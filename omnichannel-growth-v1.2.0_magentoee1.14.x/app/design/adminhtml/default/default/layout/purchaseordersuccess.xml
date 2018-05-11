@@ -1,0 +1,420 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Purchaseordersuccess
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<layout version="0.1.0">
+    <adminhtml_purchaseordersuccess_purchaseorder_default>
+        <update handle="adminhtml_coresuccess_modal"/>
+        <reference name="head">
+            <action method="addJs">
+                <script>magestore/purchaseordersuccess/adminhtml/purchaseordersuccess.js</script>
+            </action>
+            <action method="addCss">
+                <stylesheet>css/magestore/purchaseordersuccess/style.css</stylesheet>
+            </action>
+        </reference>
+    </adminhtml_purchaseordersuccess_purchaseorder_default>
+
+    <!--Scan barcode-->
+    <adminhtml_purchaseordersuccess_barcode_scan>
+        <reference name="head">
+            <action method="addJs">
+                <script>magestore/purchaseordersuccess/adminhtml/scan.js</script>
+            </action>
+        </reference>
+    </adminhtml_purchaseordersuccess_barcode_scan>
+
+    <!--Quotation-->
+    <adminhtml_purchaseordersuccess_quotation_index>
+        <reference name="content">
+            <block type="purchaseordersuccess/adminhtml_quotation" name="quotation"/>
+        </reference>
+    </adminhtml_purchaseordersuccess_quotation_index>
+    <adminhtml_purchaseordersuccess_quotation_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="purchaseordersuccess/adminhtml_quotation_grid" name="quotation.grid"/>
+        </block>
+    </adminhtml_purchaseordersuccess_quotation_grid>
+    <adminhtml_purchaseordersuccess_quotation_new>
+        <update handle="adminhtml_purchaseordersuccess_purchaseorder_view"/>
+    </adminhtml_purchaseordersuccess_quotation_new>
+    <adminhtml_purchaseordersuccess_quotation_edit>
+        <update handle="adminhtml_purchaseordersuccess_purchaseorder_view"/>
+    </adminhtml_purchaseordersuccess_quotation_edit>
+
+    <!--Purchase Order-->
+    <adminhtml_purchaseordersuccess_purchaseorder_index>
+        <reference name="content">
+            <block type="purchaseordersuccess/adminhtml_purchaseorder" name="purchaseorder"/>
+        </reference>
+    </adminhtml_purchaseordersuccess_purchaseorder_index>
+    <adminhtml_purchaseordersuccess_purchaseorder_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_grid" name="purchaseorder.grid"/>
+        </block>
+    </adminhtml_purchaseordersuccess_purchaseorder_grid>
+    <adminhtml_purchaseordersuccess_purchaseorder_new>
+        <update handle="adminhtml_purchaseordersuccess_purchaseorder_view"/>
+    </adminhtml_purchaseordersuccess_purchaseorder_new>
+    <adminhtml_purchaseordersuccess_purchaseorder_view>
+        <update handle="adminhtml_purchaseordersuccess_purchaseorder_default"/>
+        <update handle="adminhtml_purchaseordersuccess_barcode_scan"/>
+        <reference name="content">
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit" name="purchaseorder_edit"/>
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_purchasesummary_supplyneedproduct"
+                   name="purchaseorder.purchasesummary.supplyneedproduct"/>
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_receiveditem_receiveitem"
+                   name="purchaseorder.receiveditem.receiveitem"/>
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_returneditem_returnitem"
+                   name="purchaseorder.returneditem.returnitem"/>
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_transferreditem_transferitem"
+                   name="purchaseorder.transferreditem.transferitem"/>
+            <!--#REGION Modal Import by CSV Invoice, Returned, Received, Transferred Item -->
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_transferreditem_importtransferreditem"
+                   name="purchaseorder.transferreditem.importtransferreditem"/>
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_receiveditem_importreceiveditem"
+                   name="purchaseorder.receiveditem.importreceiveditem"/>
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_returneditem_importreturneditem"
+                   name="purchaseorder.returneditem.importreturneditem"/>
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_invoice_importinvoiceitem"
+                   name="purchaseorder.invoice.importinvoiceitem"/>
+            <!--#REGION Modal Import by CSV Invoice, Returned, Received, Transferred Item -->
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_invoice_invoice"
+                   name="purchaseorder.invoice.invoice"/>
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_purchasesummary_scan"
+                   name="purchaseordersuccess.purchasesummary.scan"/>
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_receiveditem_scan"
+                   name="purchaseordersuccess.receiveditem.scan"/>
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_returneditem_scan"
+                   name="purchaseordersuccess.returneditem.scan"/>
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_transferreditem_scan"
+                   name="purchaseordersuccess.transferreditem.scan"/>
+        </reference>
+        <reference name="left">
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tabs" name="purchaseorder_tabs"/>
+        </reference>
+    </adminhtml_purchaseordersuccess_purchaseorder_view>
+
+    <!--Purchase Summary Tab-->
+    <adminhtml_purchaseordersuccess_purchaseorder_item_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_purchasesummary_grid"
+                   name="purchaseorder.purchasesummary.grid"/>
+        </block>
+    </adminhtml_purchaseordersuccess_purchaseorder_item_grid>
+    <adminhtml_purchaseordersuccess_purchaseorder_item_reloadtotal>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_purchasesummary_footer"
+                   name="purchaseorder.purchasesummary.footer"/>
+        </block>
+    </adminhtml_purchaseordersuccess_purchaseorder_item_reloadtotal>
+
+    <!--Add Product Modal-->
+    <adminhtml_purchaseordersuccess_purchaseorder_item_allsupplierproduct>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_purchasesummary_allsupplierproduct_grid"
+                   name="purchaseorder.purchasesummary.allsupplierproduct.grid"/>
+        </block>
+    </adminhtml_purchaseordersuccess_purchaseorder_item_allsupplierproduct>
+    <adminhtml_purchaseordersuccess_purchaseorder_item_lowstockproduct>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_purchasesummary_lowstockproduct_grid"
+                   name="purchaseorder.purchasesummary.lowstockproduct.grid"/>
+        </block>
+    </adminhtml_purchaseordersuccess_purchaseorder_item_lowstockproduct>
+    <adminhtml_purchaseordersuccess_purchaseorder_item_lowstockproduct>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_purchasesummary_lowstockproduct_grid"
+                   name="purchaseorder.purchasesummary.lowstockproduct.grid"/>
+        </block>
+    </adminhtml_purchaseordersuccess_purchaseorder_item_lowstockproduct>
+    <adminhtml_purchaseordersuccess_purchaseorder_item_backsaleproduct>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_purchasesummary_backsaleproduct_grid"
+                   name="purchaseorder.purchasesummary.backsaleproduct.grid"/>
+        </block>
+    </adminhtml_purchaseordersuccess_purchaseorder_item_backsaleproduct>
+    <adminhtml_purchaseordersuccess_purchaseorder_item_supplyneedproduct>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_purchasesummary_supplyneedproduct_grid"
+                   name="purchaseorder.purchasesummary.supplyneedproduct.grid"/>
+        </block>
+    </adminhtml_purchaseordersuccess_purchaseorder_item_supplyneedproduct>
+
+    <!--Received Item Tab-->
+    <adminhtml_purchaseordersuccess_purchaseorder_receiveditem>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="core/messages" name="messages" as="messages"/>
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_receiveditem"
+                   name="purchaseorder.receiveditem"/>
+        </block>
+    </adminhtml_purchaseordersuccess_purchaseorder_receiveditem>
+    <adminhtml_purchaseordersuccess_purchaseorder_receiveditem_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_receiveditem_grid"
+                   name="purchaseorder.receiveditem.grid"/>
+        </block>
+    </adminhtml_purchaseordersuccess_purchaseorder_receiveditem_grid>
+    <adminhtml_purchaseordersuccess_purchaseorder_receiveditem_gridmodal>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_receiveditem_receiveitem_grid"
+                   name="purchaseorder.receiveditem.modal.grid"/>
+        </block>
+    </adminhtml_purchaseordersuccess_purchaseorder_receiveditem_gridmodal>
+
+    <!--Shortfall Item Tab-->
+    <adminhtml_purchaseordersuccess_purchaseorder_shortfallitem>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="core/messages" name="messages" as="messages"/>
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_shortfallitem_grid"
+                   name="purchaseorder.shortfallitem"/>
+        </block>
+    </adminhtml_purchaseordersuccess_purchaseorder_shortfallitem>
+
+    <!--Returned Item Tab-->
+    <adminhtml_purchaseordersuccess_purchaseorder_returneditem>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="core/messages" name="messages" as="messages"/>
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_returneditem"
+                   name="purchaseorder.returneditem"/>
+        </block>
+    </adminhtml_purchaseordersuccess_purchaseorder_returneditem>
+    <adminhtml_purchaseordersuccess_purchaseorder_returneditem_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_returneditem_grid"
+                   name="purchaseorder.returneditem.grid"/>
+        </block>
+    </adminhtml_purchaseordersuccess_purchaseorder_returneditem_grid>
+    <adminhtml_purchaseordersuccess_purchaseorder_returneditem_gridmodal>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_returneditem_returnitem_grid"
+                   name="purchaseorder.returneditem.modal.grid"/>
+        </block>
+    </adminhtml_purchaseordersuccess_purchaseorder_returneditem_gridmodal>
+
+    <!--Transferred Item tab-->
+    <adminhtml_purchaseordersuccess_purchaseorder_transferreditem>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="core/messages" name="messages" as="messages"/>
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_transferreditem"
+                   name="purchaseorder.transferreditem"/>
+        </block>
+    </adminhtml_purchaseordersuccess_purchaseorder_transferreditem>
+    <adminhtml_purchaseordersuccess_purchaseorder_transferreditem_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_transferreditem_grid"
+                   name="purchaseorder.transferreditem.grid"/>
+        </block>
+    </adminhtml_purchaseordersuccess_purchaseorder_transferreditem_grid>
+    <adminhtml_purchaseordersuccess_purchaseorder_transferreditem_gridmodal>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_transferreditem_transferitem_grid"
+                   name="purchaseorder.transferreditem.modal.grid"/>
+        </block>
+    </adminhtml_purchaseordersuccess_purchaseorder_transferreditem_gridmodal>
+
+    <!--Invoice Tab-->
+    <adminhtml_purchaseordersuccess_purchaseorder_invoice>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="core/messages" name="messages" as="messages"/>
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_invoice"
+                   name="purchaseorder.invoice"/>
+        </block>
+    </adminhtml_purchaseordersuccess_purchaseorder_invoice>
+    <adminhtml_purchaseordersuccess_purchaseorder_invoice_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_invoice_grid"
+                   name="purchaseorder.invoice.grid"/>
+        </block>
+    </adminhtml_purchaseordersuccess_purchaseorder_invoice_grid>
+    <adminhtml_purchaseordersuccess_purchaseorder_invoice_gridmodal>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_edit_tab_invoice_invoice_grid"
+                   name="purchaseorder.invoice.modal.grid"/>
+        </block>
+    </adminhtml_purchaseordersuccess_purchaseorder_invoice_gridmodal>
+
+    <adminhtml_purchaseordersuccess_purchaseorder_print>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_email_header"
+                   name="purchaseorder.email.header"/>
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_email_items"
+                   name="purchaseorder.email.item"/>
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_email_footer"
+                   name="purchaseorder.email.footer"/>
+        </block>
+    </adminhtml_purchaseordersuccess_purchaseorder_print>
+
+    <adminhtml_purchaseordersuccess_purchaseorder_email>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_email_send_header"
+                   name="purchaseorder.email.send.header"/>
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_email_send_items"
+                   name="purchaseorder.email.send.item"/>
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_email_send_footer"
+                   name="purchaseorder.email.send.footer"/>
+        </block>
+    </adminhtml_purchaseordersuccess_purchaseorder_email>
+
+    <!--Invoice View-->
+    <adminhtml_purchaseordersuccess_purchaseorder_invoice_view>
+        <update handle="adminhtml_purchaseordersuccess_purchaseorder_default"/>
+        <reference name="content">
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_invoice_edit" name="purchaseorder_invoice_edit"/>
+        </reference>
+        <reference name="left">
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_invoice_edit_tabs"
+                   name="purchaseorder_invoice_tabs"/>
+        </reference>
+    </adminhtml_purchaseordersuccess_purchaseorder_invoice_view>
+    <adminhtml_purchaseordersuccess_purchaseorder_invoice_reloadtotal>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_invoice_edit_tab_summary_footer"
+                   name="purchaseorder.invoice.summary.footer"/>
+        </block>
+    </adminhtml_purchaseordersuccess_purchaseorder_invoice_reloadtotal>
+
+    <!--Invoice Summary Item-->
+    <adminhtml_purchaseordersuccess_purchaseorder_invoice_item_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_invoice_edit_tab_summary_grid"
+                   name="purchaseorder.invoice.summary.grid"/>
+        </block>
+    </adminhtml_purchaseordersuccess_purchaseorder_invoice_item_grid>
+
+    <!--Invoice Payment-->
+    <adminhtml_purchaseordersuccess_purchaseorder_invoice_payment>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="core/messages" name="messages" as="messages"/>
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_invoice_edit_tab_payment"
+                   name="purchaseorder.invoice.payment"/>
+        </block>
+    </adminhtml_purchaseordersuccess_purchaseorder_invoice_payment>
+    <adminhtml_purchaseordersuccess_purchaseorder_invoice_payment_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_invoice_edit_tab_payment_grid"
+                   name="purchaseorder.invoice.payment.grid"/>
+        </block>
+    </adminhtml_purchaseordersuccess_purchaseorder_invoice_payment_grid>
+
+    <!--Invoice Refund-->
+    <adminhtml_purchaseordersuccess_purchaseorder_invoice_refund>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="core/messages" name="messages" as="messages"/>
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_invoice_edit_tab_refund"
+                   name="purchaseorder.invoice.refund"/>
+        </block>
+    </adminhtml_purchaseordersuccess_purchaseorder_invoice_refund>
+    <adminhtml_purchaseordersuccess_purchaseorder_invoice_refund_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="purchaseordersuccess/adminhtml_purchaseorder_invoice_edit_tab_refund_grid"
+                   name="purchaseorder.invoice.refund.grid"/>
+        </block>
+    </adminhtml_purchaseordersuccess_purchaseorder_invoice_refund_grid>
+
+    <adminhtml_system_config_edit>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/magestore/purchaseordersuccess/style.css</stylesheet>
+            </action>
+        </reference>
+    </adminhtml_system_config_edit>
+
+    <!--Return Request-->
+    <adminhtml_purchaseordersuccess_return_index>
+        <reference name="content">
+            <block type="purchaseordersuccess/adminhtml_return" name="return"/>
+        </reference>
+    </adminhtml_purchaseordersuccess_return_index>
+    <adminhtml_purchaseordersuccess_return_email>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="purchaseordersuccess/adminhtml_return_email_header"
+                   name="return.email.send.header"/>
+            <block type="purchaseordersuccess/adminhtml_return_email_items"
+                   name="return.email.send.item"/>
+            <block type="purchaseordersuccess/adminhtml_return_email_footer"
+                   name="return.email.send.footer"/>
+        </block>
+    </adminhtml_purchaseordersuccess_return_email>
+    <adminhtml_purchaseordersuccess_return_print>
+        <update handle="adminhtml_purchaseordersuccess_return_email"/>
+    </adminhtml_purchaseordersuccess_return_print>
+    <adminhtml_purchaseordersuccess_return_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="purchaseordersuccess/adminhtml_return_grid" name="return.grid"/>
+        </block>
+    </adminhtml_purchaseordersuccess_return_grid>
+    <adminhtml_purchaseordersuccess_return_new>
+        <update handle="adminhtml_purchaseordersuccess_return_view"/>
+    </adminhtml_purchaseordersuccess_return_new>
+    <adminhtml_purchaseordersuccess_return_view>
+        <update handle="adminhtml_purchaseordersuccess_purchaseorder_default"/>
+        <update handle="adminhtml_purchaseordersuccess_barcode_scan"/>
+        <reference name="content">
+            <block type="purchaseordersuccess/adminhtml_return_edit" name="return_edit"/>
+            <block type="purchaseordersuccess/adminhtml_return_edit_tab_transferreditem_transferitem"
+                   name="return.transferreditem.transferitem"/>
+            <!--#REGION Modal Import by CSV Invoice, Returned, Received, Transferred Item -->
+            <block type="purchaseordersuccess/adminhtml_return_edit_tab_transferreditem_importtransferreditem"
+                   name="return.transferreditem.importtransferreditem"/>
+            <!--#REGION Modal Import by CSV Invoice, Returned, Received, Transferred Item -->
+            <block type="purchaseordersuccess/adminhtml_return_edit_tab_transferreditem_scan"
+                   name="purchaseordersuccess.return.transferreditem.scan"/>
+            <block type="purchaseordersuccess/adminhtml_return_edit_tab_returnsummary_scan"
+                   name="purchaseordersuccess.returnsummary.scan"/>
+        </reference>
+        <reference name="left">
+            <block type="purchaseordersuccess/adminhtml_return_edit_tabs" name="return_tabs"/>
+        </reference>
+    </adminhtml_purchaseordersuccess_return_view>
+    <!-- Return summary grid item -->
+    <adminhtml_purchaseordersuccess_return_item_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="purchaseordersuccess/adminhtml_return_edit_tab_returnsummary_grid"
+                   name="return.returnsummary.grid"/>
+        </block>
+    </adminhtml_purchaseordersuccess_return_item_grid>
+    <!--Return - Add Product Modal-->
+    <adminhtml_purchaseordersuccess_return_item_allsupplierproduct>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="purchaseordersuccess/adminhtml_return_edit_tab_returnsummary_allsupplierproduct_grid"
+                   name="return.returnsummary.allsupplierproduct.grid"/>
+        </block>
+    </adminhtml_purchaseordersuccess_return_item_allsupplierproduct>
+    <!-- Return - Transferred Item tab-->
+    <adminhtml_purchaseordersuccess_return_transferreditem>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="core/messages" name="messages" as="messages"/>
+            <block type="purchaseordersuccess/adminhtml_return_edit_tab_transferreditem"
+                   name="return.transferreditem"/>
+        </block>
+    </adminhtml_purchaseordersuccess_return_transferreditem>
+    <adminhtml_purchaseordersuccess_return_transferreditem_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="purchaseordersuccess/adminhtml_return_edit_tab_transferreditem_grid"
+                   name="return.transferreditem.grid"/>
+        </block>
+    </adminhtml_purchaseordersuccess_return_transferreditem_grid>
+    <adminhtml_purchaseordersuccess_return_transferreditem_gridmodal>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="purchaseordersuccess/adminhtml_return_edit_tab_transferreditem_transferitem_grid"
+                   name="return.transferreditem.modal.grid"/>
+        </block>
+    </adminhtml_purchaseordersuccess_return_transferreditem_gridmodal>
+</layout>

@@ -1,0 +1,13 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<!-- ko if: hasChilds() -->
+<ul class="c-menu__items">
+    <li class="title" data-bind="text:title, attr: {id: 'group_' + id}"></li>
+    <!-- ko foreach: elems() -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <!--/ko-->
+</ul>
+<!-- /ko -->

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Inventorysuccess
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<layout version="0.1.0">
+    
+    <adminhtml_inventorysuccess_installation_run>
+        <update handle="adminhtml_coresuccess_process_run" />  
+        <reference name="convert_root">
+            <block type="inventorysuccess/adminhtml_installation_process" name="inventorysuccess_installation_process" output="toHtml" />
+        </reference> 
+    </adminhtml_inventorysuccess_installation_run>
+
+</layout>

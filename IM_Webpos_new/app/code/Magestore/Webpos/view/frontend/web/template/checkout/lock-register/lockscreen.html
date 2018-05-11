@@ -1,0 +1,18 @@
+<div class="ms-webpos">
+    <div class="first-screen lock-screen" data-bind="value: $data, click: focusPin">
+        <div class="lock-block">
+            <div class="lock-icon"></div>
+            <div class="lock-text" data-bind="text: ('Please enter security PIN to unlock the register!')"></div>
+            <div class="process-box">
+                <div class="wrap-process">
+                </div>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="block-pin" data-bind="foreach: pinBoxes">
+                <input class="lock-screen-pin" data-bind="value: $data, attr: {'disabled': true}" />
+            </div>
+        </div>
+    </div>
+    <input type="text" data-bind="attr:{'id': lockRegisterInputId}, event: {keyup: enterPin}" autofocus="autofocus">
+</div>

@@ -1,0 +1,267 @@
+<?php
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+?>
+<style>
+    #product_composite_configure{
+        margin-top: -180px !important;
+        /*position: relative;*/
+    }
+    .adminhtml-sales-order-create-index #popup-window-mask{
+        z-index: 100 !important;
+    }
+</style>
+<?php /* @var $this Mage_Adminhtml_Block_Catalog_Product_Composite_Fieldset_Configurable */ ?>
+<?php
+$store = Mage::getSingleton('adminhtml/session_quote')->getStore();
+$_product = $this->getProduct();
+$_giftAmount = $this->getGiftAmount($_product);
+$timezones = Mage::getModel('core/locale')->getOptionTimezones();
+$timezone = Mage::app()->getStore()->getConfig('general/locale/timezone');
+?>
+<div id="catalog_product_composite_configure_fields_giftvoucher">
+    <h4><?php echo Mage::helper('giftvoucher')->__('Gift Card Products') ?></h4>
+    <div class="product-options">
+        <dl>
+            <?php if ($_giftAmount['type'] == 'range'): ?>
+                <?php
+                $includeTax = ( Mage::getStoreConfig('tax/display/type') != 1 );
+                $rateTax = Mage::helper('tax')->getPrice($_product, 100, $includeTax) / 100;
+                ?>
+                <dt><label class="required"><em>*</em><?php echo 'Enter value' ?></label></dt>
+                <dd>
+                    <div class="input-box">
+                        <input id="amount_range" name="amount" class="required-entry validate-greater-than-zero" onchange="validateInputRange(this, <?php echo $_giftAmount['from'] ?>, <?php echo $_giftAmount['to'] ?>, '<?php echo $store->getCurrentCurrency()->format(1000, array(), false); ?>');" value="<?php echo $this->getOptionProduct('amount'); ?>" />
+                        (<span class="price"><?php echo $_giftAmount['from_txt'] ?></span> -  <span class="price"><?php echo $_giftAmount['to_txt'] ?></span>)
+                    </div>
+                </dd>
+            <?php elseif ($_giftAmount['type'] == 'dropdown'): ?>
+                <dt><label class="required"><em>*</em><?php echo 'Select value' ?></label></dt>
+                <dd>
+                    <div class="input-box">
+                        <select id="amount_dropdown" name="amount" class="required-entry select">
+                            <?php $options = array_combine($_giftAmount['options'], $_giftAmount['options_txt']) ?>
+                            <?php foreach ($options as $value => $label): ?>
+                                <option value="<?php echo $value ?>" <?php if ($value == $this->getOptionProduct('amount')) echo 'selected' ?> ><?php echo $label ?></option>
+                            <?php endforeach ?>
+                        </select>
+                    </div>
+                </dd>    
+            <?php elseif ($_giftAmount['type'] == 'static'): ?>
+                <dt><label class="required"><em>*</em><?php echo $this->__('Gift Card value: <span class="regular-price">%s</span>', $_giftAmount['value_txt']) ?></label></dt>
+                <dd>
+                    <div class="input-box">
+                        <input type="hidden" name="amount" value="<?php echo $_giftAmount['value'] ?>" />
+                    </div>
+                </dd>                        
+            <?php endif ?>
+
+            <?php
+            $templates = $this->getAvailableTemplateAdmin();
+            if (count($templates)):
+                ?>
+                <script type="text/javascript">
+                    templates = <?php echo Mage::helper('core')->jsonEncode($templates); ?>;
+                </script>
+                <dt><label class="required"><em>*</em><?php echo $this->__('Select a template ') ?></label></dt>
+                <dd>
+                    <div class="input-box">
+                        <select id="giftcard_template_select" name="giftcard_template_id" onchange="changeTemplate(this)" >
+                            <?php foreach ($templates as $template): ?>
+                                <option value="<?php echo $template['giftcard_template_id'] ?>" <?php if ($this->getOptionProduct('giftcard_template_id') == $template['giftcard_template_id']) echo 'selected' ?>><?php echo $template['template_name'] ?></option>
+                            <?php endforeach; ?>
+                        </select> 
+                    </div>
+                    <input type="hidden" name="giftcard_template_image" id="giftcard-template-images" value="<?php echo $this->getOptionProduct('giftcard_template_image') ? $this->getOptionProduct('giftcard_template_image') : '0' ?>" />
+                    <div id="giftcard-template-show-images" style="position: relative;height: 62px; width: 311px;padding-left: 15px; margin-top: 10px">
+                        <div id="giftcard-template-prev" style="filter:alpha(opacity=30);opacity: 0.3;z-index: 10;position: absolute;cursor: pointer; left: 0; top: 0; width: 20px; height: 62px;" onclick="giftcardPrevImage();"></div>
+                        <?php foreach ($templates as $template): ?>
+                            <div id="image-for-<?php echo $template['giftcard_template_id'] ?>" style="/*display:none*/">
+                                <?php
+                                $count = 0;
+                                if (!$template['images'])
+                                    $template['images'] = 'default.png'; //07.01
+                                if ($template['images']) {
+                                    $images = explode(',', $template['images']);
+                                    $maxCount = count($images) - 1;
+                                    if ($template['design_pattern'] == Magestore_Giftvoucher_Model_Designpattern::PATTERN_TOP) {
+                                        $image_url_position = 'top/';
+                                        $image_type_show_width = '68';
+                                        $image_type_show_height = '18';
+                                        $image_type_show_padding = '16px';
+                                    } elseif ($template['design_pattern'] == Magestore_Giftvoucher_Model_Designpattern::PATTERN_CENTER) {
+                                        $image_url_position = '';
+                                        $image_type_show_width = '68';
+                                        $image_type_show_height = '50';
+                                        $image_type_show_padding = '0';
+                                    } elseif ($template['design_pattern'] == Magestore_Giftvoucher_Model_Designpattern::PATTERN_SIMPLE) {
+                                        $image_url_position = 'simple/';
+                                        $image_type_show_width = '68';
+                                        $image_type_show_height = '50';
+                                        $image_type_show_padding = '0';
+                                    } elseif ($template['design_pattern'] == Magestore_Giftvoucher_Model_Designpattern::PATTERN_AMAZON) {
+                                        $image_url_position = 'amazon/';
+                                        $image_type_show_width = '68';
+                                        $image_type_show_height = '50';
+                                        $image_type_show_padding = '0';
+                                    } else {
+                                        $image_url_position = 'left/';
+                                        $image_type_show_width = 'auto';
+                                        $image_type_show_height = '50';
+                                        $image_type_show_padding = '0';
+                                    }
+                                    foreach ($images as $image) {
+                                        if ($count % 4 == 0) {
+                                            echo '<div id="div-bound-' . $template['giftcard_template_id'] . '-' . $count . '" style="display:none">';
+                                        }
+                                        $url = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'giftvoucher/template/images/' . $image_url_position . $image;
+                                        echo '<div id="div-image-for-' . $template['giftcard_template_id'] . '-' . $count . '" style="position:relative; float: left;border: 2px solid white; width: 70px; height: 52px; text-align: center;cursor: pointer;" onclick="changeSelectImages(' . $count . ')">';
+                                        echo '<img id="image-for-' . $template['giftcard_template_id'] . '-' . $count . '" src="' . $url . '" width=' . $image_type_show_width . ' height=' . $image_type_show_height . ' alt="image giftcard" style="border: 1px solid white; margin-top: ' . $image_type_show_padding . '">';
+                                        echo '<div class="egcSwatch-arrow" style="display:none"></div>';
+                                        echo '</div>';
+                                        if ($image == $this->getOptionProduct('giftcard_template_image') && $this->getOptionProduct('giftcard_template_id') == $template['giftcard_template_id']) {
+                                            echo '<script type="text/javascript">$("div-bound-' . $template['giftcard_template_id'] . '-' . ($count - $count % 4) . '").show(); giftcard_prev = ' . ($count - $count % 4) . '; giftcard_next = ' . ($count - $count % 4 + 4) . '; image_form_data = ' . $count . ';</script>';
+                                        }
+                                        $count+=1;
+                                        if ($count % 4 == 0 || $count > $maxCount)
+                                            echo '</div>';
+                                    }
+                                }
+                                ?>
+                            </div>
+                        <?php endforeach; ?>
+                        <div id="giftcard-template-next" style="filter:alpha(opacity=30);opacity: 0.3;z-index: 10;cursor: pointer;position: absolute; right: 0; top: 0; width: 20px; height: 62px;" onclick="giftcardNextImage();"></div>
+                    </div>
+                    <script type="text/javascript">
+                        //<![CDATA[
+                        changeTemplate($('giftcard_template_select'));
+                        //]]>
+                    </script>
+                </dd>
+            <?php endif; ?>
+            <!--ship myself-->
+            <?php if ($this->enablePhysicalMail()): ?>
+                <script type="text/javascript">
+                    //<![CDATA[
+
+                    //]]>
+                </script>
+                <p>
+                    <input type="checkbox" value="<?php echo $this->__('Yes') ?>" name="recipient_ship" id="recipient_ship" onclick="shipToFriend(this, '<?php echo!Mage::helper('giftvoucher')->getEmailConfig('send_with_ship') ? true : false; ?>');" <?php if ($this->getOptionProduct('recipient_ship')) echo 'checked' ?> />
+                    <label for="recipient_ship"><?php echo $this->__('Send through post office') ?></label>
+
+                </p>
+            <?php endif ?>
+
+            <!--end ship myself-->
+
+            <dd class="last">
+                <div class="input-box">
+                    <input type="checkbox" value="1" name="send_friend" id="send_friend" onclick="sendFriend(this);" <?php if ($this->getOptionProduct('send_friend')) echo 'checked' ?> />
+                    <label for="send_friend"><?php echo $this->__('Send Gift Card to friend') ?></label>
+                </div>
+                <br>
+                <div class="giftvoucher-receiver" id="giftvoucher-receiver" style="<?php if (!$this->getOptionProduct('send_friend')) echo 'display:none;' ?>">
+                    <p>
+                        <label for="customer_name"><?php echo $this->__('Sender name (optional):') ?></label><br />
+                        <input type="text" name="customer_name" id="customer_name" value="<?php echo $this->getOptionProduct('customer_name') ?>" maxlength="12"/>
+                    </p>
+                    <p>
+                        <label for="recipient_name"><?php echo $this->__('Recipient name:') ?></label><br />
+                        <input type="text" name="recipient_name" id="recipient_name" value="<?php echo $this->getOptionProduct('recipient_name') ?>" maxlength="12"/>
+                    </p>
+                    <p>
+                        <label for="recipient_email"><?php echo $this->__('Recipient email address:') ?></label><br />
+                        <input type="text" name="recipient_email" id="recipient_email" value="<?php echo $this->getOptionProduct('recipient_email') ?>" />
+                    </p>
+
+                    <p>
+                        <script type="text/javascript">
+                            //<![CDATA[
+                            var remaining_max = '<?php echo $this->messageMaxLen() ?>';
+                            //]]>
+                        </script>
+                    <p id="recipient_ship_desc" style="display:none;">
+                        <?php
+                        if (Mage::helper('giftvoucher')->getInterfaceConfig('postoffice_date'))
+                            echo $this->__("You need to fill in your friend's address as the shipping address on checkout page. We will send this Gift Card to that address after at least %s day(s).", Mage::helper('giftvoucher')->getInterfaceConfig('postoffice_date'));
+                        else
+                            echo $this->__("You need to fill in your friend's address as the shipping address on checkout page. We will send this Gift Card to that address.");
+                        ?>
+                    </p>
+                    <label for="message"><?php echo $this->__('Custom message') ?></label><br />
+                    <textarea name="message" id="message" class="" onchange="changeRemaining(this, '<?php echo $this->messageMaxLen() ?>');" onkeyup="changeRemaining(this, '<?php echo $this->messageMaxLen() ?>');"><?php echo $this->getOptionProduct('message') ?></textarea><br />
+                    <small><?php echo $this->__('Characters Remaining: ') ?><span id="giftvoucher_char_remaining"><?php echo $this->messageMaxLen() ?></span></small>
+                    </p>
+                    <p>
+                        <input type="checkbox" value="1" name="notify_success" id="notify_success" <?php if ($this->getOptionProduct('notify_success')) echo 'checked' ?> />
+                        <label for="notify_success"><?php echo $this->__('Send-to-purchaser email when recipient receives Gift Card') ?></label>
+                    </p>
+                    <?php if ($this->enableScheduleSend()): ?>
+                        <?php echo $this->getLayout()->createBlock('core/html_calendar')->setTemplate('page/js/calendar.phtml')->toHtml() ?>
+                        <p>
+                            <label for="day_to_send"><?php echo $this->__('Day to send') ?></label><br />
+                            <img src="<?php echo Mage::getBaseUrl('skin') ?>/adminhtml/default/default/images/grid-cal.gif" alt="<?php echo $this->__('Select Date') ?>" class="v-middle" id="calendar-day_to_send" />
+                            <input type="text" name="day_to_send" id="day_to_send" value="<?php echo $this->getOptionProduct('day_to_send') ?>" style="float: left; margin-right: 3px"/>
+                        </p>
+
+                        <!--        time zone-->
+                        <p class = "timezone-box" style="width: 200px;">
+                            <label for="timezone_to_send"><?php echo $this->__('Time zone') ?></label><br />                                  <select class="required-entry" name = "timezone_to_send" id = "timezone_to_send">
+                                <?php
+                                foreach ($timezones as $timezone) {
+                                    ?>
+                                    <option value="<?php echo $timezone['value']; ?>" <?php if (Mage::app()->getStore()->getConfig('general/locale/timezone') == $timezone['value']) echo 'selected' ?> ><?php echo $timezone['label']; ?></option>
+                                    <?php
+                                }
+                                ?>
+                            </select>
+                        </p>
+                        <!--       end timezone-->
+
+                        <script type="text/javascript">
+                            //<![CDATA[
+                            Calendar.setup({
+                                inputField: "day_to_send",
+                                ifFormat: "%m/%e/%Y",
+                                showsTime: false,
+                                button: "calendar-day_to_send",
+                                //                                align: "Bl",
+                                singleClick: true,
+    //                                disableFunc: function(date) {
+    //                                    var today_date = new Date();
+    //                                    today_date.setHours(0);
+    //                                    today_date.setMinutes(0);
+    //                                    today_date.setSeconds(0);
+    //                                    today_date.setMilliseconds(0);
+    //                                    if (date < today_date)
+    //                                        return true;
+    //                                    return false;
+    //                                }
+                            });
+                            //                            sendFriend($('send_friend'));
+                            //]]>
+                        </script>
+                    <?php endif ?>
+                </div>
+            </dd>    
+        </dl>
+    </div>
+</div>

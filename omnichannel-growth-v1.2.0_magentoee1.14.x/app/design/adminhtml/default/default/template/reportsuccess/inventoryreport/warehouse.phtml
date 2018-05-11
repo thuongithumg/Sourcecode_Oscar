@@ -1,0 +1,69 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Inventorysuccess
+ * @copyright   Copyright (c) 2017 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+?>
+
+<div class="content-header">
+    <table cellspacing="0">
+        <tr>
+            <td><h3 class="icon-head"><?php echo $this->getHeaderText() ?></h3></td>
+        </tr>
+    </table>
+</div>
+
+<?php if($this->getreportHeader() == Magestore_Reportsuccess_Helper_Data::HISTORICS){
+    return true;
+}
+?>
+
+<?php if($this->getreportHeader() == Magestore_Reportsuccess_Helper_Data::INCOMING_STOCK){
+    ?>
+    <div id = "update_report" ></div>
+    <div id = "select_warehouse_option" ></div>
+    <?php
+    return;
+} ?>
+<div class="select-warehouse">
+    <table cellspacing="0">
+        <tr>
+            <td><h3><?php echo $this->__('Select Warehouse') ?></h3></td>
+        </tr>
+    </table>
+</div>
+<?php echo $this->__('Please select a warehouse to view Report'); ?>
+<br /><br />
+
+<select id="select_warehouse_option" style = "width:20%;">
+    <?php $warehouseIds_Session = Mage::getModel('admin/session')->getData('warehouse_stockonhand'); ?>
+    <option value="<?php echo Magestore_Reportsuccess_Helper_Data::ALL_WAREHOUSE ?>"><?php echo $this->__('All Warehouses'); ?></option>
+        <?php if($this->getOptionWarehouses()){
+            foreach ($this->getOptionWarehouses() as $warehouse): ?>
+                <?php if($warehouseIds_Session && $warehouseIds_Session==$warehouse->getWarehouseId() ){ ?>
+                            <option selected value="<?php echo $warehouse->getWarehouseId() ?>"><?php echo $warehouse->getWarehouse() ?></option>
+                <?php }else{
+                        ?>
+                        <option value="<?php echo $warehouse->getWarehouseId() ?>"><?php echo $warehouse->getWarehouse() ?></option>
+                <?php }
+            endforeach; }?>
+</select>
+<?php if($this->getreportHeader() != Magestore_Reportsuccess_Helper_Data::HISTORICS) {
+?> <div id = "update_report" ></div> <?php
+}?>
+<div id = "blank" ></div>

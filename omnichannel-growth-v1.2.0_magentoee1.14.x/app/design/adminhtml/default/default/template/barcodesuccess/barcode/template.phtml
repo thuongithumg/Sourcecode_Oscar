@@ -1,0 +1,180 @@
+<?php
+/**
+ *
+ *  Magestore
+ *   NOTICE OF LICENSE
+ *
+ *   This source file is subject to the Magestore.com license that is
+ *   available through the world-wide-web at this URL:
+ *   http://www.magestore.com/license-agreement.html
+ *
+ *   DISCLAIMER
+ *
+ *   Do not edit or add to this file if you wish to upgrade this extension to newer
+ *   version in the future.
+ *
+ *   @category    Magestore
+ *   @package     Magestore_Barcodesuccess
+ *   @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ *   @license     http://www.magestore.com/license-agreement.html
+ *
+ *
+ */
+
+$barcode = "";
+$barcodes = $this->getBarcodes();
+$config = $this->getTemplateData();
+
+if (count($barcodes) > 0):
+    $qty = count($barcodes);
+    $label_per_row = intval($config['label_per_row']);
+    $maxRowNumber = ceil($qty / $label_per_row);
+    $measurement_unit = $config['measurement_unit'];
+    $paper_height = $config['paper_height'] . $measurement_unit;
+    $paper_width = $config['paper_width'] . $measurement_unit;
+    $label_height = $config['label_height'] . $measurement_unit;
+    $label_width = $config['label_width'] . $measurement_unit;
+    $attributes_height_label = ($config['paper_height']-$config['label_height'])- $config['top_margin'] -$config['bottom_margin'] - 1 ;
+    if( isset($config['rotate']) && ($config['rotate'] == 90)){
+        $rotate = $config['rotate'];
+        $rotate_top =  ($config['paper_width']/2 - $config['paper_height']/2) . $measurement_unit;
+        $rotate_left = -(($config['paper_width']/2) - $config['paper_height']/2 +$config['left_margin']). $measurement_unit;
+    }else{
+        $rotate = 0;
+        $rotate_top = '';
+        $rotate_left = '';
+    }
+    $margin_left = $config['left_margin'] . $measurement_unit;
+    $margin_right = $config['right_margin'] . $measurement_unit;
+    $margin_bottom = $config['bottom_margin'] . $measurement_unit;
+    $margin_top = $config['top_margin'] . $measurement_unit;
+    $font_size = $config['font_size'] . 'px';
+    $jewelryWidth = (($config['label_width'] + $config['left_margin'] + $config['right_margin']))*2;
+    $jewelryMarginLeft = ($config['paper_width'] - $jewelryWidth);
+    $bodyHeight = $maxRowNumber * $paper_height;
+    if ($maxRowNumber > 0):
+        $generated = 0;
+        for ($rowNumber = 1;$rowNumber <= $maxRowNumber;$rowNumber++):
+            ?>
+            <div  id = "rotate_label" class="barcode-row <?php if ($this->isJewelry()) echo " jewelry "; ?>" style="text-align: center;">
+                <?php
+                for ($labelInRow = 1; $labelInRow <= $label_per_row; $labelInRow++) {
+                    if ($qty > 0) {
+                        $qty--;
+                        if (isset($barcodes[$generated])) {
+                            $attributes_soucre = $barcodes[$generated]['attribute_data'];
+
+                            $source = $barcodes[$generated]['barcode_source'];
+                            ob_start();
+                            imagepng($source->draw());
+                            $barcode = ob_get_contents();
+                            ob_end_clean();
+                            ?>
+                            <?php if (!$this->isJewelry()): ?>
+                                <div class="barcode-att">
+                                    <div class="barcode-att"  dynamic_size= "<?php echo ($attributes_height_label/count($attributes_soucre ? $attributes_soucre : 1)) ?>"
+                                         style=" height:<?php echo $attributes_height_label.$measurement_unit ?>;
+                                             line-height:<?php echo ($attributes_height_label/count($attributes_soucre ? $attributes_soucre : 1)).$measurement_unit?> ">
+                                        <?php
+                                        if($attributes_soucre){
+                                            foreach($attributes_soucre as $value){
+                                                if($value){
+                                                ?>
+                                                  <span class='barcode-att barcode-att-cal' style = "font-size :<?php echo $font_size?>"><?php echo $value; ?></span></br>
+                                                <?php
+                                                }
+                                            }
+                                        }
+                                        ?>
+                                    </div>
+                                    <div class="barcode-att">
+                                        <img class='barcode-img' name='barcode'
+                                             src="data:image/png;base64,<?php echo base64_encode($barcode); ?>"/>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                            <?php if ($this->isJewelry()): ?>
+                                <div class="jewelry-container">
+                                    <div class="jewelry-tongue"></div>
+                                    <img class='barcode-img' name='barcode'
+                                         src="data:image/png;base64,<?php echo base64_encode($barcode); ?>"/>
+                                    <img class='barcode-img' name='barcode'
+                                         src="data:image/png;base64,<?php echo base64_encode($barcode); ?>"/>
+                                </div>
+                            <?php endif;
+                            $generated++;
+                        }
+                    }
+                }
+                ?>
+            </div>
+            <div class="clear"></div>
+            <?php
+        endfor;
+    endif;
+    ?>
+    <style type="text/css">
+        body,html{
+            height:<?php echo $bodyHeight.$measurement_unit;?>;
+            margin:0px;
+        }
+
+        .barcode-row {
+            height: <?php echo $paper_height;?>;
+            width: <?php echo $paper_width;?>;
+            display: inline-flex;
+        }
+        .barcode-row .barcode-img {
+            height: <?php echo $label_height;?>;
+            width: <?php echo $label_width;?>;
+            margin-top: <?php echo $margin_top;?>;
+            margin-bottom: <?php echo $margin_bottom;?>;
+            margin-left: <?php echo $margin_left;?>;
+            margin-right: <?php echo $margin_right;?>;
+            float: left;
+        }
+
+        /* add by Peter */
+        #rotate_label {
+            -webkit-transform: rotate(<?php echo $rotate?>deg);
+            -moz-transform: rotate(<?php echo $rotate?>deg);
+            -o-transform: rotate(<?php echo $rotate?>deg);
+            -ms-transform: rotate(<?php echo $rotate?>deg);
+            margin-top:<?php echo $rotate_top ; ?>;
+            margin-left:<?php echo $rotate_left; ?>;
+        }
+        .barcode-att{
+            width: <?php echo $label_width;?>;
+            float: left;
+            margin-left: <?php echo $margin_left;?>;
+            margin-right: <?php echo $margin_right;?>;
+        }
+        /* end by Peter */
+
+
+        .barcode-row.jewelry .jewelry-container {
+            width: <?php echo $jewelryWidth.$measurement_unit;?>;
+            height: 100%;
+            float: right;
+        }
+        .barcode_preview_container .barcode-row.jewelry .jewelry-container .jewelry-tongue{
+            right:-<?php echo $jewelryMarginLeft.$measurement_unit;?>;
+        width:<?php echo $jewelryMarginLeft.$measurement_unit;?>;
+        }
+        .barcode-row.jewelry .jewelry-container .barcode{
+            height: 100%;
+        }
+        @media print {
+            body {
+                color: #000;
+                background-color: #fff;
+            }
+        }
+        @page
+        {
+            size: auto;
+            margin: 2mm 4mm;
+        }
+        .clear{clear:both}
+    </style>
+<?php endif; ?>

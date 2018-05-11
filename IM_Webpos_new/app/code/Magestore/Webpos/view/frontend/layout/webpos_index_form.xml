@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<page layout='1column' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" >
+    <head>
+        <meta name="x_ua_compatible" content="IE=edge,chrome=1"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>Webpos</title>
+        <css src="Magestore_Webpos::css/bootstrap/bootstrap.css"/>
+        <css src="Magestore_Webpos::css/bootstrap/bootstrap-theme.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Magestore\Webpos\Block\AbstractBlock" before="-" cacheable="false" template="Magestore_Webpos::sales/order/samplelist.phtml">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="customer-list" xsi:type="array">
+                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/sales/order/sample-list</item>
+                                <item name="children" xsi:type="array">
+                                    <item name="errors" xsi:type="array">
+                                        <item name="sortOrder" xsi:type="string">0</item>
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/sales/order/sample-view</item>
+                                        <item name="displayArea" xsi:type="string">sample-view</item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,33 @@
+<?php
+/**
+ * Copyright © 2018 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+?>
+<div id='manage_stock_container' class="pos_container">
+    <div class="wrap-stock_container">
+        <header class="o-header">
+            <nav class="o-header-nav">       
+                <label class="title title-header-page"><?php echo __('Manage Stocks')?></label>
+            </nav>
+        </header>
+        <main class="main-stock">
+            <div id="block-stock-list" data-bind="scope:'stock-list'">
+                <!-- ko template: getTemplate() --><!-- /ko -->
+                <script type="text/x-magento-init">
+                    {
+                    "#block-stock-list": {
+                    "Magento_Ui/js/core/app": <?php /* @escapeNotVerified */ echo $block->getJsLayout(); ?>
+                    }
+                    }
+                </script>
+            </div>
+        </main>
+    </div>
+</div>

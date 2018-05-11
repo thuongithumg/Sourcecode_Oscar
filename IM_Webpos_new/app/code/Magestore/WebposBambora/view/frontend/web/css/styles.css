@@ -1,0 +1,16 @@
+/*
+ * Copyright © 2018 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+#check-bambora-connection {
+    float: right !important;
+}
+
+#connection-text {
+    text-transform: uppercase;
+}
+
+.bambora_integration span:before{content:"\e906"}
+
+.icon-iconPOS-payment-cp1forpos:before, .icon-iconPOS-payment-bambora_integration:before{content:"\e906"}

@@ -1,0 +1,87 @@
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<!--@vars
+{"var giftImageUrl":"Gift Card Image Url",
+"var logo_url":"Logo image url",
+"var textColor":"Text Color",
+"var styleColor":"Special Text Color",
+"var senderName":"Sender Name",
+"var recipientName":"Recipient Name",
+"var giftMessage":"Gift Message",
+"var giftValue":"Value of Gift Card",
+"var giftCode":"Gift code string",
+"var barcodeUrl":"Barcode image url",
+"var expiredDate":"Expired Date of Gift code",
+"var notes":"Gift Card notes"}
+@-->
+<table style="max-width: 480px;border-radius: 4px;box-shadow: rgb(202, 202, 202) 1px 1px 1px 2px !important;border-collapse: collapse;border-spacing: 0px;margin: 0px auto; border:2px solid rgb(202, 202, 202);">
+    <tr>
+        <td>
+            <div style="text-align:center; padding:10px;">
+                {{if logo_url}}
+                <img src="{{var logo_url}}" style="height:50px" />
+                {{/if}}
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div>
+                {{if giftImageUrl}}
+                <img src="{{var giftImageUrl}}" style="width: 100%;">
+                {{/if}}
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td style="border-bottom:1px solid rgb(238, 238, 238); padding:0;">
+            <div>
+                <p style="color:#{{var textColor}};font-family: Georgia, serif;font-size:20px;line-height:32px;margin:0;padding:30px;">
+                    {{var giftMessage}}
+                </p>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div>
+                <table style="width:100%;">
+                    <tbody>
+                        <tr>
+                            <td valign="middle" style="font-size: 40px; font-family: Arial, Helvetica, sans-serif; padding: 30px; width: 50%;">
+                                <span style="color:#{{var styleColor}}; line-height:40px; font-size: 40px;font-family: Arial, Helvetica, sans-serif;">
+                                    <span data-bind="text: giftValue">{{var giftValue}}</span>
+                                </span>
+                                <span style="color:#{{var styleColor}};font-size:15px; font-family:Arial,Helvetica,sans-serif; display:block;margin-top:15px;font-weight:600;">
+                                    <span data-bind="text: giftCode">{{var giftCode}}</span>
+                                </span>
+                            </td>
+                            <td rowspan="2" valign="middle" style="padding: 30px; text-align: center; width: 50%;">
+                                {{if barcodeUrl}}
+                                <img style="max-width: 180px;" src="{{var barcodeUrl}}" />
+                                {{/if}}
+                                <!-- ko if: expiredDate-->
+                                <div style="color:#{{var textColor}};text-align:center;">
+                                    {{if expiredDate}} {{var expiredDate}} {{/if}}
+                                </div>
+                                <!-- /ko -->
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div>
+                <p style="color:#{{var textColor}};font-family: Georgia, serif;font-size:12px;font-style:italic;margin:0;padding:30px;">
+                    {{var notes}}
+                </p>
+            </div>
+        </td>
+    </tr>
+</table>
+                

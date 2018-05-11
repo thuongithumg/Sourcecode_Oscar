@@ -1,0 +1,20 @@
+<div id="set-closing" class="hide-popup popup-for-right">
+    <div class="wrap-popup">
+        <div class="popup-header">
+            <button type="button" class="button cancel"><span data-bind="i18n:'Cancel', click: closeForm">Cancel</span></button>
+            <label class="title-box"><span data-bind="i18n:'Set Reason'">Set Reason</span></label>
+            <div class="button btn-done"></div>
+        </div>
+        <div class="modal-body">
+            <label class="cash-counting-notice">
+                <span data-bind="i18n:'Fill in this form the reason to loss/profit before closing Session'">Fill in this form the reason to loss/profit before closing Session</span>
+            </label>
+            <textarea id="reason" name="reason" data-bind="value: reason" style="width: 100%; height: 200px"></textarea>
+
+            <button type="submit" class="button btn-done">
+                <span class="link-cl-cfg" data-bind="i18n:'Confirm', click: handleConfirm">Confirm</span>
+            </button>
+        </div>
+
+    </div>
+</div>

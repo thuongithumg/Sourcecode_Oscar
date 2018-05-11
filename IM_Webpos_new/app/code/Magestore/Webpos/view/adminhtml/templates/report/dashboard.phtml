@@ -1,0 +1,70 @@
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700,800"
+      rel="stylesheet" type="text/css"/>
+<?php
+/**
+ *  Copyright © 2016 Magestore. All rights reserved.
+ *  See COPYING.txt for license details.
+ *
+ */ 
+/* @var $block \Magestore\Webpos\Block\Adminhtml\Report\Dashboard */ ?>
+<?php $staffReports = $block->getStaffReportList() ?>
+<?php $locationReports = $block->getLocationReportList() ?>
+<?php $paymentReports = $block->getPaymentReportList() ?>
+<div class="admin-report-webpos">
+    <div class="wrap-report">
+        <div class="panel panel-default">
+            <div class="panel-heading"><?php echo __('Staff Report')?></div>
+            <div class="panel-body">
+                <div class="row">
+                <?php foreach ($staffReports as $report => $name): ?>
+                    <?php $reportLink = $block->getReportLink($report) ?>
+                    <div class="col-sm-3">
+                        <div class="item-staff">
+                            <a class="actions" href="<?php echo $reportLink ?>" title="<?php __('Sale by staff')?>">
+                                <span class="<?php echo 'icon-icon-Back-end-pos-'.$report?>"></span>
+                                <label><?php echo $name?></label>
+                            </a>
+                        </div>
+                    </div>
+                <?php endforeach?>
+                </div>
+            </div>
+         </div>
+        <div class="panel panel-default">
+            <div class="panel-heading"><?php echo __('Location Report')?></div>
+            <div class="panel-body">
+                <div class="row">
+                    <?php foreach ($locationReports as $report => $name): ?>
+                        <?php $reportLink = $block->getReportLink($report) ?>
+                        <div class="col-sm-3">
+                            <div class="item-staff">
+                                <a class="actions" href="<?php echo $reportLink ?>" title="<?php __('Sale by staff')?>">
+                                    <span class="<?php echo 'icon-icon-Back-end-pos-'.$report?>"></span>
+                                    <label><?php echo $name?></label>
+                                </a>
+                            </div>
+                        </div>
+                    <?php endforeach?>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading"><?php echo __('Payment Report')?></div>
+            <div class="panel-body">
+                <div class="row">
+                    <?php foreach ($paymentReports as $report => $name): ?>
+                        <?php $reportLink = $block->getReportLink($report) ?>
+                        <div class="col-sm-3">
+                            <div class="item-staff">
+                                <a class="actions" href="<?php echo $reportLink ?>" title="<?php __('Sale by staff')?>">
+                                    <span class="<?php echo 'icon-icon-Back-end-pos-'.$report?>"></span>
+                                    <label><?php echo $name?></label>
+                                </a>
+                            </div>
+                        </div>
+                    <?php endforeach?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

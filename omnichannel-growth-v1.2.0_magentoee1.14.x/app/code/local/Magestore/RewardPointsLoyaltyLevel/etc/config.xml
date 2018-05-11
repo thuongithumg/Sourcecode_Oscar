@@ -1,0 +1,319 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPointsLoyaltyLevel
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <modules>
+        <Magestore_RewardPointsLoyaltyLevel>
+            <version>0.2.5</version>
+        </Magestore_RewardPointsLoyaltyLevel>
+    </modules>
+    <frontend>
+        <routers>
+            <rewardpointsloyaltylevel>
+                <use>standard</use>
+                <args>
+                    <module>Magestore_RewardPointsLoyaltyLevel</module>
+                    <frontName>rewardpointsloyaltylevel</frontName>
+                </args>
+            </rewardpointsloyaltylevel>
+        </routers>
+        <layout>
+            <updates>
+                <rewardpointsloyaltylevel>
+                    <file>rewardpointsloyaltylevel.xml</file>
+                </rewardpointsloyaltylevel>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magestore_RewardPointsLoyaltyLevel>
+                    <files>
+                        <default>Magestore_RewardPointsLoyaltyLevel.csv</default>
+                    </files>
+                </Magestore_RewardPointsLoyaltyLevel>
+            </modules>
+        </translate>
+    </frontend>
+    <admin>
+        <routers>
+            <!-- <rewardpointsloyaltyleveladmin>
+                <use>admin</use>
+                <args>
+                    <module>Magestore_RewardPointsLoyaltyLevel</module>
+                    <frontName>rewardpointsloyaltyleveladmin</frontName>
+                </args>
+            </rewardpointsloyaltyleveladmin> -->
+			<adminhtml>
+                <args>
+                    <modules>
+                        <Magestore_RewardPointsLoyaltyLevel before="Mage_Adminhtml">Magestore_RewardPointsLoyaltyLevel_Adminhtml</Magestore_RewardPointsLoyaltyLevel>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <rewardpointsloyaltylevel>
+                    <file>rewardpointsloyaltylevel.xml</file>
+                </rewardpointsloyaltylevel>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magestore_RewardPointsLoyaltyLevel>
+                    <files>
+                        <default>Magestore_RewardPointsLoyaltyLevel.csv</default>
+                    </files>
+                </Magestore_RewardPointsLoyaltyLevel>
+            </modules>
+        </translate>
+        <events>
+            <rewardpoints_adminhtml_earning_rate_form>
+                <observers>
+                    <rewardpointsloyaltylevel_adminhtml_observers>
+                        <type>singleton</type>
+                        <class>rewardpointsloyaltylevel/observer</class>
+                        <method>prepareEarnRateForm</method>
+                    </rewardpointsloyaltylevel_adminhtml_observers>
+                </observers>
+            </rewardpoints_adminhtml_earning_rate_form>
+            
+            <rewardpoints_adminhtml_spending_rate_form>
+                <observers>
+                    <rewardpointsloyaltylevel_adminhtml_observers>
+                        <type>singleton</type>
+                        <class>rewardpointsloyaltylevel/observer</class>
+                        <method>prepareSpendRateForm</method>
+                    </rewardpointsloyaltylevel_adminhtml_observers>
+                </observers>
+            </rewardpoints_adminhtml_spending_rate_form>
+            
+            <adminhtml_promo_catalog_edit_tab_main_prepare_form>
+                <observers>
+                    <rewardpointsloyaltylevel_adminhtml_observers>
+                        <type>singleton</type>
+                        <class>rewardpointsloyaltylevel/observer</class>
+                        <method>prepareFormCatalogAdminhtml</method>
+                    </rewardpointsloyaltylevel_adminhtml_observers>
+                </observers>
+            </adminhtml_promo_catalog_edit_tab_main_prepare_form>
+            <adminhtml_promo_quote_edit_tab_main_prepare_form>
+                <observers>
+                    <rewardpointsloyaltylevel_adminhtml_observers>
+                        <type>singleton</type>
+                        <class>rewardpointsloyaltylevel/observer</class>
+                        <method>prepareFormShoppingcartAdminhtml</method>
+                    </rewardpointsloyaltylevel_adminhtml_observers>
+                </observers>
+            </adminhtml_promo_quote_edit_tab_main_prepare_form>
+            <!--
+            <adminhtml_customer_edit_tab_rewardpoints_form>
+                <observers>
+                    <rewardpointsloyaltylevel_adminhtml_observers>
+                        <type>singleton</type>
+                        <class>rewardpointsloyaltylevel/observer</class>
+                        <method>prepareCustomerRewardForm</method>
+                    </rewardpointsloyaltylevel_adminhtml_observers>
+                </observers>
+            </adminhtml_customer_edit_tab_rewardpoints_form>-->
+<!--            <customer_group_save_after>
+                <observers>
+                    <rewardpoints_adminhtml_observers>
+                        <type>singleton</type>
+                        <class>rewardpointsloyaltylevel/observer</class>
+                        <method>customerGroupSaveAfter</method>
+                    </rewardpoints_adminhtml_observers>
+                </observers>
+            </customer_group_save_after>-->
+        </events>
+    </adminhtml>   
+    <global>
+        <models>
+            <rewardpointsloyaltylevel>
+                <class>Magestore_RewardPointsLoyaltyLevel_Model</class>
+                <resourceModel>rewardpointsloyaltylevel_mysql4</resourceModel>
+            </rewardpointsloyaltylevel>
+            <rewardpointsloyaltylevel_mysql4>
+                <class>Magestore_RewardPointsLoyaltyLevel_Model_Mysql4</class>
+                <entities>
+                    <loyaltylevel>
+                        <table>rewardpoints_loyalty</table>
+                    </loyaltylevel>
+                </entities>
+            </rewardpointsloyaltylevel_mysql4>
+            <!--            <catalogrule_resource>
+                <rewrite>
+                    <rule>Magestore_RewardPointsLoyaltyLevel_Model_Catalogrule_Rewrite_Rule</rule>
+                </rewrite>
+            </catalogrule_resource>-->
+            
+        </models>
+        <resources>
+            <rewardpointsloyaltylevel_setup>
+                <setup>
+                    <module>Magestore_RewardPointsLoyaltyLevel</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </rewardpointsloyaltylevel_setup>
+            <rewardpointsloyaltylevel_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </rewardpointsloyaltylevel_write>
+            <rewardpointsloyaltylevel_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </rewardpointsloyaltylevel_read>
+        </resources>
+        <blocks>
+            <rewardpointsloyaltylevel>
+                <class>Magestore_RewardPointsLoyaltyLevel_Block</class>
+            </rewardpointsloyaltylevel>
+        </blocks>
+        <helpers>
+            <rewardpointsloyaltylevel>
+                <class>Magestore_RewardPointsLoyaltyLevel_Helper</class>
+            </rewardpointsloyaltylevel>
+        </helpers>
+        <events>
+            <controller_action_predispatch_rewardpoints_index_settingsPost>
+                <observers>
+                    <rewardpointsloyaltylevel_observers>
+                        <class>rewardpointsloyaltylevel/observer</class>
+                        <method>settingsPost</method>
+                    </rewardpointsloyaltylevel_observers>
+                </observers>
+            </controller_action_predispatch_rewardpoints_index_settingsPost>
+            <!--            <salesrule_validator_process>
+                <observers>
+                    <rewardpointsloyaltylevel_observers>
+                        <type>singleton</type>
+                        <class>rewardpointsloyaltylevel/observer</class>
+                        <method>salesruleValidatorProcess</method>
+                    </rewardpointsloyaltylevel_observers>
+                </observers>
+            </salesrule_validator_process>
+            <rewardpointsrule_collection_set_available_filter>
+                <observers>
+                    <rewardpointsloyaltylevel_observers>
+                        <type>singleton</type>
+                        <class>rewardpointsloyaltylevel/observer</class>
+                        <method>setAvailableFilter</method>
+                    </rewardpointsloyaltylevel_observers>
+                </observers>
+            </rewardpointsrule_collection_set_available_filter>
+            <rewardpointsrule_collection_category_view>
+                <observers>
+                    <rewardpointsloyaltylevel_observers>
+                        <type>singleton</type>
+                        <class>rewardpointsloyaltylevel/observer</class>
+                        <method>setFilterCategory</method>
+                    </rewardpointsloyaltylevel_observers>
+                </observers>
+            </rewardpointsrule_collection_category_view>-->
+            <customer_login>
+                <observers>
+                    <rewardpointsloyaltylevel_observers>
+                        <type>singleton</type>
+                        <class>rewardpointsloyaltylevel/observer</class>
+                        <method>expiredGroupWhenLogin</method>
+                    </rewardpointsloyaltylevel_observers>
+                </observers>
+            </customer_login>
+            <!--auto join point level -->
+            <rewardpoints_transaction_save_after>
+                <observers>
+                    <rewardpointsloyaltylevel_observers>
+                        <class>rewardpointsloyaltylevel/observer</class>
+                        <method>transactionSaveAfter</method>
+                    </rewardpointsloyaltylevel_observers>
+                </observers>
+            </rewardpoints_transaction_save_after>
+            <!--auto join sales level-->
+            <sales_order_invoice_save_after>
+                <observers>
+                    <rewardpointsloyaltylevel_observers>
+                        <type>singleton</type>
+                        <class>rewardpointsloyaltylevel/observer</class>
+                        <method>salesOrderInvoiceSaveAfter</method>
+                    </rewardpointsloyaltylevel_observers>
+                </observers>
+            </sales_order_invoice_save_after>
+            
+        </events> 
+        <rewardpoints>
+            <actions>
+                <loyalty>rewardpointsloyaltylevel/action_loyalty</loyalty>
+            </actions>
+        </rewardpoints>
+        <template>
+            <email>
+                <rewardpoints_loyaltylevelplugin_loyalty_before_expired_template translate="label" module="rewardpointsloyaltylevel">
+                    <label>Email template sent to customer before a group expires</label>
+                    <file>rewardpointsloyaltylevel/before_expire_level.html</file>
+                    <type>html</type>
+                </rewardpoints_loyaltylevelplugin_loyalty_before_expired_template>
+                <!--                <loyalty_when_can_join translate="label" module="rewardpoints">
+                    <label>Email template sent to customer when a group is joinable</label>
+                    <file>rewardpointsloyaltylevel/can_join.html</file>
+                    <type>html</type>
+                </loyalty_when_can_join>-->
+            </email>
+        </template>
+    </global>
+    <default>
+        <rewardpoints>
+            <loyaltylevelplugin>
+                <enable>1</enable>
+                <enable_promotion>0</enable_promotion>
+                <loyalty_before_expired>0</loyalty_before_expired>
+                <loyalty_before_expired_day>1</loyalty_before_expired_day>                
+                <loyalty_before_expired_template>rewardpoints_loyaltylevelplugin_loyalty_before_expired_template</loyalty_before_expired_template>
+            </loyaltylevelplugin>
+        </rewardpoints>
+    </default>
+    <crontab>
+        <jobs>
+            <rewardpointsloyaltylevel>
+                <schedule>
+                    <cron_expr>* * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>rewardpointsloyaltylevel/observer::expiredLoyaltyLevel</model>
+                </run>
+            </rewardpointsloyaltylevel>
+            <rewardpointsloyaltylevel_expired>
+                <schedule>
+                    <cron_expr>* * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>rewardpointsloyaltylevel/observer::emailExpiredLoyaltyLevel</model>
+                </run>
+            </rewardpointsloyaltylevel_expired>
+        </jobs>
+    </crontab>
+</config>

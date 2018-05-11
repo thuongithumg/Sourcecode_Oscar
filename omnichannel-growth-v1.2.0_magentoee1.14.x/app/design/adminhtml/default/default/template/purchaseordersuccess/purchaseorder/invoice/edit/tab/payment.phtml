@@ -1,0 +1,79 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Inventorysuccess
+ * @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+?>
+
+<?php if ($this->canPayment()): ?>
+    <div class="purchase_buttons">
+        <button id="register_payment_button" class="" type="button" data-toggle="modal"
+                data-target="#register_payment_modal">
+            <span><?php echo $this->__('Register Payment') ?></span>
+        </button>
+    </div>
+
+    <div class="modal right fade" id="register_payment_modal" tabindex="-1"
+         role="dialog" aria-labelledby="modalLabel" style="display:none">
+        <div class="modal-dialog" role="document" id="register_payment_modal_dialog">
+            <div class="modal-content">
+                <div class="content-header">
+                    <h3 class="icon-head"><?php echo $this->__('Register Payment') ?></h3>
+                    <p class="form-buttons">
+                        <button id="submit_register_payment" class="action-primary save" type="button" data-dismiss="modal"
+                                onclick="saveInvoicePayment(event)">
+                            <span><?php echo $this->__('Save Payment') ?></span>
+                        </button>
+                        <button title="Close" type="button" class="scalable delete" data-dismiss="modal"
+                                id="closeModal">
+                            <span><?php echo $this->__('Close') ?></span>
+                        </button>
+                    </p>
+                </div>
+                <div class="modal-body">
+                    <div class="entry-edit">
+                        <div class="fieldset purchaseorder_fieldset" id="register_payment_modal_form">
+                            <?php echo $this->addRegisterPaymentForm(); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var paymentMethodEl = $$('#register_payment_modal_form #payment_method')[0];
+        if(paymentMethodEl) {
+            paymentMethodEl.onchange = function (event) {
+                var newPaymentMethodEl = $$('#register_payment_modal_form #new_payment_method')[0];
+                if (event.target.value == 'os_new_payment_method') {
+                    newPaymentMethodEl.up('span').show();
+                    newPaymentMethodEl.removeAttribute('disabled');
+                } else {
+                    newPaymentMethodEl.up('span').hide();
+                    newPaymentMethodEl.setAttribute('disabled', 'disabled')
+                }
+            }
+            $$('#register_payment_modal_form #payment_method')[0].dispatchEvent(new Event('change'));
+        }
+    </script>
+<?php endif; ?>
+
+<?php echo $this->getGridHtml(); ?>
+

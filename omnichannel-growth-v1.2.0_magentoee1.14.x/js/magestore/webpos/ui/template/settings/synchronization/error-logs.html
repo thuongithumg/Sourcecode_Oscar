@@ -1,0 +1,66 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<div data-bind="attr:{id:idName}" class="tab-pane fade">
+    <ul class="nav nav-pills" data-bind="foreach: { data: types, as: 'type' }">
+        <li data-bind="attr:{ class: ($parent.type() == type) ? 'active' : '' }"><a data-toggle="pill" data-bind="text:type,attr:{id:'error-'+type},click:$parent.filterActionLog.bind(type,$parent)"></a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="error-log" class="tab-pane fade in active">
+            <table class="table">
+                <colgroup>
+                    <col width="120"/>
+                    <col width=""/>
+                    <col width="90"/>
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="a-left" data-bind="i18n:'ID'"></th>
+                    <th class="a-center" data-bind="i18n:'Error Message'"></th>
+                    <th class="a-center" data-bind="i18n:'Action'"></th>
+                </tr>
+                </thead>
+            </table>
+            <div class="wrap-table-error">
+            <table class="table">
+                <colgroup>
+                    <col width="120"/>
+                    <col width=""/>
+                    <col width="90"/>
+                </colgroup>
+                <tbody data-bind="foreach: errorList">
+                    <tr>
+                        <td class="a-left">
+                            <span  data-bind="text:actionId"></span>
+                            <span class="date-time" data-bind="text:createdAt"></span>
+                        </td>
+                        <td class="a-center" data-bind="text:error"></td>
+                        <td class="a-center">
+                            <button class="btn-view-error" data-bind="i18n:'View',click:$parent.viewDetail.bind($parent),visible:visibleView"></button>
+                            <button class="btn-try-again" data-bind="i18n:'Try Again',click:$parent.tryAgain.bind($parent)"></button>
+                            <button class="btn-try-again" data-bind="i18n:'Delete',click:$parent.delete.bind($parent)"></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+</div>

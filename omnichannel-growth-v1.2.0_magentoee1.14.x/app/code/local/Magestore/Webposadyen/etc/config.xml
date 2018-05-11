@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_Webposadyen
+ * @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <modules>
+        <Magestore_Webposadyen>
+            <version>0.1.0</version>
+        </Magestore_Webposadyen>
+    </modules>
+    <frontend>
+        <routers>
+            <webposadyen>
+                <use>standard</use>
+                <args>
+                    <module>Magestore_Webposadyen</module>
+                    <frontName>webposadyen</frontName>
+                </args>
+            </webposadyen>
+        </routers>
+        <layout>
+            <updates>
+                <webposadyen>
+                    <file>webposadyen.xml</file>
+                </webposadyen>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magestore_Webposadyen>
+                    <files>
+                        <default>Magestore_Webposadyen.csv</default>
+                    </files>
+                </Magestore_Webposadyen>
+            </modules>
+        </translate>
+    </frontend>
+    <admin>
+        <routers>
+            <webposadyenadmin>
+                <use>admin</use>
+                <args>
+                    <module>Magestore_Webposadyen</module>
+                    <frontName>webposadyenadmin</frontName>
+                </args>
+            </webposadyenadmin>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <webposadyen>
+                    <file>webposadyen.xml</file>
+                </webposadyen>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magestore_Webposadyen>
+                    <files>
+                        <default>Magestore_Webposadyen.csv</default>
+                    </files>
+                </Magestore_Webposadyen>
+            </modules>
+        </translate>
+    </adminhtml>   
+    <global>
+        <models>
+            <webposadyen>
+                <class>Magestore_Webposadyen_Model</class>
+                <resourceModel>webposadyen_mysql4</resourceModel>
+            </webposadyen>
+            <webposadyen_mysql4>
+                <class>Magestore_Webposadyen_Model_Mysql4</class>
+            </webposadyen_mysql4>
+        </models>
+        <resources>
+            <webposadyen_setup>
+                <setup>
+                    <module>Magestore_Webposadyen</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </webposadyen_setup>
+            <webposadyen_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </webposadyen_write>
+            <webposadyen_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </webposadyen_read>
+        </resources>
+        <blocks>
+            <webposadyen>
+                <class>Magestore_Webposadyen_Block</class>
+            </webposadyen>
+        </blocks>
+        <helpers>
+            <webposadyen>
+                <class>Magestore_Webposadyen_Helper</class>
+            </webposadyen>
+        </helpers>
+        <events>
+            <webpos_get_payment_after>
+                <observers>
+                    <webposadyen_observers>
+                        <class>webposadyen/observer</class>
+                        <method>webposGetPaymentAfter</method>
+                    </webposadyen_observers>
+                </observers>
+            </webpos_get_payment_after>
+        </events>
+    </global>
+    <default>
+        <webpos>
+            <payment>
+                <adyen>
+                    <enable>0</enable>
+                    <is_sandbox>0</is_sandbox>
+                </adyen>
+            </payment>
+        </webpos>
+    </default>
+</config>

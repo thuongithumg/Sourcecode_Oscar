@@ -1,0 +1,14 @@
+<div id='synchronization_container' class="pos_container sync_container">
+    <div id="webpos-settings-synchronization">
+        <div id="block-webpos-settings-synchronization" data-bind="scope:'webpos-settings-synchronization'" class="block">
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <script type="text/x-magento-init">
+                {
+                    "#block-webpos-settings-synchronization": {
+                        "Magento_Ui/js/core/app": <?php /* @escapeNotVerified */ echo $block->getJsLayout();?>
+                    }
+                }
+            </script>
+        </div>
+    </div>
+</div>

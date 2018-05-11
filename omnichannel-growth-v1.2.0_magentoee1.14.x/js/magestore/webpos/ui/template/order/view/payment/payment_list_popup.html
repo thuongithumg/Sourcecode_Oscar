@@ -1,0 +1,41 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<!-- ko ifnot: $parent.isAllPaymentSelected -->
+<button type="button" id="close-payment-addmore" class="close close-payment-addmore" data-dismiss="modal" data-bind="i18n: ('Cancel'), click: $parent.closeListPayment()">Cancel</button>
+<div class="row" data-bind="foreach: { data: $parent.items, as: 'item' }">
+        <!-- ko ifnot: typeof(hide) != 'undefined' && hide === true -->
+        <div data-bind="css: 'col-sm-3 '+  item.code" >
+            <div class="item">
+                <div class="payment" data-bind="click: $parents[1].setPaymentMethod">
+                    <div class="icon-payment">
+                        <span data-bind="attr:{class:icon_class}"></span>
+                    </div>
+                    <label data-bind="text: title"></label>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+</div>
+<!-- /ko -->
+<!-- ko if: $parent.isAllPaymentSelected -->
+<div class="row">
+    <span data-bind="text: $t('No payment method is available')"></span>
+</div>
+<!-- /ko -->

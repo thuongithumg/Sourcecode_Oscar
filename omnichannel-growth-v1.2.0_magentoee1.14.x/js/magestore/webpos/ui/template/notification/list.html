@@ -1,0 +1,49 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<div class="notification-bell" data-bind="click: toggleInfo">
+        <span style="opacity: 1;" class="notification-bell__icon">
+            <span class="icon-iconPOS-alert"></span>
+            <!-- ko if: notificationNumber -->
+            <span style="display: inline-block;" class="notification-bell__mentions btn-cl-cfg-active"
+                  data-bind="text: notificationNumber"></span>
+            <!-- /ko  -->
+        </span>
+</div>
+<div class="notification-info" data-bind="visible: isShowNotification">
+    <span class="arrow"></span>
+    <div class="notify-header">
+        <label class="title-box" data-bind="text: __('Notifications')"></label>
+        <label data-bind="click: clearLog, text: __('Clear All')"></label>
+    </div>
+    <div class="notify-body">
+        <ul data-bind="foreach: notificationReverse">
+            <li class="not-read" data-bind="css: {'bg-notify-active': notRead}, click: $parent.markRead.bind($parent)">
+                <div class="item">
+                    <label data-bind="text: label"></label>
+                    <span class="date-time" data-bind="text: date"></span>
+                    <a class="remove-notification"><span class="icon-iconPOS-delete"
+                                                         data-bind="click: $parent.delete.bind($parent)"></span></a>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Sales/etc/sales.xsd">
+    <section name="quote">
+        <group name="totals">
+            <!--<item name="webpos_giftcard" instance="Magestore\Webpos\Model\Cart\Quote\Total" sort_order="400"/>-->
+            <item name="webpos_creditee" instance="Magestore\Webpos\Model\Total\Quote\Credit" sort_order="700"/>
+        </group>
+    </section>
+</config>

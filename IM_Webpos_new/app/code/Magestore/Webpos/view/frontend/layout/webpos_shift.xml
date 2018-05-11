@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<page layout='webpos' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" >
+
+    <head>
+        <css src="Magestore_Webpos::css/webpos_shift.css"/>
+    </head>
+    <body>
+        <referenceContainer name="webpos_content">
+            <block class="Magestore\Webpos\Block\AbstractBlock"  name="webpos_shift" template="Magestore_Webpos::shift/register_shift.phtml">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="shift-listing" xsi:type="array">
+                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/shift/shift/shift-listing</item>
+                                <item name="children" xsi:type="array">
+                                    <!-- shift detail area -->
+                                    <item name="shift_detail" xsi:type="array">
+                                        <item name="sortOrder" xsi:type="string">0</item>
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/shift/shift/shift-detail</item>
+                                        <item name="displayArea" xsi:type="string">shift-detail</item>
+                                        <item name="children" xsi:type="array">
+
+                                            <!-- sales summary -->
+                                            <item name="sales-summary" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">0</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/shift/sales-summary/sales-summary</item>
+                                                <item name="displayArea" xsi:type="string">sales-summary</item>
+                                            </item>
+
+                                            <!-- list all cash activity of a shift -->
+                                            <item name="cash-activity" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">1</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/shift/cash-transaction/activity</item>
+                                                <item name="displayArea" xsi:type="string">cash-activity</item>
+                                            </item>
+
+                                            <!-- area for cash adjustment -->
+                                            <item name="cash-adjustment" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">1</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/shift/cash-transaction/cash-adjustment</item>
+                                                <item name="displayArea" xsi:type="string">cash-adjustment</item>
+                                            </item>
+
+                                            <!-- area for set closing balance -->
+                                            <item name="set-closing-balance-reason" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">1</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/shift/shift/set-closing-balance-reason</item>
+                                                <item name="displayArea" xsi:type="string">set-closing-balance-reason</item>
+                                            </item>
+
+                                            <!-- area for take money in out  -->
+                                            <item name="take-money-in-out-balance" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">1</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/shift/shift/take-money-in-out-balance</item>
+                                                <item name="displayArea" xsi:type="string">take-money-in-out-balance</item>
+                                            </item>
+
+                                            <!-- area for close shift -->
+                                            <item name="close-shift" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">1</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/shift/shift/close-shift</item>
+                                                <item name="displayArea" xsi:type="string">close-shift</item>
+                                            </item>
+
+                                            <!-- area for zreport -->
+                                            <item name="zreport" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">1</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/shift/sales-summary/zreport</item>
+                                                <item name="displayArea" xsi:type="string">zreport</item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                    <!-- end the area for shift detail -->
+
+                                    <!-- area for Open Shift -->
+                                    <item name="open-shift" xsi:type="array">
+                                        <item name="sortOrder" xsi:type="string">1</item>
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/shift/shift/open-shift</item>
+                                        <item name="displayArea" xsi:type="string">open-shift</item>
+                                    </item>
+
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

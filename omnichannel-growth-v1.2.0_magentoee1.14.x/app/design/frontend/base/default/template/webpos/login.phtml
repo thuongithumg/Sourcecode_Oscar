@@ -1,0 +1,90 @@
+<div class="ms-webpos">
+    <div class="login-screen">
+        <div class="wrap-login-form">
+            <form class="form-login" role="form" id="webpos-login" method="post">
+                <h1 class="title-page"><img src="<?php echo $this->getLogoUrl();?>" width="200px" height="200px" alt="logo"/></h1>
+                <div class="input-box">
+                    <?php
+                    $websites = Mage::app()->getWebsites();
+                    if (count($websites) > 1){
+                        $urls = array();
+                        foreach ($websites as $website){
+                            $defaultStore = $website->getDefaultStore();
+                            if($defaultStore){
+                                $url = $defaultStore->getBaseUrl();
+                                $url = rtrim($url, '/').'/webpos';
+                                $urls[$website->getCode()] = $url;    
+                            }
+                        }
+                        ?>
+                        <select class="selectpicker form-control" id="select_website" name="select_website" onchange="switchWebsite(this)" style="margin-bottom: 5px;">
+                            <?php
+                            foreach ($websites as $website){
+                                ?>
+                                <option value="<?php echo $website->getCode();?>"
+                                    <?php echo ($website->getCode() == Mage::app()->getWebsite()->getCode())?'selected':''; ?>><?php echo $website->getName();?></option>
+                                <?php
+                            }
+                            ?>
+                        </select>
+                        <script type="text/javascript">
+                            var urls = JSON.parse('<?php echo Mage::helper('core')->jsonEncode($urls);?>');
+                            var switchWebsite = function(select){
+                                window.location.href = urls[select.value];
+                            }
+                        </script>
+                        <?php
+                    }
+                    ?>
+<!--                    <select class="selectpicker form-control" id="select_store" name="select_store">-->
+<!--                        --><?php
+//                        $stores = $this->getStores();
+//                        if(count($stores) > 0):
+//                            foreach ($stores as $store):
+//                        ?>
+<!--                        <option value="--><?php //echo $store['id']?><!--" --><?php //echo ($store['selected'])?'selected':''; ?><!-- > --><?php //echo $store['name']?><!--</option>-->
+<!--                        --><?php
+//                            endforeach;
+//                        endif;
+//                        ?>
+<!--                    </select>-->
+                </div>
+                <div class="form-group wrap-input">
+                    <div class="input-box"><input type="text" class="form-control required-entry required" id="username" name="username" placeholder="Username"></div>
+                    <div class="input-box"><input type="password" class="form-control required-entry required" id="pwd"
+                           name="password" placeholder="Password"></div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default"><?php echo Mage::helper('webpos')->__('Login');?></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<?php $isSecure = Mage::app()->getStore()->isCurrentlySecure(); ?>
+<script>
+    require(
+        [
+            'mage/url',
+        ], function (url) {
+            return url.setBaseUrl('<?php /* @escapeNotVerified */ echo Mage::app()->getStore()->getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB, $isSecure);?>');
+        });
+</script>
+
+<script>
+    require([
+        'jquery',
+        'login'
+    ], function ($) {
+        $('#webpos-login').webposLogin();
+    })
+</script>
+<style>
+    #select_website-button span.selectpicker,
+    #select_store-button span.selectpicker{
+        display: none;
+    }
+    body {
+        opacity: initial !important;
+    }
+</style>

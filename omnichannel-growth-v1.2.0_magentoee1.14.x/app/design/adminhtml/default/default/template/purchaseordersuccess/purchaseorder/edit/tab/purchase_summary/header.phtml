@@ -1,0 +1,38 @@
+<div style="width: 100%;">
+    <div class="box-left">
+        <div class="entry-edit">
+            <div class="fieldset">
+                <table cellspacing="0" class="form-list">
+                    <tbody>
+                    <tr>
+                        <td class="label a-left"><label><?php echo $this->__('Created At: ') ?></label></td>
+                        <td class="value a-right"><strong><?php echo $this->getPurchaseDate() ?></strong></td>
+                    </tr>
+                    <tr>
+                        <td class="label a-left"><label><?php echo $this->__('Purchase From: ') ?></label></td>
+                        <td class="value a-right"><strong><?php echo $this->getSupplierInformation() ?></strong></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="box-right">
+        <div class="entry-edit">
+            <div class="fieldset">
+                <table cellspacing="0" class="form-list">
+                    <tbody>
+                    <tr>
+                        <td class="label a-left"><label><?php echo $this->__('Payment Term: ') ?></label></td>
+                        <td class="value a-right"><strong><?php echo $this->getPOPaymentTerm() ?></strong></td>
+                    </tr>
+                    <tr>
+                        <td class="label a-left"><label><?php echo $this->__('Shipping Method: ') ?></label></td>
+                        <td class="value a-right"><strong><?php echo $this->getPOShippingMethod() ?></strong></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

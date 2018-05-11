@@ -1,0 +1,35 @@
+<?php
+/**
+ * Copyright © 2018 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+
+<?php /** @var \Magestore\WebposAuthorizenet\Block\Authorizenet $block */ ?>
+<?php
+if ($block->isSandbox()) {
+    ?>
+    <script type="text/javascript"
+            src="https://jstest.authorize.net/v1/Accept.js"
+            charset="utf-8">
+    </script>
+    <?php
+} else {
+    ?>
+    <script type="text/javascript"
+            src="https://js.authorize.net/v1/Accept.js"
+            charset="utf-8">
+    </script>
+    <?php
+}
+?>
+<div id="webpos_authorizenet_integration" data-bind="scope:'webpos-authorizenet-integration'">
+    <script type="text/x-magento-init">
+        {
+            "#webpos_authorizenet_integration": {
+                "Magento_Ui/js/core/app": <?php /* @escapeNotVerified */ echo $block->getJsLayout(); ?>
+            }
+        }
+    </script>
+</div>
+

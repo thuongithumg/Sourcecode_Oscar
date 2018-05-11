@@ -1,0 +1,959 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<layout version="0.1.0">
+    <webpos_index_index>
+        <block type="webpos/abstractBlock" name="root" output="toHtml">
+            <action method="setTemplate">
+                <template>webpos/page.phtml</template>
+            </action>
+            <block type="webpos/head" name="webpos_head" as="webpos_head" template="webpos/head.phtml">
+                <action method="addJs">
+                    <script>prototype/prototype.js</script>
+                </action>
+                <action method="addJs">
+                    <script>mage/translate.js</script>
+                </action>
+                <action method="addJs">
+                    <script>magestore/webpos/require.js</script>
+                </action>
+            </block>
+            <block type="core/template" name="requirejs" as="requirejs" template="webpos/requirejs.phtml"/>
+            <block type="webpos/head" name="webpos_head_second" as="webpos_head_second"
+                   template="webpos/headsecond.phtml">
+                <action method="addJs">
+                    <script>prototype/validation.js</script>
+                </action>
+                <action method="addJs">
+                    <script>varien/js.js</script>
+                </action>
+                <action method="addJs">
+                    <script>varien/form.js</script>
+                </action>
+                <action method="addJs">
+                    <script>magestore/webpos/lib/bootstrap/bootstrap.js</script>
+                </action>
+                <action method="addJs">
+                    <script>magestore/webpos/lib/bootstrap/bootstrap-slider.min.js</script>
+                </action>
+                <action method="addJs">
+                    <script>magestore/webpos/lib/bootstrap/bootstrap-switch.js</script>
+                </action>
+                <action method="addCss">
+                    <stylesheet>magestore/webpos/css/synchronization.css</stylesheet>
+                </action>
+                <action method="addCss">
+                    <stylesheet>magestore/webpos/css/style.css</stylesheet>
+                </action>
+                <action method="addCss">
+                    <stylesheet>magestore/webpos/css/bootstrap/bootstrap.css</stylesheet>
+                </action>
+                <action method="addCss">
+                    <stylesheet>magestore/webpos/css/bootstrap/bootstrap-theme.css</stylesheet>
+                </action>
+                <action method="addCss">
+                    <stylesheet>magestore/webpos/css/bootstrap/bootstrap-switch.css</stylesheet>
+                </action>
+                <action method="addCss">
+                    <stylesheet>magestore/webpos/css/bootstrap/bootstrap-slider.min.css</stylesheet>
+                </action>
+                <action method="addCss">
+                    <stylesheet>magestore/webpos/css/owl.carousel.css</stylesheet>
+                </action>
+                <action method="addCss">
+                    <stylesheet>magestore/webpos/css/owl.transitions.css</stylesheet>
+                </action>
+                <action method="addCss">
+                    <stylesheet>magestore/webpos/css/general.css</stylesheet>
+                </action>
+                <action method="addCss">
+                    <stylesheet>magestore/webpos/css/webpos.css</stylesheet>
+                </action>
+                <action method="addCss">
+                    <stylesheet>magestore/webpos/css/login.css</stylesheet>
+                </action>
+                <action method="addCss">
+                    <stylesheet>magestore/webpos/css/settings.css</stylesheet>
+                </action>
+                <action method="addCss">
+                    <stylesheet>magestore/webpos/css/responsive.css</stylesheet>
+                </action>
+                <action method="addCss">
+                    <stylesheet>magestore/webpos/css/popup.css</stylesheet>
+                </action>
+                <action method="addCss">
+                    <stylesheet>magestore/webpos/css/calendar.css</stylesheet>
+                </action>
+                <action method="addCss">
+                    <stylesheet>magestore/webpos/css/webpos_shift.css</stylesheet>
+                </action>
+            </block>
+            <block type="core/text_list" name="after_webpos_body_start" as="after_webpos_body_start"/>
+
+            <block type="core/text_list" name="webpos_content" as="webpos_content">
+
+                <block class="webpos/login" name="webpos_login">
+                    <action method="addJsLayout">
+                        <arg>
+                            <components>
+                                <location>
+                                    <component>ui/components/location</component>
+                                    <displayArea>location</displayArea>
+                                </location>
+                            </components>
+                        </arg>
+                    </action>
+                </block>
+                <block type="webpos/content_main" name="webpos_content_main" as="webpos_content_main"
+                       template="webpos/content.phtml">
+                    <action method="addJsLayout">
+                        <arg>
+                            <components>
+                                <webpos.container>
+                                    <component>ui/components/container</component>
+                                    <displayArea>webpos_cart</displayArea>
+                                    <children>
+                                        <checkout>
+                                            <component>ui/components/container/checkout</component>
+                                            <children>
+                                                <product>
+                                                    <component>ui/components/catalog/product-list</component>
+                                                    <children>
+                                                        <webpos_cart_customsale>
+                                                            <component>ui/components/checkout/product/customsale</component>
+                                                            <displayArea>webpos_cart_customsale</displayArea>
+                                                        </webpos_cart_customsale>
+                                                        <webpos_catalog_list>
+                                                            <component>ui/components/catalog/catalog-list</component>
+                                                            <displayArea>webpos_catalog_list</displayArea>
+                                                        </webpos_catalog_list>
+                                                        <webpos_breadcrumbs>
+                                                            <component>ui/components/catalog/category/breadcrumbs</component>
+                                                            <displayArea>webpos_breadcrumbs</displayArea>
+                                                        </webpos_breadcrumbs>
+                                                    </children>
+                                                </product>
+                                                <webpos_catalog_product_detail_popup>
+                                                    <component>ui/components/catalog/product/detail-popup</component>
+                                                    <displayArea>webpos_catalog_product_detail_popup</displayArea>
+                                                    <children>
+                                                        <configurable-product>
+                                                            <component>ui/components/catalog/product/detail/configurable</component>
+                                                            <displayArea>configurable-product</displayArea>
+                                                        </configurable-product>
+                                                        <bundle-product>
+                                                            <component>ui/components/catalog/product/detail/bundle</component>
+                                                            <displayArea>bundle-product</displayArea>
+                                                            <children>
+                                                                <bundle-product-radio>
+                                                                    <component>ui/components/catalog/product/detail/bundle/radio</component>
+                                                                    <displayArea>bundle-product-radio</displayArea>
+                                                                </bundle-product-radio>
+                                                                <bundle-product-select>
+                                                                    <component>ui/components/catalog/product/detail/bundle/select</component>
+                                                                    <displayArea>bundle-product-select</displayArea>
+                                                                </bundle-product-select>
+                                                                <bundle-product-checkbox>
+                                                                    <component>ui/components/catalog/product/detail/bundle/checkbox</component>
+                                                                    <displayArea>bundle-product-checkbox</displayArea>
+                                                                </bundle-product-checkbox>
+                                                                <bundle-product-multi>
+                                                                    <component>ui/components/catalog/product/detail/bundle/multi</component>
+                                                                    <displayArea>bundle-product-multi</displayArea>
+                                                                </bundle-product-multi>
+                                                            </children>
+                                                        </bundle-product>
+                                                        <grouped-product>
+                                                            <component>ui/components/catalog/product/detail/grouped</component>
+                                                            <displayArea>grouped-product</displayArea>
+                                                        </grouped-product>
+
+                                                        <custom-option>
+                                                            <component>ui/components/catalog/product/detail/customoption</component>
+                                                            <displayArea>custom-option</displayArea>
+                                                            <children>
+                                                                <custom-option-product-field>
+                                                                    <component>ui/components/catalog/product/detail/customoption/field</component>
+                                                                    <displayArea>custom-option-product-field</displayArea>
+                                                                </custom-option-product-field>
+                                                                <custom-option-product-area>
+                                                                    <component>ui/components/catalog/product/detail/customoption/area</component>
+                                                                    <displayArea>custom-option-product-area</displayArea>
+                                                                </custom-option-product-area>
+                                                                <custom-option-product-drop_down>
+                                                                    <component>ui/components/catalog/product/detail/customoption/dropdown</component>
+                                                                    <displayArea>custom-option-product-drop_down</displayArea>
+                                                                </custom-option-product-drop_down>
+                                                                <custom-option-product-radio>
+                                                                    <component>ui/components/catalog/product/detail/customoption/radio</component>
+                                                                    <displayArea>custom-option-product-radio</displayArea>
+                                                                </custom-option-product-radio>
+                                                                <custom-option-product-checkbox>
+                                                                    <component>ui/components/catalog/product/detail/customoption/checkbox</component>
+                                                                    <displayArea>custom-option-product-checkbox</displayArea>
+                                                                </custom-option-product-checkbox>
+                                                                <custom-option-product-multiple>
+                                                                    <component>ui/components/catalog/product/detail/customoption/multiple</component>
+                                                                    <displayArea>custom-option-product-multiple</displayArea>
+                                                                </custom-option-product-multiple>
+                                                            </children>
+                                                        </custom-option>
+
+                                                        <storecredit-product>
+                                                            <component>ui/components/catalog/product/detail/storecredit</component>
+                                                            <displayArea>storecredit-product</displayArea>
+                                                        </storecredit-product>
+
+                                                        <giftvoucher-product>
+                                                            <component>ui/components/catalog/product/detail/giftvoucher</component>
+                                                            <displayArea>giftvoucher-product</displayArea>
+                                                            <children>
+                                                                <giftvoucher-product-static>
+                                                                    <component>ui/components/catalog/product/detail/giftvoucher/static</component>
+                                                                    <displayArea>giftvoucher-product-static</displayArea>
+                                                                </giftvoucher-product-static>
+                                                                <giftvoucher-product-field>
+                                                                    <component>ui/components/catalog/product/detail/giftvoucher/field</component>
+                                                                    <displayArea>giftvoucher-product-field</displayArea>
+                                                                </giftvoucher-product-field>
+                                                                <giftvoucher-product-drop_down>
+                                                                    <component>ui/components/catalog/product/detail/giftvoucher/dropdown</component>
+                                                                    <displayArea>giftvoucher-product-drop_down</displayArea>
+                                                                </giftvoucher-product-drop_down>
+                                                            </children>
+                                                        </giftvoucher-product>
+                                                    </children>
+                                                </webpos_catalog_product_detail_popup>
+                                                <cart>
+                                                    <component>ui/components/checkout/cart</component>
+                                                    <children>
+                                                        <webpos_shopping_cart>
+                                                            <component>ui/components/checkout/shopping-cart</component>
+                                                            <displayArea>webpos_shopping_cart</displayArea>
+                                                        </webpos_shopping_cart>
+                                                        <webpos_cart_items>
+                                                            <component>ui/components/checkout/cart/items</component>
+                                                            <displayArea>webpos_cart_items</displayArea>
+                                                        </webpos_cart_items>
+                                                        <webpos_cart_totals>
+                                                            <component>ui/components/checkout/cart/totals</component>
+                                                            <displayArea>webpos_cart_totals</displayArea>
+                                                        </webpos_cart_totals>
+                                                        <webpos_cart_editpopup>
+                                                            <component>ui/components/checkout/cart/editpopup</component>
+                                                            <displayArea>webpos_cart_editpopup</displayArea>
+                                                        </webpos_cart_editpopup>
+                                                        <webpos_cart_discountpopup>
+                                                            <component>ui/components/checkout/cart/discountpopup</component>
+                                                            <displayArea>webpos_cart_discountpopup</displayArea>
+                                                        </webpos_cart_discountpopup>
+                                                        <webpos_cart_commentpopup>
+                                                            <component>ui/components/checkout/cart/commentpopup</component>
+                                                            <displayArea>webpos_cart_commentpopup</displayArea>
+                                                        </webpos_cart_commentpopup>
+                                                        <webpos_change_customer>
+                                                            <component>ui/components/checkout/customer/change-customer</component>
+                                                            <displayArea>webpos_change_customer</displayArea>
+                                                        </webpos_change_customer>
+                                                        <webpos_add_customer>
+                                                            <component>ui/components/checkout/customer/add-customer</component>
+                                                            <displayArea>webpos_add_customer</displayArea>
+                                                        </webpos_add_customer>
+                                                        <webpos_edit_customer>
+                                                            <component>ui/components/checkout/customer/edit-customer</component>
+                                                            <displayArea>webpos_edit_customer</displayArea>
+                                                        </webpos_edit_customer>
+                                                        <webpos_add_shipping_address>
+                                                            <component>ui/components/checkout/customer/add-shipping-address</component>
+                                                            <displayArea>webpos_add_shipping_address</displayArea>
+                                                        </webpos_add_shipping_address>
+                                                        <webpos_add_billing_address>
+                                                            <component>ui/components/checkout/customer/add-billing-address</component>
+                                                            <displayArea>webpos_add_billing_address</displayArea>
+                                                        </webpos_add_billing_address>
+                                                        <webpos_add_address>
+                                                            <component>ui/components/checkout/customer/add-address</component>
+                                                            <displayArea>webpos_add_address</displayArea>
+                                                        </webpos_add_address>
+                                                    </children>
+                                                </cart>
+                                                <checkout>
+                                                    <component>ui/components/checkout/checkout</component>
+                                                    <children>
+                                                        <webpos_checkout_shipping>
+                                                            <component>ui/components/checkout/checkout/shipping</component>
+                                                            <displayArea>webpos_checkout_shipping</displayArea>
+                                                        </webpos_checkout_shipping>
+                                                        <webpos_checkout_payment>
+                                                            <component>ui/components/checkout/checkout/payment</component>
+                                                            <displayArea>webpos_checkout_payment</displayArea>
+                                                        </webpos_checkout_payment>
+                                                        <webpos_checkout_payment_popup>
+                                                            <component>ui/components/checkout/checkout/payment-popup</component>
+                                                            <displayArea>webpos_checkout_payment_popup</displayArea>
+                                                        </webpos_checkout_payment_popup>
+                                                        <webpos_checkout_payment_selected>
+                                                            <component>ui/components/checkout/checkout/payment_selected</component>
+                                                            <displayArea>webpos_checkout_payment_selected</displayArea>
+                                                        </webpos_checkout_payment_selected>
+                                                        <webpos_checkout_payment_creditcard>
+                                                            <component>ui/components/checkout/checkout/payment/creditcard</component>
+                                                            <displayArea>webpos_checkout_payment_creditcard</displayArea>
+                                                        </webpos_checkout_payment_creditcard>
+                                                        <webpos_checkout_print_receipt>
+                                                            <component>ui/components/checkout/checkout/receipt</component>
+                                                            <displayArea>webpos_checkout_print_receipt</displayArea>
+                                                        </webpos_checkout_print_receipt>
+                                                        <webpos_checkout_payment_method_before>
+                                                            <component>ui/components/checkout/checkout/payment/before-methods</component>
+                                                            <displayArea>webpos_checkout_payment_method_before</displayArea>
+                                                            <children>
+                                                                <os_store_credit>
+                                                                    <component>ui/components/checkout/checkout/integration/store-credit</component>
+                                                                    <displayArea>os_store_credit</displayArea>
+                                                                </os_store_credit>
+                                                                <os_reward_points>
+                                                                    <component>ui/components/checkout/checkout/integration/reward-points</component>
+                                                                    <displayArea>os_reward_points</displayArea>
+                                                                </os_reward_points>
+                                                                <os_gift_card>
+                                                                    <component>ui/components/checkout/checkout/integration/gift-card</component>
+                                                                    <displayArea>os_gift_card</displayArea>
+                                                                </os_gift_card>
+                                                            </children>
+                                                        </webpos_checkout_payment_method_before>
+                                                    </children>
+                                                </checkout>
+                                                <success>
+                                                    <component>ui/components/checkout/success</component>
+                                                </success>
+                                            </children>
+                                        </checkout>
+                                        <order>
+                                            <component>ui/components/container/order</component>
+                                            <children>
+                                                <list>
+                                                    <component>ui/components/order/list</component>
+                                                    <children>
+                                                        <detail>
+                                                            <component>ui/components/order/detail</component>
+                                                            <displayArea>order-view</displayArea>
+                                                            <children>
+                                                                <order-view-additional-actions>
+                                                                    <component>ui/components/container</component>
+                                                                    <displayArea>order-view-additional-actions</displayArea>
+                                                                    <children>
+                                                                    </children>
+                                                                </order-view-additional-actions>
+                                                            </children>
+                                                        </detail>
+                                                        <print>
+                                                            <component>ui/components/order/print</component>
+                                                            <displayArea>order-print</displayArea>
+                                                        </print>
+                                                        <order-sendemail>
+                                                            <component>ui/components/order/sendemail</component>
+                                                            <displayArea>order-sendemail</displayArea>
+                                                        </order-sendemail>
+                                                        <order-invoice>
+                                                            <component>ui/components/order/invoice</component>
+                                                            <displayArea>order-invoice</displayArea>
+                                                        </order-invoice>
+                                                        <order-payment>
+                                                            <component>ui/components/order/view/payment</component>
+                                                            <displayArea>order-payment</displayArea>
+                                                        </order-payment>
+                                                        <order-shipment>
+                                                            <component>ui/components/order/shipment</component>
+                                                            <displayArea>order-shipment</displayArea>
+                                                        </order-shipment>
+                                                        <order-creditmemo>
+                                                            <component>ui/components/order/creditmemo</component>
+                                                            <displayArea>order-creditmemo</displayArea>
+                                                        </order-creditmemo>
+                                                        <order-comment>
+                                                            <component>ui/components/order/comment</component>
+                                                            <displayArea>order-comment</displayArea>
+                                                        </order-comment>
+                                                        <order-cancel>
+                                                            <component>ui/components/order/cancel</component>
+                                                            <displayArea>order-cancel</displayArea>
+                                                        </order-cancel>
+                                                    </children>
+                                                </list>
+                                            </children>
+                                        </order>
+                                        <onhold_order>
+                                            <component>ui/components/container/onhold-order</component>
+                                            <children>
+                                                <list>
+                                                    <component>ui/components/onhold-order/list</component>
+                                                    <children>
+                                                        <detail>
+                                                            <component>ui/components/onhold-order/detail</component>
+                                                            <displayArea>order-hold-view</displayArea>
+                                                        </detail>
+                                                    </children>
+                                                </list>
+                                            </children>
+                                        </onhold_order>
+                                        <!--<cash_drawer>-->
+                                            <!--<component>ui/components/container/shift</component>-->
+                                            <!--<children>-->
+                                                <!--<list>-->
+                                                    <!--<component>ui/components/shift/list</component>-->
+                                                    <!--<children>-->
+                                                        <!--<detail>-->
+                                                            <!--<component>ui/components/shift/detail</component>-->
+                                                            <!--<displayArea>shift-detail</displayArea>-->
+                                                            <!--<children>-->
+                                                                <!--<sales_summary>-->
+                                                                    <!--<component>ui/components/shift/detail/sales-summary/sales-summary</component>-->
+                                                                    <!--<displayArea>sales-summary</displayArea>-->
+                                                                <!--</sales_summary>-->
+                                                                <!--<cash_adjustment>-->
+                                                                    <!--<component>ui/components/shift/detail/cash-transaction/cash-adjustment</component>-->
+                                                                    <!--<displayArea>cash-adjustment</displayArea>-->
+                                                                <!--</cash_adjustment>-->
+                                                                <!--<close_shift>-->
+                                                                    <!--<component>ui/components/shift/detail/close-shift</component>-->
+                                                                    <!--<displayArea>close-shift</displayArea>-->
+                                                                <!--</close_shift>-->
+                                                                <!--<zreport>-->
+                                                                    <!--<component>ui/components/shift/detail/sales-summary/zreport</component>-->
+                                                                    <!--<displayArea>zreport</displayArea>-->
+                                                                <!--</zreport>-->
+                                                            <!--</children>-->
+                                                        <!--</detail>-->
+                                                    <!--</children>-->
+                                                <!--</list>-->
+                                                <!--<open-shift>-->
+                                                    <!--<children>-->
+                                                        <!--<detail>-->
+                                                            <!--<component>ui/components/shift/detail/open-shift</component>-->
+                                                            <!--<displayArea>open-shift</displayArea>-->
+                                                        <!--</detail>-->
+                                                    <!--</children>-->
+                                                <!--</open-shift>-->
+                                            <!--</children>-->
+                                        <!--</cash_drawer>-->
+                                        <session>
+                                            <component>ui/components/container/session</component>
+                                            <children>
+                                                <list>
+                                                    <component>ui/components/session/session/session-listing</component>
+                                                    <children>
+                                                        <detail>
+                                                            <component>ui/components/session/session/session-detail</component>
+                                                            <displayArea>session-detail</displayArea>
+                                                            <children>
+                                                                <sales_summary>
+                                                                    <component>ui/components/session/sales-summary/sales-summary</component>
+                                                                    <displayArea>sales-summary</displayArea>
+                                                                </sales_summary>
+                                                                <cash_activity>
+                                                                    <component>ui/components/session/cash-transaction/activity</component>
+                                                                    <displayArea>cash-activity</displayArea>
+                                                                </cash_activity>
+                                                                <cash_adjustment>
+                                                                    <component>ui/components/session/cash-transaction/cash-adjustment</component>
+                                                                    <displayArea>cash-adjustment</displayArea>
+                                                                </cash_adjustment>
+                                                                <set_closing_balance_reason>
+                                                                    <component>ui/components/session/session/set-closing-balance-reason</component>
+                                                                    <displayArea>set-closing-balance-reason</displayArea>
+                                                                </set_closing_balance_reason>
+                                                                <take_money_in_out_balance>
+                                                                    <component>ui/components/session/session/take-money-in-out-balance</component>
+                                                                    <displayArea>take-money-in-out-balance</displayArea>
+                                                                </take_money_in_out_balance>
+                                                                <close_session>
+                                                                    <component>ui/components/session/session/close-session</component>
+                                                                    <displayArea>close-session</displayArea>
+                                                                </close_session>
+                                                                <zreport>
+                                                                    <component>ui/components/session/sales-summary/zreport</component>
+                                                                    <displayArea>zreport</displayArea>
+                                                                </zreport>
+                                                            </children>
+                                                        </detail>
+                                                        <open-session>
+                                                            <component>ui/components/session/session/open-session</component>
+                                                            <displayArea>open-session</displayArea>
+                                                        </open-session>
+                                                    </children>
+                                                </list>
+
+                                            </children>
+                                        </session>
+                                        <setting_general>
+                                            <component>ui/components/container/setting/general</component>
+                                            <children>
+                                                <content>
+                                                    <component>ui/components/settings/general/content</component>
+                                                    <children>
+                                                        <checkout_setting>
+                                                            <sortOrder>0</sortOrder>
+                                                            <component>ui/components/settings/general/group</component>
+                                                            <displayArea>checkout_setting</displayArea>
+                                                            <config>
+                                                                <label>Checkout</label>
+                                                                <className>tab-pane</className>
+                                                                <idName>checkout_setting</idName>
+                                                            </config>
+                                                            <children>
+                                                                <auto_check_promotion_rules>
+                                                                    <sortOrder>0</sortOrder>
+                                                                    <component>ui/components/settings/general/checkout/auto-check-promotion-rules</component>
+                                                                    <!--<component>ui/components/settings/general/checkout/sample</component>-->
+                                                                    <config>
+                                                                        <label>Auto check the promotion rules on checkout (Offline mode)</label>
+                                                                        <idName>auto_check_promotion_rules</idName>
+                                                                    </config>
+                                                                </auto_check_promotion_rules>
+                                                                <enable_online>
+                                                                    <sortOrder>0</sortOrder>
+                                                                    <component>ui/components/settings/general/checkout/enable-online</component>
+                                                                    <config>
+                                                                        <label>Use online mode</label>
+                                                                        <idName>enable_online</idName>
+                                                                    </config>
+                                                                </enable_online>
+                                                            </children>
+                                                        </checkout_setting>
+                                                        <catalog>
+                                                            <sortOrder>5</sortOrder>
+                                                            <component>ui/components/settings/general/group</component>
+                                                            <displayArea>catalog</displayArea>
+                                                            <config>
+                                                                <label>Catalog</label>
+                                                                <className>tab-pane active</className>
+                                                                <idName>catalog</idName>
+                                                            </config>
+                                                            <children>
+                                                                <outstockdisplay>
+                                                                    <sortOrder>5</sortOrder>
+                                                                    <component>ui/components/settings/general/catalog/outstock-display</component>
+                                                                    <config>
+                                                                        <label>Display out-of-stock products in search results (online mode)</label>
+                                                                        <idName>catalog</idName>
+                                                                    </config>
+                                                                </outstockdisplay>
+                                                            </children>
+                                                        </catalog>
+                                                        <currency>
+                                                            <sortOrder>10</sortOrder>
+                                                            <component>ui/components/settings/general/group</component>
+                                                            <displayArea>currency</displayArea>
+                                                            <config>
+                                                                <label>Currency</label>
+                                                                <className>tab-pane</className>
+                                                                <idName>currency-account</idName>
+                                                            </config>
+                                                            <children>
+                                                                <changecurrency>
+                                                                    <sortOrder>1</sortOrder>
+                                                                    <component>ui/components/settings/general/currency/change-currency</component>
+                                                                    <config>
+                                                                        <label>Currency</label>
+                                                                    </config>
+                                                                </changecurrency>
+                                                            </children>
+                                                        </currency>
+                                                        <os_store_credit>
+                                                            <sortOrder>20</sortOrder>
+                                                            <component>ui/components/settings/general/group</component>
+                                                            <displayArea>os_store_credit</displayArea>
+                                                            <config>
+                                                                <label>Customer Credit</label>
+                                                                <className>tab-pane</className>
+                                                                <idName>os_store_credit</idName>
+                                                            </config>
+                                                            <children>
+                                                                <show_customer_credit_balance_on_receipt>
+                                                                    <sortOrder>0</sortOrder>
+                                                                    <component>ui/components/settings/general/storecredit/show-storecredit-balance</component>
+                                                                    <config>
+                                                                        <label>Show customer credit balance on receipt</label>
+                                                                        <idName>show_customer_credit_balance_on_receipt</idName>
+                                                                    </config>
+                                                                </show_customer_credit_balance_on_receipt>
+                                                                <auto_sync_balance_when_checkout>
+                                                                    <sortOrder>0</sortOrder>
+                                                                    <component>ui/components/settings/general/storecredit/auto-sync-balance</component>
+                                                                    <config>
+                                                                        <label>Auto sync customer credit balance from server when creating order (Internet connection required)</label>
+                                                                        <idName>auto_sync_balance_when_checkout</idName>
+                                                                    </config>
+                                                                </auto_sync_balance_when_checkout>
+                                                            </children>
+                                                        </os_store_credit>
+                                                        <os_reward_points>
+                                                            <sortOrder>25</sortOrder>
+                                                            <component>ui/components/settings/general/group</component>
+                                                            <displayArea>os_reward_points</displayArea>
+                                                            <config>
+                                                                <label>Reward Points</label>
+                                                                <className>tab-pane</className>
+                                                                <idName>os_reward_points</idName>
+                                                            </config>
+                                                            <children>
+                                                                <show_customer_points_balance_on_receipt>
+                                                                    <sortOrder>0</sortOrder>
+                                                                    <component>ui/components/settings/general/rewardpoints/show-rewardpoints-balance</component>
+                                                                    <config>
+                                                                        <label>Show customer points balance on receipt</label>
+                                                                        <idName>show_customer_points_balance_on_receipt</idName>
+                                                                    </config>
+                                                                </show_customer_points_balance_on_receipt>
+                                                                <auto_sync_balance_when_checkout>
+                                                                    <sortOrder>0</sortOrder>
+                                                                    <component>ui/components/settings/general/rewardpoints/auto-sync-balance</component>
+                                                                    <config>
+                                                                        <label>Auto sync customer points balance from server when creating order (Internet connection required)</label>
+                                                                        <idName>auto_sync_balance_when_checkout</idName>
+                                                                    </config>
+                                                                </auto_sync_balance_when_checkout>
+                                                            </children>
+                                                        </os_reward_points>
+                                                        <os_pdf_invoice_plus>
+                                                            <sortOrder>30</sortOrder>
+                                                            <component>ui/components/settings/general/group</component>
+                                                            <displayArea>os_pdf_invoice_plus</displayArea>
+                                                            <config>
+                                                                <label>Pdf Invoice Plus</label>
+                                                                <className>tab-pane</className>
+                                                                <idName>os_pdf_invoice_plus</idName>
+                                                            </config>
+                                                            <children>
+                                                                <pdf_orders_printing_template>
+                                                                    <sortOrder>0</sortOrder>
+                                                                    <component>ui/components/settings/general/pdfinvoiceplus/orders-printing-template</component>
+                                                                    <config>
+                                                                        <label>Orders Printing Template</label>
+                                                                        <idName>pdf_orders_printing_template</idName>
+                                                                    </config>
+                                                                </pdf_orders_printing_template>
+                                                            </children>
+                                                        </os_pdf_invoice_plus>
+                                                    </children>
+                                                </content>
+                                            </children>
+                                        </setting_general>
+                                        <setting_synchronization>
+                                            <component>ui/components/container/setting/synchronization</component>
+                                            <children>
+                                                <content>
+                                                    <component>ui/components/settings/synchronization/content</component>
+                                                    <config>
+                                                        <template>ui/settings/synchronization/content</template>
+                                                    </config>
+                                                    <children>
+                                                        <sync-data>
+                                                            <sortOrder>1</sortOrder>
+                                                            <component>ui/components/settings/synchronization/sync-data</component>
+                                                            <displayArea>sync-data</displayArea>
+                                                            <config>
+                                                                <template>ui/settings/synchronization/sync-data</template>
+                                                                <label>Sync Data</label>
+                                                                <className>active</className>
+                                                                <idName>sync-data</idName>
+                                                            </config>
+                                                        </sync-data>
+                                                        <error-logs>
+                                                            <sortOrder>2</sortOrder>
+                                                            <component>ui/components/settings/synchronization/error-logs</component>
+                                                            <displayArea>error-logs</displayArea>
+                                                            <config>
+                                                                <template>ui/settings/synchronization/error-logs</template>
+                                                                <label>Error Logs</label>
+                                                                <className></className>
+                                                                <idName>error-logs</idName>
+                                                            </config>
+                                                        </error-logs>
+                                                    </children>
+                                                </content>
+                                            </children>
+                                        </setting_synchronization>
+                                        <setting_account>
+                                            <component>ui/components/container/setting/account</component>
+                                            <children>
+                                                <content>
+                                                    <component>ui/components/settings/account/content</component>
+                                                    <children>
+                                                        <information>
+                                                            <component>ui/components/settings/account/information</component>
+                                                        </information>
+                                                    </children>
+                                                </content>
+                                            </children>
+                                        </setting_account>
+                                    </children>
+                                </webpos.container>
+                                <webpos.menu>
+                                    <component>ui/components/menu</component>
+                                    <displayArea>webpos.menu</displayArea>
+                                    <children>
+                                        <order>
+                                            <component>ui/components/menu/group</component>
+                                            <sortOrder>0</sortOrder>
+                                            <id>order</id>
+                                            <title>Orders</title>
+                                            <children>
+                                                <checkout>
+                                                    <sortOrder>0</sortOrder>
+                                                    <component>ui/components/menu/item</component>
+                                                    <data>
+                                                        <id>checkout</id>
+                                                        <title>Checkout</title>
+                                                        <container>checkout</container>
+                                                        <is_display>1</is_display>
+                                                        <icon_class>icon-iconPOS-checkout</icon_class>
+                                                    </data>
+                                                </checkout>
+                                                <orders_history>
+                                                    <sortOrder>1</sortOrder>
+                                                    <component>ui/components/menu/item</component>
+                                                    <data>
+                                                        <id>orders_history</id>
+                                                        <title>Orders History</title>
+                                                        <container>orders_history</container>
+                                                        <is_display>1</is_display>
+                                                        <icon_class>icon-iconPOS-order-history</icon_class>
+                                                    </data>
+                                                </orders_history>
+                                                <on_hold_orders>
+                                                    <sortOrder>2</sortOrder>
+                                                    <component>ui/components/menu/item</component>
+                                                    <data>
+                                                        <id>on_hold_orders</id>
+                                                        <title>On-hold Orders</title>
+                                                        <container>on_hold_orders</container>
+                                                        <is_display>1</is_display>
+                                                        <icon_class>icon-iconPOS-on-hold-order</icon_class>
+                                                    </data>
+                                                </on_hold_orders>
+                                            </children>
+                                        </order>
+                                        <!--<cash_drawer>-->
+                                            <!--<component>ui/components/menu/group</component>-->
+                                            <!--<sortOrder>5</sortOrder>-->
+                                            <!--<id>shift</id>-->
+                                            <!--<title>Shift</title>-->
+                                            <!--<children>-->
+                                                <!--<cash_drawer>-->
+                                                    <!--<sortOrder>0</sortOrder>-->
+                                                    <!--<component>ui/components/menu/item</component>-->
+                                                    <!--<data>-->
+                                                        <!--<id>cash_drawer</id>-->
+                                                        <!--<title>Cash Drawer</title>-->
+                                                        <!--<container>cash_drawer</container>-->
+                                                        <!--<is_display>1</is_display>-->
+                                                        <!--<icon_class>icon-iconPOS-shift</icon_class>-->
+                                                    <!--</data>-->
+                                                <!--</cash_drawer>-->
+                                            <!--</children>-->
+                                        <!--</cash_drawer>-->
+                                        <session>
+                                            <component>ui/components/menu/group</component>
+                                            <sortOrder>5</sortOrder>
+                                            <id>session</id>
+                                            <title>Session Management</title>
+                                            <children>
+                                                <register_shift>
+                                                    <sortOrder>0</sortOrder>
+                                                    <component>ui/components/menu/item</component>
+                                                    <data>
+                                                        <id>register_shift</id>
+                                                        <title>Session Management</title>
+                                                        <container>session</container>
+                                                        <is_display>1</is_display>
+                                                        <icon_class>icon-iconPOS-shift</icon_class>
+                                                    </data>
+                                                </register_shift>
+                                            </children>
+                                        </session>
+                                        <setting>
+                                            <component>ui/components/menu/group</component>
+                                            <sortOrder>10</sortOrder>
+                                            <id>setting</id>
+                                            <title>Settings</title>
+                                            <children>
+                                                <general>
+                                                    <sortOrder>0</sortOrder>
+                                                    <component>ui/components/menu/item</component>
+                                                    <data>
+                                                        <id>general</id>
+                                                        <title>General</title>
+                                                        <container>setting_general</container>
+                                                        <is_display>1</is_display>
+                                                        <icon_class>icon-iconPOS-setting</icon_class>
+                                                    </data>
+                                                </general>
+                                                <synchronization>
+                                                    <sortOrder>1</sortOrder>
+                                                    <component>ui/components/menu/item</component>
+                                                    <data>
+                                                        <id>synchronization</id>
+                                                        <title>Synchronization</title>
+                                                        <container>synchronization</container>
+                                                        <is_display>1</is_display>
+                                                        <icon_class>icon-iconPOS-synchronize</icon_class>
+                                                    </data>
+                                                </synchronization>
+                                                <account>
+                                                    <sortOrder>2</sortOrder>
+                                                    <component>ui/components/menu/item</component>
+                                                    <data>
+                                                        <id>account</id>
+                                                        <title>Account</title>
+                                                        <container>setting_account</container>
+                                                        <is_display>1</is_display>
+                                                        <icon_class>icon-iconPOS-account</icon_class>
+                                                    </data>
+                                                </account>
+                                            </children>
+                                        </setting>
+                                    </children>
+                                </webpos.menu>
+                                <webpos.notification>
+                                    <component>ui/components/notification/list</component>
+                                    <displayArea>webpos.notification</displayArea>
+                                </webpos.notification>
+                            </components>
+                        </arg>
+                    </action>
+                </block>
+
+                <block class="webpos/settings_general" name="webpos_install" after="-" template="webpos/install.phtml">
+                    <action method="addJsLayout">
+                        <arg>
+                            <components>
+                                <webpos-install>
+                                    <component>install</component>
+                                    <displayArea>webpos-install</displayArea>
+                                    <config>
+                                        <template>ui/install</template>
+                                    </config>
+                                </webpos-install>
+                            </components>
+                        </arg>
+                    </action>
+                </block>
+
+            </block>
+            <block type="core/text_list" name="before_webpos_body_end" as="before_webpos_body_end" template="webpos/before_body_end.phtml"/>
+        </block>
+    </webpos_index_index>
+    <webpos_index_restguide>
+        <block type="webpos/abstractBlock" name="root" output="toHtml">
+            <action method="setTemplate">
+                <template>webpos/page.phtml</template>
+            </action>
+            <block type="webpos/head" name="webpos_head" as="webpos_head" template="webpos/head.phtml">
+                <action method="addJs">
+                    <script>prototype/prototype.js</script>
+                </action>
+                <action method="addJs">
+                    <script>mage/translate.js</script>
+                </action>
+                <action method="addJs">
+                    <script>magestore/webpos/require.js</script>
+                </action>
+            </block>
+            <block type="core/template" name="requirejs" as="requirejs" template="webpos/requirejs.phtml"/>
+            <block type="webpos/head" name="webpos_head_second" as="webpos_head_second"
+                   template="webpos/headsecond.phtml">
+                <action method="addJs">
+                    <script>prototype/validation.js</script>
+                </action>
+                <action method="addJs">
+                    <script>varien/js.js</script>
+                </action>
+                <action method="addJs">
+                    <script>varien/form.js</script>
+                </action>
+                <action method="addJs">
+                    <script>magestore/webpos/lib/bootstrap/bootstrap.js</script>
+                </action>
+                <action method="addJs">
+                    <script>magestore/webpos/lib/bootstrap/bootstrap-slider.min.js</script>
+                </action>
+                <action method="addJs">
+                    <script>magestore/webpos/lib/bootstrap/bootstrap-switch.js</script>
+                </action>
+                <action method="addCss">
+                    <stylesheet>magestore/webpos/css/synchronization.css</stylesheet>
+                </action>
+                <action method="addCss">
+                    <stylesheet>magestore/webpos/css/style.css</stylesheet>
+                </action>
+                <action method="addCss">
+                    <stylesheet>magestore/webpos/css/bootstrap/bootstrap.css</stylesheet>
+                </action>
+                <action method="addCss">
+                    <stylesheet>magestore/webpos/css/bootstrap/bootstrap-theme.css</stylesheet>
+                </action>
+                <action method="addCss">
+                    <stylesheet>magestore/webpos/css/bootstrap/bootstrap-switch.css</stylesheet>
+                </action>
+                <action method="addCss">
+                    <stylesheet>magestore/webpos/css/bootstrap/bootstrap-slider.min.css</stylesheet>
+                </action>
+                <action method="addCss">
+                    <stylesheet>magestore/webpos/css/owl.carousel.css</stylesheet>
+                </action>
+                <action method="addCss">
+                    <stylesheet>magestore/webpos/css/owl.transitions.css</stylesheet>
+                </action>
+                <action method="addCss">
+                    <stylesheet>magestore/webpos/css/general.css</stylesheet>
+                </action>
+                <action method="addCss">
+                    <stylesheet>magestore/webpos/css/webpos.css</stylesheet>
+                </action>
+                <action method="addCss">
+                    <stylesheet>magestore/webpos/css/login.css</stylesheet>
+                </action>
+                <action method="addCss">
+                    <stylesheet>magestore/webpos/css/settings.css</stylesheet>
+                </action>
+                <action method="addCss">
+                    <stylesheet>magestore/webpos/css/responsive.css</stylesheet>
+                </action>
+                <action method="addCss">
+                    <stylesheet>magestore/webpos/css/popup.css</stylesheet>
+                </action>
+                <action method="addCss">
+                    <stylesheet>magestore/webpos/css/calendar.css</stylesheet>
+                </action>
+                <action method="addCss">
+                    <stylesheet>magestore/webpos/css/webpos_shift.css</stylesheet>
+                </action>
+            </block>
+            <block type="core/text_list" name="after_webpos_body_start" as="after_webpos_body_start"/>
+
+            <block type="core/text_list" name="webpos_content" as="webpos_content">
+                <block class="core/template" name="webpos_guide" template="webpos/rest_guide.phtml" />
+            </block>
+            <block type="core/text_list" name="before_webpos_body_end" as="before_webpos_body_end" template="webpos/before_body_end.phtml"/>
+        </block>
+    </webpos_index_restguide>
+</layout>

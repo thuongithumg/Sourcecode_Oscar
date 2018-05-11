@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webposauthorizenet
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<config>
+    <api2>
+        <resources>
+            <webpos_authorizenet translate="title" module="api2">
+                <group>webpos</group>
+                <model>webposauthorizenet/api2_authorizenet</model>
+                <working_model>webpos/authorizenet</working_model>
+                <title>AuthorizenetApp</title>
+                <sort_order>10</sort_order>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>0</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_authorizenet_finishpayment>
+                        <route>/webpos/authorizenet/finishPayment</route>
+                        <action_type>update</action_type>
+                    </route_authorizenet_finishpayment>
+                </routes>
+                <versions>1</versions>
+            </webpos_authorizenet>
+        </resources>
+    </api2>
+</config>

@@ -1,0 +1,88 @@
+<?php
+$_giftCard = $this->getGiftCard();
+$_store = $this->getStore();
+$url_barcode = $this->getUrlBarcode();
+$_template = $this->getTemplateParam();
+$currency = $this->getCurrency();
+$_textColor = $this->getTextColor();
+$_styleColor = $this->getStyleColor();
+$expire_day = $this->getExpireDay();
+$notes = $this->getNotes();
+$resizeImage = $this->getResizeImage();
+?>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/magestore/new_amazon_design.css') ?>"
+      media="all"/>
+<table class="table-top">
+    <tbody>
+    <tr>
+        <td>
+            <?php if ($_giftCard->getPrintLogo()): ?>
+                <img id="alogo" width="100" src="<?php echo $_giftCard->getPrintLogo() ?>"
+                     alt="<?php echo $_store->getFrontendName() ?>"
+                     title="<?php echo $_store->getFrontendName() ?>"/>
+            <?php endif; ?>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+<table class="table-middle" bgcolor="ffffff" class="full-width-table" border="0">
+    <tbody>
+    <tr>
+        <td>
+            <table border="0">
+                <tbody>
+                <tr>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="5" id="mainImageContainer">
+                        <img width="100%"
+                             src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'giftvoucher/template/images/amazon/' . $_giftCard->getGiftcardTemplateImage() ?>"
+                             alt="" border="0"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-top">
+                        <p class="gc-message giftcard-text-color"><?php echo $_giftCard->getMessage() ?></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-bottom">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td valign="middle">
+                                        <span
+                                            class="gift-price giftcard-text-color"><?php echo $currency->format($_giftCard->getBalance()); ?></span>
+                                    <br/>
+                                    <span class="gift-code giftcard-style-color"  style="display: block; margin-top: 15px;"><?php echo $_giftCard->getGiftCode() ?></span>
+                                </td>
+                                <td class="logo-footer" rowspan="2" valign="middle">
+                                    <img
+                                        src="<?php echo $url_barcode ?>" <?php if ($resizeImage) echo 'width="180" height="40"' ?>
+                                        height="40" style="float: right;margin-bottom: 10px;"/>
+                                    
+                                    <div id="gc-expire-day-header-amazon" class="giftcard-text-color"><?php if ($expire_day) echo $this->__('Expired: %s', $expire_day); ?> </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <!-- End inner table -->
+        </td>
+    </tr>
+    </tbody>
+</table>
+<table class="table-bottom" class="full-width-table" border="0">
+    <tbody>
+    <tr>
+        <td valign="middle">&nbsp;</td>
+    </tr>
+    </tbody>
+</table>
+<footer></footer>

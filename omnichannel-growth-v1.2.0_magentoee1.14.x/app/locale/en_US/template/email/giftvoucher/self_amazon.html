@@ -1,0 +1,140 @@
+<!--@subject Your gift card at {{var store.getFrontendName()}} @-->
+<!--@vars
+{"htmlescape var=$name":"Recipient Name",
+"htmlescape var=$sendername":"Sender name",
+"var code":"Gift Card Code",
+"var balance":"Gift Card Balance",
+"var status":"Status",
+"htmlescape var=$message":"Message",
+"var expiredat":"Expired At"}
+@-->
+
+<!--@styles
+body,td { color:#2f2f2f; font:13px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+@-->
+
+{{template config_path="design/email/header"}}
+{{inlinecss file="magestore/email/email-inline.css"}}
+<style>
+    .giftcard-text-color{
+    color: {{var text_color}};
+    }
+    .giftcard-style-color{
+    color: {{var style_color}};
+    }
+</style>
+
+<p class="giftcard-custom-message-custom gc-message giftcard-text-color" style="font-family:Georgia,serif;font-size:20px;line-height:32px;margin:0;padding:0">
+    <strong>Dear {{htmlescape var=$sendername}}</strong>,<br/>
+    This email is to notify that you have successfully bought Gift Card(s) at {{var store.getFrontendName()}}.<br/>
+    You can use Gift Card(s) to purchase other products <a href="{{store url=""}}">here</a> or <a href="{{store url=""}}/giftvoucher/index/printemail/k/{{var secure_key}}">print now</a>.<br/>
+</p>
+
+<br>
+
+<div style="padding:0;margin:0;font-family:Arial,Helvetica,sans-serif">
+    <table width="100%" cellspacing="0" cellpadding="0" border="0" align="center">
+        <tbody>
+        <tr>
+            <td style="font-size:12px;font-family:Arial,Helvetica,sans-serif;color:#666666;line-height:1.2em" width="100%" bgcolor="f3f3f3">
+
+                <table style="border-collapse:separate;border-spacing:10px;margin-left:auto;margin-right:auto" cellspacing="0" cellpadding="30" border="0" align="center">
+                    <tbody><tr>
+                        <td style="width:500px;padding-top:50px" valign="middle" align="center">
+                            <img src="{{var logo}}" class="CToWUd" width="100">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+                <table class="" style="padding:0;width:585px;margin-left:auto;margin-right:auto" cellspacing="0" cellpadding="0" border="0" bgcolor="f3f3f3" align="center">
+                    <tbody><tr>
+                        <td>
+                            <table style="padding:0;margin:0;border-radius:4px;border-collapse:separate!important" cellspacing="0" cellpadding="0" border="0" bgcolor="ffffff" align="center">
+                                <tbody><tr>
+                                    <td style="line-height:0!important" align="center">
+                                        <a href="#" target="_blank">
+                                            <img src="{{var image_url}}" alt="Gift Card" style="width:100%;display:block;border-radius:4px 4px 0 0" id="" class="CToWUd" border="0" align="middle">
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-bottom:1px solid #eee">
+                                        <table style="padding:0;border-collapse:separate;border-spacing:30px" width="100%" cellspacing="30" cellpadding="0">
+                                            <tbody>
+                                            <tr>
+                                                <td>
+                                                    <p class="giftcard-custom-message-custom gc-message giftcard-text-color" style="font-family:Georgia,serif;font-size:20px;line-height:32px;margin:0;padding:0">
+                                                        {{var message}}
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table style="padding-bottom:0!important;border-collapse:separate;border-spacing:0px" width="100%" cellspacing="30" cellpadding="0">
+                                            <tbody>
+                                            <tr>
+                                                <td valign="middle" style="font-size: 30px; font-family: Arial, Helvetica, sans-serif; color: rgb(68, 68, 68); padding: 30px 0 30px 30px; width: 55%;">
+                                                    <span class="giftcard-price-change-custom giftcard-text-color" style="line-height: 40px;">{{var balance}}</span> <br>
+                                                    <span class="giftcard-style-color gift-code" style="">{{var code}}</span>
+                                                </td>
+                                                <td rowspan="2" valign="middle" style="padding: 30px 30px 0 0; text-align: center; width: 45%; vertical-align: top">
+                                                    <img id="gc-barcode-email" src="{{var barcode_url}}">
+                                                    <div id="gc-expire-day" class="giftcard-text-color" style="text-align: center; font-size:12px;  line-height:1.4em;">{{depend expiredat}}Expired: {{var expiredat}}{{/depend}}</div>
+                                                </td>
+                                            </tr>
+                                            </tbody></table>
+                                    </td></tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <table class="" style="margin-left:auto;margin-right:auto;width:585px;border-spacing:30px;border-collapse:separate" cellspacing="30" border="0" align="center">
+                    <tbody><tr>
+                        <td valign="middle" align="center" height="20">
+                            <br>
+                            <a href="{{store url=""}}/giftvoucher/index/printemail/k/{{var secure_key}}" target="_blank" >
+                            <button class="magestore_giftvoucher_email_gift_button_apply">Print Gift Card Now</button>
+                            </a>
+                            <p style="font-size:13px;font-family:Arial,Helvetica,sans-serif;color:#666">Don't have an account?<br><a href="{{store url=""}}/customer/account/create/{{var secure_key}}" style="color:#0066c0" target="_blank" >Sign-up</a> to redeem.</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+                <table style="font-size:12px;font-family:Arial,Helvetica,sans-serif;color:#666666;line-height:1.2em;border-spacing:30px;border-collapse:separate" width="100%" cellspacing="0" cellpadding="10" border="0" bgcolor="444444" align="center">
+                    <tbody><tr>
+                        <td>
+                            <table class="" style="margin-left:auto;margin-right:auto;width:585px" width="585px" cellspacing="0" cellpadding="0" border="0" align="center">
+                                <tbody>
+                                <tr><td colspan="3" height="36">&nbsp;</td></tr>
+                                <tr>
+                                    <td colspan="3" style="font-family:Arial,Helvetica,sans-serif;color:#c9c9c9;font-size:13px;line-height:19px">
+                                        <p>{{var note}}</p>
+                                        <p>
+                                            If you have any questions on your Gift card, please feel free to contact us at <a href="mailto:{{config path='trans_email/ident_support/email'}}" style="color:#1E7EC8;">{{config path='trans_email/ident_support/email'}}</a> or by phone at {{config path='general/store_information/phone'}}.
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr><td colspan="3" height="36">&nbsp;</td></tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+{{template config_path="design/email/footer"}}

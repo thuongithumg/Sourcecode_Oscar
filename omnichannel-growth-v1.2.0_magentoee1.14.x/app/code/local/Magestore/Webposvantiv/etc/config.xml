@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_Webposvantiv
+ * @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <modules>
+        <Magestore_Webposvantiv>
+            <version>0.1.0</version>
+        </Magestore_Webposvantiv>
+    </modules>
+    <frontend>
+        <routers>
+            <webposvantiv>
+                <use>standard</use>
+                <args>
+                    <module>Magestore_Webposvantiv</module>
+                    <frontName>webposvantiv</frontName>
+                </args>
+            </webposvantiv>
+        </routers>
+        <layout>
+            <updates>
+                <webposvantiv>
+                    <file>webposvantiv.xml</file>
+                </webposvantiv>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magestore_Webposvantiv>
+                    <files>
+                        <default>Magestore_Webposvantiv.csv</default>
+                    </files>
+                </Magestore_Webposvantiv>
+            </modules>
+        </translate>
+    </frontend>
+    <admin>
+        <routers>
+            <webposvantivadmin>
+                <use>admin</use>
+                <args>
+                    <module>Magestore_Webposvantiv</module>
+                    <frontName>webposvantivadmin</frontName>
+                </args>
+            </webposvantivadmin>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <webposvantiv>
+                    <file>webposvantiv.xml</file>
+                </webposvantiv>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magestore_Webposvantiv>
+                    <files>
+                        <default>Magestore_Webposvantiv.csv</default>
+                    </files>
+                </Magestore_Webposvantiv>
+            </modules>
+        </translate>
+    </adminhtml>   
+    <global>
+        <models>
+            <webposvantiv>
+                <class>Magestore_Webposvantiv_Model</class>
+                <resourceModel>webposvantiv_mysql4</resourceModel>
+            </webposvantiv>
+            <webposvantiv_mysql4>
+                <class>Magestore_Webposvantiv_Model_Mysql4</class>
+            </webposvantiv_mysql4>
+        </models>
+        <resources>
+            <webposvantiv_setup>
+                <setup>
+                    <module>Magestore_Webposvantiv</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </webposvantiv_setup>
+            <webposvantiv_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </webposvantiv_write>
+            <webposvantiv_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </webposvantiv_read>
+        </resources>
+        <blocks>
+            <webposvantiv>
+                <class>Magestore_Webposvantiv_Block</class>
+            </webposvantiv>
+        </blocks>
+        <helpers>
+            <webposvantiv>
+                <class>Magestore_Webposvantiv_Helper</class>
+            </webposvantiv>
+        </helpers>
+        <events>
+            <webpos_get_payment_after>
+                <observers>
+                    <webposvantiv_observers>
+                        <class>webposvantiv/observer</class>
+                        <method>webposGetPaymentAfter</method>
+                    </webposvantiv_observers>
+                </observers>
+            </webpos_get_payment_after>
+        </events>
+    </global>
+    <default>
+        <webpos>
+            <payment>
+                <vantiv>
+                    <enable>0</enable>
+                    <is_sandbox>0</is_sandbox>
+                </vantiv>
+            </payment>
+        </webpos>
+    </default>
+</config>

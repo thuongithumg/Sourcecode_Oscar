@@ -1,0 +1,48 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<fieldset class="fieldset fieldset-bundle-options"  >
+    <!-- ko foreach: {data: itemData().bundle_options, as: 'parentData' }  -->
+        <!-- ko if: parentData.type == 'radio' -->
+            <!-- ko foreach: $parent.getRegion('bundle-product-radio') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        <!-- /ko -->
+
+        <!-- ko if: parentData.type == 'select' -->
+            <!-- ko foreach: $parent.getRegion('bundle-product-select') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        <!-- /ko -->
+
+        <!-- ko if: parentData.type == 'checkbox' -->
+            <!-- ko foreach: $parent.getRegion('bundle-product-checkbox') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        <!-- /ko -->
+
+        <!-- ko if: parentData.type == 'multi' -->
+            <!-- ko foreach: $parent.getRegion('bundle-product-multi') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        <!-- /ko -->
+    <!-- /ko -->
+    <!-- ko $parent.updatePrice($parent.itemData().bundle_options) --><!-- /ko -->
+</fieldset>

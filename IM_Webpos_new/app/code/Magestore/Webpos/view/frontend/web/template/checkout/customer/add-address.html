@@ -1,0 +1,146 @@
+
+    <!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<div data-bind="afterRender:initGoogleAddress"></div>
+<div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+                <div class="popup-header">
+                    <button type="button" class="close" data-dismiss="modal" data-bind="click: cancelAddress, i18n:'Cancel'"></button>
+                    <h4 class="modal-title" data-bind="text: addressTitle"></h4>
+                    <button type="submit" class="btn-save link-cl-cfg" data-bind="click: saveAddress, i18n: 'Save'"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div id="page-loading"></div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-box">
+                                    <input type="text" name="first-name"
+                                           class="customer-fname"
+                                           data-bind="value: firstName, attr: {placeholder: $t('First Name')}"
+                                           data-validate="{'required-entry':true}"
+                                    />
+                                    <em>*</em>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-box">
+                                    <input type="text" name="last-name"
+                                           data-validate="{'required-entry':true}"
+                                           data-bind="value: lastName, attr: {placeholder: $t('Last Name')}"
+                                           class="customer-lname"/>
+                                    <em>*</em>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-box">
+                                    <input type="text" name="company"
+                                           data-bind="value: company, attr: {placeholder: $t('Company')}"
+                                           class="customer-company"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-box">
+                                    <input type="text" name="phone"
+                                           class="customer-phone"
+                                           data-validate="{'required-entry':true}"
+                                           data-bind="value: phone, attr: {placeholder: $t('Phone')}"
+
+                                    />
+                                    <em>*</em>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-box">
+                                    <input type="text" name="street1" class="customer-street"
+                                           data-validate="{'required-entry':true}"
+                                           data-bind="value: street1, attr: {placeholder: $t('Street1')}"
+
+                                    />
+                                    <em>*</em>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-box">
+                                    <input type="text" name="Street2" class="customer-street2"
+                                           data-bind="value: street2, attr: {placeholder: $t('Street2')}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-box">
+                                    <input type="text" name="city" class="customer-street"
+                                           data-validate="{'required-entry':true}"
+                                           data-bind="value: city, attr: {placeholder: $t('City')}" />
+                                    <em>*</em>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-box">
+                                    <input type="text" name="zipcode" class="customer-street2"
+                                           data-validate="{'required-entry':true}"
+                                           data-bind="value: zipcode, attr: {placeholder: $t('Zip Code')}"
+                                           />
+                                    <em>*</em>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-box">
+                                    <select class="selectpicker country_id"
+                                            data-validate="{'required-entry':true}"
+                                            data-bind="options: countryArray,
+                                                value: country,
+                                                optionsText: function(item) {
+                                                    return item.country_name
+                                                },
+                                                optionsValue: function(item) {
+                                                    return item.country_id
+                                                },
+                                                optionsCaption: $t('Please choose country...')"
+                                            id="add_address_country_id" name="country_id"
+                                    >
+                                    </select>
+                                    <em>*</em>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-box">
+                                    <select class="selectpicker region_id"
+                                            data-bind="value: region_id"
+                                            id="add_address_region_id"
+                                            name="region_id" >
+                                        <option value="" data-bind="i18n:'Please select state or province'"></option>
+                                    </select>
+                                    <input  type="text"
+                                            id="region"
+                                            data-bind="value: region, attr: {placeholder: $t('State or Province')}"
+                                            name="region"
+                                            class="selectpicker region"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-box">
+                                    <input type="text"
+                                           data-bind="value: vatId, attr: {placeholder: $t('VAT')}"
+                                           name="vat" class="customer-VAT"/>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+

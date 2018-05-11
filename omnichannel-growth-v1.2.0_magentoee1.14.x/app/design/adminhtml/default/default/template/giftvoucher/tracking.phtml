@@ -1,0 +1,54 @@
+<?php
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+?>
+
+<div>
+    <a href="#" onclick="popWin('<?php echo $this->helper('shipping')->getTrackingPopupUrlBySalesModel($this->getShipment()) ?>','trackshipment','width=800,height=600,top=0,left=0,resizable=yes,scrollbars=yes'); return false;" title="<?php echo $this->__('Track the shipment') ?>"><?php echo $this->__('Track the shipment') ?></a>
+</div>
+<?php if($_tracks = $this->getShipment()->getAllTracks()): ?>
+<div class="field-row grid">
+<table cellspacing="0" class="data">
+    <thead>
+        <tr class="headings">
+            <th><?php echo Mage::helper('sales')->__('Carrier') ?></th>
+            <th><?php echo Mage::helper('sales')->__('Title') ?></th>
+            <th><?php echo Mage::helper('sales')->__('Number') ?></th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php $i=0;foreach ($_tracks as $_track):$i++ ?>
+        <tr class="<?php echo ($i%2==0)?'even':'odd' ?>">
+            <td><?php echo $this->getCarrierTitle($_track->getCarrierCode()) ?></td>
+            <td><?php echo $this->escapeHtml($_track->getTitle()) ?></td>
+            <td class="last">
+                <?php if ($_track->isCustom()): ?>
+                <?php echo $this->escapeHtml($_track->getNumber()) ?>
+                <?php else: ?>
+                <a href="#" onclick="popWin('<?php echo $this->helper('shipping')->getTrackingPopupUrlBySalesModel($_track) ?>','trackorder','width=800,height=600,resizable=yes,scrollbars=yes')"><?php echo $this->escapeHtml($_track->getNumber()) ?></a>
+                <div id="shipment_tracking_info_response_<?php echo $_track->getId() ?>"></div>
+                <?php endif; ?>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>
+</div>
+<?php endif ?>

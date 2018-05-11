@@ -1,0 +1,38 @@
+<div style="position: relative;width: 600px;margin: 0 auto 20px;float: left;border: 1px solid #ddd;border-radius: 3px;">
+    <div style="padding: 6px;float: left;width: 100%;box-sizing: border-box">
+        {{if giftImageUrl}}
+        <img style="margin: auto;max-width: 100%;" src="{{var giftImageUrl}}"/>
+        {{/if}}
+        <div>
+            <div style="margin-bottom: 5px;margin-top: 10px;float: left;width: 100%;text-align: left;">
+                <div style="height:90px; width:176px; float: left;padding-right: 10px;padding-left: 10px;position: relative;min-height: 85px;">
+                    {{if logo_url}}
+                    <img src="{{var logo_url}}" style="margin: auto;max-width: 100%; max-height: 90px;"/>
+                    {{/if}}
+                </div>
+                <div style="height:90px; width:174px; float: left;padding-right: 10px;padding-left: 10px;position: relative;min-height: 85px;border-left: 1px solid #ddd;border-right: 1px solid #dddddd;">
+                    <div style="text-align: center; margin-bottom: 5px;margin-top: 10px;float: left;width: 100%;">
+                        <div>
+                            <span style="color:#{{var styleColor}};font-size:30px;font-family: 'Open Sans', sans-serif;text-align: center;">
+                                <span>{{var giftValue}}</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-bottom: 5px;margin-top: 10px;float: left;width: 100%;">
+                        <span style="color:#{{var styleColor}};font-weight: 600;font-size: 15px;font-family: 'Open Sans', sans-serif;">{{var giftCode}}</span>
+                    </div>
+                </div>
+                <div style="height:90px;width:176px;text-align: center;min-height: 85px;display: flex;float: left;padding-right: 10px;padding-left: 10px;position: relative">
+                    {{if barcodeUrl}}
+                    <img src="{{var barcodeUrl}}" style="margin: auto;max-width: 100%; max-height: 90px;"/>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{if notes}}
+    <div style="float: left;width: 100%;padding: 10px;border-top: 1px solid #ddd;height: 90px;overflow: hidden;">
+        <div style="color:#{{var textColor}};width: 100%;float: left;margin: 0;font-size: 14px;line-height: 18px;max-height: 70px;overflow: hidden;">{{var notes}}</div>
+    </div>
+    {{/if}}
+</div>

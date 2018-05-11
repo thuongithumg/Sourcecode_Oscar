@@ -1,0 +1,43 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div data-bind="attr: {'class': 'field option'}">
+    <label class="label">
+        <span data-bind="text: parentData.title"></span>
+    </label>
+    <div class="control">
+
+        <select data-bind="event: {'change': $parents[1].updatePrice($parents[2].itemData().bundle_options)},
+                        attr: {'id': 'bundle-option-'+parentData.id,
+                            'name': 'bundle_option['+parentData.id+']',
+                            'class': 'product bundle option bundle-option-select change-container-classname',
+                            'data-validate': (parentData.required == 1) ? '{\'required-entry\':true}' : '{\'required-entry\':false}'
+                        }">
+            <option value="" data-bind="text: $t('Choose a selection...')"></option>
+            <!-- ko foreach: {data: $parents[1].convertToArray(parentData.items), as: 'itemData' }  -->
+                <option data-bind="text: itemData.name + ' +' + $parents[2].getSelectionTitlePrice(itemData.price),
+                                        attr: {
+                                            'value': itemData.selection_id,
+                                            'selected': (itemData.is_default =='1') ? 'selected' : false
+                                        }">
+                </option>
+            <!-- /ko -->
+        </select>
+        <div class="field qty qty-holder">
+            <label class="label" data-bind="attr: {'for': 'bundle-option-' + parentData.id + '-qty-input'}">
+                <span data-bind="text: $t('Quantity')"></span>
+            </label>
+            <div class="control">
+                <input data-bind="event: {'change': $parents[1].updatePrice($parents[2].itemData().bundle_options)},
+                                    attr: {'id': 'bundle-option-' + parentData.id + '-qty-input',
+                                        'class': 'input-text qty validate-greater-than-zero',
+                                        'type': 'number',
+                                        'min' : 1,
+                                        'name': 'bundle_option_qty[' + parentData.id + ']',
+                                        'value' : 1}" />
+            </div>
+        </div>
+    </div>
+</div>

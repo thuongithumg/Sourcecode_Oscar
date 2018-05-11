@@ -1,0 +1,40 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Inventorysuccess
+ * @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+?>
+<?php if ($this->canReturnItem()): ?>
+    <div class="purchase_buttons">
+        <?php if ($this->isBarcodeSuccessEnable()): ?>
+            <button id="scan_barcode_returned_item_button" class="" type="button" data-toggle="modal"
+                    data-target="#scan-barcode-return-item-modal">
+                <span><?php echo $this->__('Scan Barcode') ?></span>
+            </button>
+        <?php endif; ?>
+        <button id="returned_item_button" class="" type="button" data-toggle="modal"
+                data-target="#returned_item_modal" onclick="returnItem.gridJsObject.reload()">
+            <span><?php echo $this->__('Return Items') ?></span>
+        </button>
+        <button id="import_returned_item_button" class="import-csv" type="button" data-toggle="modal" data-target="#import_returned_item_modal">
+            <span><?php echo $this->__('Import Returned Items') ?></span>
+        </button>
+    </div>
+<?php endif; ?>
+<?php echo $this->getGridHtml(); ?>

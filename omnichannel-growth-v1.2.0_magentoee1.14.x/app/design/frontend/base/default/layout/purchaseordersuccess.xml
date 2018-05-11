@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Purchaseordersuccess
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<layout version="0.1.0">
+    <purchaseordersuccess_purchaseorder_data>
+        <block type="core/text_list" name="email_pdf" output="toHtml">
+            <block type="purchaseordersuccess/purchaseorder_pdf_header"
+                   name="purchaseorder.pdf.header"/>
+            <block type="purchaseordersuccess/purchaseorder_pdf_items"
+                   name="purchaseorder.pdf.item"/>
+            <block type="purchaseordersuccess/purchaseorder_pdf_footer"
+                   name="purchaseorder.pdf.footer"/>
+        </block>
+    </purchaseordersuccess_purchaseorder_data>
+</layout>

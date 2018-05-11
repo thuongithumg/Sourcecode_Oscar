@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magestore_Webpos::all" title="Allow everything" sortOrder="10" />
+            <resource id="Magestore_Webpos::webpos" title="Webpos Admin" sortOrder="20">
+                <resource id="Magestore_Webpos::manage_order" title="Manage Order" sortOrder="2">
+                    <resource id="Magestore_Webpos::manage_order_me" title="Manage Order Created By This Staff" sortOrder="0" />
+                    <resource id="Magestore_Webpos::manage_order_location" title="Manage Order Created at Location of Staff" sortOrder="0" />
+                    <resource id="Magestore_Webpos::manage_all_order" title="Manage All Order" sortOrder="1" />
+                </resource>
+                <resource id="Magestore_Webpos::manage_discount" title="Manage Discount" sortOrder="3">
+                    <resource id="Magestore_Webpos::apply_discount_per_cart" title="Apply Custom Discount Per Cart" sortOrder="0" />
+                    <resource id="Magestore_Webpos::apply_coupon" title="Apply Coupon Code" sortOrder="1" />
+                    <resource id="Magestore_Webpos::apply_discount_per_item" title="Apply Custom Discount Per Item" sortOrder="2" />
+                    <resource id="Magestore_Webpos::apply_custom_price" title="Apply Custom Price" sortOrder="3" />
+                    <resource id="Magestore_Webpos::all_discount" title="Apply All Discount" sortOrder="4" />
+                </resource>
+                <resource id="Magestore_Webpos::manage_inventory" title="Manage Inventory" sortOrder="5" />
+                <resource id="Magestore_Webpos::manage_shift" title="Manage Shift" sortOrder="3">
+                    <resource id="Magestore_Webpos::manage_shift_adjustment" title="Can Make Shift Adjustment" sortOrder="1" />
+                    <resource id="Magestore_Webpos::open_shift" title="Open Shift" sortOrder="2" />
+                    <resource id="Magestore_Webpos::close_shift" title="Close Shift" sortOrder="3" />
+                </resource>
+                <resource id="Magestore_Webpos::lock_register" title="Lock Register" sortOrder="6">
+                    <resource id="Magestore_Webpos::lock_unlock_register" title="Lock and Unlock register" sortOrder="1" />
+                    <resource id="Magestore_Webpos::edit_pin" title="Edit security PIN" sortOrder="2" />
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

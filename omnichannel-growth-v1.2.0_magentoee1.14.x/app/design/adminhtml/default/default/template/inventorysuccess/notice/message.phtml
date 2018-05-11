@@ -1,0 +1,47 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Inventorysuccess
+ * @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+?>
+<?php /** @var Magestore_Inventorysuccess_Block_Adminhtml_Import_Notice $this */ ?>
+<?php $isHasError = $this->isHasError(); ?>
+<?php if ($isHasError) :?>
+    <?php
+    $numberSkuInvalid = $this->getNumberSkuInvalid();
+    if (!$numberSkuInvalid) {
+        $numberSkuInvalid = 0;
+    }
+    ?>
+    <ul class="messages">
+        <li class="notice-msg">
+            <ul>
+                <li>
+                    <b><?php echo$this-> __('Invalid data'); ?></b>
+                </li>
+                <li>
+                    <?php if ($numberSkuInvalid):?>
+                        <?php echo $this->__('There are %s invalid rows. You must download', $numberSkuInvalid); ?>
+                    <?php endif;?>
+                    <a href="<?php echo $this->getInvalidFileCsvUrl();?>"><?php echo $this->__('this file');?></a>
+                    <?php echo $this->__(' to modify and try to import them again.'); ?>
+                </li>
+            </ul>
+        </li>
+    </ul>
+<?php endif;?>

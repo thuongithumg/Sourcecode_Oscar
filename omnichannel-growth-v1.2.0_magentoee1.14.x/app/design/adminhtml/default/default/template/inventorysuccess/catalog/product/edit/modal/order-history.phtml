@@ -1,0 +1,88 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Inventorysuccess
+ * @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+/**
+ * Adjuststock Adminhtml Block
+ * 
+ * @category    Magestore
+ * @package     Magestore_Inventorysuccess
+ * @author      Magestore Developer
+*/
+?>
+
+<div class="modal right fade" id="inventory_catalog_product_order_history" tabindex="-1" role="dialog" aria-labelledby="modalLabel" style="display:none">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="content-header">
+                <table cellspacing="0">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <h3 class="head-dashboard"><?php echo $this->getTitle() ?></h3>
+                            </td>
+                            <td class="a-right">
+                                <button title="<?php echo $this->__('Close')?>" type="button" class="scalable delete" data-dismiss="modal">
+                                    <span><span><span><?php echo $this->__('Close') ?></span></span></span>
+                                </button>        
+                            </td>                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>            
+
+            <div class="entry-edit">
+                <div id="catalog_product_order_history_list"></div>
+            </div>
+            
+        </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+</div><!-- modal -->
+
+<script type="text/javascript">
+    jQuery('#inventory_catalog_product_order_history').on('shown.bs.modal', function() {
+        loadOrderHistory('<?php echo $this->getOrderHistoryUrl() ?>', 'catalog_product_order_history_list');
+    })
+    
+    function loadOrderHistory(url, containerId){
+        new Ajax.Request(url, {
+            parameters: {form_key: FORM_KEY},
+            evalScripts: true,
+            onSuccess: function(transport) {
+                try {
+                    if (transport.responseText.isJSON()) {
+                        var response = transport.responseText.evalJSON()
+                        if (response.error) {
+                            alert(response.message);
+                        }
+                        if(response.ajaxExpired && response.ajaxRedirect) {
+                            setLocation(response.ajaxRedirect);
+                        }
+                    } else {
+                        $(containerId).update(transport.responseText);
+                    }
+                }
+                catch (e) {
+                    $(containerId).update(transport.responseText);
+                }
+            }
+        });        
+
+    }
+</script>

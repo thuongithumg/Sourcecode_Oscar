@@ -1,0 +1,130 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<div id="webpos_checkout" class="col-sm-8 col-left">
+    <header class="o-header checkout-header">
+        <div class="price-box">
+            <span class="price" data-bind="text:cartTotal()"></span>
+        </div>
+    </header>
+    <main class="main-content" data-bind="afterRender: afterRenderCheckout">
+        <div class="wrap-list-product">
+            <div class="panel-group" id="checkout-method">
+                <div class="panel panel-default" data-bind="visible:shipAble">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#checkout-method"  href="#shipping-method" data-bind="text:shippingHeader"></a>
+                        </h4>
+                    </div>
+                    <div id="shipping-method" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <!-- ko foreach: getRegion('webpos_checkout_shipping') -->
+                            <!-- ko template: getTemplate() --><!-- /ko -->
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default" data-bind="visible:showPayments">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#checkout-method" aria-expanded="true" href="#payment-method" data-bind="i18n:'Payment'"></a>
+                        </h4>
+                    </div>
+                    <div id="payment-method" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <!-- ko foreach: getRegion('webpos_checkout_payment_method_before') -->
+                            <!-- ko template: getTemplate() --><!-- /ko -->
+                            <!-- /ko -->
+                            <!-- ko if: payAble() -->
+                            <!-- ko foreach: getRegion('webpos_checkout_payment') -->
+                            <!-- ko template: getTemplate() --><!-- /ko -->
+                            <!-- /ko -->
+                            <!-- ko foreach: getRegion('webpos_checkout_payment_selected') -->
+                            <!-- ko template: getTemplate() --><!-- /ko -->
+                            <!-- /ko -->
+                            <!-- ko foreach: getRegion('webpos_checkout_payment_creditcard') -->
+                            <!-- ko template: getTemplate() --><!-- /ko -->
+                            <!-- /ko -->
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="checkout-footer">
+        <div class="wrap-footer">
+            <ul>
+                <li class="remain-money"><label data-bind="i18n: remainTitle"></label>
+                    <span class="price" data-bind="text: remainTotal"></span>
+                </li>
+                <li data-bind="afterRender:initCheckboxStyle">
+                    <div class="shipment-box">
+                        <label data-bind="i18n:'Mark as shipped',visible:shipAble"></label>
+                        <div id="can_ship" class="switch-box" data-bind="visible:shipAble">
+                            <input type="checkbox" class="ios" data-bind="event:{change:createShipment}, checked: canShip"/>
+                        </div>
+                    </div>
+                    <div class="invoice-box" data-bind="visible: canPaid">
+                        <label data-bind="i18n:'Create Invoice'"></label>
+                        <div id="can_paid" class="switch-box">
+                            <input data-bind="event:{change:createInvoice},
+                                   checked: canPaid"
+                                   type="checkbox" class="ios"/>
+                        </div>
+                    </div>
+                </li>
+                <li class="actions">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <button id="add_payment_button" class="add-payment button btn-cl-cfg-other"
+                                    data-bind="i18n:'Add Payment',
+                                    click: addMorePayments,disable:cannotAddPayment" ></button>
+                        </div>
+                        <div class="col-sm-6">
+                            <button id="checkout_button" class="checkout-actions button btn-cl-cfg-active" data-bind="click:placeOrder,text:checkoutButtonLabel"></button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </footer>
+    <!-- Popup Add more payment -->
+    <div id="add-more-payment" class="hide-popup popup-for-right" data-bind="css:{'fade-in':showPaymentPopup}">
+        <div class="modal-body">
+            <div class="wrap-payment-list">
+                <!-- ko foreach: getRegion('webpos_checkout_payment_popup') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+                <!-- /ko -->
+            </div>
+        </div>
+        <a class="arrow"></a>
+    </div>
+    <!-- ko foreach: getRegion('webpos_checkout_success') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <!-- /ko -->
+    <div class="indicator" data-bind="visible:loading">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- ko foreach: getRegion('webpos_checkout_print_receipt') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <!-- /ko -->
+</div>

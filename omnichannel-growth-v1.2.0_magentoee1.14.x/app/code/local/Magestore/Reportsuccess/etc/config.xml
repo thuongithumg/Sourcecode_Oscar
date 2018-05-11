@@ -1,0 +1,220 @@
+<?xml version="1.0"?>
+<!--
+  ~
+  ~  Magestore
+  ~   NOTICE OF LICENSE
+  ~
+  ~   This source file is subject to the Magestore.com license that is
+  ~   available through the world-wide-web at this URL:
+  ~   http://www.magestore.com/license-agreement.html
+  ~
+  ~   DISCLAIMER
+  ~
+  ~   Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~   version in the future.
+  ~
+  ~   @category    Magestore
+  ~   @package     Magestore_Reportsuccess
+  ~   @copyright   Copyright (c) 2017 Magestore (http://www.magestore.com/)
+  ~   @license     http://www.magestore.com/license-agreement.html
+  ~
+  ~
+  -->
+<config>
+    <modules>
+        <Magestore_Reportsuccess>
+            <version>1.0.0</version>
+        </Magestore_Reportsuccess>
+    </modules>
+    <frontend>
+
+        <routers>
+            <reprotsuccess>
+                <use>standard</use>
+                <args>
+                    <module>Magestore_Reportsuccess</module>
+                    <frontName>reprotsuccess</frontName>
+                </args>
+            </reprotsuccess>
+        </routers>
+
+        <layout>
+            <updates>
+                <reprotsuccess>
+                    <file>reprotsuccess.xml</file>
+                </reprotsuccess>
+            </updates>
+        </layout>
+
+        <translate>
+            <modules>
+                <Magestore_Reportsuccess>
+                    <files>
+                        <default>Magestore_Reportsuccess.csv</default>
+                    </files>
+                </Magestore_Reportsuccess>
+            </modules>
+        </translate>
+
+    </frontend>
+
+
+    <admin>
+
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Magestore_Reportsuccess>Magestore_Reportsuccess_Adminhtml</Magestore_Reportsuccess>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+
+    </admin>
+
+    <adminhtml>
+
+        <layout>
+            <updates>
+                <reportsuccess>
+                    <file>reportsuccess.xml</file>
+                </reportsuccess>
+            </updates>
+        </layout>
+
+        <translate>
+            <modules>
+                <Magestore_Reportsuccess>
+                    <files>
+                        <default>Magestore_Reportsuccess.csv</default>
+                    </files>
+                </Magestore_Reportsuccess>
+            </modules>
+        </translate>
+
+        <events>
+            <admin_session_user_login_success>
+                <observers>
+                    <reportsuccess_observers>
+                        <class>reportsuccess/observer</class>
+                        <method>adminSessionUserLoginSuccess</method>
+                    </reportsuccess_observers>
+                </observers>
+            </admin_session_user_login_success>
+
+            <update_mac_values>
+                <observers>
+                    <reportsuccess_observers>
+                        <type>singleton</type>
+                        <class>reportsuccess/observer</class>
+                        <method>upadteMacAfterTranferPO</method>
+                    </reportsuccess_observers>
+                </observers>
+            </update_mac_values>
+        </events>
+
+    </adminhtml>
+    <global>
+        <models>
+            <reportsuccess>
+                <class>Magestore_Reportsuccess_Model</class>
+                <resourceModel>reportsuccess_mysql4</resourceModel>
+            </reportsuccess>
+            <reportsuccess_mysql4>
+                <class>Magestore_Reportsuccess_Model_Mysql4</class>
+                <entities>
+                    <costofgood>
+                        <table>os_report_cog</table>
+                    </costofgood>
+                    <historics>
+                        <table>os_report_historics</table>
+                    </historics>
+                    <editcolumns>
+                        <table>os_report_editcolumns</table>
+                    </editcolumns>
+                    <salesreport>
+                        <table>os_salesreport_report</table>
+                    </salesreport>
+                    <flagtag>
+                        <table>os_flagtag_reindexer</table>
+                    </flagtag>
+                </entities>
+            </reportsuccess_mysql4>
+        </models>
+
+        <resources>
+            <reportsuccess_setup>
+                <setup>
+                    <module>Magestore_Reportsuccess</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </reportsuccess_setup>
+            <reportsuccess_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </reportsuccess_write>
+            <reportsuccess_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </reportsuccess_read>
+        </resources>
+
+
+        <blocks>
+            <reportsuccess>
+                <class>Magestore_Reportsuccess_Block</class>
+            </reportsuccess>
+        </blocks>
+
+        <events>
+            <sales_order_save_after>
+                <observers>
+                    <reportsuccess_salesreport_observers>
+                        <class>reportsuccess/observer_salesreport_salesOrderPlaceAfter</class>
+                        <method>execute</method>
+                    </reportsuccess_salesreport_observers>
+                </observers>
+            </sales_order_save_after>
+        </events>
+
+        <helpers>
+            <reportsuccess>
+                <class>Magestore_Reportsuccess_Helper</class>
+            </reportsuccess>
+        </helpers>
+
+
+        <index>
+            <indexer>
+                <reportsuccess_historics_indexer>
+                    <model>reportsuccess/indexer</model>
+                </reportsuccess_historics_indexer >
+            </indexer>
+        </index>
+
+    </global>
+
+    <default>
+        <reportsuccess>
+            <general>
+                <author>Kai</author>
+                <version>[1.0.0]</version>
+            </general>
+        </reportsuccess>
+    </default>
+
+    <crontab>
+        <jobs>
+            <reportsuccess_cronjob>
+                <schedule><cron_expr>*/1 * * * *</cron_expr></schedule>
+                <run><model>reportsuccess/service_cron_reportindexer::execute</model></run>
+            </reportsuccess_cronjob>
+        </jobs>
+    </crontab>
+
+</config>

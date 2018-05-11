@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Magestore_Webpos::webpos" title="Web POS" module="Magestore_Webpos" sortOrder="30" parent="Magento_Sales::sales" resource="Magestore_Webpos::webpos"/>
+        <add id="Magestore_Webpos::checkout" title="POS Checkout" module="Magestore_Webpos" sortOrder="0" parent="Magestore_Webpos::webpos" resource="Magestore_Webpos::checkout" action="webposadmin/index/index"/>
+        <add id="Magestore_Webpos::locations" title="Manage Locations" module="Magestore_Webpos" sortOrder="10" parent="Magestore_Webpos::webpos" resource="Magestore_Webpos::locations" action="webposadmin/location/index"/>
+        <add id="Magestore_Webpos::staffs" title="Manage Staff" module="Magestore_Webpos" sortOrder="20" parent="Magestore_Webpos::webpos" resource="Magestore_Webpos::staffs" action="webposadmin/staff_staff/index"/>
+        <add id="Magestore_Webpos::roles" title="Manage Roles" module="Magestore_Webpos" sortOrder="30" parent="Magestore_Webpos::webpos" resource="Magestore_Webpos::roles" action="webposadmin/staff_role/index"/>
+        <add id="Magestore_Webpos::zreport" title="Z-Reports" module="Magestore_Webpos" sortOrder="40" parent="Magestore_Webpos::webpos" resource="Magestore_Webpos::zreport" action="webposadmin/zreport/index"/>
+        <add id="Magestore_Webpos::reports" title="Sales Order Reports" module="Magestore_Webpos" sortOrder="50" parent="Magestore_Webpos::webpos" resource="Magestore_Webpos::reports" action="webposadmin/report/dashboard"/>
+        <add id="Magestore_Webpos::pos" title="Manage POS" module="Magestore_Webpos" sortOrder="60" parent="Magestore_Webpos::webpos" resource="Magestore_Webpos::pos" action="webposadmin/pos/index"/>
+        <add id="Magestore_Webpos::denomination" title="Manage Cash Denomination" module="Magestore_Webpos" sortOrder="65" parent="Magestore_Webpos::webpos" resource="Magestore_Webpos::denomination" action="webposadmin/denomination/index"/>
+        <add id="Magestore_Webpos::settings" title="Settings" module="Magestore_Webpos" sortOrder="70" parent="Magestore_Webpos::webpos" resource="Magestore_Webpos::settings" action="adminhtml/system_config/edit/section/webpos"/>
+    </menu>
+</config>

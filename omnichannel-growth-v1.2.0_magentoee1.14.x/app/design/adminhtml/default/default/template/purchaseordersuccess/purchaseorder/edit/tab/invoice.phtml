@@ -1,0 +1,34 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Inventorysuccess
+ * @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+?>
+<?php if ($this->canInvoice()): ?>
+    <div class="purchase_buttons">
+        <button id="create_invoice_button" class="" type="button" data-toggle="modal"
+                data-target="#create_invoice_modal" onclick="createInvoice.gridJsObject.reload()">
+            <span><?php echo $this->__('Create an Invoice') ?></span>
+        </button>
+        <button id="import_invoice_item_button" class="import-csv" type="button" data-toggle="modal" data-target="#import_invoice_item_modal">
+            <span><?php echo $this->__('Import Invoice Items') ?></span>
+        </button>
+    </div>
+<?php endif; ?>
+<?php echo $this->getGridHtml(); ?>

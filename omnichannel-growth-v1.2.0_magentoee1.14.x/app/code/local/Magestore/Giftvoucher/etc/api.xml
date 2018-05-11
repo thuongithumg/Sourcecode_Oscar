@@ -1,0 +1,155 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Giftvoucher
+  ~ @module     Giftvoucher
+  ~ @author      Magestore Developer
+  ~
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  ~
+  -->
+
+<config>
+    <api>
+        <resources>
+            <giftcard translate="title" module="giftvoucher">
+                <title>Gift Card</title>
+                <acl>giftcard</acl>
+                <model>giftvoucher/api</model>
+                <methods>                    
+                    <list translate="title" module="customer">
+                        <title>Retrive giftcard</title>
+                        <method>items</method> 
+                        <acl>giftcard/list</acl>
+                    </list>
+                    <check translate="title" module="giftvoucher">
+                        <title>Check giftcard</title>
+                        <acl>giftcard/check</acl>
+                    </check>
+                    <create translate="title" module="giftvoucher">
+                        <title>Create giftcard</title>
+                        <acl>giftcard/create</acl>
+                    </create>
+                    <massCreate translate="title" module="giftvoucher">
+                        <title>massCreate giftcard</title>
+                        <acl>giftcard/massCreate</acl>
+                    </massCreate>
+                    <history translate="title" module="giftvoucher">
+                        <title>history giftcard</title>
+                        <acl>giftcard/history</acl>
+                    </history>
+                    <update translate="title" module="giftvoucher">
+                        <title>Update giftcard data</title>
+                        <acl>giftcard/update</acl>
+                    </update>
+                    <sendEmail translate="title" module="giftvoucher">
+                        <title>sendEmail</title>
+                        <acl>giftcard/sendEmail</acl>
+                    </sendEmail>
+                    <redeemToCredit translate="title" module="giftvoucher">
+                        <title>redeemToCredit</title>
+                        <acl>giftcard/redeemToCredit</acl>
+                    </redeemToCredit>
+                </methods>
+                <faults module="giftvoucher">
+                    <data_invalid>
+                        <code>100</code>
+                        <message>Invalid Gift card data. View details in error message</message>
+                    </data_invalid>
+                    <filters_invalid>
+                        <code>101</code>
+                        <message>Invalid filter data. View details in error message</message>
+                    </filters_invalid>
+                    <not_exists>
+                        <code>102</code>
+                        <message>Giftcard not exists.</message>
+                    </not_exists>
+                    <invalid_code>
+                        <code>103</code>
+                        <message>Invalid card code. View details in error message.</message>
+                    </invalid_code>
+                    <limited_code>
+                        <code>104</code>
+                        <message>The gift code usage has exceeded the number of users allowed.</message>
+                    </limited_code>
+                </faults>
+            </giftcard>
+            <giftcard_credit>
+                <title>Credit GiftCard</title>
+                <acl>giftcard/credit</acl>
+                <model>giftvoucher/api</model>
+                <methods>                    
+                    <info translate="title" module="giftvoucher">
+                        <title>Retrieve Credit GiftCard data</title>
+                        <acl>giftcard/credit/info</acl>
+                    </info>
+                    <updateCredit translate="title" module="giftvoucher">
+                        <title>Update Credit GiftCard data</title>
+                        <acl>giftcard/credit/updateCredit</acl>
+                    </updateCredit>
+                 </methods>  
+            </giftcard_credit>
+        </resources>
+        <v2>
+            <resources_function_prefix>
+                <giftcard>giftcard</giftcard>
+                <giftcard_credit>giftcardCredit</giftcard_credit>
+            </resources_function_prefix>
+        </v2>
+        <acl>
+            <resources>
+                <giftcard translate="title" module="giftvoucher">
+                    <title>Gift Card</title>
+                    <sort_order>2000</sort_order> 
+                    <list translate="title" module="giftvoucher">
+                        <title>View All</title>
+                    </list> 
+                    <check translate="title" module="giftvoucher">
+                        <title>Create</title>
+                    </check>                  
+                    <create translate="title" module="giftvoucher">
+                        <title>Create</title>
+                    </create>
+                    <massCreate translate="title" module="giftvoucher">
+                        <title>MassCreate</title>
+                    </massCreate>
+                    <history translate="title" module="giftvoucher">
+                        <title>History</title>
+                    </history>
+                    <update translate="title" module="giftvoucher">
+                        <title>Update</title>
+                    </update>
+                    <sendEmail translate="title" module="giftvoucher">
+                        <title>sendEmail</title>
+                    </sendEmail>
+                    <redeemToCredit translate="title" module="giftvoucher">
+                        <title>redeemToCredit</title>
+                    </redeemToCredit>
+                    <credit translate="title" module="giftvoucher">
+                         <title>Credit</title>
+                         <sort_order>100</sort_order>
+                         <info translate="title" module="giftvoucher">
+                            <title>Info Credit Giftcard</title>
+                         </info>
+                         <updateCredit translate="title" module="giftvoucher">
+                            <title>Update Credit Giftcard</title>
+                         </updateCredit>
+                     </credit>
+                </giftcard>
+            </resources>
+        </acl>
+    </api>
+</config>

@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_Webposauthorizenet
+ * @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <tabs>
+        <magestore translate="label">
+            <label>Magestore Extension</label>
+            <sort_order>300</sort_order>
+        </magestore>
+    </tabs>
+    <sections>
+        <webpos translate="label" module="webpos">
+            <class>separator-top</class>
+            <label>Web POS</label>
+            <tab>magestore</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>300</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <payment translate="label">
+                    <label>Payment for POS</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>26</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <authorizenet_separator translate="label comment">
+                            <label>Authorizenet Integration</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>webpos/adminhtml_system_config_form_field_separator</frontend_model>
+                            <margin_top>10px</margin_top>
+                            <sort_order>300</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </authorizenet_separator>
+                        <authorizenet_enable translate="label">
+                            <label>Allow customer pay via authorizenet</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>305</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </authorizenet_enable>
+                        <authorizenet_api_login translate="label comment">
+                            <label>API Login ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>305</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <authorizenet_enable>1</authorizenet_enable>
+                            </depends>
+                            <comment></comment>
+                        </authorizenet_api_login>
+                        <authorizenet_transaction_key translate="label comment">
+                            <label>Transaction Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>310</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <authorizenet_enable>1</authorizenet_enable>
+                            </depends>
+                            <comment></comment>
+                        </authorizenet_transaction_key>
+                        <authorizenet_client_id translate="label comment">
+                            <label>Client ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>315</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <authorizenet_enable>1</authorizenet_enable>
+                            </depends>
+                            <comment></comment>
+                        </authorizenet_client_id>
+                        <authorizenet_payment_action translate="label comment">
+                            <label>Payment Action</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>paygate/authorizenet_source_paymentAction</source_model>
+                            <sort_order>320</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <authorizenet_enable>1</authorizenet_enable>
+                            </depends>
+                            <comment></comment>
+                        </authorizenet_payment_action>
+                        <authorizenet_is_sandbox translate="label comment">
+                            <label>Sandbox Mode</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>330</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <authorizenet_enable>1</authorizenet_enable>
+                            </depends>
+                            <comment></comment>
+                        </authorizenet_is_sandbox>
+                    </fields>
+                </payment>
+            </groups>
+        </webpos>
+    </sections>
+</config>

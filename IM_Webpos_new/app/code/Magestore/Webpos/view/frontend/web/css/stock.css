@@ -1,0 +1,61 @@
+/*
+ * Copyright © 2018 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/* style for Stock page */
+#manage_stock_container .wrap-manage_stock_container .o-header-nav .title {color: #3c4857;font-size: 15px;display: block;text-align: center;width: 100%; max-width: 100%}
+#manage_stock_container  main.main-stock {height: calc(100vh - 50px);background: #f2f4f6;padding: 20px 30px;}
+
+#manage_stock_container  main.main-stock .wrap-table-header {background:#fff;border-radius: 3px;}
+#manage_stock_container  main.main-stock .wrap-table-header .table {margin-bottom: 0 !important;}
+#manage_stock_container  main.main-stock .wrap-table-header th{color: #6f7d90;font-size: 15px;text-transform: uppercase;font-weight: 400;height: 26px;line-height: 26px;padding:5px;}
+#manage_stock_container  main.main-stock .wrap-table-header th {vertical-align: middle;border-bottom:1px solid #e2e5e6;border-top:0 none; width: 10%}
+#manage_stock_container  main.main-stock .wrap-table-header th:first-child {padding-left:34px; width:30%;}
+#manage_stock_container  main.main-stock .wrap-table-header th:last-child {padding-right:34px;}
+#manage_stock_container  main.main-stock .wrap-table-header .th-update {color:#3785dd;font-size:15px;}
+
+#manage_stock_container  main.main-stock .wrap-table {background:#fff;height: calc(100vh - 296px); overflow: auto;border-radius: 3px;}
+#manage_stock_container  main.main-stock .wrap-table th{color: #6f7d90;font-size: 15px;text-transform: uppercase;font-weight: 400;height: 26px;line-height: 26px;padding:14px 5px;}
+#manage_stock_container  main.main-stock .wrap-table th,
+#manage_stock_container  main.main-stock .wrap-table td{vertical-align: middle;border-bottom:1px solid #e2e5e6;border-top:0 none; width:10%;}
+#manage_stock_container  main.main-stock .wrap-table td .qty-edit{text-align:center}
+#manage_stock_container  main.main-stock .wrap-table th:first-child,
+#manage_stock_container  main.main-stock .wrap-table td:first-child{padding-left:34px; width:30%;}
+#manage_stock_container  main.main-stock .wrap-table th:last-child,
+#manage_stock_container  main.main-stock .wrap-table td:last-child{padding-right:34px;}
+#manage_stock_container  main.main-stock .wrap-table td .product-name{margin-top: 0;font-size:15px;color:#3c4857;font-weight:400}
+#manage_stock_container  main.main-stock .wrap-table td span.sku {color: #6f7d90;}
+#manage_stock_container  main.main-stock .wrap-table tr:last-child td{border-bottom:0 none}
+#manage_stock_container  main.main-stock .wrap-table .th-update,
+#manage_stock_container  main.main-stock .wrap-table td .update{color:#3785dd;font-size:15px;}
+#manage_stock_container  main.main-stock .wrap-table td .input-qty{width: 48px;border: 1px solid #ebebeb;text-align: center;font-size: 1.269vw;padding: 5px 10px;    color: #3c4857;}
+#manage_stock_container .o-header-nav label.title {display: block;text-align: center;width: 100%;}
+.popup-for-right .popup-header,#manage_stock_container .wrap-calc{display:flex;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between}
+.popup-for-right .popup-header .cancel{color:#9da4a2;font-weight:400;font-size:15px}
+.popup-for-right .popup-header .product-name{flex-grow:2;text-align:center;color:#3c4857;font-weight:400;font-size:15px}
+.wrap-calc .numberFields{flex-grow:3}
+.wrap-calc .operator-actions{flex-grow:1;margin-top:10px}
+.wrap-calc .enter,.operator-actions .operator{background-color:#ebebeb;border:1px solid #e1e1e1;height:47px;width:100%;display:inline-block;color:#5d6774;font-size:20px;padding:0;min-width:37px}
+.wrap-calc .enter{height:94px;background:#00a679;color:#fff;font-size:14px;    border: 1px solid #00a679;padding: 0;}
+.wrap-calc .numberFields button{background-color: transparent;}
+#popup-add-remove-qty{width:437px;right: auto;left: calc(50% - 220px);}
+#manage_stock_container .show-input{margin-top:20px}
+#manage_stock_container .show-input input{border:1px solid #e1e1e1;width:100%;border-radius:3px;height:38px;line-height:39px;padding:0 10px;text-align:right;color:#6f7d90;font-size:13px;}
+
+#manage_stock_container .sum-info-top{padding-top:20px;padding-bottom:20px;height:auto}
+#manage_stock_container .sum-info-top .search-box{min-width:466px; height: 40px;}
+#manage_stock_container .form-inline{flex-grow: 5;margin-left: 50px;margin-bottom: 8px;}
+#manage_stock_container .form-inline .form-group,
+#manage_stock_container .form-inline  .search-header{width:100%}
+#manage_stock_container .form-inline  .search-header{border: 0 none;background: none transparent;box-shadow: 0 0 0;color: #6f7d90;font-size: 100%;}
+#manage_stock_container .form-inline  .form-group{background:#edeff2;display: flex;border-radius: 3px;margin-top:8px;}
+#manage_stock_container .form-inline  .form-group .icon-iconPOS-search,
+#manage_stock_container .form-inline  .form-group .icon-iconPOS-search{display: inline-block;margin-left: 10px;margin-top:2px;color: #778597;margin-right: 10px;}
+#manage_stock_container  .form-inline .btn-default{width:0;visibility: hidden;height:0;line-height: 0;font-size: 0;position: absolute;top: 0;}
+#manage_stock_container .remove-text{cursor:pointer;display:none;margin-top: 9px;border-radius: 50%;margin-right: 15px;background: #919cab;width: 15px;height: 15px;vertical-align: middle;text-align: center;line-height: 15px; color: #fff;font-weight: 100;}
+#manage_stock_container .address-left label{display:block;text-align:left;font-size:15px;color:#6f7d90;font-weight:400;line-height: 1.4;margin: 0;}
+#manage_stock_container .address-left label.location{font-weight:600;}
+/* End style for Stock page */
+
+#manage_stock_container .icon-iconPOS-success {font-size: 24px !important;}

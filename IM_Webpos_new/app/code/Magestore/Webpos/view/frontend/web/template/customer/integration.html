@@ -1,0 +1,17 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<!-- ko if: hasChilds() -->
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h5 data-bind="i18n: 'Account Information'"></h5>
+    </div>
+    <div class="panel-body">
+        <!-- ko foreach: elems() -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+    </div>
+</div>
+<!-- /ko -->

@@ -1,0 +1,35 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<!-- ko if: $parent.orderData-->
+<nav class="o-header-nav">
+    <div class="id-order"><label class="title-header-page">Order: <span data-bind="text: $parent.orderData.call().increment_id"></span></label></div>
+</nav>
+<div class="sum-info-top">
+    <div class="life-time-left">
+        <span class="price" data-bind="text: $parent.convertAndFormatPrice($parent.orderData().base_grand_total)"/>
+    </div>
+    <div class="info-order">
+        <table>
+            <tr>
+                <td><label data-bind="text: $t('Status: ')"/></td>
+                <td>
+                    <span data-bind="attr: {class: 'status' + $parent.orderData().status}, text: $t('On Hold')"/>
+                </td>
+            </tr>
+            <tr>
+                <td><label data-bind="text: $t('Created Date: ')"/></td>
+                <td><span class="date-time" data-bind="text: $parent.getFullDate($parent.orderData().created_at)"/></td>
+            </tr>
+            <!-- ko if: $parent.orderData().webpos_staff_name -->
+            <tr>
+                <td><label data-bind="text: $t('Served by: ')"/></td>
+                <td><span class="date-time" data-bind="text: $parent.orderData().webpos_staff_name"></span></td>
+            </tr>
+            <!-- /ko -->
+        </table>
+    </div>
+</div>
+<!--/ko-->

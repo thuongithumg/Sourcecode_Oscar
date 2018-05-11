@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPointsApi
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <modules>
+        <Magestore_RewardPointsApi>
+            <version>0.1.0</version>
+        </Magestore_RewardPointsApi>
+    </modules>
+    <frontend>
+        <routers>
+            <rewardpointsapi>
+                <use>standard</use>
+                <args>
+                    <module>Magestore_RewardPointsApi</module>
+                    <frontName>rewardpointsapi</frontName>
+                </args>
+            </rewardpointsapi>
+        </routers>
+        <layout>
+            <updates>
+                <rewardpointsapi>
+                    <file>rewardpointsapi.xml</file>
+                </rewardpointsapi>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magestore_RewardPointsApi>
+                    <files>
+                        <default>Magestore_RewardPointsApi.csv</default>
+                    </files>
+                </Magestore_RewardPointsApi>
+            </modules>
+        </translate>
+    </frontend>
+    <admin>
+        <routers>
+            <rewardpointsapiadmin>
+                <use>admin</use>
+                <args>
+                    <module>Magestore_RewardPointsApi</module>
+                    <frontName>rewardpointsapiadmin</frontName>
+                </args>
+            </rewardpointsapiadmin>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <rewardpointsapi>
+                    <file>rewardpointsapi.xml</file>
+                </rewardpointsapi>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magestore_RewardPointsApi>
+                    <files>
+                        <default>Magestore_RewardPointsApi.csv</default>
+                    </files>
+                </Magestore_RewardPointsApi>
+            </modules>
+        </translate>
+    </adminhtml>   
+    <global>
+        <models>
+            <rewardpointsapi>
+                <class>Magestore_RewardPointsApi_Model</class>
+                <resourceModel>rewardpointsapi_mysql4</resourceModel>
+            </rewardpointsapi>
+            <rewardpointsapi_mysql4>
+                <class>Magestore_RewardPointsApi_Model_Mysql4</class>
+                <entities>
+                    
+                </entities>
+            </rewardpointsapi_mysql4>
+        </models>
+        <resources>
+            <rewardpointsapi_setup>
+                <setup>
+                    <module>Magestore_RewardPointsApi</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </rewardpointsapi_setup>
+            <rewardpointsapi_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </rewardpointsapi_write>
+            <rewardpointsapi_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </rewardpointsapi_read>
+        </resources>
+        <blocks>
+            <rewardpointsapi>
+                <class>Magestore_RewardPointsApi_Block</class>
+            </rewardpointsapi>
+        </blocks>
+        <helpers>
+            <rewardpointsapi>
+                <class>Magestore_RewardPointsApi_Helper</class>
+            </rewardpointsapi>
+        </helpers>
+        <rewardpoints>
+            <actions>
+                <api>rewardpointsapi/actions_api</api>
+            </actions>
+        </rewardpoints>
+    </global>
+</config>

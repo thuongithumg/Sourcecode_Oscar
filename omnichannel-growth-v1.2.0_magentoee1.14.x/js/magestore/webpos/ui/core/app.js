@@ -1,0 +1,32 @@
+/*
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Webpos
+ * @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+define([
+    'ui/core/renderer/types',
+    'ui/core/renderer/layout',
+    'ui/lib/knockout/bootstrap'
+], function (types, layout) {
+    'use strict';
+
+    return function (data, merge) {
+        types.set(data.types);
+        layout(data.components, undefined, true, merge);
+    };
+});

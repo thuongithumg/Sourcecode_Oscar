@@ -1,0 +1,294 @@
+<?xml version="1.0"?>
+<!--
+  ~
+  ~  Magestore
+  ~   NOTICE OF LICENSE
+  ~
+  ~   This source file is subject to the Magestore.com license that is
+  ~   available through the world-wide-web at this URL:
+  ~   http://www.magestore.com/license-agreement.html
+  ~
+  ~   DISCLAIMER
+  ~
+  ~   Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~   version in the future.
+  ~
+  ~   @category    Magestore
+  ~   @package     Magestore_Barcodesuccess
+  ~   @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~   @license     http://www.magestore.com/license-agreement.html
+  ~
+  ~
+  -->
+<layout version="0.1.0">
+    <adminhtml_barcodesuccess_scan>
+        <reference name="head">
+            <action method="addJs">
+                <script>magestore/barcodesuccess/scan.js</script>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="barcodesuccess/scan"/>
+        </reference>
+    </adminhtml_barcodesuccess_scan>
+    <adminhtml_barcodesuccess_barcode_index>
+        <update handle="adminhtml_coresuccess_modal"/>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/magestore/barcodesuccess/barcode.css</name>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/magestore/barcodesuccess/jquery-ui.min.css</name>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/magestore/barcodesuccess/jquery.datetimepicker.min.css</name>
+            </action>
+            <action method="addJs">
+                <script>magestore/barcodesuccess/jquery-ui.min.js</script>
+            </action>
+            <action method="addJs">
+                <script>magestore/barcodesuccess/jquery.datetimepicker.full.min.js</script>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="barcodesuccess/adminhtml_import_notice"
+                   name="barcodesuccess_notice_message" template="barcodesuccess/notice/message.phtml"/>
+            <block type="barcodesuccess/adminhtml_barcode_generate" template="barcodesuccess/barcode/generate.phtml"
+                   name="barcode.grid.container.generate">
+                <block type="barcodesuccess/adminhtml_barcode_generate_edit"
+                       name="barcode.generate.edit" as="content"/>
+                <block type="barcodesuccess/adminhtml_barcode_generate_edit_tabs"
+                       name="barcode.generate.edit.tabs" as="left"/>
+            </block>
+            <block type="barcodesuccess/adminhtml_barcode" name="barcode.grid.container"/>
+            <block type="adminhtml/widget_grid_serializer" name="barcode.grid.gridserializer">
+                <reference name="barcode.grid.gridserializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>adminhtml_barcode.grid</grid_block_name>
+                        <data_callback>getSelectedBarcodes</data_callback>
+                        <hidden_input_name>barcodes</hidden_input_name>
+                        <reload_param_name>barcodes_selected</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>barcode_id</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>barcode</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>supplier_code</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>product_sku</input_name>
+                    </action>
+                </reference>
+            </block>
+            <block type="barcodesuccess/adminhtml_barcode_import" template="barcodesuccess/barcode/import.phtml"
+                   name="barcode.grid.import"/>
+            <block type="core/template" template="barcodesuccess/barcode/grid/js.phtml" name="barcode.grid.js"/>
+        </reference>
+    </adminhtml_barcodesuccess_barcode_index>
+    <adminhtml_barcodesuccess_barcode_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="barcodesuccess/adminhtml_barcode_grid"
+                   name="barcode.grid"/>
+        </block>
+    </adminhtml_barcodesuccess_barcode_grid>
+    <adminhtml_barcodesuccess_barcode_productgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="barcodesuccess/adminhtml_barcode_generate_edit_tab_grid"
+                   name="barcode.generate.productgrid"/>
+        </block>
+    </adminhtml_barcodesuccess_barcode_productgrid>
+    <adminhtml_barcodesuccess_barcode_view>
+        <update handle="adminhtml_coresuccess_one_column_layout"/>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/magestore/barcodesuccess/barcode.css</name>
+            </action>
+        </reference>
+        <reference name="before_body_end">
+        </reference>
+    </adminhtml_barcodesuccess_barcode_view>
+    <adminhtml_barcodesuccess_barcode_renderview>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="barcodesuccess/adminhtml_barcode_edit_tab_general"
+                   name="barcode.view.general"/>
+            <block type="barcodesuccess/adminhtml_barcode_edit_tab_print"
+                   name="barcode.view.print"/>
+            <block type="barcodesuccess/adminhtml_barcode_edit_tab_product"
+                   name="barcode.view.product"/>
+            <block type="core/template" name="barcore_edit_before_end"
+                   template="barcodesuccess/barcode/form/js.phtml"/>
+        </block>
+    </adminhtml_barcodesuccess_barcode_renderview>
+    <adminhtml_barcodesuccess_barcode_scan_index>
+        <update handle="adminhtml_coresuccess_one_column_layout"/>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/magestore/barcodesuccess/barcode.css</name>
+            </action>
+        </reference>
+    </adminhtml_barcodesuccess_barcode_scan_index>
+    <adminhtml_barcodesuccess_barcode_scan_render>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="barcodesuccess/adminhtml_barcode_scan_edit_tab_form"
+                   name="barcode.view.form"/>
+            <block type="barcodesuccess/adminhtml_barcode_scan_edit_tab_print"
+                   name="barcode.view.print"/>
+            <block type="barcodesuccess/adminhtml_barcode_scan_edit_tab_general"
+                   name="barcode.view.general"/>
+            <block type="barcodesuccess/adminhtml_barcode_scan_edit_tab_product"
+                   name="barcode.view.product"/>
+            <block type="core/template" name="barcore_scane_edit_before_end"
+                   template="barcodesuccess/barcode/scan/js.phtml"/>
+        </block>
+    </adminhtml_barcodesuccess_barcode_scan_render>
+    <adminhtml_barcodesuccess_barcode_print_index>
+        <update handle="adminhtml_coresuccess_one_column_layout"/>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/magestore/barcodesuccess/barcode.css</name>
+            </action>
+        </reference>
+    </adminhtml_barcodesuccess_barcode_print_index>
+    <adminhtml_barcodesuccess_barcode_print_render>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="barcodesuccess/adminhtml_barcode_print_edit_tab_form"
+                   name="barcode.print.edit.tab.form"/>
+            <block type="barcodesuccess/adminhtml_barcode_print_edit_tab_grid"
+                   name="barcode.print.edit.tab.grid"/>
+            <block type="adminhtml/widget_grid_serializer" name="barcode.print.edit.tab.gridserializer">
+                <reference name="barcode.print.edit.tab.gridserializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>barcode.print.edit.tab.grid</grid_block_name>
+                        <data_callback>getSelected</data_callback>
+                        <hidden_input_name>barcodes</hidden_input_name>
+                        <reload_param_name>barcodes_selected</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>qty</input_name>
+                    </action>
+                </reference>
+            </block>
+            <block type="core/template" name="barcore_scane_edit_before_end"
+                   template="barcodesuccess/barcode/print/js.phtml"/>
+        </block>
+    </adminhtml_barcodesuccess_barcode_print_render>
+    <adminhtml_barcodesuccess_barcode_print_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="barcodesuccess/adminhtml_barcode_print_edit_tab_grid"
+                   name="barcode.print.edit.tab.grid"/>
+        </block>
+    </adminhtml_barcodesuccess_barcode_print_grid>
+
+    <!--HISTORY-->
+    <adminhtml_barcodesuccess_history_index>
+        <reference name="content">
+            <block type="barcodesuccess/adminhtml_import_notice"
+                   name="barcodesuccess_notice_message" template="barcodesuccess/notice/message.phtml"/>
+            <block type="barcodesuccess/adminhtml_history" name="barcode.grid.container"/>
+        </reference>
+    </adminhtml_barcodesuccess_history_index>
+    <adminhtml_barcodesuccess_history_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="barcodesuccess/adminhtml_history_grid"
+                   name="history.grid"/>
+        </block>
+    </adminhtml_barcodesuccess_history_grid>
+    <adminhtml_barcodesuccess_history_view>
+        <update handle="adminhtml_coresuccess_one_column_layout"/>
+    </adminhtml_barcodesuccess_history_view>
+    <adminhtml_barcodesuccess_history_historyview>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="barcodesuccess/adminhtml_history_edit_tab_form"
+                   name="history_edit_tab_form"/>
+            <block type="barcodesuccess/adminhtml_history_edit_tab_grid"
+                   name="history_edit_tab_grid"/>
+        </block>
+    </adminhtml_barcodesuccess_history_historyview>
+    <adminhtml_barcodesuccess_history_historyviewgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="barcodesuccess/adminhtml_history_edit_tab_grid"
+                   name="history_edit_tab_grid"/>
+        </block>
+    </adminhtml_barcodesuccess_history_historyviewgrid>
+
+    <!--TEMPLATE-->
+    <adminhtml_barcodesuccess_template_index>
+        <reference name="content">
+            <block type="barcodesuccess/adminhtml_template" name="barcode_template_grid_container"/>
+        </reference>
+    </adminhtml_barcodesuccess_template_index>
+    <adminhtml_barcodesuccess_template_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="barcodesuccess/adminhtml_template_grid" name="barcode_template_grid"/>
+        </block>
+    </adminhtml_barcodesuccess_template_grid>
+    <adminhtml_barcodesuccess_template_edit>
+        <update handle="adminhtml_coresuccess_one_column_layout"/>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/magestore/barcodesuccess/barcode.css</name>
+            </action>
+        </reference>
+        <reference name="before_body_end">
+            <block type="core/template" name="template_edit_before_end"
+                   template="barcodesuccess/template/form/js.phtml"/>
+        </reference>
+    </adminhtml_barcodesuccess_template_edit>
+
+    <!--PRODUCT TAB-->
+    <adminhtml_catalog_product_edit>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/magestore/barcodesuccess/barcode.css</name>
+            </action>
+        </reference>
+    </adminhtml_catalog_product_edit>
+    <adminhtml_barcodesuccess_product_rendertab>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="barcodesuccess/adminhtml_catalog_product_edit_tab_form"
+                   name="barcodesuccess.catalog.product.edit.barcode.form"/>
+            <block type="barcodesuccess/adminhtml_catalog_product_edit_tab_grid"
+                   name="barcodesuccess.catalog.product.edit.barcode.grid"/>
+            <block type="adminhtml/widget_grid_serializer"
+                   name="barcodesuccess.catalog.product.edit.barcode.gridserializer">
+                <reference name="barcodesuccess.catalog.product.edit.barcode.gridserializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>barcodesuccess.catalog.product.edit.barcode.grid</grid_block_name>
+                        <data_callback>getSelectedBarcodes</data_callback>
+                        <hidden_input_name>barcodes</hidden_input_name>
+                        <reload_param_name>barcodes_selected</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>barcode</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>barcode_id</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>print_qty</input_name>
+                    </action>
+                </reference>
+            </block>
+            <block type="core/template" template="barcodesuccess/catalog/product/js.phtml"
+                   name="barcodesuccess.catalog.product.edit.barcode.js"/>
+        </block>
+    </adminhtml_barcodesuccess_product_rendertab>
+    <adminhtml_barcodesuccess_product_productbarcodegrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="barcodesuccess/adminhtml_catalog_product_edit_tab_grid"
+                   name="barcodesuccess.catalog.product.edit.barcode.grid"/>
+        </block>
+    </adminhtml_barcodesuccess_product_productbarcodegrid>
+
+</layout>

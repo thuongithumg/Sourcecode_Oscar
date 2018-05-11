@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+
+    <event name="webpos_get_payment_after">
+        <observer name="webposauthorizenet_get_payment_after" instance="Magestore\WebposAuthorizenet\Observer\GetPaymentAfter" />
+    </event>
+    <event name="webpos_order_place_before">
+        <observer name="webposauthorizenet_webpos_order_place_before" instance="Magestore\WebposAuthorizenet\Observer\WebposOrderPlaceBefore" />
+    </event>
+    <event name="webpos_submit_order_after">
+        <observer name="webposauthorizenet_webpos_submit_order_after" instance="Magestore\WebposAuthorizenet\Observer\WebposSubmitOrderAfter"/>
+    </event>
+</config>

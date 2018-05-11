@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPointsLoyaltyLevel
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<layout version="0.1.0">
+    <default>
+        <!-- update layout for all frontend page -->
+    </default>
+    <rewardpoints_default>       
+        <reference name="rewardpoints.navigation">
+            <action method="addLink" translate="label" module="rewardpointsloyaltylevel" ifconfig="rewardpoints/loyaltylevelplugin/enable">
+                <name>rewardpoints_loyaltylevel</name>
+                <path>rewardpointsloyaltylevel</path>
+                <label>Loyalty Level</label>
+                <enable>true</enable>
+                <order>50</order>
+            </action>
+        </reference>
+    </rewardpoints_default>
+    <rewardpointsloyaltylevel_index_index>
+        <update handle="rewardpoints_default" />  
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/magestore/rewardpointsloyalty.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="rewardpointsloyaltylevel/rewardpointsloyaltylevel" name="rewardpointsloyaltylevel" template="rewardpointsloyaltylevel/rewardpointsloyaltylevel.phtml" />
+        </reference>
+    </rewardpointsloyaltylevel_index_index>
+    <rewardpointsloyaltylevel_join_index>
+        <update handle="rewardpoints_default" />  
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/magestore/rewardpointsloyalty.css</stylesheet>
+            </action>
+            <action method="addJs"><script>prototype/window.js</script></action>
+            <action method="addItem"><type>js_css</type><name>prototype/windows/themes/default.css</name></action>
+        </reference>
+        <reference name="content">
+            <block type="rewardpointsloyaltylevel/rewardpointsloyaltylevel" name="rewardpointsloyaltylevel.join" template="rewardpointsloyaltylevel/join/rewardpointsloyaltylevel.phtml" />
+        </reference>
+    </rewardpointsloyaltylevel_join_index>
+<!--    <customer_account_index>
+        <reference name="before_body_end">
+            <block type="rewardpointsloyaltylevel/rewardpointsloyaltylevel" name="rewardpointsloyaltylevel.account_dashboard" template="rewardpointsloyaltylevel/account.phtml" />
+        </reference>
+    </customer_account_index>-->
+    <rewardpoints_index_settings>
+        <reference name="before_body_end">
+            <block type="rewardpointsloyaltylevel/rewardpointsloyaltylevel" template="rewardpointsloyaltylevel/settings.phtml"/>
+        </reference>
+    </rewardpoints_index_settings>
+</layout>

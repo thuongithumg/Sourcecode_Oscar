@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<page layout='webpos' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" >
+    <update handle="webpos_customer_integration"/>
+    <body>
+        <referenceBlock name="webpos_content">
+            <block class="Magestore\Webpos\Block\Customer\Lists" name ='webpos-customer-list' cacheable="false" template="Magestore_Webpos::customer/list.phtml">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="customer-list" xsi:type="array">
+                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/customer/customer-list</item>
+                                <item name="children" xsi:type="array">
+                                    <item name="customer-view" xsi:type="array">
+                                        <item name="sortOrder" xsi:type="string">0</item>
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/customer/customer-view</item>
+                                        <item name="displayArea" xsi:type="string">customer-view</item>
+                                        <item name="children" xsi:type="array">
+                                            <item name="webpos_customer_integration" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">0</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/customer/integration</item>
+                                                <item name="displayArea" xsi:type="string">webpos_customer_integration</item>
+                                                <item name="children" xsi:type="array">
+
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

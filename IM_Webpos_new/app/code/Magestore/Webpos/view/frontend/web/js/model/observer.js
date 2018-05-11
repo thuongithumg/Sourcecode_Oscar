@@ -1,0 +1,115 @@
+/*
+ * Copyright © 2018 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+define(
+    [
+        'jquery',
+        'Magestore_Webpos/js/observer/inventory/catalog-product-collection-load-after',
+        'Magestore_Webpos/js/observer/inventory/sales-order-cancel-after',
+        'Magestore_Webpos/js/observer/inventory/sales-order-creditmemo-save-after',
+        'Magestore_Webpos/js/observer/synchronization/model-save-after',
+        'Magestore_Webpos/js/observer/synchronization/model-massupdate-after',
+        'Magestore_Webpos/js/observer/synchronization/start-pull-data',
+        'Magestore_Webpos/js/observer/synchronization/finish-pull-data',
+        'Magestore_Webpos/js/observer/checkout/place-order-before',
+        'Magestore_Webpos/js/observer/checkout/place-order-after',
+        'Magestore_Webpos/js/observer/checkout/sync-offline-order-after',
+        'Magestore_Webpos/js/observer/customer/sync-offline-customer-after',
+        'Magestore_Webpos/js/observer/shift/sync-offline-shift-after',
+        'Magestore_Webpos/js/observer/shift/refresh-shift-listing',
+        'Magestore_Webpos/js/observer/shift/after-closed-shift',
+        'Magestore_Webpos/js/observer/catalog/stock-item-save-after',
+        'Magestore_Webpos/js/observer/catalog/stock-item-massupdate-after',
+        'Magestore_Webpos/js/observer/catalog/stock-item-page-massupdate-after',
+        'Magestore_Webpos/js/observer/catalog/stock-item-pull-after',
+        'Magestore_Webpos/js/observer/shift/update-shift-after-create-order',
+        'Magestore_Webpos/js/observer/shift/open-shift-after',
+        'Magestore_Webpos/js/observer/checkout/cart-item-remove-after',
+        'Magestore_Webpos/js/observer/sales/after-take-payment',
+        'Magestore_Webpos/js/observer/sales/order-hold-after',
+        'Magestore_Webpos/js/observer/customer/customer-pull-duplicate',
+        'Magestore_Webpos/js/observer/shift/update-shift-after-take-payment',
+        'Magestore_Webpos/js/observer/checkout/tax-calculation-finish-pull-after',
+        'Magestore_Webpos/js/observer/catalog/category/load-product-by-category',
+        'Magestore_Webpos/js/observer/integration/rewardpoints/sync-prepare-maps',
+        'Magestore_Webpos/js/observer/integration/sales-order-list-load-order',
+        'Magestore_Webpos/js/observer/integration/storecredit/sync-prepare-maps',
+        'Magestore_Webpos/js/observer/integration/giftcard/sync-prepare-maps',
+        'Magestore_Webpos/js/observer/config/config-pull-after'
+    ],
+    function ($, 
+              catalogProductCollectionLoadAfter,
+              inventorySalesOrderCancelAfter,
+              inventorySalesOrderCreditmemoSaveAfter,
+              modelSaveAfter,
+              modelMassUpdateAfter,
+              startPullData,
+              finishPullData,
+              placeOrderBefore,
+              placeOrderAfter,
+              syncOrderAfter,
+              customerAfter,
+              syncOfflineShiftAfter,
+              refreshShiftListing,
+              afterClosedShift,
+              catalogStockItemSaveAfter,
+              catalogStockItemMassupdateAfter,
+              catalogStockItemPageMassupdateAfter,
+              catalogStockItemPullAfter,
+              updateShiftAfterCreateOrder,
+              openShiftAfter,
+              cartItemRemoveAfter,
+              orderTakePaymentAfter,
+              orderHoldAfter,
+              customerPullDuplicate,
+              updateShiftAfterTakePayment,
+              finishPullTaxCalculation,
+              loadProductByCategory,
+              rewardpointsSyncPrepareMaps,
+              integrationSalesOrderListLoadOrder,
+              storecreditSyncPrepareMaps,
+              giftcardSyncPrepareMaps,
+              configPullAfter
+    ) {
+        "use strict";
+
+        return {
+            processEvent: function() {
+                catalogProductCollectionLoadAfter.execute();
+                inventorySalesOrderCancelAfter.execute();
+                inventorySalesOrderCreditmemoSaveAfter.execute();
+                modelSaveAfter.execute();
+                modelMassUpdateAfter.execute();
+                startPullData.execute();
+                finishPullData.execute();
+                placeOrderBefore.execute();                   
+                placeOrderAfter.execute();
+                syncOrderAfter.execute();                
+                customerAfter.execute();
+                syncOfflineShiftAfter.execute();
+                refreshShiftListing.execute();
+                afterClosedShift.execute();
+                catalogStockItemSaveAfter.execute();
+                catalogStockItemMassupdateAfter.execute();
+                catalogStockItemPageMassupdateAfter.execute();
+                catalogStockItemPullAfter.execute();
+                updateShiftAfterCreateOrder.execute();
+                openShiftAfter.execute();
+                cartItemRemoveAfter.execute();
+                orderTakePaymentAfter.execute();
+                orderHoldAfter.execute();
+                customerPullDuplicate.execute();
+                updateShiftAfterTakePayment.execute();
+                finishPullTaxCalculation.execute();
+                loadProductByCategory.execute();
+                rewardpointsSyncPrepareMaps.execute();
+                integrationSalesOrderListLoadOrder.execute();
+                storecreditSyncPrepareMaps.execute();
+                giftcardSyncPrepareMaps.execute();
+                configPullAfter.execute();
+            },
+        };
+    }
+);

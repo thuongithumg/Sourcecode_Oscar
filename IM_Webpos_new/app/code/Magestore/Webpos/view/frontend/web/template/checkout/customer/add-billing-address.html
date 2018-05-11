@@ -1,0 +1,144 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+            <div class="popup-header">
+                <button type="button" class="close" data-bind="click: hideBillingAddress, text: leftButton"
+                        data-dismiss="modal"></button>
+                <h4 class="modal-title" data-bind="text: billingAddressTitle"></h4>
+                <button type="submit" class="btn-save  link-cl-cfg" data-bind="click: saveBillingAddress, i18n:'Save'"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="input-box">
+                                <input type="text" name="first-name"
+                                       class="customer-fname"
+                                       data-bind="value: firstNameBilling, attr: {placeholder: $t('First Name')}"
+                                       data-validate="{'required-entry':true}"
+                                />
+                                <em>*</em>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="input-box">
+                                <input type="text" name="last-name"
+                                       data-validate="{'required-entry':true}"
+                                       data-bind="value: lastNameBilling, attr: {placeholder: $t('Last Name')}"
+                                       class="customer-lname"/>
+                                <em>*</em>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="input-box">
+                                <input type="text" name="company"
+                                       data-bind="value: companyBilling, attr: {placeholder: $t('Company')}"
+                                       class="customer-company"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="input-box">
+                                <input type="text" name="phone"
+                                       class="customer-phone"
+                                       data-bind="value: phoneBilling, attr: {placeholder: $t('Phone')}"
+                                       data-validate="{'required-entry':true}"
+                                />
+                                <em>*</em>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="input-box">
+                                <input type="text" name="street1" class="customer-street"
+                                       data-bind="value: street1Billing, attr: {placeholder: $t('Street1')}"
+                                       data-validate="{'required-entry':true}"
+                                />
+                                <em>*</em>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="input-box">
+                                <input type="text" name="Street2" class="customer-street2"
+                                       data-bind="value: street2Billing, attr: {placeholder: $t('Street2')}"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="input-box">
+                                <input type="text" name="city" class="customer-street"
+                                       data-bind="value: cityBilling, attr: {placeholder: $t('City')}"
+                                       data-validate="{'required-entry':true}"
+                                />
+                                <em>*</em>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="input-box">
+                                <input type="text" name="zipcode" class="customer-street2"
+                                       data-bind="value: zipcodeBilling, attr: {placeholder: $t('Zip Code')}"
+                                       data-validate="{'required-entry':true}"/>
+                                <em>*</em>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="input-box">
+                                <select class="selectpicker country_id"
+                                        data-validate="{'required-entry':true}"
+                                        data-bind="options: countryArray,
+                                                value: countryBilling,
+                                                optionsText: function(item) {
+                                                    return item.country_name
+                                                },
+                                                optionsValue: function(item) {
+                                                    return item.country_id
+                                                },
+                                                optionsCaption: $t('Please choose country...')"
+                                        id="add_billing_country_id" name="country_id"
+                                >
+                                </select>
+                                <em>*</em>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="input-box">
+                                <select class="selectpicker region_id"
+                                        data-bind="value: regionIdBilling"
+                                        id="add_billing_region_id"
+                                        name="region_id" >
+                                    <option value="" data-bind="i18n:'Please select state or province'"></option>
+                                </select>
+                                <input  type="text"
+                                        id="add_billing_region"
+                                        data-bind="value: regionBilling, attr: {placeholder: $t('State or Province')}"
+                                        name="region"
+                                        value=""
+                                        class="selectpicker region" style="display:none" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="input-box">
+                                <input type="text"
+                                       data-bind="value: vatBilling, attr: {placeholder: $t('VAT')}"
+                                       name="vat" class="customer-VAT"/>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>

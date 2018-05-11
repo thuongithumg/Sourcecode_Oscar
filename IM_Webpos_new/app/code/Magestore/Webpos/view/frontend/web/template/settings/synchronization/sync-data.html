@@ -1,0 +1,81 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div data-bind="attr:{id:idName}" class="tab-pane fade in active">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div data-bind="visible: !isInstall(),attr:{id:'sync_container'}">
+                <div data-bind="css:'wrap-shift_container'">
+                    <div class="table-fixed">
+                    <table data-bind="css:'table table-process'">
+                        <colgroup>
+                            <col width="150" />
+                            <col width="" />
+                            <col width="45%" />
+                            <col width="100" />
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th class="last-updated" data-bind="css:'date-time'">Last Updated</th>
+                            <th class="a-right"><button class="update-all btn-update-process" data-bind="i18n:'Update All',click: updateAll,disable:running"></button></th>
+                            <th><button class="reload-all btn-update-process" data-bind="i18n:'Reload All',click: reloadAll,disable:running"></button></th>
+                        </tr>
+                        </thead>
+                    </table>
+                    </div>
+                    <main data-bind="css:'main-sync'">
+                        <table data-bind="css:'table table-process'">
+                            <colgroup>
+                                <col width="150" />
+                                <col width="" />
+                                <col width="45%" />
+                                <col width="100" />
+                            </colgroup>
+                            <tbody data-bind="foreach: modelList">
+                            <tr>
+                                <td data-bind="i18n: label"></td>
+                                <td data-bind="text: updated_date, css:'date-time'"></td>
+                                <td data-bind="css:id + ' process-box'">
+                                    <div data-bind="css:'wrap-process'">
+                                        <div data-bind="style: {visibility:isVisibility},css:id+'-myProgress myProgress'">
+                                            <div  data-bind="css:id+'-myBar myBar',attr:{style:'width:'+percent()+'%'}">
+
+                                            </div>
+                                            <div data-bind="text:percent() + '%',css: id + '-label-percent label-percent'"></div>
+                                            <label class="status-process" data-bind="i18n:actionText"></label>
+                                        </div>
+                                        <span class="icon-iconPOS-success sync-icon" data-bind="visible: finishedUpdate">
+                                            <span class="path1"></span><span class="path2"></span>
+                                        </span>
+                                        <button  data-bind="i18n:'Update',click: processUpdate,disable:running,css:'btn-update-process'"></button>
+
+                                    </div>
+
+                                </td>
+                                <td><button  data-bind="i18n:'Reload',click: clearData,disable:running,css:'actions btn-update-process'"></button></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </main>
+                    <div data-bind="css:'wrap-backover hide-popup'"></div>
+                </div>
+            </div>
+            <!--<div class="ms-webpos" data-bind="visible: isInstall">-->
+                <!--<div class="first-screen">-->
+                    <!--<div class="process-box">-->
+                        <!--<div class="wrap-process">-->
+                            <!--<div class="myProgress first-rates-myProgress">-->
+                                <!--<div class="label-percent first-rates-label-percent" data-bind="text: percent()+'%'"></div>-->
+                                <!--<div class="myBar first-rates-myBar" data-bind="attr:{style:'width:'+percent()+'%'}">-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+    </div>
+</div>

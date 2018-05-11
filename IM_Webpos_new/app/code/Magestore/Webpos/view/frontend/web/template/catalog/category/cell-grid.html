@@ -1,0 +1,16 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div id="all-categories" data-bind="attr: {'class': 'collapse' + className.call()}">
+    <!-- ko if: loadingCat() -->
+    <div class="wrap-item-category">
+        <div class="indicator-category">
+            <div class="spinner"></div>
+        </div>
+    </div>
+    <!-- /ko -->
+    <div id="list-cat-header" class="owl-carousel" data-bind="sliderCategories: items">
+    </div>
+</div>

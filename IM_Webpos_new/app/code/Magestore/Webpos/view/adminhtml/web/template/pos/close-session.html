@@ -1,0 +1,18 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div id="popup-close-shift" class="hide-popup popup-for-right" data-bind="afterRender:initModal">
+    <div class="wrap-popup">
+        <div class="modal-body">
+            <div class="cash-counting-notice">
+                <span data-bind="i18n:'Fill in this form when you check money in the cash-drawer before closing Session'"/>
+            </div>
+            <div class="amount-box">
+                <!-- ko template: {name: 'Magestore_Webpos/pos/cash-counting', data: $data} -->
+                <!-- /ko -->
+            </div>
+        </div>
+    </div>
+</div>

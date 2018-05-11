@@ -1,0 +1,65 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Inventorysuccess
+ * @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+$blockGrid = $this->getBlockGrid();
+$gridJsObjectName = $blockGrid->getJsObjectName();
+$gridJsParentObjectName = $this->getJsParentObjectName();
+$hiddenInputField = $blockGrid->getHiddenInputField();
+?>
+<div class="modal right fade" id="back_sale_product_modal" tabindex="-1"
+     role="dialog" aria-labelledby="modalLabel" style="display:none">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="icon-head"><?php echo $this->__('Back-order Products') ?></h3>
+                <p class="form-buttons">
+                    <button id="submit_back_sale_product" class="action-primary add" type="button" data-dismiss="modal">
+                        <span><?php echo $this->__('Add Selected Products') ?></span>
+                    </button>
+                    <button title="Close" type="button" class="scalable delete" data-dismiss="modal" id="closeModal">
+                        <span><?php echo $this->__('Close') ?></span>
+                    </button>
+                </p>
+            </div>
+            <div class="modal-body">
+                <?php echo $this->getGridHtml(); ?>
+            </div>
+            <input type="hidden" name="<?php echo $hiddenInputField ?>" id="<?php echo $hiddenInputField ?>" value=""/>
+            <script type="text/javascript">
+                var backSaleProduct = new PurchaseorderSuccessJS({
+                    "selectedItems": <?php /* @escapeNotVerified */ echo $blockGrid->getSelectedItems(); ?>,
+                    "gridJsObjectName": <?php /* @escapeNotVerified */ echo '"' . $gridJsObjectName . '"' ?: '{}'; ?>,
+                    "parentGridJsObjectName": <?php /* @escapeNotVerified */ echo '"' . $gridJsParentObjectName . '"' ?: '{}'; ?>,
+                    "hiddenInputField": <?php /* @escapeNotVerified */ echo '"' . $hiddenInputField . '"' ?>,
+                    "editFields": <?php /* @escapeNotVerified */ echo $blockGrid->getEditFields(); ?>,
+                    "saveBtn": "submit_back_sale_product",
+                    "saveUrl": <?php /* @escapeNotVerified */ echo '"' . $blockGrid->getSaveUrl() . '"' ?: '""'; ?>,
+                    "canReloadTotal": true,
+                    "reloadBtn": "back_sale_product_button",
+                    "messages": {
+                        "noItemSelected": <?php /* @escapeNotVerified */ echo '"' . $this->__('Please select product(s) to add.') . '"'?>,
+                    },
+                });
+            </script>
+        </div>
+    </div>
+</div>
+

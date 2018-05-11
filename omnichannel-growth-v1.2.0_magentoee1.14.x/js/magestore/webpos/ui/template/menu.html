@@ -1,0 +1,33 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<div class="admin-account">
+    <h2 class="admin-name" data-bind="text: window.webposConfig.staffName"></h2>
+    <h3 class="admin-add" data-bind="text:window.webposConfig.currentLocationName">location</h3>
+    <h3 class="admin-add" data-bind="text:generalHelper.getLocalConfig('current_store_full_name')">store</h3>
+    <div class="logout-box" data-bind="click: logout">
+        <a href="#" class="logout-link">
+            <span class="icon-iconPOS-logout" data-bind="i18n: 'Logout'")></span>
+        </a>
+    </div>
+</div>
+<!-- ko foreach: elems() -->
+<!-- ko template: getTemplate() --><!-- /ko -->
+<!--/ko-->

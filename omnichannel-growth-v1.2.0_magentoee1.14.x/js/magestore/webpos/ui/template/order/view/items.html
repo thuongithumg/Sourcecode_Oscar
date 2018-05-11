@@ -1,0 +1,101 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<div class="col-sm-12">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <table class="table">
+                <colgroup>
+                    <col width="">
+                    <col width="">
+                    <col width="">
+                    <col width="95">
+                    <col width="">
+                    <col width="">
+                    <col width="">
+                    <col width="">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th data-bind="i18n: ('Product')"/>
+                        <!--<th data-bind="text: ('SKU')"/>-->
+                        <th data-bind="i18n: ('Original Price')"/>
+                        <th data-bind="i18n: ('Price')"/>
+                        <th data-bind="i18n: ('Qty')"/>
+                        <th data-bind="i18n: ('Subtotal')"/>
+                        <th data-bind="i18n: ('Tax Amount')"/>
+                        <th data-bind="i18n: ('Discount Amount')"/>
+                        <th data-bind="i18n: ('Row Total')"/>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: {data: $parent.orderData().items, as: 'item'}">
+                    <!-- ko ifnot: item.parent_item_id -->
+                    <tr>
+                        <td>
+                            <h4 class="product-name" data-bind="html: item.name"></h4>
+                            <label class="product-sku" data-bind="i18n: ('SKU')"></label>:
+                            <span class="product-sku" data-bind="html: item.sku"></span>
+                            <!-- ko if: item.giftvoucher_info -->
+                                <!-- ko foreach: item.giftvoucher_info -->
+                                    <h4 class="product-name" data-bind="html: $data.label"></h4>
+                                    <label class="product-sku" data-bind="html: $data.value"></label>
+                                <!-- /ko -->
+                            <!-- /ko -->
+                            <!-- ko
+                            if:
+                            ($parents[1].orderData().items_info_buy && $parents[1].orderData().items_info_buy.items[$index()].options_label) ||
+                            ($parents[1].orderData().initData && $parents[1].orderData().initData.items[$index()].options_label)
+                             -->
+                                <br/>
+                                <span class="product-sku" data-bind="html: $parents[1].orderData().initData ? $parents[1].orderData().initData.items[$index()].options_label : $parents[1].orderData().items_info_buy.items[$index()].options_label "></span><br>
+                            <!-- /ko -->
+                            <!--<img src="" />-->
+                        </td>
+                        <!--<td class="order-id" data-bind="text: item.sku"/>-->
+                        <td class="price" data-bind="text: $parents[1].convertAndFormatPrice(item.base_original_price)"/>
+                        <td class="price" data-bind="text: $parents[1].convertAndFormatPrice(item.base_price)"/>
+                        <td class="order-id">
+                            <label data-bind="i18n: ('Ordered: ') + item.qty_ordered"></label></br>
+                            <!-- ko if: item.qty_invoiced > 0 -->
+                            <label data-bind="i18n: ('Invoiced: ') + item.qty_invoiced"></label></br>
+                            <!-- /ko -->
+                            <!-- ko if: item.qty_shipped > 0 -->
+                            <label data-bind="i18n: ('Shipped: ') + item.qty_shipped"></label></br>
+                            <!-- /ko -->
+                            <!-- ko if: item.qty_refunded > 0 -->
+                            <label data-bind="i18n: ('Refunded: ') + item.qty_refunded"></label></br>
+                            <!-- /ko -->
+                            <!-- ko if: item.qty_canceled > 0 -->
+                            <label data-bind="i18n: ('Canceled: ') + item.qty_canceled"></label></br>
+                            <!-- /ko -->
+                        </td>
+                        <td class="price" data-bind="text: $parents[1].convertAndFormatPrice(item.base_price*item.qty_ordered)"/>
+                        <td class="price" data-bind="text: $parents[1].convertAndFormatPrice(item.base_tax_amount)"/>
+                        <td class="price" data-bind="text: $parents[1].convertAndFormatPrice(
+                            item.base_discount_amount?item.base_discount_amount:0)"/>
+                        <!--<td class="price" data-bind="text: $parents[1].convertAndFormatPrice(item.base_row_total+item.base_tax_amount-item.base_discount_amount)"/>-->
+                        <td class="price" data-bind="text: $parents[1].convertAndFormatPrice(item.base_original_price-item.base_discount_amount)"/>
+                    </tr>
+                    <!-- /ko -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

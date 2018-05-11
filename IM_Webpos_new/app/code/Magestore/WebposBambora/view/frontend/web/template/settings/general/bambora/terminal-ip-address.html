@@ -1,0 +1,19 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div class="panel panel-default">
+    <div class="panel-heading" data-bind="i18n: label"></div>
+    <div class="panel-body">
+        <div class="col-sm-6">
+            <div class="input-box">
+                <input data-bind="
+                    attr: { name:elementName,id:elementName,class:'form-control'},
+                    value: value,
+                    event:{change:saveConfig}
+                    " />
+            </div>
+        </div>
+    </div>
+</div>

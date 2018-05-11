@@ -1,0 +1,41 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<div class="list-data">
+    <div data-bind="visible: isSearchable" class="search">
+        <input data-bind="event: {change: filter}" type="text" name="search_key" />
+    </div>
+    <div data-bind="event: {scroll: lazyload}" class="scroll-grid">
+        <table class="data-table base list">
+            <tbody data-bind="foreach: items">
+            <tr data-bind="foreach: columns">
+                <td><span data-bind="text: renderer ? renderer.render($parent) : $parent[rowText] "></span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style type="text/css">
+    .scroll-grid {height: 400px; overflow-x: auto;}
+</style>
+
+
+

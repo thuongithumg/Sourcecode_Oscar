@@ -1,0 +1,54 @@
+<?php echo $this->getChildHtml('requirejs');?>
+<fieldset class="fieldset admin__fieldset" id="admin_webpos_session_detail" data-bind="scope:'admin_webpos_session_detail'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</fieldset>
+<div id="admin_webpos_close_session_popup" data-bind="scope:'admin_webpos_close_session_popup'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+<div id="admin_webpos_cash_activity_popup" data-bind="scope:'admin_webpos_cash_activity_popup'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+<div id="admin_webpos_cash_adjustment_popup" data-bind="scope:'admin_webpos_cash_adjustment_popup'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+<div id="admin_webpos_cash_set_closing_balance_reason" data-bind="scope:'admin_webpos_cash_set_closing_balance_reason'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+<iframe id="webpos_pos_session_print_iframe" allowtransparency="true" frameborder="0" name="webpos_pos_print_iframe"
+        style="width: 100%; background-color:transparent; display:none;"
+        src="">
+</iframe>
+<script>
+    window.webposConfig = <?php /* @escapeNotVerified */ echo \Zend_Json::encode($this->getWebposConfig()); ?>;
+    require(["model/adminhtml/pos/management"], function(PosManagement){
+        PosManagement.initData('<?php echo $this->getSessionData();?>');
+    });
+    require([
+        'uiApp'
+    ], function (app) {
+        app({
+            components : {
+                "admin_webpos_session_detail": {
+                    "component": "ui/components/adminhtml/pos/detail",
+                    "displayArea": "admin_webpos_session_detail"
+                },
+                "admin_webpos_close_session_popup": {
+                    "component": "ui/components/adminhtml/pos/close-session",
+                    "displayArea": "admin_webpos_close_session_popup"
+                },
+                "admin_webpos_cash_activity_popup": {
+                    "component": "ui/components/adminhtml/pos/cash-activity",
+                    "displayArea": "admin_webpos_cash_activity_popup"
+                },
+                "admin_webpos_cash_adjustment_popup": {
+                    "component": "ui/components/adminhtml/pos/cash-adjustment",
+                    "displayArea": "admin_webpos_cash_adjustment_popup"
+                },
+                "admin_webpos_cash_set_closing_balance_reason": {
+                    "component": "ui/components/adminhtml/pos/set-closing-balance-reason",
+                    "displayArea": "admin_webpos_cash_set_closing_balance_reason"
+                }
+            }
+        });
+    });
+</script>

@@ -1,0 +1,33 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<!-- ko if: numberBreadcrumbs -->
+    <div class="category-name">
+        <a data-bind="click: getAllCategory, attr: {'class': ($index.call() =='0') ? 'root-cat' : ''}"><span data-bind="i18n: 'All Categories'"></span></a>
+        <!-- ko foreach: breadcrumbs -->
+            <!-- ko if: $index.call() == $parent.breadcrumbs.call().length - 1 -->
+                <label><span data-bind="text: name"></span></label>
+            <!-- /ko -->
+            <!-- ko if: $index.call() != $parent.breadcrumbs.call().length - 1 -->
+                <a data-bind="click: $parent.clickCat.bind($parent)"><span data-bind="text: name"></span></a>
+            <!-- /ko -->
+        <!-- /ko -->
+    </div>
+<!-- /ko -->

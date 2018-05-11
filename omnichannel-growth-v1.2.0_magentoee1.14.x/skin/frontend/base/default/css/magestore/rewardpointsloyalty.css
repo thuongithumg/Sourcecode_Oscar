@@ -1,0 +1,91 @@
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPoints
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+div.loyalty-benefits{
+    float: left;
+    width: 60%;    
+}
+div.loyalty-submit{
+    float: left;
+    width: 35%;
+    margin-left: 30px;
+    /*    padding-top: 40px;*/
+    margin-bottom: 30px;
+}
+div.loyalty-clear{
+    clear: both;
+}
+.loyalty-button-submit-span{
+    padding: 7px 35px !important;
+    margin-top: 10px;
+}
+.loyaltylevel-notice-join-group{
+    color: red;
+    margin-top: 10px;
+}
+.loyalty-time-left{
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    color: cornflowerblue;
+    margin-bottom: 10px;
+}
+.loyalty-time-left-time{
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    color: chocolate;
+}
+.rewardpointsrule-rule-name-policy { color: #3182be; font-style: italic;}
+
+.rewardpoints-loyalty-dialog .top,
+.rewardpoints-loyalty-dialog .bot{
+    display: none;
+}
+.rewardpoints-loyalty-dialog .dialog_e,
+.rewardpoints-loyalty-dialog .dialog_w {
+    width: 0;	
+}
+#loyalty-tinybox{
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+}
+#loyalty-tinybox .question-loyalty{
+    font-size: 15px;
+    color: #2f2f2f;
+}
+#loyalty-tinybox .loyalty-button-group{ text-align:right}
+/*#loyalty-tinybox .button{
+    position: absolute;
+    bottom: 30px;
+    right: 10px;
+}*/
+/*#loyalty-tinybox .button button{
+    margin-right: 5px;
+    position: relative;
+}*/
+
+.rewardpoints-loyalty-dialog .dialog_close{
+    display: none;
+}
+.dialog_content{
+    background-color: transparent;
+}

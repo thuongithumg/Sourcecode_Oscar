@@ -1,0 +1,81 @@
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+body{margin:0;padding:0;font-family:Arial;}
+.container-gift-card{width:1060px;height:800px;margin:0 auto;position:relative}
+.container-gift-card .top-line{position:absolute;top:0; left:50%; width:2px;height:62px;}
+.container-gift-card .bottom-line{position:absolute;bottom:0; left:50%; width:2px;height:62px;}
+.container-gift-card .right-line{position:absolute;right:0; top:50%; width:75px;height:2px;}
+.container-gift-card .left-line{position:absolute;left:0; top:50%; width:75px;height:2px;}
+.container-gift-card .center-line{position:absolute;left:calc(50% - 38px); top:calc(50% - 36px); width:87px;height:87px;}
+.right-card .container-gift-card .wrapper-content{height:800px;}
+.ms-gift-card .row-gift-card{margin-right:0;margin-left:0}
+.gift-card-container{
+    padding-right: 23px;
+    padding-left: 23px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.row-gift-card {
+    margin-right: -23px;
+    margin-left: -23px;
+}
+
+.row-gift-card .left-card, .row-gift-card .right-card {
+    position: relative;
+    min-height: 1px;
+    padding-right: 23px;
+    padding-left: 23px;
+    width:50%;
+    float: left;
+}
+.row-gift-card:after,
+.gift-card-container:after{
+    clear: both;
+}
+.row-gift-card:after, .row-gift-card:before,
+.gift-card-container:after,
+.gift-card-container:before{
+    display: table;
+    content: " ";
+}
+
+.ms-wrap-content{box-sizing: border-box;position:relative;height: 50%;}
+.left-card .ms-wrap-content{padding:20px 20px 20px 0;}
+.right-card .ms-wrap-content{padding:20px 0 20px 20px;}
+.ms-wrap-content .title-card{font-size:12px;    margin-top: 50px;}
+.ms-wrap-content .price-card{border-left:1px solid #ddd}
+.ms-wrap-content .price-card .ms-price .price{font-size:30px;font-weight:600;}
+.ms-wrap-content .price-card .ms-code label{font-size:10px;display:block;margin-top:20px}
+.ms-wrap-content .price-card .ms-code .id-code{font-size:20px;display:block;}
+.ms-wrap-content .ms-std{border-top:1px solid #ddd;margin-top:30px;padding-top:30px}
+.ms-wrap-content .content-rules,
+.ms-wrap-content .list-rules{font-size:9px;}
+.ms-wrap-content .ms-bottom{position: absolute;bottom:0;width:100%;z-index:999;font-size:10px;}
+.ms-wrap-content .ms-bottom .left-number{float:left}
+.ms-wrap-content .ms-bottom .right-number{float:right;margin-right:45px}
+.ms-wrap-content .bg-img{margin-top:60px;    -webkit-transform: rotate(180deg);-moz-transform: rotate(180deg);-ms-transform: rotate(180deg);-o-transform: rotate(180deg);transform: rotate(180deg);}
+.ms-wrap-content .ms-logo img{height:57px;display:block;margin:0 auto}
+.ms-wrap-content .content-rules {margin-top: 50px; font-size: 12px}
+.ms-std {
+    text-align: center;
+}
+#gc-expire-day-header-amazon {
+    font-size:12px;
+    line-height:1.4em;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.full-logo img{
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+}

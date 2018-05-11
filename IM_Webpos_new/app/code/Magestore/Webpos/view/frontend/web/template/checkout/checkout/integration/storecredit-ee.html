@@ -1,0 +1,18 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<!-- ko if: balance && isCreditEnable() -->
+<div class="integration-item storecredit-ee" data-bind="visible:visible">
+    <div class="info">
+        <div data-bind="i18n:'Customer store credit:'"></div>
+        <div class="bold-label" data-bind="text: balance"></div>
+        <div data-bind="i18n:'credit(s)'"></div>
+    </div>
+    <div class="actions">
+        <button class="button btn-cl-cfg-active" data-bind="click:apply,i18n:'Apply'"></button>
+        <button class="button btn-cl-cfg-active" data-bind="click:cancel,i18n:'Cancel'"></button>
+    </div>
+</div>
+<!-- /ko -->

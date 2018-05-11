@@ -1,0 +1,35 @@
+
+/* Process screen */
+.coresuccess .progress_bar {  
+    height:25px;   
+    padding:0;  
+    margin:2px;  
+    position:relative;  
+    background: #00ce78 none repeat scroll 0 0;
+    color: #fff;
+    font-size: 13px;
+    font-weight: bold;
+    border: 1px solid #ccc;
+} 
+.coresuccess .progress_bar span {
+    display: block;
+    margin: 4px 0 0 5px;
+}
+.coresuccess .progress_bar div {  
+    background-color: #fff;  
+} 
+.coresuccess #process_screen {width:100%;}
+.coresuccess #process_screen .content-header {width: 100%; margin: 0 auto; text-align: center;}
+
+.coresuccess #process_screen .content-header h3 {
+    color: #eb5e00;
+    font-size: 1.25em;
+    line-height: 1.2em;
+    margin: 0.3em 0.5em 0 0;
+    font-family: sans-serif;
+}
+.coresuccess #process_screen .process-content {width:1024px; text-align: left; margin: 0 auto;}
+.coresuccess #process_screen ul { list-style-type:none; padding:0; margin:0; }
+.coresuccess #process_screen li { margin-left:0; border:1px solid #ccc; margin:2px; padding:2px 2px 2px 2px; font:normal 12px sans-serif; }
+.coresuccess #process_screen li img { margin-right:5px; }
+/* End of Process screen */

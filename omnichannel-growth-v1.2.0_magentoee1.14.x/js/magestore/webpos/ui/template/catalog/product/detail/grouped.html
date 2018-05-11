@@ -1,0 +1,56 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<div class="table-wrapper grouped">
+    <table class="table data grouped" id="super-product-table">
+        <caption class="table-caption" data-bind="text: $parent.__('Grouped product items')"></caption>
+        <thead>
+        <tr>
+            <th class="col item" scope="col" data-bind="text: $parent.__('Product Name')"></th>
+            <th class="col qty" scope="col" data-bind="text: $parent.__('Qty')"></th>
+        </tr>
+        </thead>
+        <tbody data-bind="foreach: itemData().grouped_options">
+            <tr>
+                <td data-th='Product Name' class="col item">
+                    <strong class="product-item-name" data-bind="html: $data.name"></strong>
+                </td>
+                <td data-th='Qty' class="col qty a-right">
+                    <div class="control qty">
+                        <span class="down" data-bind="click: $parent.decreaseQty.bind($parent)"> - </span>
+                        <input data-bind="event: {'change': $parent.updatePrice($parent.itemData().grouped_options)},
+                            attr: {'name': 'super_group[' + $data.id + ']', 'id': 'super_group_' + $data.id, 'value': parseInt($data.default_qty), title: $parent.__('Qty')}"
+                            data-validate = "{'validate-grouped-qty':'#super-product-table'}" type="text"
+                               maxlength="12"
+                               class="input-text qty"
+                               data-errors-message-box="#validation-message-box"/>
+                        <span class="up" data-bind="click: $parent.increaseQty.bind($parent)"> + </span>
+                    </div>
+                </td>
+            </tr>
+            <tr class="row-tier-price">
+                <td colspan="2" data-bind="text: $parent.getFormatPrice($data.price)">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div id="validation-message-box"></div>
+<div data-bind=""></div>

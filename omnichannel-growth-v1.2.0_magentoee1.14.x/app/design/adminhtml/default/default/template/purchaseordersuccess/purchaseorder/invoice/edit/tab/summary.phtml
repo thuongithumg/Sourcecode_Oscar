@@ -1,0 +1,145 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Inventorysuccess
+ * @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+$blockGrid = $this->getBlockGrid();
+?>
+<style type="text/css">
+    .calendar {
+        z-index: 1000;
+    }
+
+    .purchase_buttons {
+        width: 100%;
+        margin: .5em 0;
+        display: table;
+    }
+
+    .purchase_buttons button {
+        float: right;
+        margin: 0 0 0 5px;
+    }
+
+    .purchaseorder_fieldset .field-row {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    .purchaseorder_fieldset .field-row label {
+        text-align: right;
+        color: #363636;
+        font-weight: 600;
+        font-size: 14px;
+        padding-right: 15px;
+        width: 200px;
+    }
+
+    .coresuccess .purchase_summary_block .entry-edit {
+        margin-top: 0px !important;
+    }
+
+    .purchase_summary_block .entry-edit .fieldset {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .coresuccess .entry-edit .purchase_summary_block .box-left td {
+        padding: 5px 0px !important;
+    }
+
+    .coresuccess .entry-edit .purchase_summary_block .box-right td {
+        padding: 5px 0px !important;
+    }
+
+    .coresuccess .modal .validation-advice {
+        margin-left: 200px
+    }
+</style>
+
+<div id="purchase_summary_content">
+    <?php echo $this->getGridHtml(); ?>
+</div>
+
+<div id="purchase_summary_footer" class="purchase_summary_block">
+    <?php echo $this->getInvoiceSummaryFooter(); ?>
+</div>
+
+<script type="text/javascript">
+    function saveInvoicePayment(event) {
+        if (new Validation('register_payment_modal_form').validate()) {
+            savePaymentRefund(
+                '<?php echo $this->getSavePaymentUrl() ?>',
+                Form.serialize('register_payment_modal_form', true),
+                0
+            );
+        } else {
+            event.stopPropagation()
+        }
+    }
+
+    function saveInvoiceRefund(event) {
+        if (new Validation('register_refund_modal_form').validate()) {
+            savePaymentRefund(
+                '<?php echo $this->getSaveRefundUrl() ?>',
+                Form.serialize('register_refund_modal_form', true),
+                1
+            );
+        } else {
+            event.stopPropagation()
+        }
+    }
+
+    var tabContainer = window['<?php echo $this->getTabContainer(); ?>'];
+    var reloadTabs = <?php echo $this->getReloadTabs(); ?>;
+    var reloadPurchaseInvoiceTotalUrl = '<?php echo $this->getReloadTotalUrl(); ?>';
+
+    function savePaymentRefund(url, params, reloadIndex) {
+        new Ajax.Request(
+            url + (url.match(new RegExp('\\?')) ? '&ajax=true' : '?ajax=true' ),
+            {
+                parameters: params,
+                onSuccess: function (transport) {
+                    reloadTabs.each(function (tabId, index) {
+                        if ($(tabId)) {
+                            $(tabId).addClassName('notloaded');
+                            if (index === reloadIndex)
+                                window['<?php echo $this->getTabContainer() ?>'].showTabContent($(tabId));
+                        }
+                    });
+                    reloadPurchaseInvoiceTotal();
+                }
+            }
+        );
+    }
+
+    function reloadPurchaseInvoiceTotal() {
+        new Ajax.Request(
+            reloadPurchaseInvoiceTotalUrl + (reloadPurchaseInvoiceTotalUrl.match(new RegExp('\\?')) ? '&ajax=true' : '?ajax=true' ),
+            {
+                parameters: {},
+                onSuccess: function (transport) {
+                    if (transport.responseText.length > 0) {
+                        $('purchase_summary_footer').innerHTML = transport.responseText;
+                    }
+                }.bind(this)
+            }
+        );
+    }
+</script>

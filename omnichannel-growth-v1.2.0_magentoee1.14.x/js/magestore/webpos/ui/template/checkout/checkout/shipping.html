@@ -1,0 +1,44 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<form data-bind="foreach: items">
+    <div class="input-box">
+        <input type="radio" name="shipping_method"
+               data-bind="attr:{'id': code},
+                          value: code,
+                          checked: $parent.isSelected,
+                          event:{'change': $parent.setShippingMethod}">
+        <label data-bind="click: $parent.setShippingMethod">
+            <span class="wrap-label">
+                <em data-bind="text: title"></em>
+                <em data-bind="text: $parent.getShippingPrice(price, price_type)"></em>
+            </span>
+        </label>
+    </div>
+</form>
+<div class="delivery_time_date" id="delivery_time_date"
+     data-bind="visible: useDeliveryTime(), afterRender: initDate()">
+    <label for="delivery_date" data-bind="i18n:'Select delivery date:'"></label>
+    <p class="datetime-delivery">
+        <input readonly="readonly" id="delivery_date" class="webpos-additional-data" type="text" size="7"
+               value=""
+               name="delivery-date"/>
+    </p>
+</div>

@@ -1,0 +1,13 @@
+<div id="on_hold_orders_container" class="pos_container order-pages" data-bind="scope:'order-hold-list'">
+    <div class="wrap-order">
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <script type="text/x-magento-init">
+            {
+                "#on_hold_orders_container": {
+                    "Magento_Ui/js/core/app": <?php /* @escapeNotVerified */ echo $block->getJsLayout(); ?>
+                }
+            }
+        </script>
+        <!-- Template for Popup write note for order-->
+    </div>
+</div>

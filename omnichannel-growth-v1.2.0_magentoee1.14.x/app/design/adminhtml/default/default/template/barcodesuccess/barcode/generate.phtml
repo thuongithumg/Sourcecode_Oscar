@@ -1,0 +1,43 @@
+<?php
+/**
+ *
+ *  Magestore
+ *   NOTICE OF LICENSE
+ *
+ *   This source file is subject to the Magestore.com license that is
+ *   available through the world-wide-web at this URL:
+ *   http://www.magestore.com/license-agreement.html
+ *
+ *   DISCLAIMER
+ *
+ *   Do not edit or add to this file if you wish to upgrade this extension to newer
+ *   version in the future.
+ *
+ *   @category    Magestore
+ *   @package     Magestore_Barcodesuccess
+ *   @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ *   @license     http://www.magestore.com/license-agreement.html
+ *
+ *
+ */
+
+/**
+ * @var Magestore_Barcodesuccess_Block_Adminhtml_Barcode_Generate $this
+ */
+?>
+<!-- Modal -->
+<div class="modal right fade" id="barcode-generate" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <h2 class="modal-title" data-role="title"><?php echo $this->__($this->getTitle()) ?></h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+            <div class="modal-body">
+                <div class="side-col" style="display: none;">
+                    <?php echo $this->getChildHtml('left') ?>
+                </div>
+                <?php echo $this->getChildHtml('content') ?>
+            </div>
+        </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+</div><!-- modal -->

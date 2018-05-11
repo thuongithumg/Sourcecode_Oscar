@@ -1,0 +1,115 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<!-- ko if: orderData -->
+<div id="shipment-popup" role="dialog"
+     data-bind="visible: isVisible, style: {display: stypeDisplay()},
+     attr:{class: 'modal fade add-comment ship-refund ' + classIn()}">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <form data-bind="attr: {id: formId}, submit: submit">
+                <div class="popup-header">
+                    <button type="button" class="close" data-dismiss="modal" data-bind="i18n: ('Cancel'), click: display(false)"/>
+                    <h4 class="modal-title" data-bind="i18n: ('Shipment')"/>
+                    <button type="submit" class="btn-save"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <colgroup>
+                            <col width="">
+                            <col width="">
+                            <col width="">
+                            <col width="100">
+                            <col width="150">
+                            <col width="150">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th data-bind="i18n: ('Product')"/>
+                            <th class="a-center" data-bind="i18n: ('Sku')"/>
+                            <th class="a-center" data-bind="visible:isUsingInventorySuccess,i18n: ('Warehouse')"/>
+                            <th class="a-right" data-bind="i18n: ('Price')" width="120"/>
+                            <th class="a-center" data-bind="i18n: ('Qty')"/>
+                            <th class="a-center" data-bind="i18n: ('Qty to ship')"/>
+                        </tr>
+                        </thead>
+                    </table>
+                    <div class="wrap-table">
+                    <table class="table">
+                        <colgroup>
+                            <col width="">
+                            <col width="">
+                            <col width="">
+                            <col width="100">
+                            <col width="150">
+                            <col width="150">
+                        </colgroup>
+                        <tbody data-bind="foreach: {data: orderData().items, as: 'item'}">
+                            <!-- ko ifnot: item.parent_item_id -->
+                            <!-- ko if: item.is_virtual == 0 -->
+                            <!-- ko if: parseFloat(item.qty_ordered) - parseFloat(item.qty_shipped) - parseFloat(item.qty_refunded) - parseFloat(item.qty_canceled) > 0-->
+                            <tr>
+                                <td>
+                                    <h4 class="product-name" data-bind="text: item.name"/>
+                                </td>
+                                <td class="a-center" data-bind="text: item.sku"/>
+                                <td class="a-center" data-bind="visible:$parent.isUsingInventorySuccess,text: $parent.getWarehouseName(item.ordered_warehouse_id)"></td>
+                                <td class="a-right" data-bind="text: $parent.convertAndFormatPrice(item.base_price)"></td>
+                                <td class="a-center" data-bind="text: item.qty_ordered - item.qty_shipped - item.qty_refunded - item.qty_canceled"/>
+                                <td class="a-center">
+                                    <input type="text" class="input-qty required-entry"
+                                           data-bind="value: item.qty_ordered - item.qty_shipped - item.qty_refunded - item.qty_canceled,
+                                           attr: {name: 'items['+item.item_id+']'}, event: {keyup: $parent.validateQty.bind($parent)}"/>
+                                </td>
+                            </tr>
+                            <!-- /ko -->
+                            <!-- /ko -->
+                            <!-- /ko -->
+                        </tbody>
+                    </table>
+                    </div>
+                    <div class="bottom-refund">
+                        <div class="col-sm-7">
+                            <label data-bind="i18n: ('Shipment Comment')"></label>
+                            <textarea class="form-control" rows="3" name="comment_text"/>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="refund-bottom-right">
+                                <div class="input-box">
+                                    <label data-bind="i18n: ('Track number')"></label>
+                                    <input type="text" data-bind="attr: {name: 'tracking[1][number]'}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <div class="input-box">
+                            <input type="checkbox" id="send_email_ship_popup" value="1" name="send_email">
+                            <label for="send_email_ship_popup" data-bind="i18n: ('Send Email')"/>
+                        </div>
+                        <button class="button submit-refund btn-cl-cfg-active" data-bind="i18n: ('Submit Shipment'), click: submit"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- /ko -->

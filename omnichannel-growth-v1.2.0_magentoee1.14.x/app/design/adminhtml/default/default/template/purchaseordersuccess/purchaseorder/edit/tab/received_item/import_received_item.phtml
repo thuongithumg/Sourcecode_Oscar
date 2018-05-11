@@ -1,0 +1,184 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Inventorysuccess
+ * @copyright   Copyright (c) 2017 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+?>
+<div class="modal right fade" id="import_received_item_modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" style="display:none">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="icon-head"><?php echo $this->__('Import Received Items') ?></h3>
+                <p class="form-buttons">
+                    <button id="submit-import-received" class="action-primary import-csv" type="button" data-dismiss="modal" onclick="uploadFileReceived(event);">
+                        <span><?php echo $this->__('Import')?></span>
+                    </button>
+                    <button title="<?php echo $this->__('Close')?>" type="button" class="scalable delete" data-dismiss="modal" id="closeModal">
+                        <span><?php echo $this->__('Close') ?></span>
+                    </button>
+                </p>
+            </div>
+            <div class="modal-body">
+                <div class="entry-edit">
+                <div class="entry-edit-head">
+                    <h4 class="icon-head head-edit-form fieldset-legend">
+                        <?php echo $this->__('Received Time') ?>
+                    </h4>
+                </div>
+                <div class="fieldset purchaseorder_fieldset" id="receive_item_form">
+                    <?php echo $this->addReceivedTimeField(); ?>
+                </div>
+                <div class="fieldset">
+                    <div class="import-product hor-scroll">
+                        <form id="import_received_item_modal-form" action="<?php echo $this->getImportLink() ?>" method="post" enctype="multipart/form-data">
+                            <?php echo $this->getBlockHtml('formkey')?>
+                            <table cellspacing="0" class="form-list">
+                                <tbody>
+                                <tr>
+                                    <td class="label">
+                                        <label for="received_item_import_file_input"><?php echo $this->__('Please choose a CSV file to import') ?></label>
+                                    </td>
+                                    <td class="value">
+                                        <input id="received_item_import_file_input" name="import_product" class="input-file" type="file" onchange="fileReceivedSelected(this);">
+                                        <div id="received_item_import_file_input_descipriton"></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><label>
+                                            <span class="download-sample-file">
+                                                <a href="<?php echo $this->getCsvSampleLink();?>"><?php echo $this->__('Download sample file'); ?></a>
+                                            </span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+</div><!-- modal -->
+
+<script type="text/javascript">
+
+    function submitImportForm(formId)
+    {
+        var form = new varienForm(formId);
+        if(form.validate()) {
+            form.submit();
+        }
+    }
+
+    function fileReceivedSelected(element) {
+        var file = element.files[0];
+        if (file) {
+            var allowedTypes = <?php echo $this->getAllowedFileTypes() ?>;
+            var fileIsAllowed = false;
+            for(var i in allowedTypes) {
+                if(file.type === allowedTypes[i]) {
+                    fileIsAllowed = true;
+                }
+            }
+
+            var fileSize = 0;
+            if (file.size > 1024 * 1024) {
+                fileSize = (Math.round(file.size * 100 / (1024 * 1024)) / 100).toString() + 'MB';
+            } else {
+                fileSize = (Math.round(file.size * 100 / 1024) / 100).toString() + 'KB';
+            }
+            var fileDesciption = '';
+            fileDesciption += '<?php echo $this->__('Name')?>' + ': ' + file.name + '<br/>';
+            fileDesciption += '<?php echo $this->__('Size')?>' + ': ' + fileSize + '<br/>';
+            fileDesciption += '<?php echo $this->__('Type')?>' + ': ' + file.type;
+            $('received_item_import_file_input_descipriton').innerHTML = fileDesciption;
+        }
+    }
+
+    function uploadFileReceived(event) {
+        var fileInputId = 'received_item_import_file_input';
+        var dateReceivedInputId = 'import_received_at';
+        if(!$(fileInputId) || !$(fileInputId).value){
+            alert('<?php echo $this->getData('choose_file_upload_message') ?>');
+            event.stopPropagation();
+            return false;
+        }
+        if(!$(dateReceivedInputId) || !$(dateReceivedInputId).value){
+            alert('<?php echo $this->getData('upload_select_import_date') ?>');
+            event.stopPropagation();
+            return false;
+        }
+
+        Element.show('loading-mask');
+        var formKey = '<?php echo $this->getFormKey() ?>';
+        var fd = new FormData();
+        fd.append($(fileInputId).name, $(fileInputId).files[0]);
+        fd.append('form_key', FORM_KEY);
+        var xhr = new XMLHttpRequest();
+        xhr.upload.addEventListener('progress', resetReceiveProgress, false);
+        xhr.addEventListener('load', resetReceiveComplete, false);
+        xhr.addEventListener('error', resetReceiveFailed, false);
+        xhr.addEventListener('abort', resetReceiveCanceled, false);
+
+        var received_at = $$('#import_received_at')[0].value;
+        var import_link = '<?php echo $this->getImportLink() ?>';
+        import_link += 'received_at/' + received_at;
+        xhr.open('POST', import_link);
+        xhr.send(fd);
+    }
+
+
+    function resetReceiveFileInput()
+    {
+        var fileInputId = 'received_item_import_file_input';
+        $(fileInputId).value = null;
+        $('received_item_import_file_input_descipriton').innerHTML = null;
+    }
+    
+    function resetReceivedDate() {
+        $$('#import_received_at')[0].value = null;
+    }
+
+    function resetReceiveProgress(evt)
+    {
+
+    }
+
+    function resetReceiveComplete(evt)
+    {
+        Element.hide('loading-mask');
+        receiveItem.reloadTabs();
+        receiveItem.reloadParent();
+        receiveItem.reloadTotal();
+        resetReceiveFileInput();
+    }
+
+    function resetReceiveFailed(evt)
+    {
+        alert('<?php echo $this->getData('upload_failed_message') ?>');
+    }
+
+    function resetReceiveCanceled(evt)
+    {
+        alert('<?php echo $this->getData('upload_canceled_message') ?>');
+    }
+</script>

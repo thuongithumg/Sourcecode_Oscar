@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <remove src="jquery/jstree/themes/default/style.css"/>
+        <remove src="css/styles-old.css"/>
+        <remove src="css/styles.css"/>
+    </head>
+
+    <body>
+        <referenceBlock name="header" remove="true"/>
+        <referenceBlock name="footer" remove="true"/>
+        <referenceBlock name="page.menu" remove="true"/>
+        <referenceBlock name="logo" remove="true"/>
+        <referenceBlock name="user" remove="true"/>
+        <referenceBlock name="global.search" remove="true"/>
+        <referenceBlock name="notification.messages" remove="true"/>
+        <referenceBlock name="page.title" remove="true"/>
+        <referenceContainer name="content">
+            <block class="Magestore\Webpos\Block\Adminhtml\Zreport\Prints" name="webpos_prints" template="Magestore_Webpos::zreport/print.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

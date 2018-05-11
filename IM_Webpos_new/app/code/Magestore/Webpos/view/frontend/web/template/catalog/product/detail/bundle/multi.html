@@ -1,0 +1,28 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div data-bind="attr: {'class': 'field option'}">
+    <label class="label">
+        <span data-bind="text: parentData.title"></span>
+    </label>
+    <div class="control">
+        <select multiple="multiple" size="5"
+                data-bind="event: {'change': $parents[1].updatePrice($parents[2].itemData().bundle_options)},
+                                attr: {'id': 'bundle-option-'+parentData.id,
+                                    'name': 'bundle_option['+parentData.id+'][]',
+                                    'class': 'bundle-option-'+parentData.id+' multiselect product bundle option change-container-classname',
+                                    'data-validate': (parentData.required == 1) ? '{\'required-entry\':true}' : '{\'required-entry\':false}'
+                                }">
+            <!-- ko foreach: {data: $parents[1].convertToArray(parentData.items), as: 'itemData' }  -->
+                <option data-bind="text: parseInt(itemData.selection_qty) + ' x ' + itemData.name + ' +' + $parents[2].getSelectionTitlePrice(itemData.price),
+                                        attr: {
+                                            'value': itemData.selection_id,
+                                            'selected': (itemData.is_default =='1') ? 'selected' : false
+                                        }">
+                </option>
+            <!-- /ko -->
+        </select>
+    </div>
+</div>

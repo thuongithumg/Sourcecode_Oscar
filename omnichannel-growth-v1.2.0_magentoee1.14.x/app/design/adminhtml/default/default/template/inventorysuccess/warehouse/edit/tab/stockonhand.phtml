@@ -1,0 +1,83 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Inventorysuccess
+ * @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+$blockGrid = $this->getBlockGrid();
+$gridJsObjectName = $blockGrid->getJsObjectName();
+$hiddenInputField = $blockGrid->getHiddenInputField();
+$canDeleteProduct = $this->canDeleteProduct();
+$canAccessNonWarehouseProduct = $this->canAccessNonWarehouseProduct();
+?>
+<style type="text/css">
+    .warehouse_buttons {
+        width: 100%;
+        margin: .5em 0;
+        display: table;
+    }
+
+    .warehouse_buttons button {
+        float: right;
+        margin: 0 0 0 5px;
+    }
+</style>
+<div class="warehouse_buttons">
+    <?php if($canDeleteProduct): ?>
+        <button id="delete_warehouse_product_button" class="delete" type="button" data-toggle="modal"
+                data-target="#delete_warehouse_product_modal">
+            <span><?php echo $this->__('Delete Product') ?></span>
+        </button>
+    <?php endif; ?>
+    <?php if($canAccessNonWarehouseProduct): ?>
+        <button id="non_warehouse_product_button" class="btn-search" type="button" data-toggle="modal"
+                data-target="#non_warehouse_product_modal">
+            <span>
+                <span>
+                    <span><?php echo $this->__('Non-warehouse products') ?></span>
+                </span>
+            </span>
+        </button>
+    <?php endif; ?>
+</div>
+<div class="warehouse_buttons">
+    <button id="warehouse_update_stock_button" class="save" type="button">
+        <span>
+            <span>
+                <span><?php echo $this->__('Update Stock') ?></span>
+            </span>
+        </span>
+    </button>
+</div>
+<?php echo $this->getGridHtml(); ?>
+<input type="hidden" name="<?php echo $hiddenInputField ?>" id="<?php echo $hiddenInputField ?>" value=""/>
+<script type="text/javascript">
+    var warehouseStock = new WarehouseSelectedProduct({
+        "selectedItems": <?php /* @escapeNotVerified */ echo $blockGrid->getSelectedItems(); ?>,
+        "gridJsObjectName": <?php /* @escapeNotVerified */ echo '"' . $gridJsObjectName . '"' ?: '{}'; ?>,
+        "hiddenInputField": <?php /* @escapeNotVerified */ echo '"' . $hiddenInputField . '"' ?>,
+        "editFields": <?php /* @escapeNotVerified */ echo $blockGrid->getEditFields(); ?>,
+        "saveBtn": "warehouse_update_stock_button",
+        "saveUrl": <?php /* @escapeNotVerified */ echo '"' . $blockGrid->getSaveUrl() . '"' ?: '""'; ?>,
+        "messages": {
+            "noItemSelected": <?php /* @escapeNotVerified */ echo '"' . $this->__('Please select products to update.') . '"'?>,
+        }
+    });
+</script>
+<?php echo $canDeleteProduct?$this->getChildHtml('warehouse.stockonhand.delete'):''; ?>
+<?php echo $canAccessNonWarehouseProduct?$this->getChildHtml('warehouse.stockonhand.nonwarehouseproduct'):''; ?>

@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<page layout='webpos' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" >
+    <body>
+        <referenceBlock name="webpos">
+            <block class="Magestore\Webpos\Block\Menu" before="-" name ='webpos_menu' cacheable="false" template="Magestore_Webpos::webpos/menu.phtml">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="c-lock-register" xsi:type="array">
+                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/menu/lock-pos-popup</item>
+                                <item name="displayArea" xsi:type="string">c-lock-register</item>
+                            </item>
+                            <item name="c-menu--push-left" xsi:type="array">
+                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/menu</item>
+                                <item name="displayArea" xsi:type="string">c-menu--push-left</item>
+                                <item name="children" xsi:type="array">
+                                    <item name="order" xsi:type="array">
+                                        <item name="sortOrder" xsi:type="string">0</item>
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/menu/group</item>
+                                        <item name="id" xsi:type="string">order</item>
+                                        <item name="title" xsi:type="string" translate="true">Orders</item>
+                                        <item name="children" xsi:type="array">
+                                            <item name="checkout" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">0</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/menu/item</item>
+                                                <item name="data" xsi:type="array">
+                                                    <item name="id" xsi:type="string">checkout</item>
+                                                    <item name="title" xsi:type="string" translate="true">Checkout</item>
+                                                    <item name="container" xsi:type="string">checkout_container</item>
+                                                    <item name="is_display" xsi:type="string">1</item>
+                                                    <item name="icon_class" xsi:type="string">icon-iconPOS-checkout</item>
+                                                </item>
+                                            </item>
+                                            <item name="on_hold_orders" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">1</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/menu/item</item>
+                                                <item name="data" xsi:type="array">
+                                                    <item name="id" xsi:type="string">on_hold_orders</item>
+                                                    <item name="title" xsi:type="string" translate="true">On-hold Orders</item>
+                                                    <item name="container" xsi:type="string">on_hold_orders_container</item>
+                                                    <item name="is_display" xsi:type="string">1</item>
+                                                    <item name="icon_class" xsi:type="string">icon-iconPOS-on-hold-order</item>
+                                                </item>
+                                            </item>
+                                            <item name="orders_history" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">1</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/menu/item</item>
+                                                <item name="data" xsi:type="array">
+                                                    <item name="id" xsi:type="string">orders_history</item>
+                                                    <item name="title" xsi:type="string" translate="true">Orders History</item>
+                                                    <item name="container" xsi:type="string">orders_history_container</item>
+                                                    <item name="is_display" xsi:type="string">1</item>
+                                                    <item name="icon_class" xsi:type="string">icon-iconPOS-order-history</item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                    <item name="shift" xsi:type="array">
+                                        <item name="id" xsi:type="string">shift</item>
+                                        <item name="title" xsi:type="string">Session Management</item>
+                                        <item name="sortOrder" xsi:type="string">1</item>
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/menu/group</item>
+                                        <item name="children" xsi:type="array">
+                                            <item name="register_shift" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">0</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/menu/item</item>
+                                                <item name="data" xsi:type="array">
+                                                    <item name="id" xsi:type="string">register_shift</item>
+                                                    <item name="title" xsi:type="string" translate="true">Session Management</item>
+                                                    <item name="is_display" xsi:type="string">1</item>
+                                                    <item name="icon_class" xsi:type="string">icon-iconPOS-shift</item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                    <item name="customer" xsi:type="array">
+                                        <item name="id" xsi:type="string">customer</item>
+                                        <item name="title" xsi:type="string" translate="true">Customers</item>
+                                        <item name="sortOrder" xsi:type="string">2</item>
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/menu/group</item>
+                                        <item name="children" xsi:type="array">
+                                            <item name="customer_list" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">0</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/menu/item</item>
+                                                <item name="data" xsi:type="array">
+                                                    <item name="id" xsi:type="string">customer_list</item>
+                                                    <item name="title" xsi:type="string" translate="true">Customer List</item>
+                                                    <item name="is_display" xsi:type="string">1</item>
+                                                    <item name="icon_class" xsi:type="string">icon-iconPOS-customer-list</item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                    <item name="inventory" xsi:type="array">
+                                        <item name="id" xsi:type="string">inventory</item>
+                                        <item name="title" xsi:type="string" translate="true">Inventory</item>
+                                        <item name="sortOrder" xsi:type="string">3</item>
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/menu/group</item>
+                                        <item name="children" xsi:type="array">
+                                            <item name="manage_stock" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">0</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/menu/item</item>
+                                                <item name="data" xsi:type="array">
+                                                    <item name="id" xsi:type="string">manage_stock</item>
+                                                    <item name="title" xsi:type="string" translate="true">Manage Stocks</item>
+                                                    <item name="is_display" xsi:type="string">1</item>
+                                                    <item name="icon_class" xsi:type="string">icon-iconPOS-inventory</item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                    <item name="setting" xsi:type="array">
+                                        <item name="id" xsi:type="string">setting</item>
+                                        <item name="title" xsi:type="string" translate="true">Settings</item>
+                                        <item name="sortOrder" xsi:type="string">4</item>
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/menu/group</item>
+                                        <item name="children" xsi:type="array">
+                                            <item name="general" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">0</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/menu/item</item>
+                                                <item name="data" xsi:type="array">
+                                                    <item name="id" xsi:type="string">general</item>
+                                                    <item name="title" xsi:type="string" translate="true">General</item>
+                                                    <item name="is_display" xsi:type="string">1</item>
+                                                    <item name="icon_class" xsi:type="string">icon-iconPOS-setting</item>
+                                                </item>
+                                            </item>
+                                            <!--<item name="open_cash_drawer" xsi:type="array">-->
+                                                <!--<item name="sortOrder" xsi:type="string">1</item>-->
+                                                <!--<item name="component" xsi:type="string">Magestore_Webpos/js/view/menu/item</item>-->
+                                                <!--<item name="data" xsi:type="array">-->
+                                                    <!--<item name="id" xsi:type="string">open_cash_drawer</item>-->
+                                                    <!--<item name="title" xsi:type="string">Open Cash Drawer</item>-->
+                                                    <!--<item name="is_display" xsi:type="string">1</item>-->
+                                                    <!--<item name="icon_class" xsi:type="string">icon-iconPOS-cashdrawer</item>-->
+                                                <!--</item>-->
+                                            <!--</item>-->
+                                            <item name="synchronization" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">2</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/menu/item</item>
+                                                <item name="data" xsi:type="array">
+                                                    <item name="id" xsi:type="string">synchronization</item>
+                                                    <item name="title" xsi:type="string" translate="true">Synchronization</item>
+                                                    <item name="is_display" xsi:type="string">1</item>
+                                                    <item name="icon_class" xsi:type="string">icon-iconPOS-synchronize</item>
+                                                </item>
+                                            </item>
+                                            <item name="account" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">3</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/menu/item</item>
+                                                <item name="data" xsi:type="array">
+                                                    <item name="id" xsi:type="string">account</item>
+                                                    <item name="title" xsi:type="string" translate="true">Account</item>
+                                                    <item name="is_display" xsi:type="string">1</item>
+                                                    <item name="icon_class" xsi:type="string">icon-iconPOS-account</item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

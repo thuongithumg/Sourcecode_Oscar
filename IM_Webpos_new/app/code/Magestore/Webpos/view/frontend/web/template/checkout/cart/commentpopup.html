@@ -1,0 +1,17 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div class="modal-dialog" data-bind="css:{'on-checkout':isOnCheckout}">
+    <div class="modal-content">
+        <div class="popup-header">
+            <button type="button" class="close" data-dismiss="modal" data-bind="i18n:'Cancel', click: hide"></button>
+            <h4 class="modal-title" data-bind="i18n:'Order Comment'"></h4>
+            <button type="submit" class="btn-save" data-dismiss="modal" data-bind="i18n:'Save', click:saveComment"></button>
+        </div>
+        <div class="modal-body">
+            <textarea class="form-control" rows="3" data-bind="event:{change:setComment, text: comment}"></textarea>
+        </div>
+    </div>
+</div>

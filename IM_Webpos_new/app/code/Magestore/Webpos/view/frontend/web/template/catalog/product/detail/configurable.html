@@ -1,0 +1,24 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<div id="swatch-option">
+
+</div>
+<!-- ko if: itemData().config_options -->
+<div class="fieldset" tabindex="0" data-bind="foreach: itemData().config_options">
+    <!-- ko if: $data.optionId -->
+        <div class="field configurable required">
+            <label class="label" data-bind="attr: {'for' : 'attribute'+$data.optionId}">
+                <span data-bind="text: $data.optionLabel"></span>
+            </label>
+            <div class="control">
+
+                <select data-validate="{'required-entry':true}" data-bind="attr: {'name': 'super_attribute['+ $data.optionId +']', 'id': 'attribute' + $data.optionId, 'class': 'super-attribute-select'}, getConfigData: {}">
+                    <option value="" data-bind="i18n: 'Choose an Option...'"></option>
+                </select>
+            </div>
+        </div>
+    <!-- /ko -->
+</div>
+<!-- /ko -->

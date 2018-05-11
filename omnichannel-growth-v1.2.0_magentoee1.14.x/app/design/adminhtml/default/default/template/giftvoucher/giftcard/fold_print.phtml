@@ -1,0 +1,180 @@
+
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+?>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/magestore/giftvoucher/print_fold_style.css') ?>"
+      media="all"/>
+<?php $_store = Mage::app()->getStore() ?>
+<?php
+$_giftCard = $this->getGiftVoucher();
+$expire_day = date('m/d/Y', strtotime($_giftCard->getExpiredAt()));
+$currency = Mage::getModel('directory/currency')->load($_giftCard->getCurrency());
+?>
+<?php $_template = $this->getGiftcardTemplate($_giftCard->getGiftcardTemplateId()) ?>
+<?php
+if ($_template->getNotes())
+    $notes = $_template->getNotes();
+else
+    $notes = $_giftCard->getPrintNotes();
+
+$barcode = Mage::helper('giftvoucher')->getGeneralConfig('barcode_enable');
+$barcode_type = Mage::helper('giftvoucher')->getGeneralConfig('barcode_type');
+$url_barcode = '';
+$qr = new Magestore_Giftvoucher_QRCode($_giftCard->getGiftCode());
+if ($barcode) {
+    $resizeImage = FALSE;
+    if ($barcode_type == 'code128') {
+        $url_barcode = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'giftvoucher/template/barcode/' . $_giftCard->getGiftCode() . '.png';
+        $imageUrl = Mage::getBaseDir('media') . DS . 'giftvoucher' . DS . 'template' . DS . 'barcode' . DS . $_giftCard->getGiftCode() . '.png';
+        $imageObj = new Varien_Image($imageUrl);
+        if ($imageObj->getOriginalWidth() > 200)
+            $resizeImage = true;
+    } else
+        $url_barcode = $qr->getResult();
+}
+?>
+<?php
+if (!$_template->getStyleColor())
+    $_template->setStyleColor('orange');
+if (!$_template->getTextColor())
+    $_template->setTextColor('#2f2f2f');
+$_styleColor = $_template->getStyleColor();
+$_textColor = $_template->getTextColor();
+if (!$_giftCard->getGiftcardTemplateImage())
+    $_giftCard->setGiftcardTemplateImage('default.png');
+if (!$_template->getBackgroundImg())
+    $_template->setBackgroundImg('default.png');
+?>
+<style>
+    @page {
+        size: landscape;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .giftcard-text-color{
+        color: <?php echo $_textColor; ?> !important;
+    }
+    .giftcard-style-color{
+        color: <?php echo $_styleColor; ?> !important;
+    }
+
+</style>
+<?php
+
+if ($_template->getDesignPattern() == Magestore_Giftvoucher_Model_Designpattern::PATTERN_TOP) {
+    $giftCardImage = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'giftvoucher/template/images/top/' . $_giftCard->getGiftcardTemplateImage();
+} elseif ($_template->getDesignPattern() == Magestore_Giftvoucher_Model_Designpattern::PATTERN_SIMPLE) {
+    $giftCardImage = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'giftvoucher/template/images/simple/' . $_giftCard->getGiftcardTemplateImage();
+} elseif ($_template->getDesignPattern() == Magestore_Giftvoucher_Model_Designpattern::PATTERN_AMAZON) {
+    $giftCardImage = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'giftvoucher/template/images/amazon/' . $_giftCard->getGiftcardTemplateImage();
+} else {
+    $giftCardImage = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'giftvoucher/template/images/' . $_giftCard->getGiftcardTemplateImage();
+}
+
+?>
+<div class="container-gift-card">
+    <div class="top-line"><img class="bg-img" src="<?php echo $this->getSkinUrl('css/magestore/giftvoucher/images/top-img.png') ?>" width="2"/></div>
+    <div class="bottom-line"><img class="bg-img" src="<?php echo $this->getSkinUrl('css/magestore/giftvoucher/images/top-img.png') ?>" width="2"/></div>
+    <div class="right-line"><img class="bg-img" src="<?php echo $this->getSkinUrl('css/magestore/giftvoucher/images/right-img.png') ?>" width="75"/></div>
+    <div class="left-line"><img class="bg-img" src="<?php echo $this->getSkinUrl('css/magestore/giftvoucher/images/right-img.png') ?>" width="75"/></div>
+    <div class="center-line"><img class="bg-img" src="<?php echo $this->getSkinUrl('css/magestore/giftvoucher/images/center-img.png') ?>" width="75"/></div>
+    <div class="wrapper-content">
+        <div class="gift-card-container">
+            <div class="row-gift-card">
+                <div class="left-card">
+                    <div class="ms-wrap-content"><img class="bg-img" src="<?php echo $giftCardImage ?>" width="100%"/></div>
+                </div>
+                <div class="right-card">
+                    <div class="ms-wrap-content">
+                        <div class="write-content">
+                            &nbsp;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-gift-card">
+                <div class="left-card">
+                    <div class="ms-wrap-content">
+                        <div class="ms-logo">
+                            <img src="<?php echo $_giftCard->getPrintLogo() ? $_giftCard->getPrintLogo() : $this->getSkinUrl('images/logo_print.png') ?>" height="57"/>
+
+                            <p class="content-rules">
+                                <?php
+                                    $notes = str_replace(array(
+                                        '{store_url}',
+                                        '{store_name}',
+                                        '{store_address}'
+
+                                    ), array(
+                                        Mage::app()->getStore($this->getStoreId())->getBaseUrl(),
+                                        Mage::app()->getStore($this->getStoreId())->getFrontendName(),
+                                        Mage::getStoreConfig('general/store_information/address', $this->getStoreId())
+
+                                    ), Mage::helper('giftvoucher')->getFoldPaperNote());
+                                ?>
+                                <?php echo $notes; ?>
+                            </p>
+                            <div class="ms-bottom">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="right-card">
+                    <div class="ms-wrap-content">
+                        <div class="ms-gift-card">
+                            <div class="row-gift-card">
+                                <div class="left-card">
+                                    <div class="full-logo">
+                                        <img src="<?php echo $_giftCard->getPrintLogo() ? $_giftCard->getPrintLogo() : $this->getSkinUrl('images/logo_print.png') ?>" height="57"/>
+                                    </div>
+                                </div>
+                                <div class="right-card price-card">
+                                    <div class="ms-price">
+                                        <span class="price giftcard-text-color"><?php echo $currency->format($_giftCard->getBalance()); ?></span>
+                                        <div class="ms-code">
+                                            <label><?php echo $this->__('Claim Code'); ?></label>
+                                            <span class="id-code giftcard-style-color"><?php echo $_giftCard->getGiftCode() ?></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row-gift-card">
+                                <?php if ($url_barcode != ''): ?>
+                                    <div class="ms-std">
+                                        <img src="<?php echo $url_barcode ?>"/>
+                                        <div id="gc-expire-day-header-amazon" class="giftcard-text-color"><?php if ($_giftCard->getExpiredAt()) echo $this->__('Expired: %s', $expire_day); ?> </div>
+
+                                    </div>
+
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">window.print();</script>
+

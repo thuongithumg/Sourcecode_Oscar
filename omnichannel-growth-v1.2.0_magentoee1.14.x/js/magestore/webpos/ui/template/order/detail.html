@@ -1,0 +1,151 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<div class="order-pages">
+<!-- ko ifnot: orderData -->
+<div class="col-sm-8 col-left">
+    <header class="o-header">
+        <nav class="o-header-nav">
+            <span></span>
+            <label class="title" data-bind="i18n: ('Order Details')"></label>
+            <span></span>
+        </nav>
+    </header>
+    <main class="main-content main-content-no-order">
+        <div class="pos-machine icon-info"></div>
+        <div class="text-note">
+            <span class="icon-iconPOS-empty-order"></span>
+            <h4 class="title-box" data-bind="i18n: ('You don\'t have any orders yet')"></h4>
+        </div>
+    </main>
+</div>
+<!--/ko-->
+<!-- ko if: orderData -->
+<div class="col-sm-8 col-left" id="webpos_order_view_container">
+    <header class="o-header">
+        <!-- ko template: {name: templateTop, data: $parent} -->
+        <!-- /ko -->
+    </header>
+
+    <main class="main-content">
+        <div class="panel-group order-info">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h5 data-bind="i18n: ('Billing Address')"/>
+                        </div>
+                        <!-- ko template: {name: templateBilling, data: $parent} -->
+                        <!-- /ko -->
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h5 data-bind="i18n: ('Shipping Address')"/>
+                        </div>
+                        <!-- ko template: {name: templateShipping, data: $parent} -->
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- ko template: {name: templatePaymentMethod, data: $parent} -->
+                <!-- /ko -->
+                <!-- ko template: {name: templateShippingMethod, data: $parent} -->
+                <!-- /ko -->
+            </div>
+            <div class="row">
+                <!-- ko template: {name: templateItems, data: $parent} -->
+                <!-- /ko -->
+            </div>
+            <!-- ko template: {name: templateComments, data: $parent} -->
+            <!-- /ko -->
+        </div>
+    </main>
+    <footer class="footer-order">
+        <!-- ko template: {name: templateTotal, data: $parent} -->
+        <!-- /ko -->
+        <!-- ko if: orderData -->
+        <div class="">
+            <div class="action-button">
+                <button class="button print btn-cl-cfg-other" data-bind="i18n: ('Print'), click: printOrder"/>
+                <!-- ko if: showInvoiceButton -->
+                <button class="button invoice btn-cl-cfg-active" data-toggle="modal"
+                        data-bind="i18n: ('Invoice'), click: showPopup.bind($data, 'invoice')"/>
+                <!--/ko-->
+                <!-- ko if: canSync -->
+                <button class="button invoice btn-cl-cfg-active" data-bind="i18n: ('Sync'), click: syncOrder"/>
+                <!--/ko-->
+            </div>
+        </div>
+        <!-- /ko -->
+    </footer>
+</div>
+<!-- /ko -->
+<!-- ko if: orderData -->
+<div data-bind="visible: isShowActionPopup" id="form-add-note-order">
+    <ul>
+        <!-- ko if: !isCanceled() && orderData().status != 'notsync' -->
+        <li>
+            <a href="#" data-toggle="modal"
+               lass="order-note" data-bind="i18n: ('Send Email'), click: showPopup.bind($data, 'sendemail')"/>
+        </li>
+        <!--/ko-->
+        <!-- ko if: canShip() && orderData().status != 'notsync' -->
+        <li>
+            <a href="#" data-toggle="modal"
+               class="order-note" data-bind="i18n: ('Ship'),  click: showPopup.bind($data, 'shipment')"/>
+        </li>
+        <!--/ko-->
+        <!-- ko if: canCancel() && orderData().status != 'notsync' -->
+        <li>
+            <a href="#" class="order-note" data-bind="i18n: ('Cancel'), click: showPopup.bind($data, 'cancel')"/>
+        </li>
+        <!--/ko-->
+        <!-- ko if:  orderData().status != 'notsync' -->
+        <li>
+            <a href="#" data-toggle="modal"
+               class="order-note" data-bind="i18n: ('Add Comment'), , click: showPopup.bind($data, 'comment')"/>
+        </li>
+        <!--/ko-->
+        <li>
+            <a href="#" class="order-note" data-bind="i18n: ('Re-order'), click: reOrder"/>
+        </li>
+        <!-- ko if: canCreditmemo() && orderData().status != 'notsync'  -->
+        <li class="last">
+            <a href="#" data-toggle="modal"
+               class="order-note" data-bind="i18n: ('Refund'), click: showPopup.bind($data, 'refund')"/>
+        </li>
+        <!--/ko-->
+        <!-- ko if: canUnhold -->
+        <li class="last">
+        <a href="#" data-toggle="modal"
+        class="order-note" data-bind="i18n: ('Unhold'), click: showPopup.bind($data, 'refund')"/>
+        </li>
+        <!--/ko-->
+
+        <!-- ko foreach: {data:getRegion('order-view-additional-actions')} -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!-- /ko -->
+
+    </ul>
+</div>
+<!--/ko-->
+</div>

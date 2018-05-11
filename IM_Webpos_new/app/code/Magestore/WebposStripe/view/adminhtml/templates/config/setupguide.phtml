@@ -1,0 +1,104 @@
+<tr>
+    <td class="label">
+        <label>
+            <span><?php echo __('Installation guide')?></span>
+        </label>
+    </td>
+    <td class="value stripe-installation-guide">
+        <h4 class="title"><?php echo __('Install the Stripe REST SDK')?></h4>
+        <ul class="stripe-installation-skd-guide">
+            <li>
+                <?php echo __('If you can access to your server via SSH:');?><br />
+                <div class="guide-content">
+                    <?php echo __('Use cd command to your Magento root folder. After that, enter the command:');?>
+                    <br />
+                    <b>composer require "stripe/stripe-php:*"</b>
+                    <br />
+                    <a href="https://stripe.com/docs/libraries"><?php echo __('View detail')?></a>
+                </div>
+            </li>
+        </ul>
+        <h4 class="title"><?php echo __('Test the API connection')?></h4>
+        <ul class="stripe-installation-test">
+            <li><?php echo __('After install the SDK and save all the API information, you can click the button below to test the connection');?></li>
+            <li><button type="button" id="webpos-stripe-integration-test-api"><?php echo __('Test API connection');?></button></li>
+            <li>
+                <div id="webpos-stripe-integration-test-response">
+                    <div class="loader hide"></div>
+                    <div class="success hide"><?php echo __('Success');?></div>
+                    <div class="error hide"><?php echo __('Error');?></div>
+                </div>
+            </li>
+        </ul>
+    </td>
+    <td class=""></td>
+</tr>
+<script>
+    require([
+        'jquery'
+    ], function ($) {
+        var testAPIUrl = '<?php echo $block->getTestApiUrl();?>';
+        $(document).ready(function(){
+            $('#webpos-stripe-integration-test-api').click(function(){
+                $("#webpos-stripe-integration-test-response .loader").removeClass('hide');
+                $.ajax({
+                    method:'get',
+                    url: testAPIUrl
+                }).complete(function( result, status) {
+                    $("#webpos-stripe-integration-test-response .loader").addClass('hide');
+                    if(status == 'success'){
+                        var response = JSON.parse(result.responseText);
+                        if(response && response.success){
+                            $("#webpos-stripe-integration-test-response .success").removeClass('hide');
+                            $("#webpos-stripe-integration-test-response .error").addClass('hide');
+                        }else{
+                            if(response && response.message){
+                                alert(response.message);
+                            }
+                            $("#webpos-stripe-integration-test-response .success").addClass('hide');
+                            $("#webpos-stripe-integration-test-response .error").removeClass('hide');
+                        }
+                    }else{
+                        alert('<?php echo __('Please check your network connection');?>');
+                    }
+                });
+            });
+        });
+    });
+</script>
+<style type="text/css">
+    .hide{
+        display: none;
+    }
+    .stripe-installation-guide h4.title{
+        padding-top:7px;
+        padding-left:0px;
+        margin-top:0px;
+        margin-left:0px;
+        font-size: 14px;
+        font-weight: 600;
+    }
+    .stripe-installation-guide ul li{
+        list-style: none;
+        margin: 5px 0px;
+    }
+    .stripe-installation-guide ol li{
+        list-style: inherit;
+    }
+    .stripe-installation-guide li .guide-content{
+        padding-left: 20px;
+    }
+    .loader {
+        border: 6px solid #f3f3f3; /* Light grey */
+        border-top: 6px solid #3498db; /* Blue */
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1.5s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+</style>

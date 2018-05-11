@@ -1,0 +1,32 @@
+<?php
+/**
+ * Copyright © 2018 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+$block->getCurrentReportName(); ?>
+<?php if ($reports = $block->getReportList()): ?>
+
+<div class="store-switcher store-view">
+    <span class="store-switcher-label"><?php /* @escapeNotVerified */ echo __('Reports:') ?></span>
+    <div class="actions dropdown closable">        
+        <button
+            type="button"
+            class="admin__action-dropdown"
+            data-mage-init='{"dropdown":{}}'
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            id="store-change-button">
+            <?php /* @escapeNotVerified */ echo $block->getCurrentReportName() ?>
+        </button>
+        <ul class="dropdown-menu" data-role="stores-list">
+            <?php foreach ($reports as $report => $name): ?>
+                <?php $reportLink = $block->getReportLink($report) ?>  
+                <li class="store-switcher-website">  
+                 <a href="<?php echo $reportLink?>"><?php echo $block->escapeHtml($name) ?></a>                                 
+                </li>                                        
+            <?php endforeach; ?>            
+        </ul>
+    </div>
+</div>
+<?php endif?>

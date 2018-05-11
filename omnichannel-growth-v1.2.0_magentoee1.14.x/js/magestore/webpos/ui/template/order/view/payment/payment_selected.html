@@ -1,0 +1,64 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<div class="row" id="payment_selected" data-bind="visible:$parent.showSelectedPayment">
+    <div class="col-sm-12">
+        <div class="payment-method payment-detail-box" data-bind="foreach: { data: $parent.selectedPayments, as: 'item' } ">
+            <div class="wrap-detail-payment">
+                <div class="left-payment">
+                    <span data-bind="attr:{'class': iconClass}"></span>
+                    <label data-bind="text: title"></label>
+                </div>
+                <div class="reference-number">
+                    <input type="text"
+                           data-bind="visible: $parents[1].isShowReferenceNumber(is_reference_number),
+                                  event: {change: $parents[1].editReferenceNumber.bind($parents[1])},
+                                  attr:{'placeholder': $parents[1].getRefenceNumberText(),
+                                      'id': $parents[1].getRefenrenceNumberId(code)
+                                  }"
+                    />
+                </div>
+                <div class="input-actions">
+                    <div class="input-box">
+                        <!--ko ifnot: $parents[1].editAble($data)-->
+                        <label data-bind="text: cart_total_formated" class="extension_payment_method"></label>
+                        <!--/ko-->
+                        <!--ko if: $parents[1].editAble($data)-->
+                        <input type="text"
+                               onclick="this.select()"
+                               data-bind="value: cart_total_formated,
+                                      event: {change: $parents[1].editPaymentPrice.bind($parents[1])}"
+                        />
+                        <!--/ko-->
+                    </div>
+                    <a data-bind="css: 'remove-icon '+  item.code, event: {click: $parents[1].removeSelectedPayment.bind($parents[1])}">
+                        <span class="icon-iconPOS-remove"></span>
+                    </a>
+                </div>
+            </div>
+            <!-- ko if: (template) -->
+                <div class="detail-payment-form"
+                     data-bind="attr:{'id': $parents[1].getFormId(code)}">
+                    <!-- ko template: {name:template, data: $parents[1].getPaymentForm(code, form_data)} -->
+                    <!-- /ko -->
+                </div>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>

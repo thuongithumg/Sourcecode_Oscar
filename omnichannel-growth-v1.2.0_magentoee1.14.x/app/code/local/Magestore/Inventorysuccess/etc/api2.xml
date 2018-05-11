@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Inventorysuccess
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<config>
+    <api2>
+        <resource_groups>
+            <inventorysuccess translate="title" module="api2">
+                <title>InventorySuccess</title>
+                <sort_order>140</sort_order>
+            </inventorysuccess>
+        </resource_groups>
+        <resources>
+            <inventorysuccess_warehouse_stock translate="title" module="api2">
+                <group>inventorysuccess</group>
+                <sort_order>10</sort_order>
+                <model>inventorysuccess/api2_warehouseStock</model>
+                <title>Inventory Warehouse Stock</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_getlist_update>
+                        <route>/inventory/warehouseStocks</route>
+                        <action_type>getlist_update</action_type>
+                    </route_getlist_update>
+                    <route_retrieve>
+                        <route>/inventory/warehouseStocks/warehouse/:warehouseId/productSku/:productSku</route>
+                        <action_type>retrieve</action_type>
+                    </route_retrieve>
+
+                    <route_getlist_update_magmi>
+                        <route>/inventory/warehouseStocksMagmi</route>
+                        <action_type>getlist_update_magmi</action_type>
+                    </route_getlist_update_magmi>
+                </routes>
+                <versions>1</versions>
+            </inventorysuccess_warehouse_stock>
+
+            <inventorysuccess_supplier_stock translate="title" module="api2">
+                <group>inventorysuccess</group>
+                <sort_order>10</sort_order>
+                <model>inventorysuccess/api2_supplierStock</model>
+                <title>Inventory Supplier Stock</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_getlist_update>
+                        <route>/inventory/supplierStocks</route>
+                        <action_type>getlist_update</action_type>
+                    </route_getlist_update>
+                </routes>
+                <versions>1</versions>
+            </inventorysuccess_supplier_stock>
+
+            <inventorysuccess_warehouse translate="title" module="api2">
+                <group>inventorysuccess</group>
+                <sort_order>20</sort_order>
+                <model>inventorysuccess/api2_warehouse</model>
+                <title>Inventory Warehouse</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                        <create>1</create>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_getlist_create>
+                        <route>/inventory/warehouses</route>
+                        <action_type>getlist_create</action_type>
+                    </route_getlist_create>
+                    <route_retrieve_update>
+                        <route>/inventory/warehouses/:warehouseCode</route>
+                        <action_type>retrieve_update</action_type>
+                    </route_retrieve_update>
+                </routes>
+                <versions>1</versions>
+            </inventorysuccess_warehouse>
+            <inventorysuccess_adjustStock translate="title" module="api2">
+                <group>inventorysuccess</group>
+                <sort_order>30</sort_order>
+                <model>inventorysuccess/api2_adjustStock</model>
+                <title>Inventory Adjust Stock</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                        <create>1</create>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_create>
+                        <route>/inventory/adjustStocks</route>
+                        <action_type>create</action_type>
+                    </route_create>
+                    <route_retrieve>
+                        <route>/inventory/adjustStocks/:adjustStockCode</route>
+                        <action_type>retrieve</action_type>
+                    </route_retrieve>
+                </routes>
+                <versions>1</versions>
+            </inventorysuccess_adjustStock>
+        </resources>
+    </api2>
+</config>

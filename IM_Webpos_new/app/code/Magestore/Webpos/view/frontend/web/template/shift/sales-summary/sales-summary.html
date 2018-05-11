@@ -1,0 +1,146 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div class="notify-notsync" data-bind="visible:isNotSync, i18n:'This was an issue syncing this shift with your admin'"></div>
+
+<div class="sum-info-top">
+    <div class="session-info">
+        <div class="col-sm-6 block">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td class="a-left">
+                            <label data-bind="i18n: 'Staff'"/>
+                        </td>
+                        <td><span data-bind="text: shiftData().staff_name"/></td>
+                    </tr>
+                    <tr>
+                        <td><label data-bind="i18n: 'POS'"/></td>
+                        <td><span  data-bind="text: shiftData().pos_name"/></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-6 block">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <td class="a-left">
+                        <label data-bind="i18n: 'Opened'"/>
+                    </td>
+                    <td><span data-bind="text: getFullDatetime(convertToCurrentTime(shiftData().opened_at))"/></td>
+                </tr>
+                <tr data-bind="visible:isClosed()">
+                    <td><label data-bind="i18n: 'Closed'"/></td>
+                    <td><span data-bind="text: getFullDatetime(convertToCurrentTime(shiftData().closed_at))"/></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="transactions-info">
+        <div class="col-sm-6 block">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td class="a-left">
+                            <label data-bind="i18n: 'Opening Balance'"/>
+                        </td>
+                        <td><span data-bind="text: formatPrice(shiftData().float_amount)"/></td>
+                    </tr>
+                    <tr>
+                        <td><a href="#" data-bind="click:showAddTransactionsDetail"><label data-bind="i18n: '+ Transactions'"/></a></td>
+                        <td><span data-bind="text: formatPrice(getAddTransactionTotal())"/></td>
+                    </tr>
+                    <tr>
+                        <td><a href="#" data-bind="click:showRemoveTransactionsDetail"><label data-bind="i18n: '- Transactions'"/></a></td>
+                        <td><span data-bind="text: formatPrice(getRemoveTransactionTotal())"/></td>
+                    </tr>
+                    <tr>
+                        <td><label data-bind="i18n: 'Theoretical Closing Balance'"/></td>
+                        <td><span data-bind="text: formatPrice(theoretialClosingBalance())"/></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-6 block">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <td class="a-left">
+                        <label data-bind="i18n: 'Real Closing Balance'"/>
+                    </td>
+                    <td><span data-bind="text: formatPrice(realClosingBalance())"/></td>
+                </tr>
+                <tr class="difference-row">
+                    <td class="a-left">
+                        <label data-bind="i18n: 'Difference'"/>
+                    </td>
+                    <td><span data-bind="text: formatPrice(differenceAmount())"/></td>
+                </tr>
+                <!-- ko if: profitLossReason() -->
+                <tr class="difference-reason">
+                    <td class="a-left">
+                        <label data-bind="i18n: 'Difference Reason'"/>
+                    </td>
+                    <td><span data-bind="text: profitLossReason()"/></td>
+                </tr>
+                <!--/ko-->
+                <tr data-bind="visible:!isClosed()">
+                    <td class="a-center" colspan="2">
+                        <button type="button" class="button btn-others"  data-bind="click: putMoneyIn">
+                            <span data-bind="i18n:'Put Money In'"/>
+                        </button>
+                        <button type="button" class="button btn-others"  data-bind="click: takeMoneyOut">
+                            <span data-bind="i18n:'Take Money Out'"/>
+                        </button>
+                        <!-- ko if: canEndSession() -->
+                        <button type="button" class="button btn-cl-cfg-active"  data-bind="click: setClosingBalance">
+                            <span data-bind="i18n:'Set Closing Balance'"/>
+                        </button>
+                        <!--/ko-->
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<div id="shift-detail-sale" data-bind="visible: hasData">
+    <table class="table">
+        <thead>
+        <tr>
+            <th></th>
+            <th><span data-bind="i18n:'Sale'"/></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <!-- html for one item of sale summary -->
+
+        <!-- ko foreach: items -->
+
+        <tr>
+
+            <td class="a-left">
+                <div class="credit-card-payment">
+                    <div class="icon-payment cash"><span data-bind="attr:{'class': $parent.generatePaymentCode(payment_method)}"></span></div>
+                    <label data-bind="text: method_title"/>
+                </div>
+
+            </td>
+            <td><span data-bind="text: $parent.formatPrice(payment_amount)"/></td>
+
+        </tr>
+        <!-- /ko -->
+
+        <!-- end of html for one item of sale summary -->
+
+        </tbody>
+    </table>
+</div>
+

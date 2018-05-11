@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns:typens="urn:{{var wsdl.name}}" 
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" 
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/"
+             name="{{var wsdl.name}}" targetNamespace="urn:{{var wsdl.name}}">
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:Magento">
+            <import namespace="http://schemas.xmlsoap.org/soap/encoding/" schemaLocation="http://schemas.xmlsoap.org/soap/encoding/" />
+            <complexType name="rewardpointsCustomerEntity">
+                <all>
+                    <element name="customer_id" type="xsd:int" minOccurs="0" />
+                    <element name="entity_id" type="xsd:int" minOccurs="0" />
+                    <element name="entity_type_id" type="xsd:int" minOccurs="0" />
+                    <element name="attribute_set_id" type="xsd:int" minOccurs="0" />
+                    <element name="created_at" type="xsd:string" minOccurs="0" />
+                    <element name="updated_at" type="xsd:string" minOccurs="0" />
+                    <element name="increment_id" type="xsd:string" minOccurs="0" />
+                    <element name="disable_auto_group_change" type="xsd:string" minOccurs="0" />
+                    <element name="default_billing" type="xsd:string" minOccurs="0" />
+                    <element name="default_shipping" type="xsd:string" minOccurs="0" />
+                    <element name="is_active" type="xsd:string" minOccurs="0" />
+                    <element name="store_id" type="xsd:int" minOccurs="0" />
+                    <element name="website_id" type="xsd:int" minOccurs="0" />
+                    <element name="created_in" type="xsd:string" minOccurs="0" />
+                    <element name="email" type="xsd:string" minOccurs="0" />
+                    <element name="firstname" type="xsd:string" minOccurs="0" />
+                    <element name="middlename" type="xsd:string" minOccurs="0" />
+                    <element name="lastname" type="xsd:string" minOccurs="0" />
+                    <element name="group_id" type="xsd:int" minOccurs="0" />
+                    <element name="prefix" type="xsd:string" minOccurs="0" />
+                    <element name="suffix" type="xsd:string" minOccurs="0" />
+                    <element name="dob" type="xsd:string" minOccurs="0" />
+                    <element name="taxvat" type="xsd:string" minOccurs="0" />
+                    <element name="confirmation" type="xsd:boolean" minOccurs="0" />
+                    <element name="password_hash" type="xsd:string" minOccurs="0" />
+                    <element name="point_balance" type="xsd:int" minOccurs="0" />
+                    <element name="holding_balance" type="xsd:int" minOccurs="0" />
+                    <element name="spent_balance" type="xsd:int" minOccurs="0" />
+                    <element name="is_notification" type="xsd:int" minOccurs="0" />
+                    <element name="expire_notification" type="xsd:int" minOccurs="0" />
+                </all>
+            </complexType>
+            <complexType name="rewardpointsTransactionEntity">
+                <all>
+                    <element name="transaction_id" type="xsd:int" minOccurs="0" />
+                    <element name="reward_id" type="xsd:int" minOccurs="0" />
+                    <element name="customer_id" type="xsd:int" minOccurs="0" />
+                    <element name="title" type="xsd:string" minOccurs="0" />
+                    <element name="action" type="xsd:string" minOccurs="0" />
+                    <element name="action_type" type="xsd:int" minOccurs="0" />
+                    <element name="store_id" type="xsd:int" minOccurs="0" />
+                    <element name="point_amount" type="xsd:int" minOccurs="0" />
+                    <element name="point_used" type="xsd:int" minOccurs="0" />
+                    <element name="real_point" type="xsd:int" minOccurs="0" />
+                    <element name="status" type="xsd:int" minOccurs="0" />
+                    <element name="created_time" type="xsd:string" minOccurs="0" />
+                    <element name="updated_time" type="xsd:string" minOccurs="0" />
+                    <element name="expiration_date" type="xsd:string" minOccurs="0" />
+                    <element name="expire_email" type="xsd:int" minOccurs="0" />
+                    <element name="order_id" type="xsd:int" minOccurs="0" />
+                    <element name="order_increment_id" type="xsd:string" minOccurs="0" />
+                    <element name="order_base_amount" type="xsd:string" minOccurs="0" />
+                    <element name="order_amount" type="xsd:string" minOccurs="0" />
+                    <element name="base_discount" type="xsd:string" minOccurs="0" />
+                    <element name="discount" type="xsd:string" minOccurs="0" />
+                    <element name="extra_content" type="xsd:string" minOccurs="0" />
+                </all>
+            </complexType>
+            <complexType name="rewardpointsTransactionAdd">
+                <all>
+                    <element name="actionCode" type="xsd:string" minOccurs="0" />
+                    <element name="customerId" type="xsd:string" minOccurs="1" /> 
+                    <element name="pointAmount" type="xsd:string" minOccurs="1" />
+                    <element name="orderId" type="xsd:string" minOccurs="0" />
+                    <element name="status" type="xsd:string" minOccurs="0" />
+                    <element name="extraContent" type="xsd:string" minOccurs="0" />
+                    <element name="title" type="xsd:string" minOccurs="0" />
+                    <element name="storeId" type="xsd:string" minOccurs="1" />
+                    <element name="expireAfter" type="xsd:string" minOccurs="0" />
+                </all>
+            </complexType>
+            <complexType name="rewardpointsTransferAdd">
+                <all>
+                    <element name="emailSend" type="xsd:string" minOccurs="1" />
+                    <element name="emailReceive" type="xsd:string" minOccurs="1" /> 
+                    <element name="pointAmount" type="xsd:string" minOccurs="1" />
+                    <element name="message" type="xsd:string" minOccurs="0" />
+                    <element name="storeId" type="xsd:string" minOccurs="1" />
+                </all>
+            </complexType>
+            <complexType name="rewardpointsTransferEntity">
+                <all>
+                    <element name="transfer_id" type="xsd:int" minOccurs="0" />
+                    <element name="sender_email" type="xsd:int" minOccurs="0" />
+                    <element name="receiver_email" type="xsd:int" minOccurs="0" />
+                    <element name="point_amount" type="xsd:string" minOccurs="0" />
+                    <element name="send_transaction_id" type="xsd:string" minOccurs="0" />
+                    <element name="receive_transaction_id" type="xsd:int" minOccurs="0" />
+                    <element name="sender_customer_id" type="xsd:int" minOccurs="0" />
+                    <element name="receiver_customer_id" type="xsd:int" minOccurs="0" />
+                    <element name="extra_content" type="xsd:int" minOccurs="0" />
+                    <element name="status" type="xsd:int" minOccurs="0" />
+                    <element name="store_id" type="xsd:string" minOccurs="0" />
+                    <element name="pending_day" type="xsd:string" minOccurs="0" />
+                    <element name="holding_day" type="xsd:string" minOccurs="0" />
+                    <element name="created_time" type="xsd:int" minOccurs="0" />
+                    <element name="updated_time" type="xsd:int" minOccurs="0" />
+                </all>
+            </complexType>
+            <complexType name="rewardpointsCustomerEntityArray">
+                <complexContent>
+                    <restriction base="soapenc:Array">
+                        <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:rewardpointsCustomerEntity[]" />
+                    </restriction>
+                </complexContent>
+            </complexType>
+            <complexType name="rewardpointsTransactionEntityArray">
+                <complexContent>
+                    <restriction base="soapenc:Array">
+                        <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:rewardpointsTransactionEntity[]" />
+                    </restriction>
+                </complexContent>
+            </complexType>
+            <complexType name="rewardpointsTransferEntityArray">
+                <complexContent>
+                    <restriction base="soapenc:Array">
+                        <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:rewardpointsTransferEntity[]" />
+                    </restriction>
+                </complexContent>
+            </complexType>
+        </schema>
+    </types>
+    <message name="rewardpointsCustomerGetcustomerbyemailRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="customerEmail" type="xsd:string" />
+    </message>
+    <message name="rewardpointsCustomerGetcustomerbyemailResponse">
+        <part name="customerView" type="typens:rewardpointsCustomerEntity" />
+    </message>
+    <message name="rewardpointsCustomerGetcustomeridbyemailRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="customerEmail" type="xsd:string" />
+    </message>
+    <message name="rewardpointsCustomerGetcustomeridbyemailResponse">
+        <part name="customerId" type="xsd:int" />
+    </message>
+    <message name="rewardpointsCustomerGetbalancebyemailRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="customerEmail" type="xsd:string" />
+    </message>
+    <message name="rewardpointsCustomerGetbalancebyemailResponse">
+        <part name="balance" type="xsd:int" />
+    </message>
+    <message name="rewardpointsCustomerGetbalancebyidRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="customerEmail" type="xsd:string" />
+    </message>
+    <message name="rewardpointsCustomerGetbalancebyidResponse">
+        <part name="balance" type="xsd:int" />
+    </message>
+    <message name="rewardpointsCustomerGetcustomersbalanceRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="filters" type="typens:filters" />
+    </message>
+    <message name="rewardpointsCustomerGetcustomersbalanceResponse">
+        <part name="customersBalance" type="typens:rewardpointsCustomerEntityArray" />
+    </message>
+    <message name="rewardpointsTransactionListRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="filters" type="typens:filters" />
+    </message>
+    <message name="rewardpointsTransactionListResponse">
+        <part name="transactionList" type="typens:rewardpointsTransactionEntityArray" />
+    </message>
+    <message name="rewardpointsTransactionAddRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="addTransaction" type="typens:rewardpointsTransactionAdd" />
+    </message>
+    <message name="rewardpointsTransactionAddResponse">
+        <part name="transactionId" type="xsd:string" />
+    </message>
+    <message name="rewardpointsTransactionCompleteRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="transactionIds" type="typens:ArrayOfInt" />
+    </message>
+    <message name="rewardpointsTransactionCompleteResponse">
+        <part name="transactionComplete" type="typens:ArrayOfString" />
+    </message>
+    <message name="rewardpointsTransactionCancelRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="transactionIds" type="typens:ArrayOfInt" />
+    </message>
+    <message name="rewardpointsTransactionCancelResponse">
+        <part name="transactionComplete" type="typens:ArrayOfString" />
+    </message>
+    <message name="rewardpointsTransactionExpireRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="transactionIds" type="typens:ArrayOfInt" />
+    </message>
+    <message name="rewardpointsTransactionExpireResponse">
+        <part name="transactionComplete" type="typens:ArrayOfString" />
+    </message>
+    <message name="rewardpointsTransactionBalanceEmailRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="transactionIds" type="typens:ArrayOfInt" />
+    </message>
+    <message name="rewardpointsTransactionBalanceEmailResponse">
+        <part name="balanceEmail" type="typens:ArrayOfBoolean" />
+    </message>
+    <message name="rewardpointsTransactionExpireEmailRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="transactionIds" type="typens:ArrayOfInt" />
+    </message>
+    <message name="rewardpointsTransactionExpireEmailResponse">
+        <part name="expireEmaill" type="typens:ArrayOfBoolean" />
+    </message>
+    <message name="rewardpointsReferfriendsLinkRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="customer" type="xsd:string" />
+    </message>
+    <message name="rewardpointsReferfriendsLinkResponse">
+        <part name="linkCustomer" type="xsd:string" />
+    </message>
+    <message name="rewardpointsReferfriendsCouponRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="customer" type="xsd:string" />
+    </message>
+    <message name="rewardpointsReferfriendsCouponResponse">
+        <part name="couponCustomer" type="xsd:string" />
+    </message>
+    <message name="rewardpointsReferfriendsCustomerLinkRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="linkKey" type="xsd:string" />
+    </message>
+    <message name="rewardpointsReferfriendsCustomerLinkResponse">
+        <part name="linkResponse" type="typens:rewardpointsCustomerEntity" />
+    </message>
+    <message name="rewardpointsReferfriendsCustomerCouponRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="couponCode" type="xsd:string" />
+    </message>
+    <message name="rewardpointsReferfriendsCustomerCouponResponse">
+        <part name="couponResponse" type="typens:rewardpointsCustomerEntity" />
+    </message>
+    <message name="rewardpointsTransferListRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="filters" type="typens:filters" />
+    </message>
+    <message name="rewardpointsTransferListResponse">
+        <part name="transferList" type="typens:rewardpointsTransferEntityArray" />
+        <!--        <part name="transferList" type="typens:Array" />-->
+    </message>
+    <message name="rewardpointsTransferAddRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="transferData" type="typens:rewardpointsTransferAdd" />
+    </message>
+    <message name="rewardpointsTransferAddResponse">
+        <part name="transferId" type="xsd:string" />
+    </message>
+    <message name="rewardpointsTransferCompleteRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="transferIds" type="typens:ArrayOfInt" />
+    </message>
+    <message name="rewardpointsTransferCompleteResponse">
+        <part name="transferComplete" type="typens:ArrayOfBoolean" />
+    </message>
+    <message name="rewardpointsTransferCancelRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="transferIds" type="typens:ArrayOfInt" />
+    </message>
+    <message name="rewardpointsTransferCancelResponse">
+        <part name="transferComplete" type="typens:ArrayOfBoolean" />
+    </message>
+    <message name="rewardpointsTransferTransferEmailRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="transferIds" type="typens:ArrayOfInt" />
+    </message>
+    <message name="rewardpointsTransferTransferEmailResponse">
+        <part name="transferEmail" type="typens:ArrayOfBoolean" />
+    </message>
+    <portType name="{{var wsdl.handler}}PortType">
+        <operation name="rewardpointsCustomerGetcustomerbyemail">
+            <documentation>Get customer by email</documentation>
+            <input message="typens:rewardpointsCustomerGetcustomerbyemailRequest" />
+            <output message="typens:rewardpointsCustomerGetcustomerbyemailResponse" />
+        </operation>
+        <operation name="rewardpointsCustomerGetcustomeridbyemail">
+            <documentation>Get customer Id by email</documentation>
+            <input message="typens:rewardpointsCustomerGetcustomeridbyemailRequest" />
+            <output message="typens:rewardpointsCustomerGetcustomeridbyemailResponse" />
+        </operation>
+        <operation name="rewardpointsCustomerGetbalancebyemail">
+            <documentation>Get balance by email</documentation>
+            <input message="typens:rewardpointsCustomerGetbalancebyemailRequest" />
+            <output message="typens:rewardpointsCustomerGetbalancebyemailResponse" />
+        </operation>
+        <operation name="rewardpointsCustomerGetbalancebyemail">
+            <documentation>Get balance by customer Id</documentation>
+            <input message="typens:rewardpointsCustomerGetbalancebyidRequest" />
+            <output message="typens:rewardpointsCustomerGetbalancebyidResponse" />
+        </operation>
+        <operation name="rewardpointsCustomerGetbalancebyid">
+            <documentation>Get balance by customer Id</documentation>
+            <input message="typens:rewardpointsCustomerGetbalancebyidRequest" />
+            <output message="typens:rewardpointsCustomerGetbalancebyidResponse" />
+        </operation>
+        <operation name="rewardpointsCustomerGetcustomersbalance">
+            <documentation>Get balance of customers</documentation>
+            <input message="typens:rewardpointsCustomerGetcustomersbalanceRequest" />
+            <output message="typens:rewardpointsCustomerGetcustomersbalanceResponse" />
+        </operation>
+        <operation name="rewardpointsTransactionList">
+            <documentation>Get transactions</documentation>
+            <input message="typens:rewardpointsTransactionListRequest" />
+            <output message="typens:rewardpointsTransactionListResponse" />
+        </operation>
+        <operation name="rewardpointsTransactionAdd">
+            <documentation>Add transactions</documentation>
+            <input message="typens:rewardpointsTransactionAddRequest" />
+            <output message="typens:rewardpointsTransactionAddResponse" />
+        </operation>
+        <operation name="rewardpointsTransactionComplete">
+            <documentation>Complete transactions</documentation>
+            <input message="typens:rewardpointsTransactionCompleteRequest" />
+            <output message="typens:rewardpointsTransactionCompleteResponse" />
+        </operation>
+        <operation name="rewardpointsTransactionCancel">
+            <documentation>Cancel transactions</documentation>
+            <input message="typens:rewardpointsTransactionCancelRequest" />
+            <output message="typens:rewardpointsTransactionCancelResponse" />
+        </operation>
+        <operation name="rewardpointsTransactionExpire">
+            <documentation>Expire transactions</documentation>
+            <input message="typens:rewardpointsTransactionExpireRequest" />
+            <output message="typens:rewardpointsTransactionExpireResponse" />
+        </operation>
+        <operation name="rewardpointsTransactionBalanceEmail">
+            <documentation>Send update balance email transactions</documentation>
+            <input message="typens:rewardpointsTransactionBalanceEmailRequest" />
+            <output message="typens:rewardpointsTransactionBalanceEmailResponse" />
+        </operation>
+        <operation name="rewardpointsTransactionExpireEmail">
+            <documentation>Send email before expire transactions</documentation>
+            <input message="typens:rewardpointsTransactionExpireEmailRequest" />
+            <output message="typens:rewardpointsTransactionExpireEmailResponse" />
+        </operation>
+        <operation name="rewardpointsReferfriendsCoupon">
+            <documentation>Get coupon by customer</documentation>
+            <input message="typens:rewardpointsReferfriendsCouponRequest" />
+            <output message="typens:rewardpointsReferfriendsCouponResponse" />
+        </operation>
+        <operation name="rewardpointsReferfriendsLink">
+            <documentation>Get link by customer</documentation>
+            <input message="typens:rewardpointsReferfriendsLinkRequest" />
+            <output message="typens:rewardpointsReferfriendsLinkResponse" />
+        </operation>
+        <operation name="rewardpointsReferfriendsCustomerCoupon">
+            <documentation>Get customer by coupon</documentation>
+            <input message="typens:rewardpointsReferfriendsCustomerCouponRequest" />
+            <output message="typens:rewardpointsReferfriendsCustomerCouponResponse" />
+        </operation>
+        <operation name="rewardpointsReferfriendsCustomerLink">
+            <documentation>Get customer by link</documentation>
+            <input message="typens:rewardpointsReferfriendsCustomerLinkRequest" />
+            <output message="typens:rewardpointsReferfriendsCustomerLinkResponse" />
+        </operation>
+        <operation name="rewardpointsTransferList">
+            <documentation>Get transfer</documentation>
+            <input message="typens:rewardpointsTransferListRequest" />
+            <output message="typens:rewardpointsTransferListResponse" />
+        </operation>
+        <operation name="rewardpointsTransferAdd">
+            <documentation>Add transfer</documentation>
+            <input message="typens:rewardpointsTransferAddRequest" />
+            <output message="typens:rewardpointsTransferAddResponse" />
+        </operation>
+        <operation name="rewardpointsTransferComplete">
+            <documentation>Complete transfer</documentation>
+            <input message="typens:rewardpointsTransferCompleteRequest" />
+            <output message="typens:rewardpointsTransferCompleteResponse" />
+        </operation>
+        <operation name="rewardpointsTransferCancel">
+            <documentation>Cancel transfer</documentation>
+            <input message="typens:rewardpointsTransferCancelRequest" />
+            <output message="typens:rewardpointsTransferCancelResponse" />
+        </operation>
+        <operation name="rewardpointsTransferTransferEmail">
+            <documentation>Send transfer email</documentation>
+            <input message="typens:rewardpointsTransferTransferEmailRequest" />
+            <output message="typens:rewardpointsTransferTransferEmailResponse" />
+        </operation>
+    </portType>
+    <binding name="{{var wsdl.handler}}Binding" type="typens:{{var wsdl.handler}}PortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
+        <operation name="rewardpointsCustomerGetcustomerbyemail">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="rewardpointsCustomerGetcustomeridbyemail">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="rewardpointsCustomerGetbalancebyemail">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="rewardpointsCustomerGetbalancebyid">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="rewardpointsCustomerGetcustomersbalance">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="rewardpointsTransactionList">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="rewardpointsTransactionAdd">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="rewardpointsTransactionComplete">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="rewardpointsTransactionCancel">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="rewardpointsTransactionExpire">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="rewardpointsTransactionBalanceEmail">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="rewardpointsTransactionExpireEmail">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="rewardpointsReferfriendsCoupon">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="rewardpointsReferfriendsLink">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="rewardpointsReferfriendsCustomerLink">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="rewardpointsReferfriendsCustomerCoupon">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="rewardpointsTransferList">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="rewardpointsTransferAdd">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="rewardpointsTransferComplete">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="rewardpointsTransferCancel">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="rewardpointsTransferTransferEmail">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+    </binding>
+</definitions>

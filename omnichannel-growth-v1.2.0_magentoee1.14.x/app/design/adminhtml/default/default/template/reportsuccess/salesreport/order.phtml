@@ -1,0 +1,86 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Reportsuccess
+ * @copyright   Copyright (c) 2017 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+/** @var $this Mage_Core_Block_Template */
+?>
+<!-- Order Grid modal -->
+<div class="modal right fade" id="report_salesreport_order_modal" tabindex="-1"
+     role="dialog" aria-labelledby="modalLabel" style="display:none">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <h2 class="modal-title" id="report_salesreport_order_modal_header" data-role="title">
+                <?php echo $this->__('Order list') ?>
+            </h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+            <div class="modal-body" id="report_salesreport_order_modal_content">
+
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var runInitReportOrderGrid;
+    var currentOrderIds = 0;
+    var currentWarehouseIds = 0;
+    function showReportOrder(orderIds) {
+        var selectedWarehouseIds = jQuery('#select_warehouse_option').val();
+        selectedWarehouseIds = selectedWarehouseIds.join(',');
+        if (orderIds == currentOrderIds && selectedWarehouseIds == currentWarehouseIds)
+            return false;
+        currentOrderIds = orderIds;
+        currentWarehouseIds = selectedWarehouseIds;
+        if (typeof salesreportOrderGridJsObject != 'undefined') {
+            clearInterval(runInitReportOrderGrid);
+            salesreportOrderGridJsObject.reloadParams.order_ids = currentOrderIds;
+            salesreportOrderGridJsObject.reloadParams.warehouse_ids = currentWarehouseIds;
+            salesreportOrderGridJsObject.reload();
+            return true;
+        }
+
+        new Ajax.Request(
+            '<?php echo $this->getUrl('*/salesreport_index/order') ?>',
+            {
+                parameters: {
+                    'order_ids': currentOrderIds,
+                    'warehouse_ids': currentWarehouseIds,
+                    'isAjax': false
+                },
+                evalScripts: true,
+                onSuccess: function (transport) {
+                    var responseText = transport.responseText.replace(/>\s+</g, '><');
+                    $('report_salesreport_order_modal_content').update(responseText);
+                },
+                onComplete: function (transport) {
+                    runInitReportOrderGrid = setInterval(function () {
+                        initReportOrderGrid(orderIds)
+                    }, 100);
+                }
+            }
+        )
+    }
+
+    function initReportOrderGrid(orderIds) {
+        if (typeof salesreportOrderGridJsObject != 'undefined') {
+            clearInterval(runInitReportOrderGrid);
+            salesreportOrderGridJsObject.reloadParams = salesreportOrderGridJsObject.reloadParams || {};
+        }
+    }
+</script>

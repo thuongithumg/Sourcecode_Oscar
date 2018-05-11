@@ -1,0 +1,104 @@
+<script>
+    requirejs.config({
+        baseUrl: '<?php echo $this->getJsUrl()."magestore/webpos";?>',
+        urlArgs: '',//"bust=" + (new Date()).getTime(), // Disable require js cache
+        waitSeconds: 0,
+        paths: {
+            domReady: 'domReady',
+            jquery: 'lib/jquery.min',
+            prototype: 'lib/magento/prototype/prototype',
+            'mage/translate': 'lib/magento/mage/translate',
+            'mage/mage': 'lib/magento/mage/mage',
+            'mage/template': 'lib/mage/template',
+            'prototype/validation': 'lib/magento/prototype/validation',
+            'varien/js': 'lib/magento/varien/js',
+            underscore: 'lib/underscore',
+            ko: 'lib/knockoutjs/knockout',
+            'knockout-es5': 'lib/knockoutjs/knockout-es5',
+            'mage/utils/wrapper': 'lib/mage/utils/wrapper',
+            'mage/apply/main': 'lib/mage/apply/main',
+            mageUtils: 'lib/mage/utils/main',
+            'es6-collections': 'es6-collections',
+            uiApp: 'ui/core/app',
+            uiClass: 'ui/lib/core/class',
+            uiElement: 'ui/lib/core/element/element',
+            uiComponent: 'ui/lib/core/collection',
+            uiRegistry: 'ui/lib/registry/registry',
+            eventManager: 'model/event-manager',
+            dataManager: 'model/data-manager',
+            posComponent: 'ui/components/abstract',
+
+            /* Js Lib*/
+            'mage/url': 'lib/mage/url',
+            'mage/storage': 'lib/mage/storage',
+            accounting: 'lib/accounting.min',
+
+            /* Model Abstract */
+            modelAbstract: 'model/abstract',
+//            collectionAbstract: 'model/collection/abstract',
+            resourceModelAbstract: 'model/resource-model/abstract',
+            offlineAbstract: 'model/resource-model/offline-abstract',
+            onlineAbstract: 'model/resource-model/online-abstract',
+            indexDbAbstract: 'model/resource-model/indexed-db/abstract',
+            restAbstract: 'model/resource-model/magento-rest/abstract',
+            db: 'model/resource-model/indexed-db/db',
+            /* End Model Abstract*/
+
+            /* Model, Resource Model and Collection for Customer*/
+            customerModel: 'model/customer/customer',
+            customerCollection: 'model/collection/customer/customer',
+            customerIndexedDb: 'model/resource-model/indexed-db/customer/customer',
+            customerRest: 'model/resource-model/magento-rest/customer/customer',
+            /* End */
+
+            posPopupPlugin: 'lib/jquery/posPopup',
+
+            installSchema: 'setup/install-schema',
+
+            'jquery/ui' : 'lib/jquery-ui',
+            'jquery/validate': 'lib/jquery.validate',
+            'jquery/jquery.metadata': 'lib/jquery.metadata',
+            'mage/validation': 'lib/mage/validation',
+            'mage/validation/validation': 'lib/mage/validation/validation',
+            'priceUtils': 'lib/magento/catalog/price-utils',
+            'priceBox': 'lib/magento/catalog/price-box',
+            'jquery/jquery.parsequery': 'lib/jquery.parsequery',
+            'jquery/jquery-ui-timepicker-addon': 'lib/jquery/jquery-ui-timepicker-addon',
+            'mage/calendar': 'lib/mage/calendar'
+        },
+        config: {
+            text: {
+                useXhr: function (url, protocol, hostname, port) {
+                    return true;
+                }
+            }
+        }
+//
+//        shim: {
+//            'bootstrap/bootstrap': {
+//                deps: [
+//                    'lib/jquery-3.1.1'
+//                ]
+//            },
+//
+//            'bootstrap/bootstrap.min': {
+//                deps: [
+//                    'lib/jquery-3.1.1'
+//                ]
+//            },
+//
+//            'bootstrap/bootstrap-slider.min': {
+//                deps: [
+//                    'lib/jquery-3.1.1'
+//                ]
+//            },
+//
+//            'bootstrap/bootstrap-switch': {
+//                deps: [
+//                    'lib/jquery-3.1.1'
+//                ]
+//            },
+//        }
+
+    });
+</script>

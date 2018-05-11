@@ -1,0 +1,195 @@
+<?php
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+?>
+<?php $_code = 'giftvoucher' ?>
+<?php $_giftCards = $this->getExistedGiftCard() ?>
+
+<dl id="<?php echo $_code ?>_container" class="gift-card">
+    <?php
+    $cart = Mage::getSingleton('checkout/session');
+    $items = $cart->getQuote()->getAllItems();
+    $count = 0;
+    foreach ($items as $item) {
+        $data = $item->getData();
+        if ($data['product_type'] == 'giftvoucher') {
+            $count++;
+        }
+    }
+    ?>
+    <?php if ($count != count($items)): ?>
+        <?php if ($count > 0): ?>
+            <ul class="form-group">
+                <li class="message">
+                    <ul class="notice-msg">
+                        <li><?php echo $this->__('Gift Cards cannot be used to purchase Gift Card products') ?></li>
+                    </ul>
+                </li>
+            </ul>
+        <?php endif; ?>  
+
+        <?php if (Mage::helper('giftvoucher')->getGeneralConfig('enablecredit')): ?>
+            <?php if ($_customerCredit = $this->getCustomerCredit()): ?>
+                <dt class="<?php echo $_code ?>_credit form-group">
+
+                    <input type="checkbox" name="payment[<?php echo $_code ?>_credit]" id="<?php echo $_code ?>_credit" onclick="changeUseGiftCredit(this);"<?php if ($this->getUseGiftCredit()): ?> checked="checked"<?php endif ?> />
+                    <label for="<?php echo $_code ?>_credit" style="font-weight: bold; color: #666;"><?php echo $this->__('Use Gift Card credit to check out (%s)', $this->formatBalance($_customerCredit, true)) ?></label>
+
+                <p id="<?php echo $_code ?>_credit_ajaxload" style="display:none; font-weight: normal; font-style: italic;">
+                    <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Loading...') ?>" title="<?php echo $this->__('Loading...') ?>" class="v-middle" />
+                    <?php echo $this->__('Loading...') ?>
+                </p>
+                </dt>
+                <dd class="form-group <?php echo $_code ?>_credit"<?php if (!$this->getUseGiftCredit()): ?> style="display: none;"<?php endif ?>>
+                    <ul  id="payment_form_<?php echo $_code ?>_credit">
+                        <li id="gift_credit_message"></li>
+                        <li class="giftvoucher-discount-code">
+                            <strong>
+                                <?php echo $this->__('You are using') ?>
+                                <span>
+                                    <span class="using_credit" style="cursor: pointer;" title="<?php echo $this->__('Edit') ?>" onclick="showCreditInput(this);">
+                                        <a href="#" onclick="return false;"><?php echo $this->getUsingAmount() ?></a>
+                                        <img src="<?php echo $this->getSkinUrl('images/btn_edit.gif') ?>" alt="<?php echo $this->__('Edit') ?>" class="ajax-loader v-middle" />
+                                    </span>
+                                    <span class="credit_input" style="display: none;">
+                                        <input class="input-text" type="text" value="<?php echo $this->getUseGiftCreditAmount() ?>" title="<?php echo $this->__('Credit') ?>" style="width: 68px;" onkeyup="enterUpdateCreditInput(this, event);" />
+                                        <img src="<?php echo $this->getSkinUrl('images/i_msg-success.gif') ?>" alt="<?php echo $this->__('Apply') ?>" title="<?php echo $this->__('Apply') ?>" class="v-middle" onclick="updateCreditInput(this);" style="cursor: pointer;" />
+                                    </span>
+                                </span>
+                            </strong>
+                        </li>
+                    </ul>
+                </dd>
+            <?php endif ?>
+        <?php endif ?>
+        <dt class="form-group <?php echo $_code ?>">
+
+            <input type="checkbox" name="payment[<?php echo $_code ?>]" id="<?php echo $_code ?>" onclick="changeUseGiftvoucher(this);"<?php if ($this->getUseGiftVoucher()): ?> checked="checked"<?php endif ?> />
+             <label for="<?php echo $_code ?>"><?php echo $this->__('Use Gift Card to check out') ?></label>
+
+        <p id="<?php echo $_code ?>_ajaxload" style="display:none; font-weight: normal; font-style: italic;">
+            <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Loading...') ?>" title="<?php echo $this->__('Loading...') ?>" class="v-middle" />
+            <?php echo $this->__('Loading...') ?>
+        </p>
+        </dt>
+        <dd class="<?php echo $_code ?>"<?php if (!$this->getUseGiftVoucher()): ?> style="display: none;"<?php endif ?>>
+            <ul  id="payment_form_<?php echo $_code ?>">
+                <?php $discounts = $this->getGiftVoucherDiscount() ?>
+                <?php if (count($discounts)): ?>
+                    <li class="giftvoucher-discount-code form-group">
+                        <!--                    Hai.Tran-->
+                        <ul <?php if (Mage::app()->getRequest()->getRouteName() == 'onestepcheckout'): ?> style='margin-left: 0' <?php endif; ?>>
+                            <?php foreach ($discounts as $code => $discount): ?>
+                                <li>
+                                    <strong id="<?php echo $code ?>_remove">
+                                        <?php echo Mage::helper('giftvoucher')->getHiddenCode($code) ?>
+                                        (
+                                        <span>
+                                            <span class="giftcard_change" onclick="showGiftCardInput(this);
+                                                    return false;" style="cursor: pointer;" title="<?php echo $this->__('Edit') ?>">
+                                                <a class="giftcard-amount" href="#" onclick="return false;"><?php echo Mage::helper('checkout')->formatPrice($discount) ?></a>
+                                                <img src="<?php echo $this->getSkinUrl('images/btn_edit.gif') ?>" alt="<?php echo $this->__('Edit') ?>" class="ajax-loader v-middle" />
+                                            </span>
+                                            <span class="giftcard_input" style="display: none;">
+                                                <input class="input-text" type="text" value="<?php echo $discount ?>" title="<?php echo $this->__('Gift Card Amount') ?>" style="width: 68px;" onkeyup="enterUpdateGiftCardInput(this, event);" />
+                                                <img src="<?php echo $this->getSkinUrl('images/i_msg-success.gif') ?>" alt="<?php echo $this->__('Apply') ?>" title="<?php echo $this->__('Apply') ?>" class="apply v-middle" onclick="updateGiftCardInput(this);" style="cursor: pointer;" />
+                                                <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Apply...') ?>" title="<?php echo $this->__('Apply...') ?>" class="ajax-loader v-middle" style="display: none;" />
+                                            </span>
+                                        </span>
+                                        )
+                                    </strong>
+                                    <button type="button" id="<?php echo $code ?>" title="<?php echo $this->__('Remove') ?>" onclick="removeGiftVoucher(this);">
+                                        <input type="hidden" value="<?php echo $this->getUrl('giftvoucher/checkout/remove', array('code' => $code)) ?>" />
+                                        <img src="<?php echo $this->getSkinUrl('images/btn_remove.gif') ?>" alt="<?php echo $this->__('Remove') ?>" style="margin-top: 2px;" />
+                                    </button>
+                                    <span id="<?php echo $code ?>_ajax" style="display:none;">
+                                        <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Removing Gift Card "%s" ...', Mage::helper('giftvoucher')->getHiddenCode($code)) ?>" title="<?php echo $this->__('Removing Gift Card "%s" ...', $code) ?>" class="v-middle" />
+                                        <?php echo $this->__('Removing Gift Card "%s" ...', Mage::helper('giftvoucher')->getHiddenCode($code)) ?>
+                                    </span>
+                                </li>
+                            <?php endforeach ?>
+                        </ul>
+                    </li>
+                <?php endif ?>
+                <?php if ($this->isPassed()): ?>
+                    <li id="<?php echo $_code ?>_message" class="form-group">
+                        <ul class="success-msg">
+                            <li><?php echo $this->__('Your order’s grand total is zero now. No need to add any more Gift code.') ?></li>
+                        </ul>
+                    </li>
+                    <div id="giftvoucher_cache_url" style="display:none;"><?php echo $this->getAddGiftVoucherUrl() ?></div>
+                <?php else: ?>
+                    <li id="<?php echo $_code ?>_message" class="form-group">
+                    <?php if (!Mage::helper('giftvoucher')->isAvailableToAddCode()): ?>
+                                    <ul>
+                                        <li style="color:red;"><?php echo $this->__('The maximum number of times to enter gift codes is %d!', Mage::helper('giftvoucher')->getGeneralConfig('maximum')) ?></li>
+                                    </ul>
+                        <?php endif ?>
+                    </li>
+                    <li id="giftvoucher-custom-code" class="form-group">
+                        <div class="row"><div class="col-xs-6">
+                        <label for="<?php echo $_code ?>_code"><?php echo $this->__('Enter your gift code') ?></label>
+
+                            <input type="text" title="<?php echo $this->__('Gift Card Code') ?>" class="form-control input-text" id="<?php echo $_code ?>_code" name="payment[gift_code]" <?php if (!Mage::helper('giftvoucher')->isAvailableToAddCode()) echo 'disabled="true"' ?> />
+                            </div></div>
+                    </li>
+                    <?php if (count($_giftCards)): ?>
+                        <li class="form-group">
+                            <div class="row"><div class="col-xs-6">
+                            <label for="<?php echo $_code ?>_existed_code"><?php echo $this->__('or select an existing Gift Card code') ?></label>
+
+                                <select title="<?php echo $this->__('Existed Gift Card Code') ?>" class="form-control input-select" id="<?php echo $_code ?>_existed_code" name="payment[existed_gift_code]">
+                                    <option value=""><?php echo $this->__('-- Please Select --') ?></option>
+                                    <?php foreach ($_giftCards as $_giftCard): ?>
+                                        <option value="<?php echo $_giftCard['gift_code'] ?>"><?php echo $_giftCard['hidden_code'] ?> (<?php echo $_giftCard['balance'] ?>)</option>
+                                    <?php endforeach ?>
+                                </select>
+                            </div></div>
+                        </li>
+                    <?php endif ?>
+                    <li style="color: #eb340a;padding-left: 5px;font-size: 11px;font-weight: bold;line-height: 13px; display:none" id="giftcard_notice_1"><?php echo $this->__('Please enter your code') ?></li>
+                    <li style="color: #eb340a;padding-left: 5px;font-size: 11px;font-weight: bold;line-height: 13px; display:none" id="giftcard_notice_2"><?php echo $this->__('Please enter or chose your code') ?></li>
+                    <li>
+                        <?php if ($this->checkCustomerIsLoggedIn()): ?>
+                            <?php echo $this->__('To manage your Gift Card, please click <a target="_blank" href="%s">here</a>.', $this->getUrl('giftvoucher/index/index')) ?>
+                        <?php else: ?>
+                            <?php echo $this->__('To check your Gift card information, please click <a target="_blank" href="%s">here</a>.', $this->getUrl('giftvoucher/index/check')) ?>
+                        <?php endif ?>
+                    </li>
+                    <li>
+                        <div class="input-box">
+                            <button type="button" class="button" id="<?php echo $_code ?>_add" onclick="addGiftVoucher();">
+                                <div id="giftvoucher_cache_url" style="display:none;"><?php echo $this->getAddGiftVoucherUrl() ?></div>
+                                <input type="hidden" value="<?php echo $this->getAddGiftVoucherUrl() ?>" />
+                                <span><span><?php echo $this->__('Add Gift Card') ?></span></span>
+                            </button>
+                            <span id="<?php echo $_code ?>_wait" style="display:none;">
+                                <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Adding Gift Card...') ?>" title="<?php echo $this->__('Adding Gift Card...') ?>" class="v-middle" />
+                                <?php echo $this->__('Adding Gift Card...') ?>
+                            </span>
+                            <input type="hidden" class="" id="<?php echo $_code ?>_passed" />
+                        </div>
+                    </li>
+                <?php endif ?>
+                <p></p>
+            </ul>
+        </dd>
+    <?php endif; ?>
+</dl>

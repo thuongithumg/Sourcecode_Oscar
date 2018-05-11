@@ -1,0 +1,16 @@
+/* Update style of menu item of ERP */
+ul#nav .level0 a[href*="admin/coresuccess/dashboard"] span {
+    background-image: url('images/erp.ico');
+    background-position: left 0px top 5px;
+    background-repeat: no-repeat;
+    background-size: 16px auto;
+    font-weight: bold;
+    padding-left: 20px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+ul#nav .level1 a[href*="admin/coresuccess/dashboard"] span {
+    background-image: none;
+    padding-left: 15px;
+}

@@ -1,0 +1,61 @@
+<?php
+/**
+ * Copyright © 2018 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<fieldset class="fieldset admin__fieldset" id="admin_webpos_session_detail" data-bind="scope:'admin_webpos_session_detail'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</fieldset>
+<div id="admin_webpos_close_session_popup" data-bind="scope:'admin_webpos_close_session_popup'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+<div id="admin_webpos_cash_activity_popup" data-bind="scope:'admin_webpos_cash_activity_popup'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+<div id="admin_webpos_cash_adjustment_popup" data-bind="scope:'admin_webpos_cash_adjustment_popup'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+<div id="admin_webpos_cash_set_closing_balance_reason" data-bind="scope:'admin_webpos_cash_set_closing_balance_reason'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+<iframe id="webpos_pos_session_print_iframe" allowtransparency="true" frameborder="0" name="webpos_pos_print_iframe"
+        style="width: 100%; background-color:transparent; display:none;"
+        src="">
+</iframe>
+<script>
+    window.webposConfig = <?php echo \Zend_Json::encode($block->getWebposConfig()); ?>;
+    require(["Magestore_Webpos/js/model/pos/management"], function(PosManagement){
+        PosManagement.initData('<?php echo $block->getSessionData();?>');
+    });
+</script>
+<script type="text/x-magento-init">
+{
+    "*": {
+        "Magento_Ui/js/core/app": {
+            "components" : {
+                "admin_webpos_session_detail": {
+                    "component": "Magestore_Webpos/js/view/pos/detail",
+                    "displayArea": "admin_webpos_session_detail"
+                },
+                "admin_webpos_close_session_popup": {
+                    "component": "Magestore_Webpos/js/view/pos/close-session",
+                    "displayArea": "admin_webpos_close_session_popup"
+                },
+                "admin_webpos_cash_activity_popup": {
+                    "component": "Magestore_Webpos/js/view/pos/cash-activity",
+                    "displayArea": "admin_webpos_cash_activity_popup"
+                },
+                "admin_webpos_cash_adjustment_popup": {
+                    "component": "Magestore_Webpos/js/view/pos/cash-adjustment",
+                    "displayArea": "admin_webpos_cash_adjustment_popup"
+                },
+                "admin_webpos_cash_set_closing_balance_reason": {
+                    "component": "Magestore_Webpos/js/view/pos/set-closing-balance-reason",
+                    "displayArea": "admin_webpos_cash_set_closing_balance_reason"
+                }
+            }
+        }
+    }
+}
+</script>

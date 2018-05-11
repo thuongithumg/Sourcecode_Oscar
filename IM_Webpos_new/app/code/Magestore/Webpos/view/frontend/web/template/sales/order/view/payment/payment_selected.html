@@ -1,0 +1,40 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<!-- ko if: $parent.selectedPayments().length > 0 -->
+<div class="row" id="payment_selected">
+    <div class="col-sm-12">
+        <div class="payment-method payment-detail-box" data-bind="foreach: $parent.selectedPayments">
+            <div class="wrap-detail-payment">
+                <div class="left-payment">
+                    <span data-bind="attr:{'class': iconClass}"></span>
+                    <label data-bind="text: title"></label>
+                </div>
+                <div class="reference-number">
+                    <!-- ko if: code != 'cashforpos' -->
+                    <input type="text"
+                           data-bind="visible: is_reference_number,
+                                      event: {change: $parents[1].editReferenceNumber.bind($parents[1])},
+                                      attr:{'placeholder': $t('Reference Number'), 'id': code + '_reference_number'}"
+                    />
+                    <!-- /ko -->
+                </div>
+                <div class="input-actions">
+                    <div class="input-box">
+                        <input type="text"
+                               onclick="this.select()"
+                               data-bind="value: cart_total_formated,
+                                          event: {change: $parents[1].editPaymentPrice.bind($parents[1])}"
+                        />
+                    </div>
+                    <a class="remove-icon" data-bind="event: {click: $parents[1].removeSelectedPayment.bind($parents[1])}">
+                        <span class="icon-iconPOS-remove"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /ko -->

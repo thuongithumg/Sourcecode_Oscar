@@ -1,0 +1,213 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<!-- ko if: orderData -->
+<div id="invoice-popup" role="dialog"
+     data-bind="visible: isVisible, style: {display: stypeDisplay()},
+      attr:{class: 'modal fade add-comment ship-refund ' + classIn()}">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <form data-bind="attr:{id: formId},submit: submit">
+                <div class="popup-header">
+                    <button type="button" class="close" data-dismiss="modal" data-bind="i18n: ('Cancel'), click: display(false)"></button>
+                    <h4 class="modal-title" data-bind="i18n: ('Invoice')"></h4>
+                    <span></span>
+                </div>
+                <div class="modal-body">
+                    <div class="total-invoice-top">
+                    <!-- ko if: orderData().base_total_due > 0 -->
+                    <label><span data-bind="i18n: ('Total Due')"></span>: <span class="price" data-bind="text:convertAndFormatPrice(orderData().base_total_due)"/></label>
+                    <!-- /ko -->        
+                    <label><span data-bind="i18n: ('Total Paid')"></span>: <span class="price" data-bind="text:convertAndFormatPrice(orderData().base_total_paid)"/></label>
+                    <label><span data-bind="i18n: ('Total Invoiced')"></span>: <span class="price" data-bind="text:convertAndFormatPrice(orderData().base_total_invoiced)"/></label>
+                    <label><span data-bind="i18n: ('Invoiceable')"></span>: <span class="price" data-bind="text:convertAndFormatPrice(invoiceable())"/></label>
+                    </div>
+                    <table class="table">
+                        <colgroup>
+                            <col width="">
+                            <col width="100">
+                            <col width="100">
+                            <col width="100">
+                            <col width="100">
+                            <col width="100">
+                            <col width="100">
+                            <col width="100">
+                            <!--ko if:hasRewardpoints -->
+                            <col width="100">
+                            <!--/ko -->
+                            <!--ko if:hasGiftcard -->
+                            <col width="100">
+                            <!--/ko-->
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th data-bind="i18n: ('Product')"></th>
+                            <th class="a-right" data-bind="i18n: ('Price')"></th>
+                            <th class="a-center" data-bind="i18n: ('Qty')"></th>
+                            <th class="a-center" data-bind="i18n: ('Qty to Invoice')"></th>
+                            <th class="a-right" data-bind="i18n: ('SubTotal')"></th>
+                            <th class="a-right" data-bind="i18n: ('Tax')"></th>
+                            <th class="a-right" data-bind="i18n: ('Discount')"></th>
+                            <!--ko if:hasRewardpoints -->
+                            <th class="a-right" data-bind="i18n: ('Point Discount')"></th>
+                            <!--/ko -->
+                            <!--ko if:hasGiftcard -->
+                            <th class="a-right" data-bind="i18n: ('Voucher Discount')"></th>
+                            <!--/ko-->
+                            <th class="a-right" data-bind="i18n: ('Row total')"></th>
+                        </tr>
+                        </thead>
+                    </table>
+                    <div class="wrap-table">
+                    <table class="table">
+                        <colgroup>
+                            <col width="">
+                            <col width="100">
+                            <col width="100">
+                            <col width="100">
+                            <col width="100">
+                            <col width="100">
+                            <col width="100">
+                            <col width="100">
+                            <!--ko if:hasRewardpoints -->
+                            <col width="100">
+                            <!--/ko -->
+                            <!--ko if:hasGiftcard -->
+                            <col width="100">
+                            <!--/ko-->
+                        </colgroup>
+                        <tbody data-bind="foreach: {data: orderData().items, as: 'item'}">
+                            <!-- ko ifnot: item.parent_item_id -->
+                            <!-- ko if: parseFloat(item.qty_ordered) - parseFloat(item.qty_invoiced) - parseFloat(item.qty_canceled) > 0 -->
+                            <tr>
+                                <td>
+                                    <h4 class="product-name" data-bind="text: item.name"></h4>
+                                    <br/>
+                                    <label class="product-sku" data-bind="i18n: ('SKU')"></label>: <span class="product-sku" data-bind="text: item.sku"></span>
+                                </td>
+                                <td class="a-right" data-bind="text: $parent.convertAndFormatPrice(item.base_price)"></td>
+                                <td class="a-center">
+                                    <label data-bind="i18n: ('Ordered')"></label>: <span data-bind="text:  item.qty_ordered"></span>
+                                    <!-- ko if: item.qty_invoiced -->
+                                    <label data-bind="i18n: ('Invoiced')"></label>: <span data-bind="text:  item.qty_invoiced"></span>
+                                    <!-- /ko -->
+                                    <!-- ko if: item.qty_canceled -->
+                                    <label data-bind="i18n: ('Canceled')"></label>: <span data-bind="text:  item.qty_canceled"></span>
+                                    <!-- /ko -->                                    
+                                </td>
+                                <td class="a-center">
+                                    <input type="text" class="input-qty" data-bind="value: item.qtyToInvoice,
+                                        attr:{name: 'items['+item.item_id+']', id: 'invoice_item_qty_'+item_id}, event: {keyup: $parent.validateQty.bind($parent), change: $parent.validateQty.bind($parent)}">
+                                </td>
+                                <td class="a-right" data-bind="attr: {id: 'invoice_item_subtotal_'+item_id, price: item.subTotalItem(),
+                                tax: item.taxAmountItem(), discount: item.discountAmountItem()},
+                                text: $parent.convertAndFormatPrice(item.subTotalItem())"></td>
+                                
+                                <td class="a-right" data-bind="attr: {id: 'invoice_item_tax_'+item_id}, text: $parent.convertAndFormatPrice(item.taxAmountItem())"></td>
+                                
+                                <td class="a-right" data-bind="attr: {id: 'invoice_item_discount_'+item_id}, text: $parent.convertAndFormatPrice(item.discountAmountItem())"></td>
+                                <!--ko if:$parent.hasRewardpoints -->
+                                <td class="a-right" data-bind="attr: {id: 'invoice_item_point_discount_'+item_id}, text: $parent.convertAndFormatPrice(item.points_base_discount())"></td>
+                                <!--/ko -->
+                                <!--ko if:$parent.hasGiftcard -->
+                                <td class="a-right" data-bind="attr: {id: 'invoice_item_voucher_discount_'+item_id}, text: $parent.convertAndFormatPrice(item.voucher_base_discount())"></td>
+                                <!--/ko-->
+                                <td class="a-right" data-bind="attr: {id: 'invoice_item_rowtotal_'+item_id, price: $parent.getRowTotalItem(item)},
+                                text: $parent.convertAndFormatPrice(item.rowTotalItem())"></td>
+                            </tr>
+                            <!-- /ko -->
+                            <!-- /ko -->
+                        </tbody>
+                    </table>
+                    </div>
+                    <div class="bottom-refund">
+                        <div class="col-sm-6">
+                            <label data-bind="i18n: ('Invoice Comment')"></label>
+                            <textarea class="form-control" rows="3" data-bind="attr: {name: 'comment_text'}"></textarea>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="refund-bottom-right">
+                                <!-- ko if: false -->
+                                <div class="input-box">
+                                    <label data-bind="i18n: ('Invoice Amount')"></label>
+                                    <input type="text" data-bind="attr: {id: invoiceAmountId,name: 'invoice_amount'}, event: {focus:calculateAmount, change:addInvoiceAmount}"/>
+                                </div>
+                                <!-- /ko -->
+                                <!-- ko if: paymentList().length > 0 && false -->
+                                <div class="input-box">
+                                    <label data-bind="i18n: ('Payment Method')"></label>
+                                    <select class="selectpicker" data-bind="event:{change:selectPayment},attr: {name: 'payment_method[]'}, foreach: paymentList">
+                                        <option data-bind="value: value, text: label"></option>
+                                    </select>
+                                </div>
+                                <!-- /ko -->
+                                <div class="input-box">
+                                    <label data-bind="i18n: ('Subtotal')"></label>
+                                    <span data-bind="attr: {id: 'invoice_subtotal'}, text: convertAndFormatPrice(subTotal())" class="price"></span>
+                                </div>
+                                <div class="input-box">
+                                    <label data-bind="i18n: ('Shipping & Handling')"></label>
+                                    <span class="price" data-bind="text: convertAndFormatPrice(getShippingAmount())"></span>
+                                </div>
+                                
+                                <div class="input-box">
+                                    <label data-bind="i18n: ('Tax')"></label>
+                                    <span class="price" data-bind="text: convertAndFormatPrice(taxAmount())"></span>
+                                </div>
+                                
+                                <div class="input-box">
+                                    <label data-bind="i18n: ('Discount')"></label>
+                                    <span class="price" data-bind="text: convertAndFormatPrice(-discountAmount())"></span>
+                                </div>
+                                <!--ko if:hasRewardpoints -->
+                                <div class="input-box">
+                                    <label data-bind="i18n: ('Points Discount')"></label>
+                                    <span class="price" data-bind="text: convertAndFormatPrice(pointsDiscount())"></span>
+                                </div>
+                                <!--/ko-->
+                                <!--ko if:hasGiftcard -->
+                                <div class="input-box">
+                                    <label data-bind="i18n: ('Gift Card')"></label>
+                                    <span class="price" data-bind="text: convertAndFormatPrice(voucherDiscount())"></span>
+                                </div>
+                                <!--/ko-->
+                                <div class="input-box">
+                                    <label data-bind="i18n: ('Grand Total')"></label>
+                                    <span class="price" data-bind="attr: {id: 'invoice_grandtotal'}, text: convertAndFormatPrice(grandTotal())"></span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <div class="input-box">
+                            <input type="checkbox" id="send_email_ship" value="1" data-bind="attr: {name: 'send_email'}">
+                            <label for="send_email_ship" data-bind="i18n: ('Send Email')"></label>
+                        </div>
+                        <button class="button submit-refund btn-cl-cfg-active" data-bind="i18n: ('Submit Invoice'), click: submit"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- /ko -->

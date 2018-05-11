@@ -1,0 +1,90 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div id="webpos_order_list" class="col-sm-4 col-right">
+    <header class="o-header">
+        <nav class="o-header-nav">
+            <label class="title title-header-page" data-bind="text: $t('Orders')"/>
+        </nav>
+        <div class="form-inline" role="form">
+            <div class="form-group">
+                <span class="icon-iconPOS-search"></span>
+                <input type="search"
+                       class="form-control search-header" id="search-header-order"
+                       data-bind="attr: {placeholder: $t('Search by name, email or order ID')}, event: {change: filter}"/>
+                <a class="remove-text"><span class="icon-iconPOS-delete"></span></a>
+            </div>
+            <button type="submit" class="btn btn-default" data-bind="text: $t('Search')"/>
+        </div>
+    </header>
+
+    <div class="main-item-order">
+        <div class="wrap-status-orders">
+            <ul data-bind="foreach: statusObject">
+                <li data-bind="attr: {class: statusClass, status: statusClass},click: $parent.filterStatus.bind($parent)">
+                    <a href="#" data-bind="attr: {title: statusTitle}, text: statusLabel"></a>
+                </li>
+            </ul>
+        </div>
+        <div class="wrap-item-order" data-bind="foreach: items, event: {scroll: lazyload}">
+            <div class="title-time time-one" data-bind="text: $parent.formatDateGroup(day)"></div>
+            <ul class="list-orders" data-bind="foreach: orderItems">
+
+                <li data-bind="attr: {class: 'order-item bg-cl-active ' + status}, click: $parents[1].loadItem.bind($parents[1]),
+                css: {'selected': entity_id==$parents[1].selectedOrder.call()}">
+                    <div class="item">
+                        <div class="id-order">
+                            <span class="id" data-bind="text: increment_id"/>
+                            <span class="type" data-bind="text: $parents[1].getCustomerName($data)"/>
+                        </div>
+                        <div class="price-date">
+                            <span class="price" data-bind="text: $parents[1].getGrandTotal($data)"/>
+                            <span class="time" data-bind="text: $parents[1].getCreatedAt($data)"/>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- ko if: isSearching -->
+        <div class="wrap-item-order">
+            <div class="indicator">
+                <div class="spinner"></div>
+            </div>
+        </div>
+        <!--/ko-->
+    </div>
+</div>
+
+<!-- ko foreach: getRegion('order-view') -->
+<!-- ko template: getTemplate() --><!-- /ko -->
+<!--/ko-->
+
+<!-- ko foreach: getRegion('order-invoice') -->
+<!-- ko template: getTemplate() --><!-- /ko -->
+<!--/ko-->
+
+<!-- ko foreach: getRegion('order-shipment') -->
+<!-- ko template: getTemplate() --><!-- /ko -->
+<!--/ko-->
+
+<!-- ko foreach: getRegion('order-creditmemo') -->
+<!-- ko template: getTemplate() --><!-- /ko -->
+<!--/ko-->
+
+<!-- ko foreach: getRegion('order-comment') -->
+<!-- ko template: getTemplate() --><!-- /ko -->
+<!--/ko-->
+
+<!-- ko foreach: getRegion('order-sendemail') -->
+<!-- ko template: getTemplate() --><!-- /ko -->
+<!--/ko-->
+
+<!-- ko foreach: getRegion('order-print') -->
+<!-- ko template: getTemplate() --><!-- /ko -->
+<!--/ko-->
+
+<!-- ko foreach: getRegion('order-cancel') -->
+<!-- ko template: getTemplate() --><!-- /ko -->
+<!--/ko-->

@@ -1,0 +1,26 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<!-- ko ifnot: $parent.isAllPaymentSelected -->
+<div class="row" data-bind="foreach: $parent.items">
+    <!-- ko ifnot: typeof(hide) != 'undefined' && hide === true -->
+    <div class="col-sm-3">
+        <div class="item">
+            <div class="payment" data-bind="foreach: columns,
+                        click: $parents[1].setPaymentMethodPopup.bind($parents[1])">
+                <div class="icon-payment">
+                    <span data-bind="attr:{'class': renderer ? renderer.render($parent) : $parent[rowText]}"></span>
+                </div>
+                <label data-bind="text: $parent[rowText]"></label>
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+</div>
+<!-- /ko -->
+<!-- ko if: $parent.isAllPaymentSelected -->
+<div class="row">
+    <span data-bind="text: $t('No payment method is available')"></span>
+</div>
+<!-- /ko -->

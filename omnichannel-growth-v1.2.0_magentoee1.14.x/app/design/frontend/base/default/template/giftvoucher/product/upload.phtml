@@ -1,0 +1,159 @@
+<?php
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+?>
+
+<?php
+    $secure_connection = false;
+    if(isset($_SERVER['HTTPS']))
+    {
+        if ($_SERVER["HTTPS"] == "on") 
+        {
+            $secure_connection = true;
+        }
+    }
+?>
+
+<?php if ($secure_connection): ?>
+    <link rel="stylesheet" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN, true) ?>frontend/base/default/css/magestore/giftvoucher/uploadfile.min.css" type="text/css" />
+    <script src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS, true) ?>magestore/giftvoucher/js/jquery.uploadfile.min.js"></script>
+    <script src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS, true) ?>magestore/giftvoucher/js/jquery.form.js"></script>
+<?php else: ?>
+    <link rel="stylesheet" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN) ?>frontend/base/default/css/magestore/giftvoucher/uploadfile.min.css" type="text/css" />
+    <script src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS) ?>magestore/giftvoucher/js/jquery.uploadfile.min.js"></script>
+    <script src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS) ?>magestore/giftvoucher/js/jquery.form.js"></script>
+<?php endif;?>
+<label><?php echo $this->__('Or upload your photo') ?>
+<small style="font-size: 90%;font-weight: normal;" id="<?php echo $this->getHtmlId() ?>" class="uploader">
+
+            <span>&nbsp; (
+                <?php echo $this->__('Recommended size: ') ?>
+                <span id="giftcard-notes-simple" style="display: none">584x310</span>
+                <span id="giftcard-notes-top" style="display: none">600x190</span>
+                <span id="giftcard-notes-center" style="display: none">600x365</span>
+                <span id="giftcard-notes-left" style="display: none">250x365</span>. <?php echo $this->__('&nbsp;&nbsp;Support gif, jpg, png files.') ?>
+                )
+            </span>
+
+</small>
+</label><br/>
+<div id="eventsupload">Upload</div>
+
+<div id="div-image-for-custom" style="position:relative; float: left;border: 2px solid white;display: none; clear: both; margin: 10px 0px 5px 15px;">
+    <img id="image-for-custom" src="" width="68" height="56" alt="image giftcard" style="cursor: pointer;border: 1px solid white;" onclick="changeImageDesignAgain(this)">
+    <div class="egcSwatch-arrow" style="display: none"></div>
+</div>
+<input type="hidden" name="giftcard_use_custom_image" id='giftcard-use-custom-image' value="0" />
+<script type="text/javascript">
+//<![CDATA[       
+    maxUploadFileSizeInBytes = '<?php echo $this->getDataMaxSizeInBytes() ?>';//512000;
+    image_upload_name = '';
+</script>
+
+<script type="text/javascript">
+    var upImg = jQuery.noConflict();
+    var uploadUrl = '<?php echo $this->getUrl("giftvoucher/index/uploadImageAjax"); ?>';
+    
+    if(window.location.href.match('https://') && !uploadUrl.match('https://'))
+		uploadUrl = uploadUrl.replace('http://','https://');
+	if(!window.location.href.match('https://') && uploadUrl.match('https://'))
+		uploadUrl = uploadUrl.replace('https://','http://');
+    
+    upImg(document).ready(function(){
+        upImg("#eventsupload").uploadFile({
+            url: uploadUrl,
+            multiple: false,
+            allowedTypes: "png,gif,jpg,jpeg",
+            maxFileSize: maxUploadFileSizeInBytes,
+            showDone: false,
+            fileName: "templateimage",
+            onSubmit:function(files)
+            {
+                upImg("#eventsmessage").html(upImg("#eventsmessage").html()+"<br/>Submitting:"+JSON.stringify(files));
+            },
+            onSuccess:function(files,data,xhr)
+            {
+                upImg("#eventsmessage").html(upImg("#eventsmessage").html()+"<br/>Success for: "+JSON.stringify(data));
+                var json_data = upImg.parseJSON(data);
+                urlUploadImage = json_data['url'];
+                image_upload_name = json_data['file'];
+                upImg('#image-for-custom').attr('src', urlUploadImage);
+                upImg('div-image-for-custom').show();
+                changeImageDesign();
+                upImg('.ajax-file-upload-statusbar').delay(1000).fadeOut(500);
+
+            },
+            afterUploadAll:function()
+            {
+                upImg("#eventsmessage").html(upImg("#eventsmessage").html()+"<br/>All files are uploaded");
+
+            },
+            onError: function(files,status,errMsg)
+            {
+                upImg("#eventsmessage").html(upImg("#eventsmessage").html()+"<br/>Error for: "+JSON.stringify(files));
+            }
+        });
+
+    });
+</script>
+
+<script type="text/javascript">	
+    function changeImageDesignAgain(el) {
+        urlUploadImage = el.src;
+        changeImageDesign();
+    }
+
+    function changeImageDesign() {
+        if (urlUploadImage == '')
+            url = '';
+        else {
+            url = 'url(' + urlUploadImage + ')';
+            if (typeof image_old != 'undefined') {
+                $('div-' + image_old).removeClassName('gift-active');
+                $('div-' + image_old).down('.egcSwatch-arrow').hide();
+            }
+        }
+
+        giftvoucherVariable.giftImageUrl = urlUploadImage;
+        $j("body").trigger('updateTemplate', giftvoucherVariable);
+        resetPosition();
+
+        $('div-image-for-custom').addClassName('gift-active');
+        $('div-image-for-custom').show();
+        $('div-image-for-custom').down('.egcSwatch-arrow').show();
+
+        images_tmp = templates[template_id].images;
+        if (images_tmp)
+        images_tmp = images_tmp.split(',');
+        $('giftcard-template-images').value = image_upload_name;
+        $('giftcard-use-custom-image').value = '1';
+    }
+//]]>
+</script>
+<script type="text/javascript">
+<?php if (Mage::getSingleton('customer/session')->getGiftcardCustomUploadImage() && file_exists(Mage::getBaseDir() . str_replace("/", DS, strstr(Mage::getSingleton('customer/session')->getGiftcardCustomUploadImage(), '/media')))): ?>
+        urlUploadImage = '<?php echo Mage::getSingleton('customer/session')->getGiftcardCustomUploadImage() ?>';
+        image_upload_name = '<?php echo Mage::getSingleton('customer/session')->getGiftcardCustomUploadImageName() ?>';
+        $('image-for-custom').src = urlUploadImage;
+        $('div-image-for-custom').show();
+        urlUploadImage = '';
+        //changeImageDesign();
+<?php endif; ?>
+</script> 

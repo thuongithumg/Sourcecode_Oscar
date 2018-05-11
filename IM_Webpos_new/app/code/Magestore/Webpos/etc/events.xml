@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!--<event name="sales_order_save_after">
+        <observer name="shiftorder" instance="Magestore\Webpos\Observer\Shift\SalesOrderAfterPlaceObserver" />
+    </event>
+    -->
+    <event name="webpos_api_customer_list_after">
+        <observer name="rewardpoints_customer_list" instance="Magestore\Webpos\Observer\Rewardpoints\WebposApiCustomerListAfter" />
+    </event>    
+
+    <event name="webpos_order_payment_save_after">
+        <observer name="webpos_order_payment_save_after" instance="Magestore\Webpos\Observer\Shift\OrderPaymentSaveAfterObserver" />
+    </event>
+    
+    <event name="sales_order_invoice_pay">
+        <observer name="webpos_sales_order_invoice_pay" instance="Magestore\Webpos\Observer\Sales\SalesOrderInvoicePay" />
+    </event>
+    <event name="sales_quote_item_set_product">
+        <observer name="webpos_sales_quote_item_set_producty" instance="Magestore\Webpos\Observer\Sales\SalesQuoteItemSetProduct" />
+    </event>
+    <!-- fixbug updated at -->
+    <event name="catalog_product_save_before">
+        <observer name="webpos_catalog_product_save_before" instance="Magestore\Webpos\Observer\Catalog\Product\CatalogProdcutSaveBefore" />
+    </event>
+
+    <event name="refund_storecredit_ee">
+        <observer name="refund_storecredit_ee" instance="Magestore\Webpos\Observer\Integration\WebposUseCustomerCreditEEAfter" />
+    </event>
+    <event name="webpos_refund_by_cash">
+        <observer name="webpos_refund_by_cash" instance="Magestore\Webpos\Observer\Shift\RefundByCash" />
+    </event>
+    <!-- end fixbug updated at -->
+    <!-- integration with Magestore_InventorySuccess -->
+    <event name="inventorysuccess_new_order_warehouse">
+        <observer name="webpos_inventorysuccess_new_order_warehouse" instance="Magestore\Webpos\Observer\InventorySuccess\NewOrderWarehouse" />
+    </event>        
+    <event name="inventorysuccess_create_shipment_warehouse">
+        <observer name="webpos_inventorysuccess_create_shipment_warehouse" instance="Magestore\Webpos\Observer\InventorySuccess\CreateShipmentWarehouse" />
+    </event>             
+    <event name="inventorysuccess_create_creditmemo_warehouse">
+        <observer name="webpos_inventorysuccess_create_creditmemo_warehouse" instance="Magestore\Webpos\Observer\InventorySuccess\CreateCreditmemoWarehouse" />
+    </event>    
+    <event name="inventorysuccess_create_creditmemo_adjuststock_data">
+        <observer name="webpos_inventorysuccess_create_creditmemo_adjuststock_data" instance="Magestore\Webpos\Observer\InventorySuccess\CreateCreditmemoAdjuststockData" />
+    </event>
+    <event name="inventorysuccess_get_default_scope_id">
+        <observer name="webpos_inventorysuccess_get_default_scope_id" instance="Magestore\Webpos\Observer\InventorySuccess\GetDefaultScopeId" />
+    </event>
+    <event name="inventorysuccess_get_current_warehouse_by_store">
+        <observer name="webpos_inventorysuccess_get_current_warehouse_by_store" instance="Magestore\Webpos\Observer\InventorySuccess\GetCurrentWarehouseByStore" />
+    </event>
+
+    <!-- End of integration with Magestore_InventorySuccess -->
+
+    <!-- Start of integration with Magestore_Customercredit -->
+    <event name="webpos_use_customer_credit_after">
+        <observer name="webpos_use_customer_credit_after" instance="Magestore\Webpos\Observer\Integration\WebposUseCustomerCreditEEAfter" />
+    </event>
+    <!-- End of integration with Magestore_Customercredit -->
+
+    <!-- Start of integration with Magestore_Customercredit -->
+    <event name="webpos_use_customer_creditee_after">
+        <observer name="webpos_use_customer_creditee_after" instance="Magestore\Webpos\Observer\Integration\WebposUseCustomerCreditEEAfter" />
+    </event>
+    <!-- End of integration with Magestore_Customercredit -->
+
+    <!-- Start of integration with Magestore_Rewardpoints -->
+    <event name="webpos_create_order_with_points_after">
+        <observer name="webpos_create_order_with_points_after" instance="Magestore\Webpos\Observer\Integration\WebposCreateOrderWithPointAfter" />
+    </event>
+    <!-- End of integration with Magestore_Rewardpoints -->
+
+    <!-- Start of integration with Magestore_Giftvoucher -->
+    <event name="webpos_create_order_with_giftcard_after">
+        <observer name="webpos_create_order_with_giftcard_after" instance="Magestore\Webpos\Observer\Integration\WebposCreateOrderWithGiftcardAfter" />
+    </event>
+    <!-- End of integration with Magestore_Giftvoucher -->
+    <event name="sales_model_service_quote_submit_before">
+        <observer name="sales_model_service_quote_submit_before" instance="Magestore\Webpos\Observer\Sales\SalesModelServiceQuoteSubmitBefore" />
+    </event>
+    <event name="view_block_abstract_to_html_before">
+        <observer name="webpos_view_block_abstract_to_html_before" instance="Magestore\Webpos\Observer\View\BlockToHtmlBefore" />
+    </event>
+
+    <event name="catalog_product_attribute_update_before">
+        <observer name="product_attribute_update_before" instance="Magestore\Webpos\Observer\Catalog\Product\Attribute\UpdateBefore" />
+    </event>
+
+    <event name="webpos_before_render_layout">
+        <observer name="webpos_add_register_security_observer" instance="Magestore\Webpos\Observer\Register\WebposBeforeRenderLayoutObserver" />
+    </event>
+</config>

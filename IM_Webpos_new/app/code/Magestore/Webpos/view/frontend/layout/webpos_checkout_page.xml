@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<page layout='webpos' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" >
+    <update handle="webpos_checkout_shipping"/>
+    <update handle="webpos_checkout_payment"/>
+    <update handle="webpos_checkout_success"/>
+    <update handle="webpos_checkout_integration"/>
+    <update handle="webpos_payment_method_before"/>
+    <body>
+        <referenceBlock name="webpos_checkout">
+            <block class="Magestore\Webpos\Block\AbstractBlock" before="-" name="webpos_checkout_page" cacheable="false" template="Magestore_Webpos::checkout/page.phtml" >
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="webpos_checkout" xsi:type="array">
+                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/checkout/checkout</item>
+                                <item name="displayArea" xsi:type="string">webpos_checkout</item>
+                                <item name="children" xsi:type="array">
+                                    <item name="webpos_checkout_print_receipt" xsi:type="array">
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/checkout/checkout/receipt</item>
+                                        <item name="displayArea" xsi:type="string">webpos_checkout_print_receipt</item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

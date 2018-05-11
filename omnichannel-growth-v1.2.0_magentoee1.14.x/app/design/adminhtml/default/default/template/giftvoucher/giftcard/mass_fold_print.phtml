@@ -1,0 +1,100 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+?>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/magestore/giftvoucher/print_fold_style.css') ?>"
+      media="all"/>
+<style media="print">
+    @page {
+        size: landscape;
+        margin-top:  0;
+        margin-bottom:  0;
+    }
+    .print-notes{
+        color: <?php if (isset($_styleColor)) echo $_styleColor ?>;
+        text-decoration: none;
+    }
+    .print-font{
+        font: 12px/1.55 Arial, Helvetica, sans-serif;
+    }
+    footer {page-break-after: always;}
+</style>
+<?php $_store = Mage::app()->getStore() ?>
+<?php $_giftCards = $this->getGiftVouchers();
+
+?>
+
+<?php foreach ($_giftCards as $_giftCard): ?>
+    <?php
+    $storeId = Mage::app()->getStore()->getId();
+    $currency = Mage::getModel('directory/currency')->load($_giftCard->getCurrency());
+    $image = Mage::getStoreConfig('giftvoucher/print_voucher/logo', $storeId);
+    $expire_day = date('m/d/Y', strtotime($_giftCard->getExpiredAt()));
+    $_template = $this->getGiftcardTemplate($_giftCard->getGiftcardTemplateId());
+
+    if ($_template->getNotes())
+        $notes = $_template->getNotes();
+    else
+        $notes = $_giftCard->getPrintNotes();
+
+    $barcode = Mage::helper('giftvoucher')->getGeneralConfig('barcode_enable');
+    $barcode_type = Mage::helper('giftvoucher')->getGeneralConfig('barcode_type');
+    $url_barcode = '';
+    $qr = new Magestore_Giftvoucher_QRCode($_giftCard->getGiftCode());
+    if ($barcode) {
+        $resizeImage = FALSE;
+        if ($barcode_type == 'code128') {
+            $url_barcode = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'giftvoucher/template/barcode/' . $_giftCard->getGiftCode() . '.png';
+            $imageUrl = Mage::getBaseDir('media') . DS . 'giftvoucher' . DS . 'template' . DS . 'barcode' . DS . $_giftCard->getGiftCode() . '.png';
+            $imageObj = new Varien_Image($imageUrl);
+            if ($imageObj->getOriginalWidth() > 200)
+                $resizeImage = true;
+        } else
+            $url_barcode = $qr->getResult();
+    }
+
+    if (!$_template->getStyleColor())
+        $_template->setStyleColor('orange');
+    if (!$_template->getTextColor())
+        $_template->setTextColor('#2f2f2f');
+    $_styleColor = $_template->getStyleColor();
+    $_textColor = $_template->getTextColor();
+    if (!$_giftCard->getGiftcardTemplateImage())
+        $_giftCard->setGiftcardTemplateImage('default.png');
+    if (!$_template->getBackgroundImg())
+        $_template->getBackgroundImg('default.png');
+
+    if ($_template->getDesignPattern() == Magestore_Giftvoucher_Model_Designpattern::PATTERN_TOP) {
+        $giftCardImage = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'giftvoucher/template/images/top/' . $_giftCard->getGiftcardTemplateImage();
+    } elseif ($_template->getDesignPattern() == Magestore_Giftvoucher_Model_Designpattern::PATTERN_SIMPLE) {
+        $giftCardImage = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'giftvoucher/template/images/simple/' . $_giftCard->getGiftcardTemplateImage();
+    } elseif ($_template->getDesignPattern() == Magestore_Giftvoucher_Model_Designpattern::PATTERN_AMAZON) {
+        $giftCardImage = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'giftvoucher/template/images/amazon/' . $_giftCard->getGiftcardTemplateImage();
+    } else {
+        $giftCardImage = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'giftvoucher/template/images/' . $_giftCard->getGiftcardTemplateImage();
+    }
+    ?>
+    <?php echo $this->getLayout()->createBlock('giftvoucher/adminhtml_giftvoucher_view')
+        ->setTemplate('giftvoucher/giftcard/fold_print.phtml')
+        ->setGiftVoucher($_giftCard)->toHtml(); ?>
+
+<?php endforeach; ?>
+
+<script type="text/javascript">window.print();</script>

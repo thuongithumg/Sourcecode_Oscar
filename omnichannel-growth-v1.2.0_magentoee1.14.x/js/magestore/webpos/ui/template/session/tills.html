@@ -1,0 +1,32 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<div class="modal-header">
+    <h4 class="modal-title" data-bind="i18n:'Please select cash drawer'"></h4>
+</div>
+<div class="list-group" data-bind="foreach: { data: tills, as: 'till' }">
+    <a href="#" class="list-group-item" data-bind="css:{active:till.selected}, text:till.title, click: $parent.selectTill.bind($parent)"></a>
+</div>
+<div class="list-group" data-bind="visible:isTillsEmpty">
+    <div class="list-group-item" data-bind="i18n:'No cash drawer are available, please try to login again or contact the administrator!'"></div>
+    <div class="list-group-item">
+        <button class="button btn-cl-cfg-active" data-bind="i18n:'Logout', click:logout"></button>
+    </div>
+</div>

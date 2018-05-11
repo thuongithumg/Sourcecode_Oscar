@@ -1,0 +1,50 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<div class="posPopup" data-bind="attr:{id: popupId},afterRender:initData">
+    <!-- ko if: loading() -->
+    <div class="indicator">
+        <div class="spinner"></div>
+    </div>
+    <!-- /ko -->
+    <span class="icon-iconPOS-synchronize" data-bind="click: refreshData"></span>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th class="a-left" data-bind="i18n:'Item'"></th>
+                    <th class="a-center" data-bind="i18n:'Qty'"></th>
+                    <th class="a-center" data-bind="i18n:'Price'"></th>
+                    <th class="a-center" data-bind="i18n:'Remove'"></th>
+                    <th class="a-center" data-bind="i18n:'Add'"></th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: items">
+            <tr>
+                <td class="a-left" data-bind="text:name"></td>
+                <td class="a-center" data-bind="text:qty"></td>
+                <td class="a-center" data-bind="text:unit_price_formated"></td>
+                <td class="action a-center"><input type="checkbox" data-bind="checked:remove_this"></td>
+                <td class="action a-center"><input type="checkbox" data-bind="checked:add_this"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

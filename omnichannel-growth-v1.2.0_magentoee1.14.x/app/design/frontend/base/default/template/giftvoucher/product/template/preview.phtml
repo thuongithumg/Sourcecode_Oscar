@@ -1,0 +1,170 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+?>
+<?php
+//field expire date
+$timeLife = Mage::getStoreConfig('giftvoucher/general/expire');
+$timeSite = date("m/d/Y", Mage::getModel('core/date')->timestamp(time()));
+if (Mage::helper('giftvoucher')->getGeneralConfig('show_expiry_date')) {
+    $expire_day = Mage::helper('giftvoucher')->__('Expired: ') . date('m/d/Y', strtotime($timeSite . '+' . $timeLife . ' days'));
+} else {
+    $expire_day = '';
+}
+//end
+$barcode = Mage::helper('giftvoucher')->getGeneralConfig('barcode_enable');
+$barcode_type = Mage::helper('giftvoucher')->getGeneralConfig('barcode_type');
+$url_barcode = '';
+if ($barcode) {
+    if ($barcode_type == 'code128')
+        $url_barcode = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'giftvoucher/template/barcode/default.png';
+    else
+        $url_barcode = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'giftvoucher/template/barcode/qr.png';
+}
+if (Mage::getStoreConfig('giftvoucher/print_voucher/logo')) {
+    $logo = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'giftvoucher/pdf/logo/' . Mage::getStoreConfig('giftvoucher/print_voucher/logo');
+} else {
+    $logo = '';
+}
+
+$template = Mage::getBlockSingleton('giftvoucher/product_view')->getStyleDesignPattern(Magestore_Giftvoucher_Model_Designpattern::PATTERN_AMAZON);
+if($template){
+    $_styleColor = $template['style_color'];
+    $_textColor = $template['text_color'];
+    if (isset($template['notes']) &&  $template['notes']) {
+        $notes = $template['notes'];
+    } else {
+        $notes = '';
+    }
+}else{
+    $_styleColor = '#DC8C71';
+    $_textColor = '#949392';
+    $notes = '';
+}
+
+?>
+<div id="giftcard-template-amazon" class="gift-card">
+    <div class="amazon-top">
+
+        <div id="tinycontent">
+        </div>
+
+        <div class="giftcard-template-content-simple giftcard-change-image-temp2 giftcard-change-image form-group" style="display: none; background-size: 584px 310px; "></div>
+    </div>
+</div>
+
+<div class="giftcard-product-media-new" style="display: none;" id="giftcard-product-media-new">
+    <div class="a-popover-wrapper"><div class="a-popover-header"><button data-action="a-popover-close" class="a-button-close a-declarative" aria-label="Close">x</button><h4 class="a-popover-header-content" id="a-popover-header-1">Preview </h4></div><div class="a-popover-inner" id="a-popover-content-1" style="height: auto; overflow-y: auto; padding-bottom: 14px;">
+            <div id="gc-preview-wrapper" class="a-section a-spacing-none">
+                <div id="gc-preview-modal-wrapper" class="a-section">
+                    <div id="gc-preview-header-recipient-email-box-wrapper" class="a-row a-size-base a-color-base a-grid-vertical-align a-grid-center gc-preview-header-recipient-email-box-default-wrapper a-ws-row">
+                        <div class="a-column a-span1"></div>
+                        <div class="a-column a-span10 a-text-left">
+                            <div id="gc-preview-email-data-section" class="a-section">
+                                <div id="gc-preview-email-sent-to-section" class="a-section a-spacing-top-extra-large">
+                                    <span id="gc-preview-sent-to-title" class="a-text-bold"><?php echo $this->__('Gift card will be sent to:');?></span>
+                                    <br>
+                                    <span id="gc-preview-sent-to-value"></span>
+                                    <span id="gc-preview-sent-to-on-string" class="gc-text-hidden">on</span>
+                                    <span id="gc-preview-sent-to-on-date" class="a-color-success gc-text-hidden"></span>
+                                </div>
+                                <div id="gc-preview-email-subject-section" class="a-section a-spacing-extra-large a-spacing-top-extra-large">
+                                    <span id="gc-preview-subject-title" class="a-text-bold"><?php echo $this->__('Subject:');?></span>
+                                    <br>
+                                    <span id="gc-preview-subject-value"><span><?php echo $this->__('Someone');?></span><?php echo $this->__(' sent you an Gift Certificate!');?> </span>
+                                </div>
+                                <span id="gc-preview-header-recipient-email-hidden-message" class="gc-preview-header-recipient-email-text gc-hide">
+                                    ... and 1 more.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="a-column a-span1 a-span-last a-ws-span-last"></div>
+                    </div>
+                    <div id="gc-preview-template-wrapper" class="a-section">
+                        <div class="a-row a-size-base a-color-base a-grid-vertical-align a-grid-center gc-preview-header-recipient-email-box-default-wrapper a-ws-row" style="margin-top: 40px;">
+
+                            <div class="a-column a-span1 a-span-last a-ws-span-last"></div>
+                            <div id="giftcard-template-amazon-content" class="a-column a-span10 a-text-left">
+                            </div>
+                            <div class="a-column a-span1"></div>
+                        </div>
+                        <table class="full-width-table" border="0" style="width: 500px; border-collapse: separate; border-spacing: 20px; margin: 0px auto;">
+                            <tbody><tr>
+                                <td valign="middle" style="padding: 0px; text-align: center; height: 40px;">&nbsp;</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php foreach ($this->getAllTemplatePatternId() as $templatePatternId) :?>
+<script type="text/template" id="PastCommunityTemplate_<?php echo $templatePatternId?>">
+    <?php echo $this->getTemplateContent($templatePatternId);?>
+</script>
+<?php endforeach; ?>
+<script>
+    // Test Object for template
+    var giftvoucherVariable = {
+        templateId : 'amazon-giftcard-01',
+        notes: '<?php echo $notes ?>',
+        logo_url: '<?php echo $logo ?>',
+        giftImageUrl: '<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) .'/giftvoucher/template/images/simple-gift-card/default.png' ?>',
+        giftBackgroundUrl: '',
+        textColor: '<?php echo str_replace('#', '', $_textColor);?>',
+        styleColor: '<?php echo str_replace('#', '', $_styleColor);?>',
+        giftValue: '$100.00',
+        giftCode: '<?php echo 'GIFT-XXXX-XXXX';?>',
+        barcodeUrl: '<?php echo $url_barcode;?>',
+        expiredDate: '<?php echo $expire_day;?>',
+        giftMessage: '<?php echo Mage::helper('giftvoucher')->__('Hope you enjoy this gift card!') ?>',
+        recipientName: '',
+        senderName: '',
+        giftCardValueText : '<?php echo Mage::helper('giftvoucher')->__('Value')?>',
+        giftCardTitleText : '<?php echo Mage::helper('giftvoucher')->__('Gift Card')?>',
+        fromText: '<?php echo Mage::helper('giftvoucher')->__('From: ')?>',
+        toText: '<?php echo Mage::helper('giftvoucher')->__('To: ')?>',
+        bkgValueUrl: '<?php echo Mage::helper('giftvoucher/template')->getBkgValueUrl();?>',
+        bkgTitleUrl: '<?php echo Mage::helper('giftvoucher/template')->getBkgTitleUrl();?>',
+    };
+
+    // Gets what is inside of the JS template and treats is as html
+    // stores the js template function as this.tmpl
+    // replaces the template placeholders with what is passed in the giftvoucherVariable
+
+    $j( "body" ).on( "updateTemplate", function( event, data) {
+        var tmpl;
+        if ($j('#PastCommunityTemplate_' + data.templateId).length > 0) {
+            tmpl = _.template($j('#PastCommunityTemplate_' + data.templateId).html());
+        } else {
+            tmpl = _.template($j('#PastCommunityTemplate_amazon-giftcard-01').html());
+        }
+        var html = tmpl(data);
+        $j('#tinycontent').html('');
+        $j('#tinycontent').append(html);
+        $j('#giftcard-template-amazon-content').html('');
+        $j('#giftcard-template-amazon-content').append(html);
+
+    });
+
+    $j("body").trigger('updateTemplate', giftvoucherVariable);
+</script>

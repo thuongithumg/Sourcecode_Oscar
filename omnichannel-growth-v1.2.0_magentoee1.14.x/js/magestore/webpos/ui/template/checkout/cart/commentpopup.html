@@ -1,0 +1,33 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<div id="cart-add-comment-popup" class="hide">
+    <div class="modal-dialog" data-bind="css:{'on-checkout':isOnCheckout}">
+        <div class="modal-content">
+            <div class="popup-header">
+                <button type="button" class="close" data-bind="i18n:'Cancel', click:hideCommentPopup"></button>
+                <h4 class="modal-title" data-bind="i18n:'Order Comment'"></h4>
+                <button type="submit" class="btn-save" data-bind="i18n:'Save', click:saveComment"></button>
+            </div>
+            <div class="modal-body">
+                <textarea class="form-control" rows="3" data-bind="event:{change:setComment},value:comment"></textarea>
+            </div>
+        </div>
+    </div>
+</div>

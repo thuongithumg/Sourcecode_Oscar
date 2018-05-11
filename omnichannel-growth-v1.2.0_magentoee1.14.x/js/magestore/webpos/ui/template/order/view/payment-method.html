@@ -1,0 +1,53 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<!-- ko if: $parent.orderData.call().payment -->
+<div class="col-sm-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5 data-bind="i18n: ('PAYMENT METHOD')" />
+        </div>
+        <div class="panel-body">
+            <!-- ko if: $parent.showWebposPayment() -->
+            <label class="title-box paid" data-bind="i18n:'Paid'"/>
+            <div class="customer-address" data-bind="foreach:$parent.getPaidPayment()">
+                <div class="content-box">
+                    <label data-bind="text: ($data.method_title)"/>
+                    <label data-bind="text: $parents[1].getWebposPaymentAmount($data)"/>
+                </div>
+            </div>
+            <!-- ko if: $parent.showPayLater() -->
+            <label class="title-box pay-later" data-bind="i18n:'Pay Later'"/>
+            <div class="customer-address" data-bind="foreach:$parent.getPayLaterPayment()">
+                <div class="content-box">
+                    <label data-bind="text: $data.method_title"/>
+                </div>
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- ko ifnot: $parent.showWebposPayment() -->
+            <div class="customer-address">
+                <div class="content-box"><label data-bind="html: $parent.orderData.call().payment"/></div>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
+<!-- /ko -->

@@ -1,0 +1,22 @@
+<?php
+/**
+ * Copyright © 2018 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+?>
+<?php /** @var \Magestore\Webpos\Block\Adminhtml\Order\View\DeliveryDate $block */ ?>
+<?php $order = $block->getOrder(); ?>
+
+<tr id="order_warehouse">
+    <th><?php echo __("Delivery Date") ?></th>
+    <td>
+        <div id="warehouse_info">
+            <?php if ($order->getData('webpos_delivery_date')): ?>
+                <?php echo $block->getDeliveryDateDisplay($order); ?>
+            <?php else: ?>
+                <?php echo __('N/A'); ?>
+            <?php endif; ?>
+        </div>
+    </td>
+</tr>

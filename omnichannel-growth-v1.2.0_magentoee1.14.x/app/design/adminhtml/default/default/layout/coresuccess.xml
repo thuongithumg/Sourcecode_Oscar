@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Inventorysuccess
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/magestore/coresuccess/erp_item.css</stylesheet>
+            </action>
+        </reference>
+    </default>
+
+    <adminhtml_coresuccess_modal>
+        <reference name="head">
+            <action method="addCss">
+                <styleSheet>css/magestore/coresuccess/modal.css</styleSheet>
+            </action>
+            <action method="addJs">
+                <script>magestore/coresuccess/jquery.min.js</script>
+            </action>
+            <action method="addJs">
+                <script>magestore/coresuccess/bootstrap.min.js</script>
+            </action>
+        </reference>
+    </adminhtml_coresuccess_modal>
+
+    <adminhtml_coresuccess_module_layout>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/magestore/coresuccess/menu.css</stylesheet>
+            </action>
+            <action method="addCss">
+                <stylesheet>css/magestore/coresuccess/style.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>coresuccess/page-2column-left.phtml</template>
+            </action>
+        </reference>
+    </adminhtml_coresuccess_module_layout>
+
+    <adminhtml_coresuccess_one_column_layout>
+        <update handle="adminhtml_coresuccess_module_layout" />
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/magestore/coresuccess/one-column.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>coresuccess/page-1column.phtml</template>
+            </action>
+        </reference>
+    </adminhtml_coresuccess_one_column_layout>
+
+    <adminhtml_coresuccess_process_run>
+        <remove name="root"/>
+        <block type="adminhtml/page" name="convert_root" output="toHtml" template="page.phtml">
+            <block type="adminhtml/page_head" name="convert_root_head" as="head" template="page/head.phtml">
+                <action method="addJs">
+                    <script>prototype/prototype.js</script>
+                </action>
+                <action method="addJs">
+                    <script>prototype/validation.js</script>
+                </action>
+                <action method="addJs">
+                    <script>varien/js.js</script>
+                </action>
+                <action method="addJs">
+                    <script>mage/translate.js</script>
+                </action>
+                <action method="addJs">
+                    <script>mage/adminhtml/tools.js</script>
+                </action>
+                <action method="addJs">
+                    <script>magestore/coresuccess/process/processbar.js</script>
+                </action>
+                <action method="addJs">
+                    <script>magestore/coresuccess/process/process.js</script>
+                </action>
+                <action method="addCss">
+                    <stylesheet>css/magestore/coresuccess/process.css</stylesheet>
+                </action>                
+            </block>
+        </block>        
+    </adminhtml_coresuccess_process_run>    
+    
+    <adminhtml_coresuccess_dashboard>      
+        <update handle="adminhtml_coresuccess_one_column_layout" />  
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/magestore/coresuccess/dashboard.css</stylesheet>
+            </action>
+        </reference>        
+        <reference name="content">
+            <block type="coresuccess/adminhtml_dashboard" template="coresuccess/page/dashboard.phtml" />
+        </reference>
+    </adminhtml_coresuccess_dashboard>  
+        
+</layout>

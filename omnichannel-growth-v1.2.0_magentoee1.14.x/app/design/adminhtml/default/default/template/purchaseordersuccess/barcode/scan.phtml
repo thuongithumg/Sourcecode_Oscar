@@ -1,0 +1,91 @@
+<?php
+/**
+ * @var Magestore_Purchaseordersuccess_Block_Adminhtml_Barcode_Scan $this
+ */
+?>
+<div class="modal right fade" id="scan-barcode" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <h2 class="modal-title" data-role="title"><?php echo $this->__("Scan Barcode") ?></h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+            <div class="modal-header">
+                <button id="submit-barcode" class="action-primary import_button" type="button" data-role="action">
+                    <span><?php echo $this->__('Save') ?></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="entry-edit">
+                    <div class="entry-edit-head">
+                        <h4 class="icon-head head-edit-form fieldset-legend">
+                            <?php echo $this->__('Scan Barcode'); ?>
+                        </h4>
+                    </div>
+                    <div class="purchaseorder_fieldset fieldset">
+                        <div class="barcode-input field-row">
+                            <label for="barcode"><?php echo $this->__("Barcode") ?></label>
+                            <input type="text" class="search-input input-text" name="barcode" id="barcode">
+                        </div>
+                    </div>
+                    <div class="entry-edit-head">
+                        <h4 class="icon-head head-edit-form fieldset-legend">
+                            <?php echo $this->__('Scan Item List'); ?>
+                        </h4>
+                    </div>
+                    <table class="actions"></table>
+                    <div class="grid">
+                        <table class="data" id="barcode-table">
+                            <colgroup>
+                                <col width="55">
+                                <col>
+                                <col>
+                                <col>
+                                <col width="150">
+                            </colgroup>
+                            <thead>
+                            <tr class="headings">
+                                <th class="a-center"><?php echo $this->__("Barcode") ?></th>
+                                <th class="a-center"><?php echo $this->__("QTY") ?></th>
+                                <th class="a-center"><?php echo $this->__("SKU") ?></th>
+                                <th class="a-center"><?php echo $this->__("Supplier SKU") ?></th>
+                                <th class="a-center"><?php echo $this->__("Product Name") ?></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    window.scanBarcode = new ScanBarcode({
+        'loadBarcodeUrl': '<?php echo $this->getUrl('adminhtml/barcodesuccess_scan/loadBarcode') ?>',
+        'submitBarcodeUrl': '<?php echo $this->getUrl('adminhtml/barcodesuccess_scan/submitBarcode') ?>',
+    });
+
+    window.scanBarcode.renderRow = function (data) {
+        var wrapper = document.createElement('tr');
+        wrapper.innerHTML = "<tr>" +
+            "<td>" + data.barcode + "</td>" +
+            "<td><input class='barcode-qty' id='" + data.barcode_id + "' type='text' value='" + data.qty + "'></td>" +
+            "<td>" + data.product_sku + "</td>" +
+            "<td>" + data.product_supplier_sku + "</td>" +
+            "<td>" + data.product_name + "</td>" +
+            "</tr>";
+        return wrapper;
+    };
+
+    Event.observe($('barcode'), 'keypress', function (e) {
+        if (e.charCode == 13) {
+            e.target.select();
+            window.scanBarcode.loadBarcode();
+        }
+    });
+    Event.observe($('submit-barcode'), 'click', function (e) {
+        window.scanBarcode.submitBarcode();
+    });
+</script>
+

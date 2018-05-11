@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Purchaseordersuccess
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<config>
+    <tabs>
+        <magestore translate="label">
+            <label>Magestore Extension</label>
+            <sort_order>400</sort_order>
+        </magestore>
+    </tabs>
+    <sections>
+        <purchaseordersuccess translate="label" module="purchaseordersuccess">
+            <class>separator-top</class>
+            <label>Purchase Order Success</label>
+            <tab>magestore</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>300</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <product_source translate="label">
+                    <label><![CDATA[Product Config]]></label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>5</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <product_source translate="label">
+                            <label>Get Product From</label>
+                            <sort_order>20</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>purchaseordersuccess/system_config_source_product</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </product_source>
+                    </fields>
+                </product_source>
+                <shipping_method translate="label">
+                    <label>Shipping Method</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <shipping_method translate="label">
+                            <label>Shipping method</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <frontend_model>Magestore_Purchaseordersuccess_Block_Adminhtml_Form_Field_Shippingmethod</frontend_model>
+                            <backend_model>Magestore_Purchaseordersuccess_Model_System_Config_Backend_Serialized</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </shipping_method>
+                    </fields>
+                </shipping_method>
+                <payment_method translate="label">
+                    <label>Payment Method</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <payment_method translate="label">
+                            <label>Payment method</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <frontend_model>Magestore_Purchaseordersuccess_Block_Adminhtml_Form_Field_Paymentmethod</frontend_model>
+                            <backend_model>Magestore_Purchaseordersuccess_Model_System_Config_Backend_Serialized</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </payment_method>
+                    </fields>
+                </payment_method>
+                <payment_term translate="label">
+                    <label>Payment Term</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <payment_term translate="label">
+                            <label>Payment term</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <frontend_model>Magestore_Purchaseordersuccess_Block_Adminhtml_Form_Field_Paymentterm</frontend_model>
+                            <backend_model>Magestore_Purchaseordersuccess_Model_System_Config_Backend_Serialized</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </payment_term>
+                    </fields>
+                </payment_term>
+                <tax_and_shipping translate="label">
+                    <label><![CDATA[Tax & Shipping]]></label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>40</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <!--<default_shipping_cost translate="label">-->
+                            <!--<label>Default Shipping Cost</label>-->
+                            <!--<frontend_type>text</frontend_type>-->
+                            <!--<sort_order>1</sort_order>-->
+                            <!--<show_in_default>10</show_in_default>-->
+                            <!--<show_in_website>0</show_in_website>-->
+                            <!--<show_in_store>0</show_in_store>-->
+                            <!--<validate>validate-number validate-zero-or-greater</validate>-->
+                            <!--<comment>Leaving field blank to do not use default shipping cost</comment>-->
+                        <!--</default_shipping_cost>-->
+                        <customer_tax translate="label">
+                            <label>Apply Customer Tax</label>
+                            <sort_order>20</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>tax/system_config_source_apply</source_model>
+                            <backend_model>tax/config_notification</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </customer_tax>
+                        <!--<default_tax translate="label">-->
+                            <!--<label>Default Tax (%)</label>-->
+                            <!--<frontend_type>text</frontend_type>-->
+                            <!--<sort_order>30</sort_order>-->
+                            <!--<show_in_default>1</show_in_default>-->
+                            <!--<show_in_website>0</show_in_website>-->
+                            <!--<show_in_store>0</show_in_store>-->
+                            <!--<validate>validate-number validate-zero-or-greater</validate>-->
+                            <!--<comment>Default tax for purchase order item</comment>-->
+                        <!--</default_tax>-->
+                    </fields>
+                </tax_and_shipping>
+            </groups>
+        </purchaseordersuccess>
+    </sections>
+</config>

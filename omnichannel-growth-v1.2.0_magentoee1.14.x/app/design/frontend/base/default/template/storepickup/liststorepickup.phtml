@@ -1,0 +1,101 @@
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<?php echo Mage::getModel('storepickup/shipping_storepickup')->getConfigData('gkey'); ?>&libraries=places,geometry"></script>
+<?php echo  $this->getChildHtml('translateJs') ;?>
+<?php
+    $store_id = $this->getRequest()->getParam('viewstore');
+    $store = Mage::getModel('storepickup/store')->load($store_id);
+    $storeViewId = Mage::app()->getStore()->getStoreId();
+    $currentUnit = Mage::getStoreConfig("carriers/storepickup/systemunit", Mage::app()->getStore()->getId());
+    $radiusMaxValue         = Mage::getStoreConfig("carriers/storepickup/maxradius", Mage::app()->getStore()->getId());
+?>
+<?php if($store->getId()): ?>
+<?php echo  $this->getChildHtml('store_view') ;?>
+<?php else: ?>
+<script>
+    <?php echo Mage::helper('storepickup')->echoAllStoreToJson($storeViewId) ?>
+</script>
+<div class="storepickup-list">
+    <div class="page-title">
+        <h1><?php echo $this->__('Our Stores'); ?></h1>
+        <div id="store_description">
+            <?php echo Mage::getModel("storepickup/shipping_storepickup")->getConfigData('description'); ?>
+        </div>
+    </div>
+    <div class="row">
+        <div id="store-pickup-map-box" class="store-pickup-map-box col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <?php echo  $this->getChildHtml('searchbox2') ;?>
+            <div class="store-map col-lg-12 col-md-12 col-sm-12 col-xs-12" id="store_map"></div>
+            <?php echo  $this->getChildHtml('liststorebox') ;?>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+
+<?php echo  $this->getChildHtml('gmap_template') ;?>
+<script type="text/javascript">
+    // magestore.storepickup.runSetup = function() {
+        if(typeof listStoreJson === "undefined" || listStoreJson === null) {
+            listStoreJson = [];
+        }
+        <?php if($store->getId()): ?>
+        <?php echo 'var listStoreJson = '.Mage::helper('core')->jsonEncode(array($store->prepareToJSON()->getData())) .';'; ?>
+        <?php endif; ?>
+        var mapOptions = {
+            zoom: 5,
+            center: {
+                latitude: 54.8,
+                longitude: 15.6
+            },
+			styles: [{"featureType":"water","elementType":"geometry","stylers":[{"color":"#e9e9e9"},{"lightness":17}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":20}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#ffffff"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":16}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":21}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#dedede"},{"lightness":21}]},{"elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"lightness":16}]},{"elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#333333"},{"lightness":40}]},{"elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#f2f2f2"},{"lightness":19}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#fefefe"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#fefefe"},{"lightness":17},{"weight":1.2}]}]
+        };
+        //Options for render store html
+        var storeOptions = {
+            imageMarkerIcon : '<?php echo Mage::getBaseUrl("media") . "storepickup/images/icon/{id}/resize/{icon}"; ?>',
+            storeTemplateId: 'storeBoxTemplate',
+            listStoreBoxId: 'storepickup-list-store-box',
+            storeIdItem: 'store-item',
+            storeClassItem: 'store-item'
+        };
+        var options = {
+			/* Edited by Vick - fix github #2 */
+			markerImages: JSON.parse('<?php echo Mage::helper('storepickup')->getMarkerImages(); ?>'),
+			/* End - Edited by Vick - fix github #2 */
+            googleKey: '<?php echo Mage::getModel("storepickup/shipping_storepickup")->getConfigData("gkey"); ?>',
+            mapOptions: mapOptions,
+            imageFullScreenMapSrc: '<?php echo $this->getSkinUrl("images/arrows-outside-1-128.png"); ?>',
+            radiusBarId: 'storepickup-slider-range',
+            radiusLabelId: 'storepickup-slider-amount',
+            maxRadius: '<?php echo $radiusMaxValue ?>',
+            storeOptions: storeOptions,
+            listStoreJson: listStoreJson,
+            unitSelectId: 'select_unit',
+            currentUnit: '<?php echo $currentUnit ?>',
+            allowRenderListStoreBox: true,
+            searchByDistanceInputId: 'input_search_by_distance',
+            searchByDistanceButtonId: 'btn_search_by_distance',
+            resetSearchByDistanceButtonId: 'btn_reset_distance',
+            searchByAreaInputId: 'input_search_by_area',
+            searchByAreaButtonId: 'btn_search_by_area',
+            searchOptionBoxId: 'dropdown-search-option',
+            searchMultiSelectOptionId: 'mutliSelect',
+            resetSearchByAreaButtonId: 'btn_reset_area',
+            geoYourLocationBtnId: 'widget-mylocation-button',
+            resetSearchByDateBtnId:'btn_reset_date',
+            searchByDateInputId: 'input_search_by_date',
+            searchByDateButtonId: 'btn_search_by_date'
+        }
+    var googleMap = new magestore.storepickup.GoogleMapManager('store_map', options);
+    listStoreJson = null;
+</script>
+<style type="text/css">
+	ul.listLocate li {
+		background-color: #bdced8 !important;
+		color: #fff;
+		text-transform: uppercase !important;
+		text-align: center !important;
+	}
+	ul.listLocate li.active-tag ,
+	ul.listLocate li:hover {
+		background-color: #8a9ca8 !important;
+	}
+	
+</style>

@@ -1,0 +1,55 @@
+<?php
+
+/* 
+ * Copyright © 2016 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<script type="text/javascript">
+    function massRemovePricelist()
+    {
+        if(!confirm('<?php echo $this->__('Are you sure to remove pricelist records?')?>')) {
+            return;
+        }
+        jQuery("input[name='pricelists']").each(function() {
+            if(!this.value) {
+                alert('<?php echo $this->__('Please select record(s) to remove.') ?>');
+                return;
+            }
+            var form = document.createElement('form');
+            form.setAttribute('action', '<?php echo $this->getMassDeleteUrl() ?>');
+            form.setAttribute('method', 'POST');
+            form.appendChild(this);
+            
+            var formkeyInput = document.createElement('input');
+            formkeyInput.setAttribute('type', 'hidden');
+            formkeyInput.setAttribute('name', 'form_key');
+            formkeyInput.setAttribute('value', FORM_KEY );
+            form.appendChild(formkeyInput);
+            jQuery(document.body).append(form);
+            form.submit();
+        });
+    }
+    
+    function massUpdatePricelist()
+    {
+        jQuery("input[name='pricelists']").each(function() {
+            if(!this.value) {
+                alert('<?php echo $this->__('Please select record(s) to update.') ?>');
+                return;
+            }
+            var form = document.createElement('form');
+            form.setAttribute('action', '<?php echo $this->getMassUpdateUrl() ?>');
+            form.setAttribute('method', 'POST');
+            form.appendChild(this);
+            
+            var formkeyInput = document.createElement('input');
+            formkeyInput.setAttribute('type', 'hidden');
+            formkeyInput.setAttribute('name', 'form_key');
+            formkeyInput.setAttribute('value', FORM_KEY );
+            form.appendChild(formkeyInput);
+            jQuery(document.body).append(form);
+            form.submit();
+        });        
+    }
+</script>

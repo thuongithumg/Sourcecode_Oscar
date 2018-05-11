@@ -1,0 +1,26 @@
+<div id="webpos_paynl_integration_container" class="hide" data-bind="scope:'webpos_paynl_integration'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+<div id="webpos_paynl_integration_overlay" class="hide"></div>
+<?php if($block->isEnablePaynl()):?>
+<script type="text/x-magento-init">
+    {
+        "#webpos_paynl_integration_container": {
+            "Magento_Ui/js/core/app": {
+                "components" : {
+                    "webpos_paynl_integration": {
+                        "component": "Magestore_WebposPaynl/js/view/container",
+                         "displayArea": "webpos_paynl_integration"
+                    }
+                }
+            }
+        }
+    }
+</script>
+<script>
+    require([
+        'Magestore_WebposPaynl/js/model/paynl'
+    ], function (PaynlService) {
+    });
+</script>
+<?php endif;?>

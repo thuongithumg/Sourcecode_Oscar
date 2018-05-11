@@ -1,0 +1,34 @@
+
+<?php $warehouses = $this->getAvailableWarehouses() ?>
+<?php if ($_item = $this->getItem()): ?>
+    <?php if($this->isShowWarehouseSelector($_item)): ?>
+        <?php $requireClass = $this->isRequired($_item) ? 'required-entry' : '' ?>
+        <?php if($this->isShow($_item)): ?>
+        <div class="select-warehouse-return">
+                <select class="select <?php echo $requireClass ?> return-warehouse-select" 
+                        style="display:none; width: 200px;"
+                        name="creditmemo[items][<?php echo $_item->getItemId() ?>][warehouse]" 
+                        id="creditmemo[items][<?php  echo $_item->getItemId() ?>][warehouse]">
+<!--                    <option value="">--><?php // echo $this->__('Select Warehouse')?><!--</option>-->
+                    <?php if(count($warehouses)): ?>
+                        <?php foreach($warehouses as $warehouseId => $warehouseName): ?>
+                    <option value="<?php echo $warehouseId ?>" 
+                        <?php if($this->isSelectedWarehouse($warehouseId, $_item->getItemId()) || count($warehouses) == 1) echo 'selected="selected"' ?>>
+                        <?php echo $warehouseName ?>
+                    </option>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </select>   
+            <input type="text" class="input-text not-return-reason"
+                   style="display:none; width: 200px;"
+                   placeholder="<?php echo $this->__('Why don\'t return items to stock?') ?>"
+                   name="creditmemo[items][<?php echo $_item->getItemId() ?>][reason]"
+                   id="creditmemo[items][<?php echo $_item->getItemId() ?>][reason]">
+            <input type="hidden" class="order-item-qty-to-ship" value="<?php echo $this->getQtyToShip($_item) ?>"/>
+          <?php if($_item->getQtyShipped()*1 == 0): ?>
+            <label type="hidden" class="no-shipped-item-notice" style="display:none;"><?php echo $this->getNoShippedQtyNotice() ?></label>
+          <?php endif; ?>
+        </div>        
+        <?php endif; ?>
+    <?php endif; ?>
+<?php endif; ?>

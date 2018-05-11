@@ -1,0 +1,24 @@
+
+<!--
+  ~ * Copyright © 2016 Magestore. All rights reserved.
+  ~ * See COPYING.txt for license details.
+  ~
+  -->
+
+<div id="popup-make-adjustment" class="hide-popup popup-for-right" data-bind="afterRender:initModal">
+    <div class="wrap-popup">
+        <div class="modal-body">
+            <label class="cash-drawer"><span data-bind="i18n:adjustmentNotice()"/></label>
+            <div class="amount-box">
+                <div class="input-box">
+                    <label for="webpos-cash-adjustment-input-amount"><span data-bind="i18n:'Amount'"/></label>
+                    <input id="webpos-cash-adjustment-input-amount" type="text" data-bind="textInput: valueFormatted, event:{change: valueChange}"  onfocus="this.select()">
+                </div>
+                <div>
+                    <span class="error_message" data-bind="text: valueErrorMessage"/>
+                </div>
+                <textarea class="note" placeholder="Reason" data-bind="value: note"></textarea>
+            </div>
+        </div>
+    </div>
+</div>

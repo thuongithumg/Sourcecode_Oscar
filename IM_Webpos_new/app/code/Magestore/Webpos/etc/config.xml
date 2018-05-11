@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <!-- Set default webpos settings -->
+        <webpos>
+            <general>
+                <active>1</active>
+                <webpos_color>00A679</webpos_color>
+                <enable_delivery_date>0</enable_delivery_date>
+                <session_timeout>86400</session_timeout>
+                <ignore_checkout>1</ignore_checkout>
+                <enable_session>0</enable_session>
+                <confirm_delete_order>0</confirm_delete_order>
+                <ask_for_sale_order_email>0</ask_for_sale_order_email>
+                <day_to_show_session_history>7</day_to_show_session_history>
+                <use_custom_order_id>0</use_custom_order_id>
+            </general>
+            <offline>
+                <product_sync_index>0</product_sync_index>
+                <product_time>5</product_time>
+                <stock_sync_index>0</stock_sync_index>
+                <stock_item_time>5</stock_item_time>
+                <customer_time>5</customer_time>
+                <order_time>5</order_time>
+                <order_limit>30</order_limit>
+            </offline>
+            <online>
+                <use_online_default>1</use_online_default>
+                <sections>all</sections>
+            </online>
+            <shipping>
+                <allowspecific_shipping>1</allowspecific_shipping>
+                <specificshipping>webpos_shipping</specificshipping>
+                <defaultshipping>webpos_shipping</defaultshipping>
+                <enable_mark_as_shipped_default>0</enable_mark_as_shipped_default>
+            </shipping>
+            <payment>
+                <allowspecific_payment>1</allowspecific_payment>
+                <specificpayment>codforpos,cashforpos</specificpayment>
+            </payment>
+            <product_search>
+                <product_attribute>name,sku</product_attribute>
+                <barcode>sku</barcode>
+            </product_search>
+            <guest_checkout>
+                <first_name>Guest</first_name>
+                <last_name>POS</last_name>
+                <street>Street</street>
+                <country_id>US</country_id>
+                <region_id>12</region_id>
+                <city>Guest City</city>
+                <zip>90034</zip>
+                <telephone>12345678</telephone>
+                <email>guest@example.com</email>
+            </guest_checkout>
+            <receipt>
+                <auto_print>1</auto_print>
+                <font_type>monospace</font_type>
+                <header_text> </header_text>
+                <footer_text>Thank you for shopping at our store. We hope you enjoy your purchase and look forward to serving you again.</footer_text>
+                <show_receipt_logo>1</show_receipt_logo>
+                <show_cashier_name>1</show_cashier_name>
+                <show_comment>1</show_comment>
+                <content>
+                    <title>Invoice</title>
+                </content>
+            </receipt>
+            <security>
+                <pos_account_sharing>0</pos_account_sharing>
+            </security>
+        </webpos>
+
+        <!-- Set default payment method settings -->
+        <payment>
+            <multipaymentforpos>
+                <active>1</active>
+                <model>Magestore\Webpos\Model\Payment\Method\Multipayment</model>
+                <title>Web POS - Split Payments</title>
+                <payments>cashforpos,ccforpos,codforpos,cp1forpos,cp2forpos</payments>
+            </multipaymentforpos>
+            <codforpos>
+                <active>1</active>
+                <model>Magestore\Webpos\Model\Payment\Method\Cod</model>
+                <title>Web POS - Cash On Delivery</title>
+                <use_reference_number>1</use_reference_number>
+                <pay_later>1</pay_later>
+            </codforpos>
+            <cashforpos>
+                <active>1</active>
+                <model>Magestore\Webpos\Model\Payment\Method\Cash</model>
+                <title>Web POS - Cash In</title>
+            </cashforpos>
+            <ccforpos>
+                <active>1</active>
+                <model>Magestore\Webpos\Model\Payment\Method\Creditcard</model>
+                <title>Web POS - Credit Card</title>
+                <use_reference_number>1</use_reference_number>
+                <pay_later>0</pay_later>
+            </ccforpos>
+            <cp1forpos>
+                <active>1</active>
+                <model>Magestore\Webpos\Model\Payment\Method\Custompayment1</model>
+                <title>Web POS - Custom payment 1</title>
+                <use_reference_number>1</use_reference_number>
+                <pay_later>0</pay_later>
+            </cp1forpos>
+            <cp2forpos>
+                <active>1</active>
+                <model>Magestore\Webpos\Model\Payment\Method\Custompayment2</model>
+                <title>Web POS - Custom payment 2</title>
+                <use_reference_number>1</use_reference_number>
+                <pay_later>0</pay_later>
+            </cp2forpos>
+        </payment>
+        <carriers>
+            <webpos_shipping>
+                <active>1</active>
+                <model>Magestore\Webpos\Model\Shipping\Method\Storepickup</model>
+                <title>POS Shipping</title>
+                <name>Store Pickup</name>
+                <price>0</price>
+                <sort_order>10</sort_order>
+            </webpos_shipping>
+        </carriers>
+    </default>
+</config>

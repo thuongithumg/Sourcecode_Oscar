@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<page layout='webpos' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" >
+    <update handle="webpos_cart_items"/>
+    <update handle="webpos_cart_totals"/>
+    <body>
+        <referenceBlock name="webpos_checkout">
+            <block class="Magestore\Webpos\Block\Checkout\Cart" before="-" name ='webpos_cart_block' cacheable="false" template="Magestore_Webpos::checkout/cart.phtml">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="webpos_cart" xsi:type="array">
+                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/checkout/cart</item>
+                                <item name="displayArea" xsi:type="string">webpos_cart</item>
+                                <item name="children" xsi:type="array">
+                                    <item name="webpos_multiorder" xsi:type="array">
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/checkout/cart/multiorder</item>
+                                        <item name="displayArea" xsi:type="string">webpos_multiorder</item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

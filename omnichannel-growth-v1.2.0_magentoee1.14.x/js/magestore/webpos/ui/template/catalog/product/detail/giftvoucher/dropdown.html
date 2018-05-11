@@ -1,0 +1,42 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<div class="field option">
+    <div class="control">
+        <select type="text"
+               class="admin__control-select"
+                id="giftvoucher-dropdown-price"
+                name="giftvoucher-dropdown-price"
+               data-bind="
+               event: {'change': $parents[1].updatePrice($parents[2].itemData().giftvoucher_options[0])},
+               attr: {'data-validate': '{\'required-entry\':true}'}"
+                value="">
+            <option value="" data-bind="text: __('-- Please Select --')"></option>
+            <!-- ko foreach: {data: $parents[2].itemData().giftvoucher_options[0].options, as: 'price' }  -->
+                <option data-bind="text: $parents[2].convertAndFormatPrice(price),
+                                    attr: {
+                                        'value': price,
+                                        'selected': ($index =='1') ? 'selected' : false
+                                    }">
+                </option>
+            <!-- /ko -->
+        </select>
+    </div>
+</div>

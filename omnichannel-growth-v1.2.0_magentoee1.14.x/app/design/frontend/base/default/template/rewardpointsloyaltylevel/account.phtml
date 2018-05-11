@@ -1,0 +1,34 @@
+<?php
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPointsLoyaltyLevel
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+/**
+ * Rewardpointsloyaltylevel template
+ * 
+ * @see Magestore_RewardPointsLoyaltyLevel_Block_Rewardpointsloyaltylevel
+ */
+?>
+<?php $level = $this->getLoyaltyLevel(); ?>
+<script type="text/javascript">
+    var box = $$('.box-rewardpoints-summary .info-summary strong').first();
+    var levelName = '<?php echo $level != null ? $level->getLevelName() : null ?>';
+    if (box && levelName) {
+        box.insert(' - <a href="' + '<?php echo $this->getUrl('rewardpointsloyaltylevel'); ?>' + '" style="text-decoration:none"><strong class="rewardpoints-money">' + levelName + '</strong></a>');
+    }
+</script>

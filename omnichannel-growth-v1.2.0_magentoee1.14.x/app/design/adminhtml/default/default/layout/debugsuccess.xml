@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Inventorysuccess
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<layout version="0.1.0">
+    <adminhtml_debug_default>
+        <reference name="head">
+            <action method="addJs">
+            <script>magestore/debugsuccess/correct-inventory.js</script>
+            </action>
+            <!--<action method="addCss">-->
+                <!--<stylesheet>css/magestore/reportsuccess/style.css</stylesheet>-->
+            <!--</action>-->
+        </reference>
+    </adminhtml_debug_default>
+
+    <adminhtml_indp_debug_wrongqty>
+        <update handle="adminhtml_debug_default"/>
+        <reference name="content">
+            <block type="debugsuccess/adminhtml_debug_wrongqty_wrongqty" as="report_wrongqtyGrids" name="report_wrongqtyGrids" />
+        </reference>
+    </adminhtml_indp_debug_wrongqty>
+    <adminhtml_indp_debug_wrongqtygrid>
+        <update handle="adminhtml_debug_default"/>
+        <block type="core/text_list" name="root">
+            <block type="debugsuccess/adminhtml_debug_wrongqty_grid" as="report_wrongqtyGrids.grid" name="report_wrongqtyGrids.grid" />
+        </block>
+    </adminhtml_indp_debug_wrongqtygrid>
+
+
+    <adminhtml_indp_debug_reportdebug>
+        <reference name="content">
+            <block type="debugsuccess/adminhtml_debug_movement" as="report_movementGrid" name="report_movementGrid" />
+        </reference>
+    </adminhtml_indp_debug_reportdebug>
+
+    <adminhtml_indp_debug_reportdebuggrid>
+        <block type="core/text_list" name="root">
+            <block type="debugsuccess/adminhtml_debug_movement_grid" as="report_movementGrid.grid" name="report_movementGrid.grid" />
+        </block>
+    </adminhtml_indp_debug_reportdebuggrid>
+
+
+</layout>

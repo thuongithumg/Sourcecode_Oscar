@@ -1,0 +1,47 @@
+<!-- Template for Menu Left -->
+<div id="c-lock-register" class="c-lock-register" data-bind="scope:'c-lock-register'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+<nav id="c-menu--push-left" class="c-menu c-menu--push-left" data-bind="scope:'c-menu--push-left'">
+    <button class="c-menu__close">&larr;<?php echo __("Close Menu"); ?></button>
+    <!--
+    <label class="store-name"><?php echo __("Magestore"); ?></label>
+    -->
+    <div class="admin-account">
+        <h2 class="admin-name"><?php echo $block->getStaffName(); ?></h2>
+        <h3 class="admin-add"><?php echo $block->getLocationName(); ?></h3>
+        <!-- ko if: canLockRegister -->
+        <div class="logout-box" data-bind="click: lockRegister">
+            <a href="#" class="logout-link">
+                <span class="icon-iconPOS-lockPOS"></span><?php echo __('Lock Register'); ?>
+            </a>
+        </div>
+        <!--/ko-->
+        <div class="logout-box" data-bind="click: logout">
+            <a href="#" class="logout-link">
+                <span class="icon-iconPOS-logout"></span><?php echo __('Logout'); ?>
+            </a>
+        </div>
+        <!-- Open Cash Drawer by Print -->
+        <!-- ko if: isDisplayOpenCashDrawer -->
+        <div class="logout-box" data-bind="click: openCashDrawer">
+            <a href="#" class="logout-link">
+                <span class="icon-iconPOS-logout"></span><?php echo __('Open Cash Drawer'); ?>
+            </a>
+        </div>
+        <!--/ko-->
+    </div>
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</nav><!-- /c-menu push-left -->
+<div id="c-mask" class="c-mask"></div><!-- /c-mask -->
+<!-- End Template for Menu Left -->
+<script type="text/x-magento-init">
+    {
+        "#c-lock-register": {
+            "Magento_Ui/js/core/app": <?php /* @escapeNotVerified */ echo $block->getJsLayout(); ?>
+        },
+        "#c-menu--push-left": {
+            "Magento_Ui/js/core/app": <?php /* @escapeNotVerified */ echo $block->getJsLayout(); ?>
+        }
+    }
+</script>

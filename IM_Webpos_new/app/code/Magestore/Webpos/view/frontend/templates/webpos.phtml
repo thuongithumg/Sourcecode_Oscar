@@ -1,0 +1,183 @@
+<link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+<?php
+/**
+ *  Copyright © 2016 Magestore. All rights reserved.
+ *  See COPYING.txt for license details.
+ *
+ */
+
+?>
+<script>
+    var WEBPOS = {};
+    //var ObjectManager = {};
+    <?php
+    $config = $block->getWebposConfig();
+    if(isset($config) && isset($config['webpos/general/webpos_logo'])){
+        $config['webpos/general/webpos_logo'] = $block->getLogoUrl($config['webpos/general/webpos_logo']);
+    }
+    ?>
+    window.webposConfig = <?php /* @escapeNotVerified */ echo \Zend_Json::encode($config); ?>;
+    window.searchCat = '';
+    window.curPage = '';
+</script>
+
+<script>
+    require(
+        [
+            'mage/url'
+        ], function (url) {
+            return url.setBaseUrl('<?php /* @escapeNotVerified */ echo $block->getBaseUrl();?>');
+        });
+
+
+    require([
+        'Magestore_Webpos/js/model/webpos',
+    ], function (webposModel) {
+        WEBPOS = webposModel();
+        WEBPOS.setConfig(window.webposConfig);
+    });
+
+</script>
+
+<script>
+    require(
+        [
+            'jquery',
+            'Magestore_Webpos/js/menu',
+            'Magestore_Webpos/js/bootstrap/bootstrap',
+            'Magestore_Webpos/js/bootstrap/bootstrap-switch',
+            'Magestore_Webpos/js/owl.carousel.min',
+            'Magestore_Webpos/js/general',
+            'Magestore_Webpos/js/model/object-manager',
+            'Magestore_Webpos/js/view/layout',
+            'Magestore_Webpos/js/lib/posOverlay'
+        ], function ($) {});
+</script>
+
+<script type="text/javascript">
+    window.storeCode = "default";
+    var dbName = 'magestore_webpos';
+    var version = 4;
+    var limit = 5;
+    var server;
+    var checkNetWork = true;
+    var reloading = false;
+    require([
+        'Magestore_Webpos/js/setup/install-schema',
+        'Magestore_Webpos/js/model/sync-action-log',
+        'Magestore_Webpos/js/model/observer',
+        'Magestore_Webpos/js/model/hardware/device'
+    ], function (install, syncactionlog, observer, device) {
+        install.installSchema();
+        syncactionlog.processActionLog();
+        observer.processEvent();
+        device.processConnect();
+    });
+</script>
+
+<?php echo $this->getChildHtml('webpos_lockscreen') ?>
+<div class="ms-webpos">
+    <div id="checkout-loader" data-role="checkout-loader" class="loading-mask" style="display: none">
+        <div class="loader">
+            <!--
+            <img src="<?php /* @escapeNotVerified */ echo $block->getViewFileUrl('images/loader-1.gif'); ?>"
+                 alt="<?php /* @escapeNotVerified */ echo __('Loading...'); ?>"
+                 style="position: absolute;">
+            -->
+        </div>
+    </div>
+    <div id="o-wrapper" class="o-wrapper wrap-checkout-page">
+        <button id="c-button--push-left" class="c-button"><span class="icon-iconPOS-menu"></span>
+        </button>
+        <?php echo $this->getChildHtml('webpos_notification') ?>
+        <div class="container-fluid">
+            <div class="row" id="containers_wrapper">
+                <?php echo $this->getChildHtml('webpos_content') ?>
+            </div>
+        </div>
+    </div>
+    <?php echo $this->getChildHtml('webpos_menu') ?>
+</div>
+<script type="text/javascript">
+    require([
+        'jquery',
+        'Magestore_Webpos/js/lib/jquery.fullscreen'
+    ], function ($) {
+        $(document).ready(function(){
+            $("body").on('click',"#fullscreen_link", function(){
+                $(document).toggleFullScreen();
+            });
+            if($('.popup-for-right').hasClass('in')){
+                $('.span.notification-bell__mentions').css('display','none');
+            }else{
+                $('.span.notification-bell__mentions').css('display','inline-block');
+            }
+        });
+    });
+</script>
+<?php if($color = $this->getWebposColor()):?>
+    <style type="text/css">
+        .btn-open-shift.bg-cl-active,
+        .number.bg-cl-active,
+        .bg-cl-active.active,
+        .bg-cl-active.selected, .btn-cl-cfg-active,
+        #error-logs .nav > li > a:hover,
+        #error-logs .nav-pills > li.active > a,
+        #error-logs  .nav-pills > li.active > a:hover,
+        #error-logs .nav-pills > li.active > a:focus,
+        .sync_container .wrap-item-general .nav-pills > li.active > a,
+        .sync_container .wrap-item-general .nav-pills > li.active > a:hover,
+        .sync_container .wrap-item-general .nav-pills > li.active > a:focus,
+        .modal-footer .action-accept
+        {
+            background: #<?php echo $color?> !important;
+            border: 0 none!important;
+            color: #fff;
+        }
+        .link-cl-cfg{color:#0873db !important}
+    </style>
+<?php endif?>
+<div class="hide" id="authorizenet-directpost-progress-html">
+    <style type="text/css">
+        #authorizenet-directpost-progress,
+        #authorizenet-directpost-progress .indicator{
+            width:100%;
+            height: 100%;
+        }
+        #authorizenet-directpost-progress .indicator .title{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -20px;
+            margin-top: 7px;
+            color: #888;
+        }
+        #authorizenet-directpost-progress .indicator .loader{
+            position: absolute;
+            left:50%;
+            top:50%;
+            margin-left: -60px;
+            margin-top:-60px;
+        }
+
+        #authorizenet-directpost-progress .loader {
+            border: 16px solid #f3f3f3;
+            border-top: 16px solid #3498db;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 1.5s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    <div id="authorizenet-directpost-progress">
+        <div class="indicator">
+            <h4 class="title"><?php echo __('Processing');?></h4>
+            <span class="loader"></span>
+        </div>
+    </div>
+</div>

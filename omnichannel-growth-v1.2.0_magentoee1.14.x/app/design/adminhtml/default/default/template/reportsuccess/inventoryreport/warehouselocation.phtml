@@ -1,0 +1,117 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Inventorysuccess
+ * @copyright   Copyright (c) 2017 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+?>
+<div class="content-header">
+    <table cellspacing="0">
+        <tr>
+            <td><h3 class="icon-head"><?php echo $this->getHeaderText() ?></h3></td>
+        </tr>
+    </table>
+</div>
+<div id = "select_warehouse_option"></div>
+<div id = "select_warehouse" >
+            <div class="select_warehouse_option">
+            <span id = "select_warehouse_span"><?php echo $this->__('Select Warehouses') ?></span></br>
+            <?php $warehouseIds_Session = Mage::getModel('admin/session')->getData('warehouse_locations');
+                  if($warehouseIds_Session){
+                      $warehouseIds_Session = explode(',', $warehouseIds_Session);
+                  }
+            ?>
+            <select id="select_warehouse_option_multil" multiple="multiple" name="select_att[]">
+                <?php if($this->getOptionWarehouses()){
+                            foreach ($this->getOptionWarehouses() as $warehouse): ?>
+                                <?php
+                                if($warehouseIds_Session) {
+                                    if(in_array($warehouse->getWarehouseId(), $warehouseIds_Session)){
+                                        ?>
+                                        <option selected value="<?php echo $warehouse->getWarehouseId() ?>"><?php echo $warehouse->getWarehouse() ?></option>
+                                        <?php
+                                    }else{
+                                        ?>
+                                        <option value="<?php echo $warehouse->getWarehouseId() ?>"><?php echo $warehouse->getWarehouse() ?></option>
+                                        <?php
+                                    }
+                                }else{
+                                    ?>
+                                    <option selected value="<?php echo $warehouse->getWarehouseId() ?>"><?php echo $warehouse->getWarehouse() ?></option>
+                                    <?php
+                                }
+                                ?>
+                           <?php endforeach;
+                      } ?>
+            </select>
+
+            </br></br>
+
+            <span id = "select_warehouse_span"><?php echo $this->__('Select type') ?></span></br>
+            <?php $type_Session = Mage::getModel('admin/session')->getData('type_locations');?>
+            <select id="select_type_option">
+                <?php if($this->getTypeReportOptions()){
+                    foreach ($this->getTypeReportOptions() as $key => $options): ?>
+                        <?php
+                        if($type_Session && $type_Session === $key){
+                            ?>
+                            <option selected value="<?php echo $key ?>"><?php echo $options ?></option>
+                            <?php
+                        }else{
+                            ?>
+                            <option value="<?php echo $key ?>"><?php echo $options ?></option>
+                        <?php }
+                    endforeach;
+                }?>
+            </select> <button id="update_report">Show report</button>
+
+            </div>
+</div>
+</br>
+</br>
+
+<style>
+    #select_warehouse {
+        padding: 0 20px 20px;
+        width:100%;
+        margin-top : 20px;
+        margin-bottom : 40px;
+    }
+
+    .select_warehouse_option {
+        width: 20%;
+        float: left;
+        border: 0px solid #ccc;
+        padding: 10px 0px 40px 0px;
+    }
+
+    #select_warehouse_option_multil{
+        height : 100px;
+        width : 100%
+    }
+    #select_warehouse_span  {
+        font-size: 15px;
+        line-height: 2px;
+    }
+    #select_type_option{
+        width:40%
+    }
+    #update_report {
+        float : right;
+        /*width:40%*/
+    }
+</style>

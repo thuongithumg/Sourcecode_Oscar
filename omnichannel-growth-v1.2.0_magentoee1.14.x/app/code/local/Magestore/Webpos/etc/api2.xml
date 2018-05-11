@@ -1,0 +1,1090 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<config>
+    <api2>
+        <resource_groups>
+            <webpos translate="title" module="api2">
+                <title>Web POS</title>
+                <sort_order>130</sort_order>
+            </webpos>
+        </resource_groups>
+        <resources>
+            <webpos_shift_close translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>10</sort_order>
+                <model>webpos/api2_shift</model>
+                <title>Web POS</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/webpos/shift/close</route>
+                        <action_type>close_shift</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </webpos_shift_close>
+            <webpos_shift_list translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>10</sort_order>
+                <model>webpos/api2_shift</model>
+                <title>Web POS</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/webpos/shifts</route>
+                        <action_type>get_shift_list</action_type>
+                    </route_entity>
+                    <route_save>
+                        <route>/webpos/shift/save</route>
+                        <action_type>save</action_type>
+                    </route_save>
+                </routes>
+                <versions>1</versions>
+            </webpos_shift_list>
+            <webpos_shift_getdata translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>10</sort_order>
+                <model>webpos/api2_shift</model>
+                <title>Web POS</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/webpos/shift/getData</route>
+                        <action_type>get_shift_data</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </webpos_shift_getdata>
+            <webpos_transaction_list translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>10</sort_order>
+                <model>webpos/api2_transaction</model>
+                <title>Web POS</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/webpos/shift_cashtransaction/getlist</route>
+                        <action_type>get_list_transaction</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </webpos_transaction_list>
+            <webpos_session_list translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>10</sort_order>
+                <model>webpos/api2_session</model>
+                <title>Web POS</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/webpos/session/getlist</route>
+                        <action_type>get_session_list</action_type>
+                    </route_entity>
+                    <route_save>
+                        <route>/webpos/session/save</route>
+                        <action_type>save</action_type>
+                    </route_save>
+                </routes>
+                <versions>1</versions>
+            </webpos_session_list>
+            <webpos_transaction_save translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>10</sort_order>
+                <model>webpos/api2_transaction</model>
+                <title>Web POS</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/webpos/shift_cashtransaction/save</route>
+                        <action_type>save_transaction</action_type>
+                    </route_entity>
+                    <cash_transaction>
+                        <route>/webpos/cash_transaction/save</route>
+                        <action_type>app_save_transaction</action_type>
+                    </cash_transaction>
+                </routes>
+                <versions>1</versions>
+            </webpos_transaction_save>
+            <webpos_integration_giftcard_remove_online translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>10</sort_order>
+                <model>webpos/api2_integration_giftcard</model>
+                <title>Web POS</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/webpos/integration/removeGiftcard</route>
+                        <action_type>remove_gift_card</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </webpos_integration_giftcard_remove_online>
+            <webpos_integration_giftcard_apply_online translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>10</sort_order>
+                <model>webpos/api2_integration_giftcard</model>
+                <title>Web POS</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/webpos/integration/applyGiftcard</route>
+                        <action_type>apply_gift_card</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </webpos_integration_giftcard_apply_online>
+            <webpos_integration_rewardpoints_spend_point translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>10</sort_order>
+                <model>webpos/api2_integration_rewardpoints</model>
+                <title>Web POS</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/webpos/integration/spendPoint</route>
+                        <action_type>spend_point</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </webpos_integration_rewardpoints_spend_point>
+            <webpos_integration_rewardpoints_get_rates translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>10</sort_order>
+                <model>webpos/api2_integration_rewardpoints</model>
+                <title>Web POS</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/webpos/integration/getPointRates</route>
+                        <action_type>get_rewardpoints_rates</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </webpos_integration_rewardpoints_get_rates>
+            <webpos_integration_rewardpoints_get_balance translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>10</sort_order>
+                <model>webpos/api2_integration_rewardpoints</model>
+                <title>Web POS</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/webpos/integration/getPointBalance</route>
+                        <action_type>get_points_balance</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </webpos_integration_rewardpoints_get_balance>
+            <webpos_integration_rewardpoints_get_points_list translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>10</sort_order>
+                <model>webpos/api2_integration_rewardpoints</model>
+                <title>Web POS</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/webpos/integration/getCustomerPoints</route>
+                        <action_type>get_points_list</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </webpos_integration_rewardpoints_get_points_list>
+            <webpos_integration_giftcard_get_balance translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>10</sort_order>
+                <model>webpos/api2_integration_giftcard</model>
+                <title>Web POS</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/webpos/integration/getGiftcardBalance</route>
+                        <action_type>get_giftcard_balance</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </webpos_integration_giftcard_get_balance>
+            <webpos_integration_giftcard_refund_balance translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>10</sort_order>
+                <model>webpos/api2_integration_giftcard</model>
+                <title>Web POS</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/webpos/integration/refundGiftcardBalance</route>
+                        <action_type>refund_giftcard_balance</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </webpos_integration_giftcard_refund_balance>
+            <webpos_integration_storecredit_get_list translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>10</sort_order>
+                <model>webpos/api2_integration_storecredit</model>
+                <title>Web POS</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/webpos/integration/getCreditList</route>
+                        <action_type>get_credit_list</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </webpos_integration_storecredit_get_list>
+            <webpos_integration_storecredit_get_balance translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>10</sort_order>
+                <model>webpos/api2_integration_storecredit</model>
+                <title>Web POS</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/webpos/integration/getCreditBalance</route>
+                        <action_type>get_credit_balance</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </webpos_integration_storecredit_get_balance>
+            <webpos_integration_storecredit_refund_by_credit translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>10</sort_order>
+                <model>webpos/api2_integration_storecredit</model>
+                <title>Web POS</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/webpos/integration/refundByCredit</route>
+                        <action_type>refund_by_credit</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </webpos_integration_storecredit_refund_by_credit>
+            <webpos_cart_save_cart translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>10</sort_order>
+                <model>webpos/api2_checkout</model>
+                <title>Web POS</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/webpos/cart/save</route>
+                        <action_type>save_cart</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </webpos_cart_save_cart>
+            <webpos_checkout_get_cart_data translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>10</sort_order>
+                <model>webpos/api2_checkout</model>
+                <title>Web POS</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/webpos/checkout/getCartData</route>
+                        <action_type>get_cart_data</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </webpos_checkout_get_cart_data>
+            <webpos_cart_remove_cart translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>10</sort_order>
+                <model>webpos/api2_checkout</model>
+                <title>Web POS</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/webpos/cart/removeCart</route>
+                        <action_type>remove_cart</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </webpos_cart_remove_cart>
+            <webpos_cart_remove_item translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>10</sort_order>
+                <model>webpos/api2_checkout</model>
+                <title>Web POS</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/webpos/cart/removeItem</route>
+                        <action_type>remove_item</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </webpos_cart_remove_item>
+            <webpos_checkout_save_shipping_method translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>15</sort_order>
+                <model>webpos/api2_checkout</model>
+                <title>Web POS</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/webpos/checkout/saveShippingMethod</route>
+                        <action_type>save_shipping_method</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </webpos_checkout_save_shipping_method>
+            <webpos_checkout_save_payment_method translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>15</sort_order>
+                <model>webpos/api2_checkout</model>
+                <title>Web POS</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/webpos/checkout/savePaymentMethod</route>
+                        <action_type>save_payment_method</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </webpos_checkout_save_payment_method>
+            <webpos_checkout_place_order translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>15</sort_order>
+                <model>webpos/api2_checkout</model>
+                <title>Web POS</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/webpos/checkout/placeOrder</route>
+                        <action_type>place_order</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </webpos_checkout_place_order>
+            <webpos_checkout_apply_coupon translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>15</sort_order>
+                <model>webpos/api2_checkout</model>
+                <title>Web POS</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/webpos/checkout/applyCoupon</route>
+                        <action_type>apply_coupon</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </webpos_checkout_apply_coupon>
+            <webpos_checkout_cancel_coupon translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>15</sort_order>
+                <model>webpos/api2_checkout</model>
+                <title>Web POS</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/webpos/checkout/cancelCoupon</route>
+                        <action_type>cancel_coupon</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </webpos_checkout_cancel_coupon>
+            <webpos_checkout_select_customer translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>15</sort_order>
+                <model>webpos/api2_checkout</model>
+                <title>Web POS</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/webpos/checkout/selectCustomer</route>
+                        <action_type>select_customer</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </webpos_checkout_select_customer>
+            <webpos_checkout_save_quote_data translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>15</sort_order>
+                <model>webpos/api2_checkout</model>
+                <title>Web POS</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/webpos/checkout/saveQuoteData</route>
+                        <action_type>save_quote_data</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </webpos_checkout_save_quote_data>
+            <webpos_checkout_check_promotion translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>15</sort_order>
+                <model>webpos/api2_checkout</model>
+                <title>Web POS</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/webpos/checkout/checkPromotion</route>
+                        <action_type>check_promotion</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </webpos_checkout_check_promotion>
+            <webpos_checkout_send_order_email translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>15</sort_order>
+                <model>webpos/api2_checkout</model>
+                <title>Web POS</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/webpos/checkout/sendEmail</route>
+                        <action_type>send_order_email</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </webpos_checkout_send_order_email>
+            <webpos_checkout_sync_order translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>15</sort_order>
+                <model>webpos/api2_checkout</model>
+                <title>Web POS</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity>
+                        <route>/webpos/checkout/syncOrder</route>
+                        <action_type>sync_order</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </webpos_checkout_sync_order>
+
+            <category translate="title" module="api2">
+                <group>catalog_product</group>
+                <model>webpos/api2_category</model>
+                <working_model>catalog/category</working_model>
+                <title>Catalog Category</title>
+                <sort_order>10</sort_order>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <attributes translate="entity_id type_id attribute_set_id stock_data image_url is_saleable total_reviews_count url buy_now_url has_custom_options is_in_stock regular_price_with_tax regular_price_without_tax final_price_with_tax final_price_without_tax use_config_gift_message_available use_config_gift_wrapping_available url_key_create_redirect" module="api2">
+                    <entity_id>Category ID</entity_id>
+                    <name>Name</name>
+                    <image>Image</image>
+                    <level>Level</level>
+                    <parent_id>Parent Id</parent_id>
+                    <path>Path</path>
+                    <position>Position</position>
+                    <first_category>First Category</first_category>
+                </attributes>
+                <routes>
+                    <route_collection>
+                        <route>/webpos/categories</route>
+                        <action_type>get</action_type>
+                    </route_collection>
+                    <route_breadcrumb>
+                        <route>/webpos/catalog/breadcrumbs</route>
+                        <action_type>getpath</action_type>
+                    </route_breadcrumb>
+                </routes>
+                <versions>1</versions>
+            </category>
+
+            <order translate="title" module="api2">
+                <group>sales_order</group>
+                <model>webpos/api2_order</model>
+                <working_model>sales/order</working_model>
+                <title>Sale Order</title>
+                <sort_order>10</sort_order>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <attributes translate="entity_id" module="api2">
+                    <entity_id>Order ID</entity_id>
+                </attributes>
+                <routes>
+                    <route_collection>
+                        <route>/webpos/order/find</route>
+                        <action_type>get</action_type>
+                    </route_collection>
+                    <route_create>
+                        <route>/webpos/order/create</route>
+                        <action_type>save</action_type>
+                    </route_create>
+                    <route_cancel>
+                        <route>/webpos/order/cancel</route>
+                        <action_type>cancel</action_type>
+                    </route_cancel>
+                    <route_comment>
+                        <route>/webpos/order/comments</route>
+                        <action_type>comment</action_type>
+                    </route_comment>
+                    <route_email>
+                        <route>/webpos/order/email</route>
+                        <action_type>email</action_type>
+                    </route_email>
+                    <route_waitpaynl_response>
+                        <route>/webpos/order/isWaitPayNlResponse</route>
+                        <action_type>isWaitPayNlResponse</action_type>
+                    </route_waitpaynl_response>
+                </routes>
+                <versions>1</versions>
+            </order>
+
+            <creditmemo translate="title" module="api2">
+                <group>webpos</group>
+                <model>webpos/api2_creditmemo</model>
+                <working_model>webpos/creditmemo</working_model>
+                <title>CreditMemo</title>
+                <sort_order>10</sort_order>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <attributes translate="entity_id" module="api2">
+                    <entity_id>CreditMemo ID</entity_id>
+                </attributes>
+                <routes>
+                    <route_create>
+                        <route>/webpos/creditmemo/create</route>
+                        <action_type>save</action_type>
+                    </route_create>
+                </routes>
+                <versions>1</versions>
+            </creditmemo>
+
+            <shipment translate="title" module="api2">
+                <group>webpos</group>
+                <model>webpos/api2_shipment</model>
+                <working_model>webpos/shipment</working_model>
+                <title>shipment</title>
+                <sort_order>10</sort_order>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <attributes translate="entity_id" module="api2">
+                    <entity_id>shipment ID</entity_id>
+                </attributes>
+                <routes>
+                    <route_create>
+                        <route>webpos/shipment/create</route>
+                        <action_type>save</action_type>
+                    </route_create>
+                </routes>
+                <versions>1</versions>
+            </shipment>
+
+            <invoice translate="title" module="api2">
+                <group>webpos</group>
+                <model>webpos/api2_invoice</model>
+                <working_model>webpos/invoice</working_model>
+                <title>Invoice</title>
+                <sort_order>12</sort_order>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <attributes translate="entity_id" module="api2">
+                    <entity_id>shipment ID</entity_id>
+                </attributes>
+                <routes>
+                    <route_create>
+                        <route>webpos/invoices/create</route>
+                        <action_type>save</action_type>
+                    </route_create>
+                    <route_updateqty>
+                        <route>webpos/invoices/updateqty</route>
+                        <action_type>updateQty</action_type>
+                    </route_updateqty>
+                </routes>
+                <versions>1</versions>
+            </invoice>
+
+            <customer translate="title" module="api2">
+                <group>customer</group>
+                <model>webpos/api2_customer</model>
+                <working_model>customer/customer</working_model>
+                <title>Customer</title>
+                <sort_order>11</sort_order>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <attributes translate="entity_id last_logged_in firstname lastname email website_id created_in group_id confirmation disable_auto_group_change" module="api2">
+                    <entity_id>Customer ID</entity_id>
+                    <last_logged_in>Last Logged In</last_logged_in>
+                    <firstname>First Name</firstname>
+                    <lastname>Last Name</lastname>
+                    <email>Email</email>
+                    <website_id>Associate to Website</website_id>
+                    <created_in>Created From</created_in>
+                    <group_id>Group</group_id>
+                    <confirmation>Is Confirmed</confirmation>
+                    <disable_auto_group_change>Disable automatic group change based on VAT ID</disable_auto_group_change>
+                </attributes>
+                <routes>
+                    <route_collection>
+                        <route>webpos/customers/find</route>
+                        <action_type>get</action_type>
+                    </route_collection>
+                    <route_create>
+                        <route>webpos/customer/create</route>
+                        <action_type>save</action_type>
+                    </route_create>
+                    <route_load>
+                        <route>webpos/customers/load</route>
+                        <action_type>load</action_type>
+                    </route_load>
+                </routes>
+                <versions>1</versions>
+            </customer>
+
+            <webpos_product translate="title" module="api2">
+                <group>catalog_product</group>
+                <model>webpos/api2_product</model>
+                <working_model>catalog/product</working_model>
+                <title>Catalog Product</title>
+                <sort_order>10</sort_order>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_collection>
+                        <route>/webpos/products</route>
+                        <action_type>get</action_type>
+                    </route_collection>
+                    <route_list>
+                        <route>/webpos/product/list</route>
+                        <action_type>list</action_type>
+                    </route_list>
+                    <route_get_options>
+                        <route>/webpos/product/getoptions</route>
+                        <action_type>getoptions</action_type>
+                    </route_get_options>
+                    <route_get_stocks_in_warehouses>
+                        <route>/webpos/product/getStocksInWarehouses</route>
+                        <action_type>get_stocks_in_warehouses</action_type>
+                    </route_get_stocks_in_warehouses>
+                </routes>
+                <versions>1</versions>
+            </webpos_product>
+
+            <webpos_product_swatch_search translate="title" module="api2">
+                <group>catalog_product</group>
+                <model>webpos/api2_swatch</model>
+                <working_model>catalog/product</working_model>
+                <title>Catalog Product Swatch</title>
+                <sort_order>10</sort_order>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_collection>
+                        <route>/webpos/products/swatch/search</route>
+                        <action_type>collection</action_type>
+                    </route_collection>
+                </routes>
+                <versions>1</versions>
+            </webpos_product_swatch_search>
+
+            <webpos_configurations translate="title" module="api2">
+                <group>webpos</group>
+                <model>webpos/api2_configurations</model>
+                <working_model>catalog/product</working_model>
+                <title>Configurations</title>
+                <sort_order>10</sort_order>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_collection>
+                        <route>/webpos/configurations</route>
+                        <action_type>collection</action_type>
+                    </route_collection>
+                </routes>
+                <versions>1</versions>
+            </webpos_configurations>
+
+            <webpos_countries translate="title" module="api2">
+                <group>webpos</group>
+                <model>webpos/api2_countries</model>
+                <working_model>catalog/product</working_model>
+                <title>Countries</title>
+                <sort_order>10</sort_order>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_collection>
+                        <route>/webpos/countries</route>
+                        <action_type>collection</action_type>
+                    </route_collection>
+                </routes>
+                <versions>1</versions>
+            </webpos_countries>
+
+            <webpos_currencies translate="title" module="api2">
+                <group>webpos</group>
+                <model>webpos/api2_currencies</model>
+                <working_model>catalog/product</working_model>
+                <title>Currencies</title>
+                <sort_order>10</sort_order>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_collection>
+                        <route>/webpos/currencies</route>
+                        <action_type>collection</action_type>
+                    </route_collection>
+                </routes>
+                <routes>
+                    <route_change>
+                        <route>/webpos/currencies/change</route>
+                        <action_type>update</action_type>
+                    </route_change>
+                </routes>
+                <versions>1</versions>
+            </webpos_currencies>
+
+            <webpos_staff translate="title" module="api2">
+                <group>webpos</group>
+                <model>webpos/api2_staff</model>
+                <working_model>webpos/user</working_model>
+                <title>Staff</title>
+                <sort_order>10</sort_order>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>0</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_entity_login>
+                        <route>/webpos/staff/login</route>
+                        <action_type>entity_login</action_type>
+                    </route_entity_login>
+                    <route_entity_logout>
+                        <route>/webpos/staff/logout</route>
+                        <action_type>entity_logout</action_type>
+                    </route_entity_logout>
+                    <route_entity_changepassword>
+                        <route>/webpos/staff/changepassword</route>
+                        <action_type>entity_changepassword</action_type>
+                    </route_entity_changepassword>
+                    <route_staff_list>
+                        <route>/webpos/staffs</route>
+                        <action_type>get</action_type>
+                    </route_staff_list>
+                </routes>
+                <versions>1</versions>
+            </webpos_staff>
+            <webpos_pos translate="title" module="api2">
+                <group>webpos</group>
+                <model>webpos/api2_pos</model>
+                <working_model>webpos/pos</working_model>
+                <title>Pos</title>
+                <sort_order>10</sort_order>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>0</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_pos_collection>
+                        <route>/webpos/poslist</route>
+                        <action_type>get</action_type>
+                    </route_pos_collection>
+                    <route_pos_assign>
+                        <route>/webpos/posassign</route>
+                        <action_type>update</action_type>
+                    </route_pos_assign>
+                </routes>
+                <versions>1</versions>
+            </webpos_pos>
+            <webpos_shopping_cart translate="title" module="api2">
+                <group>webpos</group>
+                <sort_order>10</sort_order>
+                <model>webpos/api2_shoppingCart</model>
+                <title>Web POS</title>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                </privileges>
+                <routes>
+                    <route_get_shoppping_cart_items>
+                        <route>/webpos/shopping-cart/items</route>
+                        <action_type>get_shopping_cart_items</action_type>
+                    </route_get_shoppping_cart_items>
+                    <route_update_shoppping_cart_items>
+                        <route>/webpos/shopping-cart/updateItems</route>
+                        <action_type>update_shopping_cart_items</action_type>
+                    </route_update_shoppping_cart_items>
+                </routes>
+                <versions>1</versions>
+            </webpos_shopping_cart>
+        </resources>
+    </api2>
+</config>

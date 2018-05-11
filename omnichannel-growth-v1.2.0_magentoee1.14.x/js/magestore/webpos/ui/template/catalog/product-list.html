@@ -1,0 +1,150 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<div class="col-sm-8 col-left" data-bind="afterRender: afterRender" id="product-list-wrapper">
+    <header class="o-header">
+        <nav class="o-header-nav">
+            <div data-bind="visible: isSearchable" class="form-inline" role="form">
+                <div class="form-group">
+                    <span class="icon-iconPOS-search"></span>
+                    <input type="search"
+                           data-bind="event: {change: filter}, attr: {'placeholder': __('Enter terms or scan barcodes to search')}, afterRender:focusSearch()"
+                           class="form-control search-header" id="search-header-product" autofocus />
+                    <a data-bind="event: {'click': removeSearch()},
+                        attr: {'class': getClassSearch()}"
+                       id="remove-text-search-product">
+                        <span class="icon-iconPOS-delete"></span>
+                    </a>
+                </div>
+                <button type="submit" class="btn btn-default" data-bind="i18n: 'Search'"></button>
+            </div>
+            <div class="catalog-header" data-toggle="collapse" data-target="#all-categories" data-bind="click: getAllCategories">
+                <span class="icon-iconPOS-categories"></span>
+                <span class="title title-header-page" data-bind="i18n: 'All Categories'"></span>
+                <span class="icon-iconPOS-dropdown"></span>
+            </div>
+        </nav>
+        <!-- ko foreach: {data:getRegion('webpos_catalog_list')} -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!-- /ko -->
+    </header><!-- /o-header -->
+    <main class="main-content">
+
+        <!-- ko foreach: {data:getRegion('webpos_breadcrumbs')} -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+        <div id="block-product-list">
+            <div class="grid-data">
+                <div class="wrap-list-product scroll-grid" style="">
+                    <div class="col-md-12">
+                        <!-- ko if: total -->
+                        <div data-bind="foreach:{data:items, afterRender:afterRenderItems}" class="row">
+                            <div class="col-sm-3">
+                                <div class="item product-item">
+                                    <div class="product-img" data-bind="click:$parent.prepareAddToCart.bind($parent)">
+                                        <a class="warning" data-bind="visible: isShowOutStock, attr:{'title': $parent.__('Out of stock')}"><span class="icon-iconPOS-out-of-stock"></span></a>
+                                        <img width="119" height="auto" data-bind="attr: {src: image}" />
+                                    </div>
+                                    <div class="product-info" data-bind="click:$parent.prepareAddToCart.bind($parent)">
+                                        <h3 class="product-name" data-bind="html: name" />
+                                        <div class="prices" data-bind="if: $data.type_id != 'giftvoucher'">
+                                            <span class="sku" data-bind="html: sku" /><br/>
+                                            <span class="final-price price" data-bind="text: $parent.showPrice('final_price', $data)" />
+                                            <!-- ko if: $parent.isShowNormalPrice -->
+                                            <span class="regular-price price" data-bind="text: $parent.showPrice('price', $data)" />
+                                            <!-- /ko -->
+                                        </div>
+                                        <!-- ko if: $parent.isShowAvailableQty($data)  && $data.is_virtual !== '1' && $data.type_id != 'giftvoucher' -->
+                                        <span data-bind="i18n: 'Availability: '"></span><label class="available_qty" data-bind="text: $parent.getAvailableQty($data)" />
+                                        <!-- /ko -->
+                                    </div>
+                                    <a data-target="#popup-product-details" data-toggle="modal" class="info" href="#" data-bind="click: $parent.showPopupDetails.bind($parent), attr: {'title': $parent.__('View product details')}">
+                                        <span class="icon-iconPOS-detail"><span class="path1"></span><span class="path2"></span></span>
+                                    </a>
+                                    <!-- ko if: $parent.getQtyInCart(entity_id) > 0 -->
+                                    <a href="#" class="number bg-cl-active" data-bind="text: $parent.getQtyInCart(entity_id)"></a>
+                                    <!-- /ko -->
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                        <!-- ko ifnot: total -->
+                        <div>
+                            <span data-bind="i18n: 'We couldn\'t find any records.'"></span>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="popup-custom-sale" class="hide-popup popup-for-right pos_modal">
+            <!-- ko foreach: {data:getRegion('webpos_cart_customsale')} -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!-- /ko -->
+        </div>
+    </main><!-- /o-content -->
+    <div class="col-sm-8 col-left wrap-list-product" id='product-list-overlay' style="opacity: 1; background-color: #fff; position: fixed; display: none; z-index: 99999">
+        <span class="product-loader"></span>
+    </div>
+    <div class="col-sm-8 col-left wrap-list-product" id='product-list-overlay-transparent' style="opacity: 1; background-color: transparent; position: fixed; display: none; z-index: 99999">
+        <span class="product-loader"></span>
+    </div>
+    <footer class="list-product-footer">
+        <div class="wrap-footer">
+            <div class="product-total-loading">
+                <label class="number-product" data-bind="text: total.call() +  __(' product(s)')"></label>
+                <span data-bind="visible: displaySyncPercent">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="" data-bind="style:{'width':syncPercent()+'%'}, attr:{'aria-valuenow':syncPercent()}">
+
+                        </div>
+                    </div>
+                    <label class="status-process" data-bind="text:syncPercent()+ '%'"></label>
+
+                </span>
+            </div>
+            <div id="productPager">
+                <ul class="pagination-pos" style="margin-top: 0px">
+                    <!-- ko if: (currentPage.call() > 1) -->
+                    <li data-bind="click: previousPage" style="float: left"><span class="icon-iconPOS-previous" aria-hidden="true"></span></li>
+                    <!-- /ko -->
+                    <li class="pager-list"><span class="pager" data-bind="text: __('Page: ') + currentPage.call()"></span></li>
+                    <!-- ko if: showNext.call() -->
+                    <li data-bind="click: nextPage" style="float: left"><span class="icon-iconPOS-next" aria-hidden="true"></span></li>
+                    <!-- /ko -->
+                </ul>
+            </div>
+
+            <label class="custom-sale pos_modal_link"
+                   data-toggle="modal"
+                   data-target="#popup-custom-sale" data-bind="click: showCustomSale">
+                <span class="icon-iconPOS-customer-sale"></span>
+                <span class="pos_modal_link"
+                      data-bind="i18n:'Custom sale'">
+                    </span>
+            </label>
+        </div>
+    </footer><!-- /o-footer -->
+</div>
+
+<style type="text/css">
+    .scroll-grid {height: 400px; overflow-x: auto;}
+</style>

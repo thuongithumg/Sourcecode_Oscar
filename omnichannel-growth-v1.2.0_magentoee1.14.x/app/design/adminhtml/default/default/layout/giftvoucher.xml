@@ -1,0 +1,376 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<layout version="0.1.0">
+    <!-- Gift Voucher -->
+    <default>
+        <reference name="head">
+            <action method="addJs"><script>tinybox/tinybox.js</script></action>
+            <action method="addCss"><stylesheet>css/tinybox/style.css</stylesheet></action>
+        </reference>
+    </default>
+    <adminhtml_giftvoucher_giftvoucher_index>
+        <reference name="content">
+            <block type="giftvoucher/adminhtml_giftvoucher" name="giftvoucher"  />
+        </reference>
+        <reference name="js">
+            <block type="core/template" template="giftvoucher/popupmassaction.phtml" />
+        </reference>
+    </adminhtml_giftvoucher_giftvoucher_index>
+    <adminhtml_giftvoucher_giftvoucher_print>
+        <block type="core/text_list" name="root">
+            <block type="giftvoucher/adminhtml_giftvoucher_view" name="giftvoucher.view" template="giftvoucher/giftcard/print.phtml" />
+        </block>
+    </adminhtml_giftvoucher_giftvoucher_print>
+    <adminhtml_giftvoucher_giftvoucher_printfold>
+        <block type="core/text_list" name="root">
+            <block type="giftvoucher/adminhtml_giftvoucher_view" name="giftvoucher.view" template="giftvoucher/giftcard/fold_print.phtml" />
+        </block>
+    </adminhtml_giftvoucher_giftvoucher_printfold>
+    <adminhtml_giftvoucher_giftvoucher_massprint>
+        <block type="core/text_list" name="root">
+            <block type="giftvoucher/adminhtml_giftvoucher_view" name="giftvoucher.massview" template="giftvoucher/giftcard/massprint.phtml" />
+            <block type="giftvoucher/adminhtml_giftvoucher_view" name="giftvoucher.massviewfold" template="giftvoucher/giftcard/mass_fold_print.phtml" />
+        </block>
+    </adminhtml_giftvoucher_giftvoucher_massprint>
+    <adminhtml_giftvoucher_giftvoucher_edit>
+        <reference name="head">  
+            <action method="addJs">
+                <script>magestore/giftvoucher/js/slideshow.js</script>
+            </action>
+            <action method="addCss">
+                <stylesheet>css/magestore/giftvoucher/giftvoucher.css</stylesheet>
+            </action>          
+        </reference>       
+    </adminhtml_giftvoucher_giftvoucher_edit>
+    <!--Gift Templage Begin-->
+    <adminhtml_giftvoucher_gifttemplate_index>
+        <reference name="content">
+            <block type="giftvoucher/adminhtml_gifttemplate" name="gifttemplate" />
+        </reference>
+    </adminhtml_giftvoucher_gifttemplate_index>
+    <adminhtml_giftvoucher_gifttemplate_viewdemo>
+        <block type="core/text_list" name="root">
+            <block type="adminhtml/template" template="giftvoucher/template/header.phtml" name="transaction.popup.header" />
+            <block type="giftvoucher/adminhtml_gifttemplate_viewdemo" name="template.popup.serializer">
+            </block>
+        </block>
+    </adminhtml_giftvoucher_gifttemplate_viewdemo>
+    <adminhtml_giftvoucher_gifttemplate_previewimage>
+        <action method="addCss">
+            <stylesheet>css/magestore/giftvoucher/giftvoucher.css</stylesheet>
+        </action>
+        <block type="core/text_list" name="root">
+            <block type="adminhtml/template" template="giftvoucher/template/pattern/header.phtml" name="template.popup.header" />
+            <block type="giftvoucher/adminhtml_gifttemplate_preview" name="giftpreview.popup.serializer" />
+        </block>
+    </adminhtml_giftvoucher_gifttemplate_previewimage>
+    <adminhtml_giftvoucher_gifttemplate_previewfoldimage>
+        <action method="addCss">
+            <stylesheet>css/magestore/giftvoucher/giftvoucher.css</stylesheet>
+        </action>
+        <block type="core/text_list" name="root">
+            <block type="adminhtml/template" template="giftvoucher/template/pattern/header.phtml" name="template.popup.header" />
+            <block type="giftvoucher/adminhtml_gifttemplate_preview" name="giftpreview.popup.serializer" />
+        </block>
+    </adminhtml_giftvoucher_gifttemplate_previewfoldimage>
+    <adminhtml_giftvoucher_gifttemplate_edit>
+        <reference name="head">
+            <action method="addJs">
+                <script>magestore/giftvoucher/jscolor/jscolor.js</script>
+            </action>
+            <action method="addJs">
+                <script>magestore/giftvoucher/js/uploadimage.js</script>
+            </action>
+            <action method="addCss">
+                <stylesheet>css/magestore/giftvoucher/mobilelibrary.css</stylesheet>
+            </action>
+            <action method="addCss">
+                <stylesheet>css/magestore/giftvoucher/gift_template.css</stylesheet>
+            </action>
+            <action method="addJs">
+                <script>magestore/giftvoucher/js/slideshow.js</script>
+            </action>        
+        </reference>       
+    </adminhtml_giftvoucher_gifttemplate_edit>
+    <adminhtml_giftvoucher_gifttemplate_new>
+        <reference name="head">
+            <action method="addJs">
+                <script>magestore/jscolor/jscolor.js</script>
+            </action>
+        </reference>       
+    </adminhtml_giftvoucher_gifttemplate_new>
+    <!--Gift Template End-->
+    <adminhtml_giftvoucher_gifthistory_index>
+        <reference name="content">
+            <block type="giftvoucher/adminhtml_gifthistory" name="gifthistory" />
+        </reference>
+    </adminhtml_giftvoucher_gifthistory_index>
+    
+    <adminhtml_giftvoucher_giftproduct_index>
+        <reference name="content">
+            <block type="giftvoucher/adminhtml_giftproduct" name="giftproduct" />
+        </reference>
+    </adminhtml_giftvoucher_giftproduct_index>
+    
+    <adminhtml_giftvoucher_generategiftcard_index>
+        <reference name="content">
+            <block type="giftvoucher/adminhtml_generategiftcard" name="generategiftcard" />
+        </reference>
+    </adminhtml_giftvoucher_generategiftcard_index>
+    
+    <adminhtml_giftvoucher_generategiftcard_edit>
+        <reference name="head">  
+            <action method="addJs">
+                <script>magestore/giftvoucher/js/slideshow.js</script>
+            </action>
+            <action method="addCss">
+                <stylesheet>css/magestore/giftvoucher/giftvoucher.css</stylesheet>
+            </action>          
+        </reference>       
+    </adminhtml_giftvoucher_generategiftcard_edit>
+
+    <adminhtml_giftvoucher_giftcodeset_index>
+        <reference name="content">
+            <block type="giftvoucher/adminhtml_giftcodeset" name="giftcodeset" />
+        </reference>
+    </adminhtml_giftvoucher_giftcodeset_index>
+
+    <adminhtml_giftvoucher_giftcodeset_giftcodelist>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="giftvoucher/adminhtml_giftcodeset_edit_tab_giftcodelist" name="giftcodelists.grid" />
+        </block>
+    </adminhtml_giftvoucher_giftcodeset_giftcodelist>
+
+
+    <!-- Order -->
+    <adminhtml_sales_order_view>
+        <reference name="order_items">
+            <action method="addColumnRender">
+                <column>name</column>
+                <block>giftvoucher/adminhtml_order_item_name</block>
+                <template>sales/items/column/name.phtml</template>
+            </action>
+        </reference>
+        <reference name="order_totals">
+            <block type="giftvoucher/adminhtml_order_credit" name="giftvoucher.order.credit" />
+            <block type="giftvoucher/adminhtml_order_totals" name="giftvoucher.order.totals" />
+        </reference>
+    </adminhtml_sales_order_view>
+	
+    <adminhtml_sales_order_invoice_new>
+        <reference name="order_items">
+            <action method="addColumnRender">
+                <column>name</column>
+                <block>giftvoucher/adminhtml_order_item_name</block>
+                <template>sales/items/column/name.phtml</template>
+            </action>
+        </reference>
+        <reference name="invoice_totals">
+            <block type="giftvoucher/adminhtml_order_invoice_credit" name="giftvoucher.order.credit" />
+            <block type="giftvoucher/adminhtml_order_invoice_totals" name="giftvoucher.order.totals" />
+        </reference>
+    </adminhtml_sales_order_invoice_new>
+    <adminhtml_sales_order_invoice_view>
+        <reference name="invoice_items">
+            <action method="addColumnRender">
+                <column>name</column>
+                <block>giftvoucher/adminhtml_order_item_name</block>
+                <template>sales/items/column/name.phtml</template>
+            </action>
+        </reference>
+        <reference name="invoice_totals">
+            <block type="giftvoucher/adminhtml_order_invoice_credit" name="giftvoucher.order.credit" />
+            <block type="giftvoucher/adminhtml_order_invoice_totals" name="giftvoucher.order.totals" />
+        </reference>
+    </adminhtml_sales_order_invoice_view>
+    <adminhtml_sales_order_invoice_updateqty>
+        <reference name="order_items">
+            <action method="addColumnRender">
+                <column>name</column>
+                <block>giftvoucher/adminhtml_order_item_name</block>
+                <template>sales/items/column/name.phtml</template>
+            </action>
+        </reference>
+        <reference name="invoice_totals">
+            <block type="giftvoucher/adminhtml_order_invoice_credit" name="giftvoucher.order.credit" />
+            <block type="giftvoucher/adminhtml_order_invoice_totals" name="giftvoucher.order.totals" />
+        </reference>
+    </adminhtml_sales_order_invoice_updateqty>
+	
+    <adminhtml_sales_order_shipment_new>
+        <reference name="order_items">
+            <action method="addColumnRender">
+                <column>name</column>
+                <block>giftvoucher/adminhtml_order_item_name</block>
+                <template>sales/items/column/name.phtml</template>
+            </action>
+        </reference>
+    </adminhtml_sales_order_shipment_new>
+    <adminhtml_sales_order_shipment_view>
+        <reference name="shipment_items">
+            <action method="addColumnRender">
+                <column>name</column>
+                <block>giftvoucher/adminhtml_order_item_name</block>
+                <template>sales/items/column/name.phtml</template>
+            </action>
+        </reference>
+    </adminhtml_sales_order_shipment_view>
+	
+    <adminhtml_sales_order_creditmemo_new>
+        <reference name="order_items">
+            <action method="addColumnRender">
+                <column>name</column>
+                <block>giftvoucher/adminhtml_order_item_name</block>
+                <template>sales/items/column/name.phtml</template>
+            </action>
+        </reference>
+        <reference name="creditmemo_totals">
+            <block type="giftvoucher/adminhtml_order_creditmemo_credit" name="giftvoucher.order.credit" />
+            <block type="giftvoucher/adminhtml_order_creditmemo_totals" name="giftvoucher.order.totals" />
+        </reference>
+        <reference name="submit_before">
+            <block type="giftvoucher/adminhtml_order_creditmemo_refund" name="giftvoucher.order.refund" template="giftvoucher/refund.phtml" />
+        </reference>
+    </adminhtml_sales_order_creditmemo_new>
+    <adminhtml_sales_order_creditmemo_updateqty>
+        <reference name="order_items">
+            <action method="addColumnRender">
+                <column>name</column>
+                <block>giftvoucher/adminhtml_order_item_name</block>
+                <template>sales/items/column/name.phtml</template>
+            </action>
+        </reference>
+        <reference name="creditmemo_totals">
+            <block type="giftvoucher/adminhtml_order_creditmemo_credit" name="giftvoucher.order.credit" />
+            <block type="giftvoucher/adminhtml_order_creditmemo_totals" name="giftvoucher.order.totals" />
+        </reference>
+        <reference name="submit_before">
+            <block type="giftvoucher/adminhtml_order_creditmemo_refund" name="giftvoucher.order.refund" template="giftvoucher/refund.phtml" />
+        </reference>
+    </adminhtml_sales_order_creditmemo_updateqty>
+    
+    <adminhtml_sales_order_creditmemo_view>
+        <reference name="creditmemo_items">
+            <action method="addColumnRender">
+                <column>name</column>
+                <block>giftvoucher/adminhtml_order_item_name</block>
+                <template>sales/items/column/name.phtml</template>
+            </action>
+        </reference>
+        <reference name="creditmemo_totals">
+            <block type="giftvoucher/adminhtml_order_creditmemo_credit" name="giftvoucher.order.credit" />
+            <block type="giftvoucher/adminhtml_order_creditmemo_totals" name="giftvoucher.order.totals" />
+        </reference>
+    </adminhtml_sales_order_creditmemo_view>
+    
+    <!-- Backend create order -->
+    <adminhtml_sales_order_create_index>
+        <reference name="head">
+            <action method="addJs"><script>magestore/giftvoucher/js/giftvoucher.js</script></action>
+            <action method="addJs"><script>magestore/adminhtml/giftvoucher.js</script></action>
+            <action method="addJs"><script>prototype/window.js</script></action>           
+            <action method="addItem">
+                <type>js_css</type>
+                <name>prototype/windows/themes/default.css</name>
+            </action>
+            <action method="addCss">
+                <stylesheet>css/magestore/giftvoucher/giftvoucher.css</stylesheet>
+            </action>
+            <!--            <action method="addJs">
+                <script>magestore/giftvoucher/js/slideshow.js</script>
+            </action>-->
+            <action method="addCss">
+                <stylesheet>css/magestore/giftvoucher/gift_template.css</stylesheet>
+            </action>
+        </reference>        
+        <reference name="items_grid">
+            <block type="giftvoucher/adminhtml_order_form" template="giftvoucher/form.phtml" name="giftvoucher.giftcard" />
+            <block type="giftvoucher/adminhtml_order_sendbackend" name="giftvoucher.giftsend" >
+            </block>
+        </reference>
+    </adminhtml_sales_order_create_index>
+    <adminhtml_sales_order_create_load_block_data>
+        <reference name="items_grid">
+            <block type="giftvoucher/adminhtml_order_form" template="giftvoucher/form.phtml" name="giftvoucher.giftcard" />
+            <block type="giftvoucher/adminhtml_order_sendbackend"  name="giftvoucher.giftsend" >
+            </block>
+        </reference>        
+    </adminhtml_sales_order_create_load_block_data>
+    <adminhtml_sales_order_create_load_block_items>
+        <reference name="items_grid">
+            <block type="giftvoucher/adminhtml_order_form" template="giftvoucher/form.phtml" name="giftvoucher.giftcard" />
+            <block type="giftvoucher/adminhtml_order_sendbackend" name="giftvoucher.giftsend" >
+            </block>
+        </reference>
+    </adminhtml_sales_order_create_load_block_items>
+    <!-- insert tabs info credit to edit customer -->
+    <adminhtml_customer_edit>
+        <reference name="customer_edit_tabs">
+            <action method="addTab">
+                <name>credit_balance_giftcard</name>
+                <block>giftvoucher/adminhtml_customer_tab_credit</block>
+            </action>
+        </reference>
+    </adminhtml_customer_edit>
+    
+    <adminhtml_catalog_product_new>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/magestore/giftvoucher/catalog_gift_product.css</stylesheet>
+            </action>
+            
+        </reference>
+        <reference name="product_tabs">
+            <action method="addTab">
+                <name>giftcard_conditions</name>
+                <block>giftvoucher/adminhtml_product_tab_conditions</block>              
+            </action>
+            <action method="addTab">
+                <name>giftcard_actions</name>
+                <block>giftvoucher/adminhtml_product_tab_actions</block>
+            </action>
+        </reference>
+    </adminhtml_catalog_product_new>
+    <adminhtml_catalog_product_edit>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/magestore/giftvoucher/catalog_gift_product.css</stylesheet>
+            </action>   
+        </reference>
+        <reference name="product_tabs">
+            <action method="addTab">
+                <name>giftcard_conditions</name>
+                <block>giftvoucher/adminhtml_product_tab_conditions</block>
+            </action>
+            <action method="addTab">
+                <name>giftcard_actions</name>
+                <block>giftvoucher/adminhtml_product_tab_actions</block>
+            </action>
+        </reference>
+    </adminhtml_catalog_product_edit>
+    <PRODUCT_TYPE_giftvoucher>
+        <reference name="product.composite.fieldset">
+            <block type="giftvoucher/adminhtml_product_view" name="product.composite.fieldset.giftvoucher" before="product.composite.fieldset.options" template="giftvoucher/product/composite/fieldset/giftvoucher.phtml" />
+        </reference>
+    </PRODUCT_TYPE_giftvoucher>
+</layout>

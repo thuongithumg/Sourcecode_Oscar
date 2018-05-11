@@ -1,0 +1,218 @@
+
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<form id="form-customer-add-customer-checkout" class="modal fade customer-popup-form" role="dialog">
+    <div class="indicator" style="display: none">
+        <div class="spinner"></div>
+    </div>
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="popup-header">
+                <button type="button" class="close" data-dismiss="modal" data-bind="click: cancelCustomerForm, i18n:'Cancel'"></button>
+                <h4 class="modal-title" data-bind="i18n:'New Customer'"></h4>
+                <button type="submit" class="btn-save  link-cl-cfg" data-bind="click: saveCustomerForm, i18n:'Save'"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="input-box">
+                                <input type="text" name="first-name"
+                                       class="customer-fname"
+                                       data-bind="value: firstNameCustomer, attr: {placeholder: __('First Name')}, event: {change: setFirstName}"
+                                       data-validate="{'required-entry':true}"
+                                />
+                                <em>*</em>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="input-box">
+                                <input type="text" name="last-name"
+                                       data-bind="value: lastNameCustomer, attr: {placeholder: __('Last Name')}, event: {change: setLastName}"
+                                       data-validate="{'required-entry':true}"
+                                       class="customer-lname"/>
+                                <em>*</em>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="input-box">
+                                <input type="text" name="email"
+                                       data-bind="value: emailCustomer, attr: {placeholder: __('Email')}, event: {change: setEmail}"
+                                       data-validate="{'required-entry':true, 'validate-email': true}"
+                                       class="customer-email"/>
+                                <em>*</em>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="input-box">
+                                <select class="selectpicker"
+                                        data-validate="{'required-entry':true}"
+
+                                        data-bind="options: customerGroupArray,
+                                                value: groupCustomer,
+                                                optionsText: function(item) {
+                                                    return item.code
+                                                },
+                                                optionsValue: function(item) {
+                                                    return item.id
+                                                },
+                                                optionsCaption: __('Please choose group...'),
+                                                event: {change: setGroup}
+
+                                                "
+                                        id="customer_group" >
+
+                                </select>
+                                <em>*</em>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="input-box">
+                                <input type="text" name="vat"
+                                       class="customer-vat"
+                                       data-bind="value: vatCustomer, attr: {placeholder: __('VAT')}, event: {change: setVatCustomer}"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="subscribe-box">
+                                <label data-bind="i18n:'Subscribe Newsletter'"></label>
+                                <div class="switch-box">
+                                    <span class="off" data-bind="i18n:'OFF'"></span>
+                                    <input type="checkbox" class="ios"
+                                           name="is_subscriber" data-bind="checked: isSubscriberCustomer, bootstrapSwitchOnCustomerCheckout: isSubscriberCustomer, event: {change: setSubscriber}"/>
+                                    <span class="on" data-bind="i18n:'ON'"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title shipping-title">
+                                <a aria-expanded="false" data-parent="#accordion" data-bind="i18n:'Shipping Address'"></a>
+                                        <span class="icon-iconPOS-add" data-toggle="modal"
+                                              data-target="#form-add-address" data-bind="click: showShippingAddress, visible: !isShowShippingSummaryForm()"></span>
+                            </h4>
+                        </div>
+                        <div id="collapse1" class="panel-collapse-address">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="address-box" data-bind="visible: isShowShippingSummaryForm">
+                                            <!-- ko if: firstNameShipping() -->
+                                            <!-- ko text: firstNameShipping() --><!--/ko-->
+                                            <!--/ko-->
+                                            <!-- ko if: lastNameShipping() -->
+                                            <!-- ko text: lastNameShipping() + ', ' --><!--/ko-->
+                                            <!--/ko-->
+                                            <!-- ko if: street1Shipping() -->
+                                            <!-- ko text: street1Shipping() + ' '--><!--/ko-->
+                                            <!--/ko-->
+                                            <!-- ko if: street2Shipping() -->
+                                            <!-- ko text: street2Shipping() + ', '--><!--/ko-->
+                                            <!--/ko-->
+                                            <!-- ko if: cityShipping() -->
+                                            <!-- ko text: cityShipping() + ', ' --><!--/ko-->
+                                            <!--/ko-->
+                                            <!-- ko if: regionShipping() -->
+                                            <!-- ko text: regionShipping() + ', ' --><!--/ko-->
+                                            <!--/ko-->
+                                            <!-- ko if: countryShipping() -->
+                                            <!-- ko text: countryShipping() + ', ' --><!--/ko-->
+                                            <!--/ko-->
+                                            <!-- ko if: zipcodeShipping() -->
+                                            <!-- ko text: zipcodeShipping() + ', ' --><!--/ko-->
+                                            <!--/ko-->
+                                            <!-- ko if: phoneShipping() -->
+                                            <!-- ko text: phoneShipping() --><!--/ko-->
+                                            <!--/ko-->
+                                            <div class="actions">
+                                                <a class="edit-address" data-bind="click: editShippingAddress"><span class="icon-iconPOS-edit-28"></span></a>
+                                                <a class="delete-address" data-bind="click: deleteShippingAddress"><span class="icon-iconPOS-emptycart"></span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default last">
+                        <div class="panel-heading">
+                            <h4 class="panel-title billing-title" >
+                                <a aria-expanded="false" data-parent="#accordion" data-bind="i18n:'Billing Address'"></a>
+                                        <span class="icon-iconPOS-add" data-toggle="modal"
+                                              data-bind="click: showBillingAddress, visible: !isShowBillingSummaryForm()"
+                                              data-target="#form-add-address"></span>
+                            </h4>
+                        </div>
+                        <div id="collapse2" class="panel-collapse-billing">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="address-box" data-bind="visible: isShowBillingSummaryForm">
+                                            <!-- ko if: firstNameBilling() -->
+                                            <!-- ko text: firstNameBilling() --><!--/ko-->
+                                            <!--/ko-->
+                                            <!-- ko if: lastNameBilling() -->
+                                            <!-- ko text: lastNameBilling() + ', ' --><!--/ko-->
+                                            <!--/ko-->
+                                            <!-- ko if: street1Billing() -->
+                                            <!-- ko text: street1Billing() + ' '--><!--/ko-->
+                                            <!--/ko-->
+                                            <!-- ko if: street2Billing() -->
+                                            <!-- ko text: street2Billing() + ', '--><!--/ko-->
+                                            <!--/ko-->
+                                            <!-- ko if: cityBilling() -->
+                                            <!-- ko text: cityBilling() + ', ' --><!--/ko-->
+                                            <!--/ko-->
+                                            <!-- ko if: regionBilling() -->
+                                            <!-- ko text: regionBilling() + ', ' --><!--/ko-->
+                                            <!--/ko-->
+                                            <!-- ko if: countryBilling() -->
+                                            <!-- ko text: countryBilling() + ', ' --><!--/ko-->
+                                            <!--/ko-->
+                                            <!-- ko if: zipcodeBilling() -->
+                                            <!-- ko text: zipcodeBilling() + ', ' --><!--/ko-->
+                                            <!--/ko-->
+                                            <!-- ko if: phoneBilling() -->
+                                            <!-- ko text: phoneBilling() --><!--/ko-->
+                                            <!--/ko-->
+                                            <div class="actions">
+                                                <a class="edit-address" data-bind="click: editBillingAddress"><span class="icon-iconPOS-edit-28"></span></a>
+                                                <a class="delete-address" data-bind="click: deleteBillingAddress"><span class="icon-iconPOS-emptycart"></span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

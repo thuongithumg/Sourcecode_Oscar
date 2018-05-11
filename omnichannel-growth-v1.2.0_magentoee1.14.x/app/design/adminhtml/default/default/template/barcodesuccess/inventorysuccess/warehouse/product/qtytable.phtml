@@ -1,0 +1,72 @@
+<?php
+/**
+ *
+ *  Magestore
+ *   NOTICE OF LICENSE
+ *
+ *   This source file is subject to the Magestore.com license that is
+ *   available through the world-wide-web at this URL:
+ *   http://www.magestore.com/license-agreement.html
+ *
+ *   DISCLAIMER
+ *
+ *   Do not edit or add to this file if you wish to upgrade this extension to newer
+ *   version in the future.
+ *
+ *   @category    Magestore
+ *   @package     Magestore_Barcodesuccess
+ *   @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ *   @license     http://www.magestore.com/license-agreement.html
+ *
+ *
+ */
+
+/**
+ * @var Magestore_BarcodeSuccess_Block_Inventorysuccess_Warehouse_Product_Qtytable $this
+ */
+?>
+<?php
+$allAvailable   = 0;
+$allQtyToShip   = 0;
+$allInWarehouse = 0;
+?>
+
+<table class="warehouse_qty_table">
+    <thead>
+    <tr>
+        <th class="text-center"><?php echo $this->__('Warehouse') ?></th>
+        <th class="text-center"><?php echo $this->__('Available Qty') ?></th>
+        <th class="text-center"><?php echo $this->__('Qty to Ship') ?></th>
+        <th class="text-center"><?php echo $this->__('Qty In Warehouse') ?></th>
+        <th class="text-center"><?php echo $this->__('Shelf Location') ?></th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach ( $this->getStocks() as $stock ): ?>
+        <?php
+        $allAvailable += $stock->getTotalQty() - $stock->getQtyToShip();
+        $allQtyToShip += $stock->getQtyToShip();
+        $allInWarehouse += $stock->getTotalQty();
+        ?>
+        <tr>
+            <td class="text-left">
+                <a
+                    href="<?php echo $this->getEditWarehouseUrl($stock->getWarehouseId()) ?>">
+                    <?php echo $this->getWarehouseName($stock->getWarehouseId()) ?>
+                </a>
+            </td>
+            <td class="text-center"><?php echo $stock->getTotalQty() - $stock->getQtyToShip() ?></td>
+            <td class="text-center"><?php echo $stock->getQtyToShip() ?></td>
+            <td class="text-center"><?php echo $stock->getTotalQty() ?></td>
+            <td class="text-center"><?php echo $stock->getShelfLocation() ?></td>
+        </tr>
+    <?php endforeach; ?>
+    <tr>
+        <td class="text-left"><?php echo $this->__("All") ?></td>
+        <td class="text-center"><?php echo $allAvailable ?></td>
+        <td class="text-center"><?php echo $allQtyToShip ?></td>
+        <td class="text-center"><?php echo $allInWarehouse ?></td>
+        <td class="text-center"></td>
+    </tr>
+    </tbody>
+</table>

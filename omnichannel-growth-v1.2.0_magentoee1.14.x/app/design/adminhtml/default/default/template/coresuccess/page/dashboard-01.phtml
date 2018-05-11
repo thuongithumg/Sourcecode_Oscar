@@ -1,0 +1,140 @@
+<?php
+
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Coresuccess
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+?>
+<?php $apps = $this->getApps() ?>
+<?php $availApps = $this->getAvailableApps() ?>
+<?php $categories = $this->getData('categories') ?>
+
+<div class="erp-apps">
+    <div class="container">
+        <div class="rowb">
+            <div class="col-md-12">
+                <h2 class="title-head"> 
+                    <?php echo $this->__('Access your active Extensions in Retailer Kit') ?>						
+                </h2>
+            </div>
+        </div>
+        <div class="rowb">
+
+            <?php if (count($apps)): ?>
+                <?php foreach ($apps as $key => $app): ?>
+                    <div class="col-md-2 col-sm-2 col-xs-6">
+                        <a class="erp-app-item" href="<?php echo $this->getDefaultPage($app) ?>" >
+                            <img src="<?php echo $this->getAppIcon($app) ?>" />
+                            <span class="app-caption"><?php echo $this->getAppCaption($app) ?> <br/> <?php echo $this->getAppVersion($app) ?></span>
+                        </a>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+</div>
+<div class="clear fix"></div>
+<?php if (count($availApps)): ?>
+    <div class="available-apps">
+        <div class="container">
+            <div class="rowb">
+                <div class="col-md-12">
+                    <div class="block-header">
+                        <h2 class="icon-head" id="erp_available_app_title"> 
+                            <?php echo $this->__('Explore What Extensions are Missing in Your Retailer Kit') ?>
+                            <!--
+                            <span id="app_board_control" style="font-size:24px;">
+                                <a onclick="erpMenu.showAppBoard();" href="javascript:void(0);">
+                                    <i class="fa fa-angle-double-down"></i>
+                                </a>
+                            </span>
+                            -->
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div id="erp_available_app_dashboard">
+            <div class="container">
+                <div class="rowb">
+                    <?php $i = 0; ?>
+                    <?php foreach ($categories as $categoryId => $categoryName): ?>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="app-group <?php echo ($i++ % 2 == 0 ? 'even' : '') ?>">
+                                <div class="group-title">
+                                    <?php echo $categoryName ?>
+                                </div>
+                                <div class="group-list">
+                                    <?php $count = 0; ?>
+                                    <?php foreach ($availApps as $key => $availApp): ?>
+                                        <?php if ($availApp['group_id'] == $categoryId): ?>
+                                            <?php if ($availApp['installed']) continue; ?>
+                                            <?php $count++; ?>
+                                            <div class="app-detail <?php echo ($availApp['installed'] ? 'installed' : '') ?>">
+                                                <a class="erp-app-item" target="_blank" href="<?php echo $availApp['url'] ?>" >
+                                                    <img src="<?php echo $availApp['icon'] ?>" />
+                                                </a>
+                                                <div class="app-desc">
+                                                    <h4><?php echo $availApp['name'] ?></h4>
+                                                    <p><?php echo 'Version: ' . $availApp['version'] ?></p>
+                                                    <p><?php //echo $availApp['quick_description']  ?></p>
+                                                    <?php if (!$availApp['installed']): ?>
+                                                        <p><?php echo $availApp['price'] ?></p>
+                                                    <?php endif; ?>
+                                                    <?php if (!$availApp['installed']): ?>
+                                                        <a target="_blank" href="<?php echo $availApp['url'] ?>" class="right purchase"><?php echo $this->__('Get it now') ?> <i class="fa fa-long-arrow-down"></i></a>
+                                                    <?php else: ?>
+                                                        <a class="right"><?php echo $this->__('Installed') ?></a>
+                                                    <?php endif; ?>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                    <?php if (!$count): ?>
+                                        <div class="app-detail installed">
+                                            <?php echo $this->__('Congrats! You\'ve activated all extensions in this group.') ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php if ($this->getIsShowList()): ?>
+        <script type="text/javascript"> erpMenu.showAppBoard();</script>
+    <?php endif; ?>
+<?php endif; ?>
+<script type="text/javascript">
+    <?php if($this->isTrackShowEvent()): ?>
+        trackEventERP('view','<?php echo Mage::getBaseUrl() ?>', '<?php echo $this->getTrackEventUrl()?>', null);
+    <?php endif; ?>
+    function trackEventERP(event, domain, trackurl, params) {
+        new Ajax.Request(trackurl, {
+            method: 'get',
+            parameters: {"action" : event,"domain" : domain, "params" : params},
+            onComplete: function (transport) {
+            }
+        });        
+    }
+</script>

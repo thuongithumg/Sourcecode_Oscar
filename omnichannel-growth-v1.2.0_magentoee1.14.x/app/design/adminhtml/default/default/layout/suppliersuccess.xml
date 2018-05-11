@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_Suppliersuccess
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<layout version="0.1.0">
+    <adminhtml_suppliersuccess_supplier_index>
+        <reference name="content">
+            <block type="suppliersuccess/adminhtml_supplier" name="supplier" />
+        </reference>
+    </adminhtml_suppliersuccess_supplier_index>
+    
+    <adminhtml_suppliersuccess_product_index>
+        <block type="core/text_list" name="root">
+            <block type="suppliersuccess/adminhtml_supplier_edit_tab_products" name="suppliersuccess.supplier.edit.tab.products"/>
+            <block type="adminhtml/widget_grid_serializer" name="related_grid_serializer">
+                    <action method="initSerializerBlock">
+                    <grid_block_name>suppliersuccess.supplier.edit.tab.products</grid_block_name>
+                    <data_callback>getSelectedRelatedProducts</data_callback>
+                    <hidden_input_name>products</hidden_input_name>
+                    <reload_param_name>products</reload_param_name>
+                </action>
+                <action method="addColumnInputName">
+                    <input_name>product_supplier_sku</input_name>
+                    <input_name>cost</input_name>
+                    <input_name>tax</input_name>
+                </action>
+            </block>
+        </block>
+    </adminhtml_suppliersuccess_product_index>
+    
+    <adminhtml_suppliersuccess_product_grid>
+        <block type="core/text_list" name="root">
+            <block type="suppliersuccess/adminhtml_supplier_edit_tab_products" name="suppliersuccess.supplier.edit.tab.products"/>
+        </block>
+    </adminhtml_suppliersuccess_product_grid>
+    
+    <adminhtml_suppliersuccess_supplier_edit>
+        <update handle="adminhtml_coresuccess_modal"/>
+        <reference name="content">
+            <block type="suppliersuccess/adminhtml_supplier_edit_product_import" name="supplier_product_import"/>
+        </reference>        
+    </adminhtml_suppliersuccess_supplier_edit>   
+    
+    <adminhtml_suppliersuccess_pricelist_index>
+        <update handle="adminhtml_coresuccess_modal"/>
+        <reference name="content">
+            <block type="suppliersuccess/adminhtml_pricelist_notice"></block>
+            <block type="suppliersuccess/adminhtml_pricelist" name="pricelist" />
+            <block type="adminhtml/widget_grid_serializer" name="related_grid_serializer">
+                    <action method="initSerializerBlock">
+                    <grid_block_name>adminhtml_pricelist.grid</grid_block_name>
+                    <data_callback>getSelectedRelatedProducts</data_callback>
+                    <hidden_input_name>pricelists</hidden_input_name>
+                    <reload_param_name>pricelists</reload_param_name>
+                </action>
+                <action method="addColumnInputName">
+                    <input_name>cost</input_name>
+                    <input_name>minimal_qty</input_name>
+                </action>
+            </block>            
+            <block type="suppliersuccess/adminhtml_pricelist_import" name="supplier_pricelist_import"/>                           
+        </reference>
+        <reference name="js">
+            <block type="suppliersuccess/adminhtml_pricelist_js" name="pricelist_js"/>
+        </reference>        
+    </adminhtml_suppliersuccess_pricelist_index>   
+    
+    <adminhtml_suppliersuccess_pricelist_grid>
+        <block type="core/text_list" name="root">
+            <block type="suppliersuccess/adminhtml_pricelist_grid" name="adminhtml_pricelist.grid"/>
+        </block>
+    </adminhtml_suppliersuccess_pricelist_grid>  
+    
+    <adminhtml_suppliersuccess_pricelist_supplier>
+        <block type="core/text_list" name="root">
+            <block type="suppliersuccess/adminhtml_pricelist_grid" name="adminhtml_pricelist.grid"/>
+            <block type="adminhtml/widget_grid_serializer" name="related_grid_serializer">
+                    <action method="initSerializerBlock">
+                    <grid_block_name>adminhtml_pricelist.grid</grid_block_name>
+                    <data_callback>getSelectedRelatedProducts</data_callback>
+                    <hidden_input_name>pricelists</hidden_input_name>
+                    <reload_param_name>pricelists</reload_param_name>
+                </action>
+                <action method="addColumnInputName">
+                    <input_name>cost</input_name>
+                    <input_name>minimal_qty</input_name>
+                </action>
+            </block>  
+        </block>
+    </adminhtml_suppliersuccess_pricelist_supplier>
+    
+    <adminhtml_suppliersuccess_pricelist_suppliergrid>
+        <block type="core/text_list" name="root">
+            <block type="suppliersuccess/adminhtml_pricelist_grid" name="adminhtml_pricelist.grid"/>
+        </block>
+    </adminhtml_suppliersuccess_pricelist_suppliergrid>  
+    
+    <adminhtml_catalog_product_edit>
+        <reference name = "head">            
+            <action method="addJs">
+                <script>magestore/suppliersuccess/catalog/product.js</script>
+            </action>            
+        </reference>          
+        <reference name="product_tabs">
+            <!--
+            <action method="addTabAfter">
+                <name>suppliersuccess_supplier</name>
+                <block>suppliersuccess/adminhtml_catalog_product_edit_tab_supplier</block>
+                <afterTabId>inventory</afterTabId>
+            </action>
+            -->
+            <!--
+            <action method="addTabAfter">
+                <name>supplier_configurable_inventory</name>
+                <block>suppliersuccess/adminhtml_catalog_product_edit_tab_configurable_supplier</block>
+                <afterTabId>inventory</afterTabId>
+            </action>        
+            -->    
+        </reference>
+        <reference name="js">
+            <block type="suppliersuccess/adminhtml_catalog_product_edit_js" name="suppliersuccess_catalog_product_js"/>
+        </reference>        
+    </adminhtml_catalog_product_edit>                                        
+        
+</layout>

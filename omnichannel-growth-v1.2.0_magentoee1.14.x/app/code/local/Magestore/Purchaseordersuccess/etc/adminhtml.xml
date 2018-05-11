@@ -1,0 +1,284 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Purchaseordersuccess
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<config>
+    <menu>
+        <purchaseordersuccess module="purchaseordersuccess" translate="title">
+            <title>Purchase Management</title>
+            <sort_order>73</sort_order>
+            <children>
+                <purchaseorder module="purchaseordersuccess" translate="title">
+                    <icon>icon-iconBackendIM-02</icon>
+                    <title>Purchase Order</title>
+                    <sort_order>10</sort_order>
+                    <children>
+                        <create module="purchaseordersuccess" translate="title">
+                            <title>Create Purchase Order</title>
+                            <sort_order>10</sort_order>
+                            <action>adminhtml/purchaseordersuccess_purchaseorder/new</action>
+                        </create>
+                        <view module="purchaseordersuccess" translate="title">
+                            <title>Purchase Orders</title>
+                            <sort_order>20</sort_order>
+                            <action>adminhtml/purchaseordersuccess_purchaseorder/index</action>
+                        </view>
+                    </children>
+                </purchaseorder>
+                <quotation module="purchaseordersuccess" translate="title">
+                    <icon>icon-iconBackendIM-06</icon>
+                    <title>Quotation</title>
+                    <sort_order>20</sort_order>
+                    <children>
+                        <create module="purchaseordersuccess" translate="title">
+                            <title>Create Quotation</title>
+                            <sort_order>10</sort_order>
+                            <action>adminhtml/purchaseordersuccess_quotation/new</action>
+                        </create>
+                        <view module="purchaseordersuccess" translate="title">
+                            <title>Quotations</title>
+                            <sort_order>20</sort_order>
+                            <action>adminhtml/purchaseordersuccess_quotation/index</action>
+                        </view>
+                    </children>
+                </quotation>
+                <return module="purchaseordersuccess" translate="title">
+                    <icon>icon-iconBackendIM-06</icon>
+                    <title>Return Request</title>
+                    <sort_order>30</sort_order>
+                    <children>
+                        <create module="purchaseordersuccess" translate="title">
+                            <title>Create Request</title>
+                            <sort_order>10</sort_order>
+                            <action>adminhtml/purchaseordersuccess_return/new</action>
+                        </create>
+                        <view module="purchaseordersuccess" translate="title">
+                            <title>Return Request</title>
+                            <sort_order>20</sort_order>
+                            <action>adminhtml/purchaseordersuccess_return/index</action>
+                        </view>
+                    </children>
+                </return>
+                <settings module="purchaseordersuccess" translate="title">
+                    <icon>icon-IMBackend-10</icon>
+                    <title>Settings</title>
+                    <sort_order>1000</sort_order>
+                    <action>adminhtml/system_config/edit/section/purchaseordersuccess</action>
+                </settings>
+            </children>
+        </purchaseordersuccess>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <purchaseordersuccess module="purchaseordersuccess" translate="title">
+                                        <title>Purchase Order Success</title>
+                                        <sort_order>73</sort_order>
+                                    </purchaseordersuccess>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <purchaseordersuccess module="purchaseordersuccess" translate="title">
+                        <title>Purchase Order Success</title>
+                        <sort_order>73</sort_order>
+                        <children>
+                            <purchaseorder module="purchaseordersuccess" translate="title">
+                                <title>Manage Purchase Orders</title>
+                                <sort_order>10</sort_order>
+                                <children>
+                                    <create module="purchaseordersuccess" translate="title">
+                                        <title>Create Purchase Order</title>
+                                        <sort_order>10</sort_order>
+                                    </create>
+                                    <view module="purchaseordersuccess" translate="title">
+                                        <title>View Purchase Order</title>
+                                        <sort_order>20</sort_order>
+                                    </view>
+                                    <save module="purchaseordersuccess" translate="title">
+                                        <title>Save Purchase Order</title>
+                                        <sort_order>30</sort_order>
+                                    </save>
+                                    <send_request module="purchaseordersuccess" translate="title">
+                                        <title>Send Purchase Order Request</title>
+                                        <sort_order>40</sort_order>
+                                    </send_request>
+                                    <print module="purchaseordersuccess" translate="title">
+                                        <title>Print Purchase Order</title>
+                                        <sort_order>50</sort_order>
+                                    </print>
+                                    <cancel module="purchaseordersuccess" translate="title">
+                                        <title>Cancel Purchase Order</title>
+                                        <sort_order>60</sort_order>
+                                    </cancel>
+                                    <delete module="purchaseordersuccess" translate="title">
+                                        <title>Delete Purchase Order</title>
+                                        <sort_order>60</sort_order>
+                                    </delete>
+                                    <confirm module="purchaseordersuccess" translate="title">
+                                        <title>Confirm Purchase Order</title>
+                                        <sort_order>60</sort_order>
+                                    </confirm>
+                                    <complete module="purchaseordersuccess" translate="title">
+                                        <title>Complete Purchase Order</title>
+                                        <sort_order>70</sort_order>
+                                    </complete>
+                                    <receive module="purchaseordersuccess" translate="title">
+                                        <title>Receive Purchase Order</title>
+                                        <sort_order>80</sort_order>
+                                    </receive>
+                                    <return module="purchaseordersuccess" translate="title">
+                                        <title>Return Purchase Order</title>
+                                        <sort_order>90</sort_order>
+                                    </return>
+                                    <transfer module="purchaseordersuccess" translate="title">
+                                        <title>Transfer Purchase Order</title>
+                                        <sort_order>100</sort_order>
+                                    </transfer>
+                                    <invoice module="purchaseordersuccess" translate="title">
+                                        <title>Manage Purchase Order Invoices</title>
+                                        <sort_order>110</sort_order>
+                                        <children>
+                                            <create module="purchaseordersuccess" translate="title">
+                                                <title>Create Purchase Order Invoice</title>
+                                                <sort_order>10</sort_order>
+                                            </create>
+                                            <view module="purchaseordersuccess" translate="title">
+                                                <title>View Purchase Order Invoice</title>
+                                                <sort_order>20</sort_order>
+                                            </view>
+                                            <register_payment module="purchaseordersuccess" translate="title">
+                                                <title>Register Payment Purchase Order Invoice</title>
+                                                <sort_order>30</sort_order>
+                                            </register_payment>
+                                            <refund module="purchaseordersuccess" translate="title">
+                                                <title>Refund Purchase Order Invoice</title>
+                                                <sort_order>40</sort_order>
+                                            </refund>
+                                        </children>
+                                    </invoice>
+                                </children>
+                            </purchaseorder>
+                            <quotation module="purchaseordersuccess" translate="title">
+                                <title>Manage Quotations</title>
+                                <sort_order>20</sort_order>
+                                <children>
+                                    <create module="purchaseordersuccess" translate="title">
+                                        <title>Create Quotation</title>
+                                        <sort_order>10</sort_order>
+                                    </create>
+                                    <view module="purchaseordersuccess" translate="title">
+                                        <title>View Quotation</title>
+                                        <sort_order>20</sort_order>
+                                    </view>
+                                    <save module="purchaseordersuccess" translate="title">
+                                        <title>Save Quotation</title>
+                                        <sort_order>30</sort_order>
+                                    </save>
+                                    <convert module="purchaseordersuccess" translate="title">
+                                        <title>Convert Quotation to Purchase Order</title>
+                                        <sort_order>40</sort_order>
+                                    </convert>
+                                    <cancel module="purchaseordersuccess" translate="title">
+                                        <title>Cancel Quotation</title>
+                                        <sort_order>50</sort_order>
+                                    </cancel>
+                                    <delete module="purchaseordersuccess" translate="title">
+                                        <title>Delete Quotation</title>
+                                        <sort_order>60</sort_order>
+                                    </delete>
+                                    <send_request module="purchaseordersuccess" translate="title">
+                                        <title>Send Quotation Request</title>
+                                        <sort_order>70</sort_order>
+                                    </send_request>
+                                    <confirm module="purchaseordersuccess" translate="title">
+                                        <title>Confirm Quotation</title>
+                                        <sort_order>80</sort_order>
+                                    </confirm>
+                                    <revert module="purchaseordersuccess" translate="title">
+                                        <title>Revert Quotation</title>
+                                        <sort_order>90</sort_order>
+                                    </revert>
+                                </children>
+                            </quotation>
+                            <return module="purchaseordersuccess" translate="title">
+                                <title>Manage Return Requests</title>
+                                <sort_order>10</sort_order>
+                                <children>
+                                    <create module="purchaseordersuccess" translate="title">
+                                        <title>Create Return Request</title>
+                                        <sort_order>10</sort_order>
+                                    </create>
+                                    <view module="purchaseordersuccess" translate="title">
+                                        <title>View Return Request</title>
+                                        <sort_order>20</sort_order>
+                                    </view>
+                                    <save module="purchaseordersuccess" translate="title">
+                                        <title>Save Return Request</title>
+                                        <sort_order>30</sort_order>
+                                    </save>
+                                    <send_request module="purchaseordersuccess" translate="title">
+                                        <title>Send Return Request Request</title>
+                                        <sort_order>40</sort_order>
+                                    </send_request>
+                                    <print module="purchaseordersuccess" translate="title">
+                                        <title>Print Return Request</title>
+                                        <sort_order>50</sort_order>
+                                    </print>
+                                    <cancel module="purchaseordersuccess" translate="title">
+                                        <title>Cancel Return Request</title>
+                                        <sort_order>60</sort_order>
+                                    </cancel>
+                                    <delete module="purchaseordersuccess" translate="title">
+                                        <title>Delete Return Request</title>
+                                        <sort_order>60</sort_order>
+                                    </delete>
+                                    <confirm module="purchaseordersuccess" translate="title">
+                                        <title>Confirm Return Request</title>
+                                        <sort_order>60</sort_order>
+                                    </confirm>
+                                    <complete module="purchaseordersuccess" translate="title">
+                                        <title>Complete Return Request</title>
+                                        <sort_order>70</sort_order>
+                                    </complete>
+                                    <transfer module="purchaseordersuccess" translate="title">
+                                        <title>Transfer Return Request</title>
+                                        <sort_order>100</sort_order>
+                                    </transfer>
+                                </children>
+                            </return>
+                            <settings module="purchaseordersuccess" translate="title">
+                                <title>Purchase Order Settings</title>
+                                <sort_order>1000</sort_order>
+                            </settings>
+                        </children>
+                    </purchaseordersuccess>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

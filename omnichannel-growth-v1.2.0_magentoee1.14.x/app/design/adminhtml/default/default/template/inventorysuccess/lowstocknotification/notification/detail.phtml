@@ -1,0 +1,107 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Inventorysuccess
+ * @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */ /** @var Magestore_Inventorysuccess_Block_Adminhtml_LowStockNotification_Notification_Edit_Tab_Detail $this */ ?>
+<?php /** @var Magestore_Inventorysuccess_Model_LowStockNotification_Notification $notification */ ?>
+<?php $notification = $this->getCurrentNotification() ?>
+<?php $updateType = $this->getUpdateType() ?>
+<?php $lowStockThresholdType = $this->getLowStockThresholdType() ?>
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Low Stock Notification Log') ?></h4>
+    </div>
+    <div id="lowstock_form" class="fieldset ">
+        <div>
+            <label for="lowstock">
+                <strong><?php echo $this->__('Warning Message') ?>:&nbsp;&nbsp;</strong>
+            </label>
+            <?php echo $notification->getWarningMessage() ?>
+        </div>
+        <div>
+            <label for="lowstock">
+                <strong><?php echo $this->__('Generated at') ?>:&nbsp;&nbsp;</strong>
+            </label>
+            <?php echo date('M d, Y h:i:s', Mage::getModel('core/date')->timestamp($notification->getCreatedAt())) ?>
+        </div>
+        <div>
+            <label for="lowstock">
+                <strong><?php echo $this->__('Notification Scope') ?>:&nbsp;&nbsp;</strong>
+            </label>
+            <?php echo $updateType[$notification->getUpdateType()] ?>
+        </div>
+        <?php if($notification->getWarehouseName()): ?>
+            <div>
+                <label for="lowstock">
+                    <strong><?php echo $this->__('Warehouse(s)') ?>:&nbsp;&nbsp;</strong>
+                </label>
+                <?php echo $notification->getWarehouseName(); ?>
+            </div>
+        <?php endif; ?>
+        <div>
+            <label for="lowstock">
+                <strong><?php echo $this->__('Notification recipients') ?>:&nbsp;&nbsp;</strong>
+            </label>
+            <?php echo $notification->getNotifierEmails() ?>
+        </div>
+
+        <div>
+            <label for="lowstock">
+                <strong><?php echo $this->__('Low-stock Threshold Type') ?>:&nbsp;&nbsp;</strong>
+            </label>
+            <?php echo $lowStockThresholdType[$notification->getLowstockThresholdType()] ?>
+        </div>
+
+        <?php /**  Availability day */ ?>
+        <?php if ($notification->getLowstockThresholdType() == Magestore_Inventorysuccess_Model_LowStockNotification_Rule::TYPE_LOWSTOCK_THRESHOLD_SALE_DAY): ?>
+            <div>
+                <label for="lowstock">
+                    <strong><?php echo $this->__('Threshold (days)') ?>:&nbsp;&nbsp;</strong>
+                </label>
+                <?php echo $notification->getLowstockThreshold() ?>
+            </div>
+
+            <div>
+                <label for="lowstock">
+                    <strong><?php echo $this->__('Sales Period (days)') ?>:&nbsp;&nbsp;</strong>
+                </label>
+                <?php echo $notification->getSalesPeriod() ?>
+            </div>
+        <?php endif ?>
+
+        <?php /**  Availability Qty */ ?>
+        <?php if ($notification->getLowstockThresholdType() == Magestore_Inventorysuccess_Model_LowStockNotification_Rule::TYPE_LOWSTOCK_THRESHOLD_PRODUCT_QTY): ?>
+            <div>
+                <label for="lowstock">
+                    <strong><?php echo $this->__('Threshold (quantity)') ?>:&nbsp;&nbsp;</strong>
+                </label>
+                <?php echo $notification->getLowstockThresholdQty() ?>
+            </div>
+        <?php endif ?>
+
+        <div class="clear"></div>
+    </div>
+</div>
+
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend">
+            <?php echo $this->__('Low Stock Products') ?>
+        </h4>
+    </div>
+</div>

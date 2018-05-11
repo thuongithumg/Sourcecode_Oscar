@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<page layout='webpos' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" >
+    <body>
+        <referenceBlock name="webpos_checkout">
+            <block class="Magestore\Webpos\Block\AbstractBlock" before="-" name='webpos_catalog' cacheable="false" template="Magestore_Webpos::catalog/product-list.phtml">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="product-list" xsi:type="array">
+                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/catalog/product-list</item>
+                                <item name="children" xsi:type="array">
+                                    <item name="listing" xsi:type="array">
+                                        <item name="sortOrder" xsi:type="string">0</item>
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/catalog/category/cell-grid</item>
+                                        <item name="displayArea" xsi:type="string">category-list</item>
+                                    </item>
+                                    <item name="breadcrumb" xsi:type="array">
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/catalog/category/breadcrumbs</item>
+                                        <item name="displayArea" xsi:type="string">category-breadcrumbs</item>
+                                    </item>
+                                </item>
+                            </item>
+                            <item name="webpos_catalog_product_detail_popup" xsi:type="array">
+                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/catalog/product/detail-popup</item>
+                                <item name="displayArea" xsi:type="string">webpos_catalog_product_detail_popup</item>
+                                <item name="children" xsi:type="array">
+                                    <item name="configurable-product" xsi:type="array">
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/catalog/product/detail/configurable</item>
+                                        <item name="displayArea" xsi:type="string">configurable-product</item>
+                                    </item>
+                                    <item name="bundle-product" xsi:type="array">
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/catalog/product/detail/bundle</item>
+                                        <item name="displayArea" xsi:type="string">bundle-product</item>
+                                        <item name="children" xsi:type="array">
+                                            <item name="bundle-product-radio" xsi:type="array">
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/catalog/product/detail/bundle/radio</item>
+                                                <item name="displayArea" xsi:type="string">bundle-product-radio</item>
+                                            </item>
+                                            <item name="bundle-product-select" xsi:type="array">
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/catalog/product/detail/bundle/select</item>
+                                                <item name="displayArea" xsi:type="string">bundle-product-select</item>
+                                            </item>
+                                            <item name="bundle-product-checkbox" xsi:type="array">
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/catalog/product/detail/bundle/checkbox</item>
+                                                <item name="displayArea" xsi:type="string">bundle-product-checkbox</item>
+                                            </item>
+                                            <item name="bundle-product-multi" xsi:type="array">
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/catalog/product/detail/bundle/multi</item>
+                                                <item name="displayArea" xsi:type="string">bundle-product-multi</item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                    <item name="grouped-product" xsi:type="array">
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/catalog/product/detail/grouped</item>
+                                        <item name="displayArea" xsi:type="string">grouped-product</item>
+                                    </item>
+                                    <!--<item name="downloadable-product" xsi:type="array">-->
+                                        <!--<item name="component" xsi:type="string">Magestore_Webpos/js/view/catalog/product/detail/downloadable</item>-->
+                                        <!--<item name="displayArea" xsi:type="string">downloadable-product</item>-->
+                                    <!--</item>-->
+                                    <item name="custom-option" xsi:type="array">
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/catalog/product/detail/customoption</item>
+                                        <item name="displayArea" xsi:type="string">custom-option</item>
+                                        <item name="children" xsi:type="array">
+                                            <item name="custom-option-product-field" xsi:type="array">
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/catalog/product/detail/customoption/field</item>
+                                                <item name="displayArea" xsi:type="string">custom-option-product-field</item>
+                                            </item>
+                                            <item name="custom-option-product-area" xsi:type="array">
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/catalog/product/detail/customoption/area</item>
+                                                <item name="displayArea" xsi:type="string">custom-option-product-area</item>
+                                            </item>
+                                            <item name="custom-option-product-drop_down" xsi:type="array">
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/catalog/product/detail/customoption/dropdown</item>
+                                                <item name="displayArea" xsi:type="string">custom-option-product-drop_down</item>
+                                            </item>
+                                            <item name="custom-option-product-radio" xsi:type="array">
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/catalog/product/detail/customoption/radio</item>
+                                                <item name="displayArea" xsi:type="string">custom-option-product-radio</item>
+                                            </item>
+                                            <item name="custom-option-product-checkbox" xsi:type="array">
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/catalog/product/detail/customoption/checkbox</item>
+                                                <item name="displayArea" xsi:type="string">custom-option-product-checkbox</item>
+                                            </item>
+                                            <item name="custom-option-product-multiple" xsi:type="array">
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/catalog/product/detail/customoption/multiple</item>
+                                                <item name="displayArea" xsi:type="string">custom-option-product-multiple</item>
+                                            </item>
+                                            <!--<item name="custom-option-product-date" xsi:type="array">-->
+                                                <!--<item name="component" xsi:type="string">Magestore_Webpos/js/view/catalog/product/detail/customoption/date</item>-->
+                                                <!--<item name="displayArea" xsi:type="string">custom-option-product-date</item>-->
+                                            <!--</item>-->
+                                        </item>
+                                    </item>
+                                    <item name="storecredit-product" xsi:type="array">
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/catalog/product/detail/storecredit</item>
+                                        <item name="displayArea" xsi:type="string">storecredit-product</item>
+                                    </item>
+                                    <item name="giftcards-product" xsi:type="array">
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/catalog/product/detail/giftcards</item>
+                                        <item name="displayArea" xsi:type="string">giftcards-product</item>
+                                    </item>
+                                    <item name="giftvoucher-product" xsi:type="array">
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/catalog/product/detail/giftvoucher</item>
+                                        <item name="displayArea" xsi:type="string">giftvoucher-product</item>
+                                        <item name="children" xsi:type="array">
+                                            <item name="giftcard-view-template" xsi:type="array">
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/catalog/product/detail/giftvoucher/template</item>
+                                                <item name="displayArea" xsi:type="string">giftcard-view-template</item>
+                                            </item>
+                                            <item name="giftcard-view-value" xsi:type="array">
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/catalog/product/detail/giftvoucher/value</item>
+                                                <item name="displayArea" xsi:type="string">giftcard-view-value</item>
+                                            </item>
+                                            <item name="giftcard-view-message" xsi:type="array">
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/catalog/product/detail/giftvoucher/message</item>
+                                                <item name="displayArea" xsi:type="string">giftcard-view-message</item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

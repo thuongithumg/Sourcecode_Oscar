@@ -1,0 +1,116 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div id="shift_container" data-bind="css: { 'shift-empty': hasNoShift }">
+    <div class="wrap-shift_container">
+        <!-- ko ifnot: hasNoShift() -->
+        <!-- start html content for shift listing -->
+        <div class="col-sm-4 col-right">
+            <header class="o-header">
+                <nav class="o-header-nav">
+                    <span></span>
+                    <label class="title title-header-page"><span data-bind="i18n:'Session Management'"/></label>
+                    <div class="icon-add">
+                        <!-- ko if: canOpenShift() --> <span class="icon-iconPOS-add" data-bind="afterRender:afterRenderOpenButton"/><!-- /ko -->
+                    </div>
+                </nav>
+            </header>
+
+            <div class="main-item-shift main-shift">
+                <div class="wrap-item-shift">
+                    <div class="title-time time-one"><span data-bind="i18n: shiftListingHeader"/></div>
+                    <ul class="list-shifts">
+                        <!-- html content for one shift listing item -->
+
+                        <!-- ko foreach: items -->
+                        <li class="shift-item bg-cl-active" data-bind="click: $parent.loadItem.bind($parent), css:{'shift-item selected':(shift_id == $parent.getSelectedId()), 'notsync':(!entity_id)}">
+                            <div class="item">
+                                <div class="date-time">
+                                  
+                                    <span class="day-month" data-bind="text: $parent.getDateOnly(opened_at)"/>
+                                    <span class="type"  data-bind="text: $parent.getTimeOnly(opened_at)"/><!-- ko if: (status==1) && ($parent.getTimeOnly(closed_at) != false) -->&nbsp;-&nbsp; <span data-bind="text: $parent.getTimeOnly(closed_at)"/> <!-- /ko --><!-- ko if: status==0 -->&nbsp;-&nbsp;<span class="btn-open-shift bg-cl-active">Open</span>  <!-- /ko -->
+                                </div>
+                                <div class="price-date">
+                                   <span class="price" data-bind="text: $parent.formatPrice(total_sales)"/>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- /ko -->
+
+                        <!-- end html content for one shift listing item -->
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- end htl content for shift listing -->
+
+        <!-- start html content for shift detail -->
+
+                <!-- ko foreach: getRegion('shift-detail') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+                <!--/ko-->
+
+        <!-- end html content for shift detail -->
+
+        <!-- /ko-->
+
+        <!-- start html for empty shift-->
+
+        <!-- ko if: hasNoShift() -->
+        <div class="col-sm-4 col-lg-3 col-right">
+            <header class="o-header">
+                <nav class="o-header-nav">
+                    <span></span>
+                    <label class="title title-header-page"><span data-bind="i18n:'Register shift'"/></label>
+                    <div class="icon-add" >
+                        <span class="icon-iconPOS-add" data-bind="afterRender:afterRenderOpenButton"/>
+                    </div>
+                </nav>
+            </header>
+
+            <div class="main-item-shift main-shift">
+                <div class="wrap-item-shift">
+                    <div class="title-time time-one"><span data-bind="i18n: shiftListingHeader"/></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-sm-8 col-lg-9 col-left">
+            <header class="o-header">
+                <nav class="o-header-nav">
+                    <div class="detail-datetime"><label class="title-header-page"><span data-bind="text:getFullDate()"/></label> </div>
+                </nav>
+            </header>
+            <main class="main-content">
+                <div class="pos-machine"><span class="icon-iconPOS-empty-shift"></span></div>
+                <div class="text-note">
+                    <h3 class="title-box"><span data-bind="i18n:'Manage your daily cash flow'"/> </h3>
+                    <span class="small-text"><span data-bind="i18n:'Use register shifts to balance your cash drawer'"/> <br/><span data-bind="i18n:'and keep track of how much your sell each shift'"/>.</span>
+                </div>
+            </main>
+        </div>
+        <!-- /ko-->
+
+        <!-- end html for empty shift-->
+
+
+
+
+        <!-- start html content for shift detail -->
+
+            <!-- ko foreach: getRegion('open-shift') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+
+        <!-- end html content for shift detail -->
+
+        <div class="shift-wrap-backover wrap-backover hide-popup"></div>
+    </div>
+</div>

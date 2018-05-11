@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Giftvoucher
+  ~ @module     Giftvoucher
+  ~ @author      Magestore Developer
+  ~
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  ~
+  -->
+
+<wsdl:definitions xmlns:typens="urn:{{var wsdl.name}}"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             name="{{var wsdl.name}}"
+             targetNamespace="urn:{{var wsdl.name}}">
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:{{var wsdl.name}}">
+            <xsd:complexType name="giftcardCodeEntity">
+                <xsd:sequence>
+                    <xsd:element name="giftvoucher_id" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="gift_code" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="balance" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="currency" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="status" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="expired_at" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="customer_id" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="customer_name" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="customer_email" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="recipient_name" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="recipient_email" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="recipient_address" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="message" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="store_id" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="conditions_serialized" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="day_to_send" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="is_sent" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="shipped_to_customer" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="created_form" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="template_id" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="description" type="xsd:string" minOccurs="0" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="giftcardCodeEntityArray">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" maxOccurs="unbounded" name="complexObjectArray" type="typens:giftcardCodeEntity" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="giftcardCodeEntityToCreate">
+                <xsd:sequence>
+                    <xsd:element name="gift_code" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="pattern" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="amount" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="balance" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="currency" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="status" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="expired_at" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="customer_id" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="customer_name" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="customer_email" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="recipient_name" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="recipient_email" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="recipient_address" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="message" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="store_id" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="conditions_serialized" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="day_to_send" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="is_sent" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="shipped_to_customer" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="created_form" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="template_id" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="description" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="giftvoucher_comments" type="xsd:string" minOccurs="0" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="giftcardCodeHistory">
+                <xsd:sequence>
+                    <xsd:element name="history_id" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="giftvoucher_id" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="action" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="created_at" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="amount" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="currency" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="status" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="comments" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="order_increment_id" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="order_item_id" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="order_amount" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="extra_content" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="balance" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="customer_id" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="customer_email" type="xsd:string" minOccurs="0" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="giftcardCodeHistoryArray">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" maxOccurs="unbounded" name="complexObjectArray" type="typens:giftcardCodeHistory" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="giftcardCodeSendEmail">
+                <xsd:sequence>
+                    <xsd:element name="gift_code" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="type" type="xsd:string" minOccurs="0" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="giftcardCreditHistory">
+                <xsd:sequence>
+                    <xsd:element name="history_id" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="customer_id" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="action" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="currency_balance" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="giftcard_code" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="order_id" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="order_number" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="balance_change" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="currency" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="base_amount" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="amount" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="created_date" type="xsd:string" minOccurs="0" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="giftcardCreditInfo">
+                <xsd:sequence>
+                    <xsd:element name="credit_id" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="customer_id" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="balance" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="currency" type="xsd:string" minOccurs="0" />
+                </xsd:sequence>
+            </xsd:complexType>
+            
+            <xsd:element name="giftcardListRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="filters" type="typens:filters" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="giftcardListResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="typens:giftcardCodeEntityArray" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="giftcardCheckRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="code" type="xsd:string" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="giftcardHistoryRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="code" type="xsd:string" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="giftcardCheckResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="typens:giftcardCodeEntity" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="giftcardCreateRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="data" type="typens:giftcardCodeEntityToCreate" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="giftcardMassCreateRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="data" type="typens:giftcardCodeEntityToCreate" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="giftcardHistoryResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="typens:giftcardCodeHistoryArray" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="giftcardUpdateRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="code" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="data" type="typens:giftcardCodeEntityToCreate" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="giftcardUpdateResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="xsd:boolean" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="giftcardSendEmailRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="data" type="typens:giftcardCodeSendEmail" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="giftcardRedeemToCreditRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="customerId" type="xsd:int" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="code" type="xsd:string" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="giftcardRedeemToCreditResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="typens:giftcardCreditHistory" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="giftcardCreditInfoRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="customerId" type="xsd:int" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="giftcardCreditInfoResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="typens:giftcardCreditInfo" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="giftcardCreditUpdateCreditRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="customerId" type="xsd:int" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="balance" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="currency" type="xsd:string" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="giftcardListRequest">
+        <wsdl:part name="parameters" element="typens:giftcardListRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="giftcardListResponse">
+        <wsdl:part name="parameters" element="typens:giftcardListResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="giftcardCheckRequest">
+        <wsdl:part name="parameters" element="typens:giftcardCheckRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="giftcardHistoryRequest">
+        <wsdl:part name="parameters" element="typens:giftcardHistoryRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="giftcardCheckResponse">
+        <wsdl:part name="parameters" element="typens:giftcardCheckResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="giftcardCreateRequest">
+        <wsdl:part name="parameters" element="typens:giftcardCreateRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="giftcardMassCreateRequest">
+        <wsdl:part name="parameters" element="typens:giftcardMassCreateRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="giftcardHistoryResponse">
+        <wsdl:part name="parameters" element="typens:giftcardHistoryResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="giftcardUpdateRequest">
+        <wsdl:part name="parameters" element="typens:giftcardUpdateRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="giftcardUpdateResponse">
+        <wsdl:part name="parameters" element="typens:giftcardUpdateResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="giftcardSendEmailRequest">
+        <wsdl:part name="parameters" element="typens:giftcardSendEmailRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="giftcardRedeemToCreditRequest">
+        <wsdl:part name="parameters" element="typens:giftcardRedeemToCreditRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="giftcardRedeemToCreditResponse">
+        <wsdl:part name="parameters" element="typens:giftcardRedeemToCreditResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="giftcardCreditInfoRequest">
+        <wsdl:part name="parameters" element="typens:giftcardCreditInfoRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="giftcardCreditInfoResponse">
+        <wsdl:part name="parameters" element="typens:giftcardCreditInfoResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="giftcardCreditUpdateCreditRequest">
+        <wsdl:part name="parameters" element="typens:giftcardCreditUpdateCreditRequestParam" />
+    </wsdl:message>
+    <wsdl:portType name="{{var wsdl.handler}}PortType">
+        <wsdl:operation name="giftcardList">
+            <wsdl:documentation>Retrive giftcard</wsdl:documentation>
+            <wsdl:input message="typens:giftcardListRequest" />
+            <wsdl:output message="typens:giftcardListResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="giftcardCheck">
+            <wsdl:documentation>Check giftcard</wsdl:documentation>
+            <wsdl:input message="typens:giftcardCheckRequest" />
+            <wsdl:output message="typens:giftcardCheckResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="giftcardCreate">
+            <wsdl:documentation>Create giftcard</wsdl:documentation>
+            <wsdl:input message="typens:giftcardCreateRequest" />
+            <wsdl:output message="typens:giftcardCheckResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="giftcardMassCreate">
+            <wsdl:documentation>massCreate giftcard</wsdl:documentation>
+            <wsdl:input message="typens:giftcardMassCreateRequest" />
+            <wsdl:output message="typens:giftcardListResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="giftcardHistory">
+            <wsdl:documentation>history giftcard</wsdl:documentation>
+            <wsdl:input message="typens:giftcardHistoryRequest" />
+            <wsdl:output message="typens:giftcardHistoryResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="giftcardUpdate">
+            <wsdl:documentation>Update giftcard data</wsdl:documentation>
+            <wsdl:input message="typens:giftcardUpdateRequest" />
+            <wsdl:output message="typens:giftcardUpdateResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="giftcardSendEmail">
+            <wsdl:documentation>sendEmail</wsdl:documentation>
+            <wsdl:input message="typens:giftcardSendEmailRequest" />
+            <wsdl:output message="typens:giftcardUpdateResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="giftcardRedeemToCredit">
+            <wsdl:documentation>redeemToCredit</wsdl:documentation>
+            <wsdl:input message="typens:giftcardRedeemToCreditRequest" />
+            <wsdl:output message="typens:giftcardRedeemToCreditResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="giftcardCreditInfo">
+            <wsdl:documentation>Retrieve GiftCard Credit Info</wsdl:documentation>
+            <wsdl:input message="typens:giftcardCreditInfoRequest" />
+            <wsdl:output message="typens:giftcardCreditInfoResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="giftcardCreditUpdateCredit">
+            <wsdl:documentation>Update Customer Credit Balance</wsdl:documentation>
+            <wsdl:input message="typens:giftcardCreditUpdateCreditRequest" />
+            <wsdl:output message="typens:giftcardRedeemToCreditResponse" />
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="{{var wsdl.handler}}Binding" type="typens:{{var wsdl.handler}}PortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+        <wsdl:operation name="giftcardList">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="giftcardCheck">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="giftcardCreate">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="giftcardMassCreate">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="giftcardHistory">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="giftcardUpdate">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="giftcardSendEmail">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="giftcardRedeemToCredit">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="giftcardCreditInfo">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="giftcardCreditUpdateCredit">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+</wsdl:definitions>

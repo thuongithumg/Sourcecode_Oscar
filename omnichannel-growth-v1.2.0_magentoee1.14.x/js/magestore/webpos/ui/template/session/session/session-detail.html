@@ -1,0 +1,83 @@
+<!--
+  ~ * Copyright © 2016 Magestore. All rights reserved.
+  ~ * See COPYING.txt for license details.
+  ~
+  -->
+
+<div class="col-sm-8 col-left">
+    <header class="o-header">
+        <nav class="o-header-nav">
+            <div class="detail-datetime"><span data-bind="text: shiftOpenedAt"/> </div>
+        </nav>
+
+        <!-- start html content for sales summary -->
+
+        <!-- ko foreach: getRegion('sales-summary') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+
+        <!-- end html content for sales summary -->
+
+    </header>
+
+    <main class="main-content" data-bind="attr:{'class': noSalesSummary}">
+        <!-- start html content for cash transaction activity -->
+
+        <!-- ko foreach: getRegion('cash-activity') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+
+        <!-- end html content for cash transaction activity -->
+    </main>
+
+    <footer class="footer-shift">
+        <div class="action-button">
+            <button class="button btn-cl-cfg-other btn-print"  data-bind="afterRender:afterRenderZReportButton, i18n:'Print'"></button>
+            <!-- ko if: canEndSession() -->
+            <button class="button btn-close-shift"
+                    data-bind="visible: isClosedShift()==false, afterRender:afterRenderCloseButton, i18n:closeButtonTitle(), click: startCloseSession"></button>
+            <!--/ko-->
+        </div>
+
+    </footer>
+    <div id="cash-adjustment-container" data-bind="visible:canMakeAdjustment()">
+        <!-- ko foreach: getRegion('cash-adjustment') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+    </div>
+
+    <div id="zreport-container">
+        <!-- ko foreach: getRegion('zreport') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+    </div>
+</div>
+
+<div id="close-shift-container">
+    <!-- ko foreach: getRegion('close-session') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <!--/ko-->
+</div>
+
+<div id="set-closing-balance-reason">
+    <!-- ko foreach: getRegion('set-closing-balance-reason') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <!--/ko-->
+</div>
+
+<div id="take-money-in-out-balance-wrapper">
+    <!-- ko foreach: getRegion('take-money-in-out-balance') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <!--/ko-->
+</div>
+
+
+
+
+
+
+
+
+
+
+

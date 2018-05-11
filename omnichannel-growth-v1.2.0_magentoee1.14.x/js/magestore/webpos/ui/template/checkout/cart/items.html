@@ -1,0 +1,55 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<ul class="order-checkout wrap-item-order" data-bind="foreach:getItems()">
+    <li class="product-item" data-bind="css:{hasError:has_error}">
+        <div class="item">
+            <div class="main-data" data-bind="click:$parent.prepareEditData.bind($parent)">
+                <div class="product-img">
+                    <!-- ko ifnot: $data.image_url -->
+                    <span class="icon-iconPOS-image"></span>
+                    <!--/ko-->
+                    <!-- ko if: $data.image_url -->
+                    <img width="auto" height="auto" data-bind="attr:{src:image_url,alt:product_name}"/>
+                    <!--/ko-->
+                    <!-- ko if: $data.qty() > 1 -->
+                    <a class="number bg-cl-active" data-bind="text:qty"></a>
+                    <!--/ko-->
+                </div>
+                <div class="product-info">
+                    <span class="product-name" data-bind="html:sku"></span>
+                    <h4 class="product-name" data-bind="html:product_name"></h4>
+                    <!-- ko if: $data.options_label -->
+                    <div class="item-options" data-bind="text:options_label"></div>
+                    <!--/ko-->
+                </div>
+                <div class="price-box">
+                    <span class="price" data-bind="text:row_total_formated"></span>
+                    <!--ko if:$data.show_original_price -->
+                    <span class="original-price" data-bind="text:original_row_total_formated"></span>
+                    <!--/ko-->
+                </div>
+            </div>
+            <a class="remove-icon" data-bind="click:$parent.remove, visible:$parent.isOnCartPage()">
+                <span class="icon-iconPOS-delete" aria-hidden="true"></span>
+            </a>
+        </div>
+    </li>
+</ul>

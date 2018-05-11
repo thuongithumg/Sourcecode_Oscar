@@ -1,0 +1,62 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Inventorysuccess
+ * @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+?>
+
+<?php if ($this->canRefund()): ?>
+    <div class="purchase_buttons">
+        <button id="register_refund_button" class="" type="button" data-toggle="modal"
+                data-target="#register_refund_modal">
+            <span><?php echo $this->__('Refund') ?></span>
+        </button>
+    </div>
+
+    <div class="modal right fade" id="register_refund_modal" tabindex="-1"
+         role="dialog" aria-labelledby="modalLabel" style="display:none">
+        <div class="modal-dialog" role="document" id="register_refund_modal_dialog">
+            <div class="modal-content">
+                <div class="content-header">
+                    <h3 class="icon-head"><?php echo $this->__('Refund Information') ?></h3>
+                    <p class="form-buttons">
+                        <button id="submit_register_refund" class="action-primary save" type="button" data-dismiss="modal"
+                                onclick="saveInvoiceRefund(event)">
+                            <span><?php echo $this->__('Submit Refund') ?></span>
+                        </button>
+                        <button title="Close" type="button" class="scalable delete" data-dismiss="modal"
+                                id="closeModal">
+                            <span><?php echo $this->__('Close') ?></span>
+                        </button>
+                    </p>
+                </div>
+                <div class="modal-body">
+                    <div class="entry-edit">
+                        <div class="fieldset purchaseorder_fieldset" id="register_refund_modal_form">
+                            <?php echo $this->addRegisterRefundForm(); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+
+<?php echo $this->getGridHtml(); ?>
+

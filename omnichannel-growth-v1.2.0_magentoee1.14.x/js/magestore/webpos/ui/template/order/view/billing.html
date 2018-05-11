@@ -1,0 +1,29 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<!-- ko if: $parent.orderData() &&$parent.orderData().billing_address -->
+<div class="panel-body">
+    <div class="customer-address">
+        <label data-bind="text: $parent.getCustomerName('billing')"/>
+        <span class="address" data-bind="text: $parent.getAddress('billing')"/>
+        <span class="telephone" data-bind="text: $parent.getAddressType('billing').telephone"/>
+    </div>
+</div>
+<!--/ko-->

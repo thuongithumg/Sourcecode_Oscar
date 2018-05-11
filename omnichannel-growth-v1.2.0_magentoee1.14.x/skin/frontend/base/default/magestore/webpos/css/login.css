@@ -1,0 +1,21 @@
+/* style for Loading page */
+.ms-webpos .first-screen{position:relative;background:url(../images/bg-login-bottom.png) no-repeat center bottom;height:100vh;width:100vw;background-size:100% auto}
+.first-screen .process-box{position:absolute;top:50%;left:calc(50% - 280px);width:560px}
+.first-screen .process-box .wrap-process{width:560px;margin:0 auto;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between}
+.first-rates-myProgress{position:relative;width:100%;height:12px;background-color:#f1f1f1;border-radius:6px;line-height:30px;vertical-align:middle;margin-top:8px}
+.first-rates-myBar{position:absolute;width:45%;height:100%;background-color:#00a679;border-radius:6px}
+.first-rates-label-percent{text-align:center;line-height:72px;color:#535b66;font-size:72px;position:absolute;left:calc(50% - 70px);top:-95px;font-weight:100}
+/* End style for Loading page */
+
+
+/* Style for Login page */
+.ms-webpos .login-screen{position:relative;background:url(../images/bg-login-bottom.png) no-repeat center bottom;height:100vh;width:100vw;background-size:100% auto}
+.ms-webpos .login-screen .title-page{font-size:20px;color:#3c4857;text-align:center;margin-bottom:25px}
+.ms-webpos .login-screen .wrap-login-form{position:absolute;top:calc(50% - 170px);left:calc(50% - 170px);width:340px}
+.ms-webpos .login-screen .wrap-login-form button.btn.btn-default{background:#00a679;border:0 none;text-shadow:0 0 0;color:#fff;font-size:15px;text-transform:uppercase;width:100%;height:50px;line-height:50px;padding:0}
+.ms-webpos .login-screen .wrap-login-form .wrap-input{border:1px solid #ccc;border-radius:5px; margin-top: 20px;}
+.ms-webpos .login-screen .wrap-login-form .wrap-input .input-box{position:relative}
+.ms-webpos .login-screen .wrap-login-form .wrap-input .input-box div.mage-error{position:absolute;left:100%;top:20px;width:200px;margin-left:20px}
+.ms-webpos .login-screen .wrap-login-form .wrap-input input{border:0 none;box-shadow:0 0 0;border-radius:0;background:none transparent;height:55px;line-height:55px;text-align:center;font-size:15px;color:#3c4857}
+.ms-webpos .login-screen .wrap-login-form .wrap-input input#username{border-bottom:1px solid #ccc}
+/* End Style for Login page */

@@ -1,0 +1,11 @@
+.coresuccess .side-col{
+    display: none;
+}
+
+/*.coresuccess .wrapper {*/
+    /*margin-left: 0 !important;*/
+/*}*/
+
+.coresuccess div.main-col {
+    margin-left: 0 !important;
+}

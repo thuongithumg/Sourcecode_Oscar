@@ -1,0 +1,29 @@
+
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div id="take-money-in-out-balance" class="hide-popup popup-for-right">
+    <div class="wrap-popup">
+        <div class="popup-header">
+            <button type="button" class="button cancel" data-bind="click: closeForm"><span data-bind="i18n:'Cancel'"/></button>
+            <label class="title-box"><span data-bind=""/></label>
+            <button type="button" class="button btn-done" data-bind="click: apply"><span class="link-cl-cfg" data-bind="i18n:'Done'"/></button>
+        </div>
+        <div class="modal-body">
+            <label class="cash-drawer"><span data-bind=""/></label>
+            <div class="amount-box">
+                <div class="input-box">
+                    <label><span data-bind="i18n:'Amount'"/></label>
+                    <input type="text" onfocus="this.select()" data-bind="value: moneyAmount" />
+                </div>
+                <div>
+                    <span class="error_message" />
+                </div>
+                <textarea class="note" placeholder="Reason"></textarea>
+            </div>
+            <div class="staff-name"><span /> </div>
+        </div>
+    </div>
+</div>

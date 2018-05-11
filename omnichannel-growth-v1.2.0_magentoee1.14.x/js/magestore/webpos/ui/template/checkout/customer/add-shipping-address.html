@@ -1,0 +1,175 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<form id="form-customer-add-shipping-address-checkout" class="modal fade customer-popup-form" role="dialog">
+    <!-- Popup Add New Address -->
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="popup-header">
+                <button type="button" class="close" data-bind="click: hideShippingAddress, text: leftButton" data-dismiss="modal"></button>
+                <h4 class="modal-title" data-bind="text: shippingAddressTitle"></h4>
+                <button type="submit" class="btn-save  link-cl-cfg" data-bind="click: saveShippingAddress, i18n:'Save'"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="input-box">
+                                <input type="text" name="first-name"
+                                       class="customer-fname"
+                                       data-bind="value: firstNameShipping, attr: {placeholder: __('First Name')}, event: {change: setFirstName}"
+                                       data-validate="{'required-entry':true}"
+                                />
+                                <em>*</em>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="input-box">
+                                <input type="text" name="last-name"
+                                       data-validate="{'required-entry':true}"
+                                       data-bind="value: lastNameShipping, attr: {placeholder: __('Last Name')}, event: {change: setLastName}"
+                                       class="customer-lname"/>
+                                <em>*</em>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="input-box">
+                                <input type="text" name="company"
+                                       data-bind="value: companyShipping, attr: {placeholder: __('Company')}, event: {change: setCompany}"
+                                       class="customer-company"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="input-box">
+                                <input type="text" name="phone"
+                                       class="customer-phone"
+                                       data-bind="value: phoneShipping, attr: {placeholder: __('Phone')}, event: {change: setPhone}"
+                                       data-validate="{'required-entry':true}"
+                                />
+                                <em>*</em>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="input-box">
+                                <input type="text" name="street1" class="customer-street"
+                                       data-bind="value: street1Shipping, attr: {placeholder: __('Street1')}, event: {change: setStreet1}"
+                                       data-validate="{'required-entry':true}"
+                                />
+                                <em>*</em>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="input-box">
+                                <input type="text" name="Street2" class="customer-street2"
+                                       data-bind="value: street2Shipping, attr: {placeholder: __('Street2')}, event: {change: setStreet2}"
+                                />
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="input-box">
+                                <input type="text" name="city" class="customer-street"
+                                       data-bind="value: cityShipping, attr: {placeholder: __('City')}, event: {change: setCity}"
+                                       data-validate="{'required-entry':true}"
+                                />
+                                <em>*</em>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="input-box">
+                                <input type="text" name="zipcode" class="customer-street2"
+                                       data-bind="value: zipcodeShipping, attr: {placeholder: __('Zip Code')}, event: {change: setZipCode}"
+                                       data-validate="{'required-entry':true}" id="shipping_zip"/>
+                                <em>*</em>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="input-box">
+                                <select class="selectpicker"
+                                        data-validate="{'required-entry':true}",
+                                        data-bind="options: countryArray,
+                                                value: countryShipping,
+                                                optionsText: function(item) {
+                                                    return item.label
+                                                },
+                                                optionsValue: function(item) {
+                                                    return item.value
+                                                },
+                                                optionsCaption: __('Please choose country...'), event: {change: setCountry}"
+
+                                        id="shipping_country_id"
+                                >
+                                </select>
+                                <em>*</em>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="input-box">
+                                <select class="selectpicker"
+                                        data-bind="value: regionIdShipping, event: {change: setRegionId}"
+                                        id="shipping_region_id"
+                                        name="region_id" >
+                                    <option value="" data-bind="i18n:'Please select state or province'"></option>
+                                </select>
+                                <input  type="text"
+                                        id="shipping_region"
+                                        data-bind="value: regionShipping, attr: {placeholder: __('State or Province')}, event: {change: setRegion}"
+                                        name="region"
+                                        value=""
+                                        class="selectpicker" style="display:none" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="input-box">
+                                <input type="text"
+                                       data-bind="value: vatShipping, attr: {placeholder: __('VAT')}, event: {change: setVat}"
+                                       name="vat" class="customer-VAT"/>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" data-bind="event: {change: setIsSameBillingShipping}" />
+                                    <span data-bind="text: __('Billing Address and Shipping Address are the same')"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- End Popup Add New Address -->
+</form>

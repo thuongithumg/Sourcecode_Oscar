@@ -1,0 +1,135 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Inventorysuccess
+ * @copyright   Copyright (c) 2017 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+?>
+
+<div id = "report-edit-column" class="report-edit-column" inactive dofilter>
+<table>
+<tr>
+    <td>
+        <h4><?php echo $this->__('Dimensions');?></h4>
+    </td>
+    <td>
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    </td>
+    <td colspan="5">
+        <h4><?php echo $this->__('Metrics');?></h4>
+    </td>
+
+</tr>
+<tr>
+    <td>
+        <?php $removecolumn = Mage::getModel('reportsuccess/editcolumns')->getCollection()->addFieldToFilter('grid',$this->getName().'dimentions')
+            ->getFirstItem();
+        if($removecolumn){
+            $columns = $removecolumn->getValue();
+            $columns = explode(',',$columns);
+            foreach($columns as $value){
+                $column = explode(':',$value);
+                if ($column[0] === 'null')
+                    continue;
+
+                if($column[1] == 0){
+                    ?>
+                    <input type="checkbox" name="editcolumnsDimentions" value="<?php echo trim($column[0]) ?>"> <span><?php echo $this->_mapping_filed_name_column_dimensions[trim($column[0])] ?></span><br>
+                    <?php
+                }else {
+                    ?>
+                    <input checked type="checkbox" name="editcolumnsDimentions" value="<?php echo trim($column[0]) ?>"> <span><?php echo $this->_mapping_filed_name_column_dimensions[trim($column[0])] ?></span><br>
+                    <?php
+                }
+            }
+        }
+        ?>
+    </td>
+    <td>
+    </td>
+    <td>
+        <?php $removecolumn = Mage::getModel('reportsuccess/editcolumns')->getCollection()->addFieldToFilter('grid',$this->getName())
+            ->getFirstItem();
+        if($removecolumn){
+            $columns = $removecolumn->getValue();
+            $columns = explode(',',$columns);
+            $i = 0;
+            foreach($columns as $value){
+                if( $i%6 == 0 ){
+                    ?>
+                    </td><td>
+                    <?php
+                }
+                $column = explode(':',$value);
+                if ($column[0] === 'null')
+                    continue;
+                if($column[1] == 0){
+                    ?>
+                    <input id = "column-<?php echo trim($column[0])?>"  type="checkbox" name="editcolumns" value="<?php echo trim($column[0]) ?>"> <span><?php echo $this->_mapping_field_name_column[trim($column[0])] ?></span><br>
+                    <?php
+                }else {
+                    ?>
+                    <input id = "column-<?php echo trim($column[0])?>"  checked type="checkbox" name="editcolumns" value="<?php echo trim($column[0]) ?>"> <span><?php echo $this->_mapping_field_name_column[trim($column[0])] ?></span><br>
+                    <?php
+                }
+                $i++;
+            }
+        }
+        ?>
+    </td>
+</tr>
+
+    <tr>
+        <td colspan="10" style = "text-align: -webkit-right;" >
+            <div class="button_edit_columns">
+                <button id="cancel_edit_columns">Cancel</button>
+            </div>
+            <div class="button_edit_columns">
+                <button id="apply_edit_columns">Apply</button>
+            </div>
+        </td>
+    </tr>
+
+</table>
+</div>
+
+<style>
+        .report-edit-column{
+        display: none;
+        /*position: relative;*/
+        position: absolute;
+        background: white;
+        margin-left: -30px;
+        padding: 20px;
+        border:2px solid black;
+        border-color: #adadad;
+        }
+        #report-edit-column input{
+        float: initial;
+        }
+        #report-edit-column span{
+        float: initial;
+        }
+        .button_edit_columns{
+        /*//width: 50%;*/
+        text-align: center;
+        display: inline-block;
+        }
+        .report-edit-column table tr td{
+            width: : 100px;
+        }
+</style>

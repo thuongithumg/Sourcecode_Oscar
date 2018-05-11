@@ -1,0 +1,23 @@
+/*
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Webpos
+ * @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+.wrap-general_container .footer-container {padding: 0 30px;float: left;width: 100%;background:#f2f4f6;height: 95px;}
+.wrap-general_container .footer-container .action-button{ display: -webkit-box;display: -webkit-flex;display: -ms-flexbox;display: flex;-webkit-box-pack: justify; -webkit-justify-content: space-between;-ms-flex-pack: justify;    justify-content: space-between;}
+.wrap-general_container .footer-container button.button {    margin: 0 auto;background:#00a679;height:38px;line-height:38px;text-transform: none;border: 0 none;color: #fff; padding: 0 45px;font-size:15px;text-align:center;border-radius: 3px}

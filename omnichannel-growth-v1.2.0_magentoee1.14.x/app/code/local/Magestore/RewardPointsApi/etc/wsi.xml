@@ -1,0 +1,876 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:typens="urn:{{var wsdl.name}}"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             name="{{var wsdl.name}}"
+             targetNamespace="urn:{{var wsdl.name}}">
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:{{var wsdl.name}}">
+            <xsd:complexType name="rewardpointsCustomerEntity">
+                <xsd:sequence>
+                    <xsd:element name="customer_id" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="created_at" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="updated_at" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="increment_id" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="store_id" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="website_id" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="created_in" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="email" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="firstname" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="middlename" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="lastname" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="group_id" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="prefix" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="suffix" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="dob" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="taxvat" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="confirmation" type="xsd:boolean" minOccurs="0" />
+                    <xsd:element name="password_hash" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="point_balance" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="holding_balance" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="spent_balance" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="is_notification" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="expire_notification" type="xsd:int" minOccurs="0" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="rewardpointsTranstionEntity">
+                <xsd:sequence>
+                    <xsd:element name="transaction_id" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="reward_id" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="customer_id" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="customer_email" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="title" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="action" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="action_type" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="store_id" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="point_amount" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="point_used" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="real_point" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="status" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="created_time" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="updated_time" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="expiration_date" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="expire_email" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="order_id" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="order_base_amount" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="order_amount" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="base_discount" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="discount" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="extra_content" type="xsd:string" minOccurs="0" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="rewardpointsTransactionAdd">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="actionCode" type="xsd:string" />
+                    <xsd:element minOccurs="1" name="customerId" type="xsd:string" />
+                    <xsd:element minOccurs="1" name="pointAmount" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="orderId" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="status" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="extraContent" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="title" type="xsd:string" />
+                    <xsd:element minOccurs="1" name="storeId" type="xsd:string" />
+                    <xsd:element name="expireAfter" type="xsd:string" minOccurs="0" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="rewardpointsTransferAdd">
+                <xsd:sequence>
+                    <xsd:element name="emailSend" type="xsd:string" minOccurs="1" />
+                    <xsd:element name="emailReceive" type="xsd:string" minOccurs="1" /> 
+                    <xsd:element name="pointAmount" type="xsd:string" minOccurs="1" />
+                    <xsd:element name="message" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="storeId" type="xsd:string" minOccurs="1" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="rewardpointsTransferEntity">
+                <xsd:sequence>
+                    <xsd:element name="transfer_id" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="sender_email" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="receiver_email" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="point_amount" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="send_transaction_id" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="receive_transaction_id" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="sender_customer_id" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="receiver_customer_id" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="extra_content" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="status" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="store_id" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="pending_day" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="holding_day" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="created_time" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="updated_time" type="xsd:int" minOccurs="0" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="rewardpointsCustomerEntityArray">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" maxOccurs="unbounded" name="complexObjectArray" type="typens:rewardpointsCustomerEntity" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="rewardpointsTransactionEntityArray">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" maxOccurs="unbounded" name="complexObjectArray" type="typens:rewardpointsTranstionEntity" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="rewardpointsTransferEntityArray">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" maxOccurs="unbounded" name="complexObjectArray" type="typens:rewardpointsTransferEntity" />
+                </xsd:sequence>
+            </xsd:complexType>
+
+            <xsd:element name="rewardpointsCustomerGetcustomerbyemailRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="customer_email" type="xsd:string" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsCustomerGetcustomerbyemailResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="xsd:string" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsCustomerGetcustomeridbyemailRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="customer_email" type="xsd:string" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsCustomerGetcustomeridbyemailResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="xsd:int" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsCustomerGetbalancebyemailRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="customer_email" type="xsd:string" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsCustomerGetbalancebyemailResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="xsd:int" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsCustomerGetbalancebyidRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="customer_email" type="xsd:string" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsCustomerGetbalancebyidResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="xsd:int" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsCustomerGetcustomersbalanceRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="filters" type="typens:filters" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsCustomerGetcustomersbalanceResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="typens:rewardpointsCustomerEntity" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+<!--            kjdfksa-->
+            <xsd:element name="rewardpointsTransactionListRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="filters" type="typens:filters" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsTransactionListResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" maxOccurs="1" name="result" type="typens:rewardpointsTransactionEntityArray" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsTransactionAddRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="transactionData" type="typens:rewardpointsTransactionAdd" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsTransactionAddResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="xsd:int" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsTransactionCompleteRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="transactionIds" type="xsd:ArrayOfInt" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsTransactionCompleteResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="typens:ArrayofString" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsTransactionCancelRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="transactionIds" type="xsd:ArrayOfInt" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsTransactionCancelResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="typens:ArrayofString" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsTransactionExpireRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="transactionIds" type="xsd:ArrayOfInt" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsTransactionExpireResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="typens:ArrayofString" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsTransactionBalanceEmailRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="transactionIds" type="xsd:ArrayOfInt" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsTransactionBalanceEmailResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="typens:ArrayOfBoolean" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsTransactionExpireEmailRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="transactionIds" type="xsd:ArrayOfInt" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsTransactionExpireEmailResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="typens:ArrayOfBoolean" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsReferfriendsLinkRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="customerCode" type="xsd:string" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsReferfriendsLinkResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="xsd:string" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsReferfriendsCouponRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="customerCode" type="xsd:string" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsReferfriendsCouponResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="xsd:string" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsReferfriendsCustomerLinkRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="linkKey" type="xsd:string" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsReferfriendsCustomerLinkResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="typens:rewardpointsCustomerEntity" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsReferfriendsCustomerCouponRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="couponCode" type="xsd:string" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsReferfriendsCustomerCouponResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="typens:rewardpointsCustomerEntity" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsTransferListRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="filters" type="typens:filters" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsTransferListResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="typens:rewardpointsTransferEntityArray" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsTransferAddRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="transferData" type="typens:rewardpointsTransferAdd" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsTransferAddResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="xsd:string" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsTransferCompleteRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="transferIds" type="typens:ArrayOfInt" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsTransferCompleteResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="typens:ArrayOfBoolean" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsTransferCancelRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="transferIds" type="typens:ArrayOfInt" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsTransferCancelResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="typens:ArrayOfBoolean" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsTransferTransferEmailRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="transferIds" type="typens:ArrayOfInt" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="rewardpointsTransferTransferEmailResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="typens:ArrayOfBoolean" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </wsdl:types>
+
+    <wsdl:message name="rewardpointsCustomerGetcustomerbyemailRequest">
+        <wsdl:part name="parameters" element="typens:rewardpointsCustomerGetcustomerbyemailRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsCustomerGetcustomerbyemailResponse">
+        <wsdl:part name="parameters" element="typens:rewardpointsCustomerGetcustomerbyemailResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsCustomerGetcustomeridbyemailRequest">
+        <wsdl:part name="parameters" element="typens:rewardpointsCustomerGetcustomeridbyemailRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsCustomerGetcustomeridbyemailResponse">
+        <wsdl:part name="parameters" element="typens:rewardpointsCustomerGetcustomeridbyemailResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsCustomerGetbalancebyemailRequest">
+        <wsdl:part name="parameters" element="typens:rewardpointsCustomerGetbalancebyemailRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsCustomerGetbalancebyemailResponse">
+        <wsdl:part name="parameters" element="typens:rewardpointsCustomerGetbalancebyemailResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsCustomerGetbalancebyidRequest">
+        <wsdl:part name="parameters" element="typens:rewardpointsCustomerGetbalancebyidRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsCustomerGetbalancebyidResponse">
+        <wsdl:part name="parameters" element="typens:rewardpointsCustomerGetbalancebyidResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsCustomerGetcustomersbalanceRequest">
+        <wsdl:part name="parameters" element="typens:rewardpointsCustomerGetcustomersbalanceRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsCustomerGetcustomersbalanceResponse">
+        <wsdl:part name="parameters" element="typens:rewardpointsCustomerGetcustomersbalanceResponseParam" />
+    </wsdl:message>
+<!--    fdsaf-->
+    <wsdl:message name="rewardpointsTransactionListRequest">
+        <wsdl:part name="parameters" element="typens:rewardpointsTransactionListRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsTransactionListResponse">
+        <wsdl:part name="parameters" element="typens:rewardpointsTransactionListResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsTransactionAddRequest">
+        <wsdl:part name="parameters" element="typens:rewardpointsTransactionAddRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsTransactionAddResponse">
+        <wsdl:part name="parameters" element="typens:rewardpointsTransactionAddResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsTransactionCompleteRequest">
+        <wsdl:part name="parameters" element="typens:rewardpointsTransactionCompleteRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsTransactionCompleteResponse">
+        <wsdl:part name="parameters" element="typens:rewardpointsTransactionCompleteResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsTransactionCancelRequest">
+        <wsdl:part name="parameters" element="typens:rewardpointsTransactionCancelRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsTransactionCancelResponse">
+        <wsdl:part name="parameters" element="typens:rewardpointsTransactionCancelResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsTransactionExpireRequest">
+        <wsdl:part name="parameters" element="typens:rewardpointsTransactionExpireRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsTransactionExpireResponse">
+        <wsdl:part name="parameters" element="typens:rewardpointsTransactionExpireResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsTransactionBalanceEmailRequest">
+        <wsdl:part name="parameters" element="typens:rewardpointsTransactionBalanceEmailRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsTransactionBalanceEmailResponse">
+        <wsdl:part name="parameters" element="typens:rewardpointsTransactionBalanceEmailResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsTransactionExpireEmailRequest">
+        <wsdl:part name="parameters" element="typens:rewardpointsTransactionExpireEmailRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsTransactionExpireEmailResponse">
+        <wsdl:part name="parameters" element="typens:rewardpointsTransactionExpireEmailResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsReferfriendsLinkRequest">
+        <wsdl:part name="parameters" element="typens:rewardpointsReferfriendsLinkRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsReferfriendsLinkResponse">
+        <wsdl:part name="parameters" element="typens:rewardpointsReferfriendsLinkResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsReferfriendsCouponRequest">
+        <wsdl:part name="parameters" element="typens:rewardpointsReferfriendsCouponRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsReferfriendsCouponResponse">
+        <wsdl:part name="parameters" element="typens:rewardpointsReferfriendsCouponResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsReferfriendsCustomerLinkRequest">
+        <wsdl:part name="parameters" element="typens:rewardpointsReferfriendsCustomerLinkRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsReferfriendsCustomerLinkResponse">
+        <wsdl:part name="parameters" element="typens:rewardpointsReferfriendsCustomerLinkResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsReferfriendsCustomerCouponRequest">
+        <wsdl:part name="parameters" element="typens:rewardpointsReferfriendsCustomerCouponRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsReferfriendsCustomerCouponResponse">
+        <wsdl:part name="parameters" element="typens:rewardpointsReferfriendsCustomerCouponResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsTransferListRequest">
+        <wsdl:part name="parameters" element="typens:rewardpointsTransferListRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsTransferListResponse">
+        <wsdl:part name="parameters" element="typens:rewardpointsTransferListResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsTransferAddRequest">
+        <wsdl:part name="parameters" element="typens:rewardpointsTransferAddRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsTransferAddResponse">
+        <wsdl:part name="parameters" element="typens:rewardpointsTransferAddResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsTransferCompleteRequest">
+        <wsdl:part name="parameters" element="typens:rewardpointsTransferCompleteRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsTransferCompleteResponse">
+        <wsdl:part name="parameters" element="typens:rewardpointsTransferCompleteResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsTransferCancelRequest">
+        <wsdl:part name="parameters" element="typens:rewardpointsTransferCancelRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsTransferCancelResponse">
+        <wsdl:part name="parameters" element="typens:rewardpointsTransferCancelResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsTransferTransferEmailRequest">
+        <wsdl:part name="parameters" element="typens:rewardpointsTransferTransferEmailRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="rewardpointsTransferTransferEmailResponse">
+        <wsdl:part name="parameters" element="typens:rewardpointsTransferTransferEmailResponseParam" />
+    </wsdl:message>
+    
+    <wsdl:portType name="{{var wsdl.handler}}PortType">
+        <wsdl:operation name="rewardpointsCustomerGetcustomerbyemail">
+            <wsdl:documentation>Get customer by email</wsdl:documentation>
+            <wsdl:input message="typens:rewardpointsCustomerGetcustomerbyemailRequest" />
+            <wsdl:output message="typens:rewardpointsCustomerGetcustomerbyemailResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsCustomerGetcustomeridbyemail">
+            <wsdl:documentation>Get customer Id by email</wsdl:documentation>
+            <wsdl:input message="typens:rewardpointsCustomerGetcustomeridbyemailRequest" />
+            <wsdl:output message="typens:rewardpointsCustomerGetcustomeridbyemailResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsCustomerGetbalancebyemail">
+            <wsdl:documentation>Get balance by email</wsdl:documentation>
+            <wsdl:input message="typens:rewardpointsCustomerGetbalancebyemailRequest" />
+            <wsdl:output message="typens:rewardpointsCustomerGetbalancebyemailResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsCustomerGetbalancebyemail">
+            <wsdl:documentation>Get balance by customer Id</wsdl:documentation>
+            <wsdl:input message="typens:rewardpointsCustomerGetbalancebyidRequest" />
+            <wsdl:output message="typens:rewardpointsCustomerGetbalancebyidResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsCustomerGetbalancebyid">
+            <wsdl:documentation>Get balance by customer Id</wsdl:documentation>
+            <wsdl:input message="typens:rewardpointsCustomerGetbalancebyidRequest" />
+            <wsdl:output message="typens:rewardpointsCustomerGetbalancebyidResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsCustomerGetcustomersbalance">
+            <wsdl:documentation>Get balance by customers</wsdl:documentation>
+            <wsdl:input message="typens:rewardpointsCustomerGetcustomersbalanceRequest" />
+            <wsdl:output message="typens:rewardpointsCustomerGetcustomersbalanceResponse" />
+        </wsdl:operation>
+        
+        <wsdl:operation name="rewardpointsTransactionList">
+            <wsdl:documentation>Get transactions</wsdl:documentation>
+            <wsdl:input message="typens:rewardpointsTransactionListRequest" />
+            <wsdl:output message="typens:rewardpointsTransactionListResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsTransactionAdd">
+            <wsdl:documentation>Add transactions</wsdl:documentation>
+            <wsdl:input message="typens:rewardpointsTransactionAddRequest" />
+            <wsdl:output message="typens:rewardpointsTransactionAddResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsTransactionComplete">
+            <wsdl:documentation>Complete transactions</wsdl:documentation>
+            <wsdl:input message="typens:rewardpointsTransactionCompleteRequest" />
+            <wsdl:output message="typens:rewardpointsTransactionCompleteResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsTransactionCancel">
+            <wsdl:documentation>Cancel transactions</wsdl:documentation>
+            <wsdl:input message="typens:rewardpointsTransactionCancelRequest" />
+            <wsdl:output message="typens:rewardpointsTransactionCancelResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsTransactionExpire">
+            <wsdl:documentation>Expire transactions</wsdl:documentation>
+            <wsdl:input message="typens:rewardpointsTransactionExpireRequest" />
+            <wsdl:output message="typens:rewardpointsTransactionExpireResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsTransactionBalanceEmail">
+            <wsdl:documentation>Send update balance email transactions</wsdl:documentation>
+            <wsdl:input message="typens:rewardpointsTransactionBalanceEmailRequest" />
+            <wsdl:output message="typens:rewardpointsTransactionBalanceEmailResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsTransactionExpireEmail">
+            <wsdl:documentation>Send email before expire transactions</wsdl:documentation>
+            <wsdl:input message="typens:rewardpointsTransactionExpireEmailRequest" />
+            <wsdl:output message="typens:rewardpointsTransactionExpireEmailResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsReferfriendsCoupon">
+            <wsdl:documentation>Get coupon by customer</wsdl:documentation>
+            <wsdl:input message="typens:rewardpointsReferfriendsCouponRequest" />
+            <wsdl:output message="typens:rewardpointsReferfriendsCouponResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsReferfriendsLink">
+            <wsdl:documentation>Get link by customer</wsdl:documentation>
+            <wsdl:input message="typens:rewardpointsReferfriendsLinkRequest" />
+            <wsdl:output message="typens:rewardpointsReferfriendsLinkResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsReferfriendsCustomerCoupon">
+            <wsdl:documentation>Get customer by coupon</wsdl:documentation>
+            <wsdl:input message="typens:rewardpointsReferfriendsCustomerCouponRequest" />
+            <wsdl:output message="typens:rewardpointsReferfriendsCustomerCouponResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsReferfriendsCustomerLink">
+            <wsdl:documentation>Get customer by link</wsdl:documentation>
+            <wsdl:input message="typens:rewardpointsReferfriendsCustomerLinkRequest" />
+            <wsdl:output message="typens:rewardpointsReferfriendsCustomerLinkResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsTransferList">
+            <wsdl:documentation>Get transfer</wsdl:documentation>
+            <wsdl:input message="typens:rewardpointsTransferListRequest" />
+            <wsdl:output message="typens:rewardpointsTransferListResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsTransferAdd">
+            <wsdl:documentation>Add transfer</wsdl:documentation>
+            <wsdl:input message="typens:rewardpointsTransferAddRequest" />
+            <wsdl:output message="typens:rewardpointsTransferAddResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsTransferComplete">
+            <wsdl:documentation>Complete transfer</wsdl:documentation>
+            <wsdl:input message="typens:rewardpointsTransferCompleteRequest" />
+            <wsdl:output message="typens:rewardpointsTransferCompleteResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsTransferCancel">
+            <wsdl:documentation>Cancel transfer</wsdl:documentation>
+            <wsdl:input message="typens:rewardpointsTransferCancelRequest" />
+            <wsdl:output message="typens:rewardpointsTransferCancelResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsTransferTransferEmail">
+            <wsdl:documentation>Send transfer email</wsdl:documentation>
+            <wsdl:input message="typens:rewardpointsTransferTransferEmailRequest" />
+            <wsdl:output message="typens:rewardpointsTransferTransferEmailResponse" />
+        </wsdl:operation>
+    </wsdl:portType>
+
+
+    <wsdl:binding name="{{var wsdl.handler}}Binding" type="typens:{{var wsdl.handler}}PortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+        <wsdl:operation name="rewardpointsCustomerGetcustomerbyemail">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsCustomerGetcustomeridbyemail">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsCustomerGetbalancebyemail">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsCustomerGetbalancebyid">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsCustomerGetcustomersbalance">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsTransactionList">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsTransactionAdd">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsTransactionComplete">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsTransactionCancel">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsTransactionExpire">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsTransactionBalanceEmail">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsTransactionExpireEmail">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsReferfriendsCoupon">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsReferfriendsLink">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsReferfriendsCustomerLink">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsReferfriendsCustomerCoupon">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        
+        <wsdl:operation name="rewardpointsTransferList">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsTransferAdd">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsTransferComplete">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsTransferCancel">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="rewardpointsTransferTransferEmail">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+</wsdl:definitions>

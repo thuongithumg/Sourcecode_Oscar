@@ -1,0 +1,57 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<!-- ko if: itemData() -->
+<div class="fieldset" tabindex="0">
+    <div class="field configurable required">
+        <!-- ko if: isFixed() -->
+        <label class="label">
+            <span>Credit Value</span>
+        </label>
+        <div class="control">
+            <label data-bind="text:creditValueFormated(itemData().customercredit_value)"></label>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: isDropdown() -->
+        <label class="label">
+            <span>Select Credit Value</span>
+        </label>
+        <div class="control">
+            <select data-validate="{'required-entry':true}" data-bind="event: {change: updatePrice(itemData())}, attr: {name: 'storecredit_'+itemData().entity_id,id: 'storecredit_'+itemData().entity_id}, foreach: {data: getDropdownValues(), as: 'dropdownItem'},">
+                <option data-bind="attr: {value: dropdownItem.key, /*selected: $parent.isSelected($data)*/}, text: dropdownItem.value"></option>
+            </select>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: isRange() -->
+        <label class="label">
+            <span>Fill Credit Value</span><span>(from <strong data-bind="text: getCreditMin()"></strong> to <strong data-bind="text: getCreditMax()"></strong>) </span>
+        </label>
+        <div class="control">
+            <!--select data-validate="{'required-entry':true}" data-bind="event: {change: updatePrice(itemData())}, attr: {name: 'storecredit_'+itemData().id,id: 'storecredit_'+itemData().id}, foreach: {data: getDropdownValues(), as: 'dropdownItem'},">
+                <option data-bind="attr: {value: dropdownItem.key}, text: dropdownItem.value"></option>
+            </select-->
+            <input data-validate="{'required-entry':true, 'not-negative-amount': true}" style="width: 100%"
+                   data-bind="attr: {name: 'storecredit_'+itemData().entity_id, id: 'storecredit_'+itemData().entity_id},
+                       event: {change: updatePrice(itemData())} "/>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+<div data-bind="event: {afterLoad: updatePrice(itemData)}"></div>
+<!-- /ko -->

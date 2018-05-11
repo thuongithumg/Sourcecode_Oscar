@@ -1,0 +1,513 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Inventorysuccess
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<layout version="0.1.0">
+    <!--       SEND STOCK       -->
+    <adminhtml_inventorysuccess_transferstock_sendstock_index>
+        <reference name="content">
+            <block type="inventorysuccess/adminhtml_transferstock_sendstock" name="sendstock"/>
+        </reference>
+    </adminhtml_inventorysuccess_transferstock_sendstock_index>
+    <adminhtml_inventorysuccess_transferstock_sendstock_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_transferstock_sendstock_grid"
+                   name="sendstock.grid"/>
+        </block>
+    </adminhtml_inventorysuccess_transferstock_sendstock_grid>
+    <adminhtml_inventorysuccess_transferstock_sendstock_edit>
+        <update handle="adminhtml_inventorysuccess"/>
+        <update handle="adminhtml_coresuccess_modal"/>
+        <update handle="adminhtml_barcodesuccess_scan"/>
+        <reference name="content">
+            <block type="inventorysuccess/adminhtml_import_notice"
+                   name="inventorysuccess_notice_message" template="inventorysuccess/notice/message.phtml"/>
+            <block type="inventorysuccess/adminhtml_transferstock_sendstock_import" name="sendstock_import"
+                   template="inventorysuccess/transferstock/sendstock/import.phtml"/>
+            <block type="inventorysuccess/adminhtml_transferstock_sendstock_importReceiving"
+                   name="sendstock_import_receiving"
+                   template="inventorysuccess/transferstock/sendstock/import_receiving.phtml"/>
+        </reference>
+    </adminhtml_inventorysuccess_transferstock_sendstock_edit>
+    <adminhtml_inventorysuccess_transferstock_sendstock_productlist>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_transferstock_sendstock_edit_tab_productlist"
+                   name="sendstock.productlist"/>
+            <block type="adminhtml/widget_grid_serializer" name="product_grid_serializer">
+                <reference name="product_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>sendstock.productlist</grid_block_name>
+                        <data_callback>getSelectedProducts</data_callback>
+                        <hidden_input_name>products</hidden_input_name>
+                        <reload_param_name>products_selected</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>qty</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>product_id</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>product_sku</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>product_name</input_name>
+                    </action>
+                </reference>
+            </block>
+        </block>
+    </adminhtml_inventorysuccess_transferstock_sendstock_productlist>
+    <adminhtml_inventorysuccess_transferstock_sendstock_productlistgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_transferstock_sendstock_edit_tab_productlist"
+                   name="sendstock.productlist"/>
+        </block>
+    </adminhtml_inventorysuccess_transferstock_sendstock_productlistgrid>
+    <adminhtml_inventorysuccess_transferstock_sendstock_stocksummary>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_transferstock_sendstock_edit_tab_stocksummary"
+                   name="sendstock.stocksummary"/>
+        </block>
+    </adminhtml_inventorysuccess_transferstock_sendstock_stocksummary>
+    <adminhtml_inventorysuccess_transferstock_sendstock_receiving>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_transferstock_sendstock_edit_tab_receiving"
+                   name="sendstock.receiving.grid" as="sendstock.receiving.grid"/>
+            <block type="adminhtml/widget_grid_serializer" name="product_grid_serializer">
+                <reference name="product_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>sendstock.receiving.grid</grid_block_name>
+                        <data_callback>getSelectedProducts</data_callback>
+                        <hidden_input_name>products</hidden_input_name>
+                        <reload_param_name>products_selected</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>new_qty</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>product_id</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>product_sku</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>product_name</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>qty</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>qty_received</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>qty_returned</input_name>
+                    </action>
+                </reference>
+            </block>
+            <block type="inventorysuccess/adminhtml_transferstock_sendstock_edit_tab_receivinghistory"
+                   name="sendstock.receivinghistory"/>
+        </block>
+    </adminhtml_inventorysuccess_transferstock_sendstock_receiving>
+    <adminhtml_inventorysuccess_transferstock_sendstock_receivinggrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_transferstock_sendstock_edit_tab_receiving"
+                   name="sendstock.receiving"/>
+        </block>
+    </adminhtml_inventorysuccess_transferstock_sendstock_receivinggrid>
+    <adminhtml_inventorysuccess_transferstock_sendstock_receivinghistorygrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_transferstock_sendstock_edit_tab_receivinghistory"
+                   name="sendstock.receivinghistory"/>
+        </block>
+    </adminhtml_inventorysuccess_transferstock_sendstock_receivinghistorygrid>
+    <adminhtml_inventorysuccess_transferstock_sendstock_differences>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_transferstock_sendstock_edit_tab_differences"
+                   name="sendstock.differences.grid" as="sendstock.differences.grid"/>
+            <block type="adminhtml/widget_grid_serializer" name="sendstock.differences_serializer">
+                <reference name="sendstock.differences_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>sendstock.differences.grid</grid_block_name>
+                        <data_callback>getSelectedProducts</data_callback>
+                        <hidden_input_name>returning_items</hidden_input_name>
+                        <reload_param_name>products_selected</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>new_qty</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>qty_delivered</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>qty_received</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>product_sku</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>product_name</input_name>
+                    </action>
+                </reference>
+            </block>
+            <!--<block type="inventorysuccess/adminhtml_transferstock_sendstock_edit_tab_returned"-->
+                   <!--name="sendstock.returned.grid" as="sendstock.returned.grid"/>-->
+        </block>
+    </adminhtml_inventorysuccess_transferstock_sendstock_differences>
+    <adminhtml_inventorysuccess_transferstock_sendstock_refunded>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_transferstock_sendstock_edit_tab_returnActivity"
+                   name="sendstock.returned.grid" as="sendstock.returned.grid"/>
+        </block>
+        <!--<block type="core/text_list" name="root" output="toHtml">-->
+            <!--<block type="inventorysuccess/adminhtml_transferstock_sendstock_edit_tab_returnitems"-->
+                   <!--name="sendstock.eturnitems.grid" as="sendstock.eturnitems.grid"/>-->
+            <!--<block type="adminhtml/widget_grid_serializer" name="sendstock.eturnitems_serializer">-->
+                <!--<reference name="sendstock.eturnitems_serializer">-->
+                    <!--<action method="initSerializerBlock">-->
+                        <!--<grid_block_name>sendstock.eturnitems.grid</grid_block_name>-->
+                        <!--<data_callback>getSelectedProducts</data_callback>-->
+                        <!--<hidden_input_name>returning_items</hidden_input_name>-->
+                        <!--<reload_param_name>products_selected</reload_param_name>-->
+                    <!--</action>-->
+                    <!--<action method="addColumnInputName">-->
+                        <!--<input_name>new_qty</input_name>-->
+                    <!--</action>-->
+                <!--</reference>-->
+            <!--</block>-->
+            <!--<block type="inventorysuccess/adminhtml_transferstock_sendstock_edit_tab_returnActivity"-->
+                   <!--name="sendstock.returned.grid" as="sendstock.returned.grid"/>-->
+        <!--</block>-->
+    </adminhtml_inventorysuccess_transferstock_sendstock_refunded>
+    <adminhtml_inventorysuccess_transferstock_sendstock_differencesgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_transferstock_sendstock_edit_tab_differences"
+                   name="sendstock.differences.grid" as="sendstock.differences.grid"/>
+        </block>
+    </adminhtml_inventorysuccess_transferstock_sendstock_differencesgrid>
+    <adminhtml_inventorysuccess_transferstock_sendstock_returnedgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_transferstock_sendstock_edit_tab_returned"
+                   name="sendstock.differences.grid" as="sendstock.returned.grid"/>
+        </block>
+    </adminhtml_inventorysuccess_transferstock_sendstock_returnedgrid>
+
+    <!--       REQUEST STOCK      -->
+    <adminhtml_inventorysuccess_transferstock_requeststock_index>
+        <reference name="content">
+            <block type="inventorysuccess/adminhtml_transferstock_requeststock" name="requeststock"/>
+        </reference>
+    </adminhtml_inventorysuccess_transferstock_requeststock_index>
+    <adminhtml_inventorysuccess_transferstock_requeststock_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_transferstock_requeststock_grid"
+                   name="requeststock.grid"/>
+        </block>
+    </adminhtml_inventorysuccess_transferstock_requeststock_grid>
+    <adminhtml_inventorysuccess_transferstock_requeststock_edit>
+        <update handle="adminhtml_inventorysuccess"/>
+        <update handle="adminhtml_coresuccess_modal"/>
+        <update handle="adminhtml_barcodesuccess_scan"/>
+        <reference name="content">
+            <block type="inventorysuccess/adminhtml_import_notice"
+                   name="inventorysuccess_notice_message" template="inventorysuccess/notice/message.phtml"/>
+            <block type="inventorysuccess/adminhtml_transferstock_requeststock_import" name="request_import"
+                   template="inventorysuccess/transferstock/requeststock/import.phtml"/>
+            <block type="inventorysuccess/adminhtml_transferstock_requeststock_importDelivery"
+                   name="request_import_delivery"
+                   template="inventorysuccess/transferstock/requeststock/import_delivery.phtml"/>
+            <block type="inventorysuccess/adminhtml_transferstock_requeststock_importReceiving"
+                   name="request_import_receiving"
+                   template="inventorysuccess/transferstock/requeststock/import_receiving.phtml"/>
+        </reference>
+    </adminhtml_inventorysuccess_transferstock_requeststock_edit>
+    <adminhtml_inventorysuccess_transferstock_requeststock_productlist>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_transferstock_requeststock_edit_tab_productlist"
+                   name="requeststock.productlist"/>
+            <block type="adminhtml/widget_grid_serializer" name="product_grid_serializer">
+                <reference name="product_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>requeststock.productlist</grid_block_name>
+                        <data_callback>getSelectedProducts</data_callback>
+                        <hidden_input_name>products</hidden_input_name>
+                        <reload_param_name>products_selected</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>qty</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>product_id</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>product_sku</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>product_name</input_name>
+                    </action>
+                </reference>
+            </block>
+        </block>
+    </adminhtml_inventorysuccess_transferstock_requeststock_productlist>
+    <adminhtml_inventorysuccess_transferstock_requeststock_productlistgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_transferstock_requeststock_edit_tab_productlist"
+                   name="requeststock.productlist"/>
+        </block>
+    </adminhtml_inventorysuccess_transferstock_requeststock_productlistgrid>
+    <adminhtml_inventorysuccess_transferstock_requeststock_stocksummary>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_transferstock_requeststock_edit_tab_stocksummary"
+                   name="requeststock.stocksummary"/>
+        </block>
+    </adminhtml_inventorysuccess_transferstock_requeststock_stocksummary>
+    <adminhtml_inventorysuccess_transferstock_requeststock_delivery>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_transferstock_requeststock_edit_tab_delivery"
+                   name="requeststock.delivery.grid" as="requeststock.delivery.grid"/>
+            <block type="adminhtml/widget_grid_serializer" name="product_grid_serializer">
+                <reference name="product_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>requeststock.delivery.grid</grid_block_name>
+                        <data_callback>getSelectedProducts</data_callback>
+                        <hidden_input_name>products[delivery]</hidden_input_name>
+                        <reload_param_name>products_selected</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>new_qty</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>product_id</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>product_sku</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>product_name</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>qty</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>qty_delivered</input_name>
+                    </action>
+                </reference>
+            </block>
+            <block type="inventorysuccess/adminhtml_transferstock_requeststock_edit_tab_deliveryhistory"
+                   name="requeststock.deliveryhistory"/>
+        </block>
+    </adminhtml_inventorysuccess_transferstock_requeststock_delivery>
+    <adminhtml_inventorysuccess_transferstock_requeststock_return>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_transferstock_requeststock_edit_tab_returnActivity"
+            name="requeststock.returnActivity"/>
+        </block>
+    </adminhtml_inventorysuccess_transferstock_requeststock_return>
+    <adminhtml_inventorysuccess_transferstock_requeststock_deliverygrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_transferstock_requeststock_edit_tab_delivery"
+                   name="requeststock.delivery"/>
+        </block>
+    </adminhtml_inventorysuccess_transferstock_requeststock_deliverygrid>
+    <adminhtml_inventorysuccess_transferstock_requeststock_deliveryhistorygrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_transferstock_requeststock_edit_tab_deliveryhistory"
+                   name="requeststock.deliveryhistory"/>
+        </block>
+    </adminhtml_inventorysuccess_transferstock_requeststock_deliveryhistorygrid>
+    <adminhtml_inventorysuccess_transferstock_requeststock_receiving>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_transferstock_requeststock_edit_tab_receiving"
+                   name="requeststock.receiving.grid" as="requeststock.receiving.grid"/>
+            <block type="adminhtml/widget_grid_serializer" name="product_grid_serializer">
+                <reference name="product_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>requeststock.receiving.grid</grid_block_name>
+                        <data_callback>getSelectedProducts</data_callback>
+                        <hidden_input_name>products[receiving]</hidden_input_name>
+                        <reload_param_name>products_selected</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>new_qty</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>product_id</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>product_sku</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>product_name</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>qty</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>qty_delivered</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>qty_received</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>qty_returned</input_name>
+                    </action>
+                </reference>
+            </block>
+            <block type="inventorysuccess/adminhtml_transferstock_requeststock_edit_tab_receivinghistory"
+                   name="requeststock.receivinghistory"/>
+        </block>
+    </adminhtml_inventorysuccess_transferstock_requeststock_receiving>
+    <adminhtml_inventorysuccess_transferstock_requeststock_receivinggrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_transferstock_requeststock_edit_tab_receiving"
+                   name="requeststock.receiving"/>
+        </block>
+    </adminhtml_inventorysuccess_transferstock_requeststock_receivinggrid>
+    <adminhtml_inventorysuccess_transferstock_requeststock_receivinghistorygrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_transferstock_requeststock_edit_tab_receivinghistory"
+                   name="requeststock.receivinghistory"/>
+        </block>
+    </adminhtml_inventorysuccess_transferstock_requeststock_receivinghistorygrid>
+
+    <adminhtml_inventorysuccess_transferstock_requeststock_differences>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_transferstock_requeststock_edit_tab_differences"
+                   name="requeststock.differences.grid" as="requeststock.differences.grid"/>
+            <block type="adminhtml/widget_grid_serializer" name="requeststock.differences_serializer">
+                <reference name="requeststock.differences_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>requeststock.differences.grid</grid_block_name>
+                        <data_callback>getSelectedProducts</data_callback>
+                        <hidden_input_name>returning_items</hidden_input_name>
+                        <reload_param_name>products_selected</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>new_qty</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>qty_delivered</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>qty_received</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>qty_returned</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>product_sku</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>product_name</input_name>
+                    </action>
+                </reference>
+            </block>
+        </block>
+    </adminhtml_inventorysuccess_transferstock_requeststock_differences>
+
+    <adminhtml_inventorysuccess_transferstock_requeststock_differencesgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_transferstock_requeststock_edit_tab_differences"
+                   name="requeststock.differences.grid" as="requeststock.differences.grid"/>
+        </block>
+    </adminhtml_inventorysuccess_transferstock_requeststock_differencesgrid>
+    <adminhtml_inventorysuccess_transferstock_requeststock_returnedgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_transferstock_requeststock_edit_tab_returned"
+                   name="requeststock.differences.grid" as="requeststock.returned.grid"/>
+        </block>
+    </adminhtml_inventorysuccess_transferstock_requeststock_returnedgrid>
+
+
+    <!--       EXTERNAL       -->
+    <adminhtml_inventorysuccess_transferstock_external_index>
+        <reference name="content">
+            <block type="inventorysuccess/adminhtml_transferstock_external" name="external"/>
+        </reference>
+    </adminhtml_inventorysuccess_transferstock_external_index>
+    <adminhtml_inventorysuccess_transferstock_external_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_transferstock_external_grid"
+                   name="external.grid"/>
+        </block>
+    </adminhtml_inventorysuccess_transferstock_external_grid>
+    <adminhtml_inventorysuccess_transferstock_external_edit>
+        <update handle="adminhtml_inventorysuccess"/>
+        <update handle="adminhtml_coresuccess_modal"/>
+        <update handle="adminhtml_barcodesuccess_scan"/>
+        <reference name="content">
+            <block type="inventorysuccess/adminhtml_import_notice"
+                   name="inventorysuccess_notice_message" template="inventorysuccess/notice/message.phtml"/>
+            <block type="inventorysuccess/adminhtml_transferstock_external_import" name="external_import"
+                   template="inventorysuccess/transferstock/external/import.phtml"/>
+        </reference>
+    </adminhtml_inventorysuccess_transferstock_external_edit>
+    <adminhtml_inventorysuccess_transferstock_external_productlist>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_transferstock_external_edit_tab_productlist"
+                   name="external.productlist"/>
+            <block type="adminhtml/widget_grid_serializer" name="product_grid_serializer">
+                <reference name="product_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>external.productlist</grid_block_name>
+                        <data_callback>getSelectedProducts</data_callback>
+                        <hidden_input_name>products</hidden_input_name>
+                        <reload_param_name>products_selected</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>qty</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>product_id</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>product_sku</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>product_name</input_name>
+                    </action>
+                </reference>
+            </block>
+        </block>
+    </adminhtml_inventorysuccess_transferstock_external_productlist>
+    <adminhtml_inventorysuccess_transferstock_external_productlistgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_transferstock_external_edit_tab_productlist"
+                   name="external.productlist"/>
+        </block>
+    </adminhtml_inventorysuccess_transferstock_external_productlistgrid>
+    <adminhtml_inventorysuccess_transferstock_external_stocksummary>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_transferstock_external_edit_tab_stocksummary"
+                   name="external.stocksummary"/>
+        </block>
+    </adminhtml_inventorysuccess_transferstock_external_stocksummary>
+
+    <!--ACTIVITY-->
+    <adminhtml_inventorysuccess_transferstock_activity_view>
+        <reference name="content">
+            <block type="inventorysuccess/adminhtml_transferstock_activity" name="activity"/>
+        </reference>
+    </adminhtml_inventorysuccess_transferstock_activity_view>
+    <adminhtml_inventorysuccess_transferstock_activity_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_transferstock_activity_grid"
+                   name="activity.grid"/>
+        </block>
+    </adminhtml_inventorysuccess_transferstock_activity_grid>
+</layout>

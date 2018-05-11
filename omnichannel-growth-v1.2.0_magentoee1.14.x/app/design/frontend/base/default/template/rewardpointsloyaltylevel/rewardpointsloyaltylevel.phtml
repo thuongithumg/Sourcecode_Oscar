@@ -1,0 +1,75 @@
+<?php
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPointsLoyaltyLevel
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+/**
+ * Rewardpointsloyaltylevel template
+ * 
+ * @see Magestore_RewardPointsLoyaltyLevel_Block_Rewardpointsloyaltylevel
+ */
+?>
+<?php $level = $this->getLoyaltyLevel() ?>
+<?php $earn_point = $this->getEarningPoints($level->getId()) ?>
+<?php $spend_point = $this->getSpendingPoints($level->getId()) ?>
+<?php $discount = $this->getAllPromoSpendingRuleResponsive($level->getId()) ?>
+<div class="page-title">
+    <h1><?php echo $level->getLevelName() ?></h1>
+</div>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<p><strong>
+        <?php echo $level->getDescription() ?>
+    </strong>    
+</p>
+<div class="loyalty-benefits" style="margin-bottom: 20px">            
+    <?php if (count($earn_point)): ?>
+        <span><?php echo $this->__('Earning Points') ?></span><br/>
+        <div style="margin-left: 10px; margin-bottom: 10px">
+            <?php foreach ($earn_point as $earn): ?>
+                <?php echo $earn . '<br />' ?>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>        
+    <?php if (count($spend_point)): ?>
+        <span><?php echo $this->__('Spending Points') ?></span><br/>
+        <div style="margin-left: 10px; margin-bottom: 10px">
+            <?php foreach ($spend_point as $spend): ?>
+                <?php echo $spend . '<br />' ?>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+    <?php if (count($discount)): ?>
+        <span><?php echo $this->__('Discount') ?></span><br/>
+        <div style="margin-left: 10px; margin-bottom: 10px">
+            <?php foreach ($discount as $spend): ?>
+                <?php echo $spend . '<br />' ?>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+</div>
+<?php if ($this->getTimeLeft()): ?>
+    <div class="loyalty-submit">
+        <div class="loyalty-time-left"><?php echo $this->__('Membership Expires After') ?></div>
+        <div class="loyalty-time-left-time"><?php echo $this->getTimeLeft() ?></div>
+    </div>
+<?php endif; ?>
+
+<div class="buttons-set">
+    <button type="button" title="<?php echo $this->__('View Other Groups') ?>" class="button" onclick="window.location.assign('<?php echo $this->getUrl('rewardpointsloyaltylevel/join'); ?>');
+            return false;"><span><span><?php echo $this->__('View Other Groups') ?></span></span></button>
+</div>

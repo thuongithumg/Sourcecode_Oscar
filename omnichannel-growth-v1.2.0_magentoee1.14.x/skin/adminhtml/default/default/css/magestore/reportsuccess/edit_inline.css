@@ -1,0 +1,13 @@
+form.inplaceeditor-form a {
+    display: inline-block;
+    margin: 4px 0 -8px 12px !important;
+}
+.label-address {
+    width: 80px;
+    color: #999;
+    display: block;
+    float: left;
+}
+.editorder {
+    color: #ea7601
+}

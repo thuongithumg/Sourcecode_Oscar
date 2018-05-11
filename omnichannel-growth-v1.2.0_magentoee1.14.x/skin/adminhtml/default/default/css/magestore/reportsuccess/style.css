@@ -1,0 +1,100 @@
+#inventory_report_dashboard{
+    width: 100%;
+    float: left;
+    margin-left:0%;
+}
+#inventory_report_dashboard table.report-table {
+    margin: 1% 0px 0px 0px;
+    width:100%;
+}
+#inventory_report_dashboard table.report-table td {
+    width:47%;
+    padding:10px 20px;
+    background-color: #fff;
+    background-image: linear-gradient(#fff, #f7f7f7);
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+#inventory_report_dashboard table.report-table td.td-separate {width:6%;border:0;background:none;}
+
+#inventory_report_dashboard .dasboard_column{
+    width:100%;
+    float: left;
+    background: #fff;
+}
+#inventory_report_dashboard .dasboard_column .report_box{
+    width: 90%;
+    float: left;
+}
+#inventory_report_dashboard .dasboard_column .report_box .mbl{
+    margin-bottom: 20px !important;
+    font-weight: 400;
+    color: #4B4D4F;
+    text-rendering: optimizelegibility;
+}
+
+#inventory_report_dashboard .dasboard_column .report_box .report_list .report_image {
+    text-align: center;
+    display: inline-block;
+    float:left;
+    width: 60px;
+    height: 60px;
+    margin-right:10px;
+}
+#inventory_report_dashboard .dasboard_column .report_box .report_list .sales {
+    background: #fafafa url('images/dashboard/sales.png') no-repeat center center;
+    background-size: 50px 50px;
+}
+#inventory_report_dashboard .dasboard_column .report_box .report_list .stockonhand {
+    background: #fafafa url('images/dashboard/product.png') no-repeat center center;
+    background-size: 50px 50px;
+}
+#inventory_report_dashboard .dasboard_column .report_box .report_list .purchaseorder {
+    background: #fafafa url('images/dashboard/purchase-order.png') no-repeat center center;
+    background-size: 50px 50px;
+}
+#inventory_report_dashboard .dasboard_column .report_box .report_list .stockmovement {
+    background: #fafafa url('images/dashboard/movement.png') no-repeat center center;
+    background-size: 50px 50px;
+}
+#inventory_report_dashboard .dasboard_column .report_box .report_list .warehouse {
+    background: #fafafa url('images/dashboard/warehouse.png') no-repeat center center;
+    background-size: 50px 50px;
+}
+#inventory_report_dashboard .dasboard_column .report_box .report_list .customer {
+    background: #fafafa url('images/dashboard/customer.png') no-repeat center center;
+    background-size: 50px 50px;
+}
+#inventory_report_dashboard .dasboard_column .report_box .report_list .bestseller {
+    background: #fafafa url('images/dashboard/bestseller.png') no-repeat center center;
+    background-size: 50px 50px;
+}
+#inventory_report_dashboard .dasboard_column .report_box .report_list .report_type_description{
+    margin-bottom: 5px !important;
+    font-size:13px;
+}
+#inventory_report_dashboard .dasboard_column .report_box .report_list ul{
+    list-style: none;
+    padding:10px;
+    margin-left:60px;
+}
+#inventory_report_dashboard .dasboard_column .report_box .report_list ul li{
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    height: 60px;
+    margin: 4px 0px 0px 0px;
+}
+#inventory_report_dashboard .dasboard_column .report_box .report_list ul li a{
+    text-decoration: none;
+    color: #009e8a;
+    margin: 0px 0px 0px 2%;
+}
+#inventory_report_dashboard .dasboard_column .report_box .report_list ul li span{
+    text-decoration: none;
+    margin: 0px 0px 0px 2%;
+}
+#inventory_report_dashboard .dasboard_column .report_box .report_list ul li a:hover{
+    text-decoration: underline;
+    color: #009e8a;
+}

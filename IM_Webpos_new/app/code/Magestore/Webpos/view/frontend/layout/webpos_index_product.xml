@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<page layout='1column' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" >
+    <body>
+        <referenceContainer name="content">
+            <!--
+            <block class="Magestore\Webpos\Block\Settings\General" before="-" name="webpos-settings-synchronization" cacheable="false" template="Magestore_Webpos::settings/synchronization.phtml">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="webpos-settings-synchronization" xsi:type="array">
+                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/settings/synchronization/content</item>
+                                <item name="config" xsi:type="array">
+                                    <item name="template" xsi:type="string">Magestore_Webpos/settings/synchronization/content</item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+            -->
+            <block class="Magestore\Webpos\Block\AbstractBlock"  cacheable="false" template="Magestore_Webpos::catalog/test-product.phtml">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="product-list" xsi:type="array">
+                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/catalog/product/grid</item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

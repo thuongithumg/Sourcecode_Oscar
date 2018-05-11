@@ -1,0 +1,147 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<!-- ko if: orderData -->
+<div id="refund-popup" role="dialog"
+     data-bind="visible: isVisible, style: {display: stypeDisplay()},
+     attr:{class: 'modal fade add-comment ship-refund ' + classIn()}">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <form data-bind="attr:{id: formId},submit: submit">
+                <div class="popup-header">
+                    <button type="button" class="close" data-dismiss="modal" data-bind="i18n: ('Cancel'), click: display(false)"></button>
+                    <h4 class="modal-title" data-bind="i18n: ('Refund')"/>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <colgroup>
+                            <col width="36%">
+                            <col width="12%">
+                            <col width="12%">
+                            <col width="10%">
+                            <col width="15%">
+                            <col width="15%">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th data-bind="i18n: ('Product')"></th>
+                            <th class="a-center" data-bind="i18n: ('Sku')"></th>
+                            <th class="a-right" data-bind="i18n: ('Price')"></th>
+                            <th class="a-center" data-bind="i18n: ('Qty')"></th>
+                            <th class="a-center" data-bind="i18n: ('Qty to refund')"></th>
+                            <th class="a-center" data-bind="i18n: ('Return to stock')"></th>
+                        </tr>
+                        </thead>
+                    </table>
+                    <div class="wrap-table">
+                    <table class="table">
+                        <colgroup>
+                            <col width="36%">
+                            <col width="12%">
+                            <col width="12%">
+                            <col width="10%">
+                            <col width="15%">
+                            <col width="15%">
+                        </colgroup>
+                        <tbody data-bind="foreach: {data: orderData().items, as: 'item'}">
+                            <!-- ko ifnot: item.parent_item_id -->
+                            <!-- ko if: item.qty_invoiced - item.qty_refunded > 0-->
+                            <tr>
+                                <td>
+                                    <h4 class="product-name" data-bind="text: item.name"></h4>
+                                </td>
+                                <td class="a-center" data-bind="text: item.sku"></td>
+                                <td class="a-right" data-bind="text: $parent.convertAndFormatPrice(item.base_price)"></td>
+                                <td class="a-center" data-bind="text: item.qty_invoiced - item.qty_refunded"></td>
+                                <td class="a-center">
+                                    <input type="text" class="input-qty refund-input-qty"
+                                           data-bind="attr: {value: item.qty_invoiced - item.qty_refunded,
+                                           id: 'item_' + item.item_id,
+                                           name: 'items['+item.item_id+'][qty]', itemid:item.item_id}, event: {keyup: $parent.validateQty.bind($parent)}"/>
+                                </td>
+                                <td class="a-center">
+                                    <input type="checkbox" value="1" data-bind="attr: {name: 'items['+item.item_id+'][back_to_stock]', class: 'check_fund_' + item.item_id}"/>
+                                </td>
+                            </tr>
+                            <!-- /ko -->
+                            <!-- /ko -->
+                        </tbody>
+                    </table>
+                    </div>
+                    <div class="bottom-refund">
+                        <div class="col-sm-7">
+                            <label data-bind="i18n: ('Refund Comment')"></label>
+                            <textarea class="form-control" rows="3" data-bind="attr:{name: 'comment_text'}"></textarea>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="refund-bottom-right">
+                                <div class="input-box">
+                                    <label data-bind="i18n: ('Adjust refund')"></label>
+                                    <input type="text" data-bind="attr: {name: 'adjustment_positive'}"/>
+                                </div>
+                                <!-- ko if: shippingRefunded -->
+                                <div class="input-box">
+                                    <label data-bind="i18n: ('Refund Shipping')"></label>
+                                    <input type="text" data-bind="attr: {name: 'shipping_amount'}, value: shippingRefunded"/>
+                                </div>
+                                <!-- /ko -->
+                                <div class="input-box">
+                                    <label data-bind="i18n: ('Adjust fee')"></label>
+                                    <input type="text" data-bind="attr: {name: 'adjustment_negative'}"/>
+                                </div>
+                                <!-- ko if: canRefundByStorecredit -->
+                                <div class="input-box">
+                                    <label data-bind="i18n: ('Store Credit')"></label>
+                                    <input type="text" id="credit-amount" onfocus="this.select()" data-bind="value:creditAmount, event:{change:saveCreditAmount}" />
+                                </div>
+                                <!-- /ko -->
+                                <!-- ko if: canRefundGiftcard -->
+                                <div class="input-box">
+                                    <label data-bind="i18n: ('Refund to gift card code used')"></label>
+                                    <input type="text" onfocus="this.select()" data-bind="value: Math.abs(Number(giftcardAmount())), event:{change:saveGiftcardAmount}" />
+                                </div>
+                                <!-- /ko -->
+                                <!--<div class="input-box">-->
+                                    <!--<label data-bind="text: ('Reward Points')"></label>-->
+                                    <!--<input type="text" />-->
+                                <!--</div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <div class="input-box">
+                            <input type="checkbox" id="refund_cash_creditmemo_popup" value="1" name="refund_cash">
+                            <label for="refund_cash_creditmemo_popup" data-bind="i18n: ('Refund By Cash')"></label>
+                        </div>
+                        <div class="input-box">
+                            <input type="checkbox" id="send_email_creditmemo_popup" value="1" name="send_email">
+                            <label for="send_email_creditmemo_popup" data-bind="i18n: ('Send Email')"></label>
+                        </div>
+                        <button class="button submit-refund btn-cl-cfg-active" data-bind="i18n: ('Submit refund'), click: submit" ></button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+<!-- /ko -->

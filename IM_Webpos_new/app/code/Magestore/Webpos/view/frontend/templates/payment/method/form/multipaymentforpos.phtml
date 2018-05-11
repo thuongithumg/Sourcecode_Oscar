@@ -1,0 +1,48 @@
+<!--
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Webpos
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<?php
+$_code = $block->getMethodCode();
+$allow_method_codes = $block->getActiveMethods();
+?>
+<ul class="form-list" id="payment_form_<?php echo $_code ?>" style="display:none;">
+    <?php
+    if (!empty($allow_method_codes)):
+        foreach ($allow_method_codes as $method_code => $method_title):
+            ?>
+            <li>
+                <label for="<?php echo $method_code ?>_ref_no" ><?php echo $method_title ?></label>
+                <span class="input-box">
+                    <input onclick="webposPayment.splitPaymentFocus('<?php echo $method_code,'_ref_no_multi'; ?>')" 
+                           onchange="webposPayment.calculateSplitRemaining('<?php echo $method_code,'_ref_no_multi'; ?>')" 
+                           type="text" 
+                           title="<?php echo $method_title ?>" 
+                           class="input-text form-control split_child_method" 
+                           id="<?php echo $method_code ?>_ref_no_multi" 
+                           name="payment[<?php echo $method_code ?>_ref_no]" 
+                           value="<?php echo $block->htmlEscape($block->getInfoData($method_code . '_ref_no')) ?>" />
+                </span>
+            </li>
+            <?php
+        endforeach;
+    endif;
+    ?>
+</ul>

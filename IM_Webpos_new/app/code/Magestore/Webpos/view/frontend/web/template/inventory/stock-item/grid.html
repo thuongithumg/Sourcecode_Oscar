@@ -1,0 +1,65 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div class="grid-data">
+    <div class="sum-info-top">
+        <div class="address-left">
+            <label class="location" data-bind="text: locationName"></label>
+            <label class="address" data-bind="text: locationAddress"></label>
+        </div>
+        <div class="search-box">
+            <div class="form-inline">
+                <div class="form-group">
+                    <input data-bind="event: {keyup: filterOffline, change:filter}, attr: {placeholder: searchPlaceHolder}"  name="search_key" type="search" id="search-header-stock" class="form-control search-header">
+                    <span class="icon-iconPOS-search"></span>
+                </div>
+                <button class="btn btn-default" type="submit" data-bind="i18n: 'Update All'"></button>
+            </div>
+        </div>
+    </div>
+    <div class="wrap-table-header">
+        <table class="table table-product">
+            <thead data-bind="visible: isShowHeader">
+                <tr>
+                    <th class="a-left" data-bind="i18n: 'Product'"></th>
+                    <th class="a-center" data-bind="i18n: 'SKU'"></th>
+                    <th class="a-center" data-bind="i18n: 'Qty'"></th>
+                    <th class="a-center" data-bind="i18n: 'In stock'"></th>
+                    <th class="a-center" data-bind="i18n: 'Manage Stock'"></th>
+                    <th class="a-center" data-bind="i18n: 'Backorders'"></th>
+                    <th class="a-right">
+                        <a data-bind="event: {click: massUpdateStock}, enable: changedData, i18n: 'Update All'" type="button"></a>
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div data-bind="event: {scroll: lazyload}" class="wrap-table">
+        <table class="table table-product">
+            <tbody data-bind="foreach: {data: items}">
+                <tr>
+                    <td class="a-left" ><span data-bind="text: name"></span></td>
+                    <td class="a-center" ><span data-bind="text: sku"></span></td>
+                    <td class="a-center">
+                        <input data-bind="attr:{'disabled':canAdjustStock},value: qtyVal, event: {change: $parent.changeStockData.bind($parent)}" class="qty-edit" style="width: 50px" type="text"/>
+                    </td>
+                    <td data-bind="attr:{'class':'a-center '}">
+                        <input data-bind="attr:{'disabled':canAdjustStock},event: {change: $parent.changeStockData.bind($parent)}, checked: isInStock, bootstrapSwitchOn: isInStock," type="checkbox" class="ios">
+                    </td>
+                    <td class="a-center">
+                        <input data-bind="event: {change: $parent.changeStockData.bind($parent)}, checked: manageStock, bootstrapSwitchOn: manageStock" type="checkbox" class="ios">
+                    </td>
+                    <td class="a-center">
+                        <input data-bind="event: {change: $parent.changeStockData.bind($parent)}, checked: backOrder, bootstrapSwitchOn: backOrder" type="checkbox" class="ios">
+                    </td>
+                    <td class="a-right">
+                        <a data-bind="visible: changedData, event: {click: $parent.updateStock.bind($parent)}, i18n: 'Update'" class="update"></a>
+                        <span class="icon-iconPOS-success" data-bind="visible: finishedUpdate"><span class="path1"></span><span class="path2"></span></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

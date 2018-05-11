@@ -1,0 +1,35 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div id="popup-open-shift" class="hide-popup popup-for-right">
+    <div class="wrap-popup">
+        <div class="indicator" data-bind="visible:loading">
+            <div class="spinner"></div>
+        </div>
+        <div class="popup-header">
+            <button type="button" class="button cancel" data-bind="click: closeForm"><span data-bind="i18n:'Cancel'"/></button>
+            <label class="title-box"><span data-bind="i18n:'Open Session'"/></label>
+            <div class="button btn-done"></div>
+        </div>
+        <div class="modal-body">
+            <div class="staff-name" data-bind="visible:showError">
+                <span data-bind="i18n:errorMessage()" class="error-message"/>
+            </div>
+            <div class="amount-box">
+                <div class="input-box">
+                    <label><span data-bind="i18n:'Staff'"/></label>
+                    <div class="staff-name" data-bind="afterRender:checkSessionOpen"><span data-bind="text:staffName"/> </div>
+                </div>
+                <div class="input-box">
+                    <label><span data-bind="i18n:'POS'"/></label>
+                    <span data-bind="text: window.webposConfig.posName"></span>
+                </div>
+                <!-- ko template: {name: 'Magestore_Webpos/shift/shift/cash-counting', data: $data} -->
+                <!-- /ko -->
+            </div>
+            <button type="submit" class="button btn-done"  data-bind="click: OpenNewShift"><span class="link-cl-cfg" data-bind="i18n:'Open Session'"/></button>
+        </div>
+    </div>
+</div>

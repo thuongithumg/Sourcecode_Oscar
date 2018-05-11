@@ -1,0 +1,54 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<div class="wrap-general_container sync_container">
+    <!-- Template for  submenu general -->
+    <div class="col-sm-4 col-lg-3 col-right">
+        <header class="o-header">
+            <nav class="o-header-nav">
+                <label class="title title-header-page" data-bind="text:'Synchronization'"></label>
+            </nav>
+        </header>
+        <div class="main-item-general main-general">
+            <div class="wrap-item-general">
+                <ul class="nav nav-pills">
+                    <!-- ko foreach: elems() -->
+                    <li data-bind="attr:{class:'bg-cl-active ' + className}"><a data-toggle="pill" data-bind="text:label,click:$parent.changeMenu.bind(this,$parent),attr:{href:'#'+idName}"></a></li>
+                    <!-- /ko -->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- End Template for submenu general -->
+    <div class="col-sm-8 col-lg-9 col-left">
+        <header class="o-header">
+            <nav class="o-header-nav">
+                <div class="title-page"><label class="title-header-page"  data-bind="text: headerName"></label></div>
+            </nav>
+        </header><!-- /o-header -->
+        <main class="main-content">
+            <div class="tab-content">
+                <!-- ko foreach: elems() -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+                <!-- /ko -->
+            </div>
+        </main><!-- /o-content -->
+    </div>
+</div>

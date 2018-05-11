@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<page layout='webpos' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" >
+    <head>
+        <css src="Magestore_Webpos::css/synchronization.css"/>
+    </head>
+    <body>
+        <referenceBlock name="webpos_content">
+            <block class="Magestore\Webpos\Block\Settings\General" name="webpos-settings-synchronization" before="-" cacheable="false" template="Magestore_Webpos::settings/synchronization.phtml">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="webpos-settings-synchronization" xsi:type="array">
+                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/settings/synchronization/content</item>
+                                <item name="config" xsi:type="array">
+                                    <item name="template" xsi:type="string">Magestore_Webpos/settings/synchronization/content</item>
+                                </item>
+                                <item name="children" xsi:type="array">
+                                    <item name="sync-data" xsi:type="array">
+                                        <item name="sortOrder" xsi:type="string">1</item>
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/settings/synchronization/sync-data</item>
+                                        <item name="displayArea" xsi:type="string">sync-data</item>
+                                        <item name="config" xsi:type="array">
+                                            <item name="template" xsi:type="string">Magestore_Webpos/settings/synchronization/sync-data</item>
+                                            <item name="label" xsi:type="string"  translate="true">Sync Data</item>
+                                            <item name="className" xsi:type="string">active</item>
+                                            <item name="idName" xsi:type="string">sync-data</item>
+                                        </item>
+                                    </item>
+                                    <item name="error-logs" xsi:type="array">
+                                        <item name="sortOrder" xsi:type="string">10</item>
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/settings/synchronization/error-logs</item>
+                                        <item name="displayArea" xsi:type="string">error-logs</item>
+                                        <item name="config" xsi:type="array">
+                                            <item name="template" xsi:type="string">Magestore_Webpos/settings/synchronization/error-logs</item>
+                                            <item name="label" xsi:type="string"  translate="true">Error Logs</item>
+                                            <item name="className" xsi:type="string"></item>
+                                            <item name="idName" xsi:type="string">error-logs</item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

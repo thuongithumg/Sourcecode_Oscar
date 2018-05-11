@@ -1,0 +1,305 @@
+<?xml version="1.0"?>
+<!--/**
+* Magestore
+* 
+* NOTICE OF LICENSE
+* 
+* This source file is subject to the Magestore.com license that is
+* available through the world-wide-web at this URL:
+* http://www.magestore.com/license-agreement.html
+* 
+* DISCLAIMER
+* 
+* Do not edit or add to this file if you wish to upgrade this extension to newer
+* version in the future.
+* 
+* @category    Magestore
+* @package     Magestore_RewardPoints
+* @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+* @license     http://www.magestore.com/license-agreement.html
+**/-->
+<config>
+    <api>
+        <resources>
+            <rewardpoints_customer translate="title" module="rewardpointsapi">
+                <model>rewardpointsapi/customer_api</model>
+                <title>RewardPoints Customer API</title>
+                <acl>rewardpoints_customer</acl>
+                <methods>
+                    <getcustomerbyemail translate="title" module="rewardpointsapi">
+                        <title>Fetch the customer by the e-mail and website id</title>
+                        <method>getCustomerByEmail</method>
+                        <acl>rewardpoints_customer/getcustomerbyemail</acl>
+                    </getcustomerbyemail>
+                    <getcustomeridbyemail translate="title" module="rewardpointsapi">
+                        <title>Fetch the customer id by the e-mail and website id</title>
+                        <method>getCustomerIdByEmail</method>
+                        <acl>rewardpoints_customer/getcustomeridbyemail</acl>
+                    </getcustomeridbyemail>
+                    <getbalancebyemail translate="title" module="rewardpointsapi">
+                        <title>Get the points balance for a user by e-mail</title>
+                        <method>getBalanceByEmail</method>
+                        <acl>rewardpoints_customer/getbalance</acl>
+                    </getbalancebyemail>
+                    <getbalancebyid translate="title" module="rewardpointsapi">
+                        <title>Get the points balance for a user by customer id</title>
+                        <method>getBalanceById</method>
+                        <acl>rewardpoints_customer/getbalance</acl>
+                    </getbalancebyid>
+                     <getcustomersbalance translate="title" module="rewardpointsapi">
+                        <title>Get the customers balance </title>
+                        <method>getCustomersBalance</method>
+                        <acl>rewardpoints_customer/getbalancecustomers</acl>
+                    </getcustomersbalance>
+                </methods>
+                <faults module="rewardpointsapi">
+                    <no_such_customer>
+                        <code>200</code>
+                        <message>Customer not found</message>
+                    </no_such_customer>
+                    <api_usage_exception>
+                        <code>202</code>
+                        <message>A problem with your RewardPoints Api installation.</message>
+                    </api_usage_exception>
+                    <filters_invalid>
+                        <code>203</code >
+                        <message>Invalid filters specified. Details in error message.</message>
+                    </filters_invalid>
+                </faults>
+            </rewardpoints_customer>
+            <rewardpoints_transaction translate="title" module="rewardpointsapi">
+                <model>rewardpointsapi/transaction_api</model>
+                <title>Rewardpoints transaction API</title>
+                <acl>rewardpoints_transaction</acl>
+                <methods>
+                    <list translate="title" module="rewardpointsapi">
+                        <title>Get a list of transaction</title>
+                        <method>items</method>
+                        <acl>rewardpoints_transaction/list</acl>
+                    </list>
+                    <add translate="title" module="rewardpointsapi">
+                        <title>Add a transaction</title>
+                        <method>add</method>
+                        <acl>rewardpoints_transaction/add</acl>
+                    </add>
+                    <complete translate="title" module="rewardpointsapi">
+                        <title>Complete transaction</title>
+                        <method>complete</method>
+                        <acl>rewardpoints_transaction/complete</acl>
+                    </complete>
+                    <cancel translate="title" module="rewardpointsapi">
+                        <title>Cancel transaction</title>
+                        <method>cancel</method>
+                        <acl>rewardpoints_transaction/cancel</acl>
+                    </cancel>
+                    <expire translate="title" module="rewardpointsapi">
+                        <title>Expire transaction</title>
+                        <method>expire</method>
+                        <acl>rewardpoints_transaction/expire</acl>
+                    </expire>
+                    <balanceEmail translate="title" module="rewardpointsapi">
+                        <title>Send email update balance to customer</title>
+                        <method>sendUpdateBalanceEmail</method>
+                        <acl>rewardpoints_transaction/balance_email</acl>
+                    </balanceEmail>
+                    <expireEmail translate="title" module="rewardpointsapi">
+                        <title>Send email to customer before transaction is expired</title>
+                        <method>sendBeforeExpireEmail</method>
+                        <acl>rewardpoints_transaction/expire_email</acl>
+                    </expireEmail>
+                </methods>
+                <faults module="rewardpointsapi">
+                    <api_usage_exception>
+                        <code>500</code>
+                        <message>A problem with your RewardPoints Api installation.</message>
+                    </api_usage_exception>
+                    <filters_invalid>
+                        <code>101</code>
+                        <message>Invalid filters given for transaction. Details in error message.</message>
+                    </filters_invalid>
+                    <transactionid_invalid>
+                        <code>501</code>
+                        <message>Invalid transactionIds. Details in error message</message>
+                    </transactionid_invalid>
+                </faults>
+            </rewardpoints_transaction>
+            <rewardpoints_referfriends translate="title" module="rewardpointsapi">
+                <model>rewardpointsapi/referfriends_api</model>
+                <title>Rewardpoints refer friends API</title>
+                <acl>rewardpoints_referfriends</acl>
+                <methods>
+                    <coupon translate="title" module="rewardpointsapi">
+                        <title>Get coupon of customer</title>
+                        <method>getCouponByCustomer</method>
+                        <acl>rewardpoints_referfriends/coupon</acl>
+                    </coupon>
+                    <link translate="title" module="rewardpointsapi">
+                        <title>Get link share of customer</title>
+                        <method>getLinkByCustomer</method>
+                        <acl>rewardpoints_referfriends/link</acl>
+                    </link>
+                    <customerCoupon translate="title" module="rewardpointsapi">
+                        <title>Get customer by coupon code</title>
+                        <method>getCustomerByCoupon</method>
+                        <acl>rewardpoints_referfriends/customer_coupon</acl>
+                    </customerCoupon>
+                    <customerLink translate="title" module="rewardpointsapi">
+                        <title>Get customer by link</title>
+                        <method>getCustomerByLink</method>
+                        <acl>rewardpoints_referfriends/customer_link</acl>
+                    </customerLink>
+                </methods>
+                <faults module="rewardpointsapi">
+                    <api_usage_exception>
+                        <code>600</code>
+                        <message>There was a problem with the rewards_sales_order API</message>
+                    </api_usage_exception>
+                    <enable_plugin>
+                        <code>601</code>
+                        <message>You must enable refer friends plugin before use this function.</message>
+                    </enable_plugin>
+                </faults>
+            </rewardpoints_referfriends>
+            <rewardpoints_transfer translate="title" module="rewardpointsapi">
+                <model>rewardpointsapi/transfer_api</model>
+                <title>Rewardpoints transfer API</title>
+                <acl>rewardpoints_transfer</acl>
+                <methods>
+                    <list translate="title" module="rewardpointsapi">
+                        <title>Get a list of transfer</title>
+                        <method>items</method>
+                        <acl>rewardpoints_transfer/list</acl>
+                    </list>
+                    <add translate="title" module="rewardpointsapi">
+                        <title>Add a transfer</title>
+                        <method>add</method>
+                        <acl>rewardpoints_transfer/add</acl>
+                    </add>
+                    <complete translate="title" module="rewardpointsapi">
+                        <title>Complete transfer</title>
+                        <method>complete</method>
+                        <acl>rewardpoints_transfer/complete</acl>
+                    </complete>
+                    <cancel translate="title" module="rewardpointsapi">
+                        <title>Cancel transfer</title>
+                        <method>cancel</method>
+                        <acl>rewardpoints_transfer/cancel</acl>
+                    </cancel>
+                    <transferEmail translate="title" module="rewardpointsapi">
+                        <title>Send email transfer to customer</title>
+                        <method>sendTransferEmail</method>
+                        <acl>rewardpoints_transfer/transferEmail</acl>
+                    </transferEmail>
+                </methods>
+                <faults module="rewardpointsapi">
+                    <api_usage_exception>
+                        <code>600</code>
+                        <message>There was a problem with the rewardspoint_transfer API</message>
+                    </api_usage_exception>
+                    <enable_plugin>
+                        <code>701</code>
+                        <message>You must enable transfer plugin before use this function.</message>
+                    </enable_plugin>
+                    <data_error>
+                        <code>702</code>
+                        <message>Data error, please check again.</message>
+                    </data_error>
+                </faults>
+            </rewardpoints_transfer>
+        </resources>
+        <resources_alias>
+            <rewardpoints_customer>rewardpoints_customer</rewardpoints_customer>
+            <rewardpoints_transaction>rewardpoints_transaction</rewardpoints_transaction>
+            <rewardpoints_referfriends>rewardpoints_referfriends</rewardpoints_referfriends>
+            <rewardpoints_transfer>rewardpoints_transfer</rewardpoints_transfer>
+        </resources_alias>
+        <v2>
+            <resources_function_prefix>
+                <rewardpoints_customer>rewardpointsCustomer</rewardpoints_customer>
+                <rewardpoints_transaction>rewardpointsTransaction</rewardpoints_transaction>
+                <rewardpoints_referfriends>rewardpointsReferfriends</rewardpoints_referfriends>
+                <rewardpoints_transfer>rewardpointsTransfer</rewardpoints_transfer>
+            </resources_function_prefix>
+        </v2>
+        <acl>
+            <resources>
+                <rewardpoints_customer translate="title" module="rewardpointsapi">
+                    <title>RewardPoints Customer API</title>
+                    <sort_order>100</sort_order>
+                    <getcustomerbyemail translate="title" module="rewardpointsapi">
+                        <title>Fetch the customer by the e-mail and website id</title>
+                    </getcustomerbyemail>
+                    <getcustomeridbyemail translate="title" module="rewardpointsapi">
+                        <title>Get the customer id by the e-mail and website id</title>
+                    </getcustomeridbyemail>
+                    <getbalance translate="title" module="rewardpointsapi">
+                        <title>Get the points balance for a user by email or id</title>
+                    </getbalance>
+                    <getbalancecustomers translate="title" module="rewardpointsapi">
+                        <title>Fetch list customers balance</title>
+                    </getbalancecustomers>
+                </rewardpoints_customer>
+                <rewardpoints_transaction translate="title" module="rewardpointsapi">
+                    <title>RewardPoints Transaction API</title>
+                    <sort_order>101</sort_order>
+                    <list translate="title" module="rewardpointsapi">
+                        <title>Fetch a list of transaction</title>
+                    </list>
+                    <add translate="title" module="rewardpointsapi">
+                        <title>Add a transaction</title>
+                    </add>
+                    <cancel translate="title" module="rewardpointsapi">
+                        <title>Cancel transactions</title>
+                    </cancel>
+                    <complete translate="title" module="rewardpointsapi">
+                        <title>Complete transactions</title>
+                    </complete>
+                    <expire translate="title" module="rewardpointsapi">
+                        <title>Expire transactions</title>
+                    </expire>
+                    <balance_email translate="title" module="rewardpointsapi">
+                        <title>Send update balance email</title>
+                    </balance_email>
+                    <expire_email translate="title" module="rewardpointsapi">
+                        <title>Send expired transaction email</title>
+                    </expire_email>
+                </rewardpoints_transaction>
+                <rewardpoints_referfriends translate="title" module="rewardpointsapi">
+                    <title>RewardPoints Refer Friends API</title>
+                    <sort_order>102</sort_order>
+                    <coupon translate="title" module="rewardpointsapi">
+                        <title>Get coupon code of customer by id or email</title>
+                    </coupon>
+                    <link translate="title" module="rewardpointsapi">
+                        <title>Get link key of customer by id or email</title>
+                    </link>
+                    <customer_coupon translate="title" module="rewardpointsapi">
+                        <title>Get customer by coupon code</title>
+                    </customer_coupon>
+                    <customer_link translate="title" module="rewardpointsapi">
+                        <title>Get customer by link</title>
+                    </customer_link>
+                </rewardpoints_referfriends>
+                <rewardpoints_transfer translate="title" module="rewardpointsapi">
+                    <title>RewardPoints Transfer API</title>
+                    <sort_order>103</sort_order>
+                    <list translate="title" module="rewardpointsapi">
+                        <title>Fetch a list of transfer</title>
+                    </list>
+                    <add translate="title" module="rewardpointsapi">
+                        <title>Add a transfer</title>
+                    </add>
+                    <cancel translate="title" module="rewardpointsapi">
+                        <title>Cancel transfer</title>
+                    </cancel>
+                    <complete translate="title" module="rewardpointsapi">
+                        <title>Complete transfer</title>
+                    </complete>
+                    <transferEmail translate="title" module="rewardpointsapi">
+                        <title>Send receiver transfer email</title>
+                    </transferEmail>
+                </rewardpoints_transfer>
+            </resources>
+        </acl>
+    </api>
+</config>

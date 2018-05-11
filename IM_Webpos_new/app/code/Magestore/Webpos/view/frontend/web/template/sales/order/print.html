@@ -1,0 +1,389 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<!-- ko if: orderData -->
+<div class="print-order-class-container" data-bind="attr:{id: containerId}, style: {display: 'none'}">
+
+    <style>
+        @media (max-width: 480px) {
+            .items-view table .row-total {
+                display: none;
+            }items-view table td[data-metadata='qty']
+        .methods {
+                 display: block !important;
+             }
+        }
+        @media (max-width: 380px) {
+            .items-view table .item-name {
+                max-width: 120px;
+            }
+            .items-view table .price-container,
+            .items-view table .tax {
+                display: none !important;
+            }
+            .items-view table .row-total {
+                display: table-cell !important;
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+        html {
+            font-size: 13px;
+        }
+        body, h1, h2, h3, h4, h5, h6, ul {
+            padding: 0;
+            margin: 0;
+            font-weight: normal;
+        }
+        table {
+            border-spacing: 0;
+        }
+        ul {
+            list-style: none;
+        }
+        .flex-container {
+            display: -webkit-flex;
+            display: flex;
+            -webkit-justify-content: space-around;
+            justify-content: space-around;
+        }
+
+        .paper {
+            margin: 0;
+            padding: 5px 0;
+        }
+
+        .logo-container, .store-info, .print-footer {
+            text-align: center;
+        }
+        .store-info {
+            margin-bottom: 7px;
+        }
+        .store-info .name {
+            font-weight: 800;
+            text-align: inherit;
+        }
+
+        #logo {
+            font-family: Segoe UI, Arial, sans-serif;
+            font-weight: 800;
+            font-size: 32px;
+        }
+
+        #logo img {
+            max-width: 200px;
+        }
+
+        .receipt-info {
+            display: -webkit-flex;
+            display: flex;
+            -webkit-justify-content: space-between;
+            justify-content: space-between;
+            margin-bottom: 7px;
+        }
+
+        .receipt-info .customer-info {
+            text-transform: uppercase;
+        }
+
+        .items-view {
+            padding: 3px 0;
+            margin-bottom: 7px;
+        }
+        .items-view table {
+            width: 100%;
+            text-align: right;
+            font-size: inherit;
+            font-weight: inherit;
+            border-collapse: separate;
+        }
+
+        .items-view table thead {
+            vertical-align: top;
+        }
+
+        .items-view table tbody {
+            vertical-align: top;
+        }
+
+        .items-view table tbody tr td {
+            padding: 5px 0;
+        }
+
+        .items-view table td,
+        .items-view table th {
+            border-left: 10px solid transparent;
+        }
+
+        .items-view table td:first-child,
+        .items-view table th:first-child {
+            border-left: none;
+        }
+
+        .items-view table .item-name {
+            overflow: hidden;
+            white-space: normal;
+            text-transform: capitalize;
+        }
+
+        .items-view table .item-name .sku {
+            display: block;
+            text-transform: none;
+        }
+
+        .total-zone {
+            margin-bottom: 7px;
+            text-transform: uppercase;
+        }
+        .total-zone .title {
+            display: -webkit-flex;
+            display: flex;
+            font-weight: 800;
+            -webkit-justify-content: space-between;
+            justify-content: space-between;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+        .total-zone .title .literal {
+
+        }
+        .total-zone table {
+            font-weight: inherit;
+            font-size: inherit;
+            width: 100%;
+        }
+        .methods {
+            display: block;
+            margin-bottom: 7px;
+            text-transform: uppercase;
+        }
+        .shipping_area, .shipping_area address {
+            text-transform: uppercase;
+            font-style: normal;
+        }
+        .footer {
+            text-align: center;
+        }
+        .footer .highlight {
+            text-transform: uppercase;
+            font-weight: 400;
+            font-size: 28px;
+        }
+        .footer .separate {
+
+        }
+        .date {
+            text-align: right;
+        }
+        #store-name {
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 30px;
+        }
+        .store-star {
+            text-transform: uppercase;
+            font-weight: 400;
+            font-size: 16px;
+        }
+        #store-info {
+            font-weight: 200;
+            font-size: 16px;
+        }
+
+        @media screen {
+            .paper {
+                margin: 5px auto;
+                max-width: 600px;
+            }
+        }
+        @media print {
+            body {
+                color: #000;
+                background-color: #fff;
+            }
+        }
+        @page
+        {
+            size: auto;
+            margin: 2mm 4mm;
+        }
+        #print_layout .barcode{
+            text-align:center;
+            margin-top: 5px;
+        }
+        #print_layout .logo-container img{
+            max-width:100%;
+            max-height: 70px;
+        }
+
+        #print_layout{
+            margin: 0px 5px;
+        }
+        #webpos_sales_order_receipt_barcode{
+            margin: auto;
+            padding-top: 5px;
+        }
+    </style>
+    <div class="paper fluid-container" onclick="window.close();">
+
+        <div id="print_layout" data-bind="style:{fontFamily:getFont()}">
+            <div class="logo-container container">
+                <!--ko if:isShowLogo() -->
+                    <img src="" class="logo" alt="Logo" data-bind="attr:{src:getLogoPath()}"/>
+                <!--/ko-->
+                <div id="store-name"  data-bind="html:getTitle()"></div>
+                <div class="store-star">**** ****</div>
+                <!--ko if:hasHeaderHtml() -->
+                <div class="header-text" data-bind="html: getHeaderHtml()"></div>
+                <!--/ko-->
+                <div class="info-invoice">
+                    <br/>
+                <span>
+                    <span style="font-size:20px" data-bind="text: getIncrementId()"></span>&nbsp;<br/>
+                    <span  data-bind="text: getCreatedDate()"></span>
+                    <span  data-bind="text: getCreatedTime()"></span>
+                </span>
+                </div>
+                <!--ko if:isShowDeliveryDate() -->
+                <div class="user-info">
+                    <p style="text-transform: uppercase;margin-bottom:0px;">
+                        <span data-bind="text: $t('DeliveryDate:')"></span>
+                        <span data-bind="text: getDeliveryDate()"></span>
+                    </p>
+                </div>
+                <!--/ko-->
+                <!--ko if:isShowCashierName() -->
+                <div class="user-info">
+                    <p style="text-transform: uppercase;margin-bottom:0px;">
+                        <span data-bind="text: $t('CASHIER:')"></span>
+                        <span data-bind="text: getCashierName()"></span>
+                    </p>
+                </div>
+                <!--/ko-->
+                <!--ko if:hasCustomerName() -->
+                <div class="user-info">
+                    <p style="text-transform: uppercase;margin-top:0px;margin-bottom:0px;">
+                        <span data-bind="text: $t('CUSTOMER:')"></span>
+                        <span data-bind="text: getCustomerName()"></span>
+                    </p>
+                    <!--ko foreach: customerAdditionalInfomation() -->
+                    <p style="margin-top:0px;margin-bottom:0px;">
+                        <span data-bind="text: label"></span>
+                        <span data-bind="text: value"></span>
+                    </p>
+                    <!--/ko-->
+                </div>
+                <!--/ko-->
+            </div>
+            <div class="shipping_area">
+                <!--ko if:hasShipping() -->
+                <span><span data-bind="text: $t('SHIPPING:')"></span>
+                    <span data-bind="text: getShipping()"></span>
+                </span> <br/>
+                <!--/ko-->
+            </div>
+            <div class="items-view-container container">
+                <div class="items-view">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th class="item-name" data-metadata="item-name" align="left" data-bind="text: $t('ITEM')"></th>
+                            <th data-metadata="qty" data-bind="text: $t('Qty')"></th>
+                            <th class="price-container" data-metadata="regular-price" data-bind="i18n:'REGULAR PRICE'"></th>
+                            <th class="price-container" data-metadata="price" data-bind="text: $t('PRICE')"></th>
+                            <th class="row-total" data-metadata="row-total" align="right" data-bind="text: $t('SUBTOTAL')"></th>
+                        </tr>
+                        </thead>
+                        <tbody id='offline_receipt_items' data-bind="foreach: {data: getItems(), as: 'item'}">
+                        <!-- ko if: (!item.parent_item_id) || (typeof item.parent_item !== 'undefined' && item.parent_item.product_type === 'bundle') -->
+                        <tr>
+                            <td class='item-name' data-metadata='item-name' align='left'>
+                                <span class='name' data-bind="html: item.name"></span>
+                                <span class='sku' data-bind="html: item.sku"></span>
+                            </td>
+                            <!-- ko if: item.product_type !== 'bundle' -->
+                            <td data-metadata='qty' class='qty' data-bind="text: item.qty_ordered"></td>
+                            <td style="text-align: center;padding-left: 5%;" class='price-container' data-metadata='regular-price' data-bind="text: $parent.formatPrice(item.original_price)"></td>
+                            <td class='price-container' data-metadata='price' data-bind="text: $parent.formatPrice(item.price)"></td>
+                            <td class='row-total' data-metadata='row-total' align='right' data-bind="text: $parent.formatPrice(item.row_total)"></td>
+                            <!-- /ko -->
+                            <!-- ko if: item.product_type === 'bundle' -->
+                            <td data-metadata='qty' class='qty'></td>
+                            <td style="text-align: center;padding-left: 5%;" class='price-container' data-metadata='regular-price'></td>
+                            <td class='price-container' data-metadata='price'></td>
+                            <td class='row-total' data-metadata='row-total' align='right'></td>
+                            <!-- /ko -->
+                        </tr>
+                        <!-- /ko -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="total-zone-container container">
+                <div class="total-zone">
+                    <table>
+                        <tbody>
+                        <!--ko foreach: getOrderTotals() -->
+                        <tr>
+                            <td data-bind="text: $t(label)"></td>
+                            <td align="right"><strong data-bind="text: value"></strong></td>
+                        </tr>
+                        <!-- /ko -->
+
+                        <!--ko if: hasRefundAmount() -->
+                        <tr>
+                            <td data-bind="text: $t('Refund Amount')"></td>
+                            <td align="right"><strong data-bind="text: formatPrice(getRefundAmount())"></strong></td>
+                        </tr>
+                        <!-- /ko -->
+
+                        <tr>
+                            <td style='border-top: dashed 1px #000;padding:2px 0px;'></td>
+                            <td style='border-top: dashed 1px #000;padding:2px 0px;'></td>
+                        </tr>
+                        <!--ko foreach: getPayment() -->
+                        <tr>
+                            <td data-bind="text: $data.method_title"></td>
+                            <td align="right"><strong data-bind="text: $parent.formatPrice($data.display_amount)"></strong></td>
+                        </tr>
+                        <!-- /ko -->
+                        <!--ko if: hasWebposChange() -->
+                        <tr>
+                            <td data-bind="text: $t('Change')"></td>
+                            <td align="right"><strong data-bind="text: formatPrice(getWebposChange())"></strong></td>
+                        </tr>
+                        <!-- /ko -->
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <!--ko if:isShowComment() -->
+            <div class="comment">
+                <label data-bind="text: $t('Comment ')"/>
+                <table>
+                    <colgroup>
+                        <col width="300">
+                        <col width="">
+                    </colgroup>
+                    <tbody data-bind="foreach: {data: getComment(), as: 'comment_order'}">
+                    <tr>
+                        <td data-bind="text: $parents[1].getFullCurrentDatetime(comment_order.created_at)"></td>
+                        <td data-bind="text: comment_order.comment"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--/ko-->
+            <div class="print-footer store-star">-------- **** --------</div>
+            <div class="print-footer" data-bind="html:getFooterHtml()"></div>
+            <div class="print-footer" id="webpos_sales_order_receipt_barcode"></div>
+        </div>
+    </div>
+</div>
+
+<!-- /ko -->

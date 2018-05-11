@@ -1,0 +1,105 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<fieldset class="fieldset giftcard send">
+    <div class="field option">
+        <label class="label" for="custom_giftcard_amount">
+            <span data-bind="text:'Amount'"></span>
+        </label>
+
+        <div class="control">
+            <select type="text"
+                    class="product-custom-option admin__control-select required-entry"
+                    id="giftcard_amount"
+                    name="giftcard_amount"
+                    data-bind="value: amount, attr: {'data-validate': true},event: {'change': showCustomAmount()}">
+                <option value="" data-bind="text: $t('-- Please Select --')"></option>
+                <!-- ko foreach: {data: selectAmounts(), as: 'itemData' }  -->
+                <option data-bind="text: $parent.convertAndFormat(itemData),
+                                    attr: {'value': itemData}">
+                </option>
+                <!-- /ko -->
+                <!-- ko if: isOpenAmountAvailable() -->
+                <option value="custom" data-bind="text: 'Other Amount...'" ></option>
+                <!-- /ko -->
+            </select>
+        </div>
+    </div>
+
+    <!-- ko if: isOpenAmountAvailable() -->
+    <div class="field sender required option" id="custom_giftcard_amount_field" style="display: none">
+        <label for="custom_giftcard_amount" class="label"><span data-bind="text:'Custom Amount'"></span></label>
+        <div class="control">
+            <input type="text"
+                   id="custom_giftcard_amount"
+                   name="custom_giftcard_amount"
+                   class="required-entry input-text product-custom-option"
+                   data-validate="{number: true,required: true,min: 25,max: 100}"
+                   data-bind="value: customAmount, attr: {'data-validate': true}" />
+        </div>
+        <p class="note">
+            <!-- ko if: itemData().open_amount_min && itemData().open_amount_max -->
+            <span data-bind="text:'Minimum: ' + getGiftcardAmountMin()"></span>
+            <span data-bind="text:'Minimum: ' + getGiftcardAmountMax()"></span>
+            <!-- /ko -->
+            <!-- ko if: itemData().open_amount_min && itemData().open_amount_max == null -->
+            <span data-bind="text:'Minimum: ' + getGiftcardAmountMin()"></span>
+            <!-- /ko -->
+            <!-- ko if: itemData().open_amount_min == null && itemData().open_amount_max -->
+            <span data-bind="text:'Minimum: ' + getGiftcardAmountMax()"></span>
+            <!-- /ko -->
+        </p>
+    </div>
+    <!-- /ko -->
+
+
+    <div class="field sender required option">
+        <label for="giftcard_sender_name" class="label"><span data-bind="text:'Sender Name'"></span></label>
+        <div class="control">
+            <input type="text"
+                   id="giftcard_sender_name"
+                   name="giftcard_sender_name"
+                   class="required-entry input-text product-custom-option"
+                   data-bind="value: senderName,
+                        attr: {'data-validate': true}" />
+        </div>
+    </div>
+
+
+    <div class="field recipient required option">
+        <label for="giftcard_recipient_name" class="label"><span data-bind="text:'Recipient Name'"></span></label>
+        <div class="control">
+            <input type="text"
+                   id="giftcard_recipient_name"
+                   name="giftcard_recipient_name"
+                   class="required-entry input-text product-custom-option"
+                   data-bind="value: recipientName,
+                        attr: {'data-validate': true}" />
+        </div>
+    </div>
+    <!-- ko if: isEmailAvailable() -->
+    <div class="field recipient email required option">
+        <label for="giftcard_recipient_email" class="label"><span data-bind="text:'Recipient Email'"></span></label>
+        <div class="control">
+            <input type="email"
+                   id="giftcard_recipient_email"
+                   name="giftcard_recipient_email"
+                   class="validate-email required-entry input-text product-custom-option"
+                   data-bind="value: recipientEmail,
+                        attr: {'data-validate': true}" />
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: isMessageAvailable() -->
+    <div class="field text option">
+        <label for="giftcard-message" class="label"><span data-bind="text:'Message'"></span></label>
+        <div class="control">
+            <textarea name="giftcard_message" id="giftcard-message" class="input-text giftcard-message-max-length" cols="5" rows="3"
+                      data-bind="event: {'change': updateMessage()}" data-validate="{maxlength: window.webposConfig.plugins_config.m2ee_gift_card['giftcard/general/message_max_length'],messages:{maxlength:'Maximum length of the message is ' + window.webposConfig.plugins_config.m2ee_gift_card['giftcard/general/message_max_length'] + ' characters.'}}"></textarea>
+        </div>
+        <p class="note" for="giftcard-message" id="giftcard-message-error"></p>
+    </div>
+    <!-- /ko -->
+</fieldset>

@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Inventorysuccess
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<layout version="0.1.0">
+    
+    <adminhtml_sales_order_shipment_new>
+        <reference name="order_items">
+            <action method="setTemplate">
+                <template>inventorysuccess/sales/shipment/create/items.phtml</template>
+            </action>
+             <action method="addItemRender">
+                 <type>default</type>
+                 <block>inventorysuccess/adminhtml_sales_shipment_create_items_renderer_default</block>
+                 <template>inventorysuccess/sales/shipment/create/items/renderer/default.phtml</template>
+             </action>
+             <action method="addItemRender">
+                 <type>bundle</type>
+                 <block>inventorysuccess/adminhtml_sales_shipment_create_items_renderer_bundle</block>
+                 <template>inventorysuccess/sales/shipment/create/items/renderer/bundle.phtml</template>
+             </action>             
+            <block type="inventorysuccess/adminhtml_sales_shipment_create_selectWarehouse" as="select_warehouse" name="select_warehouse" />            
+        </reference>
+    </adminhtml_sales_order_shipment_new>
+    
+    <adminhtml_sales_order_shipment_view>
+        <reference name="shipment_items">
+            <action method="setTemplate">
+                <template>inventorysuccess/sales/shipment/view/items.phtml</template>
+            </action>           
+            <block type="inventorysuccess/adminhtml_sales_shipment_view_warehouse" as="view_warehouse" name="view_warehouse" />            
+        </reference>        
+    </adminhtml_sales_order_shipment_view>
+
+    <adminhtml_sales_order_creditmemo_new>
+        <reference name="order_items">        
+            <action method="addColumnRender">
+                <column>qty</column>
+                <block>inventorysuccess/adminhtml_sales_creditmemo_create_items_column_qty</block>
+                <template>inventorysuccess/sales/creditmemo/create/items/column/qty_warehouse.phtml</template>
+            </action>   
+            <action method="addItemRender">
+                <type>bundle</type>
+                <block>inventorysuccess/adminhtml_sales_creditmemo_create_items_renderer_bundle</block>
+                <template>inventorysuccess/sales/creditmemo/create/items/renderer/bundle.phtml</template>
+            </action>     
+            <action method="addColumnRender">
+                <column>warehouse</column>
+                <block>inventorysuccess/adminhtml_sales_creditmemo_create_items_column_qty</block>
+                <template>inventorysuccess/sales/creditmemo/create/items/column/warehouse.phtml</template>
+            </action>                              
+        </reference>      
+        <reference name="js">
+            <block type="inventorysuccess/adminhtml_sales_creditmemo_create_js" name="inventorysuccess_sales_creditmemo_create_js"/>
+        </reference>                
+    </adminhtml_sales_order_creditmemo_new>
+    
+    <adminhtml_sales_order_creditmemo_updateqty>
+        <reference name="order_items">        
+            <action method="addColumnRender">
+                <column>qty</column>
+                <block>inventorysuccess/adminhtml_sales_creditmemo_create_items_column_qty</block>
+                <template>inventorysuccess/sales/creditmemo/create/items/column/qty_warehouse.phtml</template>
+            </action>     
+            <action method="addItemRender">
+                <type>bundle</type>
+                <block>inventorysuccess/adminhtml_sales_creditmemo_create_items_renderer_bundle</block>
+                <template>inventorysuccess/sales/creditmemo/create/items/renderer/bundle.phtml</template>
+            </action>     
+            <action method="addColumnRender">
+                <column>warehouse</column>
+                <block>inventorysuccess/adminhtml_sales_creditmemo_create_items_column_qty</block>
+                <template>inventorysuccess/sales/creditmemo/create/items/column/warehouse.phtml</template>
+            </action>                       
+        </reference>       
+        <reference name="submit_before">
+            <block type="inventorysuccess/adminhtml_sales_creditmemo_create_js" name="inventorysuccess_sales_creditmemo_create_js"/>
+        </reference>               
+    </adminhtml_sales_order_creditmemo_updateqty>
+    
+    <adminhtml_sales_order_creditmemo_view>
+        <reference name="creditmemo_items">        
+            <action method="addColumnRender">
+                <column>name</column>
+                <block>inventorysuccess/adminhtml_sales_creditmemo_view_items_column_name</block>
+                <template>inventorysuccess/sales/creditmemo/view/items/column/name.phtml</template>
+            </action>   
+            <action method="addItemRender">
+                <type>bundle</type>
+                <block>inventorysuccess/adminhtml_sales_creditmemo_view_items_renderer_bundle</block>
+                <template>inventorysuccess/sales/creditmemo/view/items/renderer/bundle.phtml</template>
+            </action>             
+            <action method="addColumnRender">
+                <column>warehouse</column>
+                <block>inventorysuccess/adminhtml_sales_creditmemo_view_items_column_warehouse</block>
+                <template>inventorysuccess/sales/creditmemo/view/items/column/warehouse.phtml</template>
+            </action>  
+            <action method="addColumnRender">
+                <column>name</column>
+                <block>inventorysuccess/adminhtml_sales_creditmemo_view_items_column_name_grouped</block>
+                <template>inventorysuccess/sales/creditmemo/view/items/column/name.phtml</template>
+                <type>grouped</type>
+            </action>                                               
+        </reference>     
+        <reference name="js">
+            <block type="adminhtml/template" 
+                   template="inventorysuccess/sales/creditmemo/view/js.phtml"/>
+        </reference>              
+    </adminhtml_sales_order_creditmemo_view>
+</layout>

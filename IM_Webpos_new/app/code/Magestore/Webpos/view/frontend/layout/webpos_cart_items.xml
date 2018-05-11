@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<page layout='webpos' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" >
+    <body>
+        <referenceBlock name="webpos_cart_block">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="webpos_cart" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="webpos_cart_items" xsi:type="array">
+                                    <item name="component" xsi:type="string">Magestore_Webpos/js/view/checkout/cart/items</item>
+                                    <item name="displayArea" xsi:type="string">webpos_cart_items</item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

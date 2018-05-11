@@ -1,0 +1,352 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<!-- ko if: customerData().email -->
+<div data-bind="afterRender:initGoogleAddress"></div>
+<header class="o-header">
+    <nav class="o-header-nav">
+        <h3 class="customer-name"><label class="title-header-page" data-bind="text: customerData().firstname + ' ' + customerData().lastname"></label></h3>
+    </nav>
+    <!-- ko if: notSync() -->
+    <div class="notify-notsync" data-bind="i18n: 'This was an issue syncing this customer with your admin'"></div>
+    <!--/ko-->
+    <div class="life-time-sale">
+        <div class="life-time-left">
+            <!--<label data-bind="text: getLifeTimeTitle()"></label>-->
+            <!--<span class="price" data-bind="text: totalSale"></span>-->
+        </div>
+        <a href="#" class="use-to-checkout btn-cl-cfg-active" data-bind="click: useToCheckout, i18n: 'Use to checkout'"></a>
+    </div>
+</header>
+<main class="main-content">
+    <form class="panel-group customer-info" id="customer-edit-form">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h5 data-bind="i18n: 'Customer Information'"></h5>
+                <a class="action-edit actions btn-cl-cfg-other" data-bind="click: showEdit, visible: !isEditInformation(), i18n: 'Edit'"></a>
+                <button type="submit" class="action-edit actions btn-cl-cfg-other" data-bind="click: saveInformation, visible: isEditInformation, i18n: 'Save'"></button>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="customer-fname customer-info">
+                            <label for="customer_firstname" data-bind="i18n: 'First name:'"></label>
+                            <span data-bind="text: currentFirstName, visible: !isEditInformation()" ></span>
+                            <div class="input-box" data-bind="visible: isEditInformation"><input data-bind="value: currentFirstName"
+                                   data-validate="{'required-entry':true}"
+                                   name="customer_firstname" id="customer_firstname" />
+                            <em>*</em></div>
+                        </div>
+                        <div class="customer-lname customer-info">
+                            <label for="customer_lastname" data-bind="i18n: 'Last name:'"></label>
+                            <span data-bind="text: currentLastName, visible: !isEditInformation()"></span>
+                            <div class="input-box" data-bind="visible: isEditInformation"><input data-bind="value: currentLastName"
+                                   data-validate="{'required-entry':true}"
+                                   name="customer_lastname" id="customer_lastname" />
+                            <em>*</em></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="customer-email customer-info">
+                            <label for="customer_email" data-bind="i18n: 'Email:'"></label>
+                            <span data-bind="text: currentEmail, visible: !isEditInformation()"></span>
+                            <div class="input-box" data-bind="visible: isEditInformation"><input data-bind="value: currentEmail"
+                                   data-validate="{'required-entry':true, 'validate-email': true}"
+                                   name="customer_email" id="customer_email"  />
+                            <em>*</em></div>
+                        </div>
+                        <div class="customer-group customer-info">
+                            <label for="customer_group" data-bind="i18n: 'Group:'"></label>
+                            <span data-bind="text: customerData().group_label, visible: !isEditInformation()"></span>
+                            <div class="input-box" data-bind="visible: isEditInformation"><select class="selectpicker"
+                                    data-validate="{'required-entry':true}"
+                                    data-bind="options: customerGroupArray,
+                                                value: currentGroupId,
+                                                optionsText: function(item) {
+                                                    return item.code
+                                                },
+                                                optionsValue: function(item) {
+                                                    return item.id
+                                                },
+                                                optionsCaption: 'Choose...',
+                                                visible: isEditInformation
+                                                "
+                                    id="customer_group"
+                            >
+                            </select>
+                            <em>*</em></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6"  data-bind="visible:(showDob&&showGender)">
+                        <div class="customer-email customer-info"  data-bind="visible:showDob">
+                            <label for="customer_email" data-bind="i18n: 'Day of Birth:'"></label>
+                            <span data-bind="text: dob, visible: !isEditInformation()"></span>
+                            <div class="input-box" data-bind="visible: isEditInformation">
+                                <!-- ko if: requireDob -->
+                                <input type="text" name="dob"
+                                       data-bind="value: dob"
+                                       data-validate="{'required-entry':true}"
+                                       class="dob"/>
+                                <!--/ko-->
+                                <!-- ko if: !requireDob -->
+                                <input type="text" name="dob"
+                                       data-bind="value: dob"
+                                       class="dob"/>
+                                <!--/ko-->
+                                <!-- ko if: requireDob -->
+                                <em>*</em>
+                                <!--/ko-->
+                            </div>
+                        </div>
+                        <div class="customer-group customer-info" data-bind="visible:showGender">
+                            <label for="customer_group" data-bind="i18n: 'Gender:'"></label>
+                            <span data-bind="text: gender_label, visible: !isEditInformation()"></span>
+                            <div class="input-box" data-bind="visible: isEditInformation">
+                                <!-- ko if: requireGender -->
+                                <select class="gender"
+                                        data-validate="{'required-entry':requireGender}"
+                                        data-bind="options: genderArray,
+                                                        value: gender,
+                                                        optionsText: function(item) {
+                                                            return item.code
+                                                        },
+                                                        optionsValue: function(item) {
+                                                            return item.id
+                                                        },
+                                                        optionsCaption: $t('Please choose gender...')
+                                                        ">
+                                </select>
+                                <!--/ko-->
+                                <!-- ko if: !requireGender -->
+                                <select class="gender"
+                                        data-bind="options: genderArray,
+                                                        value: gender,
+                                                        optionsText: function(item) {
+                                                            return item.code
+                                                        },
+                                                        optionsValue: function(item) {
+                                                            return item.id
+                                                        },
+                                                        optionsCaption: $t('Please choose gender...')
+                                                        ">
+                                </select>
+                                <!--/ko-->
+                                <!-- ko if: requireGender -->
+                                <em>*</em>
+                                <!--/ko-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6" data-bind="visible:showTaxvat">
+                        <div class="customer-email customer-info">
+                            <label for="customer_email" data-bind="i18n: 'Tax/VAT number:'"></label>
+                            <span data-bind="text: taxvat, visible: !isEditInformation()"></span>
+                            <div class="input-box" data-bind="visible: isEditInformation"><!-- ko if: requireTaxvat -->
+                                <input type="text" name="taxvat"
+                                       data-bind="value: taxvat"
+                                       data-validate="{'required-entry':requireTaxvat}"
+                                       class="taxvat"/>
+                                <!--/ko-->
+                                <!-- ko if: !requireTaxvat -->
+                                <input type="text" name="taxvat"
+                                       data-bind="value: taxvat"
+                                       class="taxvat"/>
+                                <!--/ko-->
+                                <!-- ko if: requireTaxvat -->
+                                <em>*</em>
+                                <!--/ko-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ko foreach: getRegion('webpos_customer_integration') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!-- /ko -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h5 data-bind="i18n: 'Address'"></h5>
+                <a class="action-add actions  btn-cl-cfg-other" data-bind="click: showForm, i18n: 'Add'"></a>
+            </div>
+            <div class="panel-body">
+                <div class="row" data-bind="foreach: {data: addressArrayData, afterRender: resizeAddress}">
+                    <div class="col-sm-4">
+                        <div class="info-address-edit">
+                            <h3 class="customer-name" data-bind="text: firstname + ' ' + lastname"></h3>
+                            <div class="customer-address">
+                                <!-- ko if: street[0] -->
+                                    <!-- ko text: street[0] --><!--/ko-->
+                                <!--/ko-->
+                                <!-- ko if: street[1] -->
+                                    <!-- ko text: ', ' + street[1] --><!--/ko-->
+                                <!--/ko-->
+                                <!-- ko if: city -->
+                                    <!-- ko text: ' ' + city --><!--/ko-->
+                                <!--/ko-->
+                                <!-- ko if: region.region -->
+                                     <!-- ko text: ', ' + region.region --><!--/ko-->
+                                <!--/ko-->
+                                <!-- ko if: country_id -->
+                                    <!-- ko text: ', ' + country_id --><!--/ko-->
+                                <!--/ko-->
+                                <!-- ko if: postcode -->
+                                    <!-- ko text: ' ' + postcode --><!--/ko-->
+                                <!--/ko-->
+                            </div>
+                            <a href="" class="edit-address" data-bind="click: $parent.showEditForm.bind($parent)"><span class="icon-iconPOS-edit-28"></span></a>
+                            <a href="" class="delete-address" data-bind="click: $parent.deleteAddress.bind($parent)"><span class="icon-iconPOS-emptycart"></span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h5 data-bind="text: getOrderHistoryTitle()"></h5>
+            </div>
+            <div class="panel-body">
+                <table class="table">
+                    <colgroup>
+                        <col width="200"/>
+                        <col width=""/>
+                        <col width=""/>
+                    </colgroup>
+                    <tbody data-bind="foreach: orderHistory">
+                        <tr>
+                            <td class="datetime" data-bind="text: $parent.getFullDate(created_at)"></td>
+                            <td class="order-id" data-bind="text: increment_id, click: $parent.viewOrderDetail.bind($parent)"></td>
+                            <td class="price" data-bind="text: $parent.formatPrice(base_grand_total)"></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h5 data-bind="text: getRefundHistoryTitle()"></h5>
+            </div>
+            <div class="panel-body">
+                <table class="table">
+                    <colgroup>
+                        <col width="200"/>
+                        <col width=""/>
+                        <col width=""/>
+                    </colgroup>
+                    <tbody data-bind="foreach: refundHistory">
+                        <tr>
+                            <td class="datetime" data-bind="text: $parent.getFullDate(created_at)"></td>
+                            <td class="order-id" data-bind="text: increment_id, click: $parent.viewOrderDetail.bind($parent)"></td>
+                            <td class="price" data-bind="text: $parent.formatPrice(base_total_refunded)"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h5 data-bind="i18n: 'Store Credit'"></h5>
+            </div>
+            <div class="panel-body">
+                <div class="col-sm-6">
+                    <div class="customer-balance customer-info">
+                        <label for="customer-balance" data-bind="i18n: 'Balance: '"></label>
+                        <span data-bind="text: (creditAmount)"></span>
+                        <span data-bind="i18n: ' store credit(s)'"></span>
+                    </div>
+                </div>
+                <table class="table">
+                    <colgroup>
+                        <col width="200"/>
+                        <col width=""/>
+                        <col width=""/>
+                    </colgroup>
+                    <thead>
+                        <td class="text" data-bind="i18n: 'Date'"></td>
+                        <td class="text" data-bind="i18n: 'Balance Change'"></td>
+                        <td class="text" data-bind="i18n: 'Balance'"></td>
+                        <td class="text" data-bind="i18n: 'More Information'"></td>
+                    </thead>
+                    <tbody data-bind="foreach: customerCreditData">
+                    <tr>
+                        <td class="datetime" data-bind="text: $parent.getFullDate(updated_at)"></td>
+                        <td class="text" data-bind="text: $parent.formatPrice(balance_delta)"></td>
+                        <td class="text" data-bind="text: $parent.formatPrice(balance_amount)"></td>
+                        <td class="text" data-bind="text: additional_info"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h5 data-bind="i18n: 'Complain'"></h5>
+                <a class="action-add actions btn-cl-cfg-other" data-bind="click: showComplainForm, i18n: 'Add'"></a>
+            </div>
+            <div class="panel-body">
+                <table class="table">
+                    <colgroup>
+                        <col width="200"/>
+                        <col width=""/>
+                        <col width=""/>
+                    </colgroup>
+                    <tbody data-bind="foreach: customerComplainData">
+                        <tr>
+                            <td class="datetime" data-bind="text: $parent.getFullDate(created_at)"></td>
+                            <td class="text" data-bind="text: content"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+</main>
+<!--/ko-->
+<!-- ko ifnot: customerData().email -->
+<div class="col-sm-12 col-left">
+    <header class="o-header">
+        <nav class="o-header-nav">
+            <span></span>
+            <label class="title" data-bind="i18n: 'Customer Detail'"></label>
+            <span></span>
+        </nav>
+    </header>
+    <main class="main-content main-content-no-order">
+        <div class="pos-machine icon-info"></div>
+        <div class="text-note">
+            <span class="icon-iconPOS-empty-customer" id="empty-customer"></span>
+            <h3 class="title-box" data-bind="i18n: 'You don\'t have any customers yet'"></h3>
+        </div>
+    </main>
+</div>
+<!--/ko-->
+
+<!-- ko template: {name: addressTemplate} -->
+<!-- /ko -->
+
+<!-- ko -->
+<!-- ko template: {name: customerFormTemplate} -->
+<!-- /ko -->
+
+
+
+<!-- ko -->
+<!-- ko template: {name: shippingAddressTemplate} -->
+<!-- /ko -->
+
+
+<!-- ko -->
+<!-- ko template: {name: billingAddressTemplate} -->
+<!-- /ko -->
+
+<!-- ko -->
+<!-- ko template: {name: addComplainForm} -->
+<!-- /ko -->
+
+<!-- /ko -->
+
+
+<!-- /ko -->

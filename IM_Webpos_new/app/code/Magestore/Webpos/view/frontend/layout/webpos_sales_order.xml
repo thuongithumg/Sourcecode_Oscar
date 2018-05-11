@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<page layout='webpos' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" >
+    <body>
+        <referenceBlock name="webpos_content">
+            <block class="Magestore\Webpos\Block\AbstractBlock" name ='webpos-order-list' cacheable="false" template="Magestore_Webpos::sales/order/list.phtml">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="order-list" xsi:type="array">
+                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/sales/order/list</item>
+                                <item name="children" xsi:type="array">
+                                    <item name="view" xsi:type="array">
+                                        <item name="sortOrder" xsi:type="string">0</item>
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/sales/order/view</item>
+                                        <item name="displayArea" xsi:type="string">order-view</item>
+                                        <item name="children" xsi:type="array">
+                                            <item name="payment" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">0</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/sales/order/view/payment</item>
+                                                <item name="displayArea" xsi:type="string">order-payment</item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                    <item name="invoice" xsi:type="array">
+                                        <item name="sortOrder" xsi:type="string">0</item>
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/sales/order/invoice</item>
+                                        <item name="displayArea" xsi:type="string">order-invoice</item>
+                                    </item>
+                                    <item name="shipment" xsi:type="array">
+                                        <item name="sortOrder" xsi:type="string">0</item>
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/sales/order/shipment</item>
+                                        <item name="displayArea" xsi:type="string">order-shipment</item>
+                                    </item>
+                                    <item name="refund" xsi:type="array">
+                                        <item name="sortOrder" xsi:type="string">0</item>
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/sales/order/creditmemo</item>
+                                        <item name="displayArea" xsi:type="string">order-creditmemo</item>
+                                    </item>
+                                    <item name="comment" xsi:type="array">
+                                        <item name="sortOrder" xsi:type="string">0</item>
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/sales/order/comment</item>
+                                        <item name="displayArea" xsi:type="string">order-comment</item>
+                                    </item>
+                                    <item name="sendemail" xsi:type="array">
+                                        <item name="sortOrder" xsi:type="string">0</item>
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/sales/order/sendemail</item>
+                                        <item name="displayArea" xsi:type="string">order-sendemail</item>
+                                    </item>
+                                    <item name="print" xsi:type="array">
+                                        <item name="sortOrder" xsi:type="string">0</item>
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/sales/order/print</item>
+                                        <item name="displayArea" xsi:type="string">order-print</item>
+                                    </item>
+                                    <item name="cancel" xsi:type="array">
+                                        <item name="sortOrder" xsi:type="string">0</item>
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/sales/order/cancel</item>
+                                        <item name="displayArea" xsi:type="string">order-cancel</item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

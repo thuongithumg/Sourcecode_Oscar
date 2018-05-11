@@ -1,0 +1,14 @@
+<div id='install_container' class="pos_container active">
+    <div id="webpos-install">
+        <div id="block-webpos-install" data-bind="scope:'webpos-install'" class="block">
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <script type="text/x-magento-init">
+                {
+                    "#block-webpos-install": {
+                        "Magento_Ui/js/core/app": <?php /* @escapeNotVerified */ echo $block->getJsLayout();?>
+                    }
+                }
+            </script>
+        </div>
+    </div>
+</div>

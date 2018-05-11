@@ -1,0 +1,75 @@
+<!-- Modal -->
+<?php
+/**
+ * @var Magestore_BarcodeSuccess_Block_Scan $this
+ */
+$barcodes = Mage::getSingleton('adminhtml/session')->getData('scan_barcodes');
+?>
+<div class="modal right fade" id="scan-barcode" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <h2 class="modal-title" data-role="title"><?php echo $this->getTitle() ?></h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+            <div class="modal-header">
+                <button id="submit-barcode" class="action-primary import_button" type="button" data-role="action">
+                    <span><?php echo $this->__('Save') ?></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="entry-edit">
+                    <div class="header">
+                        <label><?php echo $this->__('Instruction'); ?></label>
+                    </div>
+                    <div class="barcode-input">
+                        <label for="barcode"><?php echo __("Barcode") ?></label>
+                        <input type="text" class="search-input input-text" name="barcode" id="barcode">
+                    </div>
+                    <div class="grid">
+                        <table class="data" id="barcode-table">
+                            <colgroup>
+                                <col width="55">
+                                <col>
+                                <col>
+                                <col>
+                                <col width="150">
+                            </colgroup>
+                            <thead>
+                            <tr class="headings">
+                                <th class="a-center"><?php echo __("Barcode") ?></th>
+                                <th class="a-center"><?php echo __("QTY") ?></th>
+                                <th class="a-center"><?php echo __("SKU") ?></th>
+                                <th class="a-center"><?php echo __("Product Name") ?></th>
+                                <th class="a-center"><?php echo __("Supplier") ?></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+</div><!-- modal -->
+<script type="text/javascript">
+    window.scanBarcode = new ScanBarcode({
+        'loadBarcodeUrl': '<?php echo Mage::helper('adminhtml')->getUrl('adminhtml/barcodesuccess_scan/loadBarcode') ?>',
+        'submitBarcodeUrl': '<?php echo Mage::helper('adminhtml')->getUrl('adminhtml/barcodesuccess_scan/submitBarcode') ?>',
+        'handleUrl' : '<?php echo Mage::helper('adminhtml')->getUrl('adminhtml/barcodesuccess_scan/submitBarcode') ?>',
+        /* handleUrl re-definition in app/code/local/Magestore/Inventorysuccess/Block/Adminhtml/Stocktaking/Edit/Tab/Products.php */
+    });
+//    init old barcodes
+//    window.scanBarcode.barcodes = JSON.parse('<?php //echo $this->getBarcodesJSON() ?>//');
+//    window.scanBarcode.render();
+    Event.observe($('barcode'), 'keypress', function (e) {
+        if (e.charCode == 13) {
+            $('barcode').select();
+            window.scanBarcode.loadBarcode();
+        }
+    });
+    Event.observe($('submit-barcode'), 'click', function (e) {
+        window.scanBarcode.submitBarcode();
+    });
+</script>
+

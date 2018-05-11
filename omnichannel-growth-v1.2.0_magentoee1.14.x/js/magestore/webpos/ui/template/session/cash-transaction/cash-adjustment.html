@@ -1,0 +1,30 @@
+
+<!--
+  ~ * Copyright © 2016 Magestore. All rights reserved.
+  ~ * See COPYING.txt for license details.
+  ~
+  -->
+
+<div id="popup-make-adjustment" class="hide-popup popup-for-right">
+    <div class="wrap-popup">
+        <div class="popup-header">
+            <button type="button" class="button cancel" data-bind="click: closeForm"><span data-bind="i18n:'Cancel'"/></button>
+            <label class="title-box"><span data-bind="i18n:adjustmentTitle()"/></label>
+            <button type="button" class="button btn-done" data-bind="click: createCashAdjustment"><span class="link-cl-cfg" data-bind="i18n:'Done'"/></button>
+        </div>
+        <div class="modal-body">
+            <label class="cash-drawer"><span data-bind="i18n:adjustmentNotice()"/></label>
+            <div class="amount-box">
+                <div class="input-box">
+                    <label><span data-bind="i18n:'Amount'"/></label>
+                    <input type="text" data-bind="textInput: valueFormatted, event:{change: valueChange}"  onfocus="this.select()">
+                </div>
+                <div>
+                    <span class="error_message" data-bind="text: valueErrorMessage"/>
+                </div>
+                <textarea class="note" placeholder="Reason" data-bind="value: note"></textarea>
+            </div>
+            <div class="staff-name"><span data-bind="text:staffName"/> </div>
+        </div>
+    </div>
+</div>

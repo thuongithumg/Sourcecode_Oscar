@@ -1,0 +1,61 @@
+
+<div id="purchase_email_header_block" class="purchase_email" >
+    <div class="admin__page-section-item email-header">
+        <table class="data-table admin__table-secondary email-header-table" style="font-size: 13px">
+            <tr class="col-0">
+                <td class="label" style="width: 32%">
+                    <strong><?php echo $this->__('Return From') ?></strong>
+                </td>
+                <td class="label" style="width: 32%">
+                    <strong><?php echo $this->__('Delivery To') ?></strong>
+                </td>
+                <td class="label" style="width: 32%">
+                    <strong><?php echo $this->__('Return Request') ?></strong>
+                </td>
+            </tr>
+            <tr class="col-1">
+                <td valign="top">
+                    <?php echo $this->getWarehouseName(); ?>
+                    <?php echo $this->getStreet('2'); ?>
+                    <?php echo $groupAddress = $this->getFormatedAddress('2'); ?><br/>
+                    <span><?php echo $this->__('Telephone: ') ?></span>
+                    <span><?php echo $this->getWarehouseData('telephone') ?></span><br/>
+                    <span><?php echo $this->__('Email: ') ?></span>
+                    <?php echo $this->getWarehouseData('contact_email') ?>
+                </td>
+                <td valign="top">
+                    <?php echo $this->getSupplierName(); ?>
+                    <?php echo $this->getStreet('1'); ?>
+                    <?php echo $groupAddress = $this->getFormatedAddress('1'); ?><br/>
+                    <span><?php echo $this->__('Telephone: ') ?></span>
+                    <span><?php echo $this->getSupplierData('telephone') ?></span><br/>
+                    <span><?php echo $this->__('Email: ') ?></span>
+                    <?php echo $this->getSupplierData('contact_email') ?>
+                </td>
+                <td valign="top">
+                    <span><?php echo $this->__('R.E#: ') ?></span>
+                    <span><?php echo $this->getReturnCode() ?></span><br/>
+                    <span><?php echo $this->__('Created At: ') ?></span>
+                    <span><?php echo $this->getReturnDate() ?></span><br/>
+                    <span><?php echo $this->__('Status: ') ?></span>
+                    <span><?php echo $this->getReturnStatus() ?></span><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<style type="text/css">
+    * {
+        background: transparent !important;
+        color: #000 !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+        filter: none !important;
+        -ms-filter: none !important;
+    }
+    @media print
+    {
+        @page { margin: 0; }
+        body  { margin: 1.6cm; }
+    }
+</style>

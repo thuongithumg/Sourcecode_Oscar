@@ -1,0 +1,65 @@
+<?php
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+?>
+<div class="page-title">
+    <h1><?php echo $this->__('Gift card') ?></h1>
+</div>
+<div class="gift-card">
+<form id="addredeem-giftvoucher-code" method="post" action="<?php echo $this->getFormActionUrl() ?>">
+    <div class="form-group">
+        <h2 class="sub-title"><?php echo $this->__('Add/Redeem a Gift Card') ?></h2>
+        <div class="row">
+            <div class="col-sm-6 col-xs-12">
+                <label for="giftvouchercode" class="required"><?php echo $this->__('Enter Gift Card Code') ?><em>*</em></label>
+                <input id="gift-voucher-code" name="giftvouchercode" value="" title="<?php echo $this->__('Enter Gift Card Code') ?>" class="input-text required-entry form-control" type="text">
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 text-left">
+                <?php if (Mage::helper('giftvoucher')->getGeneralConfig('enablecredit')) { ?>
+                    <button type="button" onclick="redeemgiftcard()" title="<?php echo $this->__('Redeem Gift Card') ?>" class="button"><span><span><?php echo $this->__('Redeem Gift Card') ?></span></span></button>
+                <?php } ?>
+                <button type="submit" title="<?php echo $this->__('Add To My List') ?>" class="button"><span><span><?php echo $this->__('Add To My List') ?></span></span></button>
+            </div>
+            <div class="col-xs-12 col-sm-4 text-right">
+                <p class="required"><em> * </em><?php echo $this->__('Required Fields') ?></p>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <p class="back-link"><a href="<?php echo $this->getUrl('giftvoucher/index/index') ?>"><small>« </small><?php echo $this->__('Back') ?></a></p>
+    </div>
+</form>
+</div>
+<script type="text/javascript">
+    //<![CDATA[
+    var dataForm = new VarienForm('addredeem-giftvoucher-code', true);
+    function redeemgiftcard() {
+        var clForm = new VarienForm('addredeem-giftvoucher-code', true);
+        if (clForm.validator.validate() == false) {
+            return false;
+        }
+        setLocation('<?php echo $this->getUrl("giftvoucher/index/redeem") ?>' + 'giftvouchercode/' + $('gift-voucher-code').value);
+    }
+    //]]>
+</script>

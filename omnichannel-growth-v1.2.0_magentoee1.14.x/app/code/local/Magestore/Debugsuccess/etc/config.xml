@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<!--
+  ~
+  ~  Magestore
+  ~   NOTICE OF LICENSE
+  ~
+  ~   This source file is subject to the Magestore.com license that is
+  ~   available through the world-wide-web at this URL:
+  ~   http://www.magestore.com/license-agreement.html
+  ~
+  ~   DISCLAIMER
+  ~
+  ~   Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~   version in the future.
+  ~
+  ~   @category    Magestore
+  ~   @package     Magestore_Barcodesuccess
+  ~   @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~   @license     http://www.magestore.com/license-agreement.html
+  ~
+  ~
+  -->
+<config>
+    <modules>
+        <Magestore_Debugsuccess>
+            <version>1.0.0</version>
+        </Magestore_Debugsuccess>
+    </modules>
+    <frontend>
+        <routers>
+            <debugsuccess>
+                <use>standard</use>
+                <args>
+                    <module>Magestore_Debugsuccess</module>
+                    <frontName>debugsuccess</frontName>
+                </args>
+            </debugsuccess>
+        </routers>
+        <layout>
+            <updates>
+                <debugsuccess>
+                    <file>debugsuccess.xml</file>
+                </debugsuccess>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magestore_Debugsuccess>
+                    <files>
+                        <default>Magestore_Debugsuccess.csv</default>
+                    </files>
+                </Magestore_Debugsuccess>
+            </modules>
+        </translate>
+    </frontend>
+
+
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Magestore_Debugsuccess>Magestore_Debugsuccess_Adminhtml</Magestore_Debugsuccess>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <debugsuccess>
+                    <file>debugsuccess.xml</file>
+                </debugsuccess>
+            </updates>
+        </layout>
+
+        <translate>
+            <modules>
+                <Magestore_Debugsuccess>
+                    <files>
+                        <default>Magestore_Debugsuccess.csv</default>
+                    </files>
+                </Magestore_Debugsuccess>
+            </modules>
+        </translate>
+    </adminhtml>
+
+
+    <global>
+        <models>
+            <debugsuccess>
+                <class>Magestore_Debugsuccess_Model</class>
+                <resourceModel>debugsuccess_mysql4</resourceModel>
+            </debugsuccess>
+            <debugsuccess_mysql4>
+                <class>Magestore_Debugsuccess_Model_Mysql4</class>
+                <entities>
+                    <stockmovement>
+                        <table>os_debug_movement</table>
+                    </stockmovement>
+                    <wrongqty>
+                        <table>cataloginventory_stock_item</table>
+                    </wrongqty>
+                </entities>
+            </debugsuccess_mysql4>
+        </models>
+        <resources>
+            <debugsuccess_setup>
+                <setup>
+                    <module>Magestore_Debugsuccess</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </debugsuccess_setup>
+            <debugsuccess_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </debugsuccess_write>
+            <debugsuccess_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </debugsuccess_read>
+        </resources>
+        <blocks>
+            <debugsuccess>
+                <class>Magestore_Debugsuccess_Block</class>
+            </debugsuccess>
+        </blocks>
+        <helpers>
+            <debugsuccess>
+                <class>Magestore_Debugsuccess_Helper</class>
+            </debugsuccess>
+        </helpers>
+    </global>
+
+    <default>
+        <debugsuccess>
+            <general>
+                <author>Kai</author>
+                <version>[1.0.0]</version>
+            </general>
+        </debugsuccess>
+    </default>
+
+</config>

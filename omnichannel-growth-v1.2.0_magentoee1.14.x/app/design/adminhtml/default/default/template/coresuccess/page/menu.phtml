@@ -1,0 +1,144 @@
+<?php
+
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Coresuccess
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+?>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<div id="overlay_bg" onclick="hideOverLay()"></div>
+<div class="inventory-nav-bar" style="float:left; width: 100%;">
+    <!--Logo start -->
+    <div class="logo-menu"><span class="icon-IMBackend-14"></span></div>
+    <!--Logo End -->
+    <!-- menu start -->
+    <?php echo $this->getMenuLevel($this->getMenuArray()); ?>
+    <!-- menu end -->
+</div>
+<script type="text/javascript">
+    var tab_toggle_active = false;
+
+    function navitabs(selectedtab) {
+        if(tab_toggle_active){
+            tab_toggle_active = false;
+        }else{
+            tab_toggle_active = true;
+        }
+        var s_tab = "erpplus_item_" + selectedtab;
+        var tabs = document.getElementsByTagName("li");
+        for (var x = 0; x < tabs.length; x++) {
+            name = tabs[x].getAttribute("name");
+            if (name == 'erpplus_item_0') {
+                if(tabs[x].id == s_tab){
+                    if($(tabs[x].id).hasClassName('active-main')){
+                        $(tabs[x].id).addClassName('active-ul');
+                    }
+                    var offsets = document.getElementById(tabs[x].id).getBoundingClientRect();
+                    var topLi = offsets.top;
+                    var leftLi = offsets.left;
+                    //current click
+                    if($(tabs[x].id).hasClassName('active') && $(tabs[x].id).down('ul') && $(tabs[x].id).down('ul').style.visibility == "visible"){
+                        //close
+                        if($(tabs[x].id).down('ul')){
+                            $(tabs[x].id).down('ul').style.visibility = "hidden";
+                            //$(tabs[x].id).removeClassName('active-ul');
+                        }
+                        if(!$(tabs[x].id).hasClassName('active-main')){
+                            //add class active to li has active-main
+                            if($(tabs[x].id).up().down('.active-main')){
+                                $(tabs[x].id).up().down('.active-main').addClassName('active');
+                            }
+                            $(tabs[x].id).removeClassName('active');
+                        }
+                        if($(tabs[x].id).hasClassName('active-main')){
+                            $(tabs[x].id).addClassName('active-ul');
+                        }
+                        tab_toggle_active = false;
+                    }else{
+                        //open
+                        var idUl = $(tabs[x].id).down('ul').id;
+                        if($(tabs[x].id).down('ul')){
+                            var heightUl = document.getElementById(idUl).offsetHeight;
+                           // alert(heightUl);
+                            $(tabs[x].id).down('ul').style.visibility = "visible";
+                            if(topLi<=139){
+                                $(tabs[x].id).down('ul').style.top = (topLi) + "px";
+                            } else if(topLi>206 && topLi<208){
+                                $(tabs[x].id).down('ul').style.top = (topLi-50) + "px";
+                            }else{
+                                $(tabs[x].id).down('ul').style.top = (topLi + 200 - heightUl) + "px";
+                            }
+                        }
+                        $('overlay_bg').style.display = "block";
+                        $(tabs[x].id).addClassName('active');
+                        //remove class active to li has active-main class
+                        if(!$(tabs[x].id).hasClassName('active-main')){
+                            if($(tabs[x].id).up().down('.active-main')){
+                                $(tabs[x].id).up().down('.active-main').removeClassName('active');
+                            }
+                        }
+                        if($(tabs[x].id).hasClassName('active-main')){
+                            $(tabs[x].id).removeClassName('active-ul');
+                        }
+                        tab_toggle_active = true;
+                    }
+
+                }else{
+
+                    //other no click
+                    if($(tabs[x].id).down('ul')){
+                        $(tabs[x].id).down('ul').style.visibility = "hidden";
+                    }
+                    if($(tabs[x].id).hasClassName('active-main')){
+                        //$(tabs[x].id).removeClassName('active-ul');
+                    }
+                    if(!$(tabs[x].id).hasClassName('active-main')){
+                        $(tabs[x].id).removeClassName('active');
+
+                    }
+                }
+            }
+        }
+
+        //console.log(tab_toggle_active);
+
+    }
+    function hideOverLay(){
+        var contents = document.getElementsByTagName("li");
+        for (var x = 0; x < contents.length; x++) {
+            name = contents[x].getAttribute("name");
+            if (name == 'erpplus_item_0') {
+//                console.log(contents[0].down('ul'));
+                if($(contents[x].id).hasClassName('active-main')){
+                    $(contents[x].id).addClassName('active');
+                } else{
+                    $(contents[x].id).removeClassName('active');
+                }
+                $('overlay_bg').style.display = "none";
+                if(contents[x].down('ul')!= undefined){
+                    var getUl = contents[x].down('ul');
+                    $(getUl.id).style.visibility = "hidden";
+                    if($(contents[x].id).hasClassName('active-main')){
+                        $(contents[x].id).addClassName('active-ul');
+                    }
+                }
+            }
+        }
+    }
+</script>
+

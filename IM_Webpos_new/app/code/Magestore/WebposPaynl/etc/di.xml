@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magestore\WebposPaynl\Api\PaynlServiceInterface" type="Magestore\WebposPaynl\Model\PaynlService"/>
+    <preference for="Magestore\WebposPaynl\Api\PaynlInterface" type="Magestore\WebposPaynl\Model\Paynl"/>
+    <preference for="Magestore\WebposPaynl\Api\Data\TransactionInterface" type="Magestore\WebposPaynl\Model\Data\Transaction"/>
+    <preference for="Magestore\WebposPaynl\Api\Data\ItemInterface" type="Magestore\WebposPaynl\Model\Data\Item"/>
+    <preference for="Magestore\WebposPaynl\Api\Data\TotalInterface" type="Magestore\WebposPaynl\Model\Data\Total"/>
+    <preference for="Magestore\WebposPaynl\Api\Data\InvoiceInterface" type="Magestore\WebposPaynl\Model\Data\Invoice"/>
+</config>

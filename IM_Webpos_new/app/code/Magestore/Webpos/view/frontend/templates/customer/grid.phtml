@@ -1,0 +1,12 @@
+<div id="customer-grid-page">
+    <div id="block-customer-list" data-bind="scope:'customer-list'" class="block">
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <script type="text/x-magento-init">
+            {
+                "#block-customer-list": {
+                    "Magento_Ui/js/core/app": <?php /* @escapeNotVerified */ echo $block->getJsLayout();?>
+                }
+            }
+        </script>
+    </div>
+</div>

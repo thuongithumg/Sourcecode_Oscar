@@ -1,0 +1,720 @@
+<?xml version="1.0"?>
+
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <!-- customer api -->
+    <route url="/V1/webpos/customerGroups/search" method="GET">
+        <service class="Magento\Customer\Api\GroupRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos"/>
+        </resources>
+    </route>
+
+    <route url="/V1/webpos/customers/search" method="GET">
+        <service class="Magestore\Webpos\Api\Customer\CustomerRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+
+    <route url="/V1/webpos/customers" method="POST">
+        <service class="Magestore\Webpos\Api\Customer\CustomerRepositoryInterface" method="save" />
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+
+    <route url="/V1/webpos/customers/:id" method="GET">
+        <service class="Magestore\Webpos\Api\Customer\CustomerRepositoryInterface" method="getById" />
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+
+    <route url="/V1/webpos/customers/:id" method="PUT">
+        <service class="Magento\Customer\Api\CustomerRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+
+    <route url="/V1/webpos/customers/credit" method="POST">
+        <service class="Magestore\Webpos\Api\Customer\CustomerCreditRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+
+    <route url="/V1/webpos/customers/credit/search" method="GET">
+        <service class="Magestore\Webpos\Api\Customer\CustomerCreditRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+
+    <route url="/V1/webpos/customers/complain" method="POST">
+        <service class="Magestore\Webpos\Api\Customer\CustomerComplainRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+
+    <route url="/V1/webpos/customers/complain/search" method="GET">
+        <service class="Magestore\Webpos\Api\Customer\CustomerComplainRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+
+
+    <!-- end customer api -->
+
+
+    <!-- product api -->
+    <route url="/V1/webpos/products/swatch/search" method="GET">
+        <service class="Magestore\Webpos\Api\Catalog\SwatchRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+
+    <route url="/V1/webpos/products" method="GET">
+        <service class="Magestore\Webpos\Api\Catalog\ProductRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+
+    <route url="/V1/webpos/productlist" method="GET">
+        <service class="Magestore\Webpos\Api\Catalog\ProductRepositoryInterface" method="getProductsWithoutOptions"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+
+
+    <route url="/V1/webpos/products/:id/options" method="GET">
+        <service class="Magestore\Webpos\Api\Catalog\ProductRepositoryInterface" method="getOptions"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+
+    <route url="/V1/webpos/products/get/:sku" method="GET">
+        <service class="Magestore\Webpos\Api\Catalog\ProductRepositoryInterface" method="get"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <!-- end product api -->
+
+    <!-- category api -->
+    <route url="/V1/webpos/categories" method="GET">
+        <service class="Magestore\Webpos\Api\Catalog\CategoryRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <!-- end category api -->
+
+    <!-- order api-->
+    <route url="/V1/webpos/orders/:id" method="GET">
+        <service class="Magestore\Webpos\Api\Sales\OrderRepositoryInterface" method="get"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/orders" method="GET">
+        <service class="Magestore\Webpos\Api\Sales\OrderRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/orders/:id/cancel" method="POST">
+        <service class="Magestore\Webpos\Api\Sales\OrderRepositoryInterface" method="cancel"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/orders/:id/emails" method="POST">
+        <service class="Magestore\Webpos\Api\Sales\OrderRepositoryInterface" method="notify"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/orders/:id/comments" method="POST">
+        <service class="Magestore\Webpos\Api\Sales\OrderRepositoryInterface" method="addComment"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/orders/:id/unhold" method="POST">
+        <service class="Magestore\Webpos\Api\Sales\OrderRepositoryInterface" method="unhold"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <!-- end order api -->
+
+    <!-- webpos order payment api -->
+    <route url="/V1/webpos/orders/:id/payments" method="POST">
+        <service class="Magestore\Webpos\Api\Sales\PaymentRepositoryInterface" method="takePayment"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <!-- end webpos order payment api -->
+
+    <!-- invoice api -->
+    <route url="/V1/webpos/invoices/" method="POST">
+        <service class="Magento\Sales\Api\InvoiceRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/invoices/create" method="POST">
+        <service class="Magestore\Webpos\Api\Sales\InvoiceRepositoryInterface" method="saveInvoice"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/invoices/:order_id/create" method="POST">
+        <service class="Magestore\Webpos\Api\Sales\InvoiceRepositoryInterface" method="createInvoiceByOrderId"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/invoices/updateqty" method="POST">
+        <service class="Magestore\Webpos\Api\Sales\InvoiceRepositoryInterface" method="updateQty"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <!-- end invoice api -->
+
+    <!-- shipment api-->
+    <route url="/V1/webpos/shipment/create" method="POST">
+        <service class="Magestore\Webpos\Api\Sales\ShipmentRepositoryInterface" method="saveShipment"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <!-- end shipment api-->
+
+    <!-- creditmemo api -->
+    <route url="/V1/webpos/creditmemo/create" method="POST">
+        <service class="Magestore\Webpos\Api\Sales\CreditmemoRepositoryInterface" method="saveCreditmemo"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <!-- end creditmemo api -->
+
+    <!-- checkout api -->
+    <route url="/V1/webpos/checkout/submitquote" method="POST">
+        <service class="Magestore\Webpos\Api\Checkout\CartInterface" method="submitQuote"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/checkout/submitonline" method="POST">
+        <service class="Magestore\Webpos\Api\Checkout\CartInterface" method="submitOrder"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/checkout/create" method="POST">
+        <service class="Magestore\Webpos\Api\Checkout\CartInterface" method="prepareOrder"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/checkout/checkPromotion" method="POST">
+        <service class="Magestore\Webpos\Api\Checkout\CartInterface" method="checkPromotion"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/checkout/getShippingRates" method="POST">
+        <service class="Magestore\Webpos\Api\Checkout\CartInterface" method="getShippingRates"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/checkout/sendEmail" method="POST">
+        <service class="Magestore\Webpos\Api\Checkout\CartInterface" method="sendEmail"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/checkout/unhold" method="POST">
+        <service class="Magestore\Webpos\Api\Checkout\CartInterface" method="unholdOrder"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/checkout/saveCart" method="POST">
+        <service class="Magestore\Webpos\Api\Cart\CheckoutInterface" method="saveCart" />
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/checkout/removeCart/" method="DELETE">
+        <service class="Magestore\Webpos\Api\Cart\CheckoutInterface" method="removeCart" />
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/checkout/removeItem/" method="DELETE">
+        <service class="Magestore\Webpos\Api\Cart\CheckoutInterface" method="removeItemById" />
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/checkout/removeCart/" method="POST">
+        <service class="Magestore\Webpos\Api\Cart\CheckoutInterface" method="removeCart" />
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/checkout/removeItem/" method="POST">
+        <service class="Magestore\Webpos\Api\Cart\CheckoutInterface" method="removeItemById" />
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/checkout/saveShippingMethod" method="POST">
+        <service class="Magestore\Webpos\Api\Cart\CheckoutInterface" method="saveShippingMethod" />
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/checkout/savePaymentMethod" method="POST">
+        <service class="Magestore\Webpos\Api\Cart\CheckoutInterface" method="savePaymentMethod" />
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/checkout/saveQuoteData" method="POST">
+        <service class="Magestore\Webpos\Api\Cart\CheckoutInterface" method="saveQuoteData" />
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/checkout/placeOrder" method="POST">
+        <service class="Magestore\Webpos\Api\Cart\CheckoutInterface" method="placeOrder" />
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/checkout/applyCoupon" method="POST">
+        <service class="Magestore\Webpos\Api\Cart\CheckoutInterface" method="applyCoupon" />
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/checkout/applyCoupon" method="POST">
+        <service class="Magestore\Webpos\Api\Cart\CheckoutInterface" method="applyCouponCode" />
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/checkout/getCartData" method="POST">
+        <service class="Magestore\Webpos\Api\Cart\CheckoutInterface" method="getCartData" />
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/checkout/getCartDataByCustomer" method="POST">
+        <service class="Magestore\Webpos\Api\Cart\CheckoutInterface" method="getCartDataByCustomer" />
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/checkout/getUpdateOnlineCart" method="POST">
+        <service class="Magestore\Webpos\Api\Cart\CheckoutInterface" method="getUpdateOnlineCart" />
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/checkout/getPaymentRequest" method="POST">
+        <service class="Magestore\Webpos\Api\Cart\CheckoutInterface" method="getPaymentRequest" />
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <!-- end checkout api -->
+
+    <!-- inventory api -->
+    <route url="/V1/webpos/stockItems" method="GET">
+        <service class="Magestore\Webpos\Api\Inventory\StockItemRepositoryInterface" method="getStockItems"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+            <resource ref= "Magestore_Webpos::manage_inventory" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/stockItems/:itemId" method="PUT">
+        <service class="Magestore\Webpos\Api\Inventory\StockItemRepositoryInterface" method="updateStockItem"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+            <resource ref= "Magestore_Webpos::manage_inventory" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/stockItems" method="PUT">
+        <service class="Magestore\Webpos\Api\Inventory\StockItemRepositoryInterface" method="massUpdateStockItems"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+            <resource ref= "Magestore_Webpos::manage_inventory" />
+        </resources>
+    </route>
+    <!-- end inventory api -->
+
+    <!-- payment api -->
+    <route url="/V1/webpos/payments" method="GET">
+        <service class="Magestore\Webpos\Api\Payment\PaymentRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <!-- end payment api -->
+
+    <!-- shipping api -->
+    <route url="/V1/webpos/shippings" method="GET">
+        <service class="Magestore\Webpos\Api\Shipping\ShippingRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <!-- end shipping api -->
+
+    <!-- website api -->
+    <route url="/V1/webpos/websites" method="GET">
+        <service class="Magento\Store\Api\WebsiteRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <!-- end website api -->
+
+    <!-- store view api -->
+    <route url="/V1/webpos/storeViews" method="GET">
+        <service class="Magento\Store\Api\StoreRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <!-- end store view api -->
+
+    <!-- store view api for client -->
+    <route url="/V1/webpos/storeInformation" method="GET">
+        <service class="Magestore\Webpos\Api\Store\StoreRepositoryInterface" method="getStoreInformation"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <!-- end store view api for client -->
+
+    <!-- store group api -->
+    <route url="/V1/webpos/storeGroups" method="GET">
+        <service class="Magento\Store\Api\GroupRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <!-- end store group api -->
+
+    <!-- country region api -->
+    <route url="/V1/webpos/countries" method="GET">
+        <service class="Magestore\Webpos\Api\Directory\Country\CountryRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <!-- end country region api -->
+
+    <!-- currency api -->
+    <route url="/V1/webpos/currencies" method="GET">
+        <service class="Magestore\Webpos\Api\Directory\Currency\CurrencyRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/currencies/change" method="POST">
+        <service class="Magestore\Webpos\Api\Directory\Currency\CurrencyRepositoryInterface" method="changeCurrency"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <!-- end currency api -->
+
+    <!-- configuration api -->
+    <route url="/V1/webpos/configurations" method="GET">
+        <service class="Magestore\Webpos\Api\Config\ConfigRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/configurations/:id" method="GET">
+        <service class="Magestore\Webpos\Api\Config\ConfigRepositoryInterface" method="getConfigByPath"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <!--<route url="/V1/webpos/customers/:id" method="GET">-->
+    <!--<service class="Magento\Customer\Api\CustomerRepositoryInterface" method="getById" />-->
+    <!--<resources>-->
+    <!--<resource ref="Magestore_Webpos::webpos" />-->
+    <!--</resources>-->
+    <!--</route>-->
+    <!-- end configuration api -->
+
+    <!-- Register Shift API -->
+    <route url="/V1/webpos/shifts/getlist" method="GET">
+        <service class="Magestore\Webpos\Api\Shift\ShiftRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos"  />
+        </resources>
+    </route>
+    <route url="/V1/webpos/shifts/save" method="POST">
+        <service class="Magestore\Webpos\Api\Shift\ShiftRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <!-- update shift -->
+    <route url="/V1/webpos/shifts/save/:shift_id" method="PUT">
+        <service class="Magestore\Webpos\Api\Shift\ShiftRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+
+    <route url="/V1/webpos/shifts/detail" method="GET">
+        <service class="Magestore\Webpos\Api\Shift\ShiftRepositoryInterface" method="detail"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/cash_transaction/save" method="POST">
+        <service class="Magestore\Webpos\Api\Shift\CashTransactionRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <!-- End of Register shift API -->
+
+    <route url="/V1/webpos/taxrate/list" method="GET">
+        <service class="Magestore\Webpos\Api\Checkout\TaxRateInterface" method="getList"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/taxclass/list" method="GET">
+        <service class="Magestore\Webpos\Api\Checkout\TaxClassInterface" method="getList"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/taxrule/list" method="GET">
+        <service class="Magestore\Webpos\Api\Checkout\TaxRuleInterface" method="getList"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+
+    <!-- Staff api -->
+    <route url="/V1/webpos/staffs" method="GET">
+        <service class="Magestore\Webpos\Api\Staff\StaffManagementInterface" method="getList"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/staff/login" method="POST">
+        <service class="Magestore\Webpos\Api\Staff\StaffManagementInterface" method="login"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+            <resource ref="Magestore_Webpos::login" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/staff/logout" method="POST">
+        <service class="Magestore\Webpos\Api\Staff\StaffManagementInterface" method="logout"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+            <resource ref="Magestore_Webpos::logout" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/staff/forceLogout" method="POST">
+        <service class="Magestore\Webpos\Api\Staff\StaffManagementInterface" method="forceLogout"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+            <resource ref="Magestore_Webpos::logout" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/staff/changepassword" method="POST">
+        <service class="Magestore\Webpos\Api\Staff\StaffManagementInterface" method="changepassword"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/balance/apply" method="POST">
+        <service class="Magestore\Webpos\Api\Integration\Storecreditee\CreditRepositoryInterface" method="apply"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/balance/cancel" method="POST">
+        <service class="Magestore\Webpos\Api\Integration\Storecreditee\CreditRepositoryInterface" method="cancel"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/balance/search/:id" method="POST">
+        <service class="Magestore\Webpos\Api\Integration\Storecreditee\CreditRepositoryInterface" method="getCustomerBalance"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/staff/change" method="POST">
+        <service class="Magestore\Webpos\Api\Staff\StaffManagementInterface" method="changeStaff"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <!-- End Staff api -->
+
+    <!-- Location api -->
+    <route url="/V1/webpos/locations" method="GET">
+        <service class="Magestore\Webpos\Api\Inventory\LocationRepositoryInterface" method="get"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <!-- End Location api -->
+
+    <!-- integration api -->
+    <route url="/V1/webpos/integration/refundByCredit" method="POST">
+        <service class="Magestore\Webpos\Api\Integration\Storecredit\CreditRepositoryInterface" method="refundByCredit"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/integration/getCreditBalance" method="POST">
+        <service class="Magestore\Webpos\Api\Integration\Storecredit\CreditRepositoryInterface" method="getBalance"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/integration/getCreditList" method="GET">
+        <service class="Magestore\Webpos\Api\Integration\Storecredit\CreditRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+
+    <route url="/V1/webpos/integration/getPointRates" method="GET">
+        <service class="Magestore\Webpos\Api\Integration\Rewardpoints\RateRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/integration/getCustomerPoints" method="GET">
+        <service class="Magestore\Webpos\Api\Integration\Rewardpoints\PointRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/integration/getPointBalance" method="POST">
+        <service class="Magestore\Webpos\Api\Integration\Rewardpoints\PointRepositoryInterface" method="getBalance"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/integration/getGiftcardBalance" method="POST">
+        <service class="Magestore\Webpos\Api\Checkout\CartInterface" method="checkGiftcard"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/integration/refundGiftcardBalance" method="POST">
+        <service class="Magestore\Webpos\Api\Integration\Giftcard\GiftcardRepositoryInterface" method="refundGiftcardCode"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+
+    <route url="/V1/webpos/integration/applyGiftcard" method="POST">
+        <service class="Magestore\Webpos\Api\Cart\CheckoutInterface" method="applyGiftcard"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/integration/removeGiftcard" method="POST">
+        <service class="Magestore\Webpos\Api\Cart\CheckoutInterface" method="removeGiftcard"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/integration/spendPoint" method="POST">
+        <service class="Magestore\Webpos\Api\Cart\CheckoutInterface" method="spendPoint"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <route url="/V1/webpos/integration/giftcard/template/search" method="GET">
+        <service class="Magestore\Webpos\Api\Integration\Giftcard\TemplateRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <!-- end integration api -->
+
+    <!-- pos session api -->
+    <route url="/V1/webpos/poslist" method="GET">
+        <service class="Magestore\Webpos\Api\Pos\PosRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+
+    <route url="/V1/webpos/posassign" method="POST">
+        <service class="Magestore\Webpos\Api\Pos\PosRepositoryInterface" method="assignStaff"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+
+    <route url="/V1/webpos/changepin" method="POST">
+        <service class="Magestore\Webpos\Api\Pos\PosRepositoryInterface" method="changePin"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+
+    <route url="/V1/webpos/unlockpos" method="POST">
+        <service class="Magestore\Webpos\Api\Pos\PosRepositoryInterface" method="unlockPos"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <!-- end pos session api -->
+
+    <!--Start Lock Register-->
+    <route url="/V1/webpos/pos/lockpos" method="POST">
+        <service class="Magestore\Webpos\Api\Pos\LockRegisterRepositoryInterface" method="lockPos"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+    <!--End Lock Register-->
+
+    <route url="/V1/webpos/checkpos" method="POST">
+        <service class="Magestore\Webpos\Api\Pos\PosRepositoryInterface" method="checkPos"/>
+        <resources>
+            <resource ref="Magestore_Webpos::webpos" />
+        </resources>
+    </route>
+</routes>

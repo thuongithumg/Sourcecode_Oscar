@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_Webposauthorizenet
+ * @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <modules>
+        <Magestore_Webposauthorizenet>
+            <version>0.1.0</version>
+        </Magestore_Webposauthorizenet>
+    </modules>
+    <frontend>
+        <routers>
+            <webposauthorizenet>
+                <use>standard</use>
+                <args>
+                    <module>Magestore_Webposauthorizenet</module>
+                    <frontName>webposauthorizenet</frontName>
+                </args>
+            </webposauthorizenet>
+        </routers>
+        <layout>
+            <updates>
+                <webposauthorizenet>
+                    <file>webposauthorizenet.xml</file>
+                </webposauthorizenet>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magestore_Webposauthorizenet>
+                    <files>
+                        <default>Magestore_Webposauthorizenet.csv</default>
+                    </files>
+                </Magestore_Webposauthorizenet>
+            </modules>
+        </translate>
+    </frontend>
+    <admin>
+        <routers>
+            <webposauthorizenetadmin>
+                <use>admin</use>
+                <args>
+                    <module>Magestore_Webposauthorizenet</module>
+                    <frontName>webposauthorizenetadmin</frontName>
+                </args>
+            </webposauthorizenetadmin>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <webposauthorizenet>
+                    <file>webposauthorizenet.xml</file>
+                </webposauthorizenet>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magestore_Webposauthorizenet>
+                    <files>
+                        <default>Magestore_Webposauthorizenet.csv</default>
+                    </files>
+                </Magestore_Webposauthorizenet>
+            </modules>
+        </translate>
+    </adminhtml>   
+    <global>
+        <models>
+            <webposauthorizenet>
+                <class>Magestore_Webposauthorizenet_Model</class>
+                <resourceModel>webposauthorizenet_mysql4</resourceModel>
+            </webposauthorizenet>
+            <webposauthorizenet_mysql4>
+                <class>Magestore_Webposauthorizenet_Model_Mysql4</class>
+            </webposauthorizenet_mysql4>
+        </models>
+        <resources>
+            <webposauthorizenet_setup>
+                <setup>
+                    <module>Magestore_Webposauthorizenet</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </webposauthorizenet_setup>
+            <webposauthorizenet_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </webposauthorizenet_write>
+            <webposauthorizenet_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </webposauthorizenet_read>
+        </resources>
+        <blocks>
+            <webposauthorizenet>
+                <class>Magestore_Webposauthorizenet_Block</class>
+            </webposauthorizenet>
+        </blocks>
+        <helpers>
+            <webposauthorizenet>
+                <class>Magestore_Webposauthorizenet_Helper</class>
+            </webposauthorizenet>
+        </helpers>
+        <events>
+            <webpos_get_payment_after>
+                <observers>
+                    <webposauthorizenet_observers>
+                        <class>webposauthorizenet/observer</class>
+                        <method>webposGetPaymentAfter</method>
+                    </webposauthorizenet_observers>
+                </observers>
+            </webpos_get_payment_after>
+        </events>
+    </global>
+    <default>
+        <webpos>
+            <payment>
+                <authorizenet>
+                    <enable>0</enable>
+                    <is_sandbox>0</is_sandbox>
+                </authorizenet>
+            </payment>
+        </webpos>
+    </default>
+</config>

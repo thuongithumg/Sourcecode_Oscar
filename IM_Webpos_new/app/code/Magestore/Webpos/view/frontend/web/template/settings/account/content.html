@@ -1,0 +1,27 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div class="wrap-account-container">
+    <form id="staff-settings-form" method="post">
+        <header class="o-header">
+            <nav class="o-header-nav">
+                <label class="title title-header-page" data-bind="i18n: 'My Account'"></label>
+            </nav>
+        </header>
+        <main class="main-account">
+            <div class="wrap-main-account">
+                <!-- ko foreach: elems() -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+                <!-- /ko -->
+            </div>
+        </main>
+        <footer class="footer-account">
+            <div class="action-button">
+                <button class="button btn-save-acc btn-cl-cfg-active" type="button" data-bind="i18n:'Save',click: saveStaffInformation"></button>
+            </div>
+        </footer>
+    </form>
+    <div class="wrap-backover hide-popup"></div>
+</div>

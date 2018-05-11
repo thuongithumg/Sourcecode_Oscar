@@ -1,0 +1,196 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Purchaseordersuccess
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<config>
+    <modules>
+        <Magestore_Purchaseordersuccess>
+            <version>1.2.0</version>
+        </Magestore_Purchaseordersuccess>
+    </modules>
+    <frontend>
+        <routers>
+            <purchaseordersuccess>
+                <use>standard</use>
+                <args>
+                    <module>Magestore_Purchaseordersuccess</module>
+                    <frontName>purchaseordersuccess</frontName>
+                </args>
+            </purchaseordersuccess>
+        </routers>
+        <layout>
+            <updates>
+                <purchaseordersuccess>
+                    <file>purchaseordersuccess.xml</file>
+                </purchaseordersuccess>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magestore_Purchaseordersuccess>
+                    <files>
+                        <default>Magestore_Purchaseordersuccess.csv</default>
+                    </files>
+                </Magestore_Purchaseordersuccess>
+            </modules>
+        </translate>
+    </frontend>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Magestore_Purchaseordersuccess before="Mage_Adminhtml">Magestore_Purchaseordersuccess_Adminhtml</Magestore_Purchaseordersuccess>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <purchaseordersuccess>
+                    <file>purchaseordersuccess.xml</file>
+                </purchaseordersuccess>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magestore_Purchaseordersuccess>
+                    <files>
+                        <default>Magestore_Purchaseordersuccess.csv</default>
+                    </files>
+                </Magestore_Purchaseordersuccess>
+            </modules>
+        </translate>
+    </adminhtml>
+    <global>
+        <models>
+            <purchaseordersuccess>
+                <class>Magestore_Purchaseordersuccess_Model</class>
+                <resourceModel>purchaseordersuccess_mysql4</resourceModel>
+            </purchaseordersuccess>
+            <purchaseordersuccess_mysql4>
+                <class>Magestore_Purchaseordersuccess_Model_Mysql4</class>
+                <entities>
+                    <purchaseorder>
+                        <table>os_purchase_order</table>
+                    </purchaseorder>
+                    <purchaseorder_code>
+                        <table>os_purchase_order_code</table>
+                    </purchaseorder_code>
+                    <purchaseorder_item>
+                        <table>os_purchase_order_item</table>
+                    </purchaseorder_item>
+                    <purchaseorder_item_received>
+                        <table>os_purchase_order_item_received</table>
+                    </purchaseorder_item_received>
+                    <purchaseorder_item_returned>
+                        <table>os_purchase_order_item_returned</table>
+                    </purchaseorder_item_returned>
+                    <purchaseorder_item_transferred>
+                        <table>os_purchase_order_item_transferred</table>
+                    </purchaseorder_item_transferred>
+                    <purchaseorder_invoice>
+                        <table>os_purchase_order_invoice</table>
+                    </purchaseorder_invoice>
+                    <purchaseorder_invoice_item>
+                        <table>os_purchase_order_invoice_item</table>
+                    </purchaseorder_invoice_item>
+                    <purchaseorder_invoice_payment>
+                        <table>os_purchase_order_invoice_payment</table>
+                    </purchaseorder_invoice_payment>
+                    <purchaseorder_invoice_refund>
+                        <table>os_purchase_order_invoice_refund</table>
+                    </purchaseorder_invoice_refund>
+                    <return>
+                        <table>os_return_order</table>
+                    </return>
+                    <return_item>
+                        <table>os_return_order_item</table>
+                    </return_item>
+                    <return_item_transferred>
+                        <table>os_return_order_item_transferred</table>
+                    </return_item_transferred>
+                </entities>
+            </purchaseordersuccess_mysql4>
+        </models>
+        <resources>
+            <purchaseordersuccess_setup>
+                <setup>
+                    <module>Magestore_Purchaseordersuccess</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </purchaseordersuccess_setup>
+            <purchaseordersuccess_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </purchaseordersuccess_write>
+            <purchaseordersuccess_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </purchaseordersuccess_read>
+        </resources>
+        <blocks>
+            <purchaseordersuccess>
+                <class>Magestore_Purchaseordersuccess_Block</class>
+            </purchaseordersuccess>
+        </blocks>
+        <helpers>
+            <purchaseordersuccess>
+                <class>Magestore_Purchaseordersuccess_Helper</class>
+            </purchaseordersuccess>
+        </helpers>
+        <template>
+            <email>
+                <purchase_order_success_supplier_email translate="label" module="purchaseordersuccess">
+                    <label>Purchase Order Email To Supplier</label>
+                    <file>purchaseordersuccess/email_supplier.html</file>
+                    <type>html</type>
+                </purchase_order_success_supplier_email>
+                <return_request_supplier_email translate="label" module="purchaseordersuccess">
+                    <label>Return Request Email To Supplier</label>
+                    <file>purchaseordersuccess/return_request_email_supplier.html</file>
+                    <type>html</type>
+                </return_request_supplier_email>
+            </email>
+        </template>
+    </global>
+    <default>
+        <purchaseordersuccess>
+            <product_source>
+                <product_source>1</product_source>
+            </product_source>
+            <tax_and_shipping>
+                <!--<shipping_price>0</shipping_price>-->
+                <!--<default_shipping_cost></default_shipping_cost>-->
+                <customer_tax>1</customer_tax>
+                <!--<default_tax>0</default_tax>-->
+            </tax_and_shipping>
+            <email_template>
+                <email_to_supplier>purchase_order_success_supplier_email</email_to_supplier>
+                <return_request_email_to_supplier>return_request_supplier_email</return_request_email_to_supplier>
+            </email_template>
+        </purchaseordersuccess>
+    </default>
+</config>

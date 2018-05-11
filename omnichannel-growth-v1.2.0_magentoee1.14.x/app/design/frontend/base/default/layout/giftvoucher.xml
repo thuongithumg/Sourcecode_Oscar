@@ -1,0 +1,531 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<layout version="0.1.0">
+    <!-- Default -->
+    <default>
+        <reference name="head">
+            <action method="addJs">
+                <script>magestore/giftvoucher/jquery-1.11.2.min.js</script>
+            </action>
+            <action method="addJs">
+                <script>magestore/giftvoucher/underscore.js</script>
+            </action>
+            <action method="addJs">
+                <script>magestore/giftvoucher/giftvoucher.js</script>
+            </action>
+            <action method="addCss">
+                <stylesheet>css/magestore/mobilelibrary.css</stylesheet>
+            </action>
+            <action method="addCss">
+                <stylesheet>css/magestore/giftvoucher.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="wishlist_sidebar">
+            <action method="addPriceBlockType">
+                <type>giftvoucher</type>
+                <block>giftvoucher/product_price</block>
+                <template>giftvoucher/product/price.phtml</template>
+            </action>
+        </reference>
+        <reference name="product_price_template">
+            <action method="addPriceBlockType">
+                <type>giftvoucher</type>
+                <block>giftvoucher/product_price</block>
+                <template>giftvoucher/product/price.phtml</template>
+            </action>
+        </reference>
+		
+        <!--        Hai.Tran-->
+        <reference name="cart_sidebar">
+            <action method="addItemRender">
+                <type>giftvoucher</type>
+                <block>giftvoucher/cart_item</block>
+                <template>checkout/cart/sidebar/default.phtml</template>
+            </action>
+        </reference>
+    </default>
+
+    <!-- Simple Product type -->
+    <PRODUCT_TYPE_simple>
+        <reference name="product.info.upsell">
+            <action method="addPriceBlockType">
+                <type>giftvoucher</type>
+                <block>giftvoucher/product_price</block>
+                <template>giftvoucher/product/price.phtml</template>
+            </action>
+            <action method="setItemLimit">
+                <type>giftvoucher</type>
+                <limit>4</limit>
+            </action>
+        </reference>
+    </PRODUCT_TYPE_simple>
+
+    <!-- Gift Voucher Product Type -->
+    <PRODUCT_TYPE_giftvoucher translate="label" module="giftvoucher">
+        <label>Catalog Product View (Gift Card)</label>
+        <reference name="product.info">
+            <block type="giftvoucher/product_view" name="product.info.giftvoucher" as="product_type_data" template="giftvoucher/product/view.phtml" >
+                <block type="giftvoucher/product_view" name="giftcard.product.selecttemplate" template="giftvoucher/product/template.phtml" >
+                    <block type="giftvoucher/product_upload" name="giftcard.product.upload" template="giftvoucher/product/upload.phtml" as="giftcard.uploadimage" />
+                </block>
+            </block>
+        </reference>
+        <reference name="product.info.upsell">
+            <action method="addPriceBlockType">
+                <type>giftvoucher</type>
+                <block>giftvoucher/product_price</block>
+                <template>giftvoucher/product/price.phtml</template>
+            </action>
+            <action method="setItemLimit">
+                <type>giftvoucher</type>
+                <limit>4</limit>
+            </action>
+        </reference>
+    </PRODUCT_TYPE_giftvoucher>
+
+    <!-- Gift Voucher Product Price -->
+
+    <catalog_category_default>
+        <reference name="product_list">
+            <action method="addPriceBlockType">
+                <type>giftvoucher</type>
+                <block>giftvoucher/product_price</block>
+                <template>giftvoucher/product/price.phtml</template>
+            </action>
+        </reference>
+    </catalog_category_default>
+
+    <catalog_category_view>
+        <reference name="product_list">
+            <action method="addPriceBlockType">
+                <type>giftvoucher</type>
+                <block>giftvoucher/product_price</block>
+                <template>giftvoucher/product/price.phtml</template>
+            </action>
+        </reference>
+    </catalog_category_view>
+
+    <catalog_category_layered>
+        <reference name="product_list">
+            <action method="addPriceBlockType">
+                <type>giftvoucher</type>
+                <block>giftvoucher/product_price</block>
+                <template>giftvoucher/product/price.phtml</template>
+            </action>
+        </reference>
+    </catalog_category_layered>
+
+    <catalog_product_compare_index>
+        <reference name="catalog.compare.list">
+            <action method="addPriceBlockType">
+                <type>giftvoucher</type>
+                <block>giftvoucher/product_price</block>
+                <template>giftvoucher/product/price.phtml</template>
+            </action>
+        </reference>
+    </catalog_product_compare_index>
+
+    <catalogsearch_result_index>
+        <reference name="search_result_list">
+            <action method="addPriceBlockType">
+                <type>giftvoucher</type>
+                <block>giftvoucher/product_price</block>
+                <template>giftvoucher/product/price.phtml</template>
+            </action>
+        </reference>
+    </catalogsearch_result_index>
+
+    <catalogsearch_advanced_result>
+        <reference name="search_result_list">
+            <action method="addPriceBlockType">
+                <type>giftvoucher</type>
+                <block>giftvoucher/product_price</block>
+                <template>giftvoucher/product/price.phtml</template>
+            </action>
+        </reference>
+    </catalogsearch_advanced_result>
+
+    <tag_product_list>
+        <reference name="search_result_list">
+            <action method="addPriceBlockType">
+                <type>giftvoucher</type>
+                <block>giftvoucher/product_price</block>
+                <template>giftvoucher/product/price.phtml</template>
+            </action>
+        </reference>
+    </tag_product_list>
+
+    <tag_customer_view>
+        <reference name="customer_view">
+            <action method="addPriceBlockType">
+                <type>giftvoucher</type>
+                <block>giftvoucher/product_price</block>
+                <template>giftvoucher/product/price.phtml</template>
+            </action>
+        </reference>
+    </tag_customer_view>
+    <catalog_product_view>
+        <!--            Hai.Tran-->
+        <reference name="head">
+            <action method="addJs">
+                <script>prototype/window.js</script>
+            </action>
+            <action method="addJs">
+                <script>prototype/tooltip.js</script>
+            </action>
+            <action method="addJs">
+                <script>scriptaculous/scriptaculous.js</script>
+            </action>
+            <action method="addItem">
+                <type>js_css</type>
+                <name>prototype/windows/themes/default.css</name>
+            </action>
+        </reference>
+        <reference name="alert.urls">
+            <block type="giftvoucher/product_view" name="giftvoucher.product.condition" before="-" template="giftvoucher/product/condition.phtml" />
+        </reference>
+        <reference name="catalog.product.related">
+            <action method="addPriceBlockType">
+                <type>giftvoucher</type>
+                <block>giftvoucher/product_price</block>
+                <template>giftvoucher/product/price.phtml</template>
+            </action>
+        </reference>
+    </catalog_product_view>
+
+    <checkout_cart_index>
+        <reference name="checkout.cart.crosssell">
+            <action method="addPriceBlockType">
+                <type>giftvoucher</type>
+                <block>giftvoucher/product_price</block>
+                <template>giftvoucher/product/price.phtml</template>
+            </action>
+        </reference>
+    </checkout_cart_index>
+
+    <rss_catalog_category>
+        <reference name="rss.catalog.category">
+            <action method="addPriceBlockType">
+                <type>giftvoucher</type>
+                <block>giftvoucher/product_price</block>
+                <template>giftvoucher/catalog/product/price.phtml</template>
+            </action>
+        </reference>
+    </rss_catalog_category>
+    <rss_catalog_new>
+        <reference name="rss.catalog.new">
+            <action method="addPriceBlockType">
+                <type>giftvoucher</type>
+                <block>giftvoucher/product_price</block>
+                <template>giftvoucher/catalog/product/price.phtml</template>
+            </action>
+        </reference>
+    </rss_catalog_new>
+    <rss_catalog_tag>
+        <reference name="rss.catalog.tag">
+            <action method="addPriceBlockType">
+                <type>giftvoucher</type>
+                <block>giftvoucher/product_price</block>
+                <template>giftvoucher/catalog/product/price.phtml</template>
+            </action>
+        </reference>
+    </rss_catalog_tag>
+
+    <!-- Cart Item -->
+    <checkout_cart_index>
+        <reference name="checkout.cart">
+            <action method="addItemRender">
+                <type>giftvoucher</type>
+                <block>giftvoucher/cart_item</block>
+                <template>checkout/cart/item/default.phtml</template>
+            </action>
+        </reference>
+    </checkout_cart_index>
+    <checkout_onepage_review>
+        <reference name="root">
+            <action method="addItemRender">
+                <type>giftvoucher</type>
+                <block>giftvoucher/cart_item</block>
+                <template>checkout/onepage/review/item.phtml</template>
+            </action>
+        </reference>
+    </checkout_onepage_review>
+
+    <checkout_multishipping_addresses>
+        <reference name="checkout_addresses">
+            <action method="addItemRender">
+                <type>giftvoucher</type>
+                <block>giftvoucher/cart_item</block>
+                <template>checkout/multishipping/item/default.phtml</template>
+            </action>
+        </reference>
+    </checkout_multishipping_addresses>
+
+    <checkout_multishipping_shipping>
+        <reference name="checkout_shipping">
+            <action method="addItemRender">
+                <type>giftvoucher</type>
+                <block>giftvoucher/cart_item</block>
+                <template>checkout/multishipping/item/default.phtml</template>
+            </action>
+        </reference>
+        <reference name="checkout_billing_items">
+            <action method="addItemRender">
+                <type>giftvoucher</type>
+                <block>giftvoucher/cart_item</block>
+                <template>checkout/multishipping/item/default.phtml</template>
+            </action>
+        </reference>
+    </checkout_multishipping_shipping>
+
+    <checkout_multishipping_overview>
+        <reference name="checkout_overview">
+            <action method="addItemRender">
+                <type>giftvoucher</type>
+                <block>giftvoucher/cart_item</block>
+                <template>checkout/multishipping/item/default.phtml</template>
+            </action>
+        </reference>
+    </checkout_multishipping_overview>
+
+    <!-- Gift Voucher -->
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink" ifconfig="giftvoucher/general/active" translate="label" module="giftvoucher">
+                <name>giftvoucher</name>
+                <path>giftvoucher/index/index</path>
+                <label>Gift Card</label>
+            </action>
+        </reference>
+    </customer_account>
+    <giftvoucher_index_index>
+        <update handle="customer_account" />
+
+        <reference name="content">
+            <block type="giftvoucher/giftvoucherlist" name="giftvoucherlist" template="giftvoucher/giftvoucher.phtml" />
+        </reference>
+    </giftvoucher_index_index>
+    <giftvoucher_index_history>
+        <update handle="customer_account" />
+        <reference name="content">
+            <block type="giftvoucher/history" name="history" template="giftvoucher/history.phtml" />
+        </reference>
+    </giftvoucher_index_history>
+    <giftvoucher_index_addredeem>
+        <update handle="customer_account" />
+        <reference name="content">
+            <block type="giftvoucher/addorredeem" name="add-redeem-giftvoucherlist" template="giftvoucher/addorredeem.phtml" />
+        </reference>
+    </giftvoucher_index_addredeem>
+    
+    <giftvoucher_index_check>
+        <update handle="page_two_columns_left" />
+        <reference name="content">
+            <block type="giftvoucher/giftvoucher" name="giftvoucher" template="giftvoucher/checkbalance.phtml" />
+        </reference>
+    </giftvoucher_index_check>
+
+    <!-- Order -->
+    <sales_order_view>
+        <reference name="order_items">
+            <action method="addItemRender">
+                <type>giftvoucher</type>
+                <block>giftvoucher/order_item</block>
+                <template>sales/order/items/renderer/default.phtml</template>
+            </action>
+        </reference>
+        <reference name="order_totals">
+            <block type="giftvoucher/order_credit" name="giftvoucher.order.credit" />
+            <block type="giftvoucher/order_totals" name="giftvoucher.order.totals" />
+        </reference>
+    </sales_order_view>
+    <sales_order_print>
+        <reference name="sales.order.print">
+            <action method="addItemRender">
+                <type>giftvoucher</type>
+                <block>giftvoucher/order_escape_item</block>
+                <template>sales/order/items/renderer/default.phtml</template>
+            </action>
+        </reference>
+        <reference name="order_totals">
+            <block type="giftvoucher/order_credit" name="giftvoucher.order.credit" />
+            <block type="giftvoucher/order_totals" name="giftvoucher.order.totals" />
+        </reference>
+    </sales_order_print>
+    <sales_email_order_items>
+        <reference name="items">
+            <action method="addItemRender">
+                <type>giftvoucher</type>
+                <block>giftvoucher/order_escape_item</block>
+                <template>email/order/items/order/default.phtml</template>
+            </action>
+        </reference>
+        <reference name="order_totals">
+            <block type="giftvoucher/order_credit" name="giftvoucher.order.credit" />
+            <block type="giftvoucher/order_totals" name="giftvoucher.order.totals" />
+        </reference>
+    </sales_email_order_items>
+	
+    <sales_order_invoice>
+        <reference name="invoice_items">
+            <action method="addItemRender">
+                <type>giftvoucher</type>
+                <block>giftvoucher/order_item</block>
+                <template>sales/order/invoice/items/renderer/default.phtml</template>
+            </action>
+        </reference>
+        <reference name="invoice_totals">
+            <block type="giftvoucher/order_invoice_credit" name="giftvoucher.order.credit" />
+            <block type="giftvoucher/order_invoice_totals" name="giftvoucher.order.totals" />
+        </reference>
+    </sales_order_invoice>
+    <sales_order_printinvoice>
+        <reference name="sales.order.print.invoice">
+            <action method="addItemRender">
+                <type>giftvoucher</type>
+                <block>giftvoucher/order_escape_item</block>
+                <template>sales/order/invoice/items/renderer/default.phtml</template>
+            </action>
+        </reference>
+        <reference name="invoice_totals">
+            <block type="giftvoucher/order_invoice_credit" name="giftvoucher.order.credit" />
+            <block type="giftvoucher/order_invoice_totals" name="giftvoucher.order.totals" />
+        </reference>
+    </sales_order_printinvoice>
+    <sales_email_order_invoice_items>
+        <reference name="items">
+            <action method="addItemRender">
+                <type>giftvoucher</type>
+                <block>giftvoucher/order_escape_item</block>
+                <template>email/order/items/invoice/default.phtml</template>
+            </action>
+        </reference>
+        <reference name="invoice_totals">
+            <block type="giftvoucher/order_invoice_credit" name="giftvoucher.order.credit" />
+            <block type="giftvoucher/order_invoice_totals" name="giftvoucher.order.totals" />
+        </reference>
+    </sales_email_order_invoice_items>
+	
+    <sales_order_shipment>
+        <reference name="shipment_items">
+            <action method="addItemRender">
+                <type>giftvoucher</type>
+                <block>giftvoucher/order_item</block>
+                <template>sales/order/shipment/items/renderer/default.phtml</template>
+            </action>
+        </reference>
+    </sales_order_shipment>
+    <sales_order_printshipment>
+        <reference name="sales.order.print.shipment">
+            <action method="addItemRender">
+                <type>giftvoucher</type>
+                <block>giftvoucher/order_escape_item</block>
+                <template>sales/order/shipment/items/renderer/default.phtml</template>
+            </action>
+        </reference>
+    </sales_order_printshipment>
+    <sales_email_order_shipment_items>
+        <reference name="items">
+            <action method="addItemRender">
+                <type>giftvoucher</type>
+                <block>giftvoucher/order_escape_item</block>
+                <template>email/order/items/shipment/default.phtml</template>
+            </action>
+        </reference>
+    </sales_email_order_shipment_items>
+	
+    <sales_order_creditmemo>
+        <reference name="creditmemo_items">
+            <action method="addItemRender">
+                <type>giftvoucher</type>
+                <block>giftvoucher/order_item</block>
+                <template>sales/order/creditmemo/items/renderer/default.phtml</template>
+            </action>
+        </reference>
+        <reference name="creditmemo_totals">
+            <block type="giftvoucher/order_creditmemo_credit" name="giftvoucher.order.credit" />
+            <block type="giftvoucher/order_creditmemo_totals" name="giftvoucher.order.totals" />
+        </reference>
+    </sales_order_creditmemo>
+    <sales_order_printcreditmemo>
+        <reference name="sales.order.print.creditmemo">
+            <action method="addItemRender">
+                <type>giftvoucher</type>
+                <block>giftvoucher/order_escape_item</block>
+                <template>sales/order/creditmemo/items/renderer/default.phtml</template>
+            </action>
+        </reference>
+        <reference name="creditmemo_totals">
+            <block type="giftvoucher/order_creditmemo_credit" name="giftvoucher.order.credit" />
+            <block type="giftvoucher/order_creditmemo_totals" name="giftvoucher.order.totals" />
+        </reference>
+    </sales_order_printcreditmemo>
+    <sales_email_order_creditmemo_items>
+        <reference name="items">
+            <action method="addItemRender">
+                <type>giftvoucher</type>
+                <block>giftvoucher/order_escape_item</block>
+                <template>email/order/items/creditmemo/default.phtml</template>
+            </action>
+        </reference>
+        <reference name="creditmemo_totals">
+            <block type="giftvoucher/order_creditmemo_credit" name="giftvoucher.order.credit" />
+            <block type="giftvoucher/order_creditmemo_totals" name="giftvoucher.order.totals" />
+        </reference>
+    </sales_email_order_creditmemo_items>
+    
+    <!-- Gift Card Management -->
+    <giftvoucher_index_view>
+        <update handle="customer_account" />
+        <reference name="content">
+            <block type="giftvoucher/view" name="giftvoucher.email" template="giftvoucher/giftcard/view.phtml">
+                <block type="giftvoucher/view" name="giftvoucher.basic" template="giftvoucher/giftcard/basic.phtml"/>
+            </block>
+        </reference>
+    </giftvoucher_index_view>
+    
+    <giftvoucher_index_email>
+        <update handle="customer_account" />
+        <reference name="content">
+            <block type="giftvoucher/view" name="giftvoucher.email" template="giftvoucher/giftcard/email.phtml">
+                <block type="giftvoucher/view" name="giftvoucher.basic" template="giftvoucher/giftcard/basic.phtml"/>
+            </block>
+        </reference>
+    </giftvoucher_index_email>
+    
+    <giftvoucher_index_print>
+        <block type="core/text_list" name="root">
+            <block type="giftvoucher/view" name="giftvoucher.print" template="giftvoucher/giftcard/print.phtml"/>
+        </block>
+        <!--        <update handle="print" />
+        <reference name="content">
+            <block type="giftvoucher/view" name="giftvoucher.print" template="giftvoucher/giftcard/print.phtml"/>
+        </reference>-->
+    </giftvoucher_index_print>
+    <!--// 11.4.2014 fix bug ko print khi la guest-->
+    <giftvoucher_index_printemail>
+        <block type="core/text_list" name="root">
+            <block type="giftvoucher/view" name="giftvoucher.print" template="giftvoucher/giftcard/printemail.phtml"/>
+        </block>
+    </giftvoucher_index_printemail>
+</layout>

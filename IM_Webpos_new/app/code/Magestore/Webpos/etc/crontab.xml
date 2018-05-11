@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="magestore_custom_crongroup">
+        <job name="update_index_table_product" instance="Magestore\Webpos\Cron\UpdateIndex\Product" method="execute">
+            <schedule>*/5 * * * *</schedule>
+        </job>
+        <job name="update_index_table_stock" instance="Magestore\Webpos\Cron\UpdateIndex\Stock" method="execute">
+            <schedule>*/5 * * * *</schedule>
+        </job>
+        <job name="update_index_table_customer" instance="Magestore\Webpos\Cron\UpdateIndex\Customer" method="execute">
+            <schedule>*/5 * * * *</schedule>
+        </job>
+    </group>
+</config>

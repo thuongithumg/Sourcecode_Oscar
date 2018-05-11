@@ -1,0 +1,90 @@
+<div class="ms-webpos" data-bind="scope: 'location'">
+    <div class="login-screen">
+        <div id="checkout-loader" data-role="checkout-loader" class="loading-mask" style="display: block">
+            <div class="loader">
+                <!--
+            <img src="<?php /* @escapeNotVerified */
+                echo $this->getViewFileUrl('images/loader-1.gif'); ?>"
+                 alt="<?php /* @escapeNotVerified */
+                echo Mage::helper('webpos')->__('Loading...'); ?>"
+                 style="position: absolute;">
+            -->
+            </div>
+        </div>
+        <div class="wrap-login-form">
+            <form class="form-change_location" role="form" id="webpos-location" method="post">
+                <h1 class="title-page"><img src="<?php echo $this->getLogoUrl(); ?>" width="200px" height="200px"
+                                            alt="logo"/></h1>
+                <div class="form-group">
+                    <div class="input-box">
+                        <label for="location"></label>
+                        <select class="form-control required-entry required" id="location" name="location"
+                                data-validate="{'required-entry':true}"
+                                data-bind="options: locationArray, value: locationId,
+                                                optionsText: function(item) {
+                                                    return item.location_name
+                                                },
+                                                optionsValue: function(item) {
+                                                    return item.location_id
+                                                },
+                                                optionsCaption: '--- Choose a Location ---'
+                                                ">
+                        </select>
+                    </div>
+                    <?php if ($this->isShowPosSelect()): ?>
+                        <div class="input-box">
+                            <label for="pos"></label>
+                            <select class="form-control required-entry required" id="pos" name="pos"
+                                    data-validate="{'required-entry':true}"
+                                    data-bind="options: posArray, value: posId,
+                                                optionsText: function(item) {
+                                                    return item.pos_name
+                                                },
+                                                optionsValue: function(item) {
+                                                    return item.pos_id
+                                                },
+                                                optionsCaption: '--- Choose a POS ---'
+                                                ">
+                            </select>
+                        </div>
+                    <?php endif; ?>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-default"
+                            data-bind="click: ajaxChangeLocation"><?php echo Mage::helper('webpos')->__('Enter To POS'); ?></button>
+                </div>
+                <div class="form-group" style="text-align: center;" data-bind="visible: showLogout">
+                    <a href="#" data-bind="click: logout">Logout</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    require([
+        'uiApp'
+    ], function (app) {
+        app({
+            components: <?php echo Zend_Json::encode($this->getJsLayout('components'));?>
+        });
+    });
+</script>
+<script>
+    var WEBPOS = {};
+    //var ObjectManager = {};
+    <?php
+    $config = $this->getWebposConfig();
+    ?>
+    window.webposConfig = <?php /* @escapeNotVerified */ echo \Zend_Json::encode($config); ?>;
+    window.posConfig = <?php /* @escapeNotVerified */ echo \Zend_Json::encode($this->getPosList()); ?>;
+    window.locationConfig = <?php /* @escapeNotVerified */ echo \Zend_Json::encode($this->getLocationList()); ?>;
+</script>
+
+<script>
+    require([
+        'mage/url'
+    ], function (url) {
+        return url.setBaseUrl('<?php /* @escapeNotVerified */ echo $this->getBaseUrl();?>');
+    });
+
+</script>

@@ -1,0 +1,39 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *  
+ * @category    Magestore
+ * @package     Magestore_Webpos
+ * @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+/**
+ * @see Magestore_Webpos_Block_Payment_Method_Multipayment_Info_Multipayment
+ */
+?>
+<!--p><strong><?php echo $this->escapeHtml($this->getMethod()->getTitle()) ?></strong></p-->
+<?php if ($_specificInfo = $this->getSpecificInformation()): ?>
+    <table>
+        <tbody>
+            <?php foreach ($_specificInfo as $_label => $_value): ?>
+                <tr>
+                    <td><?php echo $this->escapeHtml($_label) ?></td>
+                    <td style='padding-left:10px;font-weight:bold;'><?php echo nl2br(implode($this->getValueAsArray($_value, true), "\n")) ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+<?php endif; ?>
+<?php echo $this->getChildHtml() ?>

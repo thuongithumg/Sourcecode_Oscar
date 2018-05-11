@@ -1,0 +1,34 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<!-- Popup Add New Customer -->
+<form id="form-add-customer-complain" class="modal customer-popup-form" role="dialog"
+      data-bind="css: {'show': isShowComplainForm}">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <form id="customer-complain-form">
+                <div class="popup-header">
+                    <button type="button" class="close" data-dismiss="modal" data-bind="click: hideComplainForm, i18n: 'Cancel'"></button>
+                    <h4 class="modal-title"><label class="title-header-page" data-bind="i18n: 'Add Customer\'s complaint'"></label></h4>
+                    <button type="submit" class="btn-save  link-cl-cfg" data-bind="click: saveComplainForm, i18n: 'Save'"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <label for="complain-form">  </label>
+                                <textarea id="complain-form" style="width: 100%; height: 150px;border:0 none"
+                                    data-bind="value: customerComplainContent" data-validate="{'required-entry':true}"
+                                          name="complain-content"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</form>

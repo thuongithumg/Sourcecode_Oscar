@@ -1,0 +1,29 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<!-- ko if: orderData -->
+<div id="send-email-order" role="dialog"
+     data-bind="visible: isVisible, style: {display: stypeDisplay()},
+      attr:{class: 'modal fade add-comment ' + classIn()}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form data-bind="submit: sendEmail">
+                <div class="popup-header">
+                    <button type="button" class="close" data-dismiss="modal" data-bind="text: $t('Cancel'), click: display(false)"/>
+                    <h4 class="modal-title" data-bind="text: $t('Send email')"/>
+                    <button type="submit" class="btn-save link-cl-cfg" data-bind="text: $t('Send'), click: sendEmail"/>
+                </div>
+                <div class="modal-body">
+                    <input class="input-text"
+                           data-bind="attr: {id: inputId, placeholder: $t('Enter your email')}, value: customerEmail"/>
+                    <!-- ko if: invalidEmail -->
+                    <label class="required-email" data-bind="text: $t('Email is invalid!')"></label>
+                    <!-- /ko -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- /ko -->

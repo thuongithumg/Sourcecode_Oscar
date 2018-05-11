@@ -1,0 +1,691 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Giftvoucher
+  ~ @module     Giftvoucher
+  ~ @author      Magestore Developer
+  ~
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  ~
+  -->
+
+<config>
+    <tabs>
+        <magestore translate="label">
+            <label>Magestore Extension</label>
+            <sort_order>400</sort_order>
+        </magestore>
+    </tabs>
+    <sections>
+        <sales>
+            <groups>
+                <totals_sort>
+                    <fields>
+                        <giftvoucher translate="label">
+                            <label>Gift Voucher Before Tax</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </giftvoucher>
+                        <giftcardcredit translate="label">
+                            <label>Gift Card Credit Before Tax</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </giftcardcredit>
+                        <giftvoucher_after_tax translate="label">
+                            <label>Gift Voucher After Tax</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </giftvoucher_after_tax>
+                        <giftcardcredit_after_tax translate="label">
+                            <label>Gift Card Credit After Tax</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </giftcardcredit_after_tax>
+                    </fields>
+                </totals_sort>
+            </groups>
+        </sales>
+                
+        <giftvoucher translate="label" module="giftvoucher">
+            <class>separator-top</class>
+            <label>Gift Card</label>
+            <tab>magestore</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>300</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Enable Gift Card</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </active>
+
+                        <giftcode_configuration_separator translate="label comment">
+                            <label>Gift code</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>giftvoucher/adminhtml_system_config_form_field_separator</frontend_model>
+                            <margin_top>10px</margin_top>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </giftcode_configuration_separator>
+                        <pattern translate="label comment">
+                            <label>Gift code pattern</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Generate gift codes for Gift Card products. For example:<br/><strong>[A.8] : 8 alpha<br/>[N.4] : 4 numeric<br/>[AN.6] : 6 alphanumeric<br/>GIFT-[A.4]-[AN.6] : GIFT-ADFA-12NF0O</strong>]]></comment>
+                        </pattern>
+                        <showprefix translate="label comment">
+                            <label>The number of prefixes shown</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[The number of gift code's prefixes shown in front-end (This is to avoid code-copying).]]></comment>
+                        </showprefix>
+                        <hiddenchar translate="label comment">
+                            <label>Replace hidden characters by</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Hidden characters in gift codes will be replaced by the configured character. X is set as default.]]></comment>
+                        </hiddenchar>                    
+                        <giftused_configuration_separator translate="label comment">
+                            <label>Gift Card usage</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>giftvoucher/adminhtml_system_config_form_field_separator</frontend_model>
+                            <margin_top>10px</margin_top>
+                            <sort_order>16</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </giftused_configuration_separator>
+                        <expire translate="label comment">
+                            <label>Gift Cards codes expire after</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>17</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>day(s). Empty or zero is no limitation.</comment>
+                        </expire>
+                        <enablecredit translate="label comment">
+                            <label>Enable customer’s Gift Card credit balance</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>23</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If enabled, customers can redeem their gift code for credit balance (View more in Customer Management)</comment>
+                        </enablecredit>
+                        <credit_condition translate="label comment">
+                            <label>Allow customers to redeem Gift Cards with usage conditions</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>24</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                            <depends>
+                                <enablecredit>1</enablecredit>
+                            </depends>
+                        </credit_condition>
+                        <maximum translate="label comment">
+                            <label>Maximum time(s) to enter gift code incorrectly</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>18</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>Empty or zero is no limitation.</comment>
+                        </maximum>
+                        <share_card translate="label comment">
+                            <label>Maximum number of users per gift code</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>19</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>Empty or zero is no limitation.</comment>
+                        </share_card>
+                        <use_for_ship translate="label comment">
+                            <label>Use Gift Cards for shipping fee</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment></comment>
+                        </use_for_ship>
+                        <use_with_coupon translate="label comment">
+                            <label>Use Gift Cards with coupon codes</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>If Yes, customers can use Gift Cards codes and credit balance with system coupon codes to get discount.</comment>
+                        </use_with_coupon>
+                        <gc_show_check_link translate="label">
+                            <label>Show the link to check Gift Cards codes on website</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>35</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </gc_show_check_link>
+                        <show_expiry_date translate="label">
+                            <label>Show Gift Card expiry date on website</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>36</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment></comment>
+                        </show_expiry_date>
+                        <gifttax_configuration_separator translate="label comment">
+                            <label>Tax configuration</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>giftvoucher/adminhtml_system_config_form_field_separator</frontend_model>
+                            <margin_top>10px</margin_top>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </gifttax_configuration_separator>
+                        <apply_after_tax translate="label">
+                            <label>Apply Gift Card discount</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>giftvoucher/aftertax</source_model>
+                            <sort_order>45</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </apply_after_tax>
+                    </fields>
+                </general>
+                <interface translate="label">
+                    <label>On Product Page</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>12</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <giftcard_configuration_separator translate="label comment">
+                            <label>Gift Card value</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>giftvoucher/adminhtml_system_config_form_field_separator</frontend_model>
+                            <margin_top>10px</margin_top>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </giftcard_configuration_separator>
+                        <amount translate="label comment">
+                            <label>Default Gift Card value</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Examples:<br/><strong>10-1000 </strong>: a range between 10 to 1000<br/><strong>25,75,100 </strong>: a dropdown with values of 25, 75 and 100<br/><strong>100 </strong>: a static value of 100<br/><strong>The base currency is used as currency unit.</strong>]]></comment>
+                        </amount>
+                        <description translate="label">
+                            <label>Description of Gift Card value</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </description>
+                        <gifttemplate_configuration_separator translate="label comment">
+                            <label>Gift Card template</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>giftvoucher/adminhtml_system_config_form_field_separator</frontend_model>
+                            <margin_top>10px</margin_top>
+                            <sort_order>21</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </gifttemplate_configuration_separator>
+                        <custom_image translate="label">
+                            <label>Allow customers to change the image inserted into template</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </custom_image>
+                        <upload_max_size translate="label">
+                            <label>Maximum size of image(s) uploaded by customers</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>KB</comment>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                            <depends>
+                                <custom_image>1</custom_image>
+                            </depends>
+                        </upload_max_size>
+<!--                        <remove_custom_image translate="label">
+                            <label>Remove customers' images from server when Gift Card balance is 0 or expired</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <custom_image>1</custom_image>
+                            </depends>
+                        </remove_custom_image>-->
+                        <giftinfo_configuration_separator translate="label comment">
+                            <label>Gift Card shipping information</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>giftvoucher/adminhtml_system_config_form_field_separator</frontend_model>
+                            <margin_top>10px</margin_top>
+                            <sort_order>51</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </giftinfo_configuration_separator>
+                        <postoffice translate="label">
+                            <label>Allow shipping Gift Card</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </postoffice>
+                         
+                        <!--                        Hai.Tran-->
+                        
+                        <postoffice_date translate="label">
+                            <label>Minimum days for store owner to send Gift Card through post office</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>day(s)</comment>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                            <depends>
+                                <postoffice>1</postoffice>
+                            </depends>
+                        </postoffice_date>
+                        
+                        <max translate="label">
+                            <label>Message max length</label>
+                            <backend_model>giftvoucher/validateconfig</backend_model>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </max>
+                        
+                        <schedule translate="label">
+                            <label>Enable scheduling Gift Card delivery</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </schedule>
+                        
+                    </fields>
+                </interface>
+                <!--                Hai.Tran-->
+                <interface_checkout translate="label">
+                    <label>On Shopping Cart Page</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>13</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <show_gift_card translate="label comment">
+                            <label>Show Gift Card box on shopping cart page</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If enabled, there will be a Gift Card box for customers to apply gift code right on the shopping cart page</comment>
+                        </show_gift_card>
+                        <display translate="label">
+                            <label>Information displayed on shopping cart page</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>Magestore_Giftvoucher_Model_Displayincart</source_model>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </display>
+                        <display_image_item translate="label">
+                            <label>Show Gift Card image as product image in shopping cart </label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>16</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </display_image_item>
+                    </fields>
+                </interface_checkout>
+                <interface_payment translate="label">
+                    <label>On Checkout Page</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>17</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <show_gift_card translate="label comment">
+                            <label>Show Gift Card box in the Payment section</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>If enabled, there will be a Gift Card box for customers to apply gift code right on the payment section</comment>
+                        </show_gift_card>                    
+                    </fields>
+                </interface_payment>
+                <!--                Hai.Tran-->
+                <email translate="label">
+                    <label>Email Notification</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>18</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <emailgeneral_configuration_separator translate="label comment">
+                            <label>General</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>giftvoucher/adminhtml_system_config_form_field_separator</frontend_model>
+                            <margin_top>10px</margin_top>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </emailgeneral_configuration_separator>
+                        <enable translate="label">
+                            <label>Enable email notification</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable>
+                        <only_complete translate="label">
+                            <label>Send Gift Card to friend when Gift Card status is</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>giftvoucher/status</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </only_complete>
+                        <sender translate="label">
+                            <label>Sender of email notification</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_identity</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </sender>
+                        <note translate="label comment">
+                            <label>Gift Card notes</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Notes will be displayed in Gift Card delivery email.]]></comment>
+                        </note>
+                        <send_with_ship translate="label comment">
+                            <label>Send Gift Card copy via email</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If Yes, the system sends a copy of Gift Card via email when customers choose to ship through post office.</comment>
+                        </send_with_ship>
+                        
+                        <emailpurchaser_configuration_separator translate="label comment">
+                            <label>Notification email sent to purchaser</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>giftvoucher/adminhtml_system_config_form_field_separator</frontend_model>
+                            <margin_top>10px</margin_top>
+                            <sort_order>55</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </emailpurchaser_configuration_separator>
+                        <self translate="label">
+                            <label>Send-to-purchaser email template</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </self>
+                        <template_success translate="label">
+                            <label>Send-to-purchaser email template when recipient receives Gift Card</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </template_success>
+                        <emailrecipient_configuration_separator translate="label comment">
+                            <label>Notification email sent to recipient</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>giftvoucher/adminhtml_system_config_form_field_separator</frontend_model>
+                            <margin_top>10px</margin_top>
+                            <sort_order>71</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </emailrecipient_configuration_separator>
+                        <send_refund translate="label comment">
+                            <label>Send notification email to recipient when purchaser refunds Gift Card </label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <!--<comment>In case Customers choose to send Gift card to friend</comment>-->
+                        </send_refund>
+                        <template translate="label">
+                            <label>Send-to-recipient email template</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </template>
+                        <template_refund translate="label">
+                            <label>Send-to-recipient email template when Gift Card is refunded</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <send_refund>1</send_refund>
+                            </depends>
+                        </template_refund>                        
+                        <autosend translate="label">
+                            <label>Auto-send reminder email before Gift Card expires</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </autosend>
+                        <daybefore translate="label">
+                            <label>Auto-send reminder email before</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>360</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>day(s).</comment>
+                        </daybefore>
+                    </fields>
+                </email>
+                <print_voucher translate="label">
+                    <label>Gift Card Printout</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>80</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <logo translate="label comment">
+                            <label>Logo on PDF Printouts</label>
+                            <frontend_type>image</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_image_pdf</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">giftvoucher/pdf/logo</upload_dir>
+                            <base_url type="media" scope_info="1">giftvoucher/pdf/logo</base_url>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Used in PDF and HTML documents.
+Recommended size: 171x63px. 
+Supported format: jpeg, jpg, png</comment>
+                        </logo>
+                        
+                        <barcode_enable translate="label">
+                            <label>Show barcode on Gift Card</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </barcode_enable>
+                        <barcode_type translate="label">
+                            <label>Type of Barcode</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>Magestore_Giftvoucher_Model_Typeofbarcode</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                            <depends>
+                                <barcode_enable>1</barcode_enable>
+                            </depends>
+                        </barcode_type>
+                        <note translate="label comment">
+                            <label>Gift Card notes</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[{store_name}: your store's name<br/>{store_url}: your store's url<br/>{store_address}: your store's address]]></comment>
+                        </note>
+                        <fold_paper_notes translate="label comment">
+                            <label>Gift Card fold paper note</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[{store_name}: your store's name<br/>{store_url}: your store's url<br/>{store_address}: your store's address]]></comment>
+                        </fold_paper_notes>
+                    </fields>
+                </print_voucher>
+            </groups>
+        </giftvoucher>
+    </sections>
+</config>

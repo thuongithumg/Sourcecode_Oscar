@@ -1,0 +1,218 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+?>
+<style media="print">
+    @page {
+        size: auto;
+        margin-top:  0;
+        margin-bottom:  0;
+    }
+    .print-notes{
+        color: <?php if (isset($_styleColor)) echo $_styleColor ?>;
+        text-decoration: none;
+    }
+    .print-font{
+        font: 12px/1.55 Arial, Helvetica, sans-serif;
+    }
+    footer {page-break-after: always;}
+</style>
+<?php $_store = Mage::app()->getStore() ?>
+<?php $_giftCards = $this->getGiftVouchers();
+
+?>
+<?php foreach ($_giftCards as $_giftCard): ?>
+    <?php echo $this->printGiftcodeHtml($_giftCard); ?>
+<?php endforeach; ?>
+<script type="text/javascript">window.print();</script>
+<style>
+
+        
+    #giftcard-template-back p, #giftcard-template-back span,
+    p, span, label{
+        font-family: 'Open Sans', sans-serif;
+    }
+    .giftcard-print-top p, .giftcard-print-top span, print-font{
+        font-family: 'Open Sans', sans-serif;
+    }
+    .print-notes{
+        color: <?php if (isset($_styleColor)) echo $_styleColor ?>;
+        text-decoration: none;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 600;
+        font-size: 12px;
+    }
+    .giftcard-text-color{
+        font-size: 16px;
+        /*font-weight: 600;*/
+    }
+    #giftcard-template-back a,
+    .giftcard-print-top a{font-size: 12px;}
+    .print-font{
+        font-size: 12px;
+        float: left;
+        font-weight: 600;
+        font-family: 'Open Sans', sans-serif;
+    }
+    .giftcard-template-content-left.giftcard-change-image{
+        float: left;
+        width: 250px;
+    }
+    .bkg-logo{
+        float: left;
+        position: absolute;
+        margin-top: -85px;
+        text-align: center;
+        width: 250px;
+    }
+    .giftcard-print{
+        float: left;
+        width: 600px;
+    }
+    .giftcard-template-content{
+        float: right;
+        /* position: absolute; */
+        width: 350px;
+        height: 365px;
+    }
+    .giftcard-mag{
+        margin: 15px 10px;
+    }
+    .giftcard-style-color.giftcard-title{
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 5px;
+        font-family: 'Open Sans', sans-serif;
+    }
+    .message-box {
+        height: 97px;
+        background: #fff;
+        border: 1px solid #ececec;
+        border-radius: 5px;
+        float: left;
+        width: 100%;
+        margin-top: 6px;
+    }
+    .message-box-top{
+        width: 342px;
+        height: 97px;
+        display: table-cell;
+        vertical-align: middle;
+        color: #0A2F23;
+        background: #fff;
+        border: 1px solid #ececec;
+        border-radius: 5px;
+        clear: both;
+        float: left;
+    }
+
+    #giftcard-template-simple{
+        width:600px;
+        margin:0 0 20px;
+        float:left;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        display: table;
+    }
+    #giftcard-template-simple .simple-top {
+        padding: 6px;
+        float: left;
+        width: 100%;
+    }
+    .simple-bottom {
+        float: left;
+        width: 100%;
+        padding: 10px;
+        border-top: 1px solid #ddd;
+        height: 90px;
+        overflow: hidden;
+    }
+    #giftcard-template-simple img.image-temp{
+        height:310px;
+        float:left;
+    }
+    #giftcard-template-simple img {
+        margin:auto;
+        max-width: 100%;
+
+    }
+    .simple-content-top .simple-logo{
+        min-height: 85px;
+        display:flex;
+    }
+    .gift-card .form-group {
+        margin-bottom: 5px;
+        margin-top:10px;
+        float: left;
+        width: 100%;
+        text-align: left;
+    }
+    .form-group{float:left;width:100%;}
+    .gift-card .text-center {
+        text-align: center;
+    }
+    .gift-card * {
+        box-sizing: border-box;
+    }
+    .gift-card .col-xs-4,.gift-card .col-xs-6{
+        float:left;
+        padding-right: 10px;
+        padding-left: 10px;
+        position: relative;
+        min-height: 85px;
+    }
+    .gift-card .col-xs-4{width: 33.33333333%;}
+    .gift-card .col-xs-4 img{max-width: 180px; max-height: 90px;}
+    .gift-card .col-xs-6{width: 50%;}
+    .simple-bottom .giftcard-custom-message {
+        width: 100%;
+        float: left;
+        margin: 0;
+        font-size: 14px;
+        color: #444;
+        line-height: 18px;
+        max-height: 70px;
+        overflow: hidden;
+    }
+    .simple-barcode img{
+        height: 35px;
+        margin:auto;
+    }
+    #giftcard-template-simple .simple-barcode{
+        min-height: 85px;
+        display:flex;
+    }
+    .simple-content-top .simple-logo img{max-height: 90px;max-width:100%;}
+    #giftcard-template-simple .simple-content-top .col-xs-4,#giftcard-template-simple .simple-content-top .col-xs-6{
+        height:90px;
+    }
+    .template-simple-content .giftcard-price-change{font-size: 30px;}
+    .template-simple-content .giftcard-number .giftcard-style-color{font-size: 15px;}
+    #giftcard-template-simple .giftcard-number .giftcard-style-color{ font-style: normal;}
+    .two-border{
+        border-left:1px solid #ddd;
+        border-right: 1px solid #dddddd;
+    }
+    .no-right{border-left:1px solid #ddd;}
+    @media print {
+        #giftcard-template-simple, .giftcard-print-top,
+        #giftcard-template-back, #giftcard-template-left{page-break-after: always;}
+    }
+</style>

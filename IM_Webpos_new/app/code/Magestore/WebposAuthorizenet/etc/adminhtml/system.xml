@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="webpos">
+            <group id="payment">
+                <group id="authorizenet" translate="label" sortOrder="100" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Authorizenet Integration</label>
+                    <field id="enable" translate="label" sortOrder="1" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Allow customer pay via authorizenet</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="api_login" translate="label" sortOrder="5" type="text" showInDefault="1" showInWebsite="1">
+                        <label>API Login ID</label>
+                        <validate>required-entry</validate>
+                        <depends>
+                            <field id="*/*/*/enable">1</field>
+                        </depends>
+                    </field>
+                    <field id="transaction_key" translate="label" sortOrder="10" type="text" showInDefault="1" showInWebsite="1">
+                        <label>Transaction Key</label>
+                        <validate>required-entry</validate>
+                        <depends>
+                            <field id="*/*/*/enable">1</field>
+                        </depends>
+                    </field>
+                    <field id="client_id" translate="label" sortOrder="12" type="text" showInDefault="1" showInWebsite="1">
+                        <label>Client ID</label>
+                        <validate>required-entry</validate>
+                        <depends>
+                            <field id="*/*/*/enable">1</field>
+                        </depends>
+                    </field>
+                    <field id="payment_action" translate="label" type="select" sortOrder="12" showInDefault="1" showInWebsite="1">
+                        <label>Payment Action</label>
+                        <source_model>Magento\Authorizenet\Model\Source\PaymentAction</source_model>
+                    </field>
+                    <field id="is_sandbox" translate="label" sortOrder="15" type="select" showInDefault="1" showInWebsite="1">
+                        <label>Sandbox Mode</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends>
+                            <field id="*/*/*/enable">1</field>
+                        </depends>
+                    </field>
+                    <group id="guides" translate="label" sortOrder="30" type="text" showInDefault="1" showInWebsite="1">
+                        <label>Guide</label>
+                        <field id="setup_guide" translate="label" sortOrder="6" type="text" showInDefault="1" showInWebsite="1">
+                            <label>Setup guide</label>
+                            <frontend_model>Magestore\WebposAuthorizenet\Block\Adminhtml\Config\Instruction</frontend_model>
+                        </field>
+                    </group>
+                </group>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,55 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<div class="grid-data">
+    <div data-bind="visible: isSearchable" class="search">
+        <input data-bind="event: {change: filter}" type="text" name="search_key" />
+    </div>
+    <div data-bind="event: {scroll: lazyload}" class="wrap-list-product scroll-grid">
+        <div class="col-md-12">
+            <div data-bind="foreach: items" class="row">
+                <div class="col-sm-3 col-lg-2">
+
+                        <div class="item product-item">
+                            <div class="product-img">
+                                <a class="warning"><span class="icon-iconPOS-out-of-stock"></span></a>
+                                <img width="119" height="auto" data-bind="attr: {src: images[0]}" />
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-name" data-bind="text: name" />
+                                <label class="sku" data-bind="text: sku" />
+                            </div>
+                            <a class="info" href="#">
+                                <span class="icon-iconPOS-detail">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                </span></a>
+                            <a class="number" href="#">3</a>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style type="text/css">
+    .scroll-grid {height: 600px; overflow-x: auto;}
+</style>

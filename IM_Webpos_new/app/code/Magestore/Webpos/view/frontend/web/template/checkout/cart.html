@@ -1,0 +1,75 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<header class="o-header">
+    <nav class="o-header-nav">
+        <!-- ko if:isOnCheckoutPage() && !createdOrder() -->
+        <button id="back_to_cart" class="c-button" data-bind="click:switchToCart"><span class="icon-iconPOS-previous"></span></button>
+        <!-- /ko -->
+        <!-- ko ifnot:isOnCheckoutPage() -->
+        <button id="empty_cart" class="c-button" data-bind="click:emptyCart"><span class="icon-iconPOS-emptycart"></span></button>
+        <!-- /ko -->
+        <label class="title title-cart title-header-page" data-bind="text:cartTitle"></label>
+        <!-- ko if:!createdOrder() -->
+        <div class="more-info" data-bind="afterRender: initNotePopup">
+            <a href="#" data-bind="click:showAddtitionalAction"><span
+                    class="icon-iconPOS-more"></span></a>
+        </div>
+        <!-- /ko -->
+
+
+    </nav>
+
+    <div style="clear:both; position: relative" class="order-selector" data-bind="visible: isShowMultiCart">
+
+        <!-- ko foreach: {data:getRegion('webpos_multiorder')} -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!-- /ko -->
+        <div style="height: 100%; width: 100%; background-color: #6f7d90; position: absolute;opacity: .7;-webkit-transition: opacity .3s;transition: opacity .3s;
+            color: #6f7d90; display: none" id="multiorder-overlay"></div>
+    </div>
+
+
+
+    <div class="actions-customer">
+        <a class="add-customer">
+            <!-- ko if:isShowCustomerId() && !createdOrder()-->
+            <span class="icon-iconPOS-edit-customer" data-bind="click: editCustomer"></span>
+            <!-- /ko -->
+            <!-- ko if:currentCustomerId() -->
+                <!-- ko if:createdOrder() -->
+                <label class="title-header-page" data-bind="text: currentCustomerName"></label>
+                <!-- /ko -->
+                <!-- ko if:!createdOrder() -->
+                <label class="title-header-page" data-bind="text: currentCustomerName, click: editCustomer"></label>
+                <!-- /ko -->
+            <!-- /ko -->
+            <!-- ko ifnot:currentCustomerId() -->
+            <label class="title-header-page" data-bind="text: currentCustomerName"></label>
+            <!-- /ko -->
+        </a>
+        <!-- ko if:!createdOrder() -->
+        <!-- ko if:!createdOrder() && currentCustomerId() -->
+        <span class="icon-iconPOS-order-history" data-bind="visible:isNotOnCheckoutPage, click:showCustomerPendingOrders"></span>
+        <span class="icon-iconPOS-checkout" data-bind="visible:isNotOnCheckoutPage, click:showShoppingCart"></span>
+        <a class="shopping-cart-number bg-cl-active number" data-bind="visible:isNotOnCheckoutPage, text:numberItemsInShoppingCart, click:showShoppingCart"></a>
+        <!-- /ko -->
+        <span data-toggle="modal" data-target="#form-add-customer"
+              class="icon-iconPOS-change-customer" data-bind="click: changeCustomer"></span>
+        <!-- /ko -->
+    </div>
+
+
+</header>
+
+<div class="main-item-order" data-bind="afterRender: afterRenderCart">
+    <!-- ko foreach: {data:getRegion('webpos_cart_items'),afterRender:renderedItems} -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    <!-- /ko -->
+    <!-- ko foreach: {data:getRegion('webpos_cart_totals'),afterRender:renderedTotals} -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    <!-- /ko -->
+    
+</div>

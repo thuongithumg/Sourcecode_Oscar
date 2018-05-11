@@ -1,0 +1,161 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Inventorysuccess
+ * @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+$blockGrid = $this->getBlockGrid();
+$gridJsObjectName = $blockGrid->getJsObjectName();
+$hiddenInputField = $blockGrid->getHiddenInputField();
+$canAddProduct = $this->canAddProduct();
+$isInventorySuccessEnable = $this->isInventorySuccessEnable();
+$isInventoryEnable = $this->isInventoryEnable();
+$isBarcodeSuccessEnable = $this->isBarcodeSuccessEnable();
+$title = Mage::helper('purchaseordersuccess')->isProductFromSupplier()
+    ? $this->__('All Products from Supplier')
+    : $this->__('All Products');
+?>
+    <style type="text/css">
+        .calendar {
+            z-index: 1000;
+        }
+
+        .purchase_buttons {
+            width: 100%;
+            margin: .5em 0;
+            display: table;
+        }
+
+        .purchase_buttons button {
+            float: right;
+            margin: 0 0 0 5px;
+        }
+
+        .purchaseorder_fieldset .field-row {
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+
+        .purchaseorder_fieldset .field-row label {
+            text-align: right;
+            color: #363636;
+            font-weight: 600;
+            font-size: 14px;
+            padding-right: 15px;
+            width: 200px;
+        }
+        
+        .coresuccess .purchase_summary_block .entry-edit {
+            margin-top: 0px !important;
+        }
+
+        .purchase_summary_block .entry-edit .fieldset {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .coresuccess .entry-edit .purchase_summary_block .box-left td {
+            padding: 5px 0px !important;
+        }
+
+        .coresuccess .entry-edit .purchase_summary_block .box-right td {
+            padding: 5px 0px !important;
+        }
+    </style>
+    <div id="purchase_summary_header" class="purchase_summary_block">
+        <?php echo $this->getPurchaseSummaryHeader(); ?>
+    </div>
+<?php if ($canAddProduct): ?>
+    <div class="purchase_buttons" style="padding-top :10px">
+        <button id="all_supplier_product_button" class="" type="button" data-toggle="modal"
+                data-target="#all_supplier_product_modal">
+            <span><?php echo $title ?></span>
+        </button>
+        <?php if ($isInventorySuccessEnable): ?>
+            <button id="low_stock_product_button" class="" type="button" data-toggle="modal"
+                    data-target="#low_stock_product_modal">
+                <span><?php echo $this->__('Low Stock Products') ?></span>
+            </button>
+        <?php endif; ?>
+        <?php if ($isInventoryEnable): ?>
+            <button id="back_sale_product_button" class="" type="button" data-toggle="modal"
+                    data-target="#back_sale_product_modal">
+                <span><?php echo $this->__('Back-order Products') ?></span>
+            </button>
+        <?php endif; ?>
+        <?php if ($isInventorySuccessEnable): ?>
+            <button id="supply_need_product_button" class="" type="button" data-toggle="modal"
+                    data-target="#supply_need_product_modal">
+                <span><?php echo $this->__('Supply Need Products') ?></span>
+            </button>
+        <?php endif; ?>
+        <?php if ($isBarcodeSuccessEnable): ?>
+            <button id="scan_barcode_button" class="" type="button" data-toggle="modal"
+                    data-target="#scan-barcode-add-product">
+                <span><?php echo $this->__('Scan Barcode') ?></span>
+            </button>
+        <?php endif; ?>
+        <button id="import_product_button" class="import-csv" type="button" data-toggle="modal"
+                data-target="#import_product_modal">
+            <span><?php echo $this->__('Import Products') ?></span>
+        </button>
+    </div>
+    <div class="purchase_buttons">
+        <button id="purchase_order_item_save" class="save" type="button">
+            <span><?php echo $this->__('Update Items') ?></span>
+        </button>
+    </div>
+<?php endif; ?>
+
+    <div id="purchase_summary_content">
+        <?php echo $this->getGridHtml(); ?>
+    </div>
+
+    <div id="purchase_summary_footer" class="purchase_summary_block">
+        <?php echo $this->getPurchaseSummaryFooter(); ?>
+    </div>
+<script>
+    window.reloadTotalUrl = <?php /* @escapeNotVerified */ echo '"' . $blockGrid->getReloadTotalUrl() . '"' ?: '""'; ?>;
+    window.priceListJson = Object.assign({}, <?php /* @escapeNotVerified */ echo $blockGrid->getPriceListJson(); ?>);
+</script>
+
+<?php if ($canAddProduct): ?>
+    <input type="hidden" name="<?php echo $hiddenInputField ?>" id="<?php echo $hiddenInputField ?>" value=""/>
+    <script type="text/javascript">
+        var purchaseItem = new PurchaseorderSuccessJS({
+            "selectedItems": <?php /* @escapeNotVerified */ echo $blockGrid->getSelectedItems(); ?>,
+            "gridJsObjectName": <?php /* @escapeNotVerified */ echo '"' . $gridJsObjectName . '"' ?: '{}'; ?>,
+            "hiddenInputField": <?php /* @escapeNotVerified */ echo '"' . $hiddenInputField . '"' ?>,
+            "editFields": <?php /* @escapeNotVerified */ echo $blockGrid->getEditFields(); ?>,
+            "updateBtn": "purchase_order_item_save",
+            "saveUrl": <?php /* @escapeNotVerified */ echo '"' . $blockGrid->getSaveUrl() . '"' ?: '""'; ?>,
+            "deleteUrl": <?php /* @escapeNotVerified */ echo '"' . $blockGrid->getDeleteUrl() . '"' ?: '""'; ?>,
+            "canReloadTotal": true,
+            "messages": {
+                "noItemSelected": <?php /* @escapeNotVerified */ echo '"' . $this->__('Please select item(s) to update.') . '"'?>,
+            },
+        });
+    </script>
+<?php endif; ?>
+
+<?php if ($canAddProduct): ?>
+    <?php echo $this->getAllSupplierProductModal(); ?>
+    <?php echo $isInventorySuccessEnable ? $this->getLowStockProductModal() : ''; ?>
+    <?php echo $isInventoryEnable ? $this->getBackSaleProductModal() : ''; ?>
+    <?php echo $this->getImportProductModal(); ?>
+<?php endif; ?>

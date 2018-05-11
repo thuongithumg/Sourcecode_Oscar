@@ -1,0 +1,58 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<div data-bind="attr: {'class': 'field option'}">
+    <label class="label">
+        <span data-bind="text: parentData.title"></span>
+    </label>
+    <div class="control">
+
+        <select data-bind="event: {'change': $parents[1].updatePrice($parents[2].itemData().bundle_options)},
+                        attr: {'id': 'bundle-option-'+parentData.id,
+                            'name': 'bundle_option['+parentData.id+']',
+                            'class': 'product bundle option bundle-option-select change-container-classname',
+                            'data-validate': (parentData.required) ? '{\'required-entry\':true}' : ''
+                        }">
+            <option value="" data-bind="text: __('Choose a selection...')"></option>
+            <!-- ko foreach: {data: $parents[1].convertToArray(parentData.items), as: 'itemData' }  -->
+                <option data-bind="text: itemData.name + ' +' + $parents[2].getSelectionTitlePrice(itemData.price),
+                                        attr: {
+                                            'value': itemData.selection_id,
+                                            'selected': (itemData.is_default =='1') ? 'selected' : false
+                                        }">
+                </option>
+            <!-- /ko -->
+        </select>
+        <div class="field qty qty-holder">
+            <label class="label" data-bind="attr: {'for': 'bundle-option-' + parentData.id + '-qty-input'}">
+                <span data-bind="text: __('Quantity')"></span>
+            </label>
+            <div class="control">
+                <input data-bind="event: {'change': $parents[1].updatePrice($parents[2].itemData().bundle_options)},
+                                    attr: {'id': 'bundle-option-' + parentData.id + '-qty-input',
+                                        'class': 'input-text qty validate-greater-than-zero',
+                                        'type': 'number',
+                                        'min' : 1,
+                                        'name': 'bundle_option_qty[' + parentData.id + ']',
+                                        'value' : 1},afterRender:$parents[1].updatePrice($parents[2].itemData().bundle_options)" />
+            </div>
+        </div>
+    </div>
+</div>

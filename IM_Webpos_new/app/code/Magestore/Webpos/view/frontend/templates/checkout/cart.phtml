@@ -1,0 +1,303 @@
+<?php
+/**
+ * Copyright © 2018 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+$jsLayout = $block->getJsLayout();?>
+<div id="webpos_cart" class="col-sm-4 col-right" data-bind="scope:'webpos_cart'">
+    <!-- ko ifnot: renderedPage() -->
+    <div class="indicator">
+        <div class="spinner"></div>
+    </div>
+    <!-- /ko -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+        {
+            "#webpos_cart": {
+                "Magento_Ui/js/core/app": <?php /* @escapeNotVerified */ echo $jsLayout; ?>
+            }
+        }
+    </script>
+</div>
+
+<!-- Popup Edit Product -->
+<div id="popup-edit-product" class="hide-popup popup-for-right" data-bind="scope:'webpos_cart_editpopup'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+        {
+            "#popup-edit-product": {
+                "Magento_Ui/js/core/app": {
+                    "components" : {
+                        "webpos_cart_editpopup": {
+                            "component": "Magestore_Webpos/js/view/checkout/cart/editpopup",
+                             "displayArea": "webpos_cart_editpopup"
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</div>
+
+
+<!-- Template for Popup write note for order-->
+<div class="hide" id="form-add-note" data-bind="scope:'webpos_cart_commentpopup'">
+    <a class="arrow"></a>
+    <ul>
+        <li>
+            <a href="#"
+               data-target="#form-note-order"
+               class="order-note pos_modal_link"
+               data-bind="click:show">
+                <?php echo __("Add order note"); ?>
+
+            </a>
+        </li>
+        <!-- ko if: isDisplayFullScreen() -->
+        <li>
+            <a href="#"
+               class="order-note" id="fullscreen_link">
+                <?php echo __("Enter/exit fullscreen mode"); ?>
+            </a>
+        </li>
+        <!-- /ko -->
+    </ul>
+</div>
+
+<div id="form-note-order" class="modal show pos_modal" role="dialog" data-bind="scope:'webpos_cart_commentpopup'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+        {
+            "#form-note-order": {
+                "Magento_Ui/js/core/app": {
+                    "components" : {
+                        "webpos_cart_commentpopup": {
+                            "component": "Magestore_Webpos/js/view/checkout/cart/commentpopup",
+                             "displayArea": "webpos_cart_commentpopup"
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <div class="pos_overlay"></div>
+</div>
+<!-- End Template for Popup write note for order -->
+
+<!-- Cart discount popup -->
+<div id="webpos_cart_discountpopup" class="hide-popup popup-for-right" data-bind="scope:'webpos_cart_discountpopup'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+        {
+            "#webpos_cart_discountpopup": {
+                "Magento_Ui/js/core/app": {
+                    "components" : {
+                        "webpos_cart_discountpopup": {
+                            "component": "Magestore_Webpos/js/view/checkout/cart/discountpopup",
+                             "displayArea": "webpos_cart_discountpopup"
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</div>
+
+<!-- Start - custom sale popup -->
+<div id="popup-custom-sale" class="hide-popup popup-for-right pos_modal" data-bind="scope:'webpos_cart_customsale'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+        {
+            "#popup-custom-sale": {
+                "Magento_Ui/js/core/app": {
+                    "components" : {
+                        "webpos_cart_customsale": {
+                            "component": "Magestore_Webpos/js/view/checkout/cart/customsale",
+                             "displayArea": "webpos_cart_customsale"
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</div>
+<!-- End - custom sale popup -->
+
+
+
+<form id="form-edit-customer" class="modal fade customer-popup-form" role="dialog" data-bind="scope:'webpos_cart_edit_customer'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+        {
+            "#form-edit-customer": {
+                "Magento_Ui/js/core/app": {
+                    "components" : {
+                        "webpos_cart_edit_customer": {
+                            "component": "Magestore_Webpos/js/view/checkout/customer/edit-customer",
+                             "displayArea": "edit_customer"
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+</form>
+
+<div id="customer-online-cart" class="modal fade customer-online-cart" data-bind="scope:'webpos_customer_online_cart'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+        {
+            "#customer-online-cart": {
+                "Magento_Ui/js/core/app": {
+                    "components" : {
+                        "webpos_customer_online_cart": {
+                            "component": "Magestore_Webpos/js/view/checkout/online-cart",
+                             "displayArea": "online-cart"
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</div>
+
+<form id="form-customer-add-address-checkout" class="modal fade customer-popup-form" data-bind="scope:'webpos_cart_add_address'"
+      action="">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+        {
+            "#form-customer-add-address-checkout": {
+                "Magento_Ui/js/core/app": {
+                    "components" : {
+                        "webpos_cart_add_address": {
+                            "component": "Magestore_Webpos/js/view/checkout/customer/add-address",
+                             "displayArea": "add_address"
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+</form>
+
+<form id="form-customer-add-customer-checkout" class="modal fade customer-popup-form" role="dialog" data-bind="scope:'webpos_cart_add_customer'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+        {
+            "#form-customer-add-customer-checkout": {
+                "Magento_Ui/js/core/app": {
+                    "components" : {
+                        "webpos_cart_add_customer": {
+                            "component": "Magestore_Webpos/js/view/checkout/customer/add-customer",
+                             "displayArea": "add_customer"
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+</form>
+
+<form id="form-customer-add-shipping-address-checkout" class="modal fade customer-popup-form" role="dialog" data-bind="scope:'webpos_cart_add_shipping_address'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+        {
+            "#form-customer-add-shipping-address-checkout": {
+                "Magento_Ui/js/core/app": {
+                    "components" : {
+                        "webpos_cart_add_shipping_address": {
+                            "component": "Magestore_Webpos/js/view/checkout/customer/add-shipping-address",
+                             "displayArea": "add_shipping_address"
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+</form>
+
+
+<form id="form-customer-add-billing-address-checkout" class="modal fade customer-popup-form" role="dialog" data-bind="scope:'webpos_cart_add_billing_address'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+        {
+            "#form-customer-add-billing-address-checkout": {
+                "Magento_Ui/js/core/app": {
+                    "components" : {
+                        "webpos_cart_add_billing_address": {
+                            "component": "Magestore_Webpos/js/view/checkout/customer/add-billing-address",
+                             "displayArea": "add_billing_address"
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+</form>
+
+
+<!-- Popup Add New Customer -->
+<div id="popup-change-customer" class="hide-popup popup-for-right" role="dialog" data-bind="scope:'webpos_cart_change_customer'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+        {
+            "#popup-change-customer": {
+                "Magento_Ui/js/core/app": {
+                    "components" : {
+                        "webpos_cart_change_customer": {
+                            "component": "Magestore_Webpos/js/view/checkout/customer/change-customer",
+                             "displayArea": "change_customer"
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Popup Change Customer in right Column -->
+</div>
+<!-- End Popup Add Address -->
+<div class="wrap-backover hide-popup" onclick="webposBackoverClicked()"></div>
+<!-- Popup Shopping Cart -->
+<div id="webpos_shopping_cart" class="modal customer-popup-form fade" role="dialog" data-bind="scope:'webpos_shopping_cart'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+        {
+            "#webpos_shopping_cart": {
+                "Magento_Ui/js/core/app": {
+                    "components" : {
+                        "webpos_shopping_cart": {
+                            "component": "Magestore_Webpos/js/view/checkout/shopping-cart",
+                             "displayArea": "webpos_shopping_cart"
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Popup Shopping Cart in right Column -->
+</div>
+
+<form id="form-timeout-terminal" class="modal fade terminal-popup-form" role="dialog" data-bind="scope:'webpos_terminal_timeout'" style="z-index: 999999">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+        {
+            "#form-timeout-terminal": {
+                "Magento_Ui/js/core/app": {
+                    "components" : {
+                        "webpos_terminal_timeout": {
+                            "component": "Magestore_Webpos/js/view/terminal/timeout",
+                             "displayArea": "webpos_terminal_timeout"
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+</form>

@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<page layout='webpos' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="webpos-settings-general">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="webpos-settings-general" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="bambora" xsi:type="array">
+                                    <item name="sortOrder" xsi:type="string">18</item>
+                                    <item name="component" xsi:type="string">Magestore_Webpos/js/view/settings/general/group</item>
+                                    <item name="displayArea" xsi:type="string">bambora</item>
+                                    <item name="config" xsi:type="array">
+                                        <item name="label" xsi:type="string" translate="true">Bambora Payment</item>
+                                        <item name="className" xsi:type="string">tab-pane</item>
+                                        <item name="idName" xsi:type="string">store-bambora</item>
+                                    </item>
+                                    <item name="children" xsi:type="array">
+                                        <item name="terminal-ip-address" xsi:type="array">
+                                            <item name="sortOrder" xsi:type="string">2</item>
+                                            <item name="component" xsi:type="string">Magestore_WebposBambora/js/view/settings/general/bambora/terminal-ip-address</item>
+                                            <item name="config" xsi:type="array">
+                                                <item name="label" xsi:type="string" translate="true">Terminal IP Address</item>
+                                            </item>
+                                            <item name="idName" xsi:type="string">terminal-ip-address</item>
+                                        </item>
+                                        <item name="terminal-ip-port" xsi:type="array">
+                                            <item name="sortOrder" xsi:type="string">3</item>
+                                            <item name="component" xsi:type="string">Magestore_WebposBambora/js/view/settings/general/bambora/terminal-ip-port</item>
+                                            <item name="config" xsi:type="array">
+                                                <item name="label" xsi:type="string" translate="true">Terminal IP Port</item>
+                                            </item>
+                                            <item name="idName" xsi:type="string">terminal-ip-port</item>
+                                        </item>
+                                        <item name="check-connection" xsi:type="array">
+                                            <item name="sortOrder" xsi:type="string">4</item>
+                                            <item name="component" xsi:type="string">Magestore_WebposBambora/js/view/settings/general/bambora/check-connection</item>
+                                            <item name="config" xsi:type="array">
+                                                <item name="label" xsi:type="string" translate="true">Check Connection</item>
+                                            </item>
+                                            <item name="idName" xsi:type="string">check-connection</item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

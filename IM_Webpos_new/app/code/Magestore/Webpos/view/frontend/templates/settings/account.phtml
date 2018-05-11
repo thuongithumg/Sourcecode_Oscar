@@ -1,0 +1,17 @@
+<div id='account_container' class="pos_container">
+    <div id="webpos-settings-account">
+        <div id="block-webpos-settings-account" data-bind="scope:'webpos-settings-account'" class="block">
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <script type="text/x-magento-init">
+                {
+                    "#block-webpos-settings-account": {
+                        "Magento_Ui/js/core/app": <?php /* @escapeNotVerified */ echo $block->getJsLayout();?>
+                    }
+                }
+            </script>
+        </div>
+    </div>
+</div>
+<script>
+    window.staffName = <?php /* @escapeNotVerified */ echo \Zend_Json::encode($block->getStaffName()); ?>;
+</script>

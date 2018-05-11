@@ -1,0 +1,34 @@
+
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div class="modal-dialog" data-bind="afterRender: afterRender">
+    <div class="modal-content">
+        <div class="popup-header">
+            <button type="button" class="close" data-dismiss="modal" data-bind="i18n:'Cancel', click: cancelSaleRequest"></button>
+        </div>
+        <div class="modal-body">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-sm-12">
+                        <div id="countdown-number"></div>
+                        <span id="terminal-loading"></span>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <p class="waiting-text" id="transaction-process">Transaction is being processed.</p>
+                        <p class="waiting-text" >Please swipe the card through the slot on the right
+                            side of the card reader to complete the order!
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

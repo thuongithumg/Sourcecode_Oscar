@@ -1,0 +1,92 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Inventorysuccess
+ * @copyright   Copyright (c) 2017 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+$blockGrid = $this->getBlockGrid();
+$gridJsObjectName = $blockGrid->getJsObjectName();
+$html = $this->getGridHtml();
+echo $this->getEditcolumnGrid();
+?>
+
+<div id = "totals_report" class="row-fluid intelligence-data ">
+    <?php echo $data = Mage::helper('reportsuccess')->totalService($this->type);?>
+</div>
+</br></br></br></br></br>
+
+<?php echo $html;
+
+$img =  $this->getSkinUrl("images/ajax-loader-tr.gif");
+$alt =  Mage::helper("adminhtml")->__("Loading...");
+
+?>
+
+<script type="text/javascript">
+    var SalesreportCeritial = new SalesreportCeritial({
+        "gridJsObjectName": <?php /* @escapeNotVerified */ echo '"' . $gridJsObjectName . '"' ?: '{}'; ?>,
+        "changeWarehouseBtn": "select_warehouse_option",
+        "updateReportBtn": "update_report",
+        "urls" : '<?php echo $this->getUrlTotalsReport();?>',
+        "urlsUpdateSalesData" : '<?php echo $this->getUrlToUpdateSalesData();?>',
+        "img" : '<?php echo isset($img) ? $img : null; ?>',
+        "alt" : '<?php echo isset($alt) ? $alt : null; ?>',
+        "modifiColumn" :'<?php echo $this->canModifiColumn ?>',
+        "editColumnsUrl" : '<?php echo $blockGrid->editColumnUrl() ?>'
+    });
+</script>
+
+<style>
+    .totals{
+        background: #CCFFFF !important;
+    }
+    .totals th{
+        padding: 18px 14px;
+        border-color: #d0d4dc;
+        vertical-align: bottom !important;
+        border-width: 0 1px 0 0;
+        font-size: 14px;
+        color: #171717;
+     }
+
+    .intelligence-data {
+        padding: 0 20px 20px;
+        width:100%;
+        color:#5A7FA2;
+        margin-top : 50px;
+        margin-bottom : 40px;
+    }
+
+    .intelligence-data .data-well {
+        background: white;
+        border: 1px solid #E9E9E9;
+        padding: 20px;
+        border-radius: 3px;
+    }
+    .row-fluid .span3 {
+        width: 20%;
+        float: left;
+        text-align: center;
+    }
+    .row-fluid .span3 h2{
+        width:100%;
+    }
+    .translation_missing{
+        font-size:14px;
+    }
+</style>

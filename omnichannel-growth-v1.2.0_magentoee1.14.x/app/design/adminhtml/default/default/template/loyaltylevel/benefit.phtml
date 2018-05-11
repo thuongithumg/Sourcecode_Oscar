@@ -1,0 +1,410 @@
+
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Earning') ?></h4>
+        <div class="form-buttons"></div>
+    </div>
+    <div class="fieldset " id="rewardpointsloyaltylevel_earning">
+        <?php
+        $earningRule = $this->getAllEarningRuleHasLoyalty();
+        ?>
+        <div class="hor-scroll">
+            <table cellspacing="0" class="form-list">
+                <tbody>
+                    <?php foreach ($earningRule as $earning): ?>
+                        <tr>
+                            <td width="200px" id="earn-rule-<?php echo $earning->getType() . '-' . $earning->getId() ?>"><span style="font-weight: bold"> <span id='earn-rule-view-condition-<?php echo $earning->getType() . '-' . $earning->getId() ?>' style="cursor: pointer" ><?php echo $earning->getTitle(); ?></span >
+                                    <div id='earn-rule-tooltip-<?php echo $earning->getType() . '-' . $earning->getId() ?>' style="display:none; margin: 5px; background-color: #FFFFFF; border: 1px solid rgb(199, 203, 204); padding: 10px; width: 300px; z-index: 1000; box-shadow: 2px 4px 17px rgb(179, 184, 183); border-radius: 7px;">
+                                        <?php echo $earning->getDescription(); ?>
+                                    </div>
+                            </td>
+                    <script type="text/javascript">
+    <?php if ($earning->getDescription() != ''): ?>
+                            var my_tooltip = new Tooltip('earn-rule-view-condition-<?php echo $earning->getType() . '-' . $earning->getId() ?>', 'earn-rule-tooltip-<?php echo $earning->getType() . '-' . $earning->getId() ?>')
+    <?php endif; ?>
+                    </script>
+                    <td>
+                        <?php
+                        $_editEarnLink = '';
+                        switch ($earning->getType()) {
+                            case 'rate':
+                                $_editEarnLink = Mage::helper("adminhtml")->getUrl("adminhtml/reward_earning/edit", array('id' => $earning->getId()));
+                                break;
+                            case 'catalog':
+                                $_editEarnLink = Mage::helper("adminhtml")->getUrl("adminhtml/reward_earning_catalog/edit", array('id' => $earning->getId()));
+                                break;
+                            case 'sales':
+                                $_editEarnLink = Mage::helper("adminhtml")->getUrl("adminhtml/reward_earning_sales/edit", array('id' => $earning->getId()));
+                                break;
+                            default:
+                                break;
+                        }
+                        ?>
+                        <a href="<?php echo $_editEarnLink ?>" target="_blank"><img src="<?php echo $this->getSkinUrl('images/icon_edit_address.gif') ?>" title="<?php echo $this->__('Edit this rule') ?>"/><?php // echo $this->__('Edit')         ?></a>&nbsp&nbsp&nbsp<a onclick="ignoreEarnRule('<?php echo $earning->getId() ?>', '<?php echo $earning->getType() ?>')" style="cursor: pointer"><img src="<?php echo $this->getSkinUrl('images/icon_remove_address.gif') ?>" title="<?php echo $this->__('Delete this rule') ?>"/><?php // echo $this->__('Delete')         ?></a>
+                    </td>
+                    </tr>
+                <?php endforeach; ?>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        <button id="add_earning_rule" title="<?php echo $this->__('Add new earning rule'); ?>" type="button" class="scalable add" onclick="addNewEarning()" style=""><span><?php echo $this->__('Add new earning rule'); ?></span></button>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr style="display: none" id="loyalty-add-earn-rate">
+                    <td align="left" width="200px">
+                        <?php echo $this->__('Earning Rate') ?>
+                    </td>
+
+                    <?php $add_earning_link = Mage::helper("adminhtml")->getUrl("adminhtml/reward_earning/new", array('group_id' => $this->getRequest()->getParam('id'))) ?>
+                    <td><a class="rpll_link" href="<?php echo $add_earning_link ?>" target="_blank" ><img src="<?php echo $this->getSkinUrl('images/accordion_open.gif') ?>" title="<?php echo $this->__('Add new rule') ?>"/><?php // echo $this->__('Add new')         ?></a></td>
+                </tr>
+                <?php if (Mage::getConfig()->getModuleConfig('Magestore_RewardPointsRule')->is('active', 'true')): ?>
+                    <tr style="display: none" id="loyalty-add-earn-category">
+                        <td align="left">
+                            <?php echo $this->__('Catalog Earning Rule'); ?>
+                        </td>
+                        <td><a class="rpll_link" href="<?php echo Mage::helper("adminhtml")->getUrl('adminhtml/reward_earning_catalog/new', array('group_id' => $this->getRequest()->getParam('id'))) ?>" target="_blank" ><img src="<?php echo $this->getSkinUrl('images/accordion_open.gif') ?>" title="<?php echo $this->__('Add new rule') ?>"/><?php // echo $this->__('Add new')         ?></a></td>
+                    </tr>
+                    <tr style="display: none" id="loyalty-add-earn-sales">
+                        <td align="left">
+                            <?php echo $this->__('Shopping Cart Earning Rule') ?>
+                        </td>
+                        <td><a href="<?php echo Mage::helper("adminhtml")->getUrl('adminhtml/reward_earning_sales/new', array('group_id' => $this->getRequest()->getParam('id'))) ?>" target="_blank"><img src="<?php echo $this->getSkinUrl('images/accordion_open.gif') ?>" title="<?php echo $this->__('Add new rule') ?>"/><?php // echo $this->__('Add new')         ?></a></td>
+                    </tr>
+                <?php endif; ?>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Spending'); ?></h4>
+        <div class="form-buttons"></div>
+    </div>
+    <div class="fieldset " id="rewardpointsloyaltylevel_spending">
+        <?php
+        $spendingRule = $this->getAllSpendingRuleHasLoyalty();
+        ?>
+        <div class="hor-scroll">
+            <table cellspacing="0" class="form-list">
+                <tbody>
+                    <?php foreach ($spendingRule as $spending): ?>
+                        <tr>
+                            <td width="200px" id="spend-rule-<?php echo $spending->getType() . '-' . $spending->getId() ?>"><span style="font-weight: bold"> <span id='spend-rule-view-condition-<?php echo $spending->getType() . '-' . $spending->getId() ?>' style="cursor: pointer" ><?php echo $spending->getTitle(); ?></span >
+                                    <div id='spend-rule-tooltip-<?php echo $spending->getType() . '-' . $spending->getId() ?>' style="display:none; margin: 5px; background-color: #FFFFFF; border: 1px solid rgb(199, 203, 204); padding: 10px; width: 300px; z-index: 1000; box-shadow: 2px 4px 17px rgb(179, 184, 183); border-radius: 7px;">
+                                        <?php echo $spending->getDescription(); ?>
+                                    </div>
+                            </td>
+                    <script type="text/javascript">
+    <?php if ($spending->getDescription() != ''): ?>
+                            var my_tooltip = new Tooltip('spend-rule-view-condition-<?php echo $spending->getType() . '-' . $spending->getId() ?>', 'spend-rule-tooltip-<?php echo $spending->getType() . '-' . $spending->getId() ?>')
+    <?php endif; ?>
+                    </script>
+                    <td>
+                        <?php
+                        $_editSpendLink = '';
+                        switch ($spending->getType()) {
+                            case 'rate':
+                                $_editSpendLink = Mage::helper("adminhtml")->getUrl("adminhtml/reward_spending/edit", array('id' => $spending->getId()));
+                                break;
+                            case 'catalog':
+                                $_editSpendLink = Mage::helper("adminhtml")->getUrl("adminhtml/reward_spending_catalog/edit", array('id' => $spending->getId()));
+                                break;
+                            case 'sales':
+                                $_editSpendLink = Mage::helper("adminhtml")->getUrl("adminhtml/reward_spending_sales/edit", array('id' => $spending->getId()));
+                                break;
+                            default:
+                                break;
+                        }
+                        ?>
+
+                        <a href="<?php echo $_editSpendLink ?>" target="_blank">
+                            <img src="<?php echo $this->getSkinUrl('images/icon_edit_address.gif') ?>" title="<?php echo $this->__('Edit this rule') ?>"/><?php // echo $this->__('Edit')         ?></a>&nbsp&nbsp&nbsp<a onclick="ignoreSpendRule('<?php echo $spending->getId() ?>', '<?php echo $spending->getType() ?>')" style="cursor: pointer"><img src="<?php echo $this->getSkinUrl('images/icon_remove_address.gif') ?>" title="<?php echo $this->__('Delete this rule') ?>"/><?php // echo $this->__('Delete')         ?></a>
+                    </td>
+                    </tr>
+                <?php endforeach; ?>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        <button id="add_spending_rule" title="<?php echo $this->__('Add new spending rule') ?>" type="button" class="scalable add" onclick="addNewSpending()" style=""><span><?php echo $this->__('Add new spending rule') ?></span></button>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr  style="display: none" id="loyalty-add-spend-rate">
+                    <td width="200px" align="left" width="200px">
+                        <?php echo $this->__('Spending Rate') ?>
+                    </td>
+                    <td><a href="<?php echo Mage::helper("adminhtml")->getUrl("adminhtml/reward_spending/new", array('group_id' => $this->getRequest()->getParam('id'))) ?>" target="_blank"   ><img src="<?php echo $this->getSkinUrl('images/accordion_open.gif') ?>" title="<?php echo $this->__('Add new rule') ?>"/><?php // echo $this->__('Add new')         ?></a></td>
+                </tr>
+                <?php if (Mage::getConfig()->getModuleConfig('Magestore_RewardPointsRule')->is('active', 'true')): ?>
+                    <tr style="display: none" id="loyalty-add-spend-catalog">
+                        <td align="left">
+                            <?php echo $this->__('Catalog Spending Rule'); ?>
+                        </td>
+                        <td><a href="<?php echo Mage::helper("adminhtml")->getUrl('adminhtml/reward_spending_catalog/new', array('group_id' => $this->getRequest()->getParam('id'))) ?>" target="_blank" ><img src="<?php echo $this->getSkinUrl('images/accordion_open.gif') ?>" title="<?php echo $this->__('Add new rule') ?>"/><?php // echo $this->__('Add new')         ?></a></td>
+                    </tr>
+                    <tr style="display: none" id="loyalty-add-spend-sales">
+                        <td align="left">
+                            <?php echo $this->__('Shopping Cart Spending Rule') ?>
+                        </td>
+                        <td><a href="<?php echo Mage::helper("adminhtml")->getUrl('adminhtml/reward_spending_sales/new', array('group_id' => $this->getRequest()->getParam('id'))) ?>" target="_blank" ><img src="<?php echo $this->getSkinUrl('images/accordion_open.gif') ?>" title="<?php echo $this->__('Add new rule') ?>"/><?php // echo $this->__('Add new')         ?></a></td>
+                    </tr>
+                <?php endif; ?>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Promotions') ?></h4>
+        <div class="form-buttons"></div>
+    </div>
+    <div class="fieldset " id="rewardpointsloyaltylevel_promotions">
+        <?php
+        $promoRule = $this->getAllPromoSpendingRuleResponsive();
+        ?>
+        <div class="hor-scroll">
+            <table cellspacing="0" class="form-list">
+                <tbody>
+                    <?php foreach ($promoRule as $spending): ?>
+                        <tr>
+                            <td width="200px" id="promo-rule-<?php echo $spending->getType() . '-' . $spending->getId() ?>"><span style="font-weight: bold"> <span id='promo-rule-view-condition-<?php echo $spending->getType() . '-' . $spending->getId() ?>' style="cursor: pointer" ><?php echo $spending->getTitle(); ?></span >
+                                    <div id='promo-rule-tooltip-<?php echo $spending->getType() . '-' . $spending->getId() ?>' style="display:none; margin: 5px; background-color: #FFFFFF; border: 1px solid rgb(199, 203, 204); padding: 10px; width: 300px; z-index: 1000; box-shadow: 2px 4px 17px rgb(179, 184, 183); border-radius: 7px;">
+                                        <?php echo $spending->getDescription(); ?>
+                                    </div>
+                            </td>
+                    <script type="text/javascript">
+    <?php if ($spending->getDescription() != ''): ?>
+                            var my_tooltip = new Tooltip('promo-rule-view-condition-<?php echo $spending->getType() . '-' . $spending->getId() ?>', 'promo-rule-tooltip-<?php echo $spending->getType() . '-' . $spending->getId() ?>')
+    <?php endif; ?>
+                    </script>
+                    <td>
+                        <?php
+                        $_editSpendLink = '';
+                        switch ($spending->getType()) {
+                            case 'shopping_discount':
+                                $_editSpendLink = Mage::helper("adminhtml")->getUrl("adminhtml/promo_quote/edit", array('id' => $spending->getId()));
+                                break;
+                            case 'catalog_discount':
+                                $_editSpendLink = Mage::helper("adminhtml")->getUrl("adminhtml/promo_catalog/edit", array('id' => $spending->getId()));
+                                break;
+                            default:
+                                break;
+                        }
+                        ?>
+
+                        <a href="<?php echo $_editSpendLink ?>" target="_blank">
+                            <img src="<?php echo $this->getSkinUrl('images/icon_edit_address.gif') ?>" title="<?php echo $this->__('Edit this rule') ?>"/><?php // echo $this->__('Edit')         ?></a>&nbsp&nbsp&nbsp<a onclick="ignorePromoRule('<?php echo $spending->getId() ?>', '<?php echo $spending->getType() ?>')" style="cursor: pointer"><img src="<?php echo $this->getSkinUrl('images/icon_remove_address.gif') ?>" title="<?php echo $this->__('Delete this rule') ?>"/><?php // echo $this->__('Delete')         ?></a>
+                    </td>
+                    </tr>
+                <?php endforeach; ?>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        <button id="add_promo_rule" title="<?php echo $this->__('Add new promotion rule') ?>" type="button" class="scalable add" onclick="addNewPromotion()" style=""><span><?php echo $this->__('Add new promotion rule') ?></span></button>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>               
+                <tr style="display: none" id="loyalty-add-promo-catalog">
+                    <td width="200px" align="left">
+                        <?php echo $this->__('Catalog Price Rules'); ?>
+                    </td>
+                    <td><a href="<?php echo Mage::helper("adminhtml")->getUrl('adminhtml/promo_catalog/new', array('group_id' => $this->getRequest()->getParam('id'))) ?>" target="_blank" ><img src="<?php echo $this->getSkinUrl('images/accordion_open.gif') ?>" title="<?php echo $this->__('Add new rule') ?>"/><?php // echo $this->__('Add new')         ?></a></td>
+                </tr>
+                <tr style="display: none" id="loyalty-add-promo-sales">
+                    <td align="left">
+                        <?php echo $this->__('Shopping Cart Price Rules') ?>
+                    </td>
+                    <td><a href="<?php echo Mage::helper("adminhtml")->getUrl('adminhtml/promo_quote/new', array('group_id' => $this->getRequest()->getParam('id'))) ?>" target="_blank"  ><img src="<?php echo $this->getSkinUrl('images/accordion_open.gif') ?>" title="<?php echo $this->__('Add new rule') ?>"/><?php // echo $this->__('Add new')         ?></a></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function ignoreEarnRule(rule_id, type) {
+        if (confirm('<?php echo $this->__('Do you want delete this rule?') ?>')) {
+            url = '<?php echo $this->getUrl('*/*/ignoreEarnRule', array('_current' => true)) ?>';
+            var group = $$("#edit_form input[name='level_name']")[0].value;
+            new Ajax.Request(url, {
+                method: 'post',
+                parameters: {
+                    form_key: FORM_KEY,
+                    rule_id: rule_id,
+                    type: type,
+                    group: group
+                },
+                onSuccess: function (response) {
+                    if (response.responseText != '') {
+                        $('earn-rule-' + type + '-' + rule_id).up('tr').hide();
+                    } else {
+                        alert('<?php echo $this->__('Can not ignore this rule') ?>');
+                    }
+
+                }
+            });
+        }
+    }
+    function ignoreSpendRule(rule_id, type) {
+        if (confirm('<?php echo $this->__('Do you want delete this rule?') ?>')) {
+            url = '<?php echo $this->getUrl('*/*/ignoreSpendRule', array('_current' => true)) ?>';
+            var group = $$("#edit_form input[name='level_name']")[0].value;
+            new Ajax.Request(url, {
+                method: 'post',
+                parameters: {
+                    form_key: FORM_KEY,
+                    rule_id: rule_id,
+                    type: type,
+                    group: group
+                },
+                onSuccess: function (response) {
+                    if (response.responseText != '') {
+                        $('spend-rule-' + type + '-' + rule_id).up('tr').hide();
+                    } else {
+                        alert('<?php echo $this->__('Can not ignore this rule') ?>');
+                    }
+
+                }
+            });
+        }
+    }
+    function ignorePromoRule(rule_id, type) {
+        if (confirm('<?php echo $this->__('Do you want delete this rule?') ?>')) {
+            url = '<?php echo $this->getUrl('*/*/ignorePromoRule', array('_current' => true)) ?>';
+            var group = $$("#edit_form input[name='level_name']")[0].value;
+            new Ajax.Request(url, {
+                method: 'post',
+                parameters: {
+                    form_key: FORM_KEY,
+                    rule_id: rule_id,
+                    type: type,
+                    group: group
+                },
+                onSuccess: function (response) {
+                    if (response.responseText != '') {
+                        $('promo-rule-' + type + '-' + rule_id).up('tr').hide();
+                    } else {
+                        alert('<?php echo $this->__('Can not ignore this rule') ?>');
+                    }
+
+                }
+            });
+        }
+    }
+    function addNewEarning() {
+        url = '<?php echo $this->getUrl('*/*/addRule', array('_current' => true)) ?>';
+        new Ajax.Request(url, {
+            method: 'post',
+            parameters: {
+                form_key: FORM_KEY,
+            },
+            onSuccess: function (response) {
+                if (response.responseText == 'success') {
+                    $('loyalty-add-earn-rate').show();
+                    $('loyalty-add-earn-category').show();
+                    $('loyalty-add-earn-sales').show();
+                    //$('add_earning_rule').up('tr').remove();
+                }
+                else
+                    alert('<?php echo $this->__('You muse be save before') ?>')
+            }
+        });
+    }
+    function addNewSpending() {
+        url = '<?php echo $this->getUrl('*/*/addRule', array('_current' => true)) ?>';
+        new Ajax.Request(url, {
+            method: 'post',
+            parameters: {
+                form_key: FORM_KEY,
+            },
+            onSuccess: function (response) {
+                if (response.responseText == 'success') {
+                    $('loyalty-add-spend-rate').show();
+                    $('loyalty-add-spend-catalog').show();
+                    $('loyalty-add-spend-sales').show();
+                    //$('add_spending_rule').up('tr').remove();
+                }
+                else
+                    alert('<?php echo $this->__('You muse be save before') ?>')
+            }
+        });
+    }
+    function addNewPromotion() {
+        url = '<?php echo $this->getUrl('*/*/addRule', array('_current' => true)) ?>';
+        new Ajax.Request(url, {
+            method: 'post',
+            parameters: {
+                form_key: FORM_KEY,
+            },
+            onSuccess: function (response) {
+                if (response.responseText == 'success') {
+                    $('loyalty-add-promo-catalog').show();
+                    $('loyalty-add-promo-sales').show();
+                    //$('add_promo_rule').up('tr').remove();
+                }
+                else
+                    alert('<?php echo $this->__('You muse be save before') ?>')
+            }
+        });
+    }
+
+    function popupClosing() {
+//        alert('About to refresh');
+        window.location.reload();
+//        window.location.href = window.location.href;
+    }
+    function openWindow(url) {
+        var w = window.open(url, "_blank", "toolbar=yes, location=yes, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=no, copyhistory=yes width=800 height=800");
+        w.onunload = function () {
+            window.parent.popupClosing();
+        }
+    }
+
+
+//    $$('.rpll_link').each(function(element) {
+//        element.observe('click', onclickLink);
+//    });
+
+    function onclickLink(event) {
+        var element = event.element();
+        var url = element.readAttribute('href');
+        var w = window.open(url, "_blank", "toolbar=yes, location=yes, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=no, copyhistory=yes");
+        w.onunload = function () {
+            window.parent.popupClosing()
+        }
+    }
+
+</script>

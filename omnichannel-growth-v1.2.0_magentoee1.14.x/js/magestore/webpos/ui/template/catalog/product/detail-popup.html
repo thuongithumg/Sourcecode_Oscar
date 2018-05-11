@@ -1,0 +1,272 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<div id="popup-product-detail" class="modal customer-popup-form" role="dialog" style="display: none;">
+    <!-- ko if: styleOfPopup.call() == 'view_detail' -->
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="form-detail-product">
+                <div class="popup-header">
+                    <button type="button" class="close" data-dismiss="modal" data-bind="click: closeDetailPopup, text: __('Cancel')"></button>
+                    <h4 class="modal-title" data-bind="text: __('Product Details')"></h4>
+                    <span class="actions"></span>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="screen-shoot-detail">
+
+                                    <div id="product-img-slise">
+                                        <div class="item">
+                                            <div class="img-cat">
+                                                <a href="#">
+                                                    <img data-bind="attr: {'src': itemData().image}"/>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="config-product">
+                                    <div class="product-info-main">
+                                        <div class="page-title-wrapper product">
+                                            <h3 class="product-name" data-bind="html: itemData().name"></h3>
+                                            <span class="sku" data-bind="text: itemData().sku"></span>
+                                        </div>
+
+                                        <!-- ko ifnot: itemData().group_options -->
+                                        <div class="product-info-price">
+                                            <!-- ko if: itemData().config_options -->
+                                            <div style="display:none;" class="price-box price-final_price" data-role="priceBox" data-bind="">
+                                                    <span class="price-container price-final_price tax weee" itemprop="offers" itemscope="">
+                                                        <span data-price-type="finalPrice" class="price-wrapper 1" itemprop="price" data-bind="">
+                                                        </span>
+                                                    </span>
+                                            </div>
+                                            <div class="price-box">
+                                                <span class="price" data-bind="text: defaultPriceAmount"></span>
+                                            </div>
+                                            <!-- /ko -->
+                                            <!-- ko ifnot: itemData().config_options -->
+                                            <div class="price-box">
+                                                <span class="price" data-bind="text: defaultPriceAmount"></span>
+                                            </div>
+                                            <!-- /ko -->
+                                        </div>
+                                        <!-- /ko -->
+
+                                        <div class="product-add-form">
+                                            <form action="" method="post" id="product_addtocart_form" novalidate="novalidate">
+                                                <input type="hidden" name="product" data-bind="attr: {'value': itemData().id}"/>
+                                                <input type="hidden" name="selected_configurable_option" value="" />
+                                                <input type="hidden" name="related_product" id="related-products-field" value="" />
+                                                <div class="product-options-wrapper" id="product-options-wrapper">
+                                                    <!-- ko if: itemData().config_options -->
+                                                    <!-- ko foreach: getRegion('configurable-product') -->
+                                                    <!-- ko template: getTemplate() --><!-- /ko -->
+                                                    <!--/ko-->
+                                                    <!-- /ko -->
+
+                                                    <!-- ko if: itemData().bundle_options -->
+                                                    <!-- ko foreach: getRegion('bundle-product') -->
+                                                    <!-- ko template: getTemplate() --><!-- /ko -->
+                                                    <!--/ko-->
+                                                    <!-- /ko -->
+
+                                                    <!-- ko if: itemData().grouped_options -->
+                                                    <!-- ko foreach: getRegion('grouped-product') -->
+                                                    <!-- ko template: getTemplate() --><!-- /ko -->
+                                                    <!--/ko-->
+                                                    <!-- /ko -->
+
+                                                    <!-- ko if: itemData().custom_options -->
+                                                    <!-- ko foreach: getRegion('custom-option') -->
+                                                    <!-- ko template: getTemplate() --><!-- /ko -->
+                                                    <!--/ko-->
+                                                    <!-- /ko -->
+
+                                                    <!-- ko if: itemData().storecredit_type -->
+                                                    <!-- ko foreach: getRegion('storecredit-product') -->
+                                                    <!-- ko template: getTemplate() --><!-- /ko -->
+                                                    <!--/ko-->
+                                                    <!-- /ko -->
+
+                                                    <!-- ko if: itemData().type_id == 'giftvoucher' -->
+                                                    <!-- ko foreach: getRegion('giftvoucher-product') -->
+                                                    <!-- ko template: getTemplate() --><!-- /ko -->
+                                                    <!--/ko-->
+                                                    <!-- /ko -->
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- ko  ifnot: itemData().isShowOutStock -->
+                                    <!-- ko ifnot: itemData().grouped_options -->
+                                    <div class="ms-qty">
+                                        <label>Qty: </label>
+                                        <span class="down" data-bind="click: descQty"> - </span>
+                                        <input id="product_qty" data-bind="textInput:getQtyAddToCart(), hasFocus:focusQtyInput, event:{change:modifyQty}" onfocus="this.select()"/>
+                                        <span class="up" data-bind="click:incQty"> + </span>
+                                    </div>
+                                    <!-- /ko -->
+                                    <div class="ms-actions">
+                                        <button class="actions btn-cl-cfg-active" data-bind="click: prepareAddToCart, text: __('Add to cart')"></button>
+                                    </div>
+                                <!--/ko -->
+
+                                <!-- ko if: itemData().isShowOutStock -->
+                                <div data-bind="text: __('Out of stock')"></div>
+                                <!-- /ko -->
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="Description">
+                                    <h4 class="title-box" data-bind="text: __('Description')"></h4>
+                                    <p data-bind="html: itemData().description" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+
+    <!-- ko if: styleOfPopup.call() == 'add_to_cart' -->
+    <div class="modal-dialog option-popup">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="form-detail-product">
+                <div class="popup-header">
+                    <button type="button" class="close" data-dismiss="modal" data-bind="click: closeDetailPopup, text: __('Cancel')"></button>
+                    <h4 class="modal-title" data-bind="html: itemData().name"></h4>
+                    <span class="actions"></span>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="config-product">
+                                    <!--<div class="ms-stock">-->
+                                    <!--<label>Qty in stock: </label><span class="number" data-bind="text: itemData().stock[0].qty"/>-->
+                                    <!--</div>-->
+                                    <div class="product-info-main">
+                                        <!-- ko ifnot: itemData().grouped_options -->
+                                        <div class="product-info-price">
+                                            <!-- ko if: itemData().config_options -->
+                                            <div style="display:none;" class="price-box price-final_price" data-role="priceBox" data-bind="attr: {'data-product-id': itemData().id}">
+                                                    <span class="price-container price-final_price tax weee" itemprop="offers" itemscope="">
+                                                        <span data-price-type="finalPrice" class="price-wrapper 1" itemprop="price" data-bind="attr: {'id': 'product-price-' + itemData().id, 'data-price-amount': defaultPriceAmount}">
+                                                        </span>
+                                                    </span>
+                                            </div>
+                                            <div class="price-box">
+                                                <span class="price" data-bind="text: defaultPriceAmount"></span>
+                                            </div>
+                                            <!-- /ko -->
+                                            <!-- ko ifnot: itemData().config_options -->
+                                            <div class="price-box">
+                                                <span class="price" data-bind="text: defaultPriceAmount"></span>
+                                            </div>
+                                            <!-- /ko -->
+                                        </div>
+                                        <!-- /ko -->
+                                        <!-- ko ifnot: itemData().isShowOutStock -->
+                                        <div class="product-add-form">
+                                            <form action="" method="post" id="product_addtocart_form" novalidate="novalidate">
+                                                <input type="hidden" name="product" data-bind="attr: {'value': itemData().id}"/>
+                                                <input type="hidden" name="selected_configurable_option" value="" />
+                                                <input type="hidden" name="related_product" id="related-products-field" value="" />
+                                                <div class="product-options-wrapper" id="product-options-wrapper">
+                                                    <!-- ko if: itemData().config_options -->
+                                                    <!-- ko foreach: getRegion('configurable-product') -->
+                                                    <!-- ko template: getTemplate() --><!-- /ko -->
+                                                    <!--/ko-->
+                                                    <!-- /ko -->
+
+                                                    <!-- ko if: itemData().bundle_options -->
+                                                    <!-- ko foreach: getRegion('bundle-product') -->
+                                                    <!-- ko template: getTemplate() --><!-- /ko -->
+                                                    <!--/ko-->
+                                                    <!-- /ko -->
+
+                                                    <!-- ko if: itemData().grouped_options -->
+                                                    <!-- ko foreach: getRegion('grouped-product') -->
+                                                    <!-- ko template: getTemplate() --><!-- /ko -->
+                                                    <!--/ko-->
+                                                    <!-- /ko -->
+
+                                                    <!-- ko if: itemData().custom_options -->
+                                                    <!-- ko foreach: getRegion('custom-option') -->
+                                                    <!-- ko template: getTemplate() --><!-- /ko -->
+                                                    <!--/ko-->
+                                                    <!-- /ko -->
+
+                                                    <!-- ko if: itemData().storecredit_type -->
+                                                    <!-- ko foreach: getRegion('storecredit-product') -->
+                                                    <!-- ko template: getTemplate() --><!-- /ko -->
+                                                    <!--/ko-->
+                                                    <!-- /ko -->
+
+                                                    <!-- ko if: itemData().type_id == 'giftvoucher' -->
+                                                    <!-- ko foreach: getRegion('giftvoucher-product') -->
+                                                    <!-- ko template: getTemplate() --><!-- /ko -->
+                                                    <!--/ko-->
+                                                    <!-- /ko -->
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <!-- /ko -->
+                                    </div>
+                                </div>
+                                <!-- ko ifnot: itemData().isShowOutStock -->
+                                <!-- ko ifnot: itemData().grouped_options -->
+                                <div class="ms-qty">
+                                    <label>Qty: </label>
+                                    <span class="down" data-bind="click: descQty"> - </span>
+                                    <input id="product_qty" data-bind="textInput:getQtyAddToCart(),  event:{change:modifyQty}" onfocus="this.select()"/>
+                                    <span class="up" data-bind="click:incQty"> + </span>
+                                </div>
+                                <!-- /ko -->
+                                <div class="ms-actions">
+                                    <button class="actions btn-cl-cfg-active" data-bind="click: prepareAddToCart, text: __('Add to cart')"></button>
+                                </div>
+                                <!-- /ko -->
+                                <!-- ko if: itemData().isShowOutStock -->
+                                <div data-bind="text: __('Out of stock')"></div>
+                                <!-- /ko -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+</div>
+

@@ -1,0 +1,61 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<div class="grand-total-footer">
+    <div class="wrap-grand-total">
+        <ul>
+            <!-- ko foreach: getAdditionalInfo() -->
+            <li class="additional-info" data-bind="visible:$data.visible">
+                <div class="label">
+                    <label data-bind="text: $data.title "></label>
+                </div>
+                <div class="price-box">
+                    <span class="price" data-bind="text: $data.value "></span>
+                </div>
+            </li>            
+            <!--/ko-->
+            <!-- ko foreach: displayTotals() -->
+            <li data-bind="visible:($data.isVisible() && !(($data.code() == 'add-discount' && $parent.createdOrder()) || ($data.code() == 'add-discount' && $parent.isZeroTotal()))), click:$parent.totalItemClick.bind($parent)">
+                <div class="label" data-bind="css:$data.cssClass()">
+                    <!-- ko if: (($data.removeAble() == true)  && !$parent.createdOrder()) -->
+                        <a data-bind="click:$parent.removeTotal.bind($parent)"><span class="icon-iconPOS-remove"></span></a>
+                    <!-- /ko -->
+                    <label data-bind="text:$data.title()"></label>
+                </div>
+                <!-- ko if: $data.code() == "add-discount" -->
+                <div class="icon-add">
+                    <i class="icon-iconPOS-add" aria-hidden="true"></i>
+                </div>
+                <!-- /ko -->
+                <!-- ko if:$data.cssClass() != "add-discount" -->
+                <div class="price-box">
+                    <span class="price" data-bind="text:$data.valueFormated()"></span>
+                </div>
+                <!-- /ko -->
+            </li>
+            <!--/ko-->
+            <li class="action-button" data-bind="visible:isOnCartPage">
+                <!-- ko foreach: getButtons() -->
+                <button class="button" data-bind="css:$data.cssClass, text:$data.title, click:$parent.buttonClick"></button>
+                <!--/ko-->
+            </li>
+        </ul>
+    </div>
+</div>

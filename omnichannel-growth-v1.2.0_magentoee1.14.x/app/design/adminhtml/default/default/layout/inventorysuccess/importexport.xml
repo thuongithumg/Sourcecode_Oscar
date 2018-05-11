@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_Inventorysuccess
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<layout version="0.1.0">
+    <adminhtml_import_index>
+        <reference name="before_body_end">
+            <block type="adminhtml/template" name="add_guide_import_file" template="inventorysuccess/importexport/import/guide.phtml"/>
+        </reference>
+    </adminhtml_import_index>
+
+    <adminhtml_system_convert_gui_edit>
+        <reference name="before_body_end">
+            <block type="adminhtml/template" name="add_guide_convert_profile_file" template="inventorysuccess/convert/profile/guide.phtml"/>
+        </reference>
+    </adminhtml_system_convert_gui_edit>
+</layout>

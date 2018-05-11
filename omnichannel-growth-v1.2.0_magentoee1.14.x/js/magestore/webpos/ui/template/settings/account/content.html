@@ -1,0 +1,44 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<div class="wrap-account-container">
+    <form id="staff-settings-form" method="post">
+        <header class="o-header">
+            <nav class="o-header-nav">
+                <label class="title title-header-page" data-bind="i18n: 'My Account'"></label>
+            </nav>
+        </header>
+        <main class="main-account">
+            <div class="wrap-main-account">
+                <!-- ko foreach: elems() -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+                <!-- /ko -->
+            </div>
+        </main>
+        <footer class="footer-account">
+            <div class="action-button">
+                <button class="button btn-save-acc btn-cl-cfg-active" type="button" data-bind="i18n:'Save',click: saveStaffInformation"></button>
+            </div>
+        </footer>
+    </form>
+    <div class="wrap-backover hide-popup"></div>
+</div>
+
+

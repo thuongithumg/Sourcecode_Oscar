@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Inventorysuccess
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<layout version="0.1.0">
+    <adminhtml_inventorysuccess_adjuststock_index>
+        <reference name="content">
+            <block type="inventorysuccess/adminhtml_adjuststock" name="adjuststock" />
+        </reference>
+    </adminhtml_inventorysuccess_adjuststock_index>
+
+    <adminhtml_inventorysuccess_adjuststock_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_adjuststock_grid" name="adjuststock_grid" />
+        </block>
+    </adminhtml_inventorysuccess_adjuststock_grid>
+
+    <adminhtml_inventorysuccess_adjuststock_product>
+        <block type="core/text_list" name="root">
+            <block type="inventorysuccess/adminhtml_adjuststock_edit_tab_products"
+                   name="inventorysuccess.adjuststock.edit.tab.products"/>
+            <block type="adminhtml/widget_grid_serializer" name="related_grid_serializer">
+                    <action method="initSerializerBlock">
+                    <grid_block_name>inventorysuccess.adjuststock.edit.tab.products</grid_block_name>
+                    <data_callback>getSelectedRelatedProducts</data_callback>
+                    <hidden_input_name>products</hidden_input_name>
+                    <reload_param_name>products</reload_param_name>
+                </action>
+                <action method="addColumnInputName">
+                    <input_name>change_qty</input_name>
+                    <input_name>adjust_qty</input_name>
+                    <input_name>old_qty</input_name>
+                    <input_name>product_name</input_name>
+                    <input_name>product_sku</input_name>
+                </action>
+            </block>
+        </block>
+    </adminhtml_inventorysuccess_adjuststock_product>
+    <adminhtml_inventorysuccess_adjuststock_productgrid>
+        <block type="core/text_list" name="root">
+            <block type="inventorysuccess/adminhtml_adjuststock_edit_tab_products"
+                   name="inventorysuccess.adjuststock.edit.tab.products"/>
+        </block>
+    </adminhtml_inventorysuccess_adjuststock_productgrid>
+    <adminhtml_inventorysuccess_adjuststock_edit>
+        <update handle="adminhtml_inventorysuccess"/>
+        <update handle="adminhtml_barcodesuccess_scan" />
+        <reference name="head">
+            <action method="addCss"><styleSheet>css/magestore/coresuccess/modal.css</styleSheet></action>
+            <action method="addJs"><script>magestore/coresuccess/jquery.min.js</script></action>
+            <action method="addJs"><script>magestore/coresuccess/bootstrap.min.js</script></action>
+        </reference>
+        <reference name="content">
+            <block type="inventorysuccess/adminhtml_import_notice"
+                   name="inventorysuccess_notice_message" template="inventorysuccess/notice/message.phtml"/>
+            <block type="inventorysuccess/adminhtml_adjuststock_import" name="adjuststock_import"
+                   template="inventorysuccess/product/import.phtml"/>
+        </reference>
+    </adminhtml_inventorysuccess_adjuststock_edit>
+</layout>

@@ -1,0 +1,84 @@
+.erp-nav-bar{margin-bottom:10px}
+.nav-bar{border-top:1px solid #2d444f;border-bottom:1px solid #2d444f;background:url(images/nav1_bg.gif) repeat-x 0 100% #666e73;padding:0 30px}
+.erp-nav-bar .third-level{position:unset;margin-left:20px}
+.coresuccess .left-menu{background:#20252d}
+.left-menu:before{width:100px;background:#20252d;bottom:0;content:'';left:0;position:fixed;top:0;z-index:5}
+.coresuccess #erp-title{background:#fff;width:100%;float:none}
+.coresuccess #erp-title h3{float:left;margin:0 0 0 30px}
+.coresuccess #erp-title h3 a{float:left;padding:25px 0;font-size:30px;color:#39372b;line-height:40px;text-decoration:none;font-family:"Open Sans",Helvetica,Arial,sans-serif;text-transform:uppercase;margin:0}
+#erp-title h3 a span{color:#39372b}
+.erp-nav-bar #erp-nav{float:left;width:100px}
+#erp-nav li{text-align:left;clear:both}
+#erp-nav li.level0.active>a.active,#erp-nav li.level0.active>ul>li>ul>li.active>a.active,#erp-nav li.level0.active>ul>li.active>a.active{color:#009e8a}
+#erp-nav li.level0.active>ul>li>ul>li.active>a.active,#erp-nav li.level0.active>ul>li.active>a.active{background:#464C52}
+#erp-nav li.level0.active>ul>li.level1 a.label-item.active{background:none}
+#erp-nav li.level0:hover a{color:#009e8a}
+#erp-nav a,#erp-nav a:hover{display:block;text-decoration:none}
+#erp-nav a{line-height:1.3em;text-transform:uppercase}
+#erp-nav li.level0{float:left;width:100%}
+#erp-nav li.level0 .fa{font-size:20px;width:100%;margin-bottom:5px}
+#erp-nav li.level0 [class*='icon-IM'],
+#erp-nav li.level0 [class*='icon-iconB']{font-size:30px;color:#a7a8a9}
+#erp-nav li.level0 .icon-IMBackend-10{font-size:40px}
+#erp-nav li.level0{color:#ddd}
+#erp-nav li.level0.active a{color:#009e8a;background:#3a3d40}
+#erp-nav li.level0.active a [class*='icon-IM']:before,
+#erp-nav li.level0.active a [class*='icon-iconB']:before{color:#009e8a}
+#erp-nav li.level0.active em{display:block;position:absolute;top:0;right:-1px;width:3px;height:27px;background:url(images/nav1_active.gif) no-repeat 100% 0}
+#erp-nav li.level0 a{color:#d6d5d3;font-size:10px;font-family:"Open Sans",Helvetica,Arial,sans-serif;text-align:center;background:#20252d}
+#erp-nav li.level0:hover a{color:#009e8a;cursor:pointer}
+#erp-nav li.level0:hover a [class*='icon-iconB'],
+#erp-nav li.level0:hover a [class*='icon-IM']{color:#009e8a;cursor:pointer}
+#erp-nav li.level0 a{position:relative;z-index:5;padding:15px 0}
+#erp-nav li.level0.active ul.ullevel1{z-index:2;transform:translateX(0)}
+#erp-nav li.level0.active-ul ul.ullevel1{transform:translateX(-100%)}
+#erp-nav ul.ullevel1{background-color:#3a3d40;left:100%;z-index:1;min-height:200px;padding:0;position:absolute;top:0;transform:translateX(-100%);transition-property:transform,visibility;transition-duration:.3s;transition-timing-function:ease-in-out;visibility:hidden;padding-bottom:45px}
+#erp-nav li.level1{padding:3px 100px 3px 25px;white-space:nowrap}
+#erp-nav li.last.level0 .level1{padding:0 15px;margin-bottom:15px}
+#erp-nav li.active.level1.label-li{background:transparent}
+#erp-nav li.level1:hover,#erp-nav li.active.level1{background:#464C52}
+#erp-nav ul li.level1 a{color:#ddd;display:block;padding:10px 5px;font-size:10px;font-weight:400;text-align:left;text-transform:uppercase;background:none;font-family:"Open Sans",Helvetica,Arial,sans-serif}
+#erp-nav li.level0.active > ul > li:hover > a{color:#009e8a}
+#erp-nav ul li.level1 a.label-item,#erp-nav li.level0:hover li.level1 a.label-item{color:#a79d95!important;font-weight:700;font-style:italic;font-size:12px;text-transform:uppercase;padding-left:15px}
+#erp-nav li.level0.active li.level1 a{color:#ddd}
+#erp-nav li.level0 li.level1.label-li:hover a{background:none}
+#erp-nav li.level0 li.level1:hover a{background:#464C52}
+#erp-nav li.label-li.level1:hover{background:none}
+#erp-nav li.level0:hover li.level1 a{color:#ddd}
+#erp-nav li.vel0 li.level1 a:hover{color:#009e8a}
+#erp-nav li.level0:hover li.level1 li.level2 a{color:#ddd}
+#erp-nav li.level0 li.level1 li.level2 a:hover{background:#464C52;color:#009e8a}
+#erp-nav li.level1.active li{font-weight:400}
+#erp-nav li.level0:hover li.level1 .level2 a{color:#ddd}
+#erp-nav li.level0 li.level1 .level2 a{padding:10px 100px 10px 15px;background:#3a3d40}
+#erp-nav ul .submenu-title{font-size:16px;padding:25px 10px 10px 28px;font-weight:400;text-transform:uppercase;color:#ddd;font-family:"Open Sans",Helvetica,Arial,sans-serif}
+#erp-nav ul ul{border:0;display:inline;position:static}
+#erp-nav ul li.level1 ul li a{color:#ddd;margin-bottom:0}
+#erp-nav li.parent a,#erp-nav li.parent li.parent a,#erp-nav li.parent li.parent li.parent a{cursor:default}
+#erp-nav li.parent li a,#erp-nav li.parent li.parent li a,#erp-nav li.parent li.parent li.parent li a{cursor:pointer}
+#erp-nav ul ul ul{left:-10000px}
+#erp-nav li.over ul li.over ul ul{left:-10000px}
+#erp-nav li.over ul li.over ul li.over ul{left:100px}
+#erp-nav ul li.level1 ul li.level2{padding:0}
+.nav-bar:after{content:".";display:block;clear:both;font-size:0;line-height:0;height:0;overflow:hidden}
+ul#erp-nav button,.form-button{border-color:#ed6502 #a04300!important}
+#show_main_menu{float:right}
+#show_main_menu a{background-color:#242F30;width:40px;height:40px;float:right;margin-right:10px}
+#show_main_menu a.over{background-color:#242F30}
+#show_main_menu a i.fa{font-size:25px;margin:8px 12px;color:#fff}
+.coresuccess .header{display:none}
+.coresuccess div.side-col{margin-right:0!important}
+#overlay_bg{position:fixed;background-color:#fff;top:0;left:0;right:0;bottom:0;opacity:0;display:none}
+.coresuccess #show_main_menu button{float:right;margin:0;padding:5px}
+.coresuccess table.actions{float:left;width:100%}
+.coresuccess div.grid{float:left;width:100%}
+.coresuccess .content-header{border-bottom:0 none;padding-bottom:0;margin-bottom:0}
+.coresuccess .content-header button{background:#009e8a;color:#fff;font-size:13px;border:0 none;margin-right:2px}
+.coresuccess .content-header table{float:left;background:#f8f8f8;border-top:1px solid #d0d4dc;border-bottom:1px solid #d0d4dc;padding:24px 2px}
+.coresuccess .nav-bar{display:none}
+.coresuccess .notification-erp-global{display:block}
+.coresuccess #system_config_tabs{display:none}
+.coresuccess #anchor-content .side-col h3{padding:25px;margin:0;font-size:14px;color:#252525;text-transform:uppercase;font-weight:600}
+.coresuccess #anchor-content .side-col .tabs{padding-left:25px;background:none transparent;padding-top:10px}
+.coresuccess .left-menu .logo-menu{z-index:999;position:relative;background:#009e8a;text-align:center;padding:10px 0}
+.coresuccess .left-menu .logo-menu .icon-IMBackend-14{color:#fff;font-size:50px}

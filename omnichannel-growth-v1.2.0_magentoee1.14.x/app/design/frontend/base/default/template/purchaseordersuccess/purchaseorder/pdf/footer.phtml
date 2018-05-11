@@ -1,0 +1,92 @@
+<div id="purchase_email_total_block" class="purchase_email" style="float:right">
+    <div class="admin__page-section-item order-totals"
+         style="margin:0; padding:0; float: right; width: <?php echo $this->getWidth() ?>">
+        <div class="admin__page-section-item-title" style="padding:10px 0 10px 0; background:#EAEAEA; font-size: 12px;">
+            <span class="title"><strong><?php echo $this->__('Order Totals') ?></strong></span>
+        </div>
+        <table class="data-table admin__table-secondary order-subtotal-table" style="font-size: 12px; width: 100%">
+            <tfoot>
+            <tr class="col-0">
+                <td class="label">
+                    <strong><?php echo $this->__('Grand Total (excl. Tax)') ?></strong>
+                </td>
+                <td style="text-align: right">
+                    <strong><?php echo $this->getPriceFormat('grand_total_excl_tax'); ?></strong>
+                </td>
+            </tr>
+            <tr class="col-1">
+                <td class="label">
+                    <strong><?php echo $this->__('Grand Total (incl. Tax)') ?></strong>
+                </td>
+                <td style="text-align: right">
+                    <strong><?php echo $this->getPriceFormat('grand_total_incl_tax'); ?></strong>
+                </td>
+            </tr>
+            <?php $totalBilled = $this->getPrice('total_billed'); ?>
+            <?php $totalDue = $this->getPrice('total_due'); ?>
+            <?php if($totalBilled>0): ?>
+                <tr class="col-2">
+                    <td class="label">
+                        <strong><?php echo $this->__('Total Bill') ?></strong>
+                    </td>
+                    <td style="text-align: right">
+                        <strong><?php echo $this->getPriceFormat('total_billed') ?></strong>
+                    </td>
+                </tr>
+            <?php endif; ?>
+            <?php if($totalDue>0): ?>
+                <tr class="col-3">
+                    <td class="label">
+                        <strong><?php echo $this->__('Total Due') ?></strong>
+                    </td>
+                    <td style="text-align: right">
+                        <strong><?php echo $this->getPriceFormat('total_due') ?></strong>
+                    </td>
+                </tr>
+            <?php endif; ?>
+            </tfoot>
+
+            <tbody>
+            <tr class="col-0">
+                <td class="label"><?php echo $this->__('Subtotal') ?></td>
+                <td style="text-align: right">
+                    <span><?php echo $this->getPriceFormat('subtotal'); ?></span>
+                </td>
+            </tr>
+            <tr class="col-1">
+                <td class="label"><?php echo $this->__('Shipping Cost') ?></td>
+                <td style="text-align: right">
+                    <span><?php echo $this->getPriceFormat('shipping_cost'); ?></span>
+                </td>
+            </tr>
+            <tr class="col-2">
+                <td class="label"><?php echo $this->__('Discount') ?></td>
+                <td style="text-align: right">
+                    <span><?php echo $this->getPriceFormat('total_discount'); ?></span>
+                </td>
+            </tr>
+            <tr class="col-3">
+                <td class="label"><?php echo $this->__('Tax') ?></td>
+                <td style="text-align: right">
+                    <span><?php echo $this->getPriceFormat('total_tax'); ?></span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<style type="text/css">
+    * {
+        background: transparent !important;
+        color: #000 !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+        filter: none !important;
+        -ms-filter: none !important;
+    }
+    @media print
+    {
+        @page { margin: 0; }
+        body  { margin: 1.6cm; }
+    }
+</style>

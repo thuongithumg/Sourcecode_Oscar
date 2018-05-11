@@ -1,0 +1,40 @@
+<!--
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Webpos
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<?php
+$specificInfo = $block->getSpecificInformation();
+if ($specificInfo):
+    ?>
+    <table class="data-table admin__table-secondary">
+        <?php foreach ($specificInfo as $label => $value): ?>
+            <tr>
+                <th><?php echo $block->escapeHtml($label) ?>:</th>
+                <td style='padding-left:10px;font-weight:bold;'>
+                    <?php /* @noEscape */ echo nl2br($block->escapeHtml(implode("\n", $block->getValueAsArray($value, true)))); ?>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+<?php endif; ?>
+
+<?php
+echo $block->getChildHtml();
+?>

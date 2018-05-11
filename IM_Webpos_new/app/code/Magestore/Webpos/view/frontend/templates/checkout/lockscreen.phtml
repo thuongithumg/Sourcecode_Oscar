@@ -1,0 +1,24 @@
+<?php
+/**
+ * Copyright © 2018 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+$jsLayout = $block->getJsLayout();?>
+<div id="webpos_lockscreen" class="webpos_lockscreen" role="webpos_lockscreen" data-bind="scope:'webpos_lockscreen'" style="z-index: 999999">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+        {
+            "#webpos_lockscreen": {
+                "Magento_Ui/js/core/app": {
+                    "components" : {
+                        "webpos_lockscreen": {
+                            "component": "Magestore_Webpos/js/view/checkout/lockscreen",
+                             "displayArea": "webpos_lockscreen"
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</div>

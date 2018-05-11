@@ -1,0 +1,241 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Inventorysuccess
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<layout version="0.1.0">
+    <adminhtml_inventorysuccess_warehouse_default>
+        <update handle="adminhtml_coresuccess_modal"/>
+        <reference name="head">
+            <action method="addJs">
+                <script>magestore/inventorysuccess/adminhtml/warehouse/selected-product.js</script>
+            </action>
+        </reference>
+    </adminhtml_inventorysuccess_warehouse_default>
+
+    <adminhtml_inventorysuccess_warehouse_orders>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_warehouse_edit_tab_orders" name="adminhtml.customer.edit.tab.orders"/>
+        </block>
+    </adminhtml_inventorysuccess_warehouse_orders>
+
+    <!--Manage Stock Page-->
+    <adminhtml_inventorysuccess_managestock_index>
+        <update handle="adminhtml_inventorysuccess_warehouse_default"/>
+        <reference name="content">
+            <block type="inventorysuccess/adminhtml_manageStock_warehouses" name="managestock.warehouses"/>
+            <block type="inventorysuccess/adminhtml_manageStock_product" name="managestock.product"/>
+        </reference>
+    </adminhtml_inventorysuccess_managestock_index>
+    <adminhtml_inventorysuccess_managestock_product_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_manageStock_product_grid" name="managestock.product.grid"/>
+        </block>
+    </adminhtml_inventorysuccess_managestock_product_grid>
+    <adminhtml_inventorysuccess_managestock_product_information>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_manageStock_product_information"
+                   name="managestock.product.information"/>
+        </block>
+    </adminhtml_inventorysuccess_managestock_product_information>
+    <adminhtml_inventorysuccess_managestock_product_stockmovement>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_manageStock_product_stockMovement"
+                   name="managestock.product.stockmovement"/>
+        </block>
+    </adminhtml_inventorysuccess_managestock_product_stockmovement>
+
+    <!--Warehouse Listing and View Warehouse-->
+    <adminhtml_inventorysuccess_warehouse_index>
+        <reference name="content">
+            <block type="inventorysuccess/adminhtml_warehouse" name="warehouses"/>
+        </reference>
+    </adminhtml_inventorysuccess_warehouse_index>
+    <adminhtml_inventorysuccess_warehouse_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_warehouse_grid" name="warehouses.grid"/>
+        </block>
+    </adminhtml_inventorysuccess_warehouse_grid>
+    <adminhtml_inventorysuccess_warehouse_edit>
+        <update handle="adminhtml_inventorysuccess_warehouse_default"/>
+        <reference name="head">
+            <action method="addJs">
+                <script>magestore/inventorysuccess/adminhtml/chart/highcharts.js</script>
+            </action>
+            <action method="addJs">
+                <script>magestore/inventorysuccess/adminhtml/chart/exporting.js</script>
+            </action>
+            <action method="addJs">
+                <script>magestore/inventorysuccess/adminhtml/chart/data.js</script>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="inventorysuccess/adminhtml_warehouse_edit" name="warehouse_edit"/>
+        </reference>
+        <reference name="left">
+            <block type="inventorysuccess/adminhtml_warehouse_edit_tabs" name="warehouse_tabs"/>
+        </reference>
+    </adminhtml_inventorysuccess_warehouse_edit>
+    <adminhtml_inventorysuccess_warehouse_new>
+        <update handle="adminhtml_inventorysuccess_warehouse_edit"/>
+    </adminhtml_inventorysuccess_warehouse_new>
+    <adminhtml_inventorysuccess_warehouse_stockonhand>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_warehouse_edit_tab_stockonhand" name="warehouse.stockonhand">
+                <block type="inventorysuccess/adminhtml_warehouse_edit_tab_stockonhand_delete"
+                       name="warehouse.stockonhand.delete"/>
+                <block type="inventorysuccess/adminhtml_warehouse_edit_tab_stockonhand_nonwarehouseproduct"
+                       name="warehouse.stockonhand.nonwarehouseproduct"/>
+            </block>
+        </block>
+    </adminhtml_inventorysuccess_warehouse_stockonhand>
+    <adminhtml_inventorysuccess_warehouse_stockonhand_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_warehouse_edit_tab_stockonhand_grid"
+                   name="warehouse.stockonhand.grid"/>
+        </block>
+    </adminhtml_inventorysuccess_warehouse_stockonhand_grid>
+    <adminhtml_inventorysuccess_warehouse_stockonhand_delete_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_warehouse_edit_tab_stockonhand_delete_grid"
+                   name="warehouse.stockonhand.delete.grid"/>
+        </block>
+    </adminhtml_inventorysuccess_warehouse_stockonhand_delete_grid>
+    <adminhtml_inventorysuccess_warehouse_stockonhand_nonwarehouseproduct_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_warehouse_edit_tab_stockonhand_nonwarehouseproduct_grid"
+                   name="warehouse.stockonhand.nonwarehouseproduct.grid"/>
+        </block>
+    </adminhtml_inventorysuccess_warehouse_stockonhand_nonwarehouseproduct_grid>
+    <adminhtml_inventorysuccess_warehouse_stockmovement>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_warehouse_edit_tab_stockmovement" name="warehouse.stockmovement"/>
+        </block>
+    </adminhtml_inventorysuccess_warehouse_stockmovement>
+    <adminhtml_inventorysuccess_warehouse_stockmovement_grid>
+        <update handle="adminhtml_inventorysuccess_warehouse_stockmovement"/>
+    </adminhtml_inventorysuccess_warehouse_stockmovement_grid>
+    <adminhtml_inventorysuccess_warehouse_permission>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_warehouse_edit_tab_permission" name="warehouse.permission">
+                <block type="inventorysuccess/adminhtml_warehouse_edit_tab_permission_staff"
+                       name="warehouse.permission.staff"/>
+            </block>
+        </block>
+    </adminhtml_inventorysuccess_warehouse_permission>
+    <adminhtml_inventorysuccess_warehouse_permission_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_warehouse_edit_tab_permission_grid"
+                   name="warehouse.permission.grid"/>
+        </block>
+    </adminhtml_inventorysuccess_warehouse_permission_grid>
+    <adminhtml_inventorysuccess_warehouse_permission_staff_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_warehouse_edit_tab_permission_staff_grid"
+                   name="warehouse.permission.staff.grid"/>
+        </block>
+    </adminhtml_inventorysuccess_warehouse_permission_staff_grid>
+    <adminhtml_inventorysuccess_warehouse_dashboard>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_warehouse_edit_tab_dashboard" name="warehouse.dashboard"/>
+        </block>
+    </adminhtml_inventorysuccess_warehouse_dashboard>
+
+    <!--Non-Warehouse Product Listing-->
+    <adminhtml_inventorysuccess_warehouse_nonwarehouseproduct_index>
+        <update handle="adminhtml_inventorysuccess_warehouse_default"/>
+        <reference name="content">
+            <block type="inventorysuccess/adminhtml_warehouse_nonwarehouseproduct"
+                   name="warehouses.nonewarehouseproduct">
+            </block>
+        </reference>
+    </adminhtml_inventorysuccess_warehouse_nonwarehouseproduct_index>
+    <adminhtml_inventorysuccess_warehouse_nonwarehouseproduct_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_warehouse_nonwarehouseproduct_grid"
+                   name="warehouses.nonewarehouseproduct.grid"/>
+        </block>
+    </adminhtml_inventorysuccess_warehouse_nonwarehouseproduct_grid>
+
+    <!--Stock Movement Listing-->
+    <adminhtml_inventorysuccess_stockmovement_index>
+        <reference name="content">
+            <block type="inventorysuccess/adminhtml_stockMovement" name="stockmovement"/>
+        </reference>
+    </adminhtml_inventorysuccess_stockmovement_index>
+    <adminhtml_inventorysuccess_stockmovement_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_stockMovement_grid" name="stockmovement.grid"/>
+        </block>
+    </adminhtml_inventorysuccess_stockmovement_grid>
+
+    <!--Edit Admin User-->
+    <adminhtml_permissions_user_edit>
+        <update handle="adminhtml_inventorysuccess_warehouse_default"/>
+        <reference name="adminhtml.permissions.user.edit.tabs">
+            <block type="inventorysuccess/adminhtml_permissions_user_edit_tab_warehouse"
+                   name="adminhtml.permissions.user.edit.tab.inventorysuccess.warhouse">
+                <block type="inventorysuccess/adminhtml_permissions_user_edit_tab_warehouse_warehouse"
+                       name="adminhtml.permissions.user.edit.tab.inventorysuccess.warhouse.warehouse"/>
+            </block>
+            <action method="addTabAfter">
+                <id>inventorysuccess_warhouse_section</id>
+                <block>adminhtml.permissions.user.edit.tab.inventorysuccess.warhouse</block>
+                <after>roles_section</after>
+            </action>
+        </reference>
+    </adminhtml_permissions_user_edit>
+    <adminhtml_inventorysuccess_permission_user_warehouse_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_permissions_user_edit_tab_warehouse_grid"
+                   name="permission.user.edit.tab.inventorysuccess.warehouse.grid"/>
+        </block>
+    </adminhtml_inventorysuccess_permission_user_warehouse_grid>
+    <adminhtml_inventorysuccess_permission_user_warehouse_warehouse_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_permissions_user_edit_tab_warehouse_warehouse_grid"
+                   name="permission.user.edit.tab.inventorysuccess.warehouse.warehouse.grid"/>
+        </block>
+    </adminhtml_inventorysuccess_permission_user_warehouse_warehouse_grid>
+
+    <!--Stock Transfer Listing-->
+    <adminhtml_inventorysuccess_stockmovement_transfer_index>
+        <reference name="content">
+            <block type="inventorysuccess/adminhtml_stockMovement_transfer" name="stockmovement_transfer"/>
+        </reference>
+    </adminhtml_inventorysuccess_stockmovement_transfer_index>
+    <adminhtml_inventorysuccess_stockmovement_transfer_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_stockMovement_transfer_grid" name="stockmovement_transfer.grid"/>
+        </block>
+    </adminhtml_inventorysuccess_stockmovement_transfer_grid>
+    <adminhtml_inventorysuccess_stockmovement_transfer_view>
+        <reference name="content">
+            <block type="inventorysuccess/adminhtml_stockMovement_transfer_edit" name="stockmovement_transfer_edit"/>
+        </reference>
+        <reference name="left">
+            <block type="inventorysuccess/adminhtml_stockMovement_transfer_edit_tabs" name="stockmovement_transfer_tabs"/>
+        </reference>
+    </adminhtml_inventorysuccess_stockmovement_transfer_view>
+    <adminhtml_inventorysuccess_stockmovement_transfer_items>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="inventorysuccess/adminhtml_stockMovement_transfer_edit_tab_items"
+                   name="stockmovement_transfer_tabs.items"/>
+        </block>
+    </adminhtml_inventorysuccess_stockmovement_transfer_items>
+</layout>

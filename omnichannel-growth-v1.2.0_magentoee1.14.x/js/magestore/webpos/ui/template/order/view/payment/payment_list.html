@@ -1,0 +1,35 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<div class="row no-method-available" data-bind="visible: $parent.checkPaymentCollection()">
+    <span data-bind="i18n: 'No payment method is available'"></span>
+</div>
+<div class="row" data-bind="foreach: $parent.items">
+    <div  class="col-sm-3">
+        <div class="item">
+            <div class="payment" data-bind="click: $parents[1].setPaymentMethod">
+                <div class="icon-payment">
+                    <span data-bind="attr:{class:icon_class}"></span>
+                </div>
+                <label data-bind="text: title"></label>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

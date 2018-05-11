@@ -1,0 +1,43 @@
+<!--
+  ~ Created by Wazza Rooney on 9/6/17 3:44 PM
+  ~ Copyright (c) 2017. All rights reserved.
+  ~ Last modified 7/6/17 10:31 AM
+  -->
+
+<fieldset class="fieldset fieldset-giftvoucher-options"  >
+
+    <!-- ko foreach: {data: itemData().giftvoucher_options, as: 'parentData' }  -->
+
+    <!-- ko if: parentData.type == 'static' -->
+    <!-- ko foreach: $parent.getRegion('giftvoucher-product-static') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <!--/ko-->
+    <!-- /ko -->
+
+    <!-- ko if: parentData.type == 'range' -->
+    <!-- ko foreach: $parent.getRegion('giftvoucher-product-field') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <!--/ko-->
+    <!-- /ko -->
+
+    <!-- ko if: parentData.type == 'dropdown' -->
+    <!-- ko foreach: $parent.getRegion('giftvoucher-product-drop_down') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <!--/ko-->
+    <!-- /ko -->
+
+    <!-- /ko -->
+
+    <!-- ko if: itemData().giftvoucher_options[0].is_integrate_post_office == '1' -->
+    <div class="field option">
+        <div class="control">
+            <div class="options-list nested">
+                <div class="field choice admin__field admin__field-option">
+                    <input type="checkbox" data-bind="event: {change: setCanShip}, checked: giftvoucherCanShip" />
+                    <span data-bind="text: __('Send through post office')"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+</fieldset>

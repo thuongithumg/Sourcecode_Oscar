@@ -1,0 +1,78 @@
+<script type="text/javascript">
+    var BarcodeGrid = function (data) {
+        for (var item in data) {
+            BarcodeGrid.prototype[item] = data[item];
+        }
+    };
+    BarcodeGrid.prototype = {
+        massUpdate: function () {
+            var self = this;
+            self.removeMessage();
+            new Ajax.Request(self.massUpdateUrl, {
+                method: 'post',
+                parameters: {
+                    barcodes: self.getBarcodes()
+                },
+                onComplete: function (response) {
+                    var data = response.responseJSON;
+                    self.updateMessage(data);
+                }
+            });
+        },
+        massPrint: function () {
+            var self = this;
+            new Ajax.Request(self.massPrintUrl, {
+                method: 'post',
+                parameters: {
+                    barcodes: self.getBarcodes()
+                },
+                onComplete: function (response) {
+                    var data = response.responseJSON;
+                    if (data.message) {
+                        self.updateMessage(data);
+                    } else {
+                        window.location.href = data.redirectUrl;
+                    }
+                }
+            });
+        },
+        massDelete: function () {
+            if (confirm("Are you sure?")) {
+                var self = this;
+                new Ajax.Request(self.massDeleteUrl, {
+                    method: 'post',
+                    parameters: {
+                        barcodes: self.getBarcodes()
+                    },
+                    onComplete: function (response) {
+                        var data = response.responseJSON;
+                        if (data.message) {
+                            self.updateMessage(data);
+                        } else {
+                            window.location.href = data.redirectUrl;
+                        }
+                    }
+                });
+            }
+        },
+        getBarcodes: function () {
+            return $$('input[name=barcodes]')[0].value;
+        },
+        updateMessage: function (data) {
+            if (data.error) {
+                $('messages').innerHTML = "<ul class='messages'><li class='error-msg'><ul><li><span>" + data.message + "</span></li></ul></li></ul>";
+            } else {
+                $('messages').innerHTML = "<ul class='messages'><li class='success-msg'><ul><li><span>" + data.message + "</span></li></ul></li></ul>";
+            }
+        },
+        removeMessage: function () {
+            $('messages').innerHTML = '';
+        }
+    };
+    var barcodeGrid = new BarcodeGrid({
+        massUpdateUrl: '<?php echo Mage::helper('adminhtml')->getUrl('*/barcodesuccess_barcode/massUpdate') ?>',
+        massPrintUrl: '<?php echo Mage::helper('adminhtml')->getUrl('*/barcodesuccess_barcode/massPrint') ?>',
+        massDeleteUrl: '<?php echo Mage::helper('adminhtml')->getUrl('*/barcodesuccess_barcode/massDelete') ?>'
+    });
+</script>
+

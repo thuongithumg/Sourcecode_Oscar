@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns:typens="urn:{{var wsdl.name}}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/"
+             name="{{var wsdl.name}}" targetNamespace="urn:{{var wsdl.name}}">
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:Magento">
+            <import namespace="http://schemas.xmlsoap.org/soap/encoding/" schemaLocation="http://schemas.xmlsoap.org/soap/encoding/" />
+            <complexType name="salesOrderEntity">
+                <all>
+                    <element name="rewardpoints_earn" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_spent" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_base_discount" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_discount" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_base_amount" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_amount" type="xsd:string" minOccurs="0" />
+                </all>
+            </complexType>
+            <complexType name="salesOrderListEntity">
+                <all>
+                    <element name="rewardpoints_earn" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_spent" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_base_discount" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_discount" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_base_amount" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_amount" type="xsd:string" minOccurs="0" />
+                </all>
+            </complexType>
+            <complexType name="salesOrderItemEntity">
+                <all>
+                    <element name="rewardpoints_earn" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_spent" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_base_discount" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_discount" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_base_amount" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_amount" type="xsd:string" minOccurs="0" />
+                </all>
+            </complexType>
+            <complexType name="salesOrderInvoiceEntity">
+                <all>
+                    <element name="rewardpoints_earn" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_spent" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_base_discount" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_discount" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_base_amount" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_amount" type="xsd:string" minOccurs="0" />
+                </all>
+            </complexType>
+            <complexType name="salesOrderInvoiceItemEntity">
+                <all>
+                    <element name="rewardpoints_earn" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_spent" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_base_discount" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_discount" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_base_amount" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_amount" type="xsd:string" minOccurs="0" />
+                </all>
+            </complexType>
+            <complexType name="salesOrderCreditmemoEntity">
+                <all>
+                    <element name="rewardpoints_earn" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_spent" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_base_discount" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_discount" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_base_amount" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_amount" type="xsd:string" minOccurs="0" />
+                </all>
+            </complexType>
+            <complexType name="salesOrderCreditmemoItemEntity">
+                <all>
+                    <element name="rewardpoints_earn" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_spent" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_base_discount" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_discount" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_base_amount" type="xsd:string" minOccurs="0" />
+                    <element name="rewardpoints_amount" type="xsd:string" minOccurs="0" />
+                </all>
+            </complexType>
+        </schema>
+    </types>
+</definitions>

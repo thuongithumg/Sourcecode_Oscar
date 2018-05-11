@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">    
+    <body>
+    	<referenceContainer name="page.main.actions">
+            <block class="Magestore\Webpos\Block\Adminhtml\Report\Dashboard" template="report/list.phtml" name="report.switcher"/>            
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Magestore\Webpos\Block\Adminhtml\Report\SaleLocationDaily" template="report/grid/container.phtml" name="sales.report.grid.container">
+                <block class="Magestore\Webpos\Block\Adminhtml\Report\Filter\Form" name="grid.filter.form">                                     
+                </block>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

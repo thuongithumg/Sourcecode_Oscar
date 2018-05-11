@@ -1,0 +1,44 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<!-- ko if: orderData -->
+<div id="send-email-order" role="dialog"
+     data-bind="visible: isVisible, style: {display: stypeDisplay()},
+      attr:{class: 'modal fade add-comment ' + classIn()}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form data-bind="submit: sendEmail">
+                <div class="popup-header">
+                    <button type="button" class="close" data-dismiss="modal" data-bind="i18n: ('Cancel'), click: display(false)"/>
+                    <h4 class="modal-title" data-bind="i18n: ('Send email')"/>
+                    <button type="submit" class="btn-save link-cl-cfg" data-bind="i18n: ('Send'), click: sendEmail"/>
+                </div>
+                <div class="modal-body">
+                    <input class="input-text"
+                           data-bind="attr: {id: inputId, placeholder: ('Enter your email')}, value: customerEmail"/>
+                    <!-- ko if: invalidEmail -->
+                    <label class="required-email" data-bind="i18n: ('Email is invalid!')"></label>
+                    <!-- /ko -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- /ko -->

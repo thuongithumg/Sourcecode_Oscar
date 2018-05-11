@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!--
+  ~
+  ~  Magestore
+  ~   NOTICE OF LICENSE
+  ~
+  ~   This source file is subject to the Magestore.com license that is
+  ~   available through the world-wide-web at this URL:
+  ~   http://www.magestore.com/license-agreement.html
+  ~
+  ~   DISCLAIMER
+  ~
+  ~   Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~   version in the future.
+  ~
+  ~   @category    Magestore
+  ~   @package     Magestore_Barcodesuccess
+  ~   @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~   @license     http://www.magestore.com/license-agreement.html
+  ~
+  ~
+  -->
+<config>
+    <menu>
+        <!--<inventorysuccess>-->
+        <!--<children>-->
+                    <debugsuccess module="debugsuccess" translate="title">
+                    <title>DebugSuccess</title>
+                    <sort_order>100</sort_order>
+                        <children>
+                            <all_wrong_qty module="debugsuccess" translate="title">
+                                <title>List Wrong Qtys</title>
+                                <sort_order>100</sort_order>
+                                <action>adminhtml/indp_debug/wrongqty</action>
+                            </all_wrong_qty>
+
+                            <rerport module="debugsuccess" translate="title">
+                                <title>Collect History</title>
+                                <sort_order>110</sort_order>
+                                <action>adminhtml/indp_debug/reportdebug</action>
+                            </rerport>
+                        </children>
+                    </debugsuccess>
+        <!--</children>-->
+        <!--</inventorysuccess>-->
+    </menu>
+</config>

@@ -1,0 +1,68 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div class="product-options-wrapper"  >
+    <!-- ko foreach: {data: itemData().custom_options, as: 'parentData' }  -->
+        <!-- ko if: parentData.type == 'field' -->
+            <!-- ko foreach: $parent.getRegion('custom-option-product-field') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        <!-- /ko -->
+
+        <!-- ko if: parentData.type == 'area' -->
+            <!-- ko foreach: $parent.getRegion('custom-option-product-area') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        <!-- /ko -->
+
+        <!-- ko if: parentData.type == 'file' -->
+            <!-- ko foreach: $parent.getRegion('custom-option-product-file') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        <!-- /ko -->
+
+        <!-- ko if: parentData.type == 'drop_down' -->
+            <!-- ko foreach: $parent.getRegion('custom-option-product-drop_down') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        <!-- /ko -->
+
+        <!-- ko if: parentData.type == 'radio' -->
+            <!-- ko foreach: $parent.getRegion('custom-option-product-radio') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        <!-- /ko -->
+
+        <!-- ko if: parentData.type == 'checkbox' -->
+            <!-- ko foreach: $parent.getRegion('custom-option-product-checkbox') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        <!-- /ko -->
+
+        <!-- ko if: parentData.type == 'multiple' -->
+            <!-- ko foreach: $parent.getRegion('custom-option-product-multiple') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        <!-- /ko -->
+
+        <!-- ko if: parentData.type == 'date' -->
+            <!-- ko foreach: $parent.getRegion('custom-option-product-date') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        <!-- /ko -->
+
+        <!-- ko if: parentData.type == 'date_time' -->
+            <!-- ko foreach: $parent.getRegion('custom-option-product-date_time') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        <!-- /ko -->
+
+        <!-- ko if: parentData.type == 'time' -->
+            <!-- ko foreach: $parent.getRegion('custom-option-product-time') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        <!-- /ko -->
+    <!-- /ko -->
+</div>

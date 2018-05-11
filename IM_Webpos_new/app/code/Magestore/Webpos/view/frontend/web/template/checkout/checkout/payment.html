@@ -1,0 +1,17 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div class="row" id="payment_list" data-bind="foreach: items">
+    <div  class="col-sm-3">
+        <div class="item">
+            <div class="payment" data-bind="foreach: columns, click: $parent.setPaymentMethod">
+                <div class="icon-payment" data-bind="css : $parent.code">
+                    <span data-bind="attr:{'class': renderer ? renderer.render($parent) : $parent[rowText]}"></span>
+                </div>
+                <label data-bind="text: $parent[rowText]"></label>
+            </div>
+        </div>
+    </div>
+</div>

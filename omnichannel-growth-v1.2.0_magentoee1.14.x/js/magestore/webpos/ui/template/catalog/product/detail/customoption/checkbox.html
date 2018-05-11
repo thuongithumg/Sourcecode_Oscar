@@ -1,0 +1,51 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<div class="field option">
+    <label class="label" data-bind="attr: {'for': 'options_' + parentData.option_id + '_text'}">
+        <span data-bind="text: parentData.title"></span>
+    </label>
+
+    <div class="control">
+        <div class="options-list nested" data-bind="attr: {'id': 'options-' + parentData.option_id + '-list'">
+            <!-- ko foreach: {data: parentData.values, as: 'itemData' }  -->
+                <div class="field choice admin__field admin__field-option">
+                    <input type="checkbox"
+                           class="checkbox admin__control-checkbox product-custom-option"
+                           style="float: left"
+                           data-bind="event: {'click': $parents[2].updatePrice($parents[2].itemData().custom_options)},
+                                attr: {'id': 'options_' + parentData.option_id + '_' + itemData.sort_order,
+                                    'name': 'options['+parentData.option_id+'][]',
+                                    'value': itemData.option_type_id,
+                                    'price': itemData.price,
+                                    'data-validate': (parentData.is_require > 0) ? '{\'required-entry\':true}' : '{\'required-entry\':false}'
+                                }"
+                    />
+                    <label class="label admin__field-label"
+                           data-bind="attr: {'for': 'options_' + parentData.option_id + '_' + itemData.sort_order}">
+                        <span data-bind="text: itemData.title"></span>
+                        &nbsp;<span class="price-notice" data-bind="text: '+' + $parents[2].getFormatPrice(itemData.price, itemData.price_type)"></span>
+                    </label>
+                </div>
+            <!-- /ko -->
+            <span data-bind="attr: {'id': 'options-' + parentData.option_id + '-' + 'container'"></span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,83 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *  
+ * @category    Magestore
+ * @package     Magestore_Webpos
+ * @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+?>
+<?php
+/**
+ * Template for Mage_Page_Block_Html
+ */
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->getLang() ?>" lang="<?php echo $this->getLang() ?>">
+<head>
+    <?php echo $this->getChildHtml('webpos_head') ?>
+    <?php echo $this->getChildHtml('requirejs');?>
+    <?php echo $this->getChildHtml('webpos_head_second');?>
+    <?php $isSecure = Mage::app()->getStore()->isCurrentlySecure(); ?>
+    <script type="text/javascript">
+        window.storeCode = "default";
+        var dbName = 'magestore_webpos';
+        var version = 1;
+        var limit = 5;
+        var server;
+        var checkNetWork = true;
+        var reloading = false;
+        var WEBPOS = {};
+        //var ObjectManager = {};
+
+        window.webposConfig = <?php /* @escapeNotVerified */ echo \Zend_Json::encode($this->getWebposConfig()); ?>;
+        window.searchCat = '';
+        window.curPage = '';
+        require(
+            [
+                'mage/url'
+            ], function (url) {
+                return url.setBaseUrl('<?php /* @escapeNotVerified */ echo Mage::app()->getStore()->getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB, $isSecure);?>');
+            });
+
+        require([
+            'installSchema',
+            'model/sync-action-log',
+            'model/observer'
+        ], function (install, syncactionlog, observer) {
+            install.installSchema();
+            syncactionlog.processActionLog();
+            observer.processEvent();
+        });
+    </script>
+</head>
+
+<body <?php echo $this->getBodyClass()?' class="'.$this->getBodyClass().'"':'' ?>>
+<?php echo $this->getChildHtml('after_webpos_body_start') ?>
+<div class="wrapper">
+    <div class="page">
+        <?php echo $this->getChildHtml('webpos_content') ?>
+        <div class="before_webpos_body_end">
+        <?php echo $this->getChildHtml('before_webpos_body_end') ?>
+        </div>
+    </div>
+</div>
+<style>
+    body {
+        opacity: initial !important;
+    }
+</style>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<?php
+$_params = $this->getParams();
+?>
+<html>
+<head>
+    <script type="text/javascript">
+        //<![CDATA[
+        <?php if (isset($_params['redirect'])): ?>
+        window.location.href = "<?php echo $_params['redirect'];?>";
+        <?php else: ?>
+        var parentWindow = window.opener;
+        if(parentWindow && parentWindow.directPostModel){
+            <?php if (isset($_params['success']) && $_params['success'] == 1): ?>
+            parentWindow.directPostModel.success();
+            <?php endif; ?>
+            <?php if (isset($_params['error_msg'])): ?>
+            parentWindow.directPostModel.error('<?php echo $_params['error_msg'];?>');
+            <?php endif; ?>
+            window.close();
+        }
+        <?php endif; ?>
+        //]]>
+    </script>
+</head>
+<body></body>
+</html>

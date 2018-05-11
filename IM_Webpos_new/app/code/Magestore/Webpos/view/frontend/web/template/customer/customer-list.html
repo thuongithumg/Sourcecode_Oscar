@@ -1,0 +1,64 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div class="col-sm-4 col-right">
+    <header class="o-header">
+        <nav class="o-header-nav">
+            <label class="title title-header-page" data-bind="i18n: 'Customers'"></label>
+            <div class="icon-add" data-bind="click: showCreateForm">
+                <span class="icon-iconPOS-add"></span>
+            </div>
+        </nav>
+        <div data-bind="visible: isSearchable" class="form-inline" role="form">
+            <div class="form-group">
+                <span class="icon-iconPOS-search"></span>
+                <input type="search"
+                       data-bind="event: {change: filter}, attr: {placeholder: $t('Search by Email, Name, Telephone')}"
+                       class="form-control search-header" id="search-header-customer"/>
+                <a class="remove-text"><span class="icon-iconPOS-delete"></span></a>
+            </div>
+            <button type="submit" class="btn btn-default" data-bind="i18n: 'Search'"></button>
+        </div>
+    </header>
+    <!-- -->
+    <div class="main-item-order" >
+        <div class="wrap-item-order wrap-item-customer" data-bind="event: {scroll: lazyload}">
+            <ul class="list-customer" data-bind="foreach: items">
+                <li class="product-item bg-cl-active" data-bind="attr: {id: id} ,click: $parent.loadItem,
+                    css: {'selected': (id==$parent.getSelectId()), 'notsync': ($parent.getStatus($data)=='notsync')}">
+                    <div class="item">
+                        <h4 class="customer-name" data-bind="text: firstname + ' ' + lastname"></h4>
+                        <a class="customer-email" data-bind="text: email"></a>
+                        <span class="customer-phone" data-bind="text: telephone"></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- ko if: isSearching -->
+        <div class="wrap-item-order">
+            <div class="indicator">
+                <div class="spinner"></div>
+            </div>
+        </div>
+        <!--/ko-->
+    </div>
+
+
+
+</div>
+
+<div class="col-sm-8 col-left">
+    <!-- ko foreach: getRegion('customer-view') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    <!--/ko-->
+</div>
+
+
+<style type="text/css">
+    .scroll-grid {height: 400px; overflow-x: auto;}
+</style>
+
+
+

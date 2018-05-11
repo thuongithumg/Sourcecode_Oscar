@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<!--
+~ Magestore
+~
+~ NOTICE OF LICENSE
+~
+~ This source file is subject to the Magestore.com license that is
+~ available through the world-wide-web at this URL:
+~ http://www.magestore.com/license-agreement.html
+~
+~ DISCLAIMER
+~
+~ Do not edit or add to this file if you wish to upgrade this extension to newer
+~ version in the future.
+~
+~ @category    Magestore
+~ @package     Magestore_Giftvoucher
+~ @module     Giftvoucher
+~ @author      Magestore Developer
+~
+~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+~ @license     http://www.magestore.com/license-agreement.html
+~
+-->
+
+<config>
+    <menu>
+        <giftvoucher module="giftvoucher">
+            <title>Gift Card</title>
+            <sort_order>72</sort_order>
+            <children>
+                <giftvoucher module="giftvoucher">
+                    <title>Manage Gift Codes</title>
+                    <sort_order>1</sort_order>
+                    <action>adminhtml/giftvoucher_giftvoucher</action>
+                </giftvoucher>
+                <gifttemplate module="giftvoucher">
+                    <title>Manage Gift Card Templates</title>
+                    <sort_order>40</sort_order>
+                    <action>adminhtml/giftvoucher_gifttemplate</action>
+                </gifttemplate>
+                <gifthistory module="giftvoucher">
+                    <title>History</title>
+                    <sort_order>50</sort_order>
+                    <action>adminhtml/giftvoucher_gifthistory</action>
+                </gifthistory>
+                <giftproduct module="giftvoucher">
+                    <title>Manage Gift Card Products</title>
+                    <sort_order>10</sort_order>
+                    <action>adminhtml/giftvoucher_giftproduct</action>
+                </giftproduct>
+                <giftcodeset module="giftvoucher">
+                    <title>Manage Gift Code Sets</title>
+                    <sort_order>30</sort_order>
+                    <action>adminhtml/giftvoucher_giftcodeset</action>
+                </giftcodeset>
+                <generategiftcard module="giftvoucher">
+                    <title>Generate Gift Codes </title>
+                    <sort_order>20</sort_order>
+                    <action>adminhtml/giftvoucher_generategiftcard</action>
+                </generategiftcard>
+                <settings module="giftvoucher">
+                    <title>Settings</title>
+                    <sort_order>100</sort_order>
+                    <action>adminhtml/system_config/edit/section/giftvoucher</action>
+                </settings>
+            </children>
+        </giftvoucher>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <giftvoucher translate="title">
+                                        <title>Gift Card</title>
+                                        <sort_order>45</sort_order>
+                                    </giftvoucher>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <customer>
+                        <children>
+                            <manage translate="title" module="giftvoucher">
+                                <children>
+                                    <giftcredittab module="giftvoucher">
+                                        <title>Gift Credit Tab</title>
+                                        <sort_order>10</sort_order>
+                                    </giftcredittab>
+                                </children>
+                            </manage>
+                        </children>
+                    </customer>
+                    <giftvoucher>
+                        <title>Gift Card</title>
+                        <sort_order>10</sort_order>
+                        <children>
+                            <giftvoucher module="giftvoucher">
+                                <title>Manage Gift Codes</title>
+                                <sort_order>1</sort_order>
+                            </giftvoucher>
+                            <gifttemplate module="giftvoucher">
+                                <title>Manage Gift Card Templates</title>
+                                <sort_order>40</sort_order>
+                            </gifttemplate>
+                            <gifthistory module="giftvoucher">
+                                <title>History</title>
+                                <sort_order>50</sort_order>
+                            </gifthistory>
+                            <giftproduct module="giftvoucher">
+                                <title>Manage Gift Card Products</title>
+                                <sort_order>10</sort_order>
+                            </giftproduct>
+                            <giftcodeset module="giftvoucher">
+                                <title>Manage Gift Code Sets</title>
+                                <sort_order>30</sort_order>
+                            </giftcodeset>
+                            <generategiftcard module="giftvoucher">
+                                <title>Generate Gift Codes </title>
+                                <sort_order>20</sort_order>
+                            </generategiftcard>
+                        </children>
+                    </giftvoucher>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

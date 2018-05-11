@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Inventorysuccess
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<layout version="0.1.0">
+    
+    <adminhtml_catalog_product_new>
+        <reference name = "head">            
+            <action method="addJs">
+                <script>magestore/inventorysuccess/catalog/product.js</script>
+            </action>            
+        </reference>          
+        <reference name="product_tabs">
+            <action method="addTabAfter">
+                <name>inventorysuccess_inventory</name>
+                <block>inventorysuccess/adminhtml_catalog_product_edit_tab_inventory</block>
+                <afterTabId>inventory</afterTabId>
+            </action>
+        </reference>
+        <reference name="js">
+            <block type="inventorysuccess/adminhtml_catalog_product_edit_js" name="inventorysuccess_catalog_product_js"/>
+        </reference>           
+    </adminhtml_catalog_product_new>    
+    
+    <adminhtml_catalog_product_edit>
+        <update handle="adminhtml_coresuccess_modal"/>
+        <reference name = "head">            
+            <action method="addJs">
+                <script>magestore/inventorysuccess/catalog/product.js</script>
+            </action>            
+        </reference>          
+        <reference name="product_tabs">
+            <action method="addTabAfter">
+                <name>inventorysuccess_inventory</name>
+                <block>inventorysuccess/adminhtml_catalog_product_edit_tab_inventory</block>
+                <afterTabId>inventory</afterTabId>
+            </action>
+            <action method="addTabAfter">
+                <name>inventorysuccess_configurable_inventory</name>
+                <block>inventorysuccess/adminhtml_catalog_product_edit_tab_configurable_inventory</block>
+                <afterTabId>inventory</afterTabId>
+            </action>            
+        </reference>
+        <reference name="content">
+            <block type="inventorysuccess/adminhtml_catalog_product_edit_modal_orderhistory" name="inventorysuccess_catalog_product_order_history"/>
+        </reference>
+        <reference name="js">
+            <block type="inventorysuccess/adminhtml_catalog_product_edit_js" name="inventorysuccess_catalog_product_js"/>
+        </reference>        
+    </adminhtml_catalog_product_edit>
+    
+    <adminhtml_catalog_product_action_attribute_edit>
+        <reference name = "head">            
+            <action method="addJs">
+                <script>magestore/inventorysuccess/catalog/massupdate.js</script>
+            </action>            
+        </reference>  
+        <reference name="js">
+            <block type="inventorysuccess/adminhtml_catalog_product_edit_action_js" name="inventorysuccess_catalog_product_massupdate_js"/>
+        </reference>                  
+    </adminhtml_catalog_product_action_attribute_edit>
+    
+    <adminhtml_inventorysuccess_catalog_product_orderhistorygrid>
+        <block type="core/text_list" name="root">
+            <block type="inventorysuccess/adminhtml_catalog_product_edit_grid_orderhistory"
+                   name="inventorysuccess.catalog.product.edit.grid.orderhistory"/>
+        </block>
+    </adminhtml_inventorysuccess_catalog_product_orderhistorygrid>
+
+</layout>

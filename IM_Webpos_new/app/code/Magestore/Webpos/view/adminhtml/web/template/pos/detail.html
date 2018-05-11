@@ -1,0 +1,163 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<!--ko if:(hasData() && !isClosed())-->
+<legend class="admin__legend legend">
+    <span data-bind="i18n:'Current Session'"></span>
+    <span class="current_session_wrapper">
+        <select id="current_session_id"
+                name="current_session_id"
+                class="select admin__control-select"
+                data-bind="
+                    value: sessionId,
+                    options: sessions,
+                    optionsText: function(item) {return item.session_label;},
+                    optionsValue: function(item) {return item.entity_id;  }
+                ">
+        </select>
+    </span>
+    <span>
+        <button type="button" class="button" data-bind="click: refreshData,i18n:'Refresh'"></button>
+    </span>
+</legend><br>
+<!--/ko-->
+<!--ko if:(hasData() && isClosed())-->
+<legend class="admin__legend legend">
+    <span class="current_session_wrapper">
+        <span data-bind="text:data().session_label"></span>
+    </span>
+</legend><br>
+<legend class="admin__legend legend">
+    <span class="current_session_wrapper">
+        <span data-bind="text:data().from_label"></span>
+    </span>
+</legend><br>
+<legend class="admin__legend legend">
+    <span class="current_session_wrapper">
+        <span data-bind="text:data().to_label"></span>
+    </span>
+</legend><br>
+<!--/ko-->
+<div class="field" data-bind="visible:hasData()">
+    <div class="webpos-session-info">
+        <div class="transactions-info">
+            <div class="block">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td class="a-left">
+                            <label data-bind="i18n: 'Opening Blance'"/>
+                        </td>
+                        <td class="a-center"><span data-bind="text: formatPrice(data().float_amount)"/></td>
+                    </tr>
+                    <tr>
+                        <td><a href="#" data-bind="click:showAddTransactionsDetail"><label data-bind="i18n: '+ Transactions'"/></a></td>
+                        <td class="a-center"><span data-bind="text: formatPrice(getAddTransactionTotal())"/></td>
+                    </tr>
+                    <tr>
+                        <td><a href="#" data-bind="click:showRemoveTransactionsDetail"><label data-bind="i18n: '- Transactions'"/></a></td>
+                        <td class="a-center"><span data-bind="text: formatPrice(getRemoveTransactionTotal())"/></td>
+                    </tr>
+                    <tr>
+                        <td><label data-bind="i18n: 'Theoretical Closing Balance'"/></td>
+                        <td class="a-center"><span data-bind="text: formatPrice(theoretialClosingBalance())"/></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="block">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td class="a-left">
+                            <label data-bind="i18n: 'Real Closing Balance'"/>
+                        </td>
+                        <td class="a-center"><span data-bind="text: formatPrice(realClosingBalance())"/></td>
+                    </tr>
+                    <tr class="difference-row">
+                        <td class="a-left">
+                            <label data-bind="i18n: 'Difference'"/>
+                        </td>
+                        <td class="a-center"><span data-bind="text: formatPrice(differenceAmount())"/></td>
+                    </tr>
+                    <!-- ko if: profitLossReason() -->
+                    <tr class="difference-row">
+                        <td class="a-left">
+                            <label data-bind="i18n: 'Difference Reason'"/>
+                        </td>
+                        <td class="a-center"><span data-bind="text: profitLossReason()"/></td>
+                    </tr>
+                    <!--/ko-->
+                    <tr data-bind="visible:!isClosed()">
+                        <td class="a-center" colspan="2">
+                            <button type="button" class="button btn-others"  data-bind="click: putMoneyIn">
+                                <span data-bind="i18n:'Put Money In'"/>
+                            </button>
+                            <button type="button" class="button btn-others"  data-bind="click: takeMoneyOut">
+                                <span data-bind="i18n:'Take Money Out'"/>
+                            </button>
+                            <button type="button" class="button btn-cl-cfg-active primary "  data-bind="click: setClosingBalance">
+                                <span data-bind="i18n:'Set Closing Balance'"/>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="a-center" colspan="2">
+                            <button type="button" class="button btn-others"
+                                    data-bind="click: print">
+                                <span data-bind="i18n:'Print'"/>
+                            </button>
+                            <button type="button" class="button btn-cl-cfg-active primary "
+                                    data-bind="click: validateClosing, visible: (cashCounted() && !verified() && !isClosed())">
+                                <span data-bind="i18n:'Validate Closing'"/>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="webpos-session-sales" data-bind="visible: hasSales">
+        <table class="table">
+            <thead>
+            <tr>
+                <th></th>
+                <th class="a-center"><span data-bind="i18n:'Sale'"/></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <!-- html for one item of sale summary -->
+
+            <!-- ko foreach: data().sale_summary -->
+
+            <tr>
+
+                <td class="a-left">
+                    <div class="credit-card-payment">
+                        <div class="icon-payment cash"><span data-bind="attr:{'class': $parent.generatePaymentCode(payment_method)}"></span></div>
+                        <label data-bind="text: method_title"/>
+                    </div>
+
+                </td>
+                <td class="a-center"><span data-bind="text: $parent.formatPrice(payment_amount)"/></td>
+
+            </tr>
+            <!-- /ko -->
+
+            <!-- end of html for one item of sale summary -->
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<legend class="admin__legend legend" data-bind="visible:!hasData()">
+    <span data-bind="i18n:'There are 0 open session'"></span>
+    <span>
+        <button type="button" class="button" data-bind="click: refreshData,i18n:'Refresh'"></button>
+    </span>
+</legend>

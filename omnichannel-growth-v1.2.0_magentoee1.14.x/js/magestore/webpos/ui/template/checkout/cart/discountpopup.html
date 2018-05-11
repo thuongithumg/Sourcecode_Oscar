@@ -1,0 +1,103 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<div id="webpos_cart_discountpopup" class="hide-popup popup-for-right">
+    <div class="popup-header" data-bind="css:{couponOnly:isPromotionStage() && !hasPromotionDiscount()}">
+        <label class="button remove" data-bind="visible:isDiscountStage,text:discountTitle"></label>
+        <button type="button" class="button remove"
+                data-bind="visible:isPromotionStage() && hasPromotionDiscount(),text:cancelPromotionButtonTitle, click:cancelPromotion">
+        </button>
+        <button type="submit" class="button btn-apply" data-bind="click:apply,text:applyButtonTitle"></button>
+    </div>
+    <div class="modal-body">
+        <div class="actions">
+            <!--ko if:canUseDiscount()-->
+            <button type="button" class="custom-price" data-bind="click:showDiscount,css:{'btn-cl-cfg-active':isDiscountStage},i18n:'Discount'"></button>
+            <!--/ko-->
+            <!--ko if:canUseCoupon()-->
+            <button type="button" class="discount" data-bind="click:showPromotion,css:{'btn-cl-cfg-active':isPromotionStage},i18n:'Promotion'"></button>
+            <!--/ko-->
+        </div>
+        <!--ko if:isDiscountStage() && canUseDiscount()-->
+        <form data-bind="submit:apply">
+            <div class="price-box label-discount">
+                <label data-bind="i18n:'Name'"></label>
+                <input type="text"
+                       data-bind="textInput:discountName,hasFocus:isDiscountStage,event:{change:setDiscountName}"
+                       onfocus="this.select()"/>
+            </div>
+            <div class="price-box price-change">
+                <label data-bind="i18n:'Amount'"></label>
+                <input type="text" placeholder="0.00" data-bind="textInput:discountAmount,disable:disableDiscountAmountInput"/>
+                <button type="button"
+                        class="btn"
+                        id="btn-dollor3"
+                        data-bind="click:discountFixed,css:{'btn-cl-cfg-active':isDiscountFixed},text:getCurrencySymbol()"></button>
+                <button type="button"
+                        class="btn"
+                        id="btn-percent3"
+                        data-bind="click:discountPercent,css:{'btn-cl-cfg-active':isDiscountPercent}">%</button>
+            </div>
+            <div class="numberFields">
+                <button type="button" name="1" value="1" data-bind="click:numberpadClick">1</button>
+                <button type="button" name="2" value="2" data-bind="click:numberpadClick">2</button>
+                <button type="button" name="3" value="3" data-bind="click:numberpadClick">3</button>
+                <button type="button" name="4" value="4" data-bind="click:numberpadClick">4</button>
+                <button type="button" name="5" value="5" data-bind="click:numberpadClick">5</button>
+                <button type="button" name="6" value="6" data-bind="click:numberpadClick">6</button>
+                <button type="button" name="7" value="7" data-bind="click:numberpadClick">7</button>
+                <button type="button" name="8" value="8" data-bind="click:numberpadClick">8</button>
+                <button type="button" name="9" value="9" data-bind="click:numberpadClick">9</button>
+                <button type="button" name="00" value="00" data-bind="click:numberpadClick">00</button>
+                <button type="button" name="0" value="0" data-bind="click:numberpadClick">0</button>
+                <button type="button" name="backspace" value="backspace" data-bind="click:numberpadClick">
+                    <span class="icon-iconPOS-cal-del" value="backspace"></span>
+                </button>
+            </div>
+        </form>
+        <!--/ko-->
+        <!--ko if:isPromotionStage() || (!canUseDiscount() && canUseCoupon())-->
+        <form data-bind="submit:checkPromotion">
+            <div class="price-box" data-bind="visible:canUseCouponCode">
+                <label data-bind="i18n:'Coupon Code'"></label>
+                <input type="text"
+                       name="coupon_code"
+                       data-bind="textInput:couponCode,hasFocus:isPromotionStage,event:{change:setCoupon, keyup:enterCoupon}"
+                       onfocus="this.select()"/>
+            </div>
+            <div class="price-box" data-bind="visible: !isOnlineCheckout()">
+                <label data-bind="i18n:'Amount'"></label>
+                <input type="text" placeholder="0.00" data-bind="textInput:promotionDiscount,disable:disablePromotionAmountInput"/>
+            </div>
+            <div class="actions" data-bind="visible: !isOnlineCheckout()">
+                <button type="button" class="button checkPromotion"
+                    data-bind="i18n:'Check', click:checkPromotion">
+                </button>
+            </div>
+        </form>
+        <!--/ko-->
+    </div>
+    <a class="arrow"></a>
+    <!-- ko if: loading() -->
+    <div class="indicator">
+        <div class="spinner"></div>
+    </div>
+    <!-- /ko -->
+</div>

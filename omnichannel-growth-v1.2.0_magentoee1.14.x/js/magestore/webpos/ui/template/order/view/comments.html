@@ -1,0 +1,48 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<!-- ko if: $parent.canShowComment() -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h5 data-bind="i18n: ('Comment History')"/>
+            </div>
+            <div class="panel-body">
+                <div class="order-comment-list">
+                    <table class="table">
+                        <colgroup>
+                            <col width="300">
+                            <col width="">
+                        </colgroup>
+                        <tbody data-bind="foreach: {data: $parent.orderData().status_histories, as: 'item'}">
+                        <!-- ko if: item.comment && item.comment!='' -->
+                        <tr>
+                            <td data-bind="text: $parents[1].getFullCurrentDatetime(item.created_at)"/>
+                            <td data-bind="text: item.comment"/>
+                        </tr>
+                        <!-- /ko -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ko-->

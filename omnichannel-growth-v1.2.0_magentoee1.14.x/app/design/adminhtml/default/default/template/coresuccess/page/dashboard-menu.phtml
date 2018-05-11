@@ -1,0 +1,51 @@
+<?php
+
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Coresuccess
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+?>
+<?php $apps = $this->getApps() ?>
+<div class="available-apps">
+    <a href="<?php echo $this->getUrl('adminhtml/coresuccess/dashboard', array('showlist' => 1)) ?>#erp_available_app_title" target="_blank"><?php echo $this->__('Need more features?') ?></a>
+</div>
+<div class="erp-apps">
+    <div class="container-fluid">
+        <div class="rowb">
+            <?php if (count($apps)): ?>
+                <?php foreach ($apps as $key => $app): ?>
+                    <div class="col-lg-2 col-md-3 col-sm-3">
+                        <a class="erp-app-item" href="<?php echo $this->getDefaultPage($app) ?>" >
+                            <img src="<?php echo $this->getAppIcon($app) ?>" />
+                            <span class="app-caption"><?php echo $this->getAppCaption($app) ?> <br/> <?php echo $this->getAppVersion($app) ?></span>
+                        </a>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function showDashboardMenu() {
+        if ($('erp_menu_dashboard').hasClassName('active')) {
+            $('erp_menu_dashboard').removeClassName('active');
+        } else {
+            $('erp_menu_dashboard').addClassName('active');
+        }
+    }
+</script>

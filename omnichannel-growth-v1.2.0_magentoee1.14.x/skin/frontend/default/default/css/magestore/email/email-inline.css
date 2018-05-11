@@ -1,0 +1,25 @@
+.magestore_giftvoucher_email_gift_button_apply{
+    width: 300px;
+    height:40px;
+    text-align: center;
+    background: #F1C241;
+    font-style: normal;
+    font-size: 16px;
+    border: 1px solid #2f2f2f;
+    box-shadow: none;
+}
+
+.popup-giftcard-amazon .giftcard-style-color {
+    font-size: 15px;
+    font-family: Arial,Helvetica,sans-serif;
+    font-weight: 600;
+    display: block;
+}
+.giftcard-style-color {
+    margin-top: 10px;
+    font-size:20px;
+    display: block;
+}
+.gc-expire-day{
+    margin-top: 10px;
+}

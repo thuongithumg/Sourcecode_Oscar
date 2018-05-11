@@ -1,0 +1,186 @@
+
+"Barcode Management","Barcode Management"
+"Barcode Listing","Barcode Listing"
+"Generate Barcodes","Generate Barcodes"
+"Import Barcodes","Import Barcodes"
+"Scan Barcodes","Scan Barcodes"
+"Print Barcodes","Print Barcodes"
+"Barcode Generating History","Barcode Generating History"
+"Barcode Label Templates","Barcode Label Templates"
+"Barcode Settings","Barcode Settings"
+"Allow Everything","Allow Everything"
+Barcodesuccess,Barcodesuccess
+"Manage Items","Manage Items"
+Settings,Settings
+"Invalid data","Invalid data"
+"There are %s invalid rows. You must download","There are %s invalid rows. You must download"
+"this file","this file"
+" to modify and try to import them again."," to modify and try to import them again."
+Warehouse,Warehouse
+"Available Qty","Available Qty"
+"Qty to Ship","Qty to Ship"
+"Qty In Warehouse","Qty In Warehouse"
+"Shelf Location","Shelf Location"
+All,All
+Save,Save
+Instruction,Instruction
+Barcode,Barcode
+QTY,QTY
+SKU,SKU
+"Product Name","Product Name"
+Supplier,Supplier
+Import,Import
+Download,Download
+"Please choose a CSV file to import:","Please choose a CSV file to import:"
+"Your current setting is 1 barcode/SKU.","Your current setting is 1 barcode/SKU."
+"Save new barcode","Save new barcode"
+"Remove old barcodes","Remove old barcodes"
+Reason,Reason
+Close,Close
+"Download sample file","Download sample file"
+"Please choose  a CSV file to import","Please choose  a CSV file to import"
+Name,Name
+Size,Size
+Type,Type
+"Starting process execution, please wait...","Starting process execution, please wait..."
+"Warning: Please do not close the window during processing data","Warning: Please do not close the window during processing data"
+"Hide Main Menu","Hide Main Menu"
+"Show Main Menu","Show Main Menu"
+"Add after","Add after"
+Delete,Delete
+Loading...,Loading...
+"Please wait...","Please wait..."
+"Invalid file type!","Invalid file type!"
+"Please choose CSV file to import.","Please choose CSV file to import."
+"There was an error while importing.","There was an error while importing."
+"There was an error attempting to upload the file.","There was an error attempting to upload the file."
+"Import Products","Import Products"
+"Please choose a CSV file to import products. You can download the sample CSV file below.","Please choose a CSV file to import products. You can download the sample CSV file below."
+Processing,Processing
+"Redirecting to review page...","Redirecting to review page..."
+"There was error while processing! Try again.","There was error while processing! Try again."
+"Finished all processes.","Finished all processes."
+"Print Barcode Labels","Print Barcode Labels"
+"Are you sure?","Are you sure?"
+"Invalid file upload attempt.","Invalid file upload attempt."
+"Invalid file format.","Invalid file format."
+"In Stock","In Stock"
+"Out of Stock","Out of Stock"
+Enabled,Enabled
+Disabled,Disabled
+Generated,Generated
+Imported,Imported
+"Per Item","Per Item"
+"Per Purchase","Per Purchase"
+Active,Active
+Inactive,Inactive
+mm,mm
+cm,cm
+in,in
+px,px
+%,%
+Standard,Standard
+A4,A4
+Jewelry,Jewelry
+Code-128,Code-128
+Code-25,Code-25
+"Interleaved 2 of 5","Interleaved 2 of 5"
+Code-39,Code-39
+Ean-13,Ean-13
+Identcode,Identcode
+Itf14,Itf14
+Leitcode,Leitcode
+Royalmail,Royalmail
+"Scan Barcode","Scan Barcode"
+"Print Barcode","Print Barcode"
+"Manage Barcode Label Templates","Manage Barcode Label Templates"
+"Barcode Label Templates","Barcode Label Templates"
+"Please select item(s)","Please select item(s)"
+"Total of %d record(s) has been successfully deleted.","Total of %d record(s) has been successfully deleted."
+"Total of %d record(s) has been successfully updated.","Total of %d record(s) has been successfully updated."
+"Template Information","Template Information"
+"Item does not exist","Item does not exist"
+"Barcode Template has been successfully saved.","Barcode Template has been successfully saved."
+"Unable to find item to save","Unable to find item to save"
+"Barcode Template has been successfully deleted.","Barcode Template was successfully deleted."
+"Barcode Listing","Barcode Listing"
+"Generate Barcode","Generate Barcode"
+"Import Barcode","Import Barcode"
+"%s barcode(s) has been generated.","%s barcode(s) has been generated."
+"Cannot generate %s barcode(s), please change Barcode Pattern from the configuration to increase the maximum barcode number","Cannot generate %s barcode(s), please change Barcode Pattern from the configuration to increase the maximum barcode number"
+"You must select the product to generate the barcode","You must select the product to generate the barcode"
+"%s barcode(s) has been imported.","%s barcode(s) has been imported."
+"Barcode Information","Barcode Information"
+"The Barcode already exists.","The Barcode already exists."
+"The Product SKU doesn't exist.","The Product SKU doesn't exist."
+"Barcode Creating History","Barcode Creating History"
+"History Information","History Information"
+"Print Selected Barcode","Print Selected Barcode"
+ID,ID
+"Print Qty","Print Qty"
+"Purchased Time","Purchased Time"
+"Created At","Created At"
+Action,Action
+Print,Print
+Detail,Detail
+View,View
+"Barcode Print Configuration","Barcode Print Configuration"
+"Select Barcode Template","Select Barcode Template"
+Preview,Preview
+" "," "
+"Add New Template","Add New Template"
+"Print QTY","Print QTY"
+"Please choose a CSV file to import barcode. You can download this sample CSV file","Please choose a CSV file to import barcode. You can download this sample CSV file"
+"Import products","Import products"
+CSV,CSV
+XML,XML
+BARCODE,BARCODE
+SUPPLIER,SUPPLIER
+PURCHASE_TIME,PURCHASE_TIME
+"Item Information","Item Information"
+"Product Information","Product Information"
+Image,Image
+Price,Price
+Qty,Qty
+"Stock Availability","Stock Availability"
+Status,Status
+"Product SKU","Product SKU"
+"Created Date","Created Date"
+"Qty to print","Qty to print"
+"Scan Barcodes","Scan Barcodes"
+"General Information","General Information"
+Thumbnail,Thumbnail
+"Item Quantity","Item Quantity"
+"General information","General information"
+"Your current setting is multiple barcodes/SKU","Your current setting is multiple barcodes/SKU"
+"Generate new barcode","Generate new barcode"
+"Generating Type","Generating Type"
+Generate,Generate
+"Generate Barcodes","Generate Barcodes"
+"Barcode Details","Barcode Details"
+"Update Barcode","Update Barcode"
+"Delete Barcode","Delete Barcode"
+Date,Date
+User,User
+"Barcode Qty","Barcode Qty"
+"Created By","Created By"
+"Barcode Creating History Details","Barcode Creating History Details"
+Edit,Edit
+"Change status","Change status"
+"Barcode Template Information","Barcode Template Information"
+"Select Barcode Label Format","Select Barcode Label Format"
+"Template Name","Template Name"
+"Barcode symbology","Barcode symbology"
+"Measurement unit","Measurement unit"
+"Label per row","Label per row"
+"Paper width","Paper width"
+"Paper height","Paper height"
+"Label width","Label width"
+"Label height","Label height"
+"Font size","Font size"
+"Margin top","Margin top"
+"Margin left","Margin left"
+"Margin bottom","Margin bottom"
+"Margin right","Margin right"
+"Barcode Template","Barcode Template"
+"There is no barcode data to update","There is no barcode data to update"

@@ -1,0 +1,128 @@
+<script type="text/javascript">
+    var TemplateForm = function (data) {
+        for (var item in data) {
+            TemplateForm.prototype[item] = data[item];
+        }
+    };
+
+    TemplateForm.prototype = {
+        loadDefault: function () {
+            var params = {
+                barcodeType: this.getBarcodeType()
+            };
+            var self = this;
+            new Ajax.Request(this.loadDefaultUrl, {
+                method: 'post',
+                parameters: params,
+                onComplete: function (response) {
+                    var data = response.responseJSON;
+                    for (var id in data) {
+                        $(id).value = data[id];
+                    }
+                    self.loadPreview();
+                }
+            });
+        },
+        loadPreview: function () {
+            var self = this;
+            new Ajax.Request(this.loadPreviewUrl, {
+                method: 'post',
+                parameters: this.getFormElement().serialize(),
+                onComplete: function (response) {
+                    var data = response.responseJSON;
+                    self.previewContent(data.content);
+                    self.loadDescription();
+                    self.calculateHeight();
+                }
+            });
+        },
+        loadDescription : function(){
+            var barcodeType = this.getBarcodeType();
+            if( barcodeType == 'standard'){
+                $$('.barcode_template_description')[0].down('img').src = '<?php echo Mage::getBaseUrl('media') . 'magestore/barcodesuccess/description.png';?>';
+            }else if (barcodeType == 'a4'){
+                $$('.barcode_template_description')[0].down('img').src = '<?php echo Mage::getBaseUrl('media') . 'magestore/barcodesuccess/a4.png';?>';
+            }else if (barcodeType == 'jewelry'){
+                $$('.barcode_template_description')[0].down('img').src = '<?php echo Mage::getBaseUrl('media') . 'magestore/barcodesuccess/jewelry.png';?>';
+            }
+        },
+        printPreview: function () {
+            if (this.previewContent()) {
+                var print_window = window.open('', 'print', 'status=1,width=700,height=700');
+                if (print_window) {
+                    print_window.document.open();
+                    print_window.document.write(this.previewContent());
+                    print_window.document.close();
+                    print_window.addEventListener('load', function () {
+                        print_window.print();
+                    });
+                } else {
+                    alert('Your browser has blocked the automatic popup, please change your browser settings or print the receipt manually');
+                }
+            } else {
+                this.loadPreview();
+            }
+        },
+
+        getFontSize : function(){
+            return $$('input[name=font_size]')[0].value;
+        },
+        getLabelWidth : function(){
+            return $$('input[name=label_width]')[0].value;
+        },
+        getBarcodeType: function () {
+            return $$('select[name=type]')[0].value;
+        },
+        getFormElement: function () {
+            return $('edit_form');
+        },
+        getBarcodePreviewElement: function () {
+            return $$('.barcode_preview_container')[0];
+        },
+        previewContent: function (content) {
+            if (typeof content == 'undefined') {
+                return this.getBarcodePreviewElement().innerHTML;
+            } else {
+                this.getBarcodePreviewElement().innerHTML = content;
+            }
+        },
+        calculateHeight : function(text) {
+            var att_number = $$('.barcode-att-cal').length;
+                for( var j = 0; j < att_number ; j++){
+                    var fss = this.getFontSize();
+                    var current = $$('.barcode-att-cal')[j];
+                    var text = current.innerHTML ;
+                    var parent = current.parentElement;
+                    //var line_height =  parent.style['line-height'];
+                   // var line_height =  parent.getAttribute('dynamic_size')*3.779528;
+                    var line_height =  current.clientHeight;
+
+                        this.getBarcodePreviewElement().innerHTML += '<div id = "testtext" style=" width:30px; float:left; visibility: hidden; font-size:'+fss+'px; position:absolute;">'+text+'</div>';
+                        var textheight = ($$('#testtext')[j].clientHeight);
+                        $$('#testtext')[j].innerHTML ='';
+                    //return;
+                    while (textheight > line_height) {
+                        fss--;
+                        $$('.barcode-att-cal')[j].style['font-size'] = fss+'px';
+                        $$('#testtext')[j].innerHTML = '<div id = "testtext" style=" width:30px; float:left; visibility: hidden; font-size:'+fss+'px; position:absolute;">'+text+'</div>';
+                        textheight = ($$('#testtext')[j].clientHeight);
+                        $$('#testtext')[j].innerHTML ='';
+                    }
+                }
+
+            }
+    };
+    window.templateForm = new TemplateForm({
+        'loadDefaultUrl': '<?php echo Mage::helper("adminhtml")->getUrl('adminhtml/barcodesuccess_template/loadDefault') ?>',
+        'loadPreviewUrl': '<?php echo Mage::helper("adminhtml")->getUrl('adminhtml/barcodesuccess_template/loadPreview') ?>'
+    });
+    var getTemplateId = '<?php echo $this->getRequest()->getParam('id'); ?>';
+    if(getTemplateId){
+        setTimeout(function() {
+            window.templateForm.loadPreview();
+        },1000);
+    }else{
+        window.templateForm.loadDefault();
+    }
+    //window.templateForm.loadDefault();
+</script>

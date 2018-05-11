@@ -1,0 +1,418 @@
+<?php
+/**
+ * Copyright © 2018 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+$data = $block->getZreportData();
+?>
+    <div id="webpos-container">
+        <div class="print-shift-content" style="font-family:'Sans-serif' ">
+            <style>
+                .print-shift-content table {
+                    width: 100%;
+                }
+
+                .print-shift-content #print-shift-popup {
+                    width: 80mm;
+                    /*width: 320px;*/
+                    margin: 0;
+                    padding: 0;
+                    border-radius: 5px;
+                    left: calc(50% - 160px);
+                }
+
+                .print-shift-content .title-popup {
+                    font-size: 18px;
+                    text-align: center;
+                    color: #252525;
+                    margin: 0;
+                    font-weight: 700;
+                }
+
+                .print-shift-content .drawer-number {
+                    font-size: 14px;
+                    text-align: center;
+                    color: #252525;
+                    margin: 0 0 24px;
+                    display: block;
+                }
+
+                .print-shift-content .info-datetime td {
+                    vertical-align: top;
+                    color: #363636;
+                    font-size: 14px
+                }
+
+                .print-shift-content .info-datetime td label {
+                    font-size: 14px;
+                    color: #363636
+                }
+
+                .print-shift-content .title-box {
+                    color: #363636;
+                    font-size: 13px;
+                    font-weight: 700;
+                    text-align: left;
+                    margin: 38px 0 5px;
+                }
+
+                .print-shift-content {
+                    width: 320px;
+                    margin: 0 auto;
+                    padding: 0;
+                }
+
+                .print-shift-content .logo-print {
+                    margin: 0;
+                    height: 50px;
+                    width: 50px;
+                    border-radius: 50%;
+                    overflow: hidden;
+                }
+
+                .print-shift-content .left-top {
+                    font-weight: 400
+                }
+
+                .print-shift-content .modal-content {
+                    border: 0 none;
+                    padding: 25px 19px;
+                    color: #555555;
+                    height: 100vh;
+                    overflow: auto;
+                    max-height: 690px;
+                }
+
+                .print-shift-content .popup-header {
+                    display: -webkit-box;
+                    display: -webkit-flex;
+                    display: -ms-flexbox;
+                    display: flex;
+                    -webkit-box-pack: justify;
+                    -webkit-justify-content: space-between;
+                    -ms-flex-pack: justify;
+                    justify-content: space-between;
+                }
+
+                .print-shift-content .title-box {
+                    color: #606060;
+                    font-size: 15px;
+                    text-align: left;
+                    font-weight: 600;
+                    margin-bottom: 0;
+                }
+
+                .print-shift-content .list-transaction {
+                    margin-top: 5px;
+                }
+
+                .print-shift-content .list-transaction th {
+                    padding-bottom: 10px !important;
+                    text-transform: uppercase;
+                    border-bottom: 2px solid #d0d0d0
+                }
+
+                .print-shift-content .list-transaction th,
+                .print-shift-content .list-transaction td {
+                    padding: 2px
+                }
+
+                .print-shift-content .list-transaction td:first-child {
+                    padding-left: 0
+                }
+
+                .print-shift-content .list-transaction td:last-child {
+                    padding-right: 0
+                }
+
+                .print-shift-content .list-transaction td {
+                    border-bottom: 1px dashed #d0d0d0;
+                }
+
+                .print-shift-content .list-transaction .transaction-name {
+                    font-size: 13px;
+                    font-weight: 400;
+                    margin: 0;
+                }
+
+                .print-shift-content .table-total {
+                    margin-top: 5px
+                }
+
+                .print-shift-content .table-payment td,
+                .print-shift-content .table-total td {
+                    border-width: 0 0 1px;
+                    border-bottom: 1px dashed #d0d0d0;
+                    padding: 2px 0;
+                }
+
+                .print-shift-content .table-total tr.print-total {
+                }
+
+                .print-shift-content .table-total .print-total td {
+                    text-transform: none;
+                    font-weight: 700;
+                    color: #555;
+                    border: 0 none;
+                }
+
+                .print-shift-content .ms-barcode {
+                    text-align: center;
+                    margin: 20px 0
+                }
+
+                .print-shift-content .thank-customer {
+                    color: #959595;
+                    text-align: justify;
+                }
+
+                .print-shift-content .table-payment td {
+                    margin-top: 50px
+                }
+
+                .print-shift-content .btn-print {
+                    display: block;
+                    margin: 20px auto 0;
+                    flex-grow: inherit;
+                    padding: 0;
+                    height: 35px;
+                    border-radius: 3px;
+                    text-transform: none;
+                }
+
+                * {
+                    box-sizing: border-box;
+                }
+
+                html {
+                    font-size: 13px;
+                }
+
+                body, h1, h2, h3, h4, h5, h6, ul {
+                    padding: 0;
+                    margin: 0;
+                    font-weight: normal;
+                }
+
+                table {
+                    border-spacing: 0;
+                }
+
+                ul {
+                    list-style: none;
+                }
+
+                table .a-right {
+                    text-align: right;
+                }
+
+                @media screen {
+                    .paper {
+                        margin: 5px auto;
+                        max-width: 600px;
+                    }
+                }
+
+                @media print {
+                    body {
+                        color: #000;
+                        background-color: #fff;
+                    }
+                }
+
+                @page {
+                    size: auto;
+                    margin: 2mm 4mm;
+                }
+
+                .list-transaction.list-transaction-second{
+                    margin-top: 30px;
+                }
+
+                .print-at-title{
+                    text-align: center !important;
+                }
+
+            </style>
+            <?php if(!empty($data['closed_at'])):?>
+                <h2 class="title-popup"><span><?php echo __('Z - report');?></span></h2>
+            <?php else:?>
+                <h2 class="title-popup"><span><?php echo __('X - report');?></span></h2>
+            <?php endif;?>
+            <span class="drawer-number"><span><?php echo __('Session #');?></span><span><?php echo $data['shift_id'];?></span></span>
+            <table class="info-datetime">
+                <colgroup>
+                    <col width="35%" />
+                    <col/>
+                </colgroup>
+                <tbody>
+                <?php if(!empty($data['pos_name'])):?>
+                    <tr>
+                        <td><label><?php echo __('POS');?></label></td>
+                        <td><span><?php echo $data['pos_name'];?> </span></td>
+                    </tr>
+                <?php endif;?>
+                <?php if(!empty($data['admin_name'])):?>
+                    <tr>
+                        <td><label><?php echo __('Staff');?></label></td>
+                        <td><span><?php echo $data['admin_name'];?> </span></td>
+                    </tr>
+                <?php endif;?>
+                <tr>
+                    <td><label><?php echo __('Opened');?></label></td>
+                    <?php $opener = $data['opener']? (' '. __('by'). ' '. $data['opener']):''; ?>
+                    <td><span><?php echo $block->formatReportDate($data['opened_at']) . $opener;?></span></td>
+                </tr>
+                <?php if(!empty($data['closed_at'])):?>
+                    <tr>
+                        <td><label><?php echo __('Closed');?></label></td>
+                        <td><span><?php echo $block->formatReportDate($data['closed_at']).' '. __('by'). ' '. $data['staff_name'];?></span></td>
+                    </tr>
+                <?php endif;?>
+                </tbody>
+            </table>
+
+            <h3 class="title-box">#<span><?php echo __('Cash');?></span></h3>
+            <table class="list-transaction">
+                <tbody>
+                <tr>
+                    <td>
+                        <h4 class="transaction-name"><span><?php echo __('Opening Amount');?></span></h4>
+                    </td>
+                    <td class="a-right"><span><?php echo $block->formatReportPrice($data['float_amount']);?></span></td>
+                </tr>
+                <?php if(isset($data['status'])&&$data['status']==1):?>
+                    <tr>
+                        <td>
+                            <h4 class="transaction-name"><span><?php echo __('Closing Amount');?></span></h4>
+                        </td>
+                        <td class="a-right"><span><?php echo $block->formatReportPrice($data['closed_amount']);?></span></td>
+                    </tr>
+                <?php endif;?>
+                <?php if(isset($data['status'])&&!$data['status']):?>
+                    <tr>
+                        <td>
+                            <h4 class="transaction-name"><span><?php echo __('Expected Drawer');?></span></h4>
+                        </td>
+                        <td class="a-right"><span><?php echo $block->formatReportPrice($data['theoretical_closing_balance']);?></span></td>
+                    </tr>
+                <?php endif;?>
+                <?php if(isset($data['status'])&&$data['status']==1):?>
+                    <tr>
+                        <td>
+                            <h4 class="transaction-name"><span><?php echo __('Theoretical Closing Amount');?></span></h4>
+                        </td>
+                        <td class="a-right"><span><?php echo $block->formatReportPrice($data['theoretical_closing_balance']);?></span></td>
+                    </tr>
+                <?php endif;?>
+                <?php if(!empty($data['difference'])&&isset($data['status'])&&$data['status']==1):?>
+                    <tr>
+                        <td>
+                            <h4 class="transaction-name"><span><?php echo __('Difference');?></span></h4>
+                        </td>
+                        <td class="a-right"><span><?php echo $block->formatReportPrice($data['difference']);?></span></td>
+                    </tr>
+                <?php endif;?>
+                <?php if(!empty($data['profit_loss_reason'])):?>
+                    <tr>
+                        <td>
+                            <h4 class="transaction-name"><span><?php echo __('Reason');?></span></h4>
+                        </td>
+                        <td class="a-right"><span><?php echo $data['profit_loss_reason'];?></span></td>
+                    </tr>
+                <?php endif;?>
+                </tbody>
+            </table>
+
+            <table  class="list-transaction list-transaction-second">
+                <tbody>
+                <tr>
+                    <td>
+                        <h4 class="transaction-name"><span><?php echo __('Cash sales');?></span></h4>
+                    </td>
+                    <td class="a-right"><span><?php echo $block->formatReportPrice($data['cash_sale']);?></span></td>
+                </tr>
+                <tr>
+                    <td>
+                        <h4 class="transaction-name"><span><?php echo __('Cash Refund');?></span></h4>
+                    </td>
+                    <td class="a-right"><span><?php echo $block->formatReportPrice(-$data['cash_refunded']);?></span></td>
+                </tr>
+                <tr>
+                    <td>
+                        <h4 class="transaction-name"><span><?php echo __('Pay Ins');?></span></h4>
+                    </td>
+                    <td class="a-right"><span><?php echo $block->formatReportPrice($data['cash_added']);?></span></td>
+                </tr>
+                <tr>
+                    <td>
+                        <h4 class="transaction-name"><span><?php echo __('Payouts');?></span></h4>
+                    </td>
+                    <td class="a-right"><span><?php echo $block->formatReportPrice(-$data['cash_removed']);?></span></td>
+                </tr>
+
+                </tbody>
+            </table>
+
+            <h3 class="title-box">#<span><?php echo __('Sales');?></span></h3>
+            <table class="table table-total">
+                <tbody>
+                <tr>
+                    <td class="a-left"><span><?php echo __('Total Sales');?></span></td>
+                    <td class="a-right"><span><?php echo $block->formatReportPrice($data['zreport_sales_summary']['grand_total']);?></span></td>
+                </tr>
+
+                <tr>
+                    <td class="a-left"><span><?php echo __('Discount');?></span></td>
+                    <td class="a-right"><span><?php echo  $block->formatReportPrice($data['zreport_sales_summary']['discount_amount']);?></span></td>
+                </tr>
+
+                <tr>
+                    <td class="a-left"><span><?php echo __('Refund');?></span></td>
+                    <td class="a-right"><span><?php echo  $block->formatReportPrice(-$data['zreport_sales_summary']['total_refunded']);?></span></td>
+                </tr>
+
+                <tr>
+                    <td class="a-left"><span><?php echo __('Net Sales');?></span></td>
+                    <td class="a-right"><span><?php echo  $block->formatReportPrice($data['zreport_sales_summary']['grand_total'] - $data['zreport_sales_summary']['total_refunded']);?></span></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <h3 class="title-box">#<span><?php echo __('Sales by payment method');?></span></h3>
+            <table class="table table-payment">
+                <tbody>
+                <?php
+                if(!empty($data['sale_summary'])):
+                    foreach ($data['sale_summary'] as $payment):
+                        ?>
+                        <tr>
+                            <td class="a-left"><span><?php echo $payment['method_title'];?></span></td>
+                            <td class="a-right"><span><?php echo $block->formatReportPrice($payment['base_payment_amount']);?></span></td>
+                        </tr>
+                        <?php
+                    endforeach;
+                endif;
+                ?>
+                </tbody>
+            </table>
+
+            <h3 class="title-box" style="text-align: center"><span><?php echo __('Printed at ');?><?php echo $block->formatReportDate('');?></span></h3>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var print_window = window.open('', 'print_zreport', 'status=1,width=500,height=700');
+        var html = document.getElementById('webpos-container').innerHTML;
+        if(print_window){
+            print_window.document.open();
+            print_window.document.write(html);
+            print_window.print();
+        }else{
+            alert("<?php echo __('Your browser has blocked the automatic popup, please change your browser setting or print the receipt manually');?>");
+        }
+    </script>
+<?php if(!$data['onlyprint']):?>
+    <script type="text/javascript">
+        window.location.href = '<?php echo $block->getUrl('webposadmin/zreport/index');?>';
+    </script>
+<?php endif;?>

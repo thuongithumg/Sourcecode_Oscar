@@ -1,0 +1,188 @@
+/*
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Inventorysuccess
+ * @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+.notifications-wrapper {
+    float: right;
+    line-height: 1;
+    position: relative;
+}
+.notifications-wrapper.active {
+    z-index: 500;
+}
+.notifications-wrapper.active .notifications-action {
+    border-color: #007bdb;
+    /*box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);*/
+}
+.notifications-wrapper.active .notifications-action:after {
+    background-color: #ffffff;
+    border: none;
+    content: '';
+    display: block;
+    height: 6px;
+    left: -6px;
+    margin-top: 0;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    width: auto;
+}
+.notifications-wrapper .admin__action-dropdown-menu {
+    padding: 1rem 0 0;
+    width: 32rem;
+}
+.notifications-action {
+    color: #41362f;
+    height: 3.3rem;
+    padding: 0.75rem 2rem 0.65rem;
+}
+.notifications-action:after {
+    display: none;
+}
+.notifications-action:before {
+    content: url('../../../../images/magestore/inventorysuccess/lowstocknotification/bell.png');
+    /*font-size: 1.9rem;*/
+    margin-right: 0;
+}
+.notifications-action:active:before {
+    position: relative;
+    top: 1px;
+}
+.notifications-action .notifications-counter {
+    background-color: #e22626;
+    border-radius: 1em;
+    color: #ffffff;
+    display: inline-block;
+    /*font-size: 1.1rem;*/
+    font-weight: 700;
+    left: 50%;
+    margin-left: .3em;
+    margin-top: -1.1em;
+    padding: .3em .5em;
+    position: absolute;
+    top: 50%;
+}
+.notifications-entry {
+    line-height: 1.36;
+    padding: 0.6rem 2rem 0.8rem;
+    position: relative;
+    transition: background-color 0.1s linear;
+}
+.notifications-entry:hover {
+    background-color: #e0f6fe;
+}
+.notifications-entry.notifications-entry-last {
+    margin: 0 2rem;
+    padding: .3rem 0 1.3rem;
+    text-align: center;
+}
+.notifications-entry.notifications-entry-last:hover {
+    background-color: transparent;
+}
+.notifications-entry + .notifications-entry-last {
+    border-top: 1px solid #dddddd;
+    padding-bottom: .6rem;
+}
+.notifications-entry ._cutted {
+    cursor: pointer;
+}
+.notifications-entry ._cutted .notifications-entry-description-start:after {
+    content: '...';
+}
+.notifications-entry-title {
+    color: #ef672f;
+    display: block;
+    /*font-size: 1.1rem;*/
+    /*font-weight: 700;*/
+    margin-bottom: .7rem;
+    margin-right: 1em;
+}
+.notifications-entry-description {
+    color: #333333;
+    /*font-size: 1.1rem;*/
+    margin-bottom: .8rem;
+}
+.notifications-entry-description-end {
+    display: none;
+}
+.notifications-entry-description-end._show {
+    display: inline;
+}
+.notifications-entry-time {
+    color: #777777;
+    /*font-size: 1.1rem;*/
+}
+.notifications-close {
+    line-height: 1;
+    padding: 1rem;
+    position: absolute;
+    right: 0;
+    top: .6rem;
+}
+.notifications-close:before {
+    color: #cccccc;
+    content: '\e620';
+    transition: color 0.1s linear;
+}
+.notifications-close:hover:before {
+    color: #b3b3b3;
+}
+.notifications-close:active {
+    transform: scale(0.95);
+}
+.admin__action-dropdown-menu {
+    background-color: #ffffff;
+    border: 1px solid #007bdb;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    display: none;
+    line-height: 1.36;
+    margin-top: -1px;
+    min-width: 120%;
+    padding: 0.5rem 1rem;
+    position: absolute;
+    top: 100%;
+    transition: all 0.15s ease;
+    z-index: 1;
+}
+
+/*.admin__action-dropdown {*/
+/*padding-right: 3.3rem;*/
+/*background-color: #ffffff;*/
+/*border: 1px solid transparent;*/
+/*border-bottom: none;*/
+/*border-radius: 0;*/
+/*box-shadow: none;*/
+/*color: #41362f;*/
+/*display: inline-block;*/
+/*!*font-size: 1.3rem;*!*/
+/*font-weight: 400;*/
+/*letter-spacing: -.025em;*/
+/*padding: 0.7rem 3.3rem 0.8rem 1.5rem;*/
+/*position: relative;*/
+/*vertical-align: baseline;*/
+/*z-index: 2;*/
+/*}*/
+
+.admin__action-dropdown-wrap.active .admin__action-dropdown-menu, .admin__action-dropdown-wrap._active .admin__action-dropdown-menu {
+    display: block;
+}
+.admin__action-dropdown-wrap .admin__action-dropdown-menu {
+    left: auto;
+    right: 0;
+}

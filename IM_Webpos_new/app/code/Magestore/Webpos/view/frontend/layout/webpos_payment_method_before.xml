@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<page layout='webpos' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" >
+    <body>
+        <referenceBlock name="webpos_checkout_page">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="webpos_checkout" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="webpos_checkout_payment_method_before" xsi:type="array">
+                                    <item name="component" xsi:type="string">Magestore_Webpos/js/view/checkout/checkout/payment/before-methods</item>
+                                    <item name="displayArea" xsi:type="string">webpos_checkout_payment_method_before</item>
+                                    <item name="children" xsi:type="array">
+                                        <item name="os_reward_points" xsi:type="array">
+                                            <item name="component" xsi:type="string">Magestore_Webpos/js/view/checkout/checkout/integration/reward-points</item>
+                                            <item name="displayArea" xsi:type="string">os_reward_points</item>
+                                        </item>
+                                        <item name="os_gift_card" xsi:type="array">
+                                            <item name="component" xsi:type="string">Magestore_Webpos/js/view/checkout/checkout/integration/gift-card</item>
+                                            <item name="displayArea" xsi:type="string">os_gift_card</item>
+                                        </item>
+                                        <item name="os_store_credit" xsi:type="array">
+                                            <item name="component" xsi:type="string">Magestore_Webpos/js/view/checkout/checkout/integration/store-credit</item>
+                                            <item name="displayArea" xsi:type="string">os_store_credit</item>
+                                        </item>
+                                        <item name="os_storecredit_ee" xsi:type="array">
+                                            <item name="component" xsi:type="string">Magestore_Webpos/js/view/checkout/checkout/integration/storecredit-ee</item>
+                                            <item name="displayArea" xsi:type="string">os_storecredit_ee</item>
+                                        </item>
+                                        <!--<item name="giftCardAccount" xsi:type="array">-->
+                                            <!--<item name="component"  xsi:type="string">Magestore_Webpos/js/view/checkout/checkout/integration/gift-card-account</item>-->
+                                            <!--<item name="displayArea" xsi:type="string">magento_gift_card</item>-->
+                                            <!--<item name="children" xsi:type="array">-->
+                                                <!--<item name="errors" xsi:type="array">-->
+                                                    <!--<item name="sortOrder" xsi:type="string">0</item>-->
+                                                    <!--<item name="component" xsi:type="string">Magento_GiftCardAccount/js/view/payment/gift-card-messages</item>-->
+                                                    <!--<item name="displayArea" xsi:type="string">messages</item>-->
+                                                <!--</item>-->
+                                            <!--</item>-->
+                                        <!--</item>-->
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

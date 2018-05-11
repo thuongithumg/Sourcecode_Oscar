@@ -1,0 +1,51 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Inventorysuccess
+ * @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+$warehouse = $this->getWarehouse();
+	$region ='';
+	$regionId = 0;
+	if ($warehouse->getId()) {
+		$region = $warehouse->getRegion();
+		$regionId = $warehouse->getRegionId();
+	}
+$disabled = $this->getDisabled();
+?>
+<div class="input-box">
+	<select id="region_id" name="region_id" <?php echo $disabled?'disabled="disabled"':'' ?>
+			title="<?php echo $this->__('State/Province') ?>" class="validate-select display-none">
+		<option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+	</select>
+	<script type="text/javascript">
+	//<![CDATA[
+		$('region_id').setAttribute('defaultValue',  "<?php echo $regionId; ?>");
+	//]]>
+	</script>
+	<input type="text" id="region" name="region" <?php echo $disabled?'disabled="disabled"':'' ?>
+		   value="<?php echo $region ?>" title="<?php echo $this->__('State/Province') ?>" class="input-text display-none"/>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+	var countryRegions = <?php echo Mage::helper('directory')->getRegionJson()?>;
+    var newRegionUpdater = new RegionUpdater('country_id', 'region', 'region_id', countryRegions);
+//]]>
+</script>
+
+

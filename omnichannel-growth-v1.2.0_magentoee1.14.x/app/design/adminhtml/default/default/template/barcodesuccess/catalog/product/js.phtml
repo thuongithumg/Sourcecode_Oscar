@@ -1,0 +1,133 @@
+<script type="text/javascript">
+    var ProductForm = function (data) {
+        for (var item in data) {
+            ProductForm.prototype[item] = data[item];
+        }
+    };
+    ProductForm.prototype = {
+        loadPreview: function () {
+            var params = {
+                templateId: this.getTemplateId()
+            };
+            var self = this;
+            new Ajax.Request(this.loadPreviewUrl, {
+                method: 'post',
+                parameters: params,
+                onComplete: function (response) {
+                    var data = response.responseJSON;
+                    self.previewContent(data.content);
+                }
+            });
+        },
+        printSelected: function () {
+            var self = this;
+            var params = {
+                barcodes: this.getHiddenBarcodes(),
+                templateId: this.getTemplateId(),
+            };
+            new Ajax.Request(this.printSelectedUrl, {
+                method: 'post',
+                parameters: params,
+                onComplete: function (response) {
+                    var data = response.responseJSON;
+                    if (data.content) {
+                        self.printWindow(data.content, 1);
+                    }
+                }
+            });
+
+        },
+        deleteSelected: function () {
+            var self = this;
+            var params = {
+                barcodes: this.getHiddenBarcodes(),
+            };
+            if (confirm('Are you sure ?')) {
+                new Ajax.Request(this.deleteSelectedUrl, {
+                    method: 'post',
+                    parameters: params,
+                    onComplete: function (response) {
+                        var data = response.responseJSON;
+                        if (data.content) {
+                            alert(data.content);
+                            barcodeTabGridJsObject.reload();
+                        }
+                    }
+                });
+            }
+
+        },
+        printItem: function (element) {
+            var self = this;
+            var params = {
+                barcode: this.getBarcode(element),
+                barcodeId: this.getBarcodeId(element),
+                templateId: this.getTemplateId(),
+                printQty: this.getPrintQty(element)
+            };
+            new Ajax.Request(this.printItemUrl, {
+                method: 'post',
+                parameters: params,
+                onComplete: function (response) {
+                    var data = response.responseJSON;
+                    if (data.content) {
+                        self.printWindow(data.content, 1);
+                    }
+                }
+            });
+        },
+        getBarcode: function (element) {
+            return $(element).up('tr').down('input[name=barcode]').value;
+        },
+        getHiddenBarcodes: function () {
+            return $$('input[name=barcodes]')[0].value;
+        },
+        getBarcodeId: function (element) {
+            return $(element).up('tr').down('input[name=barcode_id]').value;
+        },
+        getTemplateId: function () {
+            return $('template_id').value;
+        },
+        getPrintQty: function (element) {
+            var value = $(element).up('tr').down('input[name=print_qty]').value;
+            if (value <= 0) {
+                value = 1;
+            }
+            return value;
+        },
+        getBarcodePreviewElement: function () {
+            return $$('.barcode_preview_container')[0];
+        },
+        previewContent: function (content) {
+            if (typeof content == 'undefined') {
+                return this.getBarcodePreviewElement().innerHTML;
+            } else {
+                this.getBarcodePreviewElement().innerHTML = content;
+            }
+        },
+        printWindow: function (content, qty) {
+            var print_window = window.open('', 'print', 'status=1,width=700,height=700');
+            if (print_window) {
+                print_window.document.open();
+                for (var i = 0; i < qty; i++) {
+                    print_window.document.write(content);
+                }
+                print_window.document.close();
+                print_window.addEventListener('load', function () {
+                    print_window.print();
+                });
+            } else {
+                alert('Your browser has blocked the automatic popup, please change your browser settings or print the receipt manually');
+            }
+        }
+
+    };
+    window.productBarcodeForm = new ProductForm({
+        'loadPreviewUrl': '<?php echo Mage::helper('adminhtml')->getUrl('adminhtml/barcodesuccess_barcode/loadPrintPreview'); ?>',
+        'printItemUrl': '<?php echo Mage::helper('adminhtml')->getUrl('adminhtml/barcodesuccess_product/printBarcodeItem'); ?>',
+        'printSelectedUrl': '<?php echo Mage::helper('adminhtml')->getUrl('adminhtml/barcodesuccess_product/printSelectedBarcode'); ?>',
+        'deleteSelectedUrl': '<?php echo Mage::helper('adminhtml')->getUrl('adminhtml/barcodesuccess_product/deleteSelectedBarcode'); ?>'
+    });
+    window.productBarcodeForm.loadPreview();
+</script>
+

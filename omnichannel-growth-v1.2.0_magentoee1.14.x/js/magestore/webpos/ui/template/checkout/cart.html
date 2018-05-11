@@ -1,0 +1,132 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<div id="webpos_cart" class="col-sm-4 col-right">
+    <!-- ko ifnot: renderedPage() -->
+    <div class="indicator">
+        <div class="spinner"></div>
+    </div>
+    <!-- /ko -->
+    <header class="o-header">
+        <nav class="o-header-nav">
+            <!-- ko if:isOnCheckoutPage() && !createdOrder() -->
+            <button id="back_to_cart" class="c-button" data-bind="click:switchToCart"><span class="icon-iconPOS-previous"></span></button>
+            <!-- /ko -->
+            <!-- ko ifnot:isOnCheckoutPage() -->
+            <button id="empty_cart" class="c-button" data-bind="click:emptyCart"><span class="icon-iconPOS-emptycart"></span></button>
+            <!-- /ko -->
+            <label class="title title-cart title-header-page" data-bind="text: __('Cart') + cartTitle.call()"></label>
+            <!-- ko if:!createdOrder() -->
+            <div class="more-info" >
+                <a href="#" data-bind="click:showAddtitionalActions"><span
+                        class="icon-iconPOS-more"></span></a>
+            </div>
+            <!-- /ko -->
+        </nav>
+        <div class="actions-customer">
+            <a class="add-customer">
+                <!-- ko if:isCanEditCustomer() && !createdOrder() && !isOnCheckoutPage()-->
+                <span class="icon-iconPOS-edit-customer" data-bind="click: editCustomer"></span>
+                <!-- /ko -->
+                <!-- ko if:currentCustomerId() -->
+                <!-- ko if:createdOrder() -->
+                <label class="title-header-page" data-bind="text: currentCustomerName"></label>
+                <!-- /ko -->
+                <!-- ko if:!createdOrder() && isCanEditCustomer() -->
+                <label class="title-header-page" data-bind="text: currentCustomerName, click: editCustomer"></label>
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko if:(!isCanEditCustomer() && !createdOrder()) -->
+                <label class="title-header-page" data-bind="text: currentCustomerName"></label>
+                <!-- /ko -->
+            </a>
+            <!-- ko if:!createdOrder() && !isOnCheckoutPage() -->
+
+            <!-- ko if:!createdOrder() && isCanEditCustomer() -->
+            <span class="icon-iconPOS-order-history" data-bind="click:showCustomerPendingOrders"></span>
+            <span class="icon-iconPOS-checkout" data-bind="visible:isOnlineCheckout, click:showShoppingCart"></span>
+            <a class="shopping-cart-number bg-cl-active number" data-bind="visible:isOnlineCheckout, text:numberItemsInShoppingCart, click:showShoppingCart"></a>
+            <!-- /ko -->
+            <span data-toggle="modal" data-target="#form-add-customer"
+                  class="icon-iconPOS-change-customer" data-bind="click: changeCustomer"></span>
+            <!-- /ko -->
+        </div>
+    </header>
+
+    <div class="main-item-order" data-bind="afterRender: afterRenderCart">
+        <!-- ko foreach: {data:getRegion('webpos_cart_items'),afterRender:renderedItems} -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!-- /ko -->
+        <!-- ko foreach: {data:getRegion('webpos_cart_totals'),afterRender:renderedTotals} -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!-- /ko -->
+
+    </div>
+</div>
+
+<div id="cart-additional-actions" data-bind="visible:showAdditional, event:{mouseout:hideAddtitionalActions,mouseover:showAddtitionalActions}">
+    <a class="arrow"></a>
+    <ul>
+        <li>
+            <a href="#"
+               data-target="#form-note-order"
+               class="order-note pos_modal_link"
+               data-bind="i18n:'Add order note', click:showAddCommentPopup">
+            </a>
+        </li>
+        <li>
+            <a href="#"
+               class="order-note"
+               id="fullscreen_link"
+               data-bind="i18n:'Enter/exit fullscreen mode', click:toggleFullscreen">
+            </a>
+        </li>
+    </ul>
+</div>
+<!-- ko foreach: {data:getRegion('webpos_cart_editpopup')} -->
+<!-- ko template: getTemplate() --><!-- /ko -->
+<!-- /ko -->
+<!-- ko foreach: {data:getRegion('webpos_cart_discountpopup')} -->
+<!-- ko template: getTemplate() --><!-- /ko -->
+<!-- /ko -->
+<!-- ko foreach: {data:getRegion('webpos_cart_commentpopup')} -->
+<!-- ko template: getTemplate() --><!-- /ko -->
+<!-- /ko -->
+<!-- ko foreach: {data:getRegion('webpos_change_customer')} -->
+<!-- ko template: getTemplate() --><!-- /ko -->
+<!-- /ko -->
+<!-- ko foreach: {data:getRegion('webpos_add_customer')} -->
+<!-- ko template: getTemplate() --><!-- /ko -->
+<!-- /ko -->
+<!-- ko foreach: {data:getRegion('webpos_edit_customer')} -->
+<!-- ko template: getTemplate() --><!-- /ko -->
+<!-- /ko -->
+<!-- ko foreach: {data:getRegion('webpos_add_shipping_address')} -->
+<!-- ko template: getTemplate() --><!-- /ko -->
+<!-- /ko -->
+<!-- ko foreach: {data:getRegion('webpos_add_billing_address')} -->
+<!-- ko template: getTemplate() --><!-- /ko -->
+<!-- /ko -->
+<!-- ko foreach: {data:getRegion('webpos_add_address')} -->
+<!-- ko template: getTemplate() --><!-- /ko -->
+<!-- /ko -->
+<!-- ko foreach: {data:getRegion('webpos_shopping_cart')} -->
+<!-- ko template: getTemplate() --><!-- /ko -->
+<!-- /ko -->

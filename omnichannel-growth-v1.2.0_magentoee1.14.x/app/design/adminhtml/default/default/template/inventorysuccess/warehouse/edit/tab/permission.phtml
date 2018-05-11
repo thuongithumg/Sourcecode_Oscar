@@ -1,0 +1,63 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Inventorysuccess
+ * @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+$blockGrid = $this->getBlockGrid();
+$gridJsObjectName = $blockGrid->getJsObjectName();
+$hiddenInputField = $blockGrid->getHiddenInputField();
+?>
+<style type="text/css">
+    .warehouse_buttons {width: 100%; margin: .5em 0; display: table;}
+    .warehouse_buttons button {float:right; margin: 0 0 0 5px;}
+</style>
+<div class="warehouse_buttons">
+    <button id="assign_staff_button" class="add" type="button" data-toggle="modal" data-target="#assign_staff_modal">
+        <span>
+            <span>
+                <span><?php echo $this->__('Assign Staffs') ?></span>
+            </span>
+        </span>
+    </button>
+    <button id="save_staff_permission_button" class="save" type="button" data-toggle="modal">
+        <span>
+            <span>
+                <span><?php echo $this->__('Save Staff Permissions') ?></span>
+            </span>
+        </span>
+    </button>
+</div>
+<?php echo $this->getGridHtml(); ?>
+<input type="hidden" name="<?php echo $hiddenInputField ?>" id="<?php echo $hiddenInputField ?>" value="" />
+<script type="text/javascript">
+    var warehousePermission = new WarehouseSelectedProduct({
+        "selectedItems": <?php /* @escapeNotVerified */ echo $blockGrid->getSelectedItems(); ?>,
+        "gridJsObjectName": <?php /* @escapeNotVerified */ echo '"' . $gridJsObjectName . '"' ?: '{}'; ?>,
+        "hiddenInputField": <?php /* @escapeNotVerified */ echo '"'.$hiddenInputField.'"' ?>,
+        "editFields": <?php /* @escapeNotVerified */ echo $blockGrid->getEditFields(); ?>,
+        "saveBtn": "save_staff_permission_button",
+        "saveUrl": <?php /* @escapeNotVerified */ echo '"' . $blockGrid->getSaveUrl() . '"' ?: '""'; ?>,
+        "deleteUrl": <?php /* @escapeNotVerified */ echo '"' . $blockGrid->getDeleteUrl() . '"' ?: '""'; ?>,
+        "messages": {
+            "noItemSelected": <?php /* @escapeNotVerified */ echo '"' . $this->__('Please select permissions to update.') . '"'?>,
+            "deleteConfirm": <?php /* @escapeNotVerified */ echo '"' . $this->__('Are you sure you want to delete this permission?.') . '"'?>
+        }
+    });
+</script>
+<?php echo $this->getChildHtml('warehouse.permission.staff'); ?>

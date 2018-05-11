@@ -1,0 +1,107 @@
+<?php
+
+/* 
+ * Copyright © 2016 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+?>
+<script type="text/javascript">
+
+$$('.order-tables input[type="checkbox"]').each(function(item) {
+    item.checked = true;
+    var event = {target: item};
+    moveWarehouseSelector(item);
+    changeReturnStockOption(event);
+    Event.observe(item, 'change', changeReturnStockOption);
+});   
+
+$$('.return-warehouse-select').each(function(item) {
+    Event.observe(item, 'change', changeReturnWarehouse);
+});   
+
+$$('.qty-input').each(function(item) {
+    var event = {target: item};
+    checkReturnQty(event);
+    Event.observe(item, 'change', checkReturnQty);
+});   
+
+function moveWarehouseSelector(returnStockOptionEl)
+{
+    var warehouseSelectorEl = returnStockOptionEl.up('tr').down('.select-warehouse-return');
+    if(warehouseSelectorEl) {
+        returnStockOptionEl.up().insert(warehouseSelectorEl);
+    }
+}
+
+function checkReturnQty(event)
+{
+    var qtyInput = event.target;
+    var refundQty = parseFloat(qtyInput.value);
+    var qtyToShipEl = qtyInput.up('tr').down('.order-item-qty-to-ship');
+    var qtyToShip = 0;
+    if(qtyToShipEl) {
+        qtyToShip = qtyToShipEl.value;
+    }
+    qtyToShip = parseFloat(qtyToShip);
+    
+    var returnWarehouseElement = qtyInput.up('tr').down('.return-warehouse-select');
+
+    if(returnWarehouseElement){
+        if(refundQty <= qtyToShip) {
+            disableElement(returnWarehouseElement);
+        } else {
+            enableElement(returnWarehouseElement);
+        }
+    }
+}
+
+
+function changeReturnWarehouse(event)
+{
+    var returnWarehouseElement = event.target;
+    if(returnWarehouseElement.value) {
+        enableElements('submit-button');
+        var errorElement = $(returnWarehouseElement.id + '-error');
+        if(errorElement) {
+            errorElement.hide();
+        }
+    }
+}
+
+function changeReturnStockOption(event)
+{
+    var returnStockElement = event.target;
+    var warehouseSelectElement = returnStockElement.up('tr').down('.return-warehouse-select');
+    var reasonElement = returnStockElement.up('tr').down('.not-return-reason');
+    var noShippedItemNotice = returnStockElement.up('tr').down('.no-shipped-item-notice');
+    var qtyToShipElement = returnStockElement.up('tr').down('.order-item-qty-to-ship');
+    var qtyToShip = qtyToShipElement ? parseFloat(qtyToShipElement.value) : 0;
+    
+    if(returnStockElement.checked == true) {
+        if(warehouseSelectElement) {
+            warehouseSelectElement.addClassName('required-entry');
+            warehouseSelectElement.show();
+        }
+        if(reasonElement) {
+            reasonElement.hide();
+        }
+        if(noShippedItemNotice) {
+            noShippedItemNotice.show();
+            warehouseSelectElement.hide();
+        }
+    } else {
+        if(warehouseSelectElement) {
+            warehouseSelectElement.removeClassName('required-entry');
+            warehouseSelectElement.hide();
+        }
+        if(reasonElement && qtyToShip){
+            reasonElement.show();
+        }
+        if(noShippedItemNotice) {
+            noShippedItemNotice.hide();
+        }        
+    }
+}
+
+</script>

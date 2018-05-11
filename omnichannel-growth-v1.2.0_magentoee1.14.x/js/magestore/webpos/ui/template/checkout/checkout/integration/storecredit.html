@@ -1,0 +1,38 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<div class="integration-item storecredit-item" data-bind="visible:visible">
+    <div class="info">
+        <div data-bind="i18n:'Customer store credit'"></div>
+        <div class="bold-label" data-bind="text:balance"></div>
+        <div data-bind="i18n:'credits'"></div>
+        <span class="icon-iconPOS-reload" data-bind="click:updateBalance,css:{active:updatingBalance,'btn-cl-cfg-other':updatingBalance}"></span>
+    </div>
+    <div class="action" data-bind="visible:canApply">
+        <div class="amount">
+            <input type="text" onfocus="this.select()" class="spend_amount" data-bind="value:currentAmount,event:{change:pointUseChange}"/>
+            <input type="checkbox" id="storecredit_spend_max_amount" data-bind="checked:useMaxPoint, event:{change:useMaxPointChange}"/>
+            <label for="storecredit_spend_max_amount" data-bind="i18n:'Use max credit'"></label>
+        </div>
+        <div class="actions">
+            <button class="button btn-cl-cfg-active" data-bind="click:apply,i18n:'Apply'"></button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+<?php
+/**
+ * Copyright © 2016 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+$isShowQtyReceived = $this->checkIsShowQtyReceived(); ?>
+
+<div id="purchase_email_items_block" class="purchase_email" style="width: 100%">
+    <h5><?php echo $this->__('Items Ordered')?></h5>
+    <div class="admin__page-section-item order-items" style="width: 100%">
+        <table class="data-table admin__table-secondary order-subtotal-table"
+               cellspacing="0" cellpadding="0" border="0" style="margin:0; padding:0; width: 100%">
+            <thead>
+            <tr style="font-size:11px;">
+                <th align="left" bgcolor="#EAEAEA"
+                    style="padding:3px 9px; font-size:11px;"><?php echo $this->__('Product') ?></th>
+                <th align="left" bgcolor="#EAEAEA" style="padding:3px 9px; font-size:11px;"><?php echo $this->__('SKU') ?></th>
+                <th align="center" bgcolor="#EAEAEA"
+                    style="padding:3px 9px; font-size:11px;"><?php echo $this->__('Supplier SKU') ?></th>
+                <th align="center" bgcolor="#EAEAEA" style="padding:3px 9px; font-size:11px;"><?php echo $this->__('Qty') ?></th>
+                <?php if($isShowQtyReceived): ?>
+                    <th align="center" bgcolor="#EAEAEA" style="padding:3px 9px; font-size:11px;">
+                        <?php echo $this->__('Qty Received') ?>
+                    </th>
+                <?php endif; ?>
+                <th align="center" bgcolor="#EAEAEA"
+                    style="padding:3px 9px; font-size:11px;"><?php echo $this->__('Purchase Cost') ?></th>
+                <th align="center" bgcolor="#EAEAEA"
+                    style="padding:3px 9px; font-size:11px;"><?php echo $this->__('Tax(%)') ?></th>
+                <th align="center" bgcolor="#EAEAEA"
+                    style="padding:3px 9px; font-size:11px;"><?php echo $this->__('Discount(%)') ?></th>
+                <th align="center" bgcolor="#EAEAEA"
+                    style="padding:3px 9px; font-size:11px;"><?php echo $this->__('Amount') ?></th>
+            </tr>
+            </thead>
+            <?php $items = $this->getPurchaseOrderItems(); $i = 0;
+            foreach ($items as $id => $item): ?>
+                <tbody<?php echo $i % 2 ? ' bgcolor="#F6F6F6"' : '' ?>>
+                <tr>
+                    <td align="left" valign="top" style="font-size:11px; padding:3px 9px; border-bottom:1px dotted #CCCCCC;">
+                        <strong style="font-size:11px;"><?php echo $this->escapeHtml($item->getProductName()) ?></strong>
+                    </td>
+                    <td align="left" valign="top" style="font-size:11px; padding:3px 9px; border-bottom:1px dotted #CCCCCC;">
+                        <?php echo $this->escapeHtml($item->getProductSku()) ?>
+                    </td>
+                    <td align="center" valign="top" style="font-size:11px; padding:3px 9px; border-bottom:1px dotted #CCCCCC;">
+                        <?php echo $item->getProductSupplierSku() ?>
+                    </td>
+                    <td align="center" valign="top" style="font-size:11px; padding:3px 9px; border-bottom:1px dotted #CCCCCC;">
+                        <?php echo $item->getQtyOrderred() * 1?>
+                    </td>
+                    <?php if($isShowQtyReceived): ?>
+                        <td align="center" valign="top" style="font-size:11px; padding:3px 9px; border-bottom:1px dotted #CCCCCC;">
+                            <?php echo $item->getQtyReceived() * 1?>
+                        </td>
+                    <?php endif; ?>
+                    <td align="center" valign="top" style="font-size:11px; padding:3px 9px; border-bottom:1px dotted #CCCCCC;">
+                        <?php echo $this->getCost($item) ?>
+                    </td>
+                    <td align="center" valign="top" style="font-size:11px; padding:3px 9px; border-bottom:1px dotted #CCCCCC;">
+                        <?php echo $item->getTax() ?>
+                    </td>
+                    <td align="center" valign="top" style="font-size:11px; padding:3px 9px; border-bottom:1px dotted #CCCCCC;">
+                        <?php echo $item->getDiscount() ?>
+                    </td>
+                    <td align="center" valign="top" style="font-size:11px; padding:3px 9px; border-bottom:1px dotted #CCCCCC;">
+                        <?php echo $this->getItemTotal($item) ?>
+                    </td>
+                </tr>
+                </tbody>
+                <?php $i++; ?>
+            <?php endforeach; ?>
+        </table>
+    </div>
+</div>

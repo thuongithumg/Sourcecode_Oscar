@@ -1,0 +1,142 @@
+<?php
+
+?>
+<div class="modal right fade" id="<?php echo $this->getModalId() ?>" tabindex="-1" role="dialog" aria-labelledby="modalLabel" style="display:none">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="icon-head"><?php echo $this->getTitle() ?></h3>
+                <p class="form-buttons">
+                    <button id="submit-import" class="action-primary import-csv" type="button" data-dismiss="modal" onclick="uploadFile(event);">
+                        <span><?php echo $this->__('Import')?></span>
+                    </button>
+                    <button title="<?php echo $this->__('Close')?>" type="button" class="scalable delete" data-dismiss="modal" id="closeModal">
+                        <span><?php echo $this->__('Close') ?></span>
+                    </button>                       
+                </p>
+            </div>            
+            <div class="entry-edit">
+                <div class="entry-edit-head">
+                    <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Instruction') ?></h4>
+                </div>
+                <div class="fieldset">
+                    <ul class="content">
+                        <li class="item">
+                            <span><?php echo $this->__($this->getContent());?></span>
+                            <div class="clear"></div>
+                        </li>
+                        <li class="item">
+                            <span><a href="<?php echo $this->getCsvSampleLink();?>"><?php echo $this->__('Download sample file'); ?></a></span>
+                        </li>
+                    </ul>
+                    <div class="import-product hor-scroll">
+                        <form id="<?php echo $this->getModalId() ?>-form" action="<?php echo $this->getImportLink() ?>" method="post" enctype="multipart/form-data">
+                            <?php echo $this->getBlockHtml('formkey')?>
+                            <table cellspacing="0" class="form-list">
+                                <tbody>
+                                    <tr>
+                                        <td class="label">
+                                            <label for="import_file_input"><?php echo $this->__('Please choose  a CSV file to import') ?></label>
+                                        </td>
+                                        <td class="value">
+                                            <input id="import_file_input" name="import_product" class="input-file" type="file" onchange="fileSelected(this);">   
+                                            <div id="import_file_input_description"></div>                                          
+                                        </td>
+                                    </tr>     
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>                    
+                </div>
+            </div>
+        </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+</div><!-- modal -->
+
+<script type="text/javascript">
+    function submitImportForm(formId)
+    {
+        var form = new varienForm(formId);
+        if(form.validate()) {
+            form.submit();
+        }
+    }
+
+    function fileSelected(element) {
+        var file = element.files[0];
+        if (file) {
+            var allowedTypes = <?php echo $this->getAllowedFileTypes() ?>;
+            var fileIsAllowed = false;
+            for(var i in allowedTypes) {
+                if(file.type === allowedTypes[i]) {
+                    fileIsAllowed = true;
+                }
+            }
+//            if(!fileIsAllowed) {
+//                alert('<?php //echo $this->getData('invalid_file_message')?>//');
+//            }
+            var fileSize = 0;
+            if (file.size > 1024 * 1024) {
+                fileSize = (Math.round(file.size * 100 / (1024 * 1024)) / 100).toString() + 'MB';
+            } else {
+                fileSize = (Math.round(file.size * 100 / 1024) / 100).toString() + 'KB';
+            }
+            var fileDesciption = '';
+            fileDesciption += '<?php echo $this->__('Name')?>' + ': ' + file.name + '<br/>';
+            fileDesciption += '<?php echo $this->__('Size')?>' + ': ' + fileSize + '<br/>';
+            fileDesciption += '<?php echo $this->__('Type')?>' + ': ' + file.type;
+            $('import_file_input_description').innerHTML = fileDesciption;
+        }
+    }
+
+    function uploadFile(event) {
+        var fileInputId = 'import_file_input';
+        if(!$(fileInputId) || !$(fileInputId).value){
+            alert('<?php echo $this->getData('choose_file_upload_message') ?>');
+            event.stopPropagation();
+            return false;
+        }
+        Element.show('loading-mask');
+        var formKey = '<?php echo $this->getFormKey() ?>';
+        var fd = new FormData();
+        fd.append($(fileInputId).name, $(fileInputId).files[0]);
+        fd.append('form_key', FORM_KEY);
+        var xhr = new XMLHttpRequest();
+        xhr.upload.addEventListener('progress', uploadProgress, false);
+        xhr.addEventListener('load', uploadComplete, false);
+        xhr.addEventListener('error', uploadFailed, false);
+        xhr.addEventListener('abort', uploadCanceled, false);
+        xhr.open('POST', '<?php echo $this->getImportLink() ?>');
+        xhr.send(fd);
+    }
+
+    function resetFileInput()
+    {
+        var fileInputId = 'import_file_input';
+        $(fileInputId).value = null;
+        $('import_file_input_description').innerHTML = null;
+    }
+
+    function uploadProgress(evt)
+    {
+
+    }
+
+    function uploadComplete(evt)
+    {
+        Element.hide('loading-mask');
+        purchaseItem.gridJsObject.doFilter();
+        purchaseItem.reloadTotal();
+        resetFileInput();
+    }
+
+    function uploadFailed(evt)
+    {
+        alert('<?php echo $this->getData('upload_failed_message') ?>');
+    }
+
+    function uploadCanceled(evt)
+    {
+        alert('<?php echo $this->getData('upload_canceled_message') ?>');
+    }    
+</script>

@@ -1,0 +1,30 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div class="grid-data">
+    <div data-bind="visible: isSearchable" class="search">
+        <input data-bind="event: {change: filter}" type="text" name="search_key" />
+    </div>
+    <div data-bind="event: {scroll: lazyload}" class="scroll-grid">
+        <table class="data table base list">
+            <thead data-bind="visible: isShowHeader">
+                <tr data-bind="foreach: columns">
+                    <th><span data-bind="text: headerText"></span></th>
+                </tr>        
+            </thead>
+            <tbody data-bind="foreach: items">
+                <tr data-bind="foreach: columns">
+                    <td>
+                        <span data-bind="text:  renderer ? renderer.render($parent) : $parent[rowText] "></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style type="text/css">
+    .scroll-grid {height: 400px; overflow-x: auto;}
+</style>

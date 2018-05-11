@@ -1,0 +1,43 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div class="wrap-account-container">
+    <form id="pin-settings-form" method="post">
+        <main class="main-account">
+            <div class="wrap-main-register">
+                <div class="panel panel-default">
+                    <div class="panel-heading" data-bind="i18n:'Security PIN'">Security PIN</div>
+                    <div class="fieldset panel-body">
+                        <div class="field row required input-box password current">
+                            <div class="col-sm-2">
+                                <label data-bind="i18n:'POS account password'" for="current-pos-password">POS account password</label>
+                                <em>*</em>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="password" class="input-text required-entry form-control" data-validate="{'required-entry':true}" name="current_pos_password" id="current-pos-password">
+                            </div>
+                        </div>
+                        <div class="row input-box required new password">
+                            <div class="col-sm-2">
+                                <label data-bind="i18n:'Security PIN'" for="security-pin">Security PIN</label>
+                                <em>*</em>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="password" class="input-text form-control" name="security_pin" id="security-pin">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="footer-account">
+            <div class="action-button">
+                <button class="button btn-save-acc btn-cl-cfg-active" type="button" data-bind="i18n:'Save',click: savePinInformation"></button>
+            </div>
+        </footer>
+    </form>
+    <div class="wrap-backover hide-popup"></div>
+</div>
+

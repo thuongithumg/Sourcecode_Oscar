@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_Suppliersuccess
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <menu>
+        <suppliersuccess module="suppliersuccess" translate="title">
+            <title>Supplier</title>
+            <sort_order>71</sort_order>
+            <children>
+                <supplier module="suppliersuccess" translate="title">
+                    <title>Manage Suppliers</title>
+                    <sort_order>0</sort_order>
+                    <icon>icon-iconBackendIM-03</icon>
+                    <action>adminhtml/suppliersuccess_supplier</action>
+                </supplier>
+                <pricelist module="suppliersuccess" translate="title">
+                    <title>Manage Pricelist</title>
+                    <icon>icon-iconBackendIM-07</icon>
+                    <sort_order>10</sort_order>
+                    <action>adminhtml/suppliersuccess_pricelist</action>
+                </pricelist>                
+            </children>
+        </suppliersuccess>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <suppliersuccess module="suppliersuccess" translate="title">
+                        <title>Supplier Management</title>
+                        <sort_order>71</sort_order>
+                        <children>
+                            <supplier module="suppliersuccess" translate="title">
+                                <title>Manage Suppliers</title>
+                                <sort_order>0</sort_order>
+                            </supplier>
+                            <pricelist module="suppliersuccess" translate="title">
+                                <title>Manage Pricelist</title>
+                                <sort_order>10</sort_order>
+                            </pricelist>                              
+                        </children>
+                    </suppliersuccess>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

@@ -1,0 +1,16 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<!-- ko if: $parent.orderData().extension_attributes &&
+$parent.orderData().extension_attributes.shipping_assignments &&
+$parent.orderData().extension_attributes.shipping_assignments[0].shipping.address -->
+<div class="panel-body">
+    <div class="customer-address">
+        <label data-bind="text: $parent.getCustomerName('shipping')"/>
+        <span class="address" data-bind="text: $parent.getAddress('shipping')"/>
+        <span class="telephone" data-bind="text: $parent.getAddressType('shipping').telephone"/>
+    </div>
+</div>
+<!--/ko-->

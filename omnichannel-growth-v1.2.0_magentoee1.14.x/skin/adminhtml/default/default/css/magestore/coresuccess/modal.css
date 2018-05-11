@@ -1,0 +1,252 @@
+/*
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Inventorysuccess
+ * @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+.modal.right .modal-dialog {
+    position: fixed;
+    margin: auto;
+    width: 90%;
+    height: 100%;
+    -webkit-transform: translate3d(0%, 0, 0);
+    -ms-transform: translate3d(0%, 0, 0);
+    -o-transform: translate3d(0%, 0, 0);
+    transform: translate3d(0%, 0, 0);
+}
+
+.modal.right .modal-body {
+    padding: 15px 15px 80px;
+}
+
+/*Right*/
+.modal.right.fade .modal-dialog {
+    right: -320px;
+    -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+    -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+    -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+    transition: opacity 0.3s linear, right 0.3s ease-out;
+}
+
+.modal.right.fade.in .modal-dialog {
+    right: 0;
+}
+
+/* ----- MODAL STYLE ----- */
+.modal-header {
+    border-bottom: 1px solid #e3e3e3;
+    border-top: 1px solid #e3e3e3;
+    background-color: #f8f8f8;
+    min-height: 16.43px;
+    padding: 15px;
+    text-align: right;
+    margin-right: 12px;
+}
+
+.modal-open {
+    overflow: hidden
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 450;
+    display: none;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    outline: 0
+}
+
+.modal.fade .modal-dialog {
+    -webkit-transition: -webkit-transform .3s ease-out;
+    -o-transition: -o-transform .3s ease-out;
+    transition: transform .3s ease-out;
+    -webkit-transform: translate(0, -25%);
+    -ms-transform: translate(0, -25%);
+    -o-transform: translate(0, -25%);
+    transform: translate(0, -25%)
+}
+
+.modal.in .modal-dialog {
+    -webkit-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    transform: translate(0, 0)
+}
+
+.modal-open .modal {
+    overflow-x: hidden;
+    overflow-y: auto
+}
+
+.modal-dialog {
+    position: relative;
+    width: auto;
+    margin: 10px
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    outline: 0;
+    -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+    box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+    height: 100%;
+    overflow-y: auto;
+    border-radius: 0;
+    padding: 10px 10px 10px 20px;
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 440;
+    background-color: #000
+}
+
+.modal-backdrop.fade {
+    filter: alpha(opacity=0);
+    opacity: 0
+}
+
+.modal-backdrop.in {
+    filter: alpha(opacity=50);
+    opacity: .5
+}
+
+.modal-title {
+    line-height: 1.5;
+    font-size: 1.5rem;
+    font-weight: 200;
+    margin-bottom: 10px;
+    min-height: 1em;
+    color: #41362f;
+}
+
+.modal-body {
+    position: relative;
+    padding: 15px
+}
+
+.modal-footer {
+    padding: 15px;
+    text-align: right;
+    border-top: 1px solid #e5e5e5
+}
+
+.modal-footer .btn + .btn {
+    margin-bottom: 0;
+    margin-left: 5px
+}
+
+.modal-footer .btn-group .btn + .btn {
+    margin-left: -1px
+}
+
+.modal-footer .btn-block + .btn-block {
+    margin-left: 0
+}
+
+.modal-scrollbar-measure {
+    position: absolute;
+    top: -9999px;
+    width: 50px;
+    height: 50px;
+    overflow: scroll
+}
+
+.modal-content .close {
+    margin-top: -60px;
+    cursor: pointer;
+    background: 0px 0px;
+    border-style: initial;
+    float: right;
+    font-size: 50px;
+    font-weight: 100;
+    color: rgb(0, 0, 0);
+    text-shadow: rgb(255, 255, 255) 0px 1px 0px;
+    opacity: 0.2;
+}
+
+/* S: Panel */
+.os_panel{
+    border: 1px #ccc solid;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.os_panel .header{
+    border-bottom: 1px #ccc solid;
+    padding: 10px;
+    background: #373330;
+    color: #fff;
+    border-radius: 10px 10px 0px 0px;
+    text-align: left;
+}
+
+.os_panel .content{
+    list-style: none;
+    margin: 10px;
+}
+
+.os_panel .content .item{
+    padding: 10px 30px;
+    text-align: left;
+}
+
+.os_panel .header label{
+    line-height: 32px;
+    color: #FFFFFF;
+}
+
+.os_panel .content .item label,
+.os_panel .header label{
+    font-weight: 600;
+}
+
+.mage-error {
+    color: red;
+}
+
+.import-product{
+    margin-top: 20px;
+}
+.import-product .admin__field-label span{
+    font-size: 13px;
+    font-weight: bold;
+}
+.import-product .admin__field-label{
+    float: left;
+    margin-left: 80px;
+}
+.import-product .admin__field-control{
+    float: left;
+    margin-left: 30px;
+}
+
+.modal-header .import_button{
+    width: 100px;
+    height: 35px;
+}

@@ -1,0 +1,242 @@
+<!--
+  ~ * Copyright © 2016 Magestore. All rights reserved.
+  ~ * See COPYING.txt for license details.
+  ~
+  -->
+
+<div id="print-shift-popup" class="hide-popup popup-for-right">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="zreport-print-content">
+                    <div class="print-shift-content" data-bind="style:{fontFamily:getFont()}">
+                        <style>
+                            .print-shift-content table{width:100%;}
+                            .print-shift-content #print-shift-popup{width:320px;margin: 0;padding: 0;border-radius: 5px;left: calc(50% - 160px);}
+                            .print-shift-content .title-popup{font-size:18px;text-align:center;color:#252525;margin: 0;    font-weight: 700;}
+                            .print-shift-content .drawer-number{font-size:14px;text-align:center;color:#252525;margin: 0 0 24px;display:block;}
+                            .print-shift-content .info-datetime td{vertical-align: top;color:#363636;font-size:14px}
+                            .print-shift-content .info-datetime td label{font-size:14px;color:#363636}
+                            .print-shift-content .title-box{color:#363636;font-size:13px;font-weight:700;text-align: left;margin:38px 0 5px;}
+                            .print-shift-content{width:320px;margin:0 auto;padding:0;}
+                            .print-shift-content .logo-print{margin:0;height:50px;width:50px;border-radius:50%;overflow:hidden;}
+                            .print-shift-content .left-top{font-weight:400}
+                            .print-shift-content .modal-content{border:0 none;padding:25px 19px;color:#555555;height: 100vh;overflow: auto;max-height: 690px;}
+                            .print-shift-content .popup-header{display: -webkit-box;display: -webkit-flex;display: -ms-flexbox;display: flex;-webkit-box-pack: justify;-webkit-justify-content: space-between; -ms-flex-pack: justify;justify-content: space-between;}
+
+                            .print-shift-content .title-box {color: #606060;font-size:15px;text-align: left;font-weight: 600;margin-bottom: 0;}
+                            .print-shift-content .list-transaction{margin-top: 5px;}
+                            .print-shift-content .list-transaction th {padding-bottom:10px!important;text-transform:uppercase;border-bottom:2px solid #d0d0d0}
+                            .print-shift-content .list-transaction th,
+                            .print-shift-content .list-transaction td{padding: 2px}
+                            .print-shift-content .list-transaction td:first-child{padding-left:0}
+                            .print-shift-content .list-transaction td:last-child{padding-right:0}
+                            .print-shift-content .list-transaction td{border-bottom:1px dashed #d0d0d0;}
+                            .print-shift-content .list-transaction .transaction-name{font-size:13px;font-weight:400; margin: 0;}
+                            .print-shift-content .table-total{margin-top:5px}
+                            .print-shift-content .table-payment td,
+                            .print-shift-content .table-total td{border-width:0 0 1px;   border-bottom: 1px dashed #d0d0d0;padding: 2px 0;}
+                            .print-shift-content .table-total tr.print-total {}
+                            .print-shift-content .table-total .print-total td{text-transform:none;font-weight:700;color:#555;border: 0 none;}
+                            .print-shift-content .ms-barcode{text-align:center;margin:20px 0}
+                            .print-shift-content .thank-customer{color:#959595;text-align: justify;}
+                            .print-shift-content .table-payment td{margin-top:50px}
+                            .print-shift-content .btn-print {display: block;margin:20px auto 0;flex-grow: inherit;padding:0;height: 35px;border-radius: 3px;text-transform: none;}
+                            * {
+                                box-sizing: border-box;
+                            }
+                            html {
+                                font-size: 13px;
+                            }
+                            body, h1, h2, h3, h4, h5, h6, ul {
+                                padding: 0;
+                                margin: 0;
+                                font-weight: normal;
+                            }
+                            table {
+                                border-spacing: 0;
+                            }
+                            ul {
+                                list-style: none;
+                            }
+                            table .a-right {
+                                text-align: right;
+                            }
+                            @media screen {
+                                .paper {
+                                    margin: 5px auto;
+                                    max-width: 600px;
+                                }
+                            }
+                            @media print {
+                                body {
+                                    color: #000;
+                                    background-color: #fff;
+                                }
+                            }
+                            @page
+                            {
+                                size: auto;
+                                margin: 2mm 4mm;
+                            }
+
+                        </style>
+                        <h2 class="title-popup">
+                            <span data-bind="i18n:'X - report', visible:!isClosed()"/>
+                            <span data-bind="i18n:'Z - report', visible:isClosed()"/>
+                        </h2>
+                        <span class="drawer-number"><span data-bind="i18n:'Session'"/> #<span data-bind="text:shiftData().shift_id"/></span>
+                        <table class="info-datetime">
+                            <colgroup>
+                                <col width="35%" />
+                                <col/>
+                            </colgroup>
+                            <tbody>
+                            <tr data-bind="visible:posName">
+                                <td><label data-bind="i18n:'POS'"></label></td>
+                                <td><span data-bind="text: posName"/> </label></td>
+                            </tr>
+                            <tr data-bind="visible:staffName">
+                                <td><label data-bind="i18n:'Staff'"></label></td>
+                                <td><span data-bind="text: staffName"/> </label></td>
+                            </tr>
+                            <tr>
+                                <td><label data-bind="i18n:'Opened'"></label></td>
+                                <td><span data-bind="text: openedAtFormatted"/> </label></td>
+                            </tr>
+                            <tr data-bind="visible:isClosed()">
+                                <td><label data-bind="i18n:'Closed'"></label></td>
+                                <td><span data-bind="text: closedAtFormatted"/></label></td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+
+                        <h3 class="title-box">#<span data-bind="i18n:'Cash'"/></h3>
+                        <table class="list-transaction">
+                            <tbody>
+
+                            <tr>
+                                <td>
+                                    <h4 class="transaction-name"><span data-bind="i18n:'Opening Amount'"/></h4>
+                                </td>
+                                <td class="a-right"><span data-bind="text: floatAmountFormatted"/></td>
+                            </tr>
+                            <tr data-bind="visible:isClosed()">
+                                <td>
+                                    <h4 class="transaction-name"><span data-bind="i18n:'Closing Amount'"/></h4>
+                                </td>
+                                <td class="a-right"><span data-bind="text: closedAmountFormatted"/></td>
+                            </tr>
+                            <tr data-bind="visible:isClosed()">
+                                <td>
+                                    <h4 class="transaction-name"><span data-bind="i18n:'Difference'"/></h4>
+                                </td>
+                                <td class="a-right"><span data-bind="text: differenceAmountFormatted"/></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+
+                        <table  class="list-transaction">
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <h4 class="transaction-name"><span data-bind="i18n:'Cash Sales'"/></h4>
+                                </td>
+                                <td class="a-right"><span data-bind="text: cashSaleFormatted"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4 class="transaction-name"><span data-bind="i18n:'Cash Refund'"/></h4>
+                                </td>
+                                <td class="a-right"><span data-bind="text: cashRefundFormatted"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4 class="transaction-name"><span data-bind="i18n:'Pay Ins'"/></h4>
+                                </td>
+                                <td class="a-right"><span data-bind="text: cashAddedFormatted"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4 class="transaction-name"><span data-bind="i18n:'Payouts'"/></h4>
+                                </td>
+                                <td class="a-right"><span data-bind="text: cashRemovedFormatted"/></td>
+                            </tr>
+                            <!-- ko if: 0 && profitLossReason() -->
+                            <tr>
+                                <td>
+                                    <h4 class="transaction-name"><span data-bind="i18n:'Reason'"/></h4>
+                                </td>
+                                <td class="a-right"><span data-bind="text: profitLossReason"/></td>
+                            </tr>
+                            <!--/ko-->
+                            </tbody>
+                        </table>
+
+                        <h3 class="title-box">#<span data-bind="i18n:'Sales'"/></h3>
+                        <table class="table table-total">
+                            <tbody>
+                            <tr>
+                                <td class="a-left"><span data-bind="i18n:'Total Sales'"/></td>
+                                <td class="a-right"><span data-bind="text: totalSalesFormatted"/></td>
+                            </tr>
+
+                            <tr>
+                                <td class="a-left"><span data-bind="i18n:'Discount'"/></td>
+                                <td class="a-right"><span data-bind="text: discountFormatted"/></td>
+                            </tr>
+
+                            <tr data-bind="visible:hasGiftcard()">
+                                <td class="a-left"><span data-bind="i18n:'Gift Voucher Discount'"/></td>
+                                <td class="a-right"><span data-bind="text: giftcardFormatted"/></td>
+                            </tr>
+
+                            <tr data-bind="visible:hasRewardPoints()">
+                                <td class="a-left"><span data-bind="i18n:'Points Discount'"/></td>
+                                <td class="a-right"><span data-bind="text: rewardpointsFormatted"/></td>
+                            </tr>
+
+                            <tr>
+                                <td class="a-left"><span data-bind="i18n:'Refund'"/></td>
+                                <td class="a-right"><span data-bind="text: refundFormatted"/></td>
+                            </tr>
+
+                            <tr>
+                                <td class="a-left"><span data-bind="i18n:'Net Sales'"/></td>
+                                <td class="a-right"><span data-bind="text: netSaleFormatted"/></td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+
+                        <h3 class="title-box">#<span data-bind="i18n:'Sales by payment method'"/></h3>
+                        <table class="table table-payment">
+                            <tbody>
+                            <!-- ko foreach: shiftData().sale_summary -->
+                            <tr>
+                                <td class="a-left"><span data-bind="text: payment_method"/></td>
+                                <td class="a-right"><span data-bind="text: $parent.formatPrice(payment_amount)"/></td>
+                            </tr>
+
+                            <!-- /ko -->
+                            </tbody>
+                        </table>
+
+                        <h3 class="title-box"><span data-bind="i18n:'Printed At '"/><span data-bind="text:getFullDatetime()"/></h3>
+                    </div>
+                </div>
+                <div class="actions">
+                    <button class="btn-cl-cfg-other btn-print" data-bind="click: printReport"><span data-bind="i18n:'Print'"/></button>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+<!-- End Template for popup print shift -->

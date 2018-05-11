@@ -1,0 +1,89 @@
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<!--@vars
+{"var giftImageUrl":"Gift Card Image Url",
+"var logo_url":"Logo image url",
+"var textColor":"Text Color",
+"var styleColor":"Special Text Color",
+"var senderName":"Sender Name",
+"var recipientName":"Recipient Name",
+"var giftMessage":"Gift Message",
+"var giftValue":"Value of Gift Card",
+"var giftCode":"Gift code string",
+"var barcodeUrl":"Barcode image url",
+"var expiredDate":"Expired Date of Gift code",
+"var notes":"Gift Card notes"}
+@-->
+<div style="float:left; width:600px;height:365px;position: relative;">
+    <div style="width:250px;height:365px;float: left;">
+        {{if giftImageUrl}}
+        <img src="{{var giftImageUrl}}" style="height:365px;width:250px;"/>
+        {{if}}
+        <div style="float: left;position: absolute;top: 287px;text-align: center;width: 250px;">
+            {{if logo_url}}
+            <img src="{{var logo_url}}" style="height:40px;"/>
+            {{/if}}
+        </div>
+        <!-- ko if: expiredDate-->
+        <div style="color:#{{var textColor}};font-size: 11px;margin-top: -25px;text-align: center;font-weight: bold;">
+            {{if expiredDate}} {{var expiredDate}} {{/if}}
+        </div>
+        <!-- /ko -->
+    </div>
+    <div style="width:350px;height:365px;float:right;">
+        {{if giftBackgroundUrl}}
+        <img src="{{var giftBackgroundUrl}}" style="width:350px;height:365px;">
+        {{/if}}
+        <div style="float: left;position: absolute;width: 350px;top: 0;">
+            <div style="color:#{{var styleColor}};margin: 15px 10px 0 15px;font-size: 20px;font-family: 'Open Sans', sans-serif;font-weight: 600;margin-top: 10px !important;margin-left: 10px !important;line-height: 30px;">
+                {{var giftCardTitleText}}
+            </div>
+            <div style="width: 320px;float: left;margin: 0 15px;">
+            <span style="color:#{{var textColor}};margin-right: 15px;overflow: hidden;display: table-cell;float: left;margin-bottom: 5px;">
+                <label style="color:#{{var textColor}};font-family: 'Open Sans', sans-serif;font-size: 16px;font-weight: 600;">{{var fromText}}</label>
+                <span style="color:#{{var styleColor}};font-size: 16px;font-family: 'Open Sans', sans-serif;">{{var senderName}}</span>
+            </span>
+                <span style="float: left;clear: both;margin-left: 0px;">
+                <label style="color:#{{var textColor}};font-family: 'Open Sans', sans-serif;font-size: 16px;font-weight: 600;">{{var toText}}</label>
+                <span style="color:#{{var styleColor}};font-size: 16px;font-family: 'Open Sans', sans-serif;">{{var recipientName}}</span>
+            </span>
+            </div>
+            <div style="width: 320px;float: left;margin: 0 15px;">
+                <div style="display: block;border-radius: 5px;border: 1px solid #cccccc;padding: 0 6px;height: 90px;vertical-align: middle;background: #fff;margin-top: 10px;">
+                    <div style="margin: 0;max-height: 85px;overflow: hidden;font-size: 11px;padding-top: 2px;">
+                        <p style="color:#{{var textColor}};max-height: 85px;overflow: hidden;font-size: 11px;padding-top: 2px;">
+                            {{var giftMessage}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div style="width: 320px;float: left;margin: 15px;margin-bottom: 10px;">
+                <div style="float:left">
+                    <span style="color:#{{var textColor}};float: left;padding-right: 10px;font-family: 'Open Sans', sans-serif;font-weight: 600;">{{var giftCardValueText}}</span>
+                    <span style="color:#{{var styleColor}};float: left;clear: both;font-size: 26px;font-weight: bold;margin-top: 10px;">{{var giftValue}}</span>
+                </div>
+                <div style="float: right;width: 200px;margin-top: -5px;">
+                <span style="width: 100%;float: right;text-align:right;margin-bottom:5px;">
+                    <span style="color:#{{var styleColor}};width: 100%;float: right;text-align: right;margin-bottom: 5px;">
+                        <span style="font-weight: 600;font-family: 'Open Sans', sans-serif;font-style: italic;font-size:14px;">{{var giftCode}}</span>
+                    </span>
+                </span>
+                    <span style="float: right;width: 177px;text-align: right;">
+                    {{if barcodeUrl}}
+                    <img style="float: right;max-width: 100%;height: 40px;" src="{{var barcodeUrl}}"/>
+                    {{/if}}
+                </span>
+                </div>
+            </div>
+            <div style="width:90%;float:left;margin:0 15px;overflow: hidden;vertical-align: bottom;height: 70px;">
+                <p data-bind="style: {color: textColor}, text: notes"
+                   style="color:#{{var textColor}};font-size: 12px;font-style:italic;">
+                    {{var notes}}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div style="clear:both;"></div>
+</div> 

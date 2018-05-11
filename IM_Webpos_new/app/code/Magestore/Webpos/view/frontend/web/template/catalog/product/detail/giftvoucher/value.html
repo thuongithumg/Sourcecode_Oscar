@@ -1,0 +1,46 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<!-- ko if: (selectPriceType() == 'static') -->
+<div class="form-group">
+    <label class="label_value" data-bind="i18n: 'Gift Card value: '"></label>
+    <span class="regular-price"><span class="price" data-bind="text: getFormattedPrice(giftAmountStatic())"></span></span>
+    <input type="hidden" name="amount" class="giftvoucher_custom_option" data-bind="value: parseFloat(giftAmountStatic())" />
+</div>
+<!-- /ko -->
+<!-- ko if: (selectPriceType() == 'dropdown') -->
+<div class="form-group">
+    <div class="label text-left">
+        <label for="amount_dropdown" style="margin-top: 8px;" data-bind="i18n: 'Select value'"></label>
+    </div>
+    <div class="gift_amount text-left">
+        <input type="hidden" id="amount_dropdown" name="amount" data-bind="value: giftCardValue">
+        <div id="amount_dropdown_buttons" class="giftvoucher_custom_option" data-bind="foreach: giftAmountOption">
+            <div class="gc-amount">
+                <button  class="gc-amount-dropdown" type="button"
+                         data-bind="value: $data,css:{'gc-amount-selected': ($parent.choosePrice() == $data)}, click: $parent.setDropdownPrice.bind($data)">
+                    <span class="price" data-bind="text: $parent.getFormattedPrice($data)"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /ko -->
+<!-- ko if: (selectPriceType() == 'range') -->
+<div class="form-group">
+    <div class="row">
+        <div class="col-xs-3 text-left">
+            <label for="amount_range" style="margin-top: 8px;" data-bind="text: 'Enter value'"></label>
+        </div>
+        <div class="col-xs-8 text-left">
+            <input id="amount_range" name="amount"
+                   class="giftvoucher_custom_option input-text required-entry validate-greater-than-zero form-control"
+                   data-bind="event: {change: setRangePrice}, value: giftCardValue" />
+            (<span class="price"><span class="price" data-bind="text: getFormattedPrice(giftAmountFrom())"></span></span>
+            - <span class="price"><span class="price" data-bind="text: getFormattedPrice(giftAmountTo())"></span></span>)
+        </div>
+    </div>
+</div>
+<!-- /ko -->

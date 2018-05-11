@@ -1,0 +1,110 @@
+<?php
+$_giftCard = $this->getGiftCard();
+$_store = $this->getStore();
+$url_barcode = $this->getUrlBarcode();
+$_template = $this->getTemplateParam();
+$currency = $this->getCurrency();
+$_textColor = $this->getTextColor();
+$_styleColor = $this->getStyleColor();
+$expire_day = $this->getExpireDay();
+$notes = $this->getNotes();
+$resizeImage = $this->getResizeImage();
+?>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/magestore/print_style.css') ?>"
+      media="all"/>
+<div class="giftcard-print-top" style="float: left; width: 600px;height: 365px;position: relative;">
+    <div class="background-top" style="position: relative; height: 190px;background-image: url();">
+        <img style=" "
+             src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'giftvoucher/template/images/top/' . $_giftCard->getGiftcardTemplateImage() ?>"
+             width="600" height="190"/>
+        <div style="float: left;position: absolute;top: 0;height: 190px;width: 600px;">
+            <div style="width: 100%; height: 84px; float: left;">
+                <?php if ($_giftCard->getPrintLogo()): ?>
+                    <img style=" margin-left: 15px; max-height: 70px;border-radius: 0px 0px 5px 5px"
+                         src="<?php echo $_giftCard->getPrintLogo() ?>" height="63" width="auto"
+                         alt="<?php echo $_store->getFrontendName() ?>"
+                         title="<?php echo $_store->getFrontendName() ?>"/>
+                <?php endif; ?>
+                <div class="expire-day expire-day-top"
+                     style="font-size: 11px; float: right; margin-top: 5px; margin-right: 5px; color: white; font-weight: bold;"><?php if (Mage::helper('giftvoucher')->getGeneralConfig('show_expiry_date') && $_giftCard->getExpiredAt()) echo $this->__('Expired: ') . $expire_day ?></div>
+            </div>
+            <div style=" position: absolute;bottom: 0;width: 100%;height: 50px;float: left; max-height: 70px;">
+                <img src="<?php echo $this->getSkinUrl('images/bkg-title.png') ?>" width="600"/>
+                <div style="position: absolute; top: 0;width: 600px">
+                    <div
+                        style="padding-top: 12px; float: left; margin-left: 15px;color: <?php echo $_styleColor ?>">
+                            <span
+                                class="giftcard-style-color giftcard-title"><?php echo $_template->getCaption() ?></span>
+                    </div>
+                    <div class="print-font"
+                         style="text-align: right; float:right; height: 50px; width: 205px; color: <?php echo $_textColor ?>;">
+                        <img src="<?php echo $this->getSkinUrl('images/bkg-value.png') ?>" width="205px"
+                             height="52"/>
+                        <div style="position: absolute; top: 0; width: 205px;height: 52px;">
+                                <span style="margin-right: 10px;font-size: 12px;">
+    <?php echo Mage::helper('giftvoucher')->__('Value') ?>
+                                </span>
+                                <span
+                                    style="text-align: right; margin-right: 15px; line-height: 52px; font-size: 26px;height: 50px; color: <?php echo $_styleColor ?>; font-weight: bold">
+    <?php echo $currency->format($_giftCard->getBalance()); ?>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="giftcard-template-content-temp2">
+        <img style=" "
+             src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'giftvoucher/template/background/top/' . $_template->getBackgroundImg() ?>"
+             width="600" height="180"/>
+        <div style="margin: 0px 15px; float: left;position: absolute;bottom: 8px;">
+            <div style="float: left;width: 55%; margin-top: 10px;">
+                <div style="float: left;">
+                        <span style="float: left; margin-bottom: 5px;">
+                            <label for="giftcard-from"
+                                   style="font-weight: 600;float: left;color: <?php echo $_textColor ?>"><?php echo Mage::helper('giftvoucher')->__('From:') ?></label>
+                            <span class="giftcard-text-color giftcard-send-form"
+                                  style="line-height: 22px;font-size: 16px;margin-left: 15px; color: <?php echo $_styleColor ?>"><?php echo $_giftCard->getCustomerName() ?></span>
+                        </span>
+                        <span style="float: left; clear: both;">
+                            <label for="giftcard-to"
+                                   style="font-weight: 600;float: left;margin-right: 10px;color: <?php echo $_textColor ?>"><?php echo Mage::helper('giftvoucher')->__('To:') ?> </label>
+                            <span class="giftcard-text-color giftcard-send-to"
+                                  style="font-size: 16px;line-height: 22px; color: <?php echo $_styleColor ?>"><?php echo $_giftCard->getRecipientName() ?></span>
+                        </span>
+                </div>
+                <div style="float: left; width: 100%;margin-top: 10px;">
+                    <div class="message-box-top" style="color: <?php echo $_textColor ?>">
+                        <p class="print-font"
+                           style="height: 69px;padding: 10px; margin: 0;overflow: hidden; font-size: 11px">
+                            <?php echo $_giftCard->getMessage() ?>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div style="float: right;width: 37%; margin-top: 5px;">
+                <div style="text-align: right;float: right; width: 130%;margin-top: 5px;">
+                    <?php if ($url_barcode != ''): ?>
+                        <span
+                            style=" font-weight: 600; font-size: 16px;  font-family: 'Open Sans', sans-serif;font-style: italic; color: <?php echo $_styleColor ?>;"><?php echo $_giftCard->getGiftCode() ?></span>
+                        <span style="width: 100%; float: right;margin-top: 5px;margin-bottom: 5px; ">
+                                <img
+                                    src="<?php echo $url_barcode ?>" <?php if ($resizeImage) echo 'width="200" height="40"' ?>
+                                    style="float: right; height: 40px"/>
+                            </span>
+                    <?php else: ?>
+                        <span
+                            style=" font-weight: 600;  font-family: 'Open Sans', sans-serif;font-size: 16px; font-style: italic; color: <?php echo $_styleColor ?>;"><?php echo $_giftCard->getGiftCode() ?></span>
+                    <?php endif; ?>
+                </div>
+                    <span
+                        style="height: 85px;float: left;text-align: right;overflow: hidden;position: absolute;bottom: 0px; width: 37%;">
+                        <span class="print-font"
+                              style="width: 100%;font-size: 12px; float: right; color: <?php echo $_textColor ?>"><?php echo $notes ?></span>
+                    </span>
+            </div>
+        </div>
+    </div>
+</div>
+<footer></footer>

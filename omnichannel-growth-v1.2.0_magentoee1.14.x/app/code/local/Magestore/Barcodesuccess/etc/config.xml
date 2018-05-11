@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+<!--
+  ~
+  ~  Magestore
+  ~   NOTICE OF LICENSE
+  ~
+  ~   This source file is subject to the Magestore.com license that is
+  ~   available through the world-wide-web at this URL:
+  ~   http://www.magestore.com/license-agreement.html
+  ~
+  ~   DISCLAIMER
+  ~
+  ~   Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~   version in the future.
+  ~
+  ~   @category    Magestore
+  ~   @package     Magestore_Barcodesuccess
+  ~   @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~   @license     http://www.magestore.com/license-agreement.html
+  ~
+  ~
+  -->
+<config>
+    <modules>
+        <Magestore_Barcodesuccess>
+            <version>1.1.0</version>
+        </Magestore_Barcodesuccess>
+    </modules>
+    <frontend>
+        <routers>
+            <barcodesuccess>
+                <use>standard</use>
+                <args>
+                    <module>Magestore_Barcodesuccess</module>
+                    <frontName>barcodesuccess</frontName>
+                </args>
+            </barcodesuccess>
+        </routers>
+        <layout>
+            <updates>
+                <barcodesuccess>
+                    <file>barcodesuccess.xml</file>
+                </barcodesuccess>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magestore_Barcodesuccess>
+                    <files>
+                        <default>Magestore_Barcodesuccess.csv</default>
+                    </files>
+                </Magestore_Barcodesuccess>
+            </modules>
+        </translate>
+    </frontend>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Magestore_Barcodesuccess before="Mage_Adminhtml">Magestore_Barcodesuccess_Adminhtml</Magestore_Barcodesuccess>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <barcodesuccess>
+                    <file>barcodesuccess.xml</file>
+                </barcodesuccess>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magestore_Barcodesuccess>
+                    <files>
+                        <default>Magestore_Barcodesuccess.csv</default>
+                    </files>
+                </Magestore_Barcodesuccess>
+            </modules>
+        </translate>
+        <events>
+            <adminhtml_catalog_product_grid_prepare_massaction>
+                <observers>
+                    <barcodesuccess_adminhtml_catalog_product_grid_prepare_massaction>
+                        <class>barcodesuccess/observer</class>
+                        <method>catalogProductGridPrepareMassaction</method>
+                    </barcodesuccess_adminhtml_catalog_product_grid_prepare_massaction>
+                </observers>
+            </adminhtml_catalog_product_grid_prepare_massaction>
+            <core_block_abstract_prepare_layout_after>
+                <observers>
+                    <barcodesuccess_core_block_abstract_prepare_layout_after>
+                        <class>barcodesuccess/observer</class>
+                        <method>prepareLayoutAfter</method>
+                    </barcodesuccess_core_block_abstract_prepare_layout_after>
+                </observers>
+            </core_block_abstract_prepare_layout_after>
+            <controller_action_postdispatch_adminhtml_catalog_product_save>
+                <observers>
+                    <barcodesuccess_controller_action_postdispatch_adminhtml_catalog_product_save>
+                        <class>barcodesuccess/observer</class>
+                        <method>postdispatchAdminhtmlCatalogProductSave</method>
+                    </barcodesuccess_controller_action_postdispatch_adminhtml_catalog_product_save>
+                </observers>
+            </controller_action_postdispatch_adminhtml_catalog_product_save>
+        </events>
+    </adminhtml>
+    <global>
+        <models>
+            <barcodesuccess>
+                <class>Magestore_Barcodesuccess_Model</class>
+                <resourceModel>barcodesuccess_mysql4</resourceModel>
+            </barcodesuccess>
+            <barcodesuccess_mysql4>
+                <class>Magestore_Barcodesuccess_Model_Mysql4</class>
+                <entities>
+                    <barcode>
+                        <table>os_barcode</table>
+                    </barcode>
+                    <history>
+                        <table>os_barcode_created_history</table>
+                    </history>
+                    <template>
+                        <table>os_barcode_template</table>
+                    </template>
+                </entities>
+            </barcodesuccess_mysql4>
+        </models>
+        <resources>
+            <barcodesuccess_setup>
+                <setup>
+                    <module>Magestore_Barcodesuccess</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </barcodesuccess_setup>
+            <barcodesuccess_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </barcodesuccess_write>
+            <barcodesuccess_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </barcodesuccess_read>
+        </resources>
+        <blocks>
+            <barcodesuccess>
+                <class>Magestore_Barcodesuccess_Block</class>
+            </barcodesuccess>
+        </blocks>
+        <helpers>
+            <barcodesuccess>
+                <class>Magestore_Barcodesuccess_Helper</class>
+            </barcodesuccess>
+        </helpers>
+    </global>
+    <default>
+        <barcodesuccess>
+            <general>
+                <one_barcode_per_sku>1</one_barcode_per_sku>
+                <barcode_pattern>[N.9]</barcode_pattern>
+            </general>
+        </barcodesuccess>
+    </default>
+</config>

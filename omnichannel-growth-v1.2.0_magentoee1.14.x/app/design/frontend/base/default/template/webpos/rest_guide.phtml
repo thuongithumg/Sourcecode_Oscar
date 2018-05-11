@@ -1,0 +1,32 @@
+<div class="ms-webpos" data-bind="scope: 'location'">
+    <div class="login-screen">
+        <div>
+            <div class="post-text">
+
+                <p><strong>Problem:</strong></p>
+
+                <p>WebPOS uses the REST API in the Server. </p>
+
+                <p>So if you want to use the Webpos, your website must support the REST API for Magento.</p>
+
+                <p><strong>Solution:</strong></p>
+
+                <p>The reason for the 404 error message was a missing configuration in the apache2.con File
+                    (/etc/apache2/apache2.conf).</p>
+
+                <p>To enable rewrites, please edit the config and add the option 'AllowOverride All'</p>
+
+                <pre><code><span class="tag">&lt;Directory</span><span class="pln"> </span><span class="pun"><?php echo Mage::getBaseDir();?></span>&gt;<span class="pln">
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+</span><span class="tag">&lt;/Directory&gt;</span></code></pre>
+
+                <p>The path must match the location of your Magento installation on the file system.
+                    After changing the configuration, restart the apache server. </p>
+            </div>
+
+        </div>
+
+    </div>
+</div>

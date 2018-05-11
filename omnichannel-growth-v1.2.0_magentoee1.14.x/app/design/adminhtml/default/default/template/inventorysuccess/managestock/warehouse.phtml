@@ -1,0 +1,24 @@
+<div class="content-header">
+    <table cellspacing="0">
+        <tr>
+            <td><h3 class="icon-head"><?php echo $this->getHeaderText() ?></h3></td>
+        </tr>
+    </table>
+</div>
+
+<div class="select-warehouse">
+    <table cellspacing="0">
+        <tr>
+            <td><h3><?php echo $this->__('Select Warehouse') ?></h3></td>
+        </tr>
+    </table>
+</div>
+<?php echo $this->__('Please select a warehouse to view stock'); ?>
+<br /><br />
+<?php echo $this->__('Warehouse'); ?>&nbsp
+<select id="select_warehouse_option">
+    <option value="0"><?php echo $this->__('All Warehouses'); ?></option>
+    <?php foreach ($this->getOptionWarehouses() as $warehouse): ?>
+        <option value="<?php echo $warehouse->getWarehouseId() ?>"><?php echo $warehouse->getWarehouse() ?></option>
+    <?php endforeach; ?>
+</select>

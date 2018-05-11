@@ -1,0 +1,89 @@
+<?php
+/**
+ * @var Magestore_Purchaseordersuccess_Block_Adminhtml_Barcode_Scan $this
+ */
+?>
+<div class="modal right fade" id="scan-barcode-add-product" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <h2 class="modal-title" data-role="title"><?php echo $this->__("Scan Barcode") ?></h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+            <div class="modal-header">
+                <button id="submit-barcode-add-product" class="action-primary import_button" type="button" data-role="action"
+                        data-dismiss="modal">
+                    <span><?php echo $this->__('Save') ?></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="entry-edit">
+                    <div class="entry-edit-head">
+                        <h4 class="icon-head head-edit-form fieldset-legend">
+                            <?php echo $this->__('Scan Barcode'); ?>
+                        </h4>
+                    </div>
+                    <div class="purchaseorder_fieldset fieldset">
+                        <div class="barcode-input field-row">
+                            <label for="barcode"><?php echo $this->__("Barcode") ?></label>
+                            <input type="text" class="search-input input-text" name="barcode" id="barcode-add-product">
+                        </div>
+                    </div>
+                    <div class="entry-edit-head">
+                        <h4 class="icon-head head-edit-form fieldset-legend">
+                            <?php echo $this->__('Scan Item List'); ?>
+                        </h4>
+                    </div>
+                    <table class="actions"></table>
+                    <div class="grid">
+                        <table class="data" id="barcode-table-add-product">
+                            <colgroup>
+                                <col width="55">
+                                <col>
+                                <col>
+                                <col>
+                                <col width="150">
+                            </colgroup>
+                            <thead>
+                            <tr class="headings">
+                                <th class="a-center"><?php echo $this->__("Barcode") ?></th>
+                                <th class="a-center"><?php echo $this->__("QTY") ?></th>
+                                <th class="a-center"><?php echo $this->__("SKU") ?></th>
+                                <th class="a-center"><?php echo $this->__("Supplier SKU") ?></th>
+                                <th class="a-center"><?php echo $this->__("Product Name") ?></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var scanBarcodeAddProductObject = new PurchaseorderSuccessJS({
+        "parentGridJsObjectName": <?php /* @escapeNotVerified */ echo '"' . $this->getJsParentObjectName() . '"' ?: '{}'; ?>,
+        "saveUrl": <?php /* @escapeNotVerified */ echo '"' . $this->getSubmitBarcodeUrl() . '"' ?: '""'; ?>,
+        "canReloadTotal": true
+    });
+    
+    var scanBarcodeAddProduct = new ScanBarcode({
+        'table': 'barcode-table-add-product',
+        'input': 'barcode-add-product',
+        'loadBarcodeUrl': '<?php echo $this->getLoadBarcodeUrl(); ?>',
+    });
+
+    scanBarcodeAddProduct.submit = function (params) {
+        scanBarcodeAddProductObject.save(null, params);
+    };
+
+    Event.observe($('submit-barcode-add-product'), 'click', function (event) {
+        if (Object.keys(scanBarcodeAddProduct.getEditedBarcodes()).length <= 0) {
+            alert('<?php echo $this->__('Please select at least one product.') ?>')
+            return event.stopPropagation();
+        }
+        scanBarcodeAddProduct.submitBarcode();
+    });
+</script>
+

@@ -1,0 +1,13 @@
+<div class="steps-wizard">
+    <div class="steps-wizard-navigation">
+        <ul class="nav-timeline-bar">
+            <?php foreach ($this->getSteps() as $step):?>
+            <li <?php if($this->isActive($step)){echo 'class="active"';}?>>
+                <a href="<?php echo $step['url']?>" >
+                    <?php echo$step['title']?>
+                </a>
+            </li>
+            <?php endforeach;?>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div class="col-sm-offset-6" data-bind="afterRender: $parent.afterRender">
+    <table class="table table-total">
+        <tbody data-bind="foreach: {data: $parent.totalValues, afterRender: $parent.afterRender}">
+            <tr>
+                <td class="a-left" data-bind="text: $t(totalLabel)"/>
+                <td class="a-right" data-bind="text: totalValue"/>
+            </tr>
+        </tbody>
+    </table>
+</div>

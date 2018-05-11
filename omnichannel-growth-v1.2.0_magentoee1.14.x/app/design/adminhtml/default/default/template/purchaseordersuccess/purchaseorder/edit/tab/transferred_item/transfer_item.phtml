@@ -1,0 +1,119 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Inventorysuccess
+ * @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+$blockGrid = $this->getBlockGrid();
+$gridJsObjectName = $blockGrid->getJsObjectName();
+$gridJsParentObjectName = $this->getJsParentObjectName();
+$hiddenInputField = $blockGrid->getHiddenInputField();
+?>
+<div class="modal right fade" id="transferred_item_modal" tabindex="-1"
+     role="dialog" aria-labelledby="modalLabel" style="display:none">
+    <div class="modal-dialog" role="document" id="transferred_item_modal_dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="icon-head"><?php echo $this->__('Transfer Items') ?></h3>
+                <p class="form-buttons">
+                    <button id="open_import_transferred_item_button" class="action-primary" type="button" data-dismiss="modal" data-toggle="modal" data-target="#import_transferred_item_modal">
+                        <span><?php echo $this->__('Import Transferred Items') ?></span>
+                    </button>
+                    <button id="submit_transferred_item" class="action-primary save" type="button" data-dismiss="modal">
+                        <span><?php echo $this->__('Transfer') ?></span>
+                    </button>
+                    <button title="Close" type="button" class="scalable delete" data-dismiss="modal" id="closeModal">
+                        <span><?php echo $this->__('Close') ?></span>
+                    </button>
+                </p>
+            </div>
+            <div class="modal-body">
+                <div class="entry-edit">
+                    <div class="entry-edit-head">
+                        <h4 class="icon-head head-edit-form fieldset-legend">
+                            <?php echo $this->__('Transfer Time') ?>
+                        </h4>
+                    </div>
+                    <div class="fieldset purchaseorder_fieldset" id="transfer_item_form">
+                        <?php echo $this->addTransferredTimeField(); ?>
+                    </div>
+                    <div class="entry-edit-head">
+                        <h4 class="icon-head head-edit-form fieldset-legend">
+                            <?php echo $this->__('Received Item List') ?>
+                        </h4>
+                    </div>
+                    <?php echo $this->getGridHtml(); ?>
+                </div>
+            </div>
+            <input type="hidden" name="<?php echo $hiddenInputField ?>" id="<?php echo $hiddenInputField ?>" value=""/>
+            <script type="text/javascript">
+                var transferItem = new PurchaseorderSuccessJS({
+                    "selectedItems": <?php /* @escapeNotVerified */ echo $blockGrid->getSelectedItems(); ?>,
+                    "gridJsObjectName": <?php /* @escapeNotVerified */ echo '"' . $gridJsObjectName . '"' ?: '{}'; ?>,
+                    "parentGridJsObjectName": <?php /* @escapeNotVerified */ echo '"' . $gridJsParentObjectName . '"' ?: '{}'; ?>,
+                    "hiddenInputField": <?php /* @escapeNotVerified */ echo '"' . $hiddenInputField . '"' ?>,
+                    "editFields": <?php /* @escapeNotVerified */ echo $blockGrid->getEditFields(); ?>,
+                    "saveUrl": <?php /* @escapeNotVerified */ echo '"' . $blockGrid->getSaveUrl() . '"' ?: '""'; ?>,
+                    "reloadBtn": ['transfer_item_button_top'],
+                    "tabContainer": <?php /* @escapeNotVerified */ echo '"' . $this->getTabContainer() . '"'; ?>,
+                    "tabsReload": <?php /* @escapeNotVerified */ echo $this->getReloadTabs(); ?>,
+                    "messages": {
+                        "noItemSelected": <?php /* @escapeNotVerified */ echo '"' . $this->__('Please select item(s) to transfer.') . '"'?>,
+                    },
+                });
+                if ($('transfer_item_button_top')) {
+                    $('transfer_item_button_top').setAttribute('data-toggle', 'modal');
+                    $('transfer_item_button_top').setAttribute('data-target', '#transferred_item_modal');
+                }
+                Event.observe($('submit_transferred_item'), 'click', function (event) {
+                    if (new Validation('transferred_item_modal').validate()) {
+                        var transferred_at = $$('#transferred_item_modal_dialog #transferred_at')[0].value;
+                        var warehouse_id = $$('#transferred_item_modal_dialog #warehouse_id')[0].value;
+                        transferItem.save(event, {transferred_at: transferred_at, warehouse_id: warehouse_id});
+                    } else {
+                        event.stopPropagation();
+                    }
+                }.bind(transferItem));
+
+                <?php if(!$this->canTransferItem()): ?>
+                if ($('transfer_item_button_top')) {
+                    $('transfer_item_button_top').hide();
+                }
+                <?php endif; ?>
+
+                <?php if ($this->isBarcodeSuccessEnable()): ?>
+                var scanBarcodeTransferItem = new PurchaseorderSuccessJS({
+                    "parentGridJsObjectName": <?php /* @escapeNotVerified */ echo '"' . $gridJsParentObjectName . '"' ?: '{}'; ?>,
+                    "saveUrl": <?php /* @escapeNotVerified */ echo '"' . $this->getSubmitBarcodeUrl() . '"' ?: '""'; ?>,
+                    "tabContainer": <?php /* @escapeNotVerified */ echo '"' . $this->getTabContainer() . '"'; ?>,
+                    "tabsReload": <?php /* @escapeNotVerified */ echo $this->getReloadTabs(); ?>
+                });
+                window.PurchaseordessuccessScanbarcodeTransferItem = {
+                    'loadBarcodeUrl': '<?php echo $this->getLoadBarcodeUrl(); ?>',
+                    'noItemSelected': '<?php echo $this->__('Please select at least one item to transfer.') ?>',
+                    'submitBarcode': function (params) {
+                        return false;
+                        scanBarcodeTransferItem.save(null, params);
+                    }
+                }
+                <?php endif; ?>
+            </script>
+        </div>
+    </div>
+</div>
+

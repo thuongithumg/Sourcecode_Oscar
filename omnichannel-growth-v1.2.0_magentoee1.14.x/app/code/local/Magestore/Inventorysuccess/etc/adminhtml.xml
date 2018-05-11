@@ -1,0 +1,413 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Inventorysuccess
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<config>
+    <menu>
+        <inventorysuccess module="inventorysuccess" translate="title">
+            <title>Inventory Management</title>
+            <sort_order>71</sort_order>
+            <children>
+                <stockcontrol module="inventorysuccess" translate="title">
+                    <icon>icon-IMBackend-22</icon>
+                    <title>Stock Control</title>
+                    <sort_order>10</sort_order>
+                    <children>
+                        <create_adjuststock module="inventorysuccess" translate="title">
+                            <title>New Stock Adjustment</title>
+                            <sort_order>10</sort_order>
+                            <action>adminhtml/inventorysuccess_adjuststock/new</action>
+                        </create_adjuststock>
+                        <create_stocktaking module="inventorysuccess" translate="title">
+                            <title>New Stocktaking</title>
+                            <sort_order>20</sort_order>
+                            <action>adminhtml/inventorysuccess_stocktaking/new</action>
+                        </create_stocktaking>
+                        <adjuststock_history module="inventorysuccess" translate="title">
+                            <title>Stock Adjustment History</title>
+                            <sort_order>30</sort_order>
+                            <action>adminhtml/inventorysuccess_adjuststock/index</action>
+                        </adjuststock_history>
+                        <stocktaking_history module="inventorysuccess" translate="title">
+                            <title>Stocktaking History</title>
+                            <sort_order>40</sort_order>
+                            <action>adminhtml/inventorysuccess_stocktaking/index</action>
+                        </stocktaking_history>
+                        <stock_transfer module="inventorysuccess" translate="title">
+                            <title>Receipt/ Delivery History</title>
+                            <sort_order>50</sort_order>
+                            <action>adminhtml/inventorysuccess_stockmovement_transfer/index</action>
+                        </stock_transfer>
+                        <stock_movement_history module="inventorysuccess" translate="title">
+                            <title>Stock Movement History</title>
+                            <sort_order>100</sort_order>
+                            <action>adminhtml/inventorysuccess_stockmovement/index</action>
+                        </stock_movement_history>
+                    </children>
+                </stockcontrol>
+                <stocklisting module="inventorysuccess" translate="title">
+                    <icon>icon-IMBackend-17</icon>
+                    <title>Stock Listing</title>
+                    <sort_order>0</sort_order>
+                    <children>
+                        <stock_in_warehouse module="inventorysuccess" translate="title">
+                            <title>Stocks in Warehouse</title>
+                            <sort_order>10</sort_order>
+                            <action>adminhtml/inventorysuccess_managestock/index</action>
+                        </stock_in_warehouse>
+                        <non_warehouse_product module="inventorysuccess" translate="title">
+                            <title>Non-Warehouse Products</title>
+                            <sort_order>20</sort_order>
+                            <action>adminhtml/inventorysuccess_warehouse_nonwarehouseproduct/index</action>
+                        </non_warehouse_product>
+                        <warehouse_list module="inventorysuccess" translate="title">
+                            <title>Warehouses</title>
+                            <sort_order>30</sort_order>
+                            <action>adminhtml/inventorysuccess_warehouse/index</action>
+                        </warehouse_list>
+                    </children>
+                </stocklisting>
+                <prediction module="inventorysuccess" translate="title">
+                    <icon>icon-IMBackend-29</icon>
+                    <title>Prediction</title>
+                    <sort_order>20</sort_order>
+                    <children>
+                        <supply_needs module="inventorysuccess" translate="title">
+                            <title>Supply Needs</title>
+                            <sort_order>0</sort_order>
+                            <action>adminhtml/inventorysuccess_supplyneeds/index</action>
+                        </supply_needs>
+                        <lowstock_rule module="inventorysuccess" translate="title">
+                            <title>Low Stock Rules</title>
+                            <sort_order>10</sort_order>
+                            <action>adminhtml/inventorysuccess_lowstocknotification_rule/index</action>
+                        </lowstock_rule>
+                        <lowstock_notification module="inventorysuccess" translate="title">
+                            <title>Low Stock Notifications</title>
+                            <sort_order>20</sort_order>
+                            <action>adminhtml/inventorysuccess_lowstocknotification_notification/index</action>
+                        </lowstock_notification>
+                    </children>
+                </prediction>
+                <create_transferstock>
+                    <icon>icon-IMBackend-16</icon>
+                    <title>Transfer Stock</title>
+                    <sort_order>30</sort_order>
+                    <children>
+                        <create_sendstock module="inventorysuccess" translate="title">
+                            <title>Send Stock</title>
+                            <sort_order>100</sort_order>
+                            <action>adminhtml/inventorysuccess_transferstock_sendstock/new</action>
+                        </create_sendstock>
+                        <create_requeststock module="inventorysuccess" translate="title">
+                            <title>Request Stock</title>
+                            <sort_order>110</sort_order>
+                            <action>adminhtml/inventorysuccess_transferstock_requeststock/new</action>
+                        </create_requeststock>
+                        <create_toexternal module="inventorysuccess" translate="title">
+                            <title>Transfer to External Location</title>
+                            <sort_order>120</sort_order>
+                            <action>adminhtml/inventorysuccess_transferstock_external/new/type/to_external</action>
+                        </create_toexternal>
+                        <create_fromexternal module="inventorysuccess" translate="title">
+                            <title>Transfer from External Location</title>
+                            <sort_order>130</sort_order>
+                            <action>adminhtml/inventorysuccess_transferstock_external/new/type/from_external</action>
+                        </create_fromexternal>
+                    </children>
+                </create_transferstock>
+                <view_transferstock>
+                    <icon>icon-IMBackend-15</icon>
+                    <title>Stock Transfer History</title>
+                    <sort_order>40</sort_order>
+                    <children>
+                        <view_sendstock module="inventorysuccess" translate="title">
+                            <title>Stock Sending History</title>
+                            <sort_order>100</sort_order>
+                            <action>adminhtml/inventorysuccess_transferstock_sendstock/index</action>
+                        </view_sendstock>
+                        <view_requeststock module="inventorysuccess" translate="title">
+                            <title>Stock Request History</title>
+                            <sort_order>110</sort_order>
+                            <action>adminhtml/inventorysuccess_transferstock_requeststock/index</action>
+                        </view_requeststock>
+                        <view_toexternal module="inventorysuccess" translate="title">
+                            <title>History of Stock Transfer to External Location</title>
+                            <sort_order>120</sort_order>
+                            <action>adminhtml/inventorysuccess_transferstock_external/index/type/to_external</action>
+                        </view_toexternal>
+                        <view_fromexternal module="inventorysuccess" translate="title">
+                            <title>History of Stock Transfer from External Location</title>
+                            <sort_order>130</sort_order>
+                            <action>adminhtml/inventorysuccess_transferstock_external/index/type/from_external</action>
+                        </view_fromexternal>
+                    </children>
+                </view_transferstock>
+                <settings module="inventorysuccess" translate="title">
+                    <icon>icon-IMBackend-10</icon>
+                    <title>Settings</title>
+                    <sort_order>1000</sort_order>
+                    <action>adminhtml/system_config/edit/section/inventorysuccess</action>
+                </settings>
+            </children>
+        </inventorysuccess>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <inventorysuccess module="inventorysuccess" translate="title">
+                                        <title>Inventorysuccess</title>
+                                        <sort_order>71</sort_order>
+                                    </inventorysuccess>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <inventorysuccess module="inventorysuccess" translate="title">
+                        <title>Inventorysuccess</title>
+                        <sort_order>71</sort_order>
+                        <children>
+
+                            <!-- add by Kai -->
+                            <catalog_force_edit module="inventorysuccess" translate="title">
+                                <title>Force Edit</title>
+                                <sort_order>0</sort_order>
+                            </catalog_force_edit>
+                            <!-- end by Kai -->
+
+                            <stockcontrol module="inventorysuccess" translate="title">
+                                <title>Stock Control</title>
+                                <sort_order>0</sort_order>
+                                <children>
+                                    <create_adjuststock module="inventorysuccess" translate="title">
+                                        <title>New Stock Adjustment</title>
+                                        <sort_order>0</sort_order>
+                                    </create_adjuststock>
+                                    <confirm_adjuststock module="inventorysuccess" translate="title">
+                                        <title>Confirm Stock Adjusment</title>
+                                        <sort_order>10</sort_order>
+                                    </confirm_adjuststock>
+                                    <adjuststock_history module="inventorysuccess" translate="title">
+                                        <title>Stock Adjustment History</title>
+                                        <sort_order>20</sort_order>
+                                    </adjuststock_history>
+                                    <create_stocktaking module="inventorysuccess" translate="title">
+                                        <title>New Stocktaking</title>
+                                        <sort_order>30</sort_order>
+                                    </create_stocktaking>
+                                    <verify_stocktaking module="inventorysuccess" translate="title">
+                                        <title>Verify Stocktaking</title>
+                                        <sort_order>40</sort_order>
+                                    </verify_stocktaking>
+                                    <confirm_stocktaking module="inventorysuccess" translate="title">
+                                        <title>Confirm Stocktaking</title>
+                                        <sort_order>50</sort_order>
+                                    </confirm_stocktaking>
+                                    <stock_transfer module="inventorysuccess" translate="title">
+                                        <title>Receipt/Delivery History</title>
+                                        <sort_order>55</sort_order>
+                                    </stock_transfer>
+                                    <stocktaking_history module="inventorysuccess" translate="title">
+                                        <title>Stocktaking History</title>
+                                        <sort_order>60</sort_order>
+                                    </stocktaking_history>
+                                    <stock_movement_history module="inventorysuccess" translate="title">
+                                        <title>Stock Movement History</title>
+                                        <sort_order>100</sort_order>
+                                    </stock_movement_history>
+
+                                </children>
+                            </stockcontrol>
+                            <stocklisting module="inventorysuccess" translate="title">
+                                <title>Stock Listing</title>
+                                <sort_order>10</sort_order>
+                                <children>
+                                    <stock_in_warehouse module="inventorysuccess" translate="title">
+                                        <title>Stocks in Warehouse</title>
+                                        <sort_order>10</sort_order>
+                                    </stock_in_warehouse>
+                                    <non_warehouse_product module="inventorysuccess" translate="title">
+                                        <title>Non-Warehouse Products</title>
+                                        <sort_order>20</sort_order>
+                                    </non_warehouse_product>
+                                    <warehouse_list module="inventorysuccess" translate="title">
+                                        <title>Warehouse</title>
+                                        <sort_order>30</sort_order>
+                                        <children>
+                                            <create_warehouse module="inventorysuccess" translate="title">
+                                                <title>Create Warehouse</title>
+                                                <sort_order>10</sort_order>
+                                            </create_warehouse>
+                                            <view_warehouse module="inventorysuccess" translate="title">
+                                                <title>View Warehouse</title>
+                                                <sort_order>20</sort_order>
+                                                <children>
+                                                    <edit_general_information module="inventorysuccess"
+                                                                              translate="title">
+                                                        <title>Edit General Information</title>
+                                                        <sort_order>10</sort_order>
+                                                    </edit_general_information>
+                                                    <view_stock_on_hand module="inventorysuccess" translate="title">
+                                                        <title>View Stock On Hand</title>
+                                                        <sort_order>20</sort_order>
+                                                        <children>
+                                                            <edit_qty module="inventorysuccess" translate="title">
+                                                                <title>Edit Qty in Warehouse</title>
+                                                                <sort_order>10</sort_order>
+                                                            </edit_qty>
+                                                            <edit_shelf_location module="inventorysuccess"
+                                                                                 translate="title">
+                                                                <title>Edit Shelf Location</title>
+                                                                <sort_order>20</sort_order>
+                                                            </edit_shelf_location>
+                                                            <delete_product module="inventorysuccess" translate="title">
+                                                                <title>Delete Product</title>
+                                                                <sort_order>30</sort_order>
+                                                            </delete_product>
+                                                        </children>
+                                                    </view_stock_on_hand>
+                                                    <manage_permission module="inventorysuccess" translate="title">
+                                                        <title>Manage Permission</title>
+                                                        <sort_order>30</sort_order>
+                                                    </manage_permission>
+                                                    <delete_warehouse module="inventorysuccess" translate="title">
+                                                        <title>Delete Warehouse</title>
+                                                        <sort_order>40</sort_order>
+                                                    </delete_warehouse>
+                                                </children>
+                                            </view_warehouse>
+                                        </children>
+                                    </warehouse_list>
+                                    <warehouse_location_mapping module="inventorysuccess" translate="title">
+                                        <title>Warehouse Location Mapping (using with Magestore_Webpos)</title>
+                                        <sort_order>100</sort_order>                                        
+                                    </warehouse_location_mapping>
+                                </children>
+                            </stocklisting>
+                            <order_process module="inventorysuccess" translate="title">
+                                <title>Order Process</title>
+                                <sort_order>15</sort_order>
+                                <children>
+                                    <change_order_warehouse module="inventorysuccess" translate="title">
+                                        <title>Change Order Warehouse</title>
+                                        <sort_order>0</sort_order>
+                                    </change_order_warehouse>
+                                    <view_order_warehouse module="inventorysuccess" translate="title">
+                                        <title>View Order Warehouse</title>
+                                        <sort_order>10</sort_order>
+                                        <children>
+                                            <create_shipment module="inventorysuccess" translate="title">
+                                                <title>Create shipment from Warehouse</title>
+                                                <sort_order>0</sort_order>
+                                            </create_shipment>
+                                            <create_creditmemo module="inventorysuccess" translate="title">
+                                                <title>Return items to Warehouse (when create creditmemo)</title>
+                                                <sort_order>10</sort_order>
+                                            </create_creditmemo>
+                                            <cancel_order module="inventorysuccess" translate="title">
+                                                <title>Cancel Order from Warehouse</title>
+                                                <sort_order>20</sort_order>
+                                            </cancel_order>
+                                        </children>
+                                    </view_order_warehouse>
+                                </children>
+                            </order_process>
+                            <prediction>
+                                <title>Prediction</title>
+                                <sort_order>20</sort_order>
+                                <children>
+                                    <supply_needs module="inventorysuccess" translate="title">
+                                        <title>Supply Needs</title>
+                                        <sort_order>0</sort_order>
+                                    </supply_needs>
+                                    <lowstock_rule module="inventorysuccess" translate="title">
+                                        <title>Low Stock Rules</title>
+                                        <sort_order>10</sort_order>
+                                    </lowstock_rule>
+                                    <lowstock_notification module="inventorysuccess" translate="title">
+                                        <title>Low Stock Notifications</title>
+                                        <sort_order>20</sort_order>
+                                    </lowstock_notification>
+                                </children>
+                            </prediction>
+                            <create_transferstock>
+                                <icon>icon-IMBackend-17</icon>
+                                <title>Transfer Stock</title>
+                                <sort_order>30</sort_order>
+                                <children>
+                                    <create_sendstock module="inventorysuccess" translate="title">
+                                        <title>Create Send Stock</title>
+                                        <sort_order>100</sort_order>
+                                    </create_sendstock>
+                                    <create_requeststock module="inventorysuccess" translate="title">
+                                        <title>Create Request Stock</title>
+                                        <sort_order>120</sort_order>
+                                    </create_requeststock>
+                                    <create_toexternal module="inventorysuccess" translate="title">
+                                        <title>Create Transfer to External</title>
+                                        <sort_order>130</sort_order>
+                                    </create_toexternal>
+                                    <create_fromexternal module="inventorysuccess" translate="title">
+                                        <title>Create Transfer from External</title>
+                                        <sort_order>130</sort_order>
+                                    </create_fromexternal>
+                                </children>
+                            </create_transferstock>
+                            <view_transferstock>
+                                <icon>icon-IMBackend-17</icon>
+                                <title>Stock Transfer History</title>
+                                <sort_order>40</sort_order>
+                                <children>
+                                    <view_sendstock module="inventorysuccess" translate="title">
+                                        <title>View Stock Sending History</title>
+                                        <sort_order>100</sort_order>
+                                    </view_sendstock>
+                                    <view_requeststock module="inventorysuccess" translate="title">
+                                        <title>View Stock Request History</title>
+                                        <sort_order>120</sort_order>
+                                    </view_requeststock>
+                                    <view_toexternal module="inventorysuccess" translate="title">
+                                        <title>View Transfer to External</title>
+                                        <sort_order>130</sort_order>
+                                    </view_toexternal>
+                                    <view_fromexternal module="inventorysuccess" translate="title">
+                                        <title>View Transfer from External</title>
+                                        <sort_order>130</sort_order>
+                                    </view_fromexternal>
+                                </children>
+                            </view_transferstock>
+                            <settings module="inventorysuccess" translate="title">
+                                <title>Settings</title>
+                                <sort_order>1000</sort_order>
+                            </settings>
+                        </children>
+                    </inventorysuccess>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

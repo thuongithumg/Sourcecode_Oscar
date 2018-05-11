@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<page layout='1column' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" >
+    <body>
+        <referenceContainer name="content">
+            <block class="Magestore\Webpos\Block\AbstractBlock"  cacheable="false" template="Magestore_Webpos::shift/register_shift.phtml">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="shift-listing" xsi:type="array">
+                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/shift/shift/shift-listing</item>
+                                <item name="children" xsi:type="array">
+                                    <!-- shift detail area -->
+                                    <item name="shift_detail" xsi:type="array">
+                                        <item name="sortOrder" xsi:type="string">0</item>
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/shift/shift/shift-detail</item>
+                                        <item name="displayArea" xsi:type="string">shift-detail</item>
+                                        <item name="children" xsi:type="array">
+
+                                            <!-- sales summary -->
+                                            <item name="sales-summary" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">0</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/shift/sales-summary/sales-summary</item>
+                                                <item name="displayArea" xsi:type="string">sales-summary</item>
+                                            </item>
+
+                                            <!-- list all cash activity of a shift -->
+                                            <item name="cash-activity" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">1</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/shift/cash-transaction/activity</item>
+                                                <item name="displayArea" xsi:type="string">cash-activity</item>
+                                            </item>
+
+                                            <!-- area for cash adjustment -->
+                                            <item name="cash-adjustment" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">1</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/shift/cash-transaction/cash-adjustment</item>
+                                                <item name="displayArea" xsi:type="string">cash-adjustment</item>
+                                            </item>
+
+
+                                            <!-- area for close shift -->
+                                            <item name="close-shift" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">1</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/shift/shift/close-shift</item>
+                                                <item name="displayArea" xsi:type="string">close-shift</item>
+                                            </item>
+                                        </item>
+                                    </item>
+
+
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

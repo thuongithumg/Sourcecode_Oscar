@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_Webposstripe
+ * @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <modules>
+        <Magestore_Webposstripe>
+            <version>0.1.0</version>
+        </Magestore_Webposstripe>
+    </modules>
+    <frontend>
+        <routers>
+            <webposstripe>
+                <use>standard</use>
+                <args>
+                    <module>Magestore_Webposstripe</module>
+                    <frontName>webposstripe</frontName>
+                </args>
+            </webposstripe>
+        </routers>
+        <layout>
+            <updates>
+                <webposstripe>
+                    <file>webposstripe.xml</file>
+                </webposstripe>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magestore_Webposstripe>
+                    <files>
+                        <default>Magestore_Webposstripe.csv</default>
+                    </files>
+                </Magestore_Webposstripe>
+            </modules>
+        </translate>
+    </frontend>
+    <admin>
+        <routers>
+            <webposstripeadmin>
+                <use>admin</use>
+                <args>
+                    <module>Magestore_Webposstripe</module>
+                    <frontName>webposstripeadmin</frontName>
+                </args>
+            </webposstripeadmin>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <webposstripe>
+                    <file>webposstripe.xml</file>
+                </webposstripe>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magestore_Webposstripe>
+                    <files>
+                        <default>Magestore_Webposstripe.csv</default>
+                    </files>
+                </Magestore_Webposstripe>
+            </modules>
+        </translate>
+    </adminhtml>   
+    <global>
+        <models>
+            <webposstripe>
+                <class>Magestore_Webposstripe_Model</class>
+                <resourceModel>webposstripe_mysql4</resourceModel>
+            </webposstripe>
+            <webposstripe_mysql4>
+                <class>Magestore_Webposstripe_Model_Mysql4</class>
+            </webposstripe_mysql4>
+        </models>
+        <resources>
+            <webposstripe_setup>
+                <setup>
+                    <module>Magestore_Webposstripe</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </webposstripe_setup>
+            <webposstripe_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </webposstripe_write>
+            <webposstripe_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </webposstripe_read>
+        </resources>
+        <blocks>
+            <webposstripe>
+                <class>Magestore_Webposstripe_Block</class>
+            </webposstripe>
+        </blocks>
+        <helpers>
+            <webposstripe>
+                <class>Magestore_Webposstripe_Helper</class>
+            </webposstripe>
+        </helpers>
+        <events>
+            <webpos_get_payment_after>
+                <observers>
+                    <webposstripe_observers>
+                        <class>webposstripe/observer</class>
+                        <method>webposGetPaymentAfter</method>
+                    </webposstripe_observers>
+                </observers>
+            </webpos_get_payment_after>
+        </events>
+    </global>
+    <default>
+        <webpos>
+            <payment>
+                <stripe>
+                    <enable>0</enable>
+                    <is_sandbox>0</is_sandbox>
+                </stripe>
+            </payment>
+        </webpos>
+    </default>
+</config>

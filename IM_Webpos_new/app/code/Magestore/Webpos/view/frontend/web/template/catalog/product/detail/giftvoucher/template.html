@@ -1,0 +1,43 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div class="form-group" style="clear: both">
+    <label for="giftcard_template_select" data-bind="i18n:'Select a template'"></label>
+
+    <input type="hidden" id="giftcard_template_select" name="giftcard_template_id"
+           data-bind="value: selectedTemplate().giftcard_template_id">
+    <div id="template_buttons" class="giftvoucher_custom_option" data-bind="foreach: templates">
+        <div class="template">
+            <button data-bind="attr: {id: 'template_' + giftcard_template_id},
+             click: $parent.selectTemplate.bind($data), css: {'gc-template-selected': $data.giftcard_template_id == $parent.selectedTemplate().giftcard_template_id}"
+                    class="gc-template-button" type="button" value="1">
+                <!-- ko text: template_name --><!-- /ko -->
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<input class="giftvoucher_custom_option" type="hidden" name="giftcard_template_image" id="giftcard-template-images"
+       data-bind="value: selectedImage" />
+<input type="hidden" id="giftcard_image_custom_select" name="giftcard_use_custom_image"
+       data-bind="value: isSelectCustomImage">
+<ul class="images-for-slider col-xs-12"
+    data-bind="foreach: images,attr: {id: 'image-for-' + selectedTemplate().giftcard_template_id}">
+    <li class="image-template"
+        style="position: relative; float: left; border: 2px solid transparent; width: 70px; height: 55px; text-align: center; cursor: pointer; margin-right: 0px;"
+        data-bind="attr: {id: 'div-image-for-' + $parent.selectedTemplate().giftcard_template_id + '-' + $index()}
+                    ,click: $parent.selectImage.bind($data, $parent.selectedTemplate().giftcard_template_id + '-' + $data),
+                    css: {'gift-active': (($parent.selectedTemplateImage() == $parent.selectedTemplate().giftcard_template_id + '-' + $data) && !$parent.isSelectCustomImage())}
+                ">
+        <img
+                data-bind="attr: {src: $data, id: 'div-image-for-' + $parent.selectedTemplate().giftcard_template_id + '-' + $index()}"
+                alt="image giftcard"
+                style="display:inline; border: 1px solid transparent;" />
+        <div class="egcSwatch-arrow" data-bind="visible: (($parent.selectedTemplateImage() == $parent.selectedTemplate().giftcard_template_id + '-' + $data) && !$parent.isSelectCustomImage())"></div>
+    </li>
+</ul>
+
+

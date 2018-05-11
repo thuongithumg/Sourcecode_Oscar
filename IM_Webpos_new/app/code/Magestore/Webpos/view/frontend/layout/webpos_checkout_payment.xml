@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<page layout='webpos' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" >
+    <body>
+        <referenceBlock name="webpos_checkout_page">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="webpos_checkout" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="webpos_checkout_payment" xsi:type="array">
+                                    <item name="component" xsi:type="string">Magestore_Webpos/js/view/checkout/checkout/payment</item>
+                                    <item name="displayArea" xsi:type="string">webpos_checkout_payment</item>
+                                </item>
+                                <item name="webpos_checkout_payment_selected" xsi:type="array">
+                                    <item name="component" xsi:type="string">Magestore_Webpos/js/view/checkout/checkout/payment_selected</item>
+                                    <item name="displayArea" xsi:type="string">webpos_checkout_payment_selected</item>
+                                </item>
+                                <item name="webpos_checkout_payment_creditcard" xsi:type="array">
+                                    <item name="component" xsi:type="string">Magestore_Webpos/js/view/checkout/checkout/payment_creditcard</item>
+                                    <item name="displayArea" xsi:type="string">webpos_checkout_payment_creditcard</item>
+                                </item>
+                                <item name="webpos_checkout_payment_popup" xsi:type="array">
+                                    <item name="component" xsi:type="string">Magestore_Webpos/js/view/checkout/checkout/payment_popup</item>
+                                    <item name="displayArea" xsi:type="string">webpos_checkout_payment_popup</item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

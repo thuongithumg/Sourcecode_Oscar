@@ -1,0 +1,25 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<!-- ko if: canLockRegister && is_display -->
+<div role="dialog" class="modal fade add-comment lock-register show in" style="z-index: 900;" data-bind="value: $data, click: focusPin">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="popup-header">
+                <button type="button" class="close" data-dismiss="modal" data-bind="text: $t('Cancel'), click: close"></button>
+                <span></span>
+            </div>
+            <div class="modal-body">
+                <div class="icon-lockPOS-modal"></div>
+                <div data-bind="text: $t('Please enter security PIN to lock the register')"></div>
+                <div class="block-pin" data-bind="foreach: pinBoxes">
+                    <input type="text" class="lock-register-pin" data-bind="value: $data"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="text" data-bind="attr:{'id': lockRegisterInputId}, event: {keyup: enterPin}">
+<!-- /ko -->

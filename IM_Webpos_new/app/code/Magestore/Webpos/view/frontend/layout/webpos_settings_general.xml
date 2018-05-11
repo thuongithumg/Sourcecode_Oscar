@@ -1,0 +1,224 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<page layout='webpos' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" >
+    <body>
+        <referenceBlock name="webpos_content">
+            <block class="Magestore\Webpos\Block\Settings\General" name="webpos-settings-general" after="webpos-customer-list" cacheable="false" template="Magestore_Webpos::settings/general.phtml">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="webpos-settings-general" xsi:type="array">
+                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/settings/general/content</item>
+                                <item name="children" xsi:type="array">
+                                    <item name="checkout_setting" xsi:type="array">
+                                        <item name="sortOrder" xsi:type="string">0</item>
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/settings/general/group</item>
+                                        <item name="displayArea" xsi:type="string">checkout_setting</item>
+                                        <item name="config" xsi:type="array">
+                                            <item name="label" xsi:type="string" translate="true">Checkout</item>
+                                            <item name="className" xsi:type="string">tab-pane</item>
+                                            <item name="idName" xsi:type="string">checkout_setting</item>
+                                        </item>
+                                        <item name="children" xsi:type="array">
+                                            <item name="enable_online" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">0</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/settings/general/checkout/enable-online</item>
+                                                <item name="config" xsi:type="array">
+                                                    <item name="label" xsi:type="string" translate="true">Use online mode</item>
+                                                </item>
+                                                <item name="idName" xsi:type="string">enable_online</item>
+                                            </item>
+                                            <item name="auto_check_promotion_rules" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">1</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/settings/general/checkout/auto-check-promotion-rules</item>
+                                                <item name="config" xsi:type="array">
+                                                    <item name="label" xsi:type="string" translate="true">Auto check the promotion rules on checkout</item>
+                                                </item>
+                                                <item name="idName" xsi:type="string">auto_check_promotion_rules</item>
+                                            </item>
+                                            <item name="sync_order_onhold" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">2</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/settings/general/checkout/sync-order-onhold</item>
+                                                <item name="config" xsi:type="array">
+                                                    <item name="label" xsi:type="string" translate="true">Sync on-hold order to server</item>
+                                                </item>
+                                                <item name="idName" xsi:type="string">sync_order_onhold</item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                    <item name="catalog" xsi:type="array">
+                                        <item name="sortOrder" xsi:type="string">5</item>
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/settings/general/group</item>
+                                        <item name="displayArea" xsi:type="string">catalog</item>
+                                        <item name="config" xsi:type="array">
+                                            <item name="label" xsi:type="string" translate="true">Catalog</item>
+                                            <item name="className" xsi:type="string">tab-pane active</item>
+                                            <item name="idName" xsi:type="string">catalog</item>
+                                        </item>
+                                        <item name="children" xsi:type="array">
+                                            <item name="outstockdisplay" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">5</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/settings/general/catalog/outstock-display</item>
+                                                <item name="config" xsi:type="array">
+                                                    <item name="label" xsi:type="string" translate="true">Display out-of-stock products in search results</item>
+                                                </item>
+                                                <item name="idName" xsi:type="string">catalog</item>
+                                            </item>
+                                        </item>
+                                    </item>
+
+                                    <item name="currency" xsi:type="array">
+                                        <item name="sortOrder" xsi:type="string">10</item>
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/settings/general/group</item>
+                                        <item name="displayArea" xsi:type="string">currency</item>
+                                        <item name="config" xsi:type="array">
+                                            <item name="label" xsi:type="string" translate="true">Currency</item>
+                                            <item name="className" xsi:type="string">tab-pane</item>
+                                            <item name="idName" xsi:type="string">currency-account</item>
+                                        </item>
+                                        <item name="children" xsi:type="array">
+                                            <item name="changecurrency" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">1</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/settings/general/currency/change-currency</item>
+                                                <item name="config" xsi:type="array">
+                                                    <item name="label" xsi:type="string" translate="true">Currency</item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+
+
+
+                                    <item name="os_store_credit" xsi:type="array">
+                                        <item name="sortOrder" xsi:type="string">20</item>
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/settings/general/group</item>
+                                        <item name="displayArea" xsi:type="string">os_store_credit</item>
+                                        <item name="config" xsi:type="array">
+                                            <item name="label" xsi:type="string" translate="true">Customer Credit</item>
+                                            <item name="className" xsi:type="string">tab-pane</item>
+                                            <item name="idName" xsi:type="string">os_store_credit</item>
+                                        </item>
+                                        <item name="children" xsi:type="array">
+                                            <item name="show_customer_credit_balance_on_receipt" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">0</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/settings/general/storecredit/show-storecredit-balance</item>
+                                                <item name="config" xsi:type="array">
+                                                    <item name="label" xsi:type="string" translate="true">Show customer credit balance on receipt</item>
+                                                </item>
+                                                <item name="idName" xsi:type="string">show_customer_credit_balance_on_receipt</item>
+                                            </item>
+                                            <item name="auto_sync_balance_when_checkout" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">0</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/settings/general/storecredit/auto-sync-balance</item>
+                                                <item name="config" xsi:type="array">
+                                                    <item name="label" xsi:type="string" translate="true">Auto sync customer credit balance from server when creating order (Internet connection required)</item>
+                                                </item>
+                                                <item name="idName" xsi:type="string">auto_sync_balance_when_checkout</item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                    <item name="os_reward_points" xsi:type="array">
+                                        <item name="sortOrder" xsi:type="string">25</item>
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/settings/general/group</item>
+                                        <item name="displayArea" xsi:type="string">os_reward_points</item>
+                                        <item name="config" xsi:type="array">
+                                            <item name="label" xsi:type="string" translate="true">Reward Points</item>
+                                            <item name="className" xsi:type="string">tab-pane</item>
+                                            <item name="idName" xsi:type="string">os_reward_points</item>
+                                        </item>
+                                        <item name="children" xsi:type="array">
+                                            <item name="show_customer_points_balance_on_receipt" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">0</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/settings/general/rewardpoints/show-rewardpoints-balance</item>
+                                                <item name="config" xsi:type="array">
+                                                    <item name="label" xsi:type="string" translate="true">Show customer points balance on receipt</item>
+                                                </item>
+                                                <item name="idName" xsi:type="string">show_customer_points_balance_on_receipt</item>
+                                            </item>
+                                            <item name="auto_sync_balance_when_checkout" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">0</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/settings/general/rewardpoints/auto-sync-balance</item>
+                                                <item name="config" xsi:type="array">
+                                                    <item name="label" xsi:type="string" translate="true">Auto sync customer points balance from server when creating order (Internet connection required)</item>
+                                                </item>
+                                                <item name="idName" xsi:type="string">auto_sync_balance_when_checkout</item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                    <!--
+                                    <item name="timeout" xsi:type="array">
+                                        <item name="sortOrder" xsi:type="string">2</item>
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/settings/general/timeout</item>
+                                        <item name="config" xsi:type="array">
+                                            <item name="label" xsi:type="string">Automatically log out after a period of inactivity</item>
+                                            <item name="className" xsi:type="string">test</item>
+                                            <item name="idName" xsi:type="string">timeout</item>
+                                        </item>
+                                    </item>
+                                    -->
+                                    <item name="hardware" xsi:type="array">
+                                        <item name="sortOrder" xsi:type="string">17</item>
+                                        <item name="component" xsi:type="string">Magestore_Webpos/js/view/settings/general/group</item>
+                                        <item name="displayArea" xsi:type="string">hardware</item>
+                                        <item name="config" xsi:type="array">
+                                            <item name="label" xsi:type="string" translate="true">POS Hub</item>
+                                            <item name="className" xsi:type="string">tab-pane</item>
+                                            <item name="idName" xsi:type="string">store-hardware</item>
+                                        </item>
+                                        <item name="children" xsi:type="array">
+                                            <item name="changehardware" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">0</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/settings/general/hardware/change-hardware</item>
+                                                <item name="config" xsi:type="array">
+                                                    <item name="label" xsi:type="string" translate="true">POS Hub IP Address</item>
+                                                </item>
+                                            </item>
+                                            <item name="enable_open_cashdrawer_manual" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">1</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/settings/general/hardware/cashdrawer-manual</item>
+                                                <item name="config" xsi:type="array">
+                                                    <item name="label" xsi:type="string" translate="true">Enable Open Cash Drawer Manually</item>
+                                                </item>
+                                                <item name="idName" xsi:type="string">cashdrawer-manual</item>
+                                            </item>
+                                            <item name="cashdrawer" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">2</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/settings/general/hardware/cashdrawer-code</item>
+                                                <item name="config" xsi:type="array">
+                                                    <item name="label" xsi:type="string" translate="true">Manual Cashdrawer Kick Code (Leave empty for automatically)</item>
+                                                </item>
+                                                <item name="idName" xsi:type="string">cashdrawer-code</item>
+                                            </item>
+                                            <item name="printer" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">3</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/settings/general/hardware/printer</item>
+                                                <item name="config" xsi:type="array">
+                                                    <item name="label" xsi:type="string" translate="true">Print Via POS Hub</item>
+                                                </item>
+                                                <item name="idName" xsi:type="string">printer</item>
+                                            </item>
+                                            <item name="poledisplay" xsi:type="array">
+                                                <item name="sortOrder" xsi:type="string">4</item>
+                                                <item name="component" xsi:type="string">Magestore_Webpos/js/view/settings/general/hardware/pole-display</item>
+                                                <item name="config" xsi:type="array">
+                                                    <item name="label" xsi:type="string" translate="true">Enable pole display</item>
+                                                </item>
+                                                <item name="idName" xsi:type="string">poledisplay</item>
+                                            </item>
+                                        </item>
+                                    </item>
+
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

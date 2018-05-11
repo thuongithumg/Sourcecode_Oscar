@@ -1,0 +1,462 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<layout version="0.1.0">
+    <adminhtml_system_config_edit>
+        <reference name="head">
+            <action method="addJs"><script>magestore/webpos/lib/jscolor/jscolor.js</script></action>
+        </reference>
+    </adminhtml_system_config_edit>
+    <adminhtml_zreport_print>
+        <reference name="head">
+            <action method="addJs">
+                <name>prototype/prototype.js</name>
+            </action>
+        </reference>
+        <label>Z-Report</label>
+        <reference name="content">
+            <block type="webpos/adminhtml_zreport_print" template="webpos/zreport/print.phtml" name="zreport-print"
+                   as="zreport-print"/>
+        </reference>
+    </adminhtml_zreport_print>
+    <adminhtml_zreport_prints>
+        <reference name="content">
+            <block type="webpos/adminhtml_zreport_print" template="webpos/zreport/print.phtml" name="webpos_prints"
+                   as="webpos_prints"/>
+        </reference>
+    </adminhtml_zreport_prints>
+    <adminhtml_zreport_index>
+        <reference name="content">
+            <block type="webpos/adminhtml_zreport" name="zreport"/>
+        </reference>
+    </adminhtml_zreport_index>
+    <adminhtml_till_index>
+        <reference name="content">
+            <block type="webpos/adminhtml_till" name="till"/>
+        </reference>
+    </adminhtml_till_index>
+    <adminhtml_posuser_index>
+        <reference name="content">
+            <block type="webpos/adminhtml_user" name="user"/>
+        </reference>
+    </adminhtml_posuser_index>
+    <adminhtml_webpos_index>
+        <reference name="content">
+            <block type="webpos/adminhtml_select" template="webpos/selectstore.phtml" name="select"/>
+        </reference>
+    </adminhtml_webpos_index>
+
+    <adminhtml_userlocation_index>
+        <reference name="content">
+            <block type="webpos/adminhtml_userlocation" name="userlocation" />
+        </reference>
+    </adminhtml_userlocation_index>
+    <adminhtml_pos_index>
+        <reference name="content">
+            <block type="webpos/adminhtml_pos" name="pos" />
+        </reference>
+    </adminhtml_pos_index>
+
+    <adminhtml_pos_edit>
+        <reference name="head">
+            <action method="addJs">
+                <script>magestore/webpos/require.js</script>
+            </action>
+            <action method="addJs">
+                <script>mage/translate.js</script>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/magestore/webpos/session.css</name>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="core/template" name="requirejs" as="requirejs" template="webpos/requirejs.phtml"/>
+        </reference>
+    </adminhtml_pos_edit>
+
+
+    <adminhtml_role_index>
+        <reference name="content">
+            <block type="webpos/adminhtml_role" name="role" />
+        </reference>
+    </adminhtml_role_index>
+
+    <adminhtml_report_grid>
+        <update handle="formkey"/>
+        <reference name="root">
+            <block type="webpos/adminhtml_report_grid" name="report_grid" output="toHtml" />
+        </reference>
+    </adminhtml_report_grid>
+
+    <adminhtml_userlocation_user>
+        <block type="core/text_list" name="root">
+            <block type="webpos/adminhtml_userlocation_edit_tab_user" name="userlocation.edit.tab.user"/>
+            <block type="adminhtml/widget_grid_serializer" name="related_grid_serializer">
+                <action method="initSerializerBlock">
+                    <grid_block_name>userlocation.edit.tab.user</grid_block_name>
+                    <data_callback>getSelectedUsers</data_callback>
+                    <hidden_input_name>userlocation_user</hidden_input_name>
+                    <reload_param_name>ouser</reload_param_name>
+                </action>
+            </block>
+        </block>
+    </adminhtml_userlocation_user>
+
+    <adminhtml_pos_sessions>
+        <block type="core/text_list" name="root">
+            <block type="webpos/adminhtml_pos_edit_tab_sessions" name="pos.edit.tab.sessions"/>
+            <block type="adminhtml/widget_grid_serializer" name="related_grid_serializer">
+                <action method="initSerializerBlock">
+                    <grid_block_name>pos.edit.tab.sessions</grid_block_name>
+                    <data_callback>getSelectedUsers</data_callback>
+                    <hidden_input_name>pos_sessions</hidden_input_name>
+                    <reload_param_name>sessions</reload_param_name>
+                </action>
+            </block>
+        </block>
+    </adminhtml_pos_sessions>
+
+    <adminhtml_pos_detail>
+            <block type="core/template" name="webpos_content_main" as="webpos_content_main"
+                   template="webpos/detail.phtml">
+            </block>
+    </adminhtml_pos_detail>
+
+    <adminhtml_userlocation_usergrid>
+        <block type="core/text_list" name="root">
+            <block type="webpos/adminhtml_userlocation_edit_tab_user" name="userlocation.edit.tab.user"/>
+        </block>
+    </adminhtml_userlocation_usergrid>
+
+    <adminhtml_role_user>
+        <block type="core/text_list" name="root">
+            <block type="webpos/adminhtml_role_edit_tab_user" name="role.edit.tab.user"/>
+            <block type="adminhtml/widget_grid_serializer" name="related_grid_serializer">
+                <action method="initSerializerBlock">
+                    <grid_block_name>role.edit.tab.user</grid_block_name>
+                    <data_callback>getSelectedUsers</data_callback>
+                    <hidden_input_name>role_user</hidden_input_name>
+                    <reload_param_name>ouser</reload_param_name>
+                </action>
+            </block>
+        </block>
+    </adminhtml_role_user>
+
+    <adminhtml_role_usergrid>
+        <block type="core/text_list" name="root">
+            <block type="webpos/adminhtml_role_edit_tab_user" name="role.edit.tab.user"/>
+        </block>
+    </adminhtml_role_usergrid>
+
+    <adminhtml_report_index>
+        <update handle="formkey"/>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/magestore/webpos/report-style.css</name>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="webpos/adminhtml_report" name="reportGrid" template="webpos/report/dashboard.phtml" />
+        </reference>
+    </adminhtml_report_index>
+    <adminhtml_report_grid>
+        <update handle="formkey"/>
+        <reference name="root">
+            <block type="webpos/adminhtml_report_grid" name="report_grid" output="toHtml" />
+        </reference>
+    </adminhtml_report_grid>
+    <adminhtml_report_sales_staff_index>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/magestore/webpos/report-style.css</name>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="webpos/adminhtml_report_sales_staff" template="webpos/report/grid/container.phtml"  name="sales.report.grid.container">
+                <block type="webpos/adminhtml_report_filter_form_order" name="grid.filter.form">
+                    <action method="addReportTypeOption" translate="value">
+                        <key>created_at_order</key>
+                        <value>Order Created Date</value>
+                    </action>
+                    <action method="addReportTypeOption" translate="value">
+                        <key>updated_at_order</key>
+                        <value>Order Updated Date</value>
+                    </action>
+                    <action method="setFieldOption" translate="value">
+                        <field>report_type</field>
+                        <option>note</option>
+                        <value>Order Updated Date report is real-time, does not need statistics refreshing.</value>
+                    </action>
+                </block>
+            </block>
+        </reference>
+    </adminhtml_report_sales_staff_index>
+    <adminhtml_report_sales_staff_daily_index>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/magestore/webpos/report-style.css</name>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="webpos/adminhtml_report_sales_staff_daily" template="webpos/report/grid/container.phtml"  name="sales.report.grid.container">
+                <block type="webpos/adminhtml_report_filter_form_order" name="grid.filter.form">
+                    <action method="addReportTypeOption" translate="value">
+                        <key>created_at_order</key>
+                        <value>Order Created Date</value>
+                    </action>
+                    <action method="addReportTypeOption" translate="value">
+                        <key>updated_at_order</key>
+                        <value>Order Updated Date</value>
+                    </action>
+                    <action method="setFieldOption" translate="value">
+                        <field>report_type</field>
+                        <option>note</option>
+                        <value>Order Updated Date report is real-time, does not need statistics refreshing.</value>
+                    </action>
+                </block>
+            </block>
+        </reference>
+    </adminhtml_report_sales_staff_daily_index>
+    <adminhtml_report_sales_staff_order_list_index>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/magestore/webpos/report-style.css</name>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="webpos/adminhtml_report_sales_staff_order_list" template="webpos/report/grid/container.phtml"  name="sales.report.grid.container">
+                <block type="webpos/adminhtml_report_filter_form_staff" name="grid.filter.form">
+                    <action method="addReportTypeOption" translate="value">
+                        <key>created_at_order</key>
+                        <value>Order Created Date</value>
+                    </action>
+                    <action method="addReportTypeOption" translate="value">
+                        <key>updated_at_order</key>
+                        <value>Order Updated Date</value>
+                    </action>
+                    <action method="setFieldOption" translate="value">
+                        <field>report_type</field>
+                        <option>note</option>
+                        <value>Order Updated Date report is real-time, does not need statistics refreshing.</value>
+                    </action>
+                </block>
+            </block>
+        </reference>
+    </adminhtml_report_sales_staff_order_list_index>
+    <adminhtml_report_sales_location_index>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/magestore/webpos/report-style.css</name>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="webpos/adminhtml_report_sales_location" template="webpos/report/grid/container.phtml"  name="sales.report.grid.container">
+                <block type="webpos/adminhtml_report_filter_form_order" name="grid.filter.form">
+                    <action method="addReportTypeOption" translate="value">
+                        <key>created_at_order</key>
+                        <value>Order Created Date</value>
+                    </action>
+                    <action method="addReportTypeOption" translate="value">
+                        <key>updated_at_order</key>
+                        <value>Order Updated Date</value>
+                    </action>
+                    <action method="setFieldOption" translate="value">
+                        <field>report_type</field>
+                        <option>note</option>
+                        <value>Order Updated Date report is real-time, does not need statistics refreshing.</value>
+                    </action>
+                </block>
+            </block>
+        </reference>
+    </adminhtml_report_sales_location_index>
+    <adminhtml_report_sales_location_daily_index>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/magestore/webpos/report-style.css</name>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="webpos/adminhtml_report_sales_location_daily" template="webpos/report/grid/container.phtml"  name="sales.report.grid.container">
+                <block type="webpos/adminhtml_report_filter_form_order" name="grid.filter.form">
+                    <action method="addReportTypeOption" translate="value">
+                        <key>created_at_order</key>
+                        <value>Order Created Date</value>
+                    </action>
+                    <action method="addReportTypeOption" translate="value">
+                        <key>updated_at_order</key>
+                        <value>Order Updated Date</value>
+                    </action>
+                    <action method="setFieldOption" translate="value">
+                        <field>report_type</field>
+                        <option>note</option>
+                        <value>Order Updated Date report is real-time, does not need statistics refreshing.</value>
+                    </action>
+                </block>
+            </block>
+        </reference>
+    </adminhtml_report_sales_location_daily_index>
+    <adminhtml_report_sales_location_order_list_index>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/magestore/webpos/report-style.css</name>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="webpos/adminhtml_report_sales_location_order_list" template="webpos/report/grid/container.phtml"  name="sales.report.grid.container">
+                <block type="webpos/adminhtml_report_filter_form_location" name="grid.filter.form">
+                    <action method="addReportTypeOption" translate="value">
+                        <key>created_at_order</key>
+                        <value>Order Created Date</value>
+                    </action>
+                    <action method="addReportTypeOption" translate="value">
+                        <key>updated_at_order</key>
+                        <value>Order Updated Date</value>
+                    </action>
+                    <action method="setFieldOption" translate="value">
+                        <field>report_type</field>
+                        <option>note</option>
+                        <value>Order Updated Date report is real-time, does not need statistics refreshing.</value>
+                    </action>
+                </block>
+            </block>
+        </reference>
+    </adminhtml_report_sales_location_order_list_index>
+    <adminhtml_report_sales_payment_index>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/magestore/webpos/report-style.css</name>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="webpos/adminhtml_report_sales_payment" template="webpos/report/grid/container.phtml"  name="sales.report.grid.container">
+                <block type="webpos/adminhtml_report_filter_form_order" name="grid.filter.form">
+                    <action method="addReportTypeOption" translate="value">
+                        <key>created_at_order</key>
+                        <value>Order Created Date</value>
+                    </action>
+                    <action method="addReportTypeOption" translate="value">
+                        <key>updated_at_order</key>
+                        <value>Order Updated Date</value>
+                    </action>
+                    <action method="setFieldOption" translate="value">
+                        <field>report_type</field>
+                        <option>note</option>
+                        <value>Order Updated Date report is real-time, does not need statistics refreshing.</value>
+                    </action>
+                </block>
+            </block>
+        </reference>
+    </adminhtml_report_sales_payment_index>
+    <adminhtml_report_sales_payment_daily_index>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/magestore/webpos/report-style.css</name>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="webpos/adminhtml_report_sales_payment_daily" template="webpos/report/grid/container.phtml"  name="sales.report.grid.container">
+                <block type="webpos/adminhtml_report_filter_form_order" name="grid.filter.form">
+                    <action method="addReportTypeOption" translate="value">
+                        <key>created_at_order</key>
+                        <value>Order Created Date</value>
+                    </action>
+                    <action method="addReportTypeOption" translate="value">
+                        <key>updated_at_order</key>
+                        <value>Order Updated Date</value>
+                    </action>
+                    <action method="setFieldOption" translate="value">
+                        <field>report_type</field>
+                        <option>note</option>
+                        <value>Order Updated Date report is real-time, does not need statistics refreshing.</value>
+                    </action>
+                </block>
+            </block>
+        </reference>
+    </adminhtml_report_sales_payment_daily_index>
+    <adminhtml_report_sales_payment_order_list_index>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/magestore/webpos/report-style.css</name>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="webpos/adminhtml_report_sales_payment_order_list" template="webpos/report/grid/container.phtml"  name="sales.report.grid.container">
+                <block type="webpos/adminhtml_report_filter_form_payment" name="grid.filter.form">
+                    <action method="addReportTypeOption" translate="value">
+                        <key>created_at_order</key>
+                        <value>Order Created Date</value>
+                    </action>
+                    <action method="addReportTypeOption" translate="value">
+                        <key>updated_at_order</key>
+                        <value>Order Updated Date</value>
+                    </action>
+                    <action method="setFieldOption" translate="value">
+                        <field>report_type</field>
+                        <option>note</option>
+                        <value>Order Updated Date report is real-time, does not need statistics refreshing.</value>
+                    </action>
+                </block>
+            </block>
+        </reference>
+    </adminhtml_report_sales_payment_order_list_index>
+    <adminhtml_report_sales_payment_location_index>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/magestore/webpos/report-style.css</name>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="webpos/adminhtml_report_sales_payment_location" template="webpos/report/grid/container.phtml"  name="sales.report.grid.container">
+                <block type="webpos/adminhtml_report_filter_form_order" name="grid.filter.form">
+                    <action method="addReportTypeOption" translate="value">
+                        <key>created_at_order</key>
+                        <value>Order Created Date</value>
+                    </action>
+                    <action method="addReportTypeOption" translate="value">
+                        <key>updated_at_order</key>
+                        <value>Order Updated Date</value>
+                    </action>
+                    <action method="setFieldOption" translate="value">
+                        <field>report_type</field>
+                        <option>note</option>
+                        <value>Order Updated Date report is real-time, does not need statistics refreshing.</value>
+                    </action>
+                </block>
+            </block>
+        </reference>
+    </adminhtml_report_sales_payment_location_index>
+    <adminhtml_cashdenomination_index>
+        <reference name="content">
+            <block type="webpos/adminhtml_cashdenomination" name="cashdenomination"/>
+        </reference>
+    </adminhtml_cashdenomination_index>
+</layout>

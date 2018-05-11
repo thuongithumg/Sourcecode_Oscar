@@ -1,0 +1,54 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div class="row" id="payment_selected">
+    <div class="col-sm-12">
+        <div class="payment-method payment-detail-box" data-bind="foreach: getPayments()">
+            <div class="wrap-detail-payment">
+                <div class="left-payment">
+                    <span data-bind="attr:{'class': iconClass}"></span>
+                    <label data-bind="text: title"></label>
+                </div>
+                <div class="reference-number">
+                    <input type="text"
+                           data-bind="visible: $parent.isShowReferenceNumber(is_reference_number),
+                                      event: {change: $parent.editReferenceNumber.bind($parent)},
+                                      attr:{'placeholder': $parent.getRefenceNumberText(),
+                                          'id': $parent.getRefenrenceNumberId(code)
+                                      }"
+                    />
+                </div>
+                <div class="input-actions">
+                    <div class="input-box">
+                        <!--ko if: is_extension_method -->
+                        <label data-bind="text: cart_total_formated" class="extension_payment_method"></label>
+                        <!--/ko-->
+                        <!--ko ifnot: is_extension_method -->
+                        <input type="text"
+                               onclick="this.select()"
+                               data-bind="value: cart_total_formated,
+                                          event: {change: $parent.editPaymentPrice.bind($parent)},
+                                          visible: $parent.checkVisibleInputBox(is_pay_later)"
+                        />
+                        <!--/ko-->
+                    </div>
+                    <a class="remove-icon" data-bind="event: {click: $parent.removeSelectedPayment.bind($parent)}">
+                        <span class="icon-iconPOS-remove"></span>
+                    </a>
+                </div>
+                <div class="detail-payment-form">
+                    <div class="input-box" data-bind="visible: $parent.isShowForm(code)">
+                        <select name="terminalId" class="selectpicker" id="payment-select" data-bind="
+                        value: id,
+                        options: $parent.showFormPayment(code),
+                        optionsValue: 'value',
+                        optionsText: 'text'">
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

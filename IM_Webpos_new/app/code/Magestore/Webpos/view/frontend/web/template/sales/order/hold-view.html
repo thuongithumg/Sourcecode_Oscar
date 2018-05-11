@@ -1,0 +1,67 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<!-- ko ifnot: orderData -->
+<div class="col-sm-8 col-left">
+    <header class="o-header">
+        <nav class="o-header-nav">
+            <span></span>
+            <label class="title title-header-page" data-bind="text: $t('Order Details')"></label>
+            <span></span>
+        </nav>
+    </header>
+    <main class="main-content main-content-no-order">
+        <div class="pos-machine icon-info"></div>
+        <div class="text-note">
+            <span class="icon-iconPOS-empty-order"></span>
+            <h4 class="title-box" data-bind="text: $t('You don\'t have any orders yet')"></h4>
+        </div>
+    </main>
+</div>
+<!--/ko-->
+
+<div class="col-sm-8 col-left">
+    <header class="o-header">
+        <!-- ko template: {name: templateTop, data: $parent} -->
+        <!-- /ko -->
+    </header>
+    <main class="main-content">
+        <div class="panel-group order-info">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="panel panel-default">
+                        <!-- ko template: {name: templateBilling, data: $parent} -->
+                        <!-- /ko -->
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="panel panel-default">
+                        <!-- ko template: {name: templateShipping, data: $parent} -->
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- ko template: {name: templateItems, data: $parent} -->
+                <!-- /ko -->
+            </div>
+            <!-- ko template: {name: templateComments, data: $parent} -->
+            <!-- /ko -->
+        </div>
+    </main>
+    <footer class="footer-order">
+        <!-- ko template: {name: templateTotal, data: $parent} -->
+        <!-- /ko -->
+        <div class="">
+            <div class="action-button">
+                <!-- ko if: isOnHold -->
+                <button class="button print" data-bind="text: $t('Delete'), click: cancelOnhold"/>
+                <button class="button invoice btn-cl-cfg-active"  data-bind="text: $t('Checkout'), click: continueProcessing"/>
+                <!--/ko-->
+            </div>
+        </div>
+    </footer>
+</div>

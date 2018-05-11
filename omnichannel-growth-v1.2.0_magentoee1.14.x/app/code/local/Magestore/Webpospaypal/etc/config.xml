@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_Webpospaypal
+ * @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <modules>
+        <Magestore_Webpospaypal>
+            <version>0.1.0</version>
+        </Magestore_Webpospaypal>
+    </modules>
+    <frontend>
+        <routers>
+            <webpospaypal>
+                <use>standard</use>
+                <args>
+                    <module>Magestore_Webpospaypal</module>
+                    <frontName>webpospaypal</frontName>
+                </args>
+            </webpospaypal>
+        </routers>
+        <layout>
+            <updates>
+                <webpospaypal>
+                    <file>webpospaypal.xml</file>
+                </webpospaypal>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magestore_Webpospaypal>
+                    <files>
+                        <default>Magestore_Webpospaypal.csv</default>
+                    </files>
+                </Magestore_Webpospaypal>
+            </modules>
+        </translate>
+    </frontend>
+    <admin>
+        <routers>
+            <webpospaypaladmin>
+                <use>admin</use>
+                <args>
+                    <module>Magestore_Webpospaypal</module>
+                    <frontName>webpospaypaladmin</frontName>
+                </args>
+            </webpospaypaladmin>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <webpospaypal>
+                    <file>webpospaypal.xml</file>
+                </webpospaypal>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magestore_Webpospaypal>
+                    <files>
+                        <default>Magestore_Webpospaypal.csv</default>
+                    </files>
+                </Magestore_Webpospaypal>
+            </modules>
+        </translate>
+    </adminhtml>   
+    <global>
+        <models>
+            <webpospaypal>
+                <class>Magestore_Webpospaypal_Model</class>
+                <resourceModel>webpospaypal_mysql4</resourceModel>
+            </webpospaypal>
+            <webpospaypal_mysql4>
+                <class>Magestore_Webpospaypal_Model_Mysql4</class>
+            </webpospaypal_mysql4>
+        </models>
+        <resources>
+            <webpospaypal_setup>
+                <setup>
+                    <module>Magestore_Webpospaypal</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </webpospaypal_setup>
+            <webpospaypal_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </webpospaypal_write>
+            <webpospaypal_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </webpospaypal_read>
+        </resources>
+        <blocks>
+            <webpospaypal>
+                <class>Magestore_Webpospaypal_Block</class>
+            </webpospaypal>
+        </blocks>
+        <helpers>
+            <webpospaypal>
+                <class>Magestore_Webpospaypal_Helper</class>
+            </webpospaypal>
+        </helpers>
+        <events>
+            <webpos_get_payment_after>
+                <observers>
+                    <webpospaypal_observers>
+                        <class>webpospaypal/observer</class>
+                        <method>webposGetPaymentAfter</method>
+                    </webpospaypal_observers>
+                </observers>
+            </webpos_get_payment_after>
+        </events>
+    </global>
+    <default>
+        <webpos>
+            <payment>
+                <paypal>
+                    <enable>0</enable>
+                    <is_sandbox>0</is_sandbox>
+                </paypal>
+            </payment>
+        </webpos>
+    </default>
+</config>

@@ -1,0 +1,113 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div class="col-sm-12">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <table class="table">
+                <colgroup>
+                    <col width="">
+                    <col width="">
+                    <col width="">
+                    <col width="95">
+                    <col width="">
+                    <col width="">
+                    <col width="">
+                    <col width="">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th data-bind="text: $t('Product')"/>
+                        <!--<th data-bind="text: $t('SKU')"/>-->
+                        <th data-bind="text: $t('Original Price')"/>
+                        <th data-bind="text: $t('Price')"/>
+                        <th data-bind="text: $t('Qty')"/>
+                        <th data-bind="text: $t('Subtotal')"/>
+                        <th data-bind="text: $t('Tax Amount')"/>
+                        <th data-bind="text: $t('Discount Amount')"/>
+                        <th data-bind="text: $t('Row Total')"/>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: {data: $parent.orderData().items, as: 'item'}">
+                    <!-- ko if: ['bundle','grouped'].indexOf(item.product_type)!=-1 -->
+                        <tr>
+                            <td>
+                                <h4 class="product-name" data-bind="html: item.name"></h4>
+                                <label class="product-sku" data-bind="text: $t('SKU')"></label>:
+                                <span class="product-sku" data-bind="html: item.sku"></span>
+                                <br />
+                                <!--<img src="" />-->
+                            </td>
+                            <!--<td class="order-id" data-bind="text: item.sku"/>-->
+                            <td class="price"/>
+                            <td class="price"/>
+                            <td class="order-id">
+                                <label data-bind="text: $t('Ordered: ') + item.qty_ordered"></label></br>
+                                <!-- ko if: item.qty_shipped > 0 -->
+                                <label data-bind="text: $t('Shipped: ') + item.qty_shipped"></label></br>
+                                <!-- /ko -->
+                            </td>
+                            <td class="price"/>
+                            <td class="price"/>
+                            <td class="price"/>
+                            <td class="price"/>
+                        </tr>
+                    <!-- /ko -->
+                    <!-- ko ifnot: ['bundle','grouped'].indexOf(item.product_type)!=-1 || (item.parent_item_id && !$parents[1].childOfBundleOrGroup(item)) -->
+                    <tr>
+                        <td>
+                            <h4 class="product-name" data-bind="html: item.name"></h4>
+                            <label class="product-sku" data-bind="text: $t('SKU')"></label>:
+                            <span class="product-sku" data-bind="html: item.sku"></span>
+                            <br />
+                            <!-- ko if: item.description -->
+                            <span class="custom-sale-description" data-bind="html: item.description"></span>
+                            <!-- /ko -->
+                            <!--<img src="" />-->
+                        </td>
+                        <!--<td class="order-id" data-bind="text: item.sku"/>-->
+                        <!-- ko if: item.product_type !== 'bundle' -->
+                        <td class="price" data-bind="text: $parents[1].convertAndFormatPrice(item.base_original_price)"/>
+                        <td class="price" data-bind="text: $parents[1].getItemPriceFormated(item)"/>
+                        <!-- /ko -->
+                        <!-- ko if: item.product_type === 'bundle' -->
+                        <td class="price" />
+                        <td class="price" />
+                        <!-- /ko -->
+                        <td class="order-id">
+                            <label data-bind="text: $t('Ordered: ') + item.qty_ordered"></label></br>
+                            <!-- ko if: item.qty_invoiced > 0 && item.product_type !== 'bundle'  -->
+                            <label data-bind="text: $t('Invoiced: ') + item.qty_invoiced"></label></br>
+                            <!-- /ko -->
+                            <!-- ko if: item.qty_shipped > 0 -->
+                            <label data-bind="text: $t('Shipped: ') + item.qty_shipped"></label></br>
+                            <!-- /ko -->
+                            <!-- ko if: item.qty_refunded > 0 -->
+                            <label data-bind="text: $t('Refunded: ') + item.qty_refunded"></label></br>
+                            <!-- /ko -->
+                            <!-- ko if: item.qty_canceled > 0 -->
+                            <label data-bind="text: $t('Canceled: ') + item.qty_canceled"></label></br>
+                            <!-- /ko -->
+                        </td>
+                        <!-- ko if: item.product_type !== 'bundle' -->
+                        <td class="price" data-bind="text: $parents[1].convertAndFormatPrice(item.base_row_total)"/>
+                        <td class="price" data-bind="text: $parents[1].convertAndFormatPrice(item.base_tax_amount)"/>
+                        <td class="price" data-bind="text: $parents[1].convertAndFormatPrice(
+                            item.base_discount_amount?item.base_discount_amount:0)"/>
+                        <td class="price" data-bind="text: $parents[1].getItemRowTotalFormated(item)"/>
+                        <!-- /ko -->
+                        <!-- ko if: item.product_type === 'bundle' -->
+                        <td class="price" />
+                        <td class="price" />
+                        <td class="price" />
+                        <td class="price" />
+                        <!-- /ko -->
+                    </tr>
+                <!-- /ko -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

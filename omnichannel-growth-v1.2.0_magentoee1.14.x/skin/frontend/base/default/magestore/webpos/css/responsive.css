@@ -1,0 +1,617 @@
+/*
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Webpos
+ * @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+@media (min-width: 1920px){
+    .active-on-checkout#popup-change-customer .arrow{top: 58px;}
+    #add-more-payment{bottom: 77px;}
+    nav.o-header-nav > .title-header-page {margin-top: 16px;}
+    .o-header-nav .remove-text{margin-top: 9px;}
+    .ms-webpos .main-content .wrap-list-product .payment-detail-box .wrap-detail-payment .input-actions .input-box input{width:350px;}
+    #popup-change-customer .arrow{top:58px;}
+    #popup-change-customer{    right: 62px !important;}
+    .ms-webpos button[class*='btn-']{height:50px}
+    .ms-webpos .main-content .wrap-list-product .product-item .number {height: 26px;min-width: 26px;line-height: 25px;font-size: 18px;}
+    #shift_container .main-content{height: calc(100vh - 495px);}
+    .wrap-table-error{height: calc(100vh - 250px)}
+    .wrap-checkout-page .wrap-account-container .wrap-main-account{max-height: calc(100vh - 166px)}
+    #shift_container .no-sales-summary.main-content {height: calc(100vh - 272px);}
+    .wrap-checkout-page .wrap-account-container .o-header-nav .title{padding-top:30px}
+    .sync_container .col-left .o-header-nav .title-page {padding-top: 15px;}
+    /* Menu */
+    .admin-account .logout-box a,
+    .c-menu--push-left .c-menu__link{font-size:18px;}
+    #c-button--push-left{padding: 26px 28px;margin: 0;}
+    /* End Menu */
+    body{font-size:15px;}
+    /*Product listing page */
+    [class^="icon-"],[class*=" icon-"]{font-size:32px}
+    .ms-webpos .main-content label.sku,
+    .ms-webpos .main-content .product-name{font-size:18px;}
+    .ms-webpos .main-content .product-name {min-height: 40px;max-height: 40px;overflow: hidden;}
+    .title-header-page,
+    .main-item-order .order-checkout .item h4.product-name,
+    .main-item-order .order-checkout .item .price-box .price,
+    .grand-total-footer .wrap-grand-total ul li label,
+    .grand-total-footer .wrap-grand-total ul li .price,
+    .ms-webpos .main-content .wrap-list-product .panel-title a,
+    .list-product-footer .wrap-footer .pos_modal_link,
+    .list-product-footer .wrap-footer .number-product,
+    #shift_container .col-left .o-header-nav .detail-datetime span,
+    .grand-total-footer button.button,
+    .life-time-sale label,
+    .checkout-footer .wrap-footer ul li .checkout-actions,
+    .checkout-footer .wrap-footer ul li .add-payment,
+    .wrap-checkout-page .wrap-account-container .footer-account  button.button{font-size:18px;}
+    :-moz-placeholder{font-size:15px;}
+    :-ms-input-placeholder{font-size:15px;}
+    ::-moz-placeholder{font-size:15px;}
+    ::-webkit-input-placeholder {font-size:15px;}
+    .search-header:-moz-placeholder{font-size:18px;}
+    .search-header:-ms-input-placeholder{font-size:18px;}
+    .search-header::-moz-placeholder{font-size:18px;}
+    .search-header::-webkit-input-placeholder {font-size:18px;}
+
+    .o-header-nav .form-inline  .form-group .icon-iconPOS-search{margin-top: 9px;}
+    .o-header .actions-customer .icon-iconPOS-change-customer {margin-top: 10px;margin-right: 18px;margin-bottom: 13px;}
+    .main-item-order .order-checkout .remove-icon,
+    .wrap-grand-total .icon-add{font-size:32px;}
+    .main-item-order .order-checkout .number{position: absolute;top:0;right:0;color: #fff;height: 20px;min-width: 20px;line-height: 17px;text-align: center;border-radius: 10px;font-size: 12px;width: auto;padding: 2px;}
+    .main-item-order .order-checkout .item .product-img img {max-height: 64px; min-width: 52px;}
+    .main-item-order .order-checkout .item .product-img {height: 64px; }
+    .main-item-order .order-checkout {max-height: calc(100vh - 418px);}
+    .list-product-footer{height: 50px;padding-top: 10px;}
+    .o-header-nav .form-inline  .search-header{height: 50px;padding: 0 12px;line-height: 50px;font-size: 18px;color: #3C4867;}
+    .o-header-nav .form-inline{margin-left: 149px;margin-bottom: 0;}
+    .o-header-nav .catalog-header{margin-top:14px;}
+    .notification-bell{left: 65px;top: 25px;z-index:999;width:40px;height:30px;}
+    .ms-webpos .o-header-nav{min-height:88px;}
+    .o-header-nav .form-inline  .form-group{margin-top:19px;}
+    .o-header-nav .more-info {margin-top: 22px}
+    .o-header-nav .more-info .icon-iconPOS-more {margin-top: 5px;color: #778597;margin-right: 15px;}
+    .ms-webpos .main-content .wrap-list-product [class^='col-'] {padding-left: 10px;padding-right: 10px;}
+    .ms-webpos .main-content .wrap-list-product .product-item{margin-bottom:20px}
+    .ms-webpos .main-content .product-img img {max-height: calc((66vw - 591px) / 4);}
+    .ms-webpos .main-content{height: calc(100vh - 86px);}
+    #checkout_container .main-content{height: calc(100vh - 141px);}
+    .main-item-order {height: calc(100vh - 135px);background: #eaedf1;}
+    .main-content-no-order {height: calc(100vh - 85px);}
+    .grand-total-footer button.button{height:54px;}
+    .admin-account .logout-box a,
+    .c-menu--push-left .c-menu__link,
+    .c-menu--push-left .c-menu__item [class^="icon-iconPOS"]{color:#76808d;}
+    #popup-product-detail .ms-qty span {width: 30px;height: 30px;line-height: 26px;font-size: 24px; }
+    #popup-product-detail .sku{font-size:15px;}
+    .c-menu--push-left .c-menu__item{padding:5px 18px;}
+    .c-menu--push-left .c-menu__items .title {padding: 15px 18px;font-size: 18px;}
+    .ms-webpos .main-content .wrap-list-product .payment-detail-box .wrap-detail-payment .input-actions .remove-icon span{font-size:32px!important}
+    /*End Product listing page */
+
+
+    /* Order page */
+    .order-pages .panel-group.order-info .customer-address label, .order-pages .panel-group.order-info .customer-address span,
+    .order-pages .main-item-order .list-orders li .item .id-order .type, .order-pages .main-item-order .list-orders li .item .id-order .time{font-size:15px;}
+    .order-pages .main-item-order .list-orders li .item .id-order .id,
+    .order-pages .order-info .panel-heading h5,
+    .order-pages .wrap-item-order .title-time.time-one,
+    .order-pages .footer-order .table-total td,
+    .order-pages .col-left .o-header-nav .id-order{font-size:18px;}
+    #shift_container .col-left .o-header-nav .detail-datetime,
+    .order-pages .col-left .o-header-nav .id-order{margin-top:16px;}
+    .wrap-status-orders ul li{height: 30px!important;line-height: 28px!important;text-align: left;padding-left: 23px!important;}
+    .wrap-status-orders ul li:before{top: 11px!important;}
+    .order-pages .wrap-item-order .title-time.time-one{height:50px;line-height:50px}
+    .wrap-item-order{max-height: calc(100vh - 193px);}
+    .main-content-no-order {height: calc(100vh - 85px);}
+    .order-pages .main-content{    height: calc(100vh - 400px)}
+    #webpos_order_view_container  .main-content{    height: calc(100vh - 447px)!important;}
+    #on_hold_orders_container .main-content{    height: calc(100vh - 417px)}
+    #shift_container .footer-shift  button.button,
+    .order-pages .footer-order  .action-button button{height: 50px;font-size: 18px;}
+    .order-pages .modal .modal-dialog .wrap-table{max-height:calc(100vh - 450px);overflow: auto}
+    /* End Order page */
+
+
+    /* Customer page */
+    #customer_list_container .form-inline  .search-header,
+    #customer_list_container .main-item-order .list-customer .item .customer-name,
+    .customer-popup-form .panel-title a,
+    .customer-popup-form .subscribe-box label,
+    .popup-for-right a.btn-use-guest, .popup-for-right a#btn-add-new-customer,
+    .popup-for-right .list-customer-old li a{font-size:18px;}
+    #shift_container .o-header .icon-add .icon-iconPOS-add,
+    #customer_list_container .o-header .icon-iconPOS-add{margin-top:28px;}
+    #customer_list_container .wrap-item-order {max-height: calc(100vh - 145px);}
+    .panel-group.customer-info .customer-info label{min-width:48px}
+    /* End Customer page */
+
+    /* Shift page */
+    .wrap-checkout-page .wrap-account-container .footer-account  button.button,
+    .wrap-general_container .footer-container button.button,
+    #shift_container .wrap-item-shift .title-time.time-one{height:50px;line-height:50px}
+    #shift_container .main-content .title-box,
+    #shift_container .wrap-item-shift .title-time.time-one{font-size:18px;}
+    #shift_container .popup-for-right .popup-header button{margin:0}
+    #shift_container .popup-for-right .popup-header label{margin-top:2px;}
+    #shift_container .col-left .o-header-nav .detail-datetime span{display:block;margin-top:0}
+    #shift_container .main-content .table,
+    #shift_container .main-content .table .staff-name,
+    #shift_container .main-item-shift .list-shifts li .item .date-time .day-month, #shift_container .main-item-shift .list-shifts li .item .date-time .type, #shift_container .main-item-shift .list-shifts li .item .price-date .price, #shift_container .main-item-shift .list-shifts li .item .price-date .time{font-size:15px}
+    /* End Shift page */
+
+    /* General page */
+    #general_container .col-left .o-header-nav .title-page {display: inline-block;padding-top:16px;}
+    /* End General page */
+
+    /* Checkout page */
+    .checkout-header {
+        padding: 20px 0 0;
+        border-bottom: 1px solid #d7d7d7;
+        height: 89px;
+        margin-bottom: 3px;
+    }
+    /* End Checkout page */
+
+
+    .panel-group.customer-info{height: calc(100vh - 150px);}
+    #customer_list_container .o-header .customer-name{margin-top:22px;}
+    #shift_container .main-content .table .date-time{font-size:15px;}
+    .notification-info{top: 64px;}
+    .notification-info{top: 64px;}
+    .notification-info .arrow{left:72px;}
+    span.notification-bell__mentions {min-width: 20px;height: 20px;top: -7px;right:1px;line-height:19px;}
+}
+@media (min-width: 1600px) and (max-width: 1919px){
+    /* Menu */
+    #add-more-payment{bottom: 77px;}
+    .active-on-checkout#popup-change-customer .arrow{top: 58px;}
+    #webpos_order_view_container  .main-content{    height: calc(100vh - 447px)}
+    nav.o-header-nav > .title-header-page {margin-top: 16px;}
+    .o-header-nav .remove-text{margin-top: 9px;}
+    #shift_container .main-content{height: calc(100vh - 495px);}
+    #shift_container .no-sales-summary.main-content {height: calc(100vh - 272px);}
+    .wrap-table-error{height: calc(100vh - 250px)}
+    .sync_container .col-left .o-header-nav .title-page {padding-top: 15px;}
+    #popup-change-customer .arrow{top:58px;}
+    #popup-change-customer{    right: 62px !important;}
+    .ms-webpos .main-content .wrap-list-product .payment-detail-box .wrap-detail-payment .input-actions .input-box input{width:250px;}
+    #c-button--push-left{padding: 26px 28px;margin: 0;}
+    .wrap-checkout-page .wrap-account-container .wrap-main-account{max-height: calc(100vh - 166px)}
+    .sync_container .wrap-general_container .main-content{height:auto}
+    .wrap-checkout-page .wrap-shift_container .main-sync {height: calc(100vh - 155px);}
+    .ms-webpos .main-content .wrap-list-product .product-item .number {height: 26px;min-width: 26px;line-height: 25px;font-size: 18px;}
+    .wrap-checkout-page .wrap-account-container .o-header-nav .title{padding-top:30px}
+    /* End Menu */
+    body{font-size:15px;}
+    /*Product listing page */
+    [class^="icon-"],[class*=" icon-"]{font-size:32px}
+    .ms-webpos .main-content label.sku,
+    .ms-webpos .main-content .product-name{font-size:18px;}
+    .ms-webpos .main-content .product-name {min-height: 40px;max-height: 75px;overflow: hidden;}
+    .title-header-page,
+    .main-item-order .order-checkout .item h4.product-name,
+    .main-item-order .order-checkout .item .price-box .price,
+    .grand-total-footer .wrap-grand-total ul li label,
+    .grand-total-footer .wrap-grand-total ul li .price,
+    .list-product-footer .wrap-footer .pos_modal_link,
+    .list-product-footer .wrap-footer .number-product,
+    .ms-webpos .main-content .wrap-list-product .panel-title a,
+    #shift_container .col-left .o-header-nav .detail-datetime span,
+    .grand-total-footer button.button,
+    .life-time-sale label,
+    .checkout-footer .wrap-footer ul li .checkout-actions, .checkout-footer .wrap-footer ul li .add-payment,
+    .wrap-checkout-page .wrap-account-container .footer-account  button.button{font-size:18px;}
+    :-moz-placeholder{font-size:14px;}
+    :-ms-input-placeholder{font-size:14px;}
+    ::-moz-placeholder{font-size:14px;}
+    ::-webkit-input-placeholder {font-size:14px;}
+    .search-header:-moz-placeholder{font-size:18px;}
+    .search-header:-ms-input-placeholder{font-size:18px;}
+    .search-header::-moz-placeholder{font-size:18px;}
+    .search-header::-webkit-input-placeholder {font-size:18px;}
+
+    .o-header-nav .form-inline  .form-group .icon-iconPOS-search{margin-top: 9px;}
+    .o-header .actions-customer .icon-iconPOS-change-customer {margin-top: 10px;margin-right: 18px;margin-bottom: 13px;}
+    .main-item-order .order-checkout .remove-icon,
+    .wrap-grand-total .icon-add{font-size:32px;}
+    .main-item-order .order-checkout .number{position: absolute;top:0;right:0;color: #fff;height: 20px;min-width: 20px;line-height: 17px;text-align: center;border-radius: 10px;font-size: 12px;width: auto;padding: 2px;}
+    .main-item-order .order-checkout .item .product-img img {max-height: 64px;}
+    .main-item-order .order-checkout .item .product-img {height: 64px; }
+    .main-item-order .order-checkout {max-height: calc(100vh - 402px);}
+    .list-product-footer{height: 50px;padding-top: 10px;}
+    .o-header-nav .form-inline  .search-header{height: 50px;padding: 0 12px;line-height: 50px;font-size: 18px;color: #3C4867;}
+    .o-header-nav .form-inline{margin-left: 149px;margin-bottom: 0;}
+    .o-header-nav .catalog-header{margin-top:14px;}
+    .notification-bell{position:absolute;left: 78px;top:28px;z-index:999;width:40px;height:30px;}
+    .ms-webpos .o-header-nav{min-height:88px;}
+    .o-header-nav .form-inline  .form-group{margin-top:19px;}
+    .o-header-nav .more-info {margin-top: 22px}
+    .o-header-nav .more-info .icon-iconPOS-more {margin-top: 5px;margin-right: 15px;}
+    .ms-webpos .main-content .wrap-list-product [class^='col-'] {padding-left: 10px;padding-right: 10px;}
+    .ms-webpos .main-content .wrap-list-product .product-item{margin-bottom:20px}
+    .ms-webpos .main-content .product-img img {max-height: calc((66vw - 591px) / 4);}
+    .ms-webpos .main-content{height: calc(100vh - 86px);}
+    #checkout_container .main-content{height: calc(100vh - 141px);}
+    .main-item-order {height: calc(100vh - 135px);background: #eaedf1;}
+    .grand-total-footer button.button{height:54px;}
+    .admin-account .logout-box a,
+    .c-menu--push-left .c-menu__link,
+    .c-menu--push-left .c-menu__item [class^="icon-iconPOS"]{color:#76808d;}
+    #popup-product-detail .ms-qty span {width: 30px;height: 30px; line-height: 26px;font-size: 24px; }
+    #popup-product-detail .sku{font-size:15px;}
+    .c-menu--push-left .c-menu__item{padding:5px 18px;}
+    .c-menu--push-left .c-menu__items .title {padding: 15px 18px;font-size: 18px;}
+    .ms-webpos .main-content .wrap-list-product .payment-detail-box .wrap-detail-payment .input-actions .remove-icon span{font-size:32px!important}
+    .ms-webpos button[class*='btn-']{height:40px}
+    /*
+    #webpos_cart_discountpopup .arrow {bottom: 220px!important;top: auto;}
+    */
+    /*End Product listing page */
+
+
+    /* Order page */
+    .order-pages .panel-group.order-info .customer-address label, .order-pages .panel-group.order-info .customer-address span,
+    .order-pages .main-item-order .list-orders li .item .id-order .type, .order-pages .main-item-order .list-orders li .item .id-order .time{font-size:15px;}
+    .order-pages .main-item-order .list-orders li .item .id-order .id,
+    .order-pages .order-info .panel-heading h5,
+    .order-pages .wrap-item-order .title-time.time-one,
+    .order-pages .footer-order .table-total td,
+    .order-pages .col-left .o-header-nav .id-order{font-size:18px;}
+    #shift_container .col-left .o-header-nav .detail-datetime,
+    .order-pages .col-left .o-header-nav .id-order{margin-top:16px;}
+    .wrap-status-orders ul li{height: 30px!important;line-height: 28px!important;text-align: left;padding-left: 23px!important;}
+    .wrap-status-orders ul li:before{top: 11px!important;}
+    .order-pages .wrap-item-order .title-time.time-one{height:50px;line-height:50px}
+    .wrap-item-order{max-height: calc(100vh - 187px);}
+    .order-pages .main-content{    height: calc(100vh - 400px)}
+    #shift_container .footer-shift  button.button,
+    .order-pages .footer-order  .action-button button{height: 50px;font-size: 18px;}
+    .order-pages .modal .modal-dialog .wrap-table{max-height:calc(100vh - 450px);overflow: auto}
+    /* End Order page */
+
+
+    /* Customer page */
+    #customer_list_container .form-inline  .search-header,
+    #customer_list_container .main-item-order .list-customer .item .customer-name,
+    .customer-popup-form .panel-title a,
+    .customer-popup-form .subscribe-box label,
+    .popup-for-right a.btn-use-guest, .popup-for-right a#btn-add-new-customer,
+    .popup-for-right .list-customer-old li a{font-size:18px;}
+    #shift_container .o-header .icon-add .icon-iconPOS-add,
+    #customer_list_container .o-header .icon-iconPOS-add{margin-top:28px;}
+    #customer_list_container .wrap-item-order {max-height: calc(100vh - 105px);}
+    .panel-group.customer-info .customer-info label{min-width:48px}
+    /* End Customer page */
+
+    /* Shift page */
+    .wrap-checkout-page .wrap-account-container .footer-account  button.button,
+    .wrap-general_container .footer-container button.button,
+    #shift_container .wrap-item-shift .title-time.time-one{height:50px;line-height:50px}
+    .wrap-checkout-page .wrap-shift_container .o-header-nav .title,
+    #shift_container .main-content .title-box,
+    #shift_container .wrap-item-shift .title-time.time-one{font-size:18px;}
+    #shift_container .popup-for-right .popup-header button{margin:0}
+    #shift_container .popup-for-right .popup-header label{margin-top:2px;}
+    #shift_container .col-left .o-header-nav .detail-datetime span{display:block;margin-top:0;font-size: 18px;}
+    #shift_container .main-content .table,
+    #shift_container .main-content .table .staff-name,
+    #shift_container .main-item-shift .list-shifts li .item .date-time .day-month, #shift_container .main-item-shift .list-shifts li .item .date-time .type, #shift_container .main-item-shift .list-shifts li .item .price-date .price, #shift_container .main-item-shift .list-shifts li .item .price-date .time{font-size:15px}
+    /* End Shift page */
+
+    /* General page */
+    #general_container .col-left .o-header-nav .title-page {font-size: 18px;display: inline-block;padding-top:16px}
+    /* End General page */
+
+
+    /* Checkout page */
+    .checkout-header {
+        padding: 20px 0 0;
+        border-bottom: 1px solid #d7d7d7;
+        height: 89px;
+        margin-bottom: 3px;
+    }
+    /* End Checkout page */
+
+
+    .panel-group.customer-info{height: calc(100vh - 150px);}
+    #customer_list_container .o-header .customer-name{margin-top:22px;}
+    #shift_container .main-content .table .date-time{font-size:15px;}
+    .notification-info{top: 64px;}
+    .notification-info{top: 64px;}
+    .notification-info .arrow{left:72px;}
+    span.notification-bell__mentions {min-width: 20px;height: 20px;top: -7px;right:1px;line-height:18px;}
+}
+
+/*Style for  1366px - 1599px*/
+@media (min-width: 1366px) and (max-width: 1599px){
+    /* Menu */
+    .ms-webpos .main-content .wrap-list-product .payment-detail-box .wrap-detail-payment .input-actions .input-box input{width:200px;}
+    #c-button--push-left{padding: 16px 18px;margin: 0;}
+    .o-header-nav .remove-text{margin-top: 9px;}
+    /* End Menu */
+    .ms-webpos .main-content .wrap-list-product{height: calc(100vh - 135px);}
+    .o-header-nav .customer-name .title-header-page,
+    nav.o-header-nav > .title-header-page {margin-top:5px;}
+    body{font-size:14px;}
+    .ms-webpos .main-content .wrap-list-product .product-item .number {height: 26px;min-width: 26px;line-height: 25px;font-size: 18px;}
+    /*Product listing page */
+    [class^="icon-"],[class*=" icon-"]{font-size:24px}
+    .ms-webpos .main-content label.sku,
+    .ms-webpos .main-content .product-name{font-size:16px;}
+    .ms-webpos .main-content .product-name {min-height: 55px;max-height: 55px;overflow: hidden;}
+    .title-header-page,
+    .main-item-order .order-checkout .item h4.product-name,
+    .main-item-order .order-checkout .item .price-box .price,
+    .grand-total-footer .wrap-grand-total ul li label,
+    .grand-total-footer .wrap-grand-total ul li .price,
+    .list-product-footer .wrap-footer .pos_modal_link,
+    .ms-webpos .main-content .wrap-list-product .panel-title a,
+    .list-product-footer .wrap-footer .number-product,
+    .grand-total-footer button.button,
+    .life-time-sale label{font-size:15px;line-height: 1;}
+    :-moz-placeholder{font-size:14px;}
+    :-ms-input-placeholder{font-size:14px;}
+    ::-moz-placeholder{font-size:14px;}
+    ::-webkit-input-placeholder {font-size:14px;}
+    .o-header-nav .form-inline  .form-group .icon-iconPOS-search{margin-top:10px;}
+    .o-header .actions-customer .icon-iconPOS-change-customer {margin-top: 10px;margin-right: 18px;margin-bottom: 13px;}
+    .main-item-order .order-checkout .remove-icon,
+    .wrap-grand-total .icon-add{font-size:24px;}
+    .main-item-order .order-checkout .number{position: absolute;top:0;right:0;color: #fff;height: 20px;min-width: 20px;line-height: 17px;text-align: center;border-radius: 10px;font-size: 12px;width: auto;padding: 2px;}
+    .main-item-order .order-checkout .item .product-img img {max-height: 64px;}
+    .main-item-order .order-checkout .item .product-img {height: 64px; }
+    .main-item-order .order-checkout {max-height: calc(100vh - 336px);}
+    .list-product-footer{height: 50px;padding-top: 10px;}
+    .o-header-nav .form-inline  .search-header{height: 40px;padding: 0 12px;line-height: 40px;font-size: 16px;color: #3C4867;}
+    .o-header-nav .form-inline{margin-left: 149px;margin-bottom: 0;}
+    .o-header-nav .catalog-header{margin-top:2px;}
+    .notification-bell{left: 60px;top: 24px;width:40px;height:30px;}
+    .ms-webpos .o-header-nav{min-height:55px;}
+    .o-header-nav .form-inline  .form-group{margin-top:8px;}
+    .o-header-nav .more-info {margin-top:15px}
+    .o-header-nav .more-info .icon-iconPOS-more {margin-top: 5px;margin-right: 15px;}
+    .ms-webpos .main-content .wrap-list-product [class^='col-'] {padding-left: 10px;padding-right: 10px;}
+    .ms-webpos .main-content .wrap-list-product .product-item{margin-bottom:20px}
+    .ms-webpos .main-content .product-img img {max-height: calc((66vw - 591px) / 4);}
+    .ms-webpos .main-content{height: calc(100vh - 58px);}
+    .main-item-order {height:calc(100vh - 110px);background: #eaedf1;}
+    .admin-account .logout-box a,
+    .c-menu--push-left .c-menu__link,
+    .c-menu--push-left .c-menu__item [class^="icon-iconPOS"]{color:#76808d;}
+    #popup-product-detail .ms-qty span {width: 30px;height: 30px;line-height:26px;font-size: 24px; }
+    #popup-product-detail .sku{font-size:15px;}
+    .ms-webpos .o-header-nav .c-button {padding: 0 24px;}
+
+    /*End Product listing page */
+
+
+    /* Order page */
+    .order-pages .panel-group.order-info .customer-address label, .order-pages .panel-group.order-info .customer-address span,
+    .order-pages .main-item-order .list-orders li .item .id-order .type, .order-pages .main-item-order .list-orders li .item .id-order .time{font-size:15px;}
+    .order-pages .main-item-order .list-orders li .item .id-order .id,
+    .order-pages .order-info .panel-heading h5,
+    .order-pages .wrap-item-order .title-time.time-one,
+    .order-pages .footer-order .table-total td,
+    .order-pages .col-left .o-header-nav .id-order{font-size:16px;}
+    .order-pages .col-left .o-header-nav .id-order{margin-top:5px;}
+    .wrap-status-orders ul li{height: 30px!important;line-height: 28px!important;text-align: left;padding-left: 23px!important;}
+    .wrap-status-orders ul li:before{top: 11px!important;}
+    .order-pages .wrap-item-order .title-time.time-one{height:50px;line-height:50px}
+    .wrap-item-order{max-height: calc(100vh - 187px);}
+    .order-pages .main-content{    height: calc(100vh - 400px)}
+    #on_hold_orders_container .main-content{    height: calc(100vh - 417px)}
+    .order-pages .footer-order  .action-button button{height: 50px;font-size: 16px;}
+    .order-pages .modal .modal-dialog .wrap-table{max-height:calc(100vh - 420px);overflow: auto}
+    /* End Order page */
+
+
+    /* Customer page */
+    #customer_list_container .form-inline  .search-header,
+    #customer_list_container .main-item-order .list-customer .item .customer-name,
+    .customer-popup-form .panel-title a,
+    .customer-popup-form .subscribe-box label,
+    .popup-for-right a.btn-use-guest, .popup-for-right a#btn-add-new-customer,
+    .popup-for-right .list-customer-old li a{font-size:16px;}
+    #shift_container .o-header .icon-add .icon-iconPOS-add,
+    #customer_list_container .o-header .icon-iconPOS-add{margin-top:19px;}
+    #customer_list_container .wrap-item-order {max-height: calc(100vh - 105px);}
+    .panel-group.customer-info .customer-info label{min-width:48px}
+    /* End Customer page */
+
+    /* Shift page */
+    #shift_container .footer-shift  button.button,
+    .wrap-general_container .footer-container button.button,
+    .wrap-checkout-page .wrap-account-container .footer-account  button.button,
+    #shift_container .wrap-item-shift .title-time.time-one{height:50px;line-height:50px}
+    .wrap-checkout-page .wrap-shift_container .o-header-nav .title,
+    #shift_container .main-content .title-box,
+    #shift_container .wrap-item-shift .title-time.time-one{font-size:16px;}
+    #shift_container .popup-for-right .popup-header button{margin:0}
+    #shift_container .popup-for-right .popup-header label{margin-top:2px;}
+    #shift_container .col-left .o-header-nav .detail-datetime span{display:block;margin-top:0;font-size: 16px;}
+    #shift_container .main-content .table,
+    #shift_container .main-content .table .staff-name,
+    #shift_container .main-item-shift .list-shifts li .item .date-time .day-month, #shift_container .main-item-shift .list-shifts li .item .date-time .type, #shift_container .main-item-shift .list-shifts li .item .price-date .price, #shift_container .main-item-shift .list-shifts li .item .price-date .time{font-size:14px}
+    /* End Shift page */
+
+    /* General page */
+    #general_container .col-left .o-header-nav .title-page {font-size: 18px;display: inline-block;line-height: 55px;margin: 0;padding: 0;}
+    /* End General page */
+    /* Checkout page */
+    .checkout-header {padding: 10px 0 0; border-bottom: 1px solid #d7d7d7;height: 56px;margin-bottom: 3px;}
+    /* End Checkout page */
+    .panel-group.customer-info{height: calc(100vh - 150px);}
+    #customer_list_container .o-header .customer-name{    margin-top: 0;margin-bottom: 0;line-height:35px;}
+    #shift_container .main-content .table .date-time{font-size:14px;}
+    .notification-info{top: 64px;}
+    .notification-info{top: 64px;}
+    .notification-info .arrow{left:72px;}
+    span.notification-bell__mentions {min-width: 20px;height: 20px;top: -7px;right:1px;    line-height: 18px;}
+}
+/*Style for  1280px - 1365px*/
+@media (min-width: 1280px) and (max-width: 1365px){
+    /* Menu */
+    .o-header-nav .remove-text{margin-top: 9px;}
+    #c-button--push-left{padding: 16px 18px;margin: 0;}
+    /* End Menu */
+    body{font-size:14px;}
+    /*Product listing page */
+    .ms-webpos .main-content .wrap-list-product{    height: calc(100vh - 125px);}
+    .customer-popup-form h4.modal-title{margin-top:5px}
+    [class^="icon-"],[class*=" icon-"]{font-size:24px}
+    .ms-webpos .main-content label.sku,
+    .ms-webpos .main-content .product-name{font-size:15px;}
+    .ms-webpos .main-content .product-name {min-height: 40px;max-height: 40px;overflow: hidden;}
+    .title-header-page,
+    .main-item-order .order-checkout .item h4.product-name,
+    .main-item-order .order-checkout .item .price-box .price,
+    .grand-total-footer .wrap-grand-total ul li label,
+    .grand-total-footer .wrap-grand-total ul li .price,
+    .list-product-footer .wrap-footer .pos_modal_link,
+    .list-product-footer .wrap-footer .number-product,
+    .grand-total-footer button.button,
+    .life-time-sale label{font-size:15px;}
+    :-moz-placeholder{font-size:14px;}
+    :-ms-input-placeholder{font-size:14px;}
+    ::-moz-placeholder{font-size:14px;}
+    ::-webkit-input-placeholder {font-size:14px;}
+    .o-header-nav .form-inline  .form-group .icon-iconPOS-search{margin-top:10px;}
+    .o-header .actions-customer .icon-iconPOS-change-customer {margin-top: 10px;margin-right: 18px;margin-bottom: 13px;}
+    .main-item-order .order-checkout .remove-icon,
+    .wrap-grand-total .icon-add{font-size:24px;}
+    .main-item-order .order-checkout .number{position: absolute;top:0;right:0;color: #fff;height: 20px;min-width: 20px;line-height: 17px;text-align: center;border-radius: 10px;font-size: 12px;width: auto;padding: 2px;}
+    .main-item-order .order-checkout .item .product-img img {max-height: 64px;}
+    .main-item-order .order-checkout .item .product-img {height: 64px; }
+    .main-item-order .order-checkout {max-height: calc(100vh - 334px);}
+    .list-product-footer{height: 50px;padding-top: 10px;}
+    .o-header-nav .form-inline  .search-header{height: 40px;padding: 0 12px;line-height: 40px;font-size: 16px;color: #3C4867;}
+    .o-header-nav .form-inline{margin-left: 149px;margin-bottom: 0;}
+    .o-header-nav .catalog-header{margin-top:2px;}
+    .notification-bell{position:absolute;left:46px;top:16px;z-index:999;width:40px;height:30px;}
+    .ms-webpos .o-header-nav{min-height:55px;}
+    .o-header-nav .form-inline  .form-group{margin-top:8px;}
+    .o-header-nav .more-info {margin-top:15px}
+    .o-header-nav .more-info .icon-iconPOS-more {margin-top: 5px;margin-right: 15px;}
+    .ms-webpos .main-content .wrap-list-product [class^='col-'] {padding-left: 10px;padding-right: 10px;}
+    .ms-webpos .main-content .wrap-list-product .product-item{margin-bottom:20px}
+    .ms-webpos .main-content .product-img img {max-height: calc((66vw - 591px) / 4);}
+    .ms-webpos .main-content{height: calc(100vh - 58px);}
+    .main-item-order {height:calc(100vh - 110px);background: #eaedf1;}
+    .grand-total-footer button.button{height:35px;}
+    .admin-account .logout-box a,
+    .c-menu--push-left .c-menu__link,
+    .c-menu--push-left .c-menu__item [class^="icon-iconPOS"]{color:#76808d;}
+    #popup-product-detail .ms-qty span {width: 30px;height: 30px;line-height: 26px;font-size: 24px; }
+    #popup-product-detail .sku{font-size:15px;}
+    .ms-webpos .o-header-nav .c-button {padding: 0 24px;}
+    #webpos_cart .main-item-order {height: calc(100vh - 99px);background: #eaedf1;}
+    /*End Product listing page */
+
+    /* Order page */
+    .order-pages .panel-group.order-info .customer-address label, .order-pages .panel-group.order-info .customer-address span,
+    .order-pages .main-item-order .list-orders li .item .id-order .type, .order-pages .main-item-order .list-orders li .item .id-order .time{font-size:15px;}
+    .order-pages .main-item-order .list-orders li .item .id-order .id,
+    .order-pages .order-info .panel-heading h5,
+    .order-pages .wrap-item-order .title-time.time-one,
+    .order-pages .footer-order .table-total td,
+    .order-pages .col-left .o-header-nav .id-order{font-size:16px;}
+    .order-pages .col-left .o-header-nav .id-order{margin-top:0;}
+    .wrap-status-orders ul li{height: 30px!important;line-height: 28px!important;text-align: left;padding-left: 23px!important;}
+    .wrap-status-orders ul li:before{top: 11px!important;}
+    .order-pages .wrap-item-order .title-time.time-one{height:50px;line-height:50px}
+    .wrap-item-order{max-height: calc(100vh - 187px);}
+    .order-pages .main-content{    height: calc(100vh - 400px)}
+    .order-pages .footer-order  .action-button button{height: 50px;font-size: 16px;}
+    .order-pages .modal .modal-dialog .wrap-table{max-height:calc(100vh - 380px);overflow: auto}
+    /* End Order page */
+
+    /* Customer page */
+    #customer_list_container .form-inline  .search-header,
+    #customer_list_container .main-item-order .list-customer .item .customer-name,
+    .customer-popup-form .panel-title a,
+    .customer-popup-form .subscribe-box label,
+    .popup-for-right a.btn-use-guest, .popup-for-right a#btn-add-new-customer,
+    .popup-for-right .list-customer-old li a{font-size:16px;}
+    #customer_list_container .wrap-item-order {max-height: calc(100vh - 105px);}
+    .panel-group.customer-info .customer-info label{min-width:45px}
+    /* End Customer page */
+    /* Shift page */
+    #shift_container .wrap-item-shift .title-time.time-one{height:50px;line-height:50px}
+    .wrap-checkout-page .wrap-shift_container .o-header-nav .title,
+    #shift_container .main-content .title-box,
+    #shift_container .wrap-item-shift .title-time.time-one{font-size:16px;}
+    #shift_container .footer-shift  button.button{font-size:16px;}
+    #shift_container .popup-for-right .popup-header button{margin:0}
+    #shift_container .popup-for-right .popup-header label{margin-top:2px;}
+    #shift_container .col-left .o-header-nav .detail-datetime span{display:block;margin-top:0;font-size: 15px;}
+    #shift_container .main-content .table,
+    #shift_container .main-content .table .staff-name,
+    #shift_container .main-item-shift .list-shifts li .item .date-time .day-month, #shift_container .main-item-shift .list-shifts li .item .date-time .type, #shift_container .main-item-shift .list-shifts li .item .price-date .price, #shift_container .main-item-shift .list-shifts li .item .price-date .time{font-size:14px}
+    /* End Shift page */
+    /* General page */
+    .wrap-checkout-page .wrap-account-container .o-header-nav .title,
+    #general_container .col-left .o-header-nav .title-page {    font-size: 18px;
+        display: inline-block;
+        line-height: 27px;
+        margin: 0;
+        padding: 0;}
+    .wrap-checkout-page .wrap-account-container .o-header-nav .title{line-height:55px;}
+    /* End General page */
+    /* Checkout page */
+    .checkout-header {
+        padding: 10px 0 0;
+        border-bottom: 1px solid #d7d7d7;
+        height: 56px;
+        margin-bottom: 3px;
+    }
+    /* End Checkout page */
+    .panel-group.customer-info{height: calc(100vh - 150px);}
+    #customer_list_container .o-header .customer-name{    margin-top: 0;margin-bottom: 0;line-height: 27px;}
+    #shift_container .main-content .table .date-time{font-size:14px;}
+    .notification-info{top: 64px;}
+    .notification-info{top: 64px;}
+    .notification-info .arrow{left:72px;}
+    span.notification-bell__mentions {min-width: 20px;height: 20px;top: -7px;right:1px;line-height:18px}
+}
+@media (max-width: 1279px){
+    #webpos_cart .main-item-order {height: calc(100vh - 99px);background: #eaedf1;}
+    .main-item-order .order-checkout .item .product-info {max-width: 150px;}
+}
+@media (max-width: 1366px){
+    .ms-webpos .main-content .wrap-list-product {
+        height: calc(100vh - 117px);
+    }
+    .order-pages .form-inline .form-group .icon-iconPOS-search, .order-pages .form-inline .form-group .icon-iconPOS-search {margin-top:10px}
+    .order-pages .modal .modal-dialog .wrap-table {max-height: calc(100vh - 479px);}
+    #manage_stock_container .form-inline  .form-group .icon-iconPOS-search, #manage_stock_container .form-inline  .form-group .icon-iconPOS-search{margin-top:6px}
+    #popup-change-customer{right: 51px !important;}
+    #popup-change-customer .form-inline .form-group .icon-iconPOS-search, .o-header-nav .form-inline .form-group .icon-iconPOS-search {margin-top:7px;}
+    .ms-webpos .main-content .wrap-list-product .payment-detail-box label{max-width:180px}
+    .list-product-footer .wrap-footer #productPager .pagination-pos .pager-list .pager{font-size:100%;margin:0}
+    .list-product-footer .wrap-footer .product-total-loading .status-process{    top: -5px;}
+    }
+@media (max-width: 1024px){
+    .ms-webpos .main-content .final-price {font-size: 100%;}
+    .ms-webpos .main-content .regular-price {font-size: 100%;margin-left:5px}
+    .ms-webpos .main-content .prices {display:flex;}
+    .o-wrapper .container .show-menu-button{padding: 13px 18px;}
+    .notification-bell{    top: 12px;}
+}@media (min-width: 1368px) and (max-width: 1599px){
+    .list-product-footer .wrap-footer #productPager .pagination-pos .pager-list .pager{margin:0}
+}

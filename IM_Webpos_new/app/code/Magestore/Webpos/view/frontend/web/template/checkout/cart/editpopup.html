@@ -1,0 +1,50 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<form action="">
+    <div class="popup-header">
+        <h4 class="product-name" data-bind="text:getProductName()"></h4>
+    </div>
+    <div class="modal-body">
+        <div class="product-img">
+            <!-- ko ifnot: $data.getProductImageUrl() -->
+            <span class="icon-iconPOS-image"></span>
+            <!--/ko-->
+            <!-- ko if: $data.getProductImageUrl() -->
+            <img src="" 
+                 width="auto" 
+                 height="auto"        
+                 data-bind="attr:{src:getProductImageUrl(),alt:getProductName()}"
+                 />
+            <!--/ko-->
+        </div>
+        <div class="product_qty">
+            <div class="bt_desc_qty">
+                <button id="bt_desc_qty" type="button" class="btn btn-warning" data-bind="click:descQty">-</button>
+            </div>
+            <div class="qty_value">
+                <input id="editpopup_product_qty" data-bind="textInput:getQty(),hasFocus:focusQtyInput,event:{change:modifyQty}" onfocus="this.select()"/>
+            </div>
+            <div class="bt_inc_qty">
+                <button id="bt_inc_qty" type="button" class="btn btn-warning" data-bind="click:incQty">+</button>
+            </div>
+        </div>
+        <div class="actions">
+            <!--ko if:canAddCustomPrice()-->
+            <button type="button" class="custom-price" data-bind="click:customPrice,css:{'btn-cl-cfg-active':isCustomPrice},i18n:'Custom Price'"></button>
+            <!--/ko-->
+            <!--ko if:canAddDiscount()-->
+            <button type="button" class="discount" data-bind="click:customDiscount,css:{'btn-cl-cfg-active':isCustomDiscount},i18n:'Discount'"></button>
+            <!--/ko-->
+        </div>
+        <div class="price-box" data-bind="visible:hasCustomAmount">
+            <label data-bind="i18n:'Amount'"></label>
+            <input type="text" data-bind="textInput:getCustomPriceAmount(),event:{keyup:modifyPrice}" onfocus="this.select()"/>
+            <button type="button" class="btn btn2" id="btn-dollor" data-bind="click:setTypeFixed,css:{'btn-cl-cfg-active':isTypeFixed},text:getCurrencySymbol()"></button>
+            <button type="button" class="btn btn1" id="btn-percent" data-bind="click:setTypePercent,css:{'btn-cl-cfg-active':isTypePercent}">%</button>
+        </div>
+    </div>
+</form>
+<a class="arrow"></a>

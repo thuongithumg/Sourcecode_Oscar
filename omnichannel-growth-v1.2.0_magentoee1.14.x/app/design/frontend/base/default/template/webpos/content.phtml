@@ -1,0 +1,158 @@
+<div class="ms-webpos">
+    <div id="checkout-loader" data-role="checkout-loader" class="loading-mask" style="display: none">
+        <div class="loader">
+        </div>
+    </div>
+    <div id="o-wrapper" class="o-wrapper  wrap-checkout-page" data-bind="scope:'webpos.container'">
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    </div>
+    <nav id="c-menu--push-left" class="c-menu c-menu--push-left" data-bind="scope:'webpos.menu'">
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    </nav>
+    <div id="c-mask" class="c-mask"></div>
+    <div id="webpos-main-overlay" class="pos-overlay main"></div>
+    <div id="webpos-medium-overlay" class="pos-overlay medium"></div>
+</div>
+
+<div id='select_cash_drawer_popup' data-bind="scope:'webpos.tills'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+
+<div id='webpos-notification' data-bind="scope:'webpos.notification'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+
+<script>
+    require([
+        'uiApp',
+        'dataManager',
+        'lib/jquery/posOverlay',
+        'lib/jquery/posAlert',
+        'lib/jquery/posPopup'
+    ], function (app, DataManager) {
+
+        /* fix js bootstrap conflict with prototype hiden element */
+        if (Prototype.BrowserFeatures.ElementExtensions) {
+            var disablePrototypeJS = function (method, pluginsToDisable) {
+                    var handler = function (event) {
+                        event.target[method] = undefined;
+                        setTimeout(function () {
+                            delete event.target[method];
+                        }, 0);
+                    };
+                    pluginsToDisable.each(function (plugin) {
+                        jQuery(window).on(method + '.bs.' + plugin, handler);
+                    });
+                },
+                pluginsToDisable = ['collapse', 'dropdown', 'modal', 'tooltip', 'popover', 'tab'];
+            disablePrototypeJS('show', pluginsToDisable);
+            disablePrototypeJS('hide', pluginsToDisable);
+        }
+        /* end fix */
+
+        DataManager.setData(<?php /* @escapeNotVerified */ echo Zend_Json::encode($this->getWebposData()); ?>);
+
+        app({
+            components: <?php echo Zend_Json::encode($this->getJsLayout('components'));?>
+        });
+
+        /* todo: add specific class into body to switch style for mobile device */
+        var isMobile = {
+            Android: function() {
+                return navigator.userAgent.match(/Android/i);
+            },
+            BlackBerry: function() {
+                return navigator.userAgent.match(/BlackBerry/i);
+            },
+            iOS: function() {
+                return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+            },
+            Opera: function() {
+                return navigator.userAgent.match(/Opera Mini/i);
+            },
+            Windows: function() {
+                return navigator.userAgent.match(/IEMobile/i);
+            },
+            any: function() {
+                return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+            }
+        };
+
+        if (isMobile.any()) {
+            jQuery('body').addClass('isNotDestop');
+        }
+
+    });
+</script>
+<?php if($color = $this->getWebposColor()):?>
+    <style type="text/css">
+        .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus,
+        .btn-open-shift.bg-cl-active,
+        .number.bg-cl-active,
+        .bg-cl-active.active,
+        .bg-cl-active.selected, .btn-cl-cfg-active,
+        #error-logs .nav > li > a:hover,
+        #error-logs .nav-pills > li.active > a,
+        #error-logs  .nav-pills > li.active > a:hover,
+        #error-logs .nav-pills > li.active > a:focus,
+        .sync_container .wrap-item-general .nav-pills > li.active > a,
+        .sync_container .wrap-item-general .nav-pills > li.active > a:hover,
+        .sync_container .wrap-item-general .nav-pills > li.active > a:focus,
+        .modal-footer .action-accept
+        {
+            background: #<?php echo $color?> !important;
+            border: 0 none!important;
+            color: #fff;
+        }
+        .link-cl-cfg{color:#0873db !important}
+    </style>
+<?php endif?>
+
+<div class="hide" id="authorizenet-directpost-progress-html">
+    <style type="text/css">
+        #authorizenet-directpost-progress,
+        #authorizenet-directpost-progress .indicator{
+            width:100%;
+            height: 100%;
+        }
+        #authorizenet-directpost-progress .indicator .title{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -20px;
+            margin-top: 7px;
+            color: #888;
+        }
+        #authorizenet-directpost-progress .indicator .loader{
+            position: absolute;
+            left:50%;
+            top:50%;
+            margin-left: -60px;
+            margin-top:-60px;
+        }
+
+        #authorizenet-directpost-progress .loader {
+            border: 16px solid #f3f3f3;
+            border-top: 16px solid #3498db;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 1.5s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    <div id="authorizenet-directpost-progress">
+        <div class="indicator">
+            <h4 class="title"><?php echo $this->__('Processing');?></h4>
+            <span class="loader"></span>
+        </div>
+    </div>
+</div>
+<iframe id="webpos-external-iframe" allowtransparency="true" frameborder="0" name="webpos-external-iframe"
+        style="width: 100%; background-color:transparent; display:none;"
+        src="">
+</iframe>

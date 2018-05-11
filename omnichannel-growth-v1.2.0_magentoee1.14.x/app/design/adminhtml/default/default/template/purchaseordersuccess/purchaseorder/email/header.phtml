@@ -1,0 +1,42 @@
+
+<div id="purchase_email_header_block" class="purchase_email" >
+    <div class="admin__page-section-item email-header">
+        <table class="data-table admin__table-secondary email-header-table" style="font-size: 13px">
+            <tr class="col-0">
+                <td class="label" style="width: 32%">
+                    <strong><?php echo $this->__('Purchase From') ?></strong>
+                </td>
+                <td class="label" style="width: 32%">
+                    <?php if($this->getPurchaseOrderData('shipping_address')): ?>
+                        <strong><?php echo $this->__('Deliver To') ?></strong>
+                    <?php endif; ?>
+                </td>
+                <td class="label" style="width: 32%">
+                    <strong><?php echo $this->__('Purchase Order') ?></strong>
+                </td>
+            </tr>
+            <tr class="col-1">
+                <td class="label" valign="top">
+                    <?php echo $this->getSupplierName() ?>
+                    <?php echo $this->getStreet() ?>
+                    <?php echo $groupAddress = $this->getPostCodeRegionCountry(); ?><br/>
+                    <span><?php echo $this->__('Telephone: ') ?></span>
+                    <span><?php echo $this->getSupplierData('telephone') ?></span><br/>
+                    <?php echo $this->__('Email: ') ?></span>
+                    <?php echo $this->getSupplierData('contact_email') ?>
+                </td>
+                <td valign="top">
+                    <span><?php echo $this->getPurchaseOrderData('shipping_address') ?></span>
+                </td>
+                <td valign="top">
+                    <span><?php echo $this->__('P.O#: ') ?></span>
+                    <span><?php echo $this->getPurchaseOrderCode() ?></span><br/>
+                    <span><?php echo $this->__('Created At: ') ?></span>
+                    <span><?php echo $this->getPurchaseDate() ?></span><br/>
+                    <span><?php echo $this->__('Status: ') ?></span>
+                    <span><?php echo $this->getPurchaseOrderStatus() ?></span><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

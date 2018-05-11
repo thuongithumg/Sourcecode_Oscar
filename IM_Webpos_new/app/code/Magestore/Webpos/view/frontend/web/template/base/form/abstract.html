@@ -1,0 +1,29 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div class="form-data">
+    <div data-bind="foreach: fieldsets">
+        <fieldset data-bind="attr: {id:id}">
+            <span class="row" data-bind="text: data.legend"/>
+            <!-- ko foreach: rows -->
+                <div class="row" data-bind="foreach: fields">
+                    <!-- ko if: typeof isShowLabel == 'undefined' || isShowLabel  -->
+                    <div data-bind="attr: {'class': $parent.data.class}">
+                        <label class="col-xs-4 col-sm-4 col-md-4" data-bind="text: label"/>
+                        <div class="col-xs-8 col-sm-8 col-md-8" data-bind="html: htmlRender">
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if: typeof isShowLabel != 'undefined' && !isShowLabel -->
+                    <div data-bind="attr: {'class': $parent.data.class}">
+                        <div class="col-xs-12 col-sm-12 col-md-12" data-bind="html: htmlRender">
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </div>
+            <!-- /ko -->
+        </fieldset>
+    </div>
+</div>

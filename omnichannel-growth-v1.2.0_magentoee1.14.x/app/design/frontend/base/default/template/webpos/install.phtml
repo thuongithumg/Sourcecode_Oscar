@@ -1,0 +1,17 @@
+<div id='install_container' class="pos_container">
+    <div id="webpos-install">
+        <div id="block-webpos-install" data-bind="scope:'webpos-install'" class="block">
+            <!-- ko template: getTemplate() --><!-- /ko -->
+
+            <script>
+                require([
+                    'uiApp'
+                ], function (app) {
+                    app({
+                        components: <?php echo Zend_Json::encode($this->getJsLayout('components'));?>
+                    });
+                });
+            </script>
+        </div>
+    </div>
+</div>

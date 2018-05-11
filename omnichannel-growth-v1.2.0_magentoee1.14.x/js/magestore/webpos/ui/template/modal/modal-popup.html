@@ -1,0 +1,58 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<aside
+    class="modal-<%= data.type %> <%= data.modalClass %>
+           <% if(data.responsive){ %><%= data.responsiveClass %><% } %>
+           <% if(data.innerScroll){ %><%= data.innerScrollClass %><% } %>"
+    data-role="modal"
+    data-type="<%= data.type %>"
+    tabindex="0">
+    <div data-role="focusable-start" tabindex="0"></div>
+    <div class="modal-inner-wrap"
+         data-role="focusable-scope">
+        <header class="modal-header">
+            <% if(data.title){ %>
+            <h1 class="modal-title"
+                data-role="title"><%= data.title %></h1>
+            <% } %>
+            <button
+                class="action-close"
+                data-role="closeBtn"
+                type="button">
+                <span><%= data.closeText %></span>
+            </button>
+        </header>
+        <div
+            class="modal-content"
+            data-role="content"></div>
+        <% if(data.buttons.length > 0){ %>
+        <footer class="modal-footer">
+            <% _.each(data.buttons, function(button) { %>
+            <button
+                class="<%= button.class %>"
+                type="button"
+                data-role="action"><span><%= button.text %></span></button>
+            <% }); %>
+        </footer>
+        <% } %>
+    </div>
+    <div data-role="focusable-end" tabindex="0"></div>
+</aside>

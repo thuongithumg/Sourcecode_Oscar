@@ -1,0 +1,56 @@
+<div class="counting-box">
+    <label class="opening-balance-wrapper" data-bind="visible:showHeaderBalance">
+        <span data-bind="i18n:headerBalanceTitle"/>:<span class='opening-balance' data-bind="text:totalValuesFormatted"/>
+    </label>
+    <table>
+        <thead>
+        <tr>
+            <th class="a-center col-sm-4" data-bind="i18n: 'Coin/Bill Value'"></th>
+            <th class="a-center col-sm-4" data-bind="i18n: 'Number of Coins/Bills'"></th>
+            <th class="a-center col-sm-4" data-bind="i18n: 'Subtotal'"></th>
+        </tr>
+        </thead>
+    </table>
+    <table>
+        <tbody data-bind="foreach: countingItems" class="cash-counting-items">
+        <tr>
+            <td class="a-center">
+                <select class="cash-counting-value"
+                        class="selectpicker"
+                        data-bind="
+                                        value: cashValue,
+                                        options: $parent.cashValues,
+                                        optionsText: function(item) {return item.denomination_name;},
+                                        optionsValue: function(item) {return item.denomination_value;  }
+                                    "></select>
+            </td>
+            <td class="a-center">
+                <input class="cash-counting-qty a-center" type="number" min="0"
+                       data-bind="value:cashQty"
+                       onkeypress="return event.charCode == 0 || event.charCode == 8 || event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57) || (event.charCode >= 96 && event.charCode <= 105)"
+                       onfocus="this.select()"/>
+            </td>
+            <td class="a-center">
+                <label data-bind="text:subtotalFormated"></label>
+                <a class="remove-icon" data-bind="click:$parent.removeCashRecord">
+                    <span class="icon-iconPOS-delete" aria-hidden="true"></span>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <table>
+        <tfoot>
+        <tr>
+            <td colspan="1" class="a-left">
+                <div class="icon-add">
+                    <span class="icon-iconPOS-add" data-bind="click:addNewCashRecord"/>
+                </div>
+            </td>
+            <td colspan="2" class="a-right">
+                <label><span class='opening-balance' data-bind="text:totalValuesFormatted"/></label>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</div>

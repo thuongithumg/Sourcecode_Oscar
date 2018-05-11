@@ -1,0 +1,87 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<div class="order-pages">
+    <!-- ko ifnot: orderData -->
+    <div class="col-sm-8 col-left">
+        <header class="o-header">
+            <nav class="o-header-nav">
+                <span></span>
+                <label class="title title-header-page" data-bind="i18n: 'Order Details'"></label>
+                <span></span>
+            </nav>
+        </header>
+        <main class="main-content main-content-no-order">
+            <div class="pos-machine icon-info"></div>
+            <div class="text-note">
+                <span class="icon-iconPOS-empty-order"></span>
+                <h4 class="title-box" data-bind="i18n: 'You don\'t have any on-hold orders yet'"></h4>
+            </div>
+        </main>
+    </div>
+    <!--/ko-->
+    <!-- ko if: orderData -->
+    <div class="col-sm-8 col-left">
+        <header class="o-header">
+            <!-- ko template: {name: templateTop, data: $parent} -->
+            <!-- /ko -->
+        </header>
+        <main class="main-content">
+            <div class="panel-group order-info">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h5 data-bind="i18n: ('Billing Address')"/>
+                            </div>
+                            <!-- ko template: {name: templateBilling, data: $parent} -->
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h5 data-bind="i18n: ('Shipping Address')"/>
+                            </div>
+                            <!-- ko template: {name: templateShipping, data: $parent} -->
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- ko template: {name: templateItems, data: $parent} -->
+                    <!-- /ko -->
+                </div>
+
+            </div>
+        </main>
+        <footer class="footer-order">
+            <!-- ko template: {name: templateTotal, data: $parent} -->
+            <!-- /ko -->
+            <div class="">
+                <div class="action-button">
+                    <button class="button print" data-bind="i18n: 'Delete', click: cancelOnhold"/>
+                    <button class="button invoice btn-cl-cfg-active"  data-bind="i18n: 'Checkout', click: continueProcessing"/>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!--/ko-->
+</div>

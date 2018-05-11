@@ -1,0 +1,18 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<!-- ko if: numberBreadcrumbs -->
+    <div class="category-name">
+        <a data-bind="click: getAllCategory, attr: {'class': ($index.call() =='0') ? 'root-cat' : ''}"><span data-bind="i18n: 'All Categories'"></span></a>
+        <!-- ko foreach: breadcrumbs -->
+            <!-- ko if: $index.call() == $parent.breadcrumbs.call().length - 1 -->
+                <label><span data-bind="text: name"></span></label>
+            <!-- /ko -->
+            <!-- ko if: $index.call() != $parent.breadcrumbs.call().length - 1 -->
+                <a data-bind="click: $parent.clickCat.bind($parent)"><span data-bind="text: name"></span></a>
+            <!-- /ko -->
+        <!-- /ko -->
+    </div>
+<!-- /ko -->

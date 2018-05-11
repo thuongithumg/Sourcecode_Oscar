@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_Suppliersuccess
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <modules>
+        <Magestore_Suppliersuccess>
+            <version>1.0.1</version>
+        </Magestore_Suppliersuccess>
+    </modules>
+    <frontend>
+        <routers>
+            <suppliersuccess>
+                <use>standard</use>
+                <args>
+                    <module>Magestore_Suppliersuccess</module>
+                    <frontName>suppliersuccess</frontName>
+                </args>
+            </suppliersuccess>
+        </routers>
+        <layout>
+            <updates>
+                <suppliersuccess>
+                    <file>suppliersuccess.xml</file>
+                </suppliersuccess>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magestore_Suppliersuccess>
+                    <files>
+                        <default>Magestore_Suppliersuccess.csv</default>
+                    </files>
+                </Magestore_Suppliersuccess>
+            </modules>
+        </translate>
+    </frontend>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Magestore_Suppliersuccess before="Mage_Adminhtml">Magestore_Suppliersuccess_Adminhtml</Magestore_Suppliersuccess>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <suppliersuccess>
+                    <file>suppliersuccess.xml</file>
+                </suppliersuccess>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magestore_Suppliersuccess>
+                    <files>
+                        <default>Magestore_Suppliersuccess.csv</default>
+                    </files>
+                </Magestore_Suppliersuccess>
+            </modules>
+        </translate>
+    </adminhtml>   
+    <global>
+        <models>
+            <suppliersuccess>
+                <class>Magestore_Suppliersuccess_Model</class>
+                <resourceModel>suppliersuccess_mysql4</resourceModel>
+            </suppliersuccess>
+            <suppliersuccess_mysql4>
+                <class>Magestore_Suppliersuccess_Model_Mysql4</class>
+                <entities>
+                    <supplier>
+                        <table>os_supplier</table>
+                    </supplier>
+                    <supplier_product>
+                        <table>os_supplier_product</table>
+                    </supplier_product>
+                    <supplier_pricelist>
+                        <table>os_supplier_pricelist</table>
+                    </supplier_pricelist>                    
+                </entities>
+            </suppliersuccess_mysql4>
+        </models>
+        <resources>
+            <suppliersuccess_setup>
+                <setup>
+                    <module>Magestore_Suppliersuccess</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </suppliersuccess_setup>
+            <suppliersuccess_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </suppliersuccess_write>
+            <suppliersuccess_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </suppliersuccess_read>
+        </resources>
+        <blocks>
+            <suppliersuccess>
+                <class>Magestore_Suppliersuccess_Block</class>
+            </suppliersuccess>
+        </blocks>
+        <helpers>
+            <suppliersuccess>
+                <class>Magestore_Suppliersuccess_Helper</class>
+            </suppliersuccess>
+        </helpers>
+    </global>
+</config>

@@ -1,0 +1,19 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<!-- ko if: $parent.orderData-->
+<div class="col-sm-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5 data-bind="text: $t('SHIPPING METHOD')"/>
+        </div>
+        <div class="panel-body">
+            <div class="customer-address">
+                <label data-bind="html: $parent.orderData.call().shipping_description"/>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ko-->

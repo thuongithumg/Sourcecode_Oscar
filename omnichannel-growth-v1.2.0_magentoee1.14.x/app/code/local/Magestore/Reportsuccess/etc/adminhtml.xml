@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<!--
+  ~
+  ~  Magestore
+  ~   NOTICE OF LICENSE
+  ~
+  ~   This source file is subject to the Magestore.com license that is
+  ~   available through the world-wide-web at this URL:
+  ~   http://www.magestore.com/license-agreement.html
+  ~
+  ~   DISCLAIMER
+  ~
+  ~   Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~   version in the future.
+  ~
+  ~   @category    Magestore
+  ~   @package     Magestore_Reportsuccess
+  ~   @copyright   Copyright (c) 2017 Magestore (http://www.magestore.com/)
+  ~   @license     http://www.magestore.com/license-agreement.html
+  ~
+  ~
+  -->
+<config>
+    <menu>
+        <reportsuccess module="reportsuccess" translate="title">
+            <icon>icon-IMBackend-17</icon>
+            <title>Retailer Reports</title>
+            <sort_order>72</sort_order>
+            <children>
+                <report module="reportsuccess" translate="title">
+                    <title>Manage Reports</title>
+                    <icon>icon-IMBackend-22</icon>
+                    <sort_order>10</sort_order>
+                    <action>adminhtml/dashboard/dashboard</action>
+                </report>
+                <setting module="reportsuccess" translate="title">
+                    <title>Settings</title>
+                    <icon>icon-IMBackend-10</icon>
+                    <sort_order>80</sort_order>
+                    <action>adminhtml/system_config/edit/section/reportsuccess</action>
+                </setting>
+            </children>
+        </reportsuccess>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <reportsuccess module="reportsuccess" translate="title">
+                                        <title>Report Success</title>
+                                        <sort_order>71</sort_order>
+                                    </reportsuccess>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+
+                    <reportsuccess module="reportsuccess" translate="title">
+                        <title>Retailer Reports</title>
+                        <sort_order>71</sort_order>
+                        <children>
+                            <report module="reportsuccess" translate="title">
+                                <title>Manage Report</title>
+                                <sort_order>0</sort_order>
+                                <children>
+                                    <inventoryreport module="reportsuccess" translate="title">
+                                        <title>Inventory Reports</title>
+                                        <sort_order>0</sort_order>
+                                    </inventoryreport>
+                                    <salereport module="reportsuccess" translate="title">
+                                        <title>Sales Reports</title>
+                                        <sort_order>80</sort_order>
+                                    </salereport>
+                                </children>
+                            </report>
+                            <setting module="reportsuccess" translate="title">
+                                <title>Settings</title>
+                                <sort_order>80</sort_order>
+                            </setting>
+                        </children>
+                    </reportsuccess>
+
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

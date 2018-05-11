@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="webpos">
+            <group id="payment">
+                <group id="vantiv" translate="label" sortOrder="100" type="text" showInDefault="1" showInWebsite="0">
+                    <label>Vantiv Integration (App only)</label>
+                    <field id="enable" translate="label" sortOrder="1" type="select" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Allow customer pay via vantiv</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                        <field id="account_id" translate="label" sortOrder="2" type="text" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Account ID</label>
+                        <validate>required-entry</validate>
+                        <depends>
+                            <field id="*/*/*/enable">1</field>
+                        </depends>
+                    </field>
+                    <field id="application_id" translate="label" sortOrder="3" type="text" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Application ID</label>
+                        <validate>required-entry</validate>
+                        <depends>
+                            <field id="*/*/*/enable">1</field>
+                        </depends>
+                    </field>
+                    <field id="acceptor_id" translate="label" sortOrder="4" type="text" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Acceptor ID</label>
+                        <validate>required-entry</validate>
+                        <depends>
+                            <field id="*/*/*/enable">1</field>
+                        </depends>
+                    </field>
+                    <field id="account_token" translate="label" sortOrder="5" type="text" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Account Token</label>
+                        <validate>required-entry</validate>
+                        <depends>
+                            <field id="*/*/*/enable">1</field>
+                        </depends>
+                    </field>
+                    <field id="payment_action" translate="label" type="select" sortOrder="6" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Payment Action</label>
+                        <source_model>Magento\Authorizenet\Model\Source\PaymentAction</source_model>
+                        <depends>
+                            <field id="*/*/*/enable">1</field>
+                        </depends>
+                    </field>
+                    <field id="is_sandbox" translate="label" sortOrder="7" type="select" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Sandbox Mode</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends>
+                            <field id="*/*/*/enable">1</field>
+                        </depends>
+                    </field>
+                    <group id="guides" translate="label" sortOrder="15" type="text" showInDefault="1" showInWebsite="0">
+                        <label>Guide</label>
+                        <field id="setup_guide" translate="label" sortOrder="6" type="text" showInDefault="1" showInWebsite="0" showInStore="0">
+                            <label>Setup guide</label>
+                            <frontend_model>Magestore\WebposVantiv\Block\Adminhtml\Config\Instruction</frontend_model>
+                        </field>
+                    </group>
+                </group>
+            </group>
+        </section>
+    </system>
+</config>

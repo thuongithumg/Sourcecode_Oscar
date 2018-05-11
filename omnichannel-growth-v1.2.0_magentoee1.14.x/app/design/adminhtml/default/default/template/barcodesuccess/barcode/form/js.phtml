@@ -1,0 +1,80 @@
+<script type="text/javascript">
+    var BarcodeForm = function (data) {
+        for (var item in data) {
+            BarcodeForm.prototype[item] = data[item];
+        }
+    };
+    BarcodeForm.prototype = {
+        loadPreview: function () {
+            var params = {
+                barcodeId: this.getBarcodeId(),
+                templateId: this.getTemplateId()
+            };
+            var self = this;
+            new Ajax.Request(this.loadPreviewUrl, {
+                method: 'post',
+                parameters: params,
+                onComplete: function (response) {
+                    var data = response.responseJSON;
+                    self.previewContent(data.content);
+                }
+            });
+        },
+        print: function () {
+            var self = this;
+            var params = {
+                barcodeId: this.getBarcodeId(),
+                templateId: this.getTemplateId(),
+                printQty: this.getPrintQty()
+            };
+            if (editForm.validate()) {
+                new Ajax.Request(this.printUrl, {
+                    method: 'post',
+                    parameters: params,
+                    onComplete: function (response) {
+                        var data = response.responseJSON;
+                        var print_window = window.open('', 'print', 'status=1,width=700,height=700');
+                        if (print_window) {
+                            print_window.document.open();
+                            print_window.document.write(data.content);
+                            print_window.document.close();
+                            print_window.addEventListener('load', function () {
+                                print_window.print();
+                            });
+                        } else {
+                            alert('Your browser has blocked the automatic popup, please change your browser settings or print the receipt manually');
+                        }
+                    }
+                });
+            }
+        },
+        getTemplateId: function () {
+            return $('template_id').value;
+        },
+        getBarcodeId: function () {
+            return $('barcode_id').value;
+        },
+        getPrintQty: function () {
+            if ($('print_qty').value) {
+                return $('print_qty').value;
+            }
+            return 1;
+        },
+        getBarcodePreviewElement: function () {
+            return $$('.barcode_preview_container')[0];
+        },
+        previewContent: function (content) {
+            if (typeof content == 'undefined') {
+                return this.getBarcodePreviewElement().innerHTML;
+            } else {
+                this.getBarcodePreviewElement().innerHTML = content;
+            }
+        }
+
+    };
+    window.barcodeForm = new BarcodeForm({
+        'loadPreviewUrl': '<?php echo Mage::helper("adminhtml")->getUrl('adminhtml/barcodesuccess_barcode/loadPreview') ?>',
+        'printUrl': '<?php echo Mage::helper("adminhtml")->getUrl('adminhtml/barcodesuccess_barcode/printDetail') ?>',
+    });
+    window.barcodeForm.loadPreview();
+</script>

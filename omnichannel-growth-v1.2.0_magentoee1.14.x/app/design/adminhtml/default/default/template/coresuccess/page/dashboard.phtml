@@ -1,0 +1,198 @@
+<?php
+
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Coresuccess
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+?>
+<?php $apps = $this->getApps() ?>
+<?php $availApps = $this->getAvailableApps() ?>
+<?php $categories = $this->getData('categories') ?>
+
+<!--template retailer kit-->
+<div class="omnichannel">
+    <div class="slide-02">
+        <div class="wrap-slide02">
+            <div class="container">                                
+                <div class="retailer-detail col-md-10 col-sm-12 col-md-offset-2">
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="retailer-magento1">
+                            <div class="row row-top-retail">
+                                <div class="col-xs-12 hidden-lg hidden-md hidden-sm"><label class="mobile-label-lg">Create Order</label></div>
+                                <div class="col-sm-4">
+                                    <div class="row">
+                                        <div class="col-xs-12 hidden-lg hidden-md hidden-sm"><label class="mobile-label">Webstore</label></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-4">
+                                            <a href="<?php echo $this->getDefaultPage('Magestore_Customercredit'); ?>" 
+                                               class="<?php echo $this->getAppClass('Magestore_Customercredit') ?>"
+                                               title="<?php echo $this->getAppComment('Magestore_Customercredit') ?>"
+                                               target="_blank" data-toggle="tooltip">
+                                                <span class="icon-OCF_storecredit">&nbsp;</span><span>Store Credit</span>
+                                            </a>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <a href="<?php echo $this->getDefaultPage('Magestore_Rewardpoints'); ?>" 
+                                               class="<?php echo $this->getAppClass('Magestore_Rewardpoints') ?>"
+                                               title="<?php echo $this->getAppComment('Magestore_Rewardpoints') ?>"
+                                               target="_blank" data-toggle="tooltip">
+                                                <span class="icon-OCF_rewardpoint">&nbsp;</span><span>Reward Points</span>
+                                            </a>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <a href="<?php echo $this->getDefaultPage('Magestore_Giftvoucher'); ?>" 
+                                               class="<?php echo $this->getAppClass('Magestore_Giftvoucher') ?>"
+                                               title="<?php echo $this->getAppComment('Magestore_Giftvoucher') ?>"
+                                               target="_blank" data-toggle="tooltip">
+                                                <span class="icon-OCF_giftcard">&nbsp;</span><span>Gift Card</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-sm-offset-4 left-top-retailer">
+                                    <div class="row">
+                                        <div class="col-xs-12 hidden-lg hidden-md hidden-sm"><label class="mobile-label">Instore|via Phone</label></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-offset-4">
+                                            <a class="<?php echo $this->getAppClass('Magestore_Webpos') ?> web-pos" 
+                                               href="<?php echo $this->getDefaultPage('Magestore_Webpos'); ?>" 
+                                               title="<?php echo $this->getAppComment('Magestore_Webpos') ?>"
+                                               target="_blank" data-toggle="tooltip">
+                                                <span class="icon-OCF_webpos">&nbsp;</span><span>Web POS</span>
+                                            </a>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <a class="<?php echo $this->getAppClass('Magestore_Retailerpos') ?> retailer-pos" 
+                                               target="_blank" data-toggle="tooltip"
+                                               title="<?php echo $this->getAppComment('Magestore_Retailerpos') ?>">
+                                                <span class="icon-OCF_reailerpos">&nbsp;</span><span>Retailer POS</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row row-retail-bottom">
+                                <div class="col-xs-12 hidden-lg hidden-md hidden-sm"><label class="mobile-label-lg">Manage Order</label></div>
+                                <div class="col-sm-10 col-sm-offset-1">
+                                    <div class="row">
+                                        <div class="col-sm-3"><label class="title-group">Multiple Stock &amp; Warehouse Control</label> 
+                                            <a class="<?php echo $this->getAppClass('Magestore_Inventorysuccess') ?>" 
+                                               href="<?php echo $this->getDefaultPage('Magestore_Inventorysuccess'); ?>" 
+                                               title="<?php echo $this->getAppComment('Magestore_Inventorysuccess'); ?>" 
+                                               target="blank" data-toggle="tooltip">                                             
+                                                <span class="icon-OCF_inventory">&nbsp;</span><span>Inventory Management</span>
+                                            </a> 
+                                            <a class="<?php echo $this->getAppClass('Magestore_Barcodesuccess') ?>" 
+                                               href="<?php echo $this->getDefaultPage('Magestore_Barcodesuccess'); ?>" 
+                                               title="<?php echo $this->getAppComment('Magestore_Barcodesuccess'); ?>" 
+                                               target="blank" data-toggle="tooltip">                                            
+                                                <span class="icon-OCF_barcode">&nbsp;</span><span>Barcode Management</span>
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-3"><label class="title-group">Order Processing Tool</label> 
+                                            <a class="<?php echo $this->getAppClass('Magestore_Fulfilsuccess') ?>" 
+                                               href="<?php echo $this->getDefaultPage('Magestore_Fulfilsuccess'); ?>" 
+                                               title="<?php echo $this->getAppComment('Magestore_Fulfilsuccess'); ?>" 
+                                               target="blank" data-toggle="tooltip">
+                                                <span class="icon-OCF_orderfulfillment">&nbsp;</span><span>Order Fulfillment</span>
+                                            </a> 
+                                            <a class="<?php echo $this->getAppClass('Magestore_Dropshipsuccess') ?>" 
+                                               href="<?php echo $this->getDefaultPage('Magestore_Dropshipsuccess'); ?>" 
+                                               title="<?php echo $this->getAppComment('Magestore_Dropshipsuccess'); ?>" 
+                                               target="blank" data-toggle="tooltip">
+                                                <span class="icon-OCF_dropshipping">&nbsp;</span><span>Dropshipping</span>
+                                            </a> 
+                                            <a class="<?php echo $this->getAppClass('Magestore_RMAsuccess') ?>" 
+                                               href="<?php echo $this->getDefaultPage('Magestore_RMAsuccess'); ?>" 
+                                               title="<?php echo $this->getAppComment('Magestore_RMAsuccess'); ?>" 
+                                               target="blank" data-toggle="tooltip">
+                                                <span class="icon-OCF_rma">&nbsp;</span><span>RMA</span>
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-2"><label class="title-group">Supplier &amp; B2B Management </label> 
+                                            <a class="<?php echo $this->getAppClass('Magestore_Purchaseordersuccess') ?>" 
+                                               href="<?php echo $this->getDefaultPage('Magestore_Purchaseordersuccess'); ?>" 
+                                               title="<?php echo $this->getAppComment('Magestore_Purchaseordersuccess'); ?>" 
+                                               target="blank" data-toggle="tooltip">
+                                                <span class="icon-OCF_purchase">&nbsp;</span><span>Purchase Management </span>
+                                            </a> 
+                                            <a class="<?php echo $this->getAppClass('Magestore_B2bsuccess') ?>" 
+                                               href="<?php echo $this->getDefaultPage('Magestore_B2bsuccess'); ?>" 
+                                               title="<?php echo $this->getAppComment('Magestore_B2bsuccess'); ?>" 
+                                               target="blank" data-toggle="tooltip">
+                                                <span class="icon-OCF_b2b">&nbsp;</span><span>B2B</span>
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-2"><label class="title-group">Report</label> 
+                                            <a class="<?php echo $this->getAppClass('Magestore_Reportsuccess') ?>" 
+                                               href="<?php echo $this->getDefaultPage('Magestore_Reportsuccess'); ?>" 
+                                               title="<?php echo $this->getAppComment('Magestore_Reportsuccess'); ?>" 
+                                               target="blank" data-toggle="tooltip">
+                                                <span class="icon-OCF_report">&nbsp;</span><span>System Report</span>
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-2"><label class="title-group">3rd Party Integration</label> 
+                                            <a class="<?php echo $this->getAppClass('Magestore_Reportsuccess') ?>" 
+                                               href="<?php echo $this->getDefaultPage('Magestore_Reportsuccess'); ?>" 
+                                               title="<?php echo $this->getAppComment('Magestore_Reportsuccess'); ?>" 
+                                               target="blank" data-toggle="tooltip">
+                                                <span class="icon-OCF_quickbook">&nbsp;</span><span>Accounting integration</span>
+                                            </a> 
+                                            <a class="<?php echo $this->getAppClass('Magestore_Shipstationsuccess') ?>" 
+                                               href="<?php echo $this->getDefaultPage('Magestore_Shipstationsuccess'); ?>" 
+                                               title="<?php echo $this->getAppComment('Magestore_Shipstationsuccess'); ?>" 
+                                               target="blank" data-toggle="tooltip">
+                                                <span class="icon-OCF_shipstation">&nbsp;</span><span>Shipping integration</span>
+                                            </a> 
+                                            <a class="<?php echo $this->getAppClass('Magestore_M2Esuccess') ?>" 
+                                               href="<?php echo $this->getDefaultPage('Magestore_M2Esuccess'); ?>" 
+                                               title="<?php echo $this->getAppComment('Magestore_M2Esuccess'); ?>" 
+                                               target="blank" data-toggle="tooltip">
+                                                <span class="icon-OCF_m2e">&nbsp;</span><span>Marketplace integration</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                                                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php if ($this->getIsShowList()): ?>
+    <script type="text/javascript"> erpMenu.showAppBoard();</script>
+<?php endif; ?>
+        
+<script type="text/javascript">
+    <?php if($this->isTrackShowEvent()): ?>
+        trackEventERP('view','<?php echo Mage::getBaseUrl() ?>', '<?php echo $this->getTrackEventUrl()?>', null);
+    <?php endif; ?>
+    function trackEventERP(event, domain, trackurl, params) {
+        new Ajax.Request(trackurl, {
+            method: 'get',
+            parameters: {"action" : event,"domain" : domain, "params" : params},
+            onComplete: function (transport) {
+            }
+        });        
+    }
+</script>

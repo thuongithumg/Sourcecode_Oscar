@@ -1,0 +1,19 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<!-- ko if: $parent.orderData && $parent.orderData().payment -->
+<div class="col-sm-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5 data-bind="text: $t('PAYMENT METHOD')" />
+        </div>
+        <div class="panel-body">
+            <div class="customer-address" data-bind="foreach:$parent.orderData.call().payment.additional_information">
+                <label data-bind="text: $data"/>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /ko -->

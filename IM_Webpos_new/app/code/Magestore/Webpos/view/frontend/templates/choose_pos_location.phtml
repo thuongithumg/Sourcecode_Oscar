@@ -1,0 +1,96 @@
+<div class="ms-webpos" data-bind="scope: 'location'">
+    <div class="login-screen">
+        <div id="checkout-loader" data-role="checkout-loader" class="loading-mask" style="display: block">
+            <div class="loader">
+                <!--
+            <img src="<?php /* @escapeNotVerified */
+                echo $block->getViewFileUrl('images/loader-1.gif'); ?>"
+                 alt="<?php /* @escapeNotVerified */
+                echo __('Loading...'); ?>"
+                 style="position: absolute;">
+            -->
+            </div>
+        </div>
+        <div class="wrap-login-form">
+            <form class="form-change_location" data-bind="afterRender: formLocationAfterRender" role="form" id="webpos-location" method="post">
+                <h1 class="title-page"><img src="<?php echo $block->getLogoUrl(); ?>" width="200px" height="200px"
+                                            alt="logo"/></h1>
+                <div class="form-group">
+                    <div class="input-box">
+                        <label for="location"></label>
+                        <select class="form-control required-entry required" id="location" name="location"
+                                data-validate="{'required-entry':true}"
+                                data-bind="options: locationArray, value: locationId,
+                                                optionsText: function(item) {
+                                                    return item.location_name
+                                                },
+                                                optionsValue: function(item) {
+                                                    return item.location_id
+                                                },
+                                                optionsCaption: '--- Choose a Location ---'
+                                                ">
+                        </select>
+                    </div>
+                    <?php if ($block->isShowPosSelect()): ?>
+                        <div class="input-box">
+                            <label for="pos"></label>
+                            <select class="form-control required-entry required" id="pos" name="pos"
+                                    data-validate="{'required-entry':true}"  data-bind="value: posId">
+                                <option value=""><?php echo __('--- Choose a POS ---'); ?></option>
+                                <!-- ko if: posArray() -->
+                                <!-- ko foreach: posArray() -->
+                                <option data-bind="value: pos_id, text: pos_name + name_status, attr: {'disabled': disable}"></option>
+                                <!-- /ko -->
+                                <!-- /ko -->
+                            </select>
+                        </div>
+                    <?php endif; ?>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-default"
+                            data-bind="click: ajaxChangeLocation"><?php echo __('Enter To POS'); ?></button>
+                </div>
+<!--                <div class="form-group" style="text-align: center;" data-bind="visible: showLogout">-->
+                <div class="form-group" style="text-align: center;">
+                   <a class="logout-choose-pos" href="#" data-bind="click: logout"> <i class="icon-logout"></i>Logout</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/x-magento-init">
+            {
+                ".ms-webpos": {
+                    "Magento_Ui/js/core/app": <?php /* @escapeNotVerified */
+    echo $block->getJsLayout(); ?>
+                 }
+             }
+
+</script>
+<script>
+    var WEBPOS = {};
+    //var ObjectManager = {};
+    <?php
+    $config = $block->getWebposConfig();
+    ?>
+    window.webposConfig = <?php /* @escapeNotVerified */ echo \Zend_Json::encode($config); ?>;
+    window.posConfig = <?php /* @escapeNotVerified */ echo \Zend_Json::encode($block->getPosList()); ?>;
+    window.locationConfig = <?php /* @escapeNotVerified */ echo \Zend_Json::encode($block->getLocationList()); ?>;
+</script>
+
+<script>
+    require([
+        'mage/url',
+        'Magento_Ui/js/block-loader'
+    ], function (url, blockLoader) {
+        blockLoader("<?php /* @escapeNotVerified */ echo $block->getViewFileUrl('images/loader-1.gif'); ?>");
+        return url.setBaseUrl('<?php /* @escapeNotVerified */ echo $block->getBaseUrl();?>');
+    });
+
+    require([
+        'Magestore_Webpos/js/model/webpos',
+    ], function (webposModel) {
+        WEBPOS = webposModel();
+        WEBPOS.setConfig(window.webposConfig);
+    });
+</script>

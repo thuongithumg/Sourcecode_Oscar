@@ -1,0 +1,32 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div data-bind="attr: {'class': 'field option'}">
+    <label class="label">
+        <span data-bind="text: parentData.title"></span>
+    </label>
+    <div class="control">
+        <div class="nested options-list">
+            <!-- ko foreach: {data: $parents[1].convertToArray(parentData.items), as: 'itemData' }  -->
+                <div class="field choice">
+                    <input style="float: left" data-bind="event: {'change': $parents[2].updatePrice($parents[2].itemData().bundle_options)},
+                                        attr: {'id': 'bundle-option-' + parentData.id + '-' + itemData.selection_id,
+                                            'name': 'bundle_option['+parentData.id+'][' + itemData.selection_id + ']',
+                                            'class': 'bundle-option-' + parentData.id + ' checkbox product bundle option change-container-classname',
+                                            'type': 'checkbox',
+                                            'value': itemData.selection_id,
+                                            'checked': (itemData.is_default =='1') ? 'checked' : false
+                                        }" />
+                    <label class="label"
+                           data-bind="attr: {'for': 'bundle-option-'+parentData.id+'-'+itemData.selection_id}">
+                        <span data-bind="text: parseInt(itemData.selection_qty) + ' x ' + itemData.name"></span>
+                        &nbsp;<span class="price-notice" data-bind="text: '+' + $parents[2].getSelectionTitlePrice(itemData.price)"></span>
+                    </label>
+                </div>
+            <!-- /ko -->
+            <div data-bind="attr: {'id': 'bundle-option-'+parentData.id+'-container'}"></div>
+        </div>
+    </div>
+</div>

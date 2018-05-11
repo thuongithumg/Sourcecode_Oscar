@@ -1,0 +1,39 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<div data-bind="attr:{id:idName}" class="tab-pane fade">
+    <div class="panel panel-default">
+        <div class="panel-heading"  data-bind="i18n: label"></div>
+        <div class="panel-body">
+            <div class="input-box">
+                <select data-bind="
+                    event: { change: saveConfig },
+                    attr: { name:elementName,id:elementName,class:'selectpicker'},
+                    value:value,
+                    options: optionsArray,
+                    optionsText: function(item) {return item.text;},
+                    optionsValue: function(item) {return item.value;  },
+                    optionsCaption: $t('Select')
+                    ">
+                </select>
+            </div>
+        </div>
+    </div>
+</div>

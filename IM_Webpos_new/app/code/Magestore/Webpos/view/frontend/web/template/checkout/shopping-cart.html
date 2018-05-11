@@ -1,0 +1,52 @@
+    <!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="popup-header">
+                <button class="button hold btn-cl-cfg-other" data-bind="i18n: 'Cancel',click: close"></button>
+                <h4 class="modal-title" data-bind="i18n: 'Shopping Cart'"></h4>
+                <span class="icon-iconPOS-synchronize" data-bind="click: refreshData"></span>
+                <button class="button btn-cl-cfg-active" data-bind="i18n:'Update to Cart',click: update"></button>
+            </div>
+            <div class="modal-body">
+                <!-- ko if: loading() -->
+                    <div class="indicator">
+                        <div class="spinner"></div>
+                    </div>
+                <!-- /ko -->
+                <div>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th class="a-left" data-bind="i18n:'Item'"></th>
+                            <th class="a-left" data-bind="i18n:'Image'"></th>
+                            <th class="a-center" data-bind="i18n:'Qty'"></th>
+                            <th class="a-center" data-bind="i18n:'Price'"></th>
+                            <!--<th class="a-center" data-bind="i18n:'Remove'"></th>-->
+                            <th class="a-center" data-bind="i18n:'Add'"></th>
+                        </tr>
+                        </thead>
+                        <tbody data-bind="foreach: items">
+                        <tr>
+                            <td class="a-left">
+                                <span data-bind="text:name"></span>
+                            </td>
+                            <td class="a-center">
+                                <img width="100%" height="auto" style="max-width: 100px" data-bind="attr: {src: image_url}">
+                            </td>
+                            <td class="a-center" data-bind="text:qty"></td>
+                            <td class="a-center" data-bind="text:unit_price_formated"></td>
+                            <!--<td class="action a-center"><input type="checkbox" data-bind="checked:remove_this"></td>-->
+                            <td class="action a-center"><input type="checkbox" data-bind="checked:add_this"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>

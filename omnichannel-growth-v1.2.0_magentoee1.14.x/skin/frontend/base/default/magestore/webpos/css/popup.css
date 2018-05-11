@@ -1,0 +1,82 @@
+/*
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Webpos
+ * @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+.pos-overlay{
+    background: #000;
+    opacity: 0.5;
+    width: 100vw;
+    height:100vh;
+    position: fixed;
+    top:0;
+    left:0;
+    display: none;
+}
+.pos-overlay.active{
+    display: block;
+}
+.pos-overlay.main{
+    z-index: 140;
+}
+
+.pos-overlay.medium{
+    opacity: 0;
+    z-index: 120;
+}
+
+.posAlert,
+.posPopup{
+    z-index: 1000;
+    background: #fff;
+    position: absolute;
+    left: 50%;
+    top: -100vh;
+    margin-left: -30vw;
+    width: 60vw;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    transition: all 0.5s;
+}
+.posAlert .title,
+.posPopup .title{
+    padding: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 600;
+    line-height: 3;
+}
+.posAlert .content,
+.posPopup .content{
+    padding: 10px;
+    max-height: 80vh;
+    overflow: auto;
+}
+.posAlert .title button.btn-save,
+.posPopup .title button.btn-save{
+    float: right;
+}
+.posAlert.active,
+.posPopup.active{
+    top: 5%;
+}
+.posPopup .indicator{
+    height: calc(100% - 85px);
+    width: calc(100% - 20px);
+}

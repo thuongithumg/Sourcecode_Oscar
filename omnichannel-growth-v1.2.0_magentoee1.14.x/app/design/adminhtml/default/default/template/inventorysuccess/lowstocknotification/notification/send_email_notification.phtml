@@ -1,0 +1,33 @@
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<?php /** @var Magestore_Inventorysuccess_Block_Adminhtml_LowStockNotification_Notification_Email $this*/?>
+<p class="greeting">
+    <?php echo $this->__('Hello, '); ?>
+</p>
+<p>
+    <?php echo $this->__('There are some product(s) remained in the system/warehouse. If these item\'s stocks reach zero, your website\'s visitors will no longer be able to purchase them. Please add more products and raise the stock level in your Inventory panel. Recheck them via the download link here:') ?>
+</p>
+<?php $productSystem = $this->getProductSystem() ?>
+<?php if ($productSystem): ?>
+    <p>
+        <?php echo $this->__('Low Stocks for system: ');?>
+        <a href="<?php echo $this->getDownloadUrl($productSystem); ?>" title="<?php echo $this->__('Low Stocks for system') ?>"><?php echo $this->__('Download'); ?></a>
+    </p>
+<?php endif ?>
+<?php $productWarehouse = $this->getProductWarehouse() ?>
+<?php if (is_array($productWarehouse)): ?>
+    <?php $warehouseInfo = $this->getWarehouseInformation($productWarehouse); ?>
+    <?php if (count($warehouseInfo)): ?>
+        <?php foreach ($warehouseInfo as $warehouse): ?>
+            <p>
+                <?php echo $this->__('Low Stock for warehouse %s: ', $warehouse['warehouse_name']); ?>
+                <a href="<?php echo $this->getDownloadUrl($warehouse['notification_id']); ?>" title="<?php echo $this->__('Low Stocks for warehouse %s', $warehouse['warehouse_name']) ?>"><?php echo $this->__('Download'); ?></a>
+            </p>
+        <?php endforeach ?>
+    <?php endif ?>
+<?php endif ?>
+<p><?php echo $this->__('Thank You,'); ?></p>

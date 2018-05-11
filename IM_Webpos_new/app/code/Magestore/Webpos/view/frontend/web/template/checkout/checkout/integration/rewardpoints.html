@@ -1,0 +1,25 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div class="integration-item reward-points-item" data-bind="visible:visible">
+    <div class="info">
+        <div data-bind="i18n:'Customer reward points'"></div>
+        <div class="bold-label" data-bind="text:balance"></div>
+        <div data-bind="i18n:'points'"></div>
+        <span class="icon-iconPOS-reload"
+              data-bind="click:updateBalance,css:{active:updatingBalance,'btn-cl-cfg-other':updatingBalance}"></span>
+    </div>
+    <div class="action" data-bind="visible:canApply">
+        <div class="amount">
+            <input type="text" onfocus="this.select()" class="spend_amount" data-bind="value:currentAmount,event:{change:pointUseChange}"/>
+            <input type="checkbox" id="rewardpoints_spend_max_amount"
+                   data-bind="checked:useMaxPoint"/>
+            <label for="rewardpoints_spend_max_amount" data-bind="i18n:'Use max points'"></label>
+        </div>
+        <div class="actions">
+            <button class="button btn-cl-cfg-active" data-bind="click:apply,i18n:'Apply'"></button>
+        </div>
+    </div>
+</div>

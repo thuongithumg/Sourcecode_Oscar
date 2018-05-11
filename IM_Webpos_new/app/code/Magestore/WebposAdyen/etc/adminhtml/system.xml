@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="webpos">
+            <group id="payment">
+                <group id="adyen" translate="label" sortOrder="100" type="text" showInDefault="1" showInWebsite="0">
+                    <label>Adyen Integration (App only)</label>
+                    <field id="enable" translate="label" sortOrder="1" type="select" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Allow customer pay via adyen</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                </group>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,24 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<!-- ko if: orderData -->
+<div id="add-cancel-comment-order" role="dialog"
+     data-bind="visible: isVisible, style: {display: stypeDisplay()}, attr:{class: 'modal fade add-comment ' + classIn()}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form data-bind="submit: cancel">
+                <div class="popup-header">
+                    <button type="button" class="close" data-dismiss="modal" data-bind="text: $t('Cancel'), click: display(false)"/>
+                    <h4 class="modal-title" data-bind="text: $t('Cancel Comment')" />
+                    <button type="submit" class="btn-save" data-bind="text: $t('Save'), click: cancel"/>
+                </div>
+                <div class="modal-body">
+                    <textarea class="form-control" rows="3" data-bind="attr: {id: inputId, placeholder: $t('Reason to cancel order')}"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- /ko -->

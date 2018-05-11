@@ -1,0 +1,36 @@
+<div style="width: 100%;">
+    <div class="box-left">
+        <div class="entry-edit">
+            <div class="fieldset">
+                <table cellspacing="0" class="form-list">
+                    <tbody>
+                    <tr>
+                        <td class="label a-left"><label><?php echo $this->__('Return From: ') ?></label></td>
+                        <td class="value a-right"><strong><?php echo $this->getWarehouseInformation() ?></strong></td>
+                    </tr>
+                    <tr>
+                        <td class="label a-left"><label><?php echo $this->__('Created At: ') ?></label></td>
+                        <td class="value a-right"><strong><?php echo $this->getReturnDate() ?></strong></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="box-right">
+        <div class="entry-edit">
+            <div class="fieldset">
+                <table cellspacing="0" class="form-list">
+                    <tbody>
+                    <tr>
+                        <td class="label a-left"><label><?php echo $this->__('Return To: ') ?></label></td>
+                        <td class="value a-right"><strong><?php echo $this->getSupplierInformation() ?></strong></td>
+                    </tr>
+                    <tr>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

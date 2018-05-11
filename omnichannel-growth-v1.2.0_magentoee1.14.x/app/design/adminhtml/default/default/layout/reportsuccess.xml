@@ -1,0 +1,195 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Inventorysuccess
+  ~ @copyright   Copyright (c) 2017 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<layout version="0.1.0">
+    <!--<adminhtml_system_config_edit>-->
+        <!--<reference name = "head">-->
+            <!--<action method="addJs">-->
+                <!--<script>magestore/reportsuccess/configuration.js</script>-->
+            <!--</action>-->
+        <!--</reference>-->
+    <!--</adminhtml_system_config_edit>-->
+
+    <adminhtml_dashboard_dashboard>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/magestore/reportsuccess/style.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="reportsuccess/adminhtml_dashboard" as="report_dashboard" name="report_dashboard" template="reportsuccess/report_dashboard.phtml" />
+        </reference>
+    </adminhtml_dashboard_dashboard>
+
+    <adminhtml_rerport_default>
+        <reference name="head">
+            <action method="addJs">
+                <script>magestore/reportsuccess/selected-warehouse.js</script>
+            </action>
+            <action method="addJs">
+                <script>magestore/reportsuccess/edit_inline_feature.js</script>
+            </action>
+            <action method="addCss">
+                <stylesheet>css/magestore/reportsuccess/edit_inline.css</stylesheet>
+            </action>
+        </reference>
+    </adminhtml_rerport_default>
+
+    <adminhtml_rerport_sales_default>
+        <reference name="head">
+            <action method="addJs">
+                <script>magestore/reportsuccess/salesreport-ceritial.js</script>
+            </action>
+            <action method="addJs">
+                <script>magestore/reportsuccess/moment.min.js</script>
+            </action>
+            <action method="addJs">
+                <script>magestore/reportsuccess/daterangepicker.js</script>
+            </action>
+            <action method="addCss">
+                <stylesheet>css/magestore/reportsuccess/daterangepicker.css</stylesheet>
+            </action>
+            <!--<action method="removeItem">-->
+                <!--<type>js</type>-->
+                <!--<name>magestore/coresuccess/bootstrap.min.js</name>-->
+            <!--</action>-->
+        </reference>
+    </adminhtml_rerport_sales_default>
+
+
+<!-- Inventory Stock On-hand report -->
+    <adminhtml_inventoryreport_stockonhand_index>
+        <update handle="adminhtml_rerport_default"/>
+        <reference name="content">
+            <block type="reportsuccess/adminhtml_inventoryreport_warehouses" name="managestock.warehouses"/>
+            <block type="reportsuccess/adminhtml_inventoryreport_stockonhand_stockonhand" as="report_stockonhandgrids" name="report_stockonhandgrids" />
+        </reference>
+    </adminhtml_inventoryreport_stockonhand_index>
+
+    <adminhtml_inventoryreport_stockonhand_indexgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="reportsuccess/adminhtml_inventoryreport_stockonhand_grid"  name="report_stockonhandgrids.grid" />
+        </block>
+    </adminhtml_inventoryreport_stockonhand_indexgrid>
+<!-- Inventory Stock On-hand report -->
+
+
+    <!-- Inventory Details report -->
+    <adminhtml_inventoryreport_details_index>
+        <update handle="adminhtml_rerport_default"/>
+        <reference name="content">
+            <block type="reportsuccess/adminhtml_inventoryreport_warehouses" name="managestock.warehouses"/>
+            <block type="reportsuccess/adminhtml_inventoryreport_details_details" as="report_detailsgrids" name="report_detailsgrids" />
+        </reference>
+    </adminhtml_inventoryreport_details_index>
+
+    <adminhtml_inventoryreport_details_indexgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="reportsuccess/adminhtml_inventoryreport_details_grid"  name="report_detailsgrids.grid" />
+        </block>
+    </adminhtml_inventoryreport_details_indexgrid>
+    <!-- Inventory Details report -->
+
+    <!-- Inventory Location report -->
+    <adminhtml_inventoryreport_locations_index>
+        <update handle="adminhtml_rerport_default"/>
+        <reference name="content">
+            <block type="reportsuccess/adminhtml_inventoryreport_warehouseslocation" name="managestock.warehouseslocation"/>
+            <block type="reportsuccess/adminhtml_inventoryreport_locations_locations" as="report_locationsgrids" name="report_locationsgrids" />
+        </reference>
+    </adminhtml_inventoryreport_locations_index>
+
+    <adminhtml_inventoryreport_locations_indexgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="reportsuccess/adminhtml_inventoryreport_locations_grid"  name="report_locationsgrids.grid" />
+        </block>
+    </adminhtml_inventoryreport_locations_indexgrid>
+    <!-- Inventory Location report -->
+
+
+    <!-- Inventory Incomingstock report -->
+    <adminhtml_inventoryreport_incomingstock_index>
+        <update handle="adminhtml_rerport_default"/>
+        <reference name="content">
+            <block type="reportsuccess/adminhtml_inventoryreport_warehouses" name="managestock.warehouses"/>
+            <block type="reportsuccess/adminhtml_inventoryreport_incomingstock_incomingstock" as="report_incomingstockgrids" name="report_incomingstockgrids" />
+        </reference>
+    </adminhtml_inventoryreport_incomingstock_index>
+
+    <adminhtml_inventoryreport_incomingstock_indexgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="reportsuccess/adminhtml_inventoryreport_incomingstock_grid"  name="report_incomingstockgrids.grid" />
+        </block>
+    </adminhtml_inventoryreport_incomingstock_indexgrid>
+    <!-- Inventory Incomingstock report -->
+
+
+    <!-- Inventory Historics report -->
+    <adminhtml_inventoryreport_historics_index>
+        <update handle="adminhtml_rerport_default"/>
+        <reference name="content">
+            <block type="reportsuccess/adminhtml_inventoryreport_warehouses" name="managestock.warehouses"/>
+            <block type="reportsuccess/adminhtml_inventoryreport_historics_historics"  as="report_historicgrids" name="report_historicgrids" />
+        </reference>
+    </adminhtml_inventoryreport_historics_index>
+
+    <adminhtml_inventoryreport_historics_indexgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="reportsuccess/adminhtml_inventoryreport_historics_grid"  name="report_historicgrids.grid" />
+        </block>
+    </adminhtml_inventoryreport_historics_indexgrid>
+    <!-- Inventory Historics report -->
+
+
+    <!-- Sales report  -->
+    <sales_messages>
+        <reference name="messages">
+            <action method="addNotice" translate="message">
+                <message>This report depends on updated time.The lifetime statistics need to be refreshed reguraly.</message>
+            </action>
+        </reference>
+    </sales_messages>
+
+    <adminhtml_salesreport_index_index>
+        <!--<update handle="sales_messages"/>-->
+        <update handle="adminhtml_coresuccess_modal"/>
+        <update handle="adminhtml_rerport_sales_default"/>
+        <reference name="content">
+            <block type="reportsuccess/adminhtml_salesreport_criteria" name="salesreport.criteria"/>
+            <block type="reportsuccess/adminhtml_salesreport_salesreport" as="report_salesreport_grid" name="report_salesreport_grid" />
+            <block type="core/template" as="report_salesreport_order_modal" name="report_salesreport_order_modal" template="reportsuccess/salesreport/order.phtml"/>
+        </reference>
+    </adminhtml_salesreport_index_index>
+
+    <adminhtml_salesreport_index_order>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="reportsuccess/adminhtml_salesreport_order"  name="report_salesreport_order" />
+        </block>
+    </adminhtml_salesreport_index_order>
+
+    <adminhtml_salesreport_index_indexgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="reportsuccess/adminhtml_salesreport_grid_grid"  name="report_salesreport_grid.grid" />
+        </block>
+    </adminhtml_salesreport_index_indexgrid>
+    <!-- Sales report  -->
+
+
+</layout>

@@ -1,0 +1,54 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<div class="integration-item giftcard-item" data-bind="visible:visible">
+    <div class="info">
+        <div data-bind="text:giftcardLabel, visible: code"></div>
+        <div class="bold-label" data-bind="text: balance, visible: isOfflineCheckout && code"></div>
+
+        <select data-bind='event:{change:selectExistedCode},visible:hasExistedCode,options:customerCodes,optionsText:"label",optionsValue:"code",optionsCaption:existedCodeCaption,value:selectedExistCode'></select>
+        <div data-bind="text:__('Gift card code')"></div><input type="text" onfocus="this.select()" class="gift_card_code" data-bind="value:code,event:{change:saveCode},attr:{placeholder:__('Gift card code')}"/>
+        <span class="icon-iconPOS-reload" data-bind="click:updateBalance,css:{active:updatingBalance,'btn-cl-cfg-other':updatingBalance}, visible:isOfflineCheckout"></span>
+
+    </div>
+    <div class="action" data-bind="visible:canApply && code">
+        <div class="amount">
+            <input type="text" onfocus="this.select()" class="spend_amount" data-bind="value:currentAmount,event:{change:pointUseChange}"/>
+            <input type="checkbox" id="giftcard_spend_max_amount" data-bind="checked:useMaxPoint, event:{change:useMaxPointChange}"/>
+            <label for="giftcard_spend_max_amount" data-bind="i18n:'Use max amount'"></label>
+        </div>
+        <div class="actions">
+            <button class="button btn-cl-cfg-active" data-bind="click:apply,i18n:'Apply'"></button>
+        </div>
+    </div>
+    <div class="action" data-bind="visible:!isOfflineCheckout()">
+        <div class="actions">
+            <button class="button btn-cl-cfg-active" data-bind="click:apply,i18n:'Apply'"></button>
+        </div>
+    </div>
+    <ul class='applied-giftcards' data-bind="foreach:appliedCards">
+        <li>
+            <div data-bind="text:code"></div>
+            <div class="bold-label" data-bind="text:valueFormated"></div>
+            <button class="button btn-cl-cfg-other" data-bind="click:$parent.editCard.bind($parent),i18n:'Edit', visible: $parent.isOfflineCheckout"></button>
+            <button class="button btn-cl-cfg-active" data-bind="click:$parent.removeCard.bind($parent),i18n:'Remove'"></button>
+        </li>
+    </ul>
+</div>

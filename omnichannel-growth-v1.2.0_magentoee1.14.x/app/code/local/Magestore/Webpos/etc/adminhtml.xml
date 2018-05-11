@@ -1,0 +1,176 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<config>
+    <menu>
+        <sales>
+            <children>
+                <webpos module="webpos">
+                    <title>Web POS</title>
+                    <sort_order>1</sort_order>
+                    <children>
+                        <gotopos>
+                            <title>Web POS Checkout</title>
+                            <sort_order>0</sort_order>
+                            <action>adminhtml/webpos</action>
+                            <icon>fa-shopping-cart</icon>
+                        </gotopos>
+                        <webpos_report>
+                            <title>Reports</title>
+                            <sort_order>20</sort_order>
+                            <action>adminhtml/report</action>
+                            <icon>fa-line-chart</icon>
+                        </webpos_report>
+                        <manage_webpos_zreport>
+                            <title>Web POS Z-Report</title>
+                            <sort_order>10</sort_order>
+                            <action>adminhtml/zreport</action>
+                            <icon>fa-institution</icon>
+                        </manage_webpos_zreport>
+                        <manage_webpos_permission>
+                            <title>Web POS Permissions</title>
+                            <sort_order>7</sort_order>
+                            <children>
+                                <manage_webpos_user>
+                                    <title>POS Users</title>
+                                    <sort_order>4</sort_order>
+                                    <action>adminhtml/posuser</action>
+                                </manage_webpos_user>
+                                <manage_webpos_role>
+                                    <title>POS Roles</title>
+                                    <sort_order>4</sort_order>
+                                    <action>adminhtml/role</action>
+                                </manage_webpos_role>
+                            </children>
+                        </manage_webpos_permission>
+                        <manage_webpos_user_location>
+                            <title>Manage Locations</title>
+                            <sort_order>6</sort_order>
+                            <action>adminhtml/userlocation</action>
+                            <icon>fa-institution</icon>
+                        </manage_webpos_user_location>
+                        <manage_webpos_denomination>
+                            <title>Manage Cash Denomination</title>
+                            <sort_order>7</sort_order>
+                            <action>adminhtml/cashDenomination</action>
+                            <icon>fa-institution</icon>
+                        </manage_webpos_denomination>
+                        <manage_webpos_pos>
+                            <title>Manage POS</title>
+                            <sort_order>7</sort_order>
+                            <action>adminhtml/pos</action>
+                            <icon>fa-institution</icon>
+                        </manage_webpos_pos>
+                        <gotosetting>
+                            <title>Settings</title>
+                            <sort_order>99</sort_order>
+                            <action>adminhtml/system_config/edit/section/webpos</action>
+                            <icon>fa-cog</icon>
+                        </gotosetting>
+                    </children>
+                </webpos>
+            </children>
+        </sales>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <sales>
+                        <children>
+                            <webpos>
+                                <title>Web POS</title>
+                                <sort_order>1</sort_order>
+                                <children>
+                                    <gotopos>
+                                        <title>Web POS Checkout</title>
+                                        <sort_order>0</sort_order>
+                                    </gotopos>
+                                    <webpos_report>
+                                        <title>POS Reports</title>
+                                        <sort_order>20</sort_order>
+                                    </webpos_report>
+                                    <manage_webpos_zreport>
+                                        <title>Web POS Z-Report</title>
+                                        <sort_order>10</sort_order>
+                                    </manage_webpos_zreport>
+                                    <manage_webpos_permission>
+                                        <title>Web POS Permissions</title>
+                                        <sort_order>7</sort_order>
+                                        <children>
+                                            <manage_webpos_user>
+                                                <title>POS Users</title>
+                                                <sort_order>4</sort_order>
+                                            </manage_webpos_user>
+                                            <manage_webpos_role>
+                                                <title>POS Roles</title>
+                                                <sort_order>4</sort_order>
+                                            </manage_webpos_role>
+                                        </children>
+                                    </manage_webpos_permission>
+                                    <manage_webpos_user_location>
+                                        <title>User Locations</title>
+                                        <sort_order>6</sort_order>
+                                    </manage_webpos_user_location>
+                                    <manage_webpos_denomination>
+                                        <title>Manage Denomination</title>
+                                        <sort_order>7</sort_order>
+                                    </manage_webpos_denomination>
+                                    <manage_webpos_pos>
+                                        <title>Manage POS</title>
+                                        <sort_order>8</sort_order>
+                                    </manage_webpos_pos>
+                                    <gotosetting>
+                                        <title>Settings</title>
+                                        <sort_order>99</sort_order>
+                                    </gotosetting>
+                                </children>
+                            </webpos>
+                        </children>
+                    </sales>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <webpos translate="title" >
+                                        <title>Web POS</title>
+                                        <sort_order>1</sort_order>
+                                    </webpos>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <translate>
+        <modules>
+            <Magestore_Webpos>
+                <files>
+                    <default>Magestore_Webpos.csv</default>
+                </files>
+            </Magestore_Webpos>
+        </modules>
+    </translate>   
+</config>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="formkey"/>
+    <container name="root">
+        <block class="Magestore\Webpos\Block\Adminhtml\Pos\Edit\Tab\Denomination" name="webpos.block.pos.denomination.grid"/>
+        <block class="Magento\Backend\Block\Widget\Grid\Serializer" name="denomination_grid_serializer">
+            <arguments>
+                <argument name="grid_block" xsi:type="string">webpos.block.pos.denomination.grid</argument>
+                <argument name="callback" xsi:type="string">getSelectedDenominations</argument>
+                <argument name="input_element_name" xsi:type="string">denomination_ids</argument>
+                <argument name="reload_param_name" xsi:type="string">denomination_ids</argument>
+            </arguments>
+        </block>
+    </container>
+</page>

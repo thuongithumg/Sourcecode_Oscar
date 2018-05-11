@@ -1,0 +1,76 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div class="popup-header">
+    <button class="remove" data-dismiss="modal" data-bind="i18n:'Cancel'"></button>
+    <h4 class="modal-title" data-bind="i18n:'Custom Sale'"></h4>
+    <span class="btn-save"></span>
+</div>
+<div class="modal-body">
+    <div class="wrap-custom-sale">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="input-box">
+                    <input type="text" placeholder="Enter Product Name"
+                           name="name-product"
+                           class="customer-fname"
+                           onfocus="this.select()"
+                           data-bind="textInput:productName,event:{change:setName}"/>
+                </div>
+                <div class="input-box">
+                    <textarea data-bind="attr: {'placeholder': 'Enter Product Description'} , value: customSaleDescription" name="comment-product" class="comment-product"></textarea>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="input-box a-right">
+                    <input type="text"
+                           placeholder="Price"
+                           value=""
+                           name="last-name"
+                           class="product-price"
+                           onfocus="this.select()"
+                           data-bind="textInput:productPrice,event:{change:setPrice}"/>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="input-box">
+                    <select class="selectpicker"
+                            data-bind="options: taxClasses,optionsText:'tax_class_name',optionsValue: 'tax_class_id',value:taxClassId,event:{change:setTaxClass}">
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="subscribe-box">
+                    <label data-bind="i18n:'Shippable'"></label>
+                    <div class="switch-box">
+                        <input type="checkbox" class="ios" data-bind="checked:shipAble,event:{change:setShipAble}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="numberFields">
+            <button type="button" name="1" value="1" data-bind="click:numberpadClick">1</button>
+            <button type="button" name="2" value="2" data-bind="click:numberpadClick">2</button>
+            <button type="button" name="3" value="3" data-bind="click:numberpadClick">3</button>
+            <button type="button" name="4" value="4" data-bind="click:numberpadClick">4</button>
+            <button type="button" name="5" value="5" data-bind="click:numberpadClick">5</button>
+            <button type="button" name="6" value="6" data-bind="click:numberpadClick">6</button>
+            <button type="button" name="7" value="7" data-bind="click:numberpadClick">7</button>
+            <button type="button" name="8" value="8" data-bind="click:numberpadClick">8</button>
+            <button type="button" name="9" value="9" data-bind="click:numberpadClick">9</button>
+            <button type="button" name="00" value="00" data-bind="click:numberpadClick">00</button>
+            <button type="button" name="0" value="0" data-bind="click:numberpadClick">0</button>
+            <button type="button" name="backspace" value="backspace" data-bind="click:numberpadClick">
+                <span class="icon-iconPOS-cal-del"></span>
+            </button>
+        </div>
+        <div class="ms-actions">
+            <button class="actions btn-cl-cfg-active" data-bind="i18n:'Add to cart',click:addToCart"></button>
+        </div>
+    </div>
+</div>
+<a class="arrow"></a>

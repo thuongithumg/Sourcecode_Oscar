@@ -1,0 +1,70 @@
+
+<div style="float: left;width: 600px;height: 365px;position: relative;">
+    <div style="position: relative;height: 190px;">
+        {{if giftImageUrl}}
+        <img style="width: 600px;height: 190px;" src="{{var giftImageUrl}}"/>
+        {{/if}}
+        <div style="float: left;position: absolute;top: 0;height: 190px;width: 600px;">
+            <div style="width: 100%;height: 84px;float: left;">
+                {{if logo_url}}
+                <img style="height:40px;" src = "{{var logo_url}}"/>
+                {{/if}}
+                <div style="color:#{{var textColor}};font-size: 11px;float: right;margin-top: 5px;margin-right: 5px;font-weight: bold;">{{if expiredDate}} {{var expiredDate}} {{/if}}</div>
+            </div>
+        </div>
+        <div style="position: absolute;bottom: 0;width: 100%;height: 50px;float: left;max-height: 70px;">
+            <img src="{{var bkgTitleUrl}}" style="width: 600px;">
+            <div style="position: absolute;top: 0;width: 600px;">
+                <div style="padding-top: 12px;float: left;margin-left: 15px;color:#{{var styleColor}};">
+                    <span style="font-size: 20px;font-weight: 600;margin-bottom: 5px;font-family: 'Open Sans', sans-serif;">{{var giftCardTitleText}}</span>
+                </div>
+                <div style="text-align: right;float: right;height: 50px;width: 205px;color: #367991;font-size: 12px;font-weight: 600;font-family: 'Open Sans', sans-serif;">
+                    <img src="{{var bkgValueUrl}}" width="205px" height="52">
+                    <div style="position: absolute;top: 0;width: 205px;height: 52px;">
+                        <span style="margin-right: 10px;font-size: 12px;font-family: 'Open Sans', sans-serif;">{{var giftCardValueText}}</span>
+                        <span style="color:#{{var styleColor}};text-align: right;margin-right: 15px;line-height: 52px;font-size: 26px; height: 50px;font-weight: bold;font-family: 'Open Sans', sans-serif;">
+                            <span style="font-family: 'Open Sans', sans-serif;">{{var giftValue}}</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        {{if giftBackgroundUrl}}
+        <img src="{{var giftBackgroundUrl}}" style="width: 600px;height: 180px;"/>
+        {{/if}}
+        <div style="margin: 0px 15px;float: left;position: absolute;bottom: 8px;">
+            <div style="float: left;width: 55%;margin-top: 10px;">
+                <div style="float: left;">
+                    <span style="float: left;margin-bottom: 5px;font-family: 'Open Sans', sans-serif;">
+                        <label style="font-weight: 600;float: left;margin-top: 2px;color:#{{var textColor}};">{{var fromText}}</label>
+                        <span style="line-height: 22px;font-size: 16px;margin-left: 15px;color:#{{var styleColor}};">{{var senderName}}</span>
+                    </span>
+                    <span style="float: left;clear: both;font-family: 'Open Sans', sans-serif;">
+                        <label style="font-weight: 600;float: left;margin-right: 10px;margin-top: 2px;color:#{{var textColor}};">{{var toText}}</label>
+                        <span style="font-size: 16px;line-height: 22px;color:#{{var styleColor}};">{{var recipientName}}</span>
+                    </span>
+                </div>
+                <div style="float: left;width: 100%;margin-top: 10px;">
+                    <div style="width: 342px;height: 97px;display: table-cell;vertical-align: middle;color:#{{var textColor}};background: #fff;border: 1px solid #ececec;border-radius: 5px;clear: both;float: left;">
+                        <p style="height: 69px;padding: 10px;margin: 0;overflow: hidden;font-size: 11px;">{{var giftMessage}}</p>
+                    </div>
+                </div>
+            </div>
+            <div style="float: right;width: 37%;margin-top: 5px;">
+                <div style="text-align: right;float: right;width: 130%;margin-top: 5px;">
+                    <span style="font-weight: 600;font-size: 16px;font-family: 'Open Sans', sans-serif;font-style: italic;color:#{{var styleColor}};">{{var giftCode}}</span>
+                    <span style="width: 100%;float: right;margin-top: 5px;margin-bottom: 5px;">
+                        {{if barcodeUrl}}
+                        <img style="float: right;height: 40px;" src="{{var barcodeUrl}}"/>
+                        {{/if}}
+                    </span>
+                </div>
+                <span style="height: 85px;float: left;text-align: right;overflow: hidden;position: absolute;bottom: 0px;width: 37%;">
+                    <span style="width: 100%;font-size: 12px;float: right;color:#{{var textColor}};">{{var notes}}</span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

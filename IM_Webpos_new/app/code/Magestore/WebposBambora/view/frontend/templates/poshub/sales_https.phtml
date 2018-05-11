@@ -1,0 +1,117 @@
+<script src="http://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script>
+    var SALE_REQUEST = 1;
+    var CANCEL_REQUEST = 3;
+
+    var hubUrl = Cookies.get('hubUrl');
+    var device = Cookies.get('device');
+    var amount = Cookies.get('amount');
+    var currency = Cookies.get('currency');
+    var ip = Cookies.get('ip');
+    var port = Cookies.get('port');
+    var type = Cookies.get('type');
+    var timeout = parseInt(Cookies.get('timeout'));
+    var xhr = null;
+    var cancelXhr = null;
+    var cookieRegistry = [];
+    cookieRegistry['type'] = "";
+    if (parseInt(type) === SALE_REQUEST) {
+        xhr = $.ajax({
+            url: hubUrl,
+            method: 'POST',
+            timeout: 1000 * timeout,
+            data: {
+                "device": device,
+                "type": parseInt(type),
+                "amount": Math.round(parseFloat(amount) * 100),
+                "currency": currency,
+                "ip": ip,
+                "port": parseInt(port)
+            },
+            success: function (response) {
+                Cookies.set('bamboraResponse', response, { expires: 86400 });
+            },
+            error: function (response, xhr) {
+                if (xhr === "timeout") {
+                    if (type === SALE_REQUEST) {
+                        $.ajax({
+                            url: hubUrl,
+                            method: 'POST',
+                            timeout: 10 * 1000,
+                            data: {
+                                "device": device,
+                                "type": CANCEL_REQUEST,
+                                "amount": Math.round(parseFloat(amount) * 100),
+                                "currency": currency,
+                                "ip": ip,
+                                "port": parseInt(port)
+                            },
+                            success: function () {
+                                Cookies.set('bamboraResponse', 'cancel_done', { expires: 86400 });
+                            },
+                            error: function () {
+                                Cookies.set('bamboraResponse', 'cancel_error', { expires: 86400 });
+                            }
+                        });
+                        Cookies.set('bamboraResponse', 'timeout', { expires: 86400 });
+                    } else {
+                        Cookies.set('bamboraResponse', 'fail', { expires: 86400 });
+                    }
+                } else if (xhr !== 'abort') {
+                    Cookies.set('bamboraResponse', 'fail', { expires: 86400 });
+                }
+            }
+        });
+
+        setInterval(function () {
+            if (cookieRegistry['type']) {
+                if (Cookies.get('type') !== cookieRegistry['type']) {
+                    cookieRegistry['type'] = Cookies.get('type');
+                    if (parseInt(cookieRegistry['type']) === CANCEL_REQUEST) {
+                        xhr.abort();
+                        $.ajax({
+                            url: hubUrl,
+                            method: 'POST',
+                            timeout: 10 * 1000,
+                            data: {
+                                "device": device,
+                                "type": CANCEL_REQUEST,
+                                "amount": Math.round(parseFloat(amount) * 100),
+                                "currency": currency,
+                                "ip": ip,
+                                "port": parseInt(port)
+                            },
+                            success: function () {
+
+                            },
+                            error: function () {
+
+                            }
+                        });
+                    }
+                }
+
+            } else {
+                cookieRegistry['type'] = Cookies.get('type');
+            }
+        }, 100);
+        $(window).unload(function() {
+            if (xhr){
+                xhr.abort();
+            }
+            if (cancelXhr){
+                cancelXhr.abort();
+            }
+            Cookies.set('hubUrl', '', {expires: 86400});
+            Cookies.set('device', '', {expires: 86400});
+            Cookies.set('timeout', '', {expires: 86400});
+            Cookies.set('type', '', {expires: 86400});
+            Cookies.set('amount', '', {expires: 86400});
+            Cookies.set('currency', '', {expires: 86400});
+            Cookies.set('ip', '', {expires: 86400});
+            Cookies.set('port', '', {expires: 86400});
+        });
+    }
+
+</script>

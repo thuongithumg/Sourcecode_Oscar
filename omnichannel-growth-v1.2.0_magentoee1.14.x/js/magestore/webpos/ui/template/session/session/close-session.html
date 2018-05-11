@@ -1,0 +1,25 @@
+<!--
+  ~ * Copyright © 2016 Magestore. All rights reserved.
+  ~ * See COPYING.txt for license details.
+  ~
+  -->
+
+<div id="popup-close-shift" class="hide-popup popup-for-right">
+    <div class="wrap-popup">
+        <div class="popup-header">
+            <button type="button" class="button cancel" data-bind="click: closeForm"><span data-bind="i18n:'Cancel'"/></button>
+            <label class="title-box"><span data-bind="i18n:'Set Closing Balance'"/></label>
+            <div class="button btn-done"></div>
+        </div>
+        <div class="modal-body">
+            <div class="cash-counting-notice">
+                <span data-bind="i18n:'Fill in this form when you check money in the cash-drawer before closing Session'"/>
+            </div>
+            <div class="amount-box">
+                <!-- ko template: {name: 'ui/session/session/cash-counting', data: $data} -->
+                <!-- /ko -->
+            </div>
+            <button type="submit" class="button btn-done"  data-bind="click: setClosingBalance"><span class="link-cl-cfg" data-bind="i18n:'Confirm'"/></button>
+        </div>
+    </div>
+</div>

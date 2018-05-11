@@ -1,0 +1,80 @@
+<?php /** @var $this Magestore_Inventorysuccess_Block_Adminhtml_Warehouse_Edit_Tab_Dashboard */ ?>
+<div id="warehouse_dashboard_header" class="admin__collapsible-block-wrapper fieldset-wrapper" 
+     style="display: flex; padding-bottom: 15px;">
+    <div style="width: 100%;">
+        <div class="box-left">
+            <div class="entry-edit">
+                <div class="entry-edit-head">
+                    <h4 class="icon-head head-account"><?php echo $this->__('Last 30 days Sales') ?></h4>
+                </div>
+                <div class="fieldset">
+                    <table cellspacing="0" class="form-list">
+                        <tbody>
+                            <tr>
+                                <td class="label a-left"><label><?php echo $this->__('Total Sales: ') ?></label></td>
+                                <td class="value a-right"><strong><?php echo $this->getTotalOrderQty30days() ?></strong></td>
+                            </tr>
+                            <tr>
+                                <td class="label a-left"><label><?php echo $this->__('Total Qty Ordered: ') ?></label></td>
+                                <td class="value a-right"><strong><?php echo $this->getTotalItemQty30days() ?></strong></td>
+                            </tr>
+                            <tr>
+                                <td class="label a-left"><label><?php echo $this->__('Total Revenue: ') ?></label></td>
+                                <td class="value a-right"><strong><?php echo $this->getTotalRevenue30days() ?></strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="box-right">
+            <div class="entry-edit">
+                <div class="entry-edit-head">
+                    <h4 class="icon-head head-account"><?php echo $this->__('Stock On Hand') ?></h4>
+                </div>
+                <div class="fieldset">
+                    <table cellspacing="0" class="form-list">
+                        <tbody>
+                            <tr>
+                                <td class="label a-left"><label><?php echo $this->__('Total Qty: ') ?></label></td>
+                                <td class="value a-right"><strong><?php echo $this->getSumTotalQty() ?></strong></td>
+                            </tr>
+                            <tr>
+                                <td class="label a-left"><label><?php echo $this->__('Total Qty To Ship: ') ?></label></td>
+                                <td class="value a-right"><strong><?php echo $this->getSumQtyToShip() ?></strong></td>
+                            </tr>
+                            <tr>
+                                <td class="label a-left"><label><?php echo $this->__('Total Available Qty: ') ?></label></td>
+                                <td class="value a-right"><strong><?php echo $this->getSumAvailableQty() ?></strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="display: flex; padding-top: 20px; padding-bottom: 20px; border-top: solid 1px #cccccc;">
+    <div id="sales_chart_container" class="dashboard-child-container" style="float:left"></div>
+    <div id="best_seller_container" class="dashboard-child-container" style="float:right"></div>
+</div>
+<div style="padding-top: 20px; border-top: solid 1px #cccccc;">
+    <div id="stock_on_hand_container"></div>
+</div>
+<?php
+    echo $this->getChartHtml(
+        'inventorysuccess/adminhtml_warehouse_edit_tab_dashboard_sales',
+        'warehouse.dashboard.sales'
+    );
+    echo $this->getChartHtml(
+        'inventorysuccess/adminhtml_warehouse_edit_tab_dashboard_bestseller',
+        'warehouse.dashboard.bestseller'
+    );
+    echo $this->getChartHtml(
+        'inventorysuccess/adminhtml_warehouse_edit_tab_dashboard_stockonhand',
+        'warehouse.dashboard.stockonhand'
+    );
+?>
+<style>
+    .dashboard-child-container {width: 47% ;height: 400px; margin: 0 auto;}
+</style>

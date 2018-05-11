@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Inventorysuccess
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addCss"><name>css/magestore/inventorysuccess/lowstocknotification/style.css</name></action>
+        </reference>
+        <reference name="notification_toolbar">
+            <action method="setTemplate">
+                <template>inventorysuccess/lowstocknotification/notification/toolbar.phtml</template>
+            </action>
+        </reference>
+    </default>
+
+    <adminhtml_inventorysuccess_lowstocknotification_rule_index>
+        <reference name="content">
+            <block type="inventorysuccess/adminhtml_lowStockNotification_rule" name="inventorysuccess_lowstocknotification_rule" />
+        </reference>
+    </adminhtml_inventorysuccess_lowstocknotification_rule_index>
+
+    <adminhtml_inventorysuccess_lowstocknotification_notification_index>
+        <reference name="content">
+            <block type="inventorysuccess/adminhtml_lowStockNotification_notification" name="inventorysuccess_lowstocknotification_notification" />
+        </reference>
+    </adminhtml_inventorysuccess_lowstocknotification_notification_index>
+
+    <adminhtml_inventorysuccess_lowstocknotification_notification_product>
+        <block type="core/text_list" name="root">
+            <block type="inventorysuccess/adminhtml_lowStockNotification_notification_edit_tab_detail" name="inventorysuccess_lowstocknotification_notification_detail" template="inventorysuccess/lowstocknotification/notification/detail.phtml" />
+            <block type="inventorysuccess/adminhtml_lowStockNotification_notification_edit_tab_products" name="inventorysuccess_lowstocknotification_notification_product"/>
+        </block>
+    </adminhtml_inventorysuccess_lowstocknotification_notification_product>
+
+    <adminhtml_inventorysuccess_lowstocknotification_notification_productgrid>
+        <block type="core/text_list" name="root">
+            <block type="inventorysuccess/adminhtml_lowStockNotification_notification_edit_tab_products" name="inventorysuccess_lowstocknotification_notification_product"/>
+        </block>
+    </adminhtml_inventorysuccess_lowstocknotification_notification_productgrid>
+
+    <inventorysuccess_lowstocknotification_email_notification>
+        <block class="inventorysuccess/adminhtml_lowStockNotification_notification_email" name="notification_email" template="inventorysuccess/lowstocknotification/notification/send_email_notification.phtml" cacheable="false"/>
+    </inventorysuccess_lowstocknotification_email_notification>
+
+    <adminhtml_inventorysuccess_lowstocknotification_notification_edit>
+        <update handle="adminhtml_coresuccess_one_column_layout" />
+    </adminhtml_inventorysuccess_lowstocknotification_notification_edit>
+</layout>

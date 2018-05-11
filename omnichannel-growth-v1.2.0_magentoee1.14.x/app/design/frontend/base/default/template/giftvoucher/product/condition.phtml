@@ -1,0 +1,42 @@
+<?php
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+?>
+<?php
+$_product = $this->getProduct();
+if ($_product->getTypeId() == 'giftvoucher' && $this->contentCondition()) :
+?>
+<div style="position: relative; float: left; clear: both;">
+	<a id='giftvoucher-view-condition' onmouseover="showGiftcardTooltip()" onmouseout="hideGiftcardTooltip()" href="javascript:void()"><?php echo $this->__('View usage conditions of this Gift Card') ?></a>
+	<div id='giftvoucher-conditions' style="position: absolute; display: none; margin: 5px; background-color: #FFFFFF; border: 1px solid rgb(199, 203, 204); padding: 10px; width: 300px; z-index: 99999; box-shadow: 2px 4px 17px rgb(179, 184, 183); border-radius: 7px; top: 15px;">
+		<?php echo $this->contentCondition() ?>
+	</div>
+</div>
+
+<script type="text/javascript">
+	function showGiftcardTooltip() {
+		$('giftvoucher-conditions').show();
+	}
+	
+	function hideGiftcardTooltip() {
+		$('giftvoucher-conditions').hide();
+	}
+</script>
+<?php endif; ?>

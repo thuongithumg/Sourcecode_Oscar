@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- rewrite api controller -->
+    <preference for="Magento\Webapi\Controller\Rest" type="Magestore\Webpos\Controller\Rest"/>
+    <preference for="Magento\Quote\Model\QuoteRepository\Plugin\AccessChangeQuoteControl" type="Magestore\Webpos\Model\QuoteRepository\Plugin\AccessChangeQuoteControl"/>
+
+    <!-- end rewrite api controller -->
+
+    <!-- configuration api -->
+    <preference for="Magestore\Webpos\Api\Data\Checkout\ConfigInterface" type="Magestore\Webpos\Model\Checkout\Data\Config"/>
+    <!-- end configuration api -->
+
+    <!-- customer api -->
+    <preference for="Magestore\Webpos\Api\Customer\CustomerComplainRepositoryInterface" type="Magestore\Webpos\Model\Customer\CustomerComplainRepository"/>
+    <preference for="Magestore\Webpos\Api\Customer\CustomerCreditRepositoryInterface" type="Magestore\Webpos\Model\Customer\CustomerCreditRepository"/>
+    <preference for="Magestore\Webpos\Api\Data\Customer\CustomerComplainInterface" type="Magestore\Webpos\Model\Customer\CustomerComplain"/>
+    <preference for="Magestore\Webpos\Api\Data\Customer\CustomerComplainSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    <preference for="Magestore\Webpos\Api\Data\Customer\CustomerCreditSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    <preference for="Magestore\Webpos\Api\Data\Customer\CustomerSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    <preference for="Magestore\Webpos\Api\Customer\CustomerRepositoryInterface" type="Magestore\Webpos\Model\Customer\CustomerRepository"/>
+    <preference for="Magento\Customer\Model\Data\Customer" type="Magestore\Webpos\Model\Customer\Data\Customer"/>
+    <preference for="Magestore\Webpos\Api\Data\Customer\CustomerInterface" type="Magestore\Webpos\Model\Customer\Data\Customer"/>
+    <!-- end customer api -->
+
+    <!-- checkout api -->
+    <preference for="Magestore\Webpos\Api\Checkout\CartInterface" type="Magestore\Webpos\Model\Checkout\Create"/>
+    <preference for="Magestore\Webpos\Api\Data\Checkout\CartItemInterface" type="Magestore\Webpos\Model\Checkout\Data\CartItem"/>
+    <preference for="Magestore\Webpos\Api\Data\Checkout\CartItemOptionInterface" type="Magestore\Webpos\Model\Checkout\Data\CartItemOption"/>
+    <preference for="Magestore\Webpos\Api\Data\Checkout\PaymentInterface" type="Magestore\Webpos\Model\Checkout\Data\Payment"/>
+    <preference for="Magestore\Webpos\Api\Data\Checkout\PaymentItemInterface" type="Magestore\Webpos\Model\Checkout\Data\PaymentItem"/>
+    <preference for="Magestore\Webpos\Api\Data\Checkout\ShippingInterface" type="Magestore\Webpos\Model\Checkout\Data\Shipping"/>
+    <preference for="Magestore\Webpos\Api\Data\Checkout\ShippingTrackInterface" type="Magestore\Webpos\Model\Checkout\Data\ShippingTrack"/>
+    <preference for="Magestore\Webpos\Api\Checkout\TaxRateInterface" type="Magestore\Webpos\Model\Checkout\TaxRate"/>
+    <preference for="Magestore\Webpos\Api\Checkout\TaxClassInterface" type="Magestore\Webpos\Model\Checkout\TaxClass"/>
+    <preference for="Magestore\Webpos\Api\Checkout\TaxRuleInterface" type="Magestore\Webpos\Model\Checkout\TaxRule"/>
+    <preference for="Magestore\Webpos\Api\Data\Checkout\ExtensionDataInterface" type="Magestore\Webpos\Model\Checkout\Data\ExtensionData"/>
+    <preference for="Magestore\Webpos\Api\Data\Checkout\AddressInterface" type="Magestore\Webpos\Model\Checkout\Data\Address"/>
+    <preference for="Magestore\Webpos\Api\Data\Checkout\ItemsInfoBuyInterface" type="Magestore\Webpos\Model\Checkout\Data\ItemsInfoBuy"/>
+    <preference for="Magestore\Webpos\Api\Data\Checkout\InfoBuyInterface" type="Magestore\Webpos\Model\Checkout\Data\InfoBuy"/>
+    <preference for="Magestore\Webpos\Api\Data\Checkout\CustomSalesInfoInterface" type="Magestore\Webpos\Model\Checkout\Data\CustomSalesInfo"/>
+    <preference for="Magestore\Webpos\Api\Data\Checkout\DataObjectInterface" type="Magestore\Webpos\Model\Checkout\Data\DataObject"/>
+    <preference for="Magestore\Webpos\Api\Data\Cart\CustomerInterface" type="Magestore\Webpos\Model\Cart\Data\Customer"/>
+    <preference for="Magestore\Webpos\Api\Data\Cart\QuoteInterface" type="Magestore\Webpos\Model\Cart\Data\Quote"/>
+    <preference for="Magestore\Webpos\Api\Data\Cart\QuoteItemInterface" type="Magestore\Webpos\Model\Cart\Data\QuoteItem"/>
+    <preference for="Magestore\Webpos\Api\Data\Cart\QuoteDataInterface" type="Magestore\Webpos\Model\Cart\Data\QuoteData"/>
+    <preference for="Magestore\Webpos\Api\Data\Cart\TotalInterface" type="Magestore\Webpos\Model\Cart\Data\Total"/>
+    <preference for="Magestore\Webpos\Api\Data\Cart\ActionInterface" type="Magestore\Webpos\Model\Cart\Data\Action"/>
+    <preference for="Magestore\Webpos\Api\Cart\CheckoutInterface" type="Magestore\Webpos\Model\Cart\Create"/>
+    <!-- end checkout api -->
+
+    <!-- order api -->
+    <preference for="Magestore\Webpos\Api\Sales\OrderRepositoryInterface" type="Magestore\Webpos\Model\Sales\OrderRepository"/>
+    <preference for="Magestore\Webpos\Api\Data\Sales\OrderSearchResultInterface" type="Magestore\Webpos\Model\ResourceModel\Sales\Order\Collection"/>
+    <preference for="Magestore\Webpos\Api\Data\Sales\OrderInterface" type="Magestore\Webpos\Model\Sales\Order"/>
+    <preference for="Magestore\Webpos\Api\Data\Sales\CreditmemoInterface" type="Magestore\Webpos\Model\Sales\Order\Creditmemo"/>
+    <!-- end order api -->
+
+    <!-- webpos order payment api -->
+    <preference for="Magestore\Webpos\Api\Sales\PaymentRepositoryInterface" type="Magestore\Webpos\Model\Sales\Order\PaymentRepository"/>
+    <preference for="Magestore\Webpos\Api\Data\Payment\OrderPaymentInterface" type="Magestore\Webpos\Model\Payment\OrderPayment"/>
+    <!-- end webpos order payment api -->
+
+    <!-- shipment api -->
+    <preference for="Magestore\Webpos\Api\Sales\ShipmentRepositoryInterface" type="Magestore\Webpos\Model\Sales\Order\ShipmentRepository"/>
+    <!-- end shipment api -->
+
+    <!-- creditmemo api -->
+    <preference for="Magestore\Webpos\Api\Sales\CreditmemoRepositoryInterface" type="Magestore\Webpos\Model\Sales\Order\CreditmemoRepository"/>
+    <!-- end creditmemo api -->
+
+    <!-- invoice api -->
+    <preference for="Magestore\Webpos\Api\Sales\InvoiceRepositoryInterface" type="Magestore\Webpos\Model\Sales\Order\InvoiceRepository"/>
+    <!-- end invoice api -->
+
+    <!-- inventory api -->
+    <preference for="Magestore\Webpos\Api\Inventory\StockItemRepositoryInterface" type="Magestore\Webpos\Model\Inventory\StockItemRepository"/>
+    <preference for="Magestore\Webpos\Api\Data\Inventory\StockItemInterface" type="Magestore\Webpos\Model\Inventory\Stock\Item"/>
+    <!-- end inventory api -->
+
+    <!-- product api -->
+    <preference for="Magestore\Webpos\Api\Catalog\ProductRepositoryInterface" type="Magestore\Webpos\Model\Catalog\ProductRepository"/>
+    <preference for="Magestore\Webpos\Api\Catalog\SwatchRepositoryInterface" type="Magestore\Webpos\Model\Catalog\SwatchRepository"/>
+    <preference for="Magestore\Webpos\Api\Data\Catalog\SwatchResultInterface" type="Magento\Framework\Api\SearchResults"/>
+    <preference for="Magestore\Webpos\Api\Data\Catalog\ProductInterface" type="Magestore\Webpos\Model\Catalog\Product"/>
+    <!-- end product api -->
+
+    <!-- category api -->
+    <preference for="Magestore\Webpos\Api\Catalog\CategoryRepositoryInterface" type="Magestore\Webpos\Model\Catalog\CategoryRepository"/>
+    <!-- end category api -->
+    <!-- begin webpos provider -->
+    <type name="Magestore\Webpos\Model\WebposConfigProvider\CompositeConfigProvider">
+        <arguments>
+            <argument name="configProviders" xsi:type="array">
+                <item name="webpos_default_config_provider" xsi:type="object">Magestore\Webpos\Model\WebposConfigProvider\DefaultConfigProvider</item>
+                <item name="webpos_currency_config_provider" xsi:type="object">Magestore\Webpos\Model\WebposConfigProvider\CurrencyConfigProvider</item>
+                <item name="webpos_inventory_config_provider" xsi:type="object">Magestore\Webpos\Model\WebposConfigProvider\InventoryConfigProvider</item>
+                <item name="webpos_rewardpoint_config_provider" xsi:type="object">Magestore\Webpos\Model\WebposConfigProvider\RewardpointConfigProvider</item>
+                <item name="webpos_giftvoucher_config_provider" xsi:type="object">Magestore\Webpos\Model\WebposConfigProvider\GiftvoucherConfigProvider</item>
+                <item name="webpos_online_config_provider" xsi:type="object">Magestore\Webpos\Model\WebposConfigProvider\OnlineConfigProvider</item>
+                <item name="webpos_paynl_config_provider" xsi:type="object">Magestore\Webpos\Model\WebposConfigProvider\PaynlConfigProvider</item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- end webpos provider -->
+    <!-- staff appi-->
+    <type name="Magestore\Webpos\Model\ResourceModel\Staff\Staff\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">webpos_staff</argument>
+            <argument name="resourceModel" xsi:type="string">Magestore\Webpos\Model\ResourceModel\Staff\Staff</argument>
+        </arguments>
+    </type>
+
+    <type name="Magestore\Webpos\Model\ResourceModel\Staff\Role\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">webpos_authorization_role</argument>
+            <argument name="resourceModel" xsi:type="string">Magestore\Webpos\Model\ResourceModel\Staff\Role</argument>
+        </arguments>
+    </type>
+    <type name="Magestore\Webpos\Model\ResourceModel\Location\Location\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">webpos_staff_location</argument>
+            <argument name="resourceModel" xsi:type="string">Magestore\Webpos\Model\ResourceModel\Location\Location</argument>
+        </arguments>
+    </type>
+    <type name="Magestore\Webpos\Model\ResourceModel\Pos\Pos\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">webpos_pos</argument>
+            <argument name="resourceModel" xsi:type="string">Magestore\Webpos\Model\ResourceModel\Pos\Pos</argument>
+        </arguments>
+    </type>
+    <type name="Magestore\Webpos\Model\ResourceModel\Denomination\Denomination\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">webpos_cash_denomination</argument>
+            <argument name="resourceModel" xsi:type="string">Magestore\Webpos\Model\ResourceModel\Denomination\Denomination</argument>
+        </arguments>
+    </type>
+    <type name="Magestore\Webpos\Model\ResourceModel\Shift\Shift\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">webpos_shift</argument>
+            <argument name="resourceModel" xsi:type="string">Magestore\Webpos\Model\ResourceModel\Shift\Shift</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="sales_order_grid_data_source" xsi:type="string">Magestore\Webpos\Model\ResourceModel\Order\Grid\Collection</item>
+                <item name="webpos_staff_listing_data_source" xsi:type="string">Magestore\Webpos\Model\ResourceModel\Staff\Staff\Grid\Collection</item>
+                <item name="webpos_role_listing_data_source" xsi:type="string">Magestore\Webpos\Model\ResourceModel\Staff\Role\Grid\Collection</item>
+                <item name="webpos_pos_listing_data_source" xsi:type="string">Magestore\Webpos\Model\ResourceModel\Pos\Pos\Grid\Collection</item>
+                <item name="webpos_denomination_listing_data_source" xsi:type="string">Magestore\Webpos\Model\ResourceModel\Denomination\Denomination\Grid\Collection</item>
+                <item name="webpos_location_listing_data_source" xsi:type="string">Magestore\Webpos\Model\ResourceModel\Location\Location\Grid\Collection</item>
+                <item name="webpos_zreport_listing_data_source" xsi:type="string">Magestore\Webpos\Model\ResourceModel\Shift\Shift\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magestore\Webpos\Model\Staff\Acl\RootResource">
+        <arguments>
+            <argument name="identifier" xsi:type="string">Magestore_Webpos::all</argument>
+        </arguments>
+    </type>
+
+    <type name="Magestore\Webpos\Model\Staff\Acl\AclResource\Provider">
+        <arguments>
+            <argument name="configReader" xsi:type="object">Magestore\Webpos\Model\Staff\Acl\AclResource\Config\Reader\Filesystem</argument>
+        </arguments>
+    </type>
+
+    <type name="Magestore\Webpos\Model\Staff\Acl\AclResource\Config\Reader\Filesystem">
+        <arguments>
+            <argument name="converter" xsi:type="object">Magento\Framework\Acl\AclResource\Config\Converter\Dom</argument>
+        </arguments>
+    </type>
+
+    <type name="Magestore\Webpos\Model\Staff\Acl\Builder">
+        <arguments>
+            <argument name="roleLoader" xsi:type="object">Magestore\Webpos\Model\Staff\Acl\Loader\Role</argument>
+            <argument name="resourceLoader" xsi:type="object">Magento\Framework\Acl\Loader\ResourceLoader</argument>
+            <argument name="ruleLoader" xsi:type="object">Magestore\Webpos\Model\Staff\Acl\Loader\Rule</argument>
+        </arguments>
+    </type>
+
+    <preference for="Magestore\Webpos\Model\Staff\Acl\AclResource\ProviderInterface" type="Magestore\Webpos\Model\Staff\Acl\AclResource\Provider"/>
+
+    <preference for="Magestore\Webpos\Api\Data\Staff\StaffListDataInterface" type="Magestore\Webpos\Model\Staff\Staff"/>
+    <preference for="Magestore\Webpos\Api\Data\Staff\StaffSearchResultsInterface" type="Magestore\Webpos\Model\ResourceModel\Staff\Staff\Collection"/>
+    <!-- end staff api-->
+
+    <!-- payment api -->
+    <preference for="Magestore\Webpos\Api\Payment\PaymentRepositoryInterface" type="Magestore\Webpos\Model\Payment\PaymentRepository"/>
+    <preference for="Magestore\Webpos\Api\Data\Payment\PaymentResultInterface" type="Magento\Framework\Api\SearchResults"/>
+    <!-- end payment api -->
+
+    <!-- shipping api -->
+    <preference for="Magestore\Webpos\Api\Shipping\ShippingRepositoryInterface" type="Magestore\Webpos\Model\Shipping\ShippingRepository"/>
+    <preference for="Magestore\Webpos\Api\Data\Shipping\ShippingResultInterface" type="Magento\Framework\Api\SearchResults"/>
+    <!-- end shipping api -->
+
+    <!-- currency api -->
+    <preference for="Magestore\Webpos\Api\Directory\Currency\CurrencyRepositoryInterface" type="Magestore\Webpos\Model\Directory\Currency\CurrencyRepository"/>
+    <preference for="Magestore\Webpos\Api\Data\Directory\Currency\CurrencyResultInterface" type="Magento\Framework\Api\SearchResults"/>
+    <!-- end currency api -->
+
+    <!-- country api -->
+    <preference for="Magestore\Webpos\Api\Directory\Country\CountryRepositoryInterface" type="Magestore\Webpos\Model\Directory\Country\CountryRepository"/>
+    <preference for="Magestore\Webpos\Api\Data\Directory\Country\CountryResultInterface" type="Magento\Framework\Api\SearchResults"/>
+    <!-- end country api -->
+
+    <!-- configuration api -->
+    <preference for="Magestore\Webpos\Api\Config\ConfigRepositoryInterface" type="Magestore\Webpos\Model\Config\ConfigRepository"/>
+    <preference for="Magestore\Webpos\Api\Data\Config\ConfigResultInterface" type="Magento\Framework\Api\SearchResults"/>
+    <!-- end configuration api -->
+
+    <!-- shift api -->
+    <preference for="Magestore\Webpos\Api\Shift\ShiftRepositoryInterface" type="Magestore\Webpos\Model\Shift\ShiftRepository"/>
+    <preference for="Magestore\Webpos\Api\Shift\CashTransactionRepositoryInterface" type="Magestore\Webpos\Model\Shift\CashTransactionRepository"/>
+    <preference for="Magestore\Webpos\Api\Data\Shift\ShiftInterface" type="Magestore\Webpos\Model\Shift\Shift"/>
+    <preference for="Magestore\Webpos\Api\Data\Shift\CashTransactionInterface" type="Magestore\Webpos\Model\Shift\CashTransaction"/>
+    <preference for="Magestore\Webpos\Api\Data\Shift\ShiftSearchResultsInterface" type="Magestore\Webpos\Model\ResourceModel\Shift\Shift\Collection"/>
+    <!-- end of shift api -->
+
+    <!-- login  -->
+    <preference for="Magestore\Webpos\Api\Data\Staff\StaffInterface" type="Magestore\Webpos\Model\Staff\Staff"/>
+    <preference for="Magestore\Webpos\Api\Staff\StaffManagementInterface" type="Magestore\Webpos\Model\Staff\StaffManagement"/>
+    <!-- end login  -->
+
+    <!-- location api -->
+    <preference for="Magestore\Webpos\Api\Data\Inventory\LocationInterface" type="Magestore\Webpos\Model\Location\Location"/>
+    <preference for="Magestore\Webpos\Api\Inventory\LocationRepositoryInterface" type="Magestore\Webpos\Model\Inventory\LocationRepository"/>
+    <!-- end location api -->
+
+    <type name="Magento\CatalogInventory\Model\Stock\StockItemRepository">
+        <plugin name="BeforeSaveStockItem" type="Magestore\Webpos\Plugin\BeforeSaveStockItem" sortOrder="1" disabled="false"/>
+    </type>
+
+    <preference for="Magento\CatalogInventory\Model\Stock\Item" type="Magestore\Webpos\Model\Inventory\Stock\ItemModel"/>
+
+    <!-- integration api -->
+    <preference for="Magestore\Webpos\Api\Integration\Storecredit\CreditRepositoryInterface" type="Magestore\Webpos\Model\Integration\Storecredit\CreditRepository"/>
+    <preference for="Magestore\Webpos\Api\Integration\Storecreditee\CreditRepositoryInterface" type="Magestore\Webpos\Model\Integration\Storecreditee\CreditRepository"/>
+    <preference for="Magestore\Webpos\Api\Data\Checkout\SessionDataInterface" type="Magestore\Webpos\Model\Checkout\Data\SessionData"/>
+    <preference for="Magestore\Webpos\Api\Data\Integration\Storecredit\SearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    <preference for="Magestore\Webpos\Api\Data\Integration\Storecredit\StoreCreditInterface" type="Magestore\Webpos\Model\Integration\Data\StoreCredit"/>
+    <preference for="Magestore\Webpos\Api\Data\Checkout\Integration\ModuleInterface" type="Magestore\Webpos\Model\Checkout\Data\Integration\Module"/>
+
+    <preference for="Magestore\Webpos\Api\Data\Integration\Rewardpoints\SearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    <preference for="Magestore\Webpos\Api\Integration\Rewardpoints\RateRepositoryInterface" type="Magestore\Webpos\Model\Integration\Rewardpoints\RateRepository"/>
+    <preference for="Magestore\Webpos\Api\Integration\Rewardpoints\PointRepositoryInterface" type="Magestore\Webpos\Model\Integration\Rewardpoints\PointRepository"/>
+    <preference for="Magestore\Webpos\Api\Data\Integration\Rewardpoints\PointInterface" type="Magestore\Webpos\Model\Integration\Data\Point"/>
+    <preference for="Magestore\Webpos\Api\Integration\Giftcard\GiftcardRepositoryInterface" type="Magestore\Webpos\Model\Integration\Giftcard\GiftcardRepository"/>
+    <preference for="Magestore\Webpos\Api\Integration\Response\GiftcardInterface" type="Magestore\Webpos\Model\Integration\Response\Giftcard"/>
+    <preference for="Magestore\Webpos\Api\Integration\Response\RewardpointsInterface" type="Magestore\Webpos\Model\Integration\Response\Rewardpoints"/>
+    <preference for="Magestore\Webpos\Api\Integration\Response\StorecreditInterface" type="Magestore\Webpos\Model\Integration\Response\Storecredit"/>
+
+    <preference for="Magestore\Webpos\Api\Data\Integration\Giftcard\UsedCodeInterface" type="Magestore\Webpos\Model\Integration\Giftcard\Data\UsedCode"/>
+    <preference for="Magestore\Webpos\Api\Data\Integration\Giftcard\TemplateInterface" type="Magestore\Webpos\Model\Integration\Data\GiftCardTemplate"/>
+    <preference for="Magestore\Webpos\Api\Data\Integration\Giftcard\TemplateResultInterface" type="Magento\Framework\Api\SearchResults"/>
+    <preference for="Magestore\Webpos\Api\Integration\Giftcard\TemplateRepositoryInterface" type="Magestore\Webpos\Model\Integration\Giftcard\TemplateRepository"/>
+    <!-- end integration api -->
+
+    <preference for="Magento\SalesRule\Model\Quote\Discount" type="Magestore\Webpos\Model\Cart\Quote\Discount" />
+    <!-- store information for client api -->
+    <preference for="Magestore\Webpos\Api\Store\StoreRepositoryInterface" type="Magestore\Webpos\Model\Store\StoreInformationRepository" />
+    <!-- store information for client api -->
+
+    <!-- pos api -->
+    <preference for="Magestore\Webpos\Api\Pos\PosRepositoryInterface" type="Magestore\Webpos\Model\Pos\PosRepository"/>
+    <preference for="Magestore\Webpos\Api\Data\Pos\PosInterface" type="Magestore\Webpos\Model\Pos\Pos"/>
+    <preference for="Magestore\Webpos\Api\Data\Pos\PosSearchResultsInterface" type="Magestore\Webpos\Model\ResourceModel\Pos\Pos\Collection"/>
+    <!-- end pos api -->
+
+    <!-- Denomination api -->
+    <preference for="Magestore\Webpos\Api\Denomination\DenominationRepositoryInterface" type="Magestore\Webpos\Model\Denomination\DenominationRepository"/>
+    <preference for="Magestore\Webpos\Api\Data\Denomination\DenominationInterface" type="Magestore\Webpos\Model\Denomination\Denomination"/>
+    <preference for="Magestore\Webpos\Api\Data\Denomination\DenominationSearchResultsInterface" type="Magestore\Webpos\Model\ResourceModel\Denomination\Denomination\Collection"/>
+    <!-- end Denomination api -->
+
+    <!-- Override invoice templace -->
+    <preference for="Magento\Sales\Model\Order\Pdf\Invoice" type="Magestore\Webpos\Model\Order\Pdf\Invoice"/>
+    <!-- End Override invoice templace -->
+
+    <preference for="Magestore\Webpos\Api\InstallManagementInterface" type="Magestore\Webpos\Model\InstallManagement"/>
+
+    <virtualType name="Magento\Sales\Model\ResourceModel\Order\Grid">
+        <arguments>
+            <argument name="columns" xsi:type="array">
+                <item name="webpos_delivery_date" xsi:type="string">sales_order.webpos_delivery_date</item>
+                <item name="fulfill_online" xsi:type="string">sales_order.fulfill_online</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Index synchronization -->
+    <preference for="Magestore\Webpos\Api\Synchronization\SynchronizationInterface" type="Magestore\Webpos\Model\Service\Synchronization\IndexAbstract"/>
+    <preference for="Magestore\Webpos\Api\Synchronization\ProductInterface" type="Magestore\Webpos\Model\Service\Synchronization\Product"/>
+    <preference for="Magestore\Webpos\Api\Synchronization\StockInterface" type="Magestore\Webpos\Model\Service\Synchronization\Stock"/>
+    <preference for="Magestore\Webpos\Api\Synchronization\CustomerInterface" type="Magestore\Webpos\Model\Service\Synchronization\Customer"/>
+    <!-- End - Index synchronization -->
+
+    <type name="Magestore\Webpos\Model\ResourceModel\InstallManagement">
+        <arguments>
+            <argument name="sychronizationModel" xsi:type="array">
+                <item name="product" xsi:type="object">Magestore\Webpos\Api\Synchronization\ProductInterface</item>
+                <item name="stock" xsi:type="object">Magestore\Webpos\Api\Synchronization\StockInterface</item>
+                <item name="customer" xsi:type="object">Magestore\Webpos\Api\Synchronization\CustomerInterface</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- New command -->
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="updateIndexData" xsi:type="object">Magestore\Webpos\Console\Synchronization</item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- End - New command -->
+
+    <!--Lock Register-->
+    <preference for="Magestore\Webpos\Api\Pos\LockRegisterRepositoryInterface" type="Magestore\Webpos\Model\Pos\LockRegisterRepository"/>
+    <preference for="Magestore\Webpos\Api\Data\Register\PinInterface" type="Magestore\Webpos\Model\Register\Pin"/>
+    <!--End Lock Register-->
+
+</config>

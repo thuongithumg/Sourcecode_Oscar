@@ -1,0 +1,566 @@
+/*
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Webpos
+ * @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+body{
+    scrollbar-base-color: #C0C0C0;
+    scrollbar-base-color: #C0C0C0;
+    scrollbar-3dlight-color: #C0C0C0;
+    scrollbar-highlight-color: #C0C0C0;
+    scrollbar-track-color: #EBEBEB;
+    scrollbar-arrow-color: black;
+    scrollbar-shadow-color: #C0C0C0;
+    scrollbar-dark-shadow-color: #C0C0C0;
+}
+#reportscalculateGrid .grid .hor-scroll{
+    cursor:pointer;
+}
+#reportscalculateGrid .grid .hor-scroll::-webkit-scrollbar { width: 3px; height: 6px;}
+#reportscalculateGrid .grid .hor-scroll::-webkit-scrollbar-button {  background-color: #666; }
+#reportscalculateGrid .grid .hor-scroll::-webkit-scrollbar-track {  background-color: #999;}
+#reportscalculateGrid .grid .hor-scroll::-webkit-scrollbar-track-piece { background-color: #ffffff;}
+#reportscalculateGrid .grid .hor-scroll::-webkit-scrollbar-thumb { height: 50px; background-color: #666; border-radius: 6px;}
+#reportscalculateGrid .grid .hor-scroll::-webkit-scrollbar-corner { background-color: #999;}
+#reportscalculateGrid .grid .hor-scroll::-webkit-resizer { background-color: #666;}
+
+.wrapper {
+    background: #fff;
+}
+
+.hide{
+    display:none !important;
+}
+
+#overlay{
+    background:#999;
+    opacity:0.5;
+    display:block;
+    width:100%;
+    height:100%;
+    z-index:9998;
+    position:fixed;
+    top:2000px;
+    left:0px;
+}
+
+#report_filter_bt{
+    position:fixed;
+    top:35%;
+    padding:30px 20px;
+    width:50px;
+    height:35px;
+    background:#fff;
+    border: 3px #000 solid;
+    border-right: transparent;
+    right:-70px;
+    border-radius: 10px 0px 0px 10px;
+    -webkit-transition: all 0.5s ;
+    -moz-transition: all 0.5s ;   
+    -o-transition: all 0.5s ;
+    -ms-transition: all 0.5s ;
+    z-index: 9999;
+    cursor:pointer;
+    display:none;
+}
+
+#report_filter_bt:hover{
+    right:0px;
+}
+
+.form-container{
+    min-height:100px;
+    border:3px solid #888;
+    border-radius:10px;
+    background:#fff;
+    padding:5px 10px;
+    display:block;
+    margin:24px;
+    box-shadow: 0px 5px 20px;
+    -webkit-transition: all 0.5s ;
+    -moz-transition: all 0.5s ;   
+    -o-transition: all 0.5s ;
+    -ms-transition: all 0.5s ;
+}
+
+#reportscalculateGrid .grid{
+    -webkit-transition: all 0.3s ;
+    -moz-transition: all 0.3s ;   
+    -o-transition: all 0.3s ;
+    -ms-transition: all 0.3s ;
+}
+
+.zoom-out{
+    opacity:0.7;
+}
+
+.zoom-out-down{
+    -webkit-transform: scale(1.2)translate(0px,-50px);
+    -moz-transform: scale(1.2)translate(0px,-50px);
+    -o-transform: scale(1.2)translate(0px,-50px);
+    -ms-transform: scale(1.2)translate(0px,-50px);
+}
+.skew-left{
+    -webkit-transform: skew(20deg,0deg);
+    -moz-transform: skew(20deg,0deg);
+    -o-transform: skew(20deg,0deg);
+    -ms-transform: skew(20deg,0deg);
+}
+.skew-right{
+    -webkit-transform: skew(-20deg,0deg);
+    -moz-transform: skew(-20deg,0deg);
+    -o-transform: skew(-20deg,0deg);
+    -ms-transform: skew(-20deg,0deg);
+}
+
+.form-container .form-content .row .value select{
+    width: 40%;
+}
+.form-container .form-content .row .value input{
+    width: 38%;
+}
+
+.form-container .form-content .row .value .select,
+.form-container .form-content .row .value input{
+    padding: 5px;
+	height: 30px;
+}
+
+.form-container .form-content .row .value .multiselect{
+    padding: 5px;
+	height: 100px;
+}
+.form-container .form-content .row .label{
+    float: left;
+    width: 20%;
+    font-weight: bold;
+}
+.form-container .form-content .row .label span{
+    color: red;
+}
+.form-container .form-content .row{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px 0px;
+}
+
+.form-container .form-content .content_right_left .subRow input{
+    margin: -2px 5px 0px 0px;
+}
+
+.form-container .form-content .content_right_left .subRow {
+    font-size: 1.1em;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.form-container .form-content .content_right_left .subRow .col_left {
+    padding:5px 0px;
+    float:left;
+    width:50%;
+}
+.form-container .form-content .content_right_left .subRow .col_right {
+    padding:5px 0px;
+    float:right;
+    width:50%;
+}
+
+.form-container .form-content{
+    padding:5px;
+    width: 100%;
+}
+
+.form-container .form-content .content-left{
+    width: 44%;
+    float: left;
+}
+
+.form-container .content-right{
+    width:45%;
+    float:right;
+}
+
+.form-container .content-right .content_right_left{
+    width:70%;
+    float:left;
+}
+
+.form-container .content-right #bt_show_report{
+    margin: 10px;
+    float:right;
+        padding: 5px 0;
+    text-align: center;
+    width: 100px;
+    border-radius: 5px;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;   
+    -o-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+        box-shadow: 0 2px 1px #880000;
+}
+.form-container .content-right #bt_show_report:active{
+     box-shadow: none;
+         border: 1px solid transparent;
+}
+
+.flipX{
+    -webkit-transform: rotateX(360deg);
+    -moz-transform: rotateX(360deg);
+    -o-transform: rotateX(360deg);
+    -ms-transform: rotateX(360deg);
+}
+
+.circle{
+    border-radius: 50% !important;
+    -webkit-transform:rotate(360deg);
+    -moz-transform:rotate(360deg);   
+    -o-transform:rotate(360deg);
+    -ms-transform:rotate(360deg);
+}
+
+.form-container .form-header .filter_title_label{
+    float:left;
+}
+
+.form-container .form-header #chart_icon,.form-container .form-header #chart_athena_icon{
+    margin-right: 35px;
+}
+
+.form-container .form-header #chart_athena_icon:hover,
+.form-container .form-header #chart_icon:hover,
+.form-container .form-header #filter_refresh_icon:hover{
+    opacity:1;
+}
+
+.form-container .form-header #chart_icon,
+.form-container .form-header #filter_refresh_icon,
+.form-container .form-header #chart_athena_icon{
+    float:right;
+    cursor:pointer;
+    opacity:0.8;
+}
+
+.form-container .form-header .ajax-loader{
+    width: 96%;
+    position: absolute;
+    text-align: center;
+    display:none;
+}
+
+.form-container .form-header{
+    border-bottom: 1px #bbb dotted;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.button{
+    background:#ff0000;
+    color:#fff;
+    padding:0px;
+    margin:auto;
+    text-align:center;
+    opacity:0.7;
+    font-size:1.2em;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.button:hover{
+    opacity:1;
+    background:#ff0000;
+    color:#fff;
+    font-size:1.2em;
+    font-weight:bold;
+}
+
+.clear{
+    clear:both;
+}
+
+#reports_filter_form  .error_message{
+    color: red;
+    text-align: left;
+    font-size: 1.2em;
+    padding: 5px 0px;
+    font-style: italic;
+    display:none;
+    float: right;
+}
+
+/* S: Css for scroll to top button */
+#scroll_to_top:hover{
+    opacity:1;
+}
+#scroll_to_top{
+    position:fixed;
+    bottom:10px;
+    right:10px;
+    background: url(images/up-to-top.png) no-repeat center;
+    padding:0px;
+    width:48px;
+    height:48px;
+    cursor:pointer;
+    -webkit-transition: all 0.3s ;
+    -moz-transition: all 0.3s ;   
+    -o-transition: all 0.3s ;
+    -ms-transition: all 0.3s ;
+    opacity:0.8;
+}
+
+.scroll_to_top_hide{
+    -webkit-transform:translate(0px,1000px);
+    -moz-transform:translate(0px,1000px);
+    -o-transform:translate(0px,1000px);
+    -ms-transform:translate(0px,1000px);
+}
+/* E: Css for scroll to top button */
+
+/* Start: Css for scroll grid buttons */
+.hideElement{
+    display:none;
+}
+
+.scroll_grid_to_left,
+.scroll_grid_to_right,
+.scroll_grid_to_right_max,
+.scroll_grid_to_left_max
+{
+    width:27px;
+    height:32px;
+    padding:0px;
+    margin:0px;
+    display: block;
+    cursor:pointer;
+    position: fixed;
+    z-index: 999;
+    opacity:0.6;
+    right:0px;
+    -webkit-transition: all 0.2s ;
+    -moz-transition: all 0.2s ;   
+    -o-transition: all 0.2s ;
+    -ms-transition: all 0.2s ;
+}
+
+.scroll_grid_to_left{
+    top:365px;
+    background: url(images/left_arrow.png) no-repeat center;
+}
+
+.scroll_grid_to_right{
+    top:405px;
+    background: url(images/right_arrow.png) no-repeat center;
+}
+.scroll_grid_to_left_max{
+    top:325px;
+    background: url(images/back.png) no-repeat center;
+}
+
+.scroll_grid_to_right_max{
+    top:445px;
+    background: url(images/next.png) no-repeat center;
+}
+
+.scroll_grid_to_left:hover,
+.scroll_grid_to_right:hover,
+.scroll_grid_to_right_max:hover,
+.scroll_grid_to_left_max:hover
+{
+    opacity:1;
+    -webkit-transform:scale(1.2);
+    -moz-transform:scale(1.2);
+    -o-transform:scale(1.2);
+    -ms-transform:scale(1.2);
+}
+
+.scroll_grid_to_left:active,
+.scroll_grid_to_right:active,
+.scroll_grid_to_right_max:active,
+.scroll_grid_to_left_max:active
+{
+    opacity:0.6;
+}
+
+/* End: Css for scroll grid buttons */
+
+/* S: Css for grid */
+
+.grid .data tbody tr .totals_column_right{
+    background:#008b8b;
+    color:#fff;
+    font-weight:bold;
+    border-right: 3px #004b4b solid;
+}
+
+.grid .data tbody tr .totals_column_left{
+    background:#008b8b;
+    color:#fff;
+    font-weight:bold;
+    border-left: 3px #004b4b solid;
+}
+
+.grid .data tbody tr:last-child {
+    background:#008b8b;
+    color:#fff;
+}
+.grid .data tbody tr:last-child td {
+    font-weight:bold;
+    padding: 8px;
+    border-bottom: 3px #004b4b solid;
+}
+.grid .data tbody tr:last-child .totals_column_right  {
+    border-right: 1px solid #dadfe0;
+}
+.grid .data tbody tr:last-child .totals_column_left {
+    border-left: 1px solid #dadfe0;
+}
+/* E: Css for grid */
+
+/* S: Css for grid */
+#chartContainer{
+    display:none;
+    position:fixed;
+    top:20px;
+    left:50%;
+    width:1000px;
+    min-height:500px;
+    margin-left:-500px;
+    background:#fff;
+    border:1px #ccc solid;
+    border-radius:5px;
+    box-shadow:0px 0px 20px #000;
+    z-index:9999;
+    padding: 10px;
+}
+
+
+.canvasjs-chart-credit{
+    display:none !important;
+}
+
+#chartContainer #canvasJsLeadReportChart{
+    width:100%;
+    float:left;
+}
+#chartContainer #canvasJsSalesReportChart{
+    width:55%;
+    float:right;
+}
+
+#chartContainer #chartSettings ul  {
+    border-bottom: 1px #aaa solid;
+    height: 30px;
+}
+
+#chartContainer #chartSettings ul .last:hover {
+    opacity:1;
+}
+#chartContainer #chartSettings ul .last a{
+    text-decoration: none;
+}
+
+#chartContainer #chartSettings ul .last {
+    float: right;
+    padding: 0px;
+    margin-top: -18px;
+    cursor:pointer;
+    opacity:0.8;
+}
+
+#chartContainer #chartSettings ul li {
+    float: left;
+    padding: 5px;
+    line-height: 10px;
+    font-size: 1.1em;
+    padding-right: 10px;
+}
+
+#chartContainer #chartSettings ul li .chartype{
+    margin-top: -2px;
+    cursor:pointer;
+}
+#chartContainer #chartSettings ul li.last a{
+    padding: 10px 10px 10px 3px;
+    background-color: #ffa500;
+    color: #fff;
+    border-radius: 4px;
+}
+#chartContainer #chartSettings ul li.last img{
+    margin-bottom: -11px;
+    padding-top: 11px;
+    margin-right: 4px;
+}
+#chartContainer #chartSettings ul li label{
+    cursor:pointer;
+    margin-left: 5px;
+}
+
+#chartContainer #bt_show_converted_chart{
+    position:absolute;
+    bottom:5px;
+    padding: 5px 15px;
+    margin: 5px 36%;
+    border-radius: 10px;
+}
+
+#chartContainer #canvasJsRatesReportChart{
+    z-index: -1;
+    position: fixed;
+    top: 70px;
+    width:1000px;
+}
+.percent{
+    background-color: #008b8b;
+    color:white;
+}
+/* E: Css for grid */
+/*hiepdd break word*/
+.grid tr.headings span{word-break: keep-all;display: inline-block !important;white-space: normal !important;}
+.grid-message{
+	width:100%;
+	position:fixed;
+	top:0px;
+	left:0px;
+	height:70px;
+	line-height:70px;
+	background:#000;
+	color:#fff;
+	border-bottom:1px #ddd solid;
+	box-shadow:1px 1px #ddd;
+	text-align:center;
+	font-size:1.3em;
+	font-style:italic;
+	font-weight:bold;
+	-webkit-transition: all 0.5s ;
+    -moz-transition: all 0.5s ;   
+    -o-transition: all 0.5s ;
+    -ms-transition: all 0.5s ;
+	z-index: 9999;
+}
+
+.message-hide{
+	-webkit-transform:translate(0px, -72px);
+    -moz-transform:translate(0px, -72px);
+    -o-transform:translate(0px, -72px);
+    -ms-transform:translate(0px, -72px);
+}
+/*
+#anchor-content,.footer{
+	margin-left:100px;
+}
+*/

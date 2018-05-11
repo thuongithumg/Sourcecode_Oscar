@@ -1,0 +1,33 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<!-- ko if: $parent.canShowComment() -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h5 data-bind="text: $t('Comment History')"/>
+            </div>
+            <div class="panel-body">
+                <div class="order-comment-list">
+                    <table class="table">
+                        <colgroup>
+                            <col width="300">
+                            <col width="">
+                        </colgroup>
+                        <tbody data-bind="foreach: {data: $parent.orderData().status_histories, as: 'item'}">
+                        <!-- ko if: item.comment && item.comment!='' -->
+                        <tr>
+                            <td data-bind="text: $parents[1].getFullCurrentDatetime(item.created_at)"/>
+                            <td data-bind="text: item.comment"/>
+                        </tr>
+                        <!-- /ko -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ko-->

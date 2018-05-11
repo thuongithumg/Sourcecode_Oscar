@@ -1,0 +1,66 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<div id='success_container' class="webpos_container rightToLeft col-sm-8 col-left" data-bind="css:{active:createdOrder}">
+    <header class="o-header checkout-header">
+        <div class="price-box">
+            <span class="price" data-bind="text:$data.getGrandTotal()"></span>
+        </div>
+    </header>
+    <main class="main-content">
+        <div class="wrap-success-content">
+            <div class="top-text">
+                <span class="icon-iconPOS-success"><span class="path1"></span><span class="path2"></span></span>
+                <div class="notify-order">
+                    <div data-bind="i18n:'Order has been created successfully'"></div>
+                    <div><span data-bind="i18n:'Order ID:  '"></span><strong data-bind="text:getOrderIdMessage()"></strong></div>
+                </div>
+            </div>
+            <div class="submit-email">
+                <div class="form-submit-email">
+                    <div class="col-sm-8">
+                        <input type="text"
+                               placeholder="Email"
+                               name="email"
+                               class="customer-email form-control"
+                               data-bind="textInput:$data.getCustomerEmail(),event:{change:saveEmail}"/>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="button-actions">
+                            <button class="btn-submit btn-cl-cfg-other" data-bind="i18n:'Send',click:sendEmail"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="checkout-footer">
+        <div class="wrap-footer">
+            <ul>
+                <li class="actions">
+                    <div class="row">
+                        <div class="col-sm-6"><button class="add-payment button btn-cl-cfg-other" data-bind="click:printReceipt,i18n:'Print'"></button></div>
+                        <div class="col-sm-6"><button class="checkout-actions button btn-cl-cfg-active" data-bind="click:startNewOrder,i18n:'New Order'"></button></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </footer>
+</div>

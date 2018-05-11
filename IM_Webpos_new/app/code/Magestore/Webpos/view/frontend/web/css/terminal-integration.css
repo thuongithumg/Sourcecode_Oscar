@@ -1,0 +1,148 @@
+/*
+ * Copyright © 2018 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/* Popup New Customer*/
+.terminal-popup-form .close{float:none;margin: 0;color: #9da4a2;font-size: 100%;font-weight: normal;opacity: 1;}
+.terminal-popup-form {
+    margin-top : 60px;
+}
+.terminal-popup-form .modal-content{height: 100%; border-radius: 0}
+.terminal-popup-form .popup-header{ display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding:8px 20px
+}
+.terminal-popup-form button.btn-save {
+    background: none transparent;
+    border: 0 none;
+    height: 35px!important;
+    line-height: 35px!important;
+    padding: 0;
+}
+.terminal-popup-form h4.modal-title {
+    color: #4e5660;
+    font-size: 18px;
+    font-weight: normal;
+    margin-top: 0;
+    line-height: 1.4;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+@media (min-width: 768px){
+    .terminal-popup-form .modal-dialog {width: 60%; height: 500px; margin: 30px auto;}
+}
+.terminal-popup-form .input-box {position: relative;margin-bottom:10px}
+.terminal-popup-form .input-box input{width:100%;background:#fff;border:1px solid #d7d7d7;height:33px;line-height:33px;padding:0 10px;color:#333}
+.terminal-popup-form .input-box select {width: 100%;height: 33px;border: 1px solid #d7d7d7;padding:0 10px;color:#6f7d90}
+.terminal-popup-form .input-box em{position: absolute;right:-10px;top:10px;    color: red;}
+.terminal-popup-form .subscribe-box{margin-top: 15px;}
+.terminal-popup-form .subscribe-box label{    color: #3c4857;font-weight: normal;font-size: 15px;}
+.terminal-popup-form .switch-box{display:inline-block;margin-left:30px;    vertical-align: middle;}
+.terminal-popup-form .switch-box .on{margin-left:10px;}
+.terminal-popup-form .switch-box .on,
+.terminal-popup-form .switch-box .off{display: inline-block;vertical-align: top;color:#9da4a2;font-size:15px;}
+.terminal-popup-form .switch-box .off{margin-right:10px}
+.terminal-popup-form .modal-footer{padding:0;text-align:left}
+.terminal-popup-form .modal-footer .panel-group .panel{box-shadow: 0 0 0;border: 0 none;border-radius: 0;}
+.terminal-popup-form .modal-footer .panel-group .panel{border-bottom:1px solid #e1e1e1;padding-bottom: 10px;}
+.terminal-popup-form .modal-footer .panel.last{border-bottom:0 none;}
+.terminal-popup-form .modal-footer .panel-group {margin-bottom:0}
+.terminal-popup-form .modal-footer .panel-group .panel .panel-body{border-top: 0 none;padding: 0;}
+.terminal-popup-form .modal-footer .panel-heading{padding: 5px 28px 0;background: none transparent;}
+.terminal-popup-form .modal-footer .address-box {border: 1px dashed #d7d7d7;padding: 10px;margin: 18px 28px 0;width: calc(100% - 56px);}
+.terminal-popup-form .modal-footer .address-box label{ color: #48586c;font-weight:400}
+.terminal-popup-form .modal-footer .actions a.edit {color: #9da4a2;cursor: pointer;}
+.terminal-popup-form .panel-title a{position:relative;display:block;width:100%;text-decoration: none;color: #3c4857;font-size: 15px;}
+.terminal-popup-form .panel-title a:hover,.terminal-popup-form .panel-title a:active{text-decoration: none}
+/*.terminal-popup-form .panel-title a[aria-expanded="false"]:after{font:normal normal normal 14px/1 icomoon;content: "\e900";display:block;position:absolute; top:0;right:0}*/
+.terminal-popup-form .panel-title{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding:0;
+    margin-top: 10px;
+}
+.terminal-popup-form .panel-title span[class*='icon-']{cursor: pointer}
+.terminal-popup-form .modal-footer .actions{display:block;text-align:right}
+.terminal-popup-form .modal-footer .actions a span[class*='icon']{color: #c1c2c4;font-size: 17px;}
+.terminal-popup-form .modal-footer .actions a:hover span[class*='icon']{color: #000;font-size: 17px;}
+.terminal-popup-form .modal-footer .actions a.edit {color: #9da4a2;cursor: pointer;}
+.terminal-popup-form .modal-footer .actions a.remove{cursor:pointer;margin-top:0;border-radius: 50%;margin-right:0;color: #919cab;width: 15px;height: 15px;vertical-align: middle;text-align: center;line-height: 15px;font-weight: 100;}
+/* End Popup New Customer*/
+#countdown {
+    position: relative;
+    margin: auto;
+    margin-top: 100px;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+}
+
+#countdown-number {
+    color: black;
+    display: inline-block;
+    line-height: 40px;
+}
+
+svg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    transform: rotateY(-180deg) rotateZ(-90deg);
+}
+
+svg circle {
+    stroke-dasharray: 113px;
+    stroke-dashoffset: 0px;
+    stroke-linecap: round;
+    stroke-width: 2px;
+    stroke: black;
+    fill: none;
+    animation: linear infinite forwards;
+}
+
+@keyframes countdown {
+    from {
+        stroke-dashoffset: 0px;
+    }
+    to {
+        stroke-dashoffset: 113px;
+    }
+}
+
+#transaction-process {
+    margin-top: 100px;
+}
+
+#terminal-loading {
+    background: url("../images/loading-01.gif");
+    display: block;
+    width: 200px;
+    height: 200px;
+    margin: auto;
+}
+
+#countdown-number {
+    position: absolute;
+    display: block;
+    font-size: 50px;
+    width: 100px;
+    left: calc(50% - 47px);
+    top: calc(50% - 17px);
+    text-align: center;
+}

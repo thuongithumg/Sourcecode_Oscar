@@ -1,0 +1,18 @@
+
+<?php $warehouses = $this->getAvailableWarehouses(); ?>
+
+<span class="field-row">
+     <label class="normal" for="shipment[warehouse]">
+         <strong><?php echo $this->__('Ship From Warehouse') ?></strong>
+     </label><br> 
+     <select class="select" name="shipment[warehouse]" id="shipment[warehouse]" style="width:300px">
+<!--         <option value="">--><?php //echo __('Select Warehouse')?><!--</option>-->
+         <?php if(count($warehouses)): ?>
+             <?php foreach($warehouses as $warehouseId => $warehouse): ?>
+         <option value="<?php echo $warehouseId ?>" <?php echo (count($warehouses)==1) ? 'selected="selected"' : '' ?>><?php echo $warehouse['label'] ?></option>
+             <?php endforeach; ?>
+         <?php endif; ?>
+     </select>      
+</span>
+<div class="field-row" id="shipment_request_stock_notify"></div>  
+<br/>

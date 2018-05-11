@@ -1,0 +1,106 @@
+<script type="text/javascript">
+    var ScanForm = function (data) {
+        for (var item in data) {
+            ScanForm.prototype[item] = data[item];
+        }
+    };
+    ScanForm.prototype = {
+        loadBarcode: function () {
+            var params = {
+                barcode: this.getBarcode()
+            };
+            var self = this;
+            new Ajax.Request(this.loadBarcodeUrl, {
+                method: 'post',
+                parameters: params,
+                onComplete: function (response) {
+                    var data = response.responseJSON;
+                    self.updateBarcodeInfo(data);
+                }
+            });
+        },
+        loadPreview: function () {
+            var self = this;
+            new Ajax.Request(this.loadPreviewUrl, {
+                method: 'post',
+                parameters: {
+                    templateId: self.getTemplateId()
+                },
+                onComplete: function (response) {
+                    var data = response.responseJSON;
+                    self.previewContent(data.content);
+                }
+            });
+        },
+        print: function () {
+            var self = this;
+            var params = {
+                barcode: this.getBarcode(),
+                templateId: this.getTemplateId(),
+                printQty: this.getPrintQty()
+            };
+            if (editForm.validate()) {
+                new Ajax.Request(this.printUrl, {
+                    method: 'post',
+                    parameters: params,
+                    onComplete: function (response) {
+                        var data = response.responseJSON;
+                        if (data.content) {
+                            var print_window = window.open('', 'print', 'status=1,width=700,height=700');
+                            if (print_window) {
+                                print_window.document.open();
+                                print_window.document.write(data.content);
+                                print_window.document.close();
+                                print_window.addEventListener('load', function () {
+                                    print_window.print();
+                                });
+                            } else {
+                                alert('Your browser has blocked the automatic popup, please change your browser settings or print the receipt manually');
+                            }
+                        }
+                    }
+                });
+            }
+        },
+        updateBarcodeInfo: function (data) {
+            for (var id in data) {
+                if ($(id)) {
+                    $(id).innerHTML = data[id];
+                }
+            }
+
+        },
+        getBarcode: function () {
+            return $('os_barcode_scan').value;
+        },
+        getTemplateId: function () {
+            return $('template_id').value;
+        },
+        getPrintQty: function () {
+            return parseInt($('print_qty').value);
+        },
+        previewContent: function (content) {
+            if (typeof content == 'undefined') {
+                return $$('.barcode_preview_container')[0].innerHTML;
+            } else {
+                $$('.barcode_preview_container')[0].innerHTML = content;
+            }
+        }
+    };
+
+    window.scanForm = new ScanForm({
+        'loadBarcodeUrl': '<?php echo Mage::helper("adminhtml")->getUrl('adminhtml/barcodesuccess_barcode_scan/loadBarcode') ?>',
+        'loadPreviewUrl': '<?php echo Mage::helper("adminhtml")->getUrl('adminhtml/barcodesuccess_barcode/loadPrintPreview') ?>',
+        'printUrl': '<?php echo Mage::helper("adminhtml")->getUrl('adminhtml/barcodesuccess_barcode_scan/print') ?>'
+    });
+    Event.observe($('os_barcode_scan'), 'keypress', function (e) {
+        if (e.charCode == 13) {
+            $('os_barcode_scan').select();
+            window.scanForm.loadBarcode();
+        }
+    });
+    Event.observe($('template_id'), 'change', function (e) {
+        window.scanForm.loadPreview();
+    });
+    window.scanForm.loadPreview();
+</script>

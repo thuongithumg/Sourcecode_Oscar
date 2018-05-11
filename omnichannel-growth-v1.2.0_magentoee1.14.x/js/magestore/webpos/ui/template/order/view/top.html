@@ -1,0 +1,65 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<nav class="o-header-nav">
+    <div class="id-order"><label class="title-header-page">Order: <span data-bind="text: $parent.orderData().increment_id"></span></label></div>
+    <div class="more-info">
+        <a href="#" rel="popover" data-bind="click: $parent.showActionPopup" data-trigger="click" data-popover-content="#form-add-note-order" data-placement="bottom" data-original-title="" title="">
+            <span class="icon-iconPOS-more"></span>
+        </a>
+    </div>
+</nav>
+<div class="notify-notsync" data-bind="i18n: ('This was an issue syncing this order.'),
+visible: $parent.canSync"></div>
+<div class="sum-info-top">
+    <div class="life-time-left">
+        <span class="price" data-bind="text: $parent.getPrice('grand_total')"/>
+    </div>
+    <div class="info-order">
+        <table>
+            <tr>
+                <td><label data-bind="i18n: ('Status: ')"/></td>
+                <td>
+                    <span data-bind="attr: {class: 'status ' + $parent.orderData().status}, text: $parent.getStatus()"/>
+                </td>
+            </tr>
+            <tr>
+                <td><label data-bind="i18n: ('Created Date: ')"/></td>
+                <td><span class="date-time" data-bind="text: $parent.getFullDate($parent.orderData().created_at)"/></td>
+            </tr>
+            <!-- ko if: $parent.orderData().webpos_staff_name -->
+            <tr>
+                <td><label data-bind="i18n: ('Served by: ')"/></td>
+                <td><span class="date-time" data-bind="text: $parent.orderData().webpos_staff_name"></span></td>
+            </tr>
+            <!-- /ko -->
+        </table>
+    </div>
+</div>
+<!-- ko if: $parent.orderData().base_total_due > 0 -->
+<div class="total-due">
+    <label class="title-total-due">Total Due:
+        <span class="price" data-bind="text: $parent.getPrice('total_due')"/>
+    </label>
+    <!-- ko if: $parent.canTakePayment -->
+    <a class="take-payment" data-bind="i18n: ('Take payment'), click: $parent.showPopup.bind($parent, 'payment')"></a>
+    <!-- /ko -->
+</div>
+<!-- /ko -->

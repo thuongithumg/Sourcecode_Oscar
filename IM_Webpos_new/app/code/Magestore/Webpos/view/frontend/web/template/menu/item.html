@@ -1,0 +1,11 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<!-- ko if: data.is_display == 1 -->
+<li class="c-menu__item" data-bind="attr:{id: 'item_' + data.id}">
+    <span aria-hidden="true" data-bind="css:data.icon_class"></span>
+    <a class="c-menu__link" data-bind="text: data.title, attr:{id:data.id}, click:itemClick, afterRender: afterRender"></a>
+</li>
+<!-- /ko -->

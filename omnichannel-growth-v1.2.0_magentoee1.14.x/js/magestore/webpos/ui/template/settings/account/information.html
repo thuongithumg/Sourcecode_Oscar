@@ -1,0 +1,46 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<div class="panel panel-default">
+    <div class="panel-heading" data-bind="i18n: 'Account Information'"></div>
+    <div class="fieldset panel-body">
+        <div class="field required input-box">
+            <label data-bind="i18n: 'Display name'"></label>
+            <input class="input-text required-entry"  id="name"  type="text" data-validate="{'required-entry':true}" data-bind="value:staff.name"/>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading" data-bind="i18n:'Change Password'"></div>
+    <div class="fieldset panel-body">
+        <div class="field required input-box password current">
+            <label data-bind="i18n:'Current Password'"></label>
+            <input type="password" class="input-text validate-admin-password required-entry"  data-validate="{'required-entry':true}"  name="current_password" id="current-password">
+        </div>
+        <div class="input-box new password">
+            <label data-bind="i18n:'New Password'"></label>
+            <input type="password" class="input-text validate-admin-password" name="password" id="password">
+        </div>
+        <div class="input-box confirm password">
+            <label data-bind="i18n:'Confirmation'"></label>
+            <input type="password" class="input-text" name="password_confirmation" id="password-confirmation" data-validate="{equalTo:'#password'}">
+        </div>
+    </div>
+</div>

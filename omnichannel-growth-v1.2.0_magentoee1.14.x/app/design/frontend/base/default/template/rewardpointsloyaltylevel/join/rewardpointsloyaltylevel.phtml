@@ -1,0 +1,168 @@
+<?php
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPointsLoyaltyLevel
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+/**
+ * Rewardpointsloyaltylevel template
+ * 
+ * @see Magestore_RewardPointsLoyaltyLevel_Block_Rewardpointsloyaltylevel
+ */
+?>
+<div class="page-title">
+    <h1><?php echo $this->__('Join Group') ?></h1>
+</div>
+<ul class="messages">
+    <li class="notice-msg">
+        <ul>
+            <li><span><?php echo $this->__('Please note that you can participate in only one group. If you join another one, your membership in the current group will be ended.') ?></span></li>
+        </ul>
+    </li>
+</ul>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+<?php
+$customerLevel = Mage::helper('rewardpointsloyaltylevel')->getCustomerLevel();
+$collections = $this->getCollection();
+if ($collections->getSize() == 0) {
+    echo $this->__('
+There is no available group to join.');
+} else {
+    foreach ($collections as $level):
+        ?>
+        <?php $enableJoin = $this->enableJoin($level->getId()); ?>
+        <?php $earn_point = $this->getEarningPoints($level->getId()) ?>
+        <?php $spend_point = $this->getSpendingPoints($level->getId()) ?>
+        <?php $discount = $this->getAllPromoSpendingRuleResponsive($level->getId()) ?>
+        <?php if (!$earn_point && !$spend_point && !$discount) continue; ?>
+        <div class="box-account box-info box-rewardpoints-summary">
+            <div class="box-head">
+                <h2><?php echo $level->getLevelName() ?></h2>
+            </div>
+            <div class="info-summary">
+                <p>
+                    <?php echo $level->getDescription() ?>
+                    <!--                    <br/>-->
+                </p>       
+                <div class="loyalty-benefits">            
+                    <?php if (count($earn_point)): ?>
+                        <span><?php echo $this->__('Earning Points') ?></span><br/>
+                        <div style="margin-left: 10px; margin-bottom: 10px">
+                            <?php foreach ($earn_point as $earn): ?>
+                                <?php echo $earn . '<br />' ?>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>        
+                    <?php if (count($spend_point)): ?>
+                        <span><?php echo $this->__('Spending Points') ?></span><br/>
+                        <div style="margin-left: 10px; margin-bottom: 10px">
+                            <?php foreach ($spend_point as $spend): ?>
+                                <?php echo $spend . '<br />' ?>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+                    <?php if (count($discount)): ?>
+                        <span><?php echo $this->__('Discount') ?></span><br/>
+                        <div style="margin-left: 10px; margin-bottom: 10px">
+                            <?php foreach ($discount as $spend): ?>
+                                <?php echo $spend . '<br />' ?>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+                <div class="loyalty-submit">
+                    
+                    <div><?php echo $this->__('Required accumulated points: %s', '<strong class="rewardpoints-money">' . $level->getRequirement() . '</strong>') ?></div>
+                    <div><?php echo $this->__('Spend: %s', '<strong class="rewardpoints-money">' . Mage::helper('rewardpoints/point')->format($level->getDemeritPoints()) . '</strong>') ?></div>
+                    <div><?php echo $this->__('Duration: %s', '<strong class="rewardpoints-money">' . $this->formatDay($level->getRetentionPeriod()) . '</strong>') ?></div>
+                    <?php if ($customerLevel != $level->getId()): ?>
+
+                        <button class="button loyalty-button-submit <?php echo $enableJoin ? '' : 'disabled'; ?>" title="<?php echo $this->__('Join Group') ?>" type="button" onclick="getLoyaltyBox('<?php echo $level->getId(); ?>', '<?php echo ($level->getDemeritPoints() > 0) ? Mage::helper('rewardpoints/point')->format($level->getDemeritPoints()) : 0 ?>');
+                                            return false;" <?php echo $enableJoin ? '' : 'disabled="true"'; ?>>
+
+                            <span class="loyalty-button-submit-span">
+                                <span><?php echo $this->__('Join Group') ?></span>
+                            </span>
+                        </button>
+                        <?php
+                        if (!$enableJoin) {
+                            echo '<div class="loyaltylevel-notice-join-group">' . $this->__('You must have at least %s to join this group.', $level->getRequirement()) . '</div>';
+                        }
+                        ?>
+                    <?php else: ?>
+                        <button class="button loyalty-button-submit disabled" title="<?php echo $this->__('Join Group') ?>" type="button" onclick="return false;" disabled="true">
+                            <span class="loyalty-button-submit-span">
+                                <span><?php echo $this->__('Joined Group') ?></span>
+                            </span>
+                        </button>
+                    <?php endif; ?>
+                </div>
+                <div class="loyalty-clear"></div>
+            </div>
+        </div>
+    <?php endforeach; ?>
+    <script type="text/javascript">
+
+        var winPopupRefer = new Window({windowClassName: 'rewardpoints-loyalty-dialog', title: 'Loyalty level', zIndex: 100, width: 300, height: 150, minimizable: false, maximizable: false, showEffectOptions: {duration: 0.4}, hideEffectOptions: {duration: 0.4}, resizable: false, destroyOnClose: false});
+        var urlLoyaltyTemp = "<?php echo $this->getUrl('rewardpointsloyaltylevel/join/join'); ?>";
+        var urlLoyalty = urlLoyaltyTemp;
+        function getLoyaltyBox(levelId, pointRequired) {
+            var messageConfirm = '';
+            if (pointRequired == 0)
+                messageConfirm = "<?php echo $this->__('Are you sure?') ?>";
+            else
+                messageConfirm = "<?php echo $this->__('You will be subtracted %s for joining this group. Are you sure you want to join?') ?>";
+            messageConfirm = messageConfirm.replace("%s", pointRequired);
+            $('question-loyalty').innerHTML = messageConfirm;
+            urlLoyalty = urlLoyaltyTemp + 'id/' + levelId;
+
+            winPopupRefer.setContent('loyalty-tinybox');
+            winPopupRefer.showCenter(true);
+            $('overlay_modal').observe('click', function (event) {
+                winPopupRefer.hide();
+            });
+        }
+        function joinLoyaltyLevel() {
+            window.location.assign(urlLoyalty);
+        }
+    </script>
+<?php } ?>
+<div id="loyalty-tinybox" style="display:none; width:260px; height: 110px">
+    <div class="question-loyalty" id="question-loyalty">
+        <?php echo $this->__('Are you sure you want to join this group?'); ?>
+    </div>
+    <div class="loyalty-button-group">
+        <button class="button" type="button" onclick="joinLoyaltyLevel();
+                    return false;">
+            <span>
+                <span><?php echo $this->__('Yes') ?></span>
+            </span>
+        </button>
+        <button class="button" type="button" onclick="winPopupRefer.hide();
+                    return false;">
+            <span>
+                <span><?php echo $this->__('No') ?></span>
+            </span>
+        </button>
+    </div>
+</div>
+<?php if ($this->getLoyaltyLevel()): ?>
+    <div class="buttons-set">
+        <p class="back-link"><a href="<?php echo $this->getUrl('rewardpointsloyaltylevel'); ?>"><small>« </small><?php echo $this->__('Back') ?></a></p>
+    </div>
+<?php endif; ?>

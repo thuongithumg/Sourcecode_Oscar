@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<page layout='webpos' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" >
+    <update handle="webpos_menu"/>
+    <update handle="webpos_notification"/>
+    <update handle="webpos_checkout"/>
+    <update handle="webpos_customer"/>
+    <update handle="webpos_settings_general"/>
+    <update handle="webpos_settings_sync"/>
+    <update handle="webpos_install"/>
+    <update handle="webpos_settings_account"/>
+    <update handle="webpos_managestock"/>
+    <update handle="webpos_sales_order"/>
+    <update handle="webpos_sales_order_hold"/>
+    <update handle="webpos_shift"/>
+
+    <head>
+        <meta name="x_ua_compatible" content="IE=edge,chrome=1"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Webpos</title>
+        <script src="requirejs/require.js"/>
+        <css src="mage/calendar.css"/>
+        <css src="Magestore_Webpos::/css/style.css"/>
+        <css src="Magestore_Webpos::css/bootstrap/bootstrap.css"/>
+        <css src="Magestore_Webpos::css/bootstrap/bootstrap-theme.css"/>
+        <css src="Magestore_Webpos::css/bootstrap/bootstrap-switch.css"/>
+        <css src="Magestore_Webpos::css/bootstrap/bootstrap-slider.min.css"/>
+        <css src="Magestore_Webpos::css/owl.carousel.css"/>
+        <css src="Magestore_Webpos::css/owl.transitions.css"/>
+        <css src="Magestore_Webpos::css/general.css"/>
+        <css src="Magestore_Webpos::css/webpos.css"/>
+        <css src="Magestore_Webpos::css/login.css"/>
+        <css src="Magestore_Webpos::css/stock.css"/>
+        <css src="Magestore_Webpos::css/settings.css"/>
+        <css src="Magestore_Webpos::css/responsive.css"/>
+        <css src="Magestore_Webpos::css/popup.css"/>
+        <css src="Magestore_Webpos::css/lib/flipclock.css"/>
+        <css src="Magestore_Webpos::css/terminal-integration.css"/>
+    </head>
+
+    <body>
+        <block name="require.js" class="Magento\Framework\View\Element\Template" template="Magento_Theme::page/js/require_js.phtml" />
+
+        <referenceContainer name="after.body.start">
+            <block class="Magento\RequireJs\Block\Html\Head\Config" name="requirejs-config"/>
+            <block class="Magento\Translation\Block\Html\Head\Config" name="translate-config"/>
+            <block class="Magento\Translation\Block\Js" name="translate" template="Magento_Translation::translate.phtml"/>
+            <block class="Magento\Framework\View\Element\Js\Cookie" name="js_cookies" template="Magento_Theme::js/cookie.phtml"/>
+            <block class="Magento\Theme\Block\Html\Notices" name="global_notices" template="html/notices.phtml"/>
+        </referenceContainer>
+
+        <referenceContainer name="main">
+            <container name="content" label="Main Content Area">
+                <block class="Magento\Framework\View\Element\FormKey" name="formkey"/>
+                <block class="Magestore\Webpos\Block\Login" name="webpos_login">
+                    <arguments>
+                        <argument name="jsLayout" xsi:type="array">
+                            <item name="components" xsi:type="array">
+                                <item name="location" xsi:type="array">
+                                    <item name="component" xsi:type="string">Magestore_Webpos/js/view/location</item>
+                                </item>
+                                <item name="warning" xsi:type="array">
+                                    <item name="component" xsi:type="string">Magestore_Webpos/js/view/warning</item>
+                                </item>
+                            </item>
+                        </argument>
+                    </arguments>
+                </block>
+                <block class="Magestore\Webpos\Block\Webpos" name="webpos" template="Magestore_Webpos::webpos.phtml">
+                    <block class="Magestore\Webpos\Block\Webpos" name="webpos_content" template="Magestore_Webpos::webpos/content.phtml" />
+                </block>
+            </container>
+        </referenceContainer>
+    </body>
+</page>

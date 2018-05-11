@@ -1,0 +1,19 @@
+<?php if (Mage::helper('rewardpointsloyaltylevel')->isEnable()) { ?>
+    <script type="text/javascript">
+        //<![CDATA[
+    <?php if (Mage::getStoreConfig('rewardpoints/loyaltylevelplugin/loyalty_before_expired')) { ?>  
+            if($('rewardpoints-settings') && $('rewardpoints-settings').down('.form-list')){
+                var eladd=$('rewardpoints-settings').down('.form-list');
+                eladd.insert(
+                        '<li class="control">'+
+                            '<div class="input-box">'+
+                                '<input type="checkbox" name="loyalty_notification" title="<?php echo $this->__('Loyalty Level Subscription') ?>" value="1" id="loyalty_notification" class="checkbox" <?php if ($this->getLoyaltyNotification()): ?>checked="checked"<?php endif ?>/>'+
+                            '</div>'+
+                            '<label for="loyalty_notification"><?php echo $this->__(' Loyalty Level Subscription') ?></label>'+
+                        '</li>'
+                );
+            }
+    <?php } ?>   
+        //]]>
+    </script>
+<?php } ?>

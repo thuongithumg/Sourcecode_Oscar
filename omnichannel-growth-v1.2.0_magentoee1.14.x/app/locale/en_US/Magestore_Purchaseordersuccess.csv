@@ -1,0 +1,330 @@
+"Purchase Management","Purchase Management"
+"Purchase Order","Purchase Order"
+"Create Purchase Order","Create Purchase Order"
+"Purchase Orders","Purchase Orders"
+Quotation,Quotation
+"Create Quotation","Create Quotation"
+Quotations,Quotations
+Settings,Settings
+"Allow Everything","Allow Everything"
+"Purchase Order Success","Purchase Order Success"
+"Manage Purchase Orders","Manage Purchase Orders"
+"View Purchase Order","View Purchase Order"
+"Save Purchase Order","Save Purchase Order"
+"Send Purchase Order Request","Send Purchase Order Request"
+"Print Purchase Order","Print Purchase Order"
+"Cancel Purchase Order","Cancel Purchase Order"
+"Confirm Purchase Order","Confirm Purchase Order"
+"Complete Purchase Order","Complete Purchase Order"
+"Receive Purchase Order","Receive Purchase Order"
+"Return Purchase Order","Return Purchase Order"
+"Transfer Purchase Order","Transfer Purchase Order"
+"Manage Purchase Order Invoices","Manage Purchase Order Invoices"
+"Create Purchase Order Invoice","Create Purchase Order Invoice"
+"View Purchase Order Invoice","View Purchase Order Invoice"
+"Register Payment Purchase Order Invoice","Register Payment Purchase Order Invoice"
+"Refund Purchase Order Invoice","Refund Purchase Order Invoice"
+"Manage Quotations","Manage Quotations"
+"View Quotation","View Quotation"
+"Save Quotation","Save Quotation"
+"Convert Quotation to Purchase Order","Convert Quotation to Purchase Order"
+"Purchase Order Settings","Purchase Order Settings"
+"Scan Barcode","Scan Barcode"
+Save,Save
+Barcode,Barcode
+"Scan Item List","Scan Item List"
+QTY,QTY
+SKU,SKU
+"Supplier SKU","Supplier SKU"
+"Product Name","Product Name"
+Refund,Refund
+"Refund Information","Refund Information"
+"Submit Refund","Submit Refund"
+Close,Close
+"Bill Information","Bill Information"
+"Bill From: ","Bill From: "
+"Bill Date: ","Bill Date"
+"Invoice Totals","Invoice Totals"
+"Grand Total (excl. Tax): ","Grand Total (excl. Tax): "
+"Discount: ","Discount: "
+"Tax: ","Tax: "
+"Grand Total (incl. Tax): ","Grand Total (incl. Tax): "
+"Total Due: ","Total Due: "
+"Total Refund: ","Total Refund: "
+"Register Payment","Register Payment"
+"Save Payment","Save Payment"
+"Please receive at least one item.","Please receive at least one item."
+"Receive Items","Receive Items"
+Receive,Receive
+"Received Time","Received Time"
+"Purchased Item List","Purchased Item List"
+"Please select item(s) to receive.","Please select item(s) to receive."
+"All Products from Supplier","All Products from Supplier"
+"Low Stock Products","Low Stock Products"
+"Back-order Products","Back-order Products"
+"Supply Need Products","Supply Need Products"
+"Import Products","Import Products"
+"Update Items","Update Items"
+"Please select item(s) to update.","Please select item(s) to update."
+"Return Items","Return Items"
+Return,Return
+"Returned Time","Returned Time"
+"Received Item List","Received Item List"
+"Please select item(s) to return.","Please select item(s) to return."
+"Please return at least one item.","Please return at least one item."
+"Create an Invoice (Purchase Order #%s)","Create an Invoice (Purchase Order #%s)"
+"Billed From","Billed From"
+"Please select item(s) to create invoice.","Please select item(s) to create invoice."
+"Transfer Items","Transfer Items"
+"Add Selected Products","Add Selected Products"
+"Please select product(s) to add.","Please select product(s) to add."
+"Created At: ","Created At: "
+"Purchase From: ","Purchase From: "
+"Payment Term: ","Payment Term: "
+"Shipping Method: ","Shipping Method: "
+"Select criteria to forecast supply needs","Select criteria to forecast supply needs"
+"Show Supply Needs","Show Supply Needs"
+"Please select at least one product.","Please select at least one product."
+Comment,Comment
+"Order Totals","Order Totals"
+"Subtotal: ","Subtotal: "
+"Shipping Cost: ","Shipping Cost: "
+"Total Bill: ","Total Bill: "
+"Select Low Stock","Select Low Stock"
+Import,Import
+Instruction,Instruction
+"Download sample file","Download sample file"
+"Please choose  a CSV file to import","Please choose  a CSV file to import"
+Name,Name
+Size,Size
+Type,Type
+"Create an Invoice","Create an Invoice"
+"Receive All Items","Receive All Items"
+Transfer,Transfer
+"Transfer Time","Transfer Time"
+"Please select item(s) to transfer.","Please select item(s) to transfer."
+"Please select at least one item to transfer.","Please select at least one item to transfer."
+"Items Ordered","Items Ordered"
+Product,Product
+Qty,Qty
+"Qty Received","Qty Received"
+"Purchase Cost","Purchase Cost"
+Tax(%),Tax(%)
+Discount(%),Discount(%)
+Amount,Amount
+"Purchase From","Purchase From"
+"Deliver To","Deliver To"
+"Purchase Order","Purchase Order"
+"Telephone: ","Telephone: "
+"Email: ","Email: "
+"P.O#: ","P.O#: "
+"Status: ","Status: "
+"Grand Total (excl. Tax)","Grand Total (excl. Tax)"
+"Grand Total (incl. Tax)","Grand Total (incl. Tax)"
+"Total Bill","Total Bill"
+"Total Due","Total Due"
+Subtotal,Subtotal
+"Shipping Cost","Shipping Cost"
+Discount,Discount
+Tax,Tax
+State/Province,State/Province
+"Please select region, state or province","Please select region, state or province"
+"Invalid data","Invalid data"
+"There are %s invalid rows. Please download","There are %s invalid rows. Please download"
+"this file","this file"
+"then try again.","then try again."
+"Are you sure to remove pricelist records?","Are you sure to remove pricelist records?"
+"Please select record(s) to remove.","Please select record(s) to remove."
+"Please select record(s) to update.","Please select record(s) to update."
+"Suppliersuccess Module Template","Suppliersuccess Module Template"
+"Purchase Management","Purchase Management"
+"Select a payment method","Select a payment method"
+"New payment method","New payment method"
+Pending,Pending
+Confirmed,Confirmed
+Processing,Processing
+Completed,Completed
+Canceled,Canceled
+"Please select a supplier","Please select a supplier"
+Enable,Enable
+Disable,Disable
+"Please select a warehouse","Please select a warehouse"
+"Please select a low stock notification","Please select a low stock notification"
+"Warehouse: ","Warehouse: "
+Global,Global
+N/A,N/A
+Email,Email
+Phone,Phone
+Fax,Fax
+"Vendor website","Vendor website"
+"Select a shipping method","Select a shipping method"
+"New shipping method","New shipping method"
+"Select a payment term","Select a payment term"
+"New payment term","New payment term"
+"Purchase order #%s","Purchase order #%s"
+"Transfer stock from purchase order #%s","Transfer stock from purchase order #%s"
+"Please select at least one item to purchase.","Please select at least one item to purchase."
+"Confirm purchase order successfully.","Confirm purchase order successfully."
+"Cannot confirm purchase order.","Cannot confirm purchase order."
+"Complete purchase order successfully.","Complete purchase order successfully."
+"Cannot complete purchase order.","Cannot complete purchase order."
+"Cancel purchase order successfully.","Cancel purchase order successfully."
+"Cancel quotation successfully.","Cancel quotation successfully."
+"Cannot cancel purchase order.","Cannot cancel purchase order."
+"Cannot cancel quotation.","Cannot cancel quotation."
+"Cannot set item(s) for purchase order.","Cannot set item(s) for purchase order."
+"Can not find this purchase order","Can not find this purchase order"
+"Can not receive product(s): %s","Can not receive product(s): %s"
+"Can not transfer product(s).","Can not transfer product(s)."
+"Please select at least one product to create invoice.","Please select at least one product to create invoice."
+"Required field is null","Required field is null"
+"Please select a purchase order to receive product(s)","Please select a purchase order to receive product(s)"
+"Receive all products successfully.","Receive all products successfully."
+"Please receive at least one product.","Please receive at least one product."
+"Receive item(s) successfully.","Receive item(s) successfully."
+"Register payment successfully.","Register payment successfully."
+"Create refund successfully.","Create refund successfully."
+"Please choose CSV file to import.","Please choose CSV file to import."
+"Import product(s) successfully","Import product(s) successfully"
+"There was an error attempting to upload the file.","There was an error attempting to upload the file."
+"Please select a purchase order to return item","Please select a purchase order to return item"
+"Please return at least one product.","Please return at least one product."
+"Return item(s) successfully.","Return item(s) successfully."
+"Please select a purchase order to create invoice","Please select a purchase order to create invoice"
+"Create invoice successfully.","Create invoice successfully."
+"Please select an invoice to view.","Please select an invoice to view."
+"View Invoice %s","View Invoice %s"
+"Please select a purchase order to transfer item","Please select a purchase order to transfer item"
+"Transfer product(s) successfully.","Transfer product(s) successfully."
+"Please select at least one item.","Please select at least one item."
+"Add product(s) successfully","Add product(s) successfully"
+"Update item(s) successfully","Update item(s) successfully"
+"Remove item successfully","Remove item successfully"
+"Purchase Orders","Purchase Orders"
+"View %s #%s","View %s #%s"
+"New %s ","New %s "
+"%s has been saved.","%s has been saved."
+"An email has been sent to supplier","An email has been sent to supplier"
+"Cannot send email to supplier","Cannot send email to supplier"
+"Cannot find supplier email address","Cannot find supplier email address"
+Quotations,Quotations
+"Manage Quotations","Manage Quotations"
+"Create Quotation","Create Quotation"
+Delete,Delete
+"Invoice Information","Invoice Information"
+"Summary","Summary"
+"Payment List","Payment List"
+"Refund List","Refund List"
+"Payment Date","Payment Date"
+"Payment Method","Payment Method"
+"New Payment Method","New Payment Method"
+"Payment Amount","Payment Amount"
+Description,Description
+"Refund Date","Refund Date"
+"Refund Amount","Refund Amount"
+Reason,Reason
+CSV,CSV
+"Excel XML","Excel XML"
+"Billed Qty","Billed Qty"
+"Unit Price","Unit Price"
+"Tax (%)","Tax (%)"
+"Discount (%)","Discount (%)"
+Back,Back
+"Purchase Order Number","Purchase Order Number"
+"Purchased At","Purchased At"
+Supplier,Supplier
+"Ordered Qty","Ordered Qty"
+"Received Qty","Received Qty"
+"Total Paid","Total Paid"
+"Grand Total (Incl. Tax)","Grand Total (Incl. Tax)"
+Status,Status
+Action,Action
+View,View
+"Received Item","Received Item"
+"Shortfall Item","Shortfall Item"
+"Returned Item","Returned Item"
+Invoices,Invoices
+"Transferred Item","Transferred Item"
+"Shipping and Payment","Shipping and Payment"
+"General Information","General Information"
+"Remaining Qty","Remaining Qty"
+"Billed Qty","Billed Qty"
+"Invoice ID","Invoice ID"
+"Invoice Total","Invoice Total"
+"Total Refund","Total Refund"
+"Current Qty","Current Qty"
+"Product Qty","Product Qty"
+"Current Cost","Current Cost"
+"Qty Ordering","Qty Ordering"
+"Qty Returned","Qty Returned"
+"Qty Billed","Qty Billed"
+Warehouse(s),Warehouse(s)
+"Sales Record Period","Sales Record Period"
+From,From
+To,To
+"Forecast Supply Needs To","Forecast Supply Needs To"
+"Product SKU","Product SKU"
+"Ordered Qty","Ordered Qty"
+"Invalid file type!","Invalid file type!"
+"There was an error while importing.","There was an error while importing."
+"The upload has been canceled by the user or the browser dropped the connection.","The upload has been canceled by the user or the browser dropped the connection."
+"Sold Qty per Day","Sold Qty per Day"
+"Availibility Date","Availibility Date"
+"Supply Need","Supply Need"
+"Ordered Qty","Ordered Qty"
+"Shortfall Qty","Shortfall Qty"
+"Returned Qty","Returned Qty"
+"Received Qty","Received Qty"
+"Received Date","Received Date"
+"Created By","Created By"
+"Shipping Address","Shipping Address"
+"Shipping Method","Shipping Method"
+"New Shipping Method","New Shipping Method"
+"Shipment Start Date","Shipment Start Date"
+"Expected Delivery Date","Expected Delivery Date"
+"Payment Term","Payment Term"
+"New Payment Term","New Payment Term"
+"Order placed via","Order placed via"
+"Created Time","Created Time"
+Currency,Currency
+"Currency Exchange Rate","Currency Exchange Rate"
+"Return Date","Return Date"
+"Transferred Qty","Transferred Qty"
+"Returned Qty","Returned Qty"
+"Transfer Date","Transfer Date"
+Warehouse,Warehouse
+"Transfer Qty","Transfer Qty"
+Print,Print
+"Are you sure you want to do it?","Are you sure you want to do it?"
+Cancel,Cancel
+"Are you sure you want to do this?","Are you sure you want to do this?"
+"Convert Quotation to PO","Convert Quotation to PO"
+"Are you sure you want to convert this Quotation to Purchase Order?","Are you sure you want to convert this Quotation to Purchase Order?"
+"Confirm Purchase Order","Confirm Purchase Order"
+"Are you sure you want to make this Purchase Order?","Are you sure you want to make this Purchase Order?"
+"Complete PO","Complete PO"
+"Are you sure you want to complete this Purchase Order?","Are you sure you want to complete this Purchase Order?"
+"Prepare Product List","Prepare Product List"
+"Quotation Number","Quotation Number"
+"Create At","Create At"
+"Manage Purchase Order","Manage Purchase Order"
+"Create Purchase Order","Create Purchase Order"
+Enabled,Enabled
+Disabled,Disabled
+"--Please Select--","--Please Select--"
+Invalid file upload attempt.,Invalid file upload attempt.
+Invalid received_qty of %s,Invalid received_qty of %s
+Receive %s item(s) successfully.,Receive %s item(s) successfully.
+Transfer %s item(s) successfully.,Transfer %s item(s) successfully.
+Return %s item(s) successfully.,Return %s item(s) successfully.
+No item transferred,No item transferred
+No item received,No item received
+Please select receive date.,Please select receive date.
+Please select transfer date.,Please select transfer date.
+Please select Warehouse to transfer.,Please select Warehouse to transfer.
+No invoice item imported.,No invoice item imported.
+Import Invoice Items,Import Invoice Items
+Import Transfered Items,Import Transfered Items
+Import Received Items,Import Received Items
+Import Returned Items,Import Returned Items
+

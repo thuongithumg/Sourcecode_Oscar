@@ -1,0 +1,15 @@
+<div id='customer_list_container' class="pos_container" data-bind="scope:'customer-list'">
+    <div class="customer_list_wrap" style="position: relative">
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <script type="text/x-magento-init">
+            {
+                "#customer_list_container": {
+                    "Magento_Ui/js/core/app": <?php /* @escapeNotVerified */ echo $block->getJsLayout(); ?>
+                 }
+             }
+        </script>
+    </div>
+    <div class="wrap-backover" data-bind="click: hideOverlay" style="display: none"></div>
+</div>
+
+

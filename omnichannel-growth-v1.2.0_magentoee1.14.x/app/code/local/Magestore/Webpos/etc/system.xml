@@ -1,0 +1,1092 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<config>
+    <tabs>
+        <magestore translate="label">
+            <label>Magestore Extension</label>
+            <sort_order>400</sort_order>
+        </magestore>
+    </tabs>
+    <sections>
+        <webpos translate="label" module="webpos">
+            <class>separator-top</class>
+            <label>Web POS</label>
+            <tab>magestore</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>300</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>		
+                <!--
+                <document_help translate="label">
+                    <label>Document and Help</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <webpos_version translate="label">
+                            <label>Web POS Version </label>
+                            <frontend_type>label</frontend_type>  
+                            <frontend_model>webpos/adminhtml_field_version</frontend_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </webpos_version>
+                        <webpos_installation_guide translate="label">
+                            <label>Web POS Installation Guide</label>
+                            <frontend_type>label</frontend_type>  
+                            <frontend_model>webpos/adminhtml_field_webposinstallation</frontend_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </webpos_installation_guide>						
+                        <webpos_standard_user_guide translate="label">
+                            <label>Web POS User Guide</label>
+                            <frontend_type>label</frontend_type>  
+                            <frontend_model>webpos/adminhtml_field_standard</frontend_model>
+                            <sort_order>45</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </webpos_standard_user_guide>
+                    </fields>
+                </document_help>
+                -->
+                <general translate="label">
+                    <label>General Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <webpos_logo translate="label">
+                            <label>Web POS logo</label>
+                            <frontend_type>image</frontend_type>
+                            <sort_order>5</sort_order>
+                            <backend_model>adminhtml/system_config_backend_image_pdf</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">webpos/logo</upload_dir>
+                            <base_url type="media" scope_info="1">webpos/logo</base_url>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Recommended size: 260x120 px <br/>Supported file: jpeg, png]]></comment>
+                        </webpos_logo>
+                        <webpos_color>
+                            <label>Web POS Color</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>jscolor</validate>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </webpos_color>
+                        <!--switch_languages translate="label">
+                            <label>Enable Language Switch</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </switch_languages-->
+                        <!--<auto_create_invoice translate="label">-->
+                            <!--<label>Auto-create invoice after placing order</label>-->
+                            <!--<frontend_type>select</frontend_type>-->
+                            <!--<source_model>adminhtml/system_config_source_yesno</source_model>-->
+                            <!--<sort_order>15</sort_order>-->
+                            <!--<show_in_default>1</show_in_default>-->
+                            <!--<show_in_website>1</show_in_website>-->
+                            <!--<show_in_store>1</show_in_store>-->
+                        <!--</auto_create_invoice>-->
+                        <!--<auto_create_shipment translate="label">-->
+                            <!--<label>Auto-create shipment after placing order</label>-->
+                            <!--<frontend_type>select</frontend_type>-->
+                            <!--<source_model>adminhtml/system_config_source_yesno</source_model>-->
+                            <!--<sort_order>16</sort_order>-->
+                            <!--<show_in_default>1</show_in_default>-->
+                            <!--<show_in_website>1</show_in_website>-->
+                            <!--<show_in_store>1</show_in_store>-->
+                        <!--</auto_create_shipment>-->
+                        <enable_delivery_date translate="label">
+                            <label>Enable Delivery Date</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>19</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_delivery_date>
+                        <session_timeout>
+                            <label>Session Timeout</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>number</validate>
+                            <sort_order>22</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Second(s)</comment>
+                        </session_timeout>
+                        <ignore_checkout translate="label">
+                            <label>Allow to sync orders of out-stock items</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>21</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </ignore_checkout>
+                        <enable_pole_display translate="label">
+                            <label>Integrate with Pole Display device</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>23</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable_pole_display>
+                        <webpos_website translate="label">
+                            <label>Default Website</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>webpos/source_adminhtml_websites</source_model>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </webpos_website>
+                        <confirm_delete_order translate="label">
+                            <label>Need to confirm before deleting order (App only)</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>27</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </confirm_delete_order>
+                        <enable_session translate="label">
+                            <label>Need to create session before working</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>28</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enable_session>
+                        <active_key translate="label">
+                            <label>Active key for using App</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>29</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </active_key>
+                    </fields> 
+                </general>
+                <!--<payment translate="label">-->
+                    <!--<label>Payment for POS</label>-->
+                    <!--<frontend_type>text</frontend_type>-->
+                    <!--<sort_order>24</sort_order>-->
+                    <!--<show_in_default>1</show_in_default>-->
+                    <!--<show_in_website>1</show_in_website>-->
+                    <!--<show_in_store>1</show_in_store>-->
+                    <!--<fields>-->
+                        <!--<allowspecific_payment translate="label">-->
+                            <!--<label>Applicable payments</label>-->
+                            <!--<frontend_type>select</frontend_type>-->
+                            <!--<sort_order>100</sort_order>-->
+                            <!--<source_model>webpos/source_adminhtml_selectorpayment</source_model>-->
+                            <!--<show_in_default>1</show_in_default>-->
+                            <!--<show_in_website>1</show_in_website>-->
+                            <!--<show_in_store>1</show_in_store>-->
+                        <!--</allowspecific_payment>-->
+						<!---->
+                        <!--<specificpayment translate="label">-->
+                            <!--<label>Specific payments</label>-->
+                            <!--<frontend_type>multiselect</frontend_type>-->
+                            <!--<sort_order>110</sort_order>-->
+                            <!--<source_model>webpos/source_adminhtml_payment</source_model>-->
+                            <!--<show_in_default>1</show_in_default>-->
+                            <!--<show_in_website>1</show_in_website>-->
+                            <!--<show_in_store>1</show_in_store>-->
+                        <!--</specificpayment>	-->
+                        <!--<defaultpayment translate="label">-->
+                            <!--<label>Default Payment Method</label>-->
+                            <!--<frontend_type>select</frontend_type>-->
+                            <!--<sort_order>120</sort_order>-->
+                            <!--<source_model>webpos/source_adminhtml_payment</source_model>-->
+                            <!--<show_in_default>1</show_in_default>-->
+                            <!--<show_in_website>1</show_in_website>-->
+                            <!--<show_in_store>1</show_in_store>-->
+                        <!--</defaultpayment>-->
+                    <!--</fields>-->
+                <!--</payment>-->
+                <shipping translate="label">
+                    <label>Shipping for POS</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>24</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <specificshipping translate="label">
+                            <label>Offline Shipping Methods</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>110</sort_order>
+                            <source_model>webpos/source_adminhtml_shippingoffline</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </specificshipping>
+                        <defaultshipping translate="label">
+                            <label>Default Shipping Method</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>120</sort_order>
+                            <source_model>webpos/source_adminhtml_shipping</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </defaultshipping>
+                    </fields>
+                </shipping>
+                <payment translate="label">
+                    <label>Payment for POS</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>26</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <allowspecific_payment translate="label">
+                            <label>Applicable payments</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>100</sort_order>
+                            <source_model>webpos/source_adminhtml_selectorpayment</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </allowspecific_payment>
+                        <specificpayment translate="label">
+                            <label>Specific payments</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>110</sort_order>
+                            <source_model>webpos/source_adminhtml_payment</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><allowspecific_payment>1</allowspecific_payment></depends>
+                        </specificpayment>
+                        <defaultpayment translate="label">
+                            <label>Default Payment Method</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>120</sort_order>
+                            <source_model>webpos/source_adminhtml_payment</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </defaultpayment>
+                    </fields>
+                </payment>
+                
+                <!--Changed By Adam 07/07/2015: Get Product Attribute for search form-->   
+                <!-- Recommendation: Only use this function if the number of your products equal or less than 1000-->   
+                <product_search translate="label">
+                    <label>Product Search</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <product_attribute translate="label comment">
+                            <label>Product Attribute(s) for Search</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>110</sort_order>
+                            <source_model>webpos/source_adminhtml_productattribute</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[ Only select necessary attributes, otherwise the searching and loading speed will be slow. ]]></comment>
+                        </product_attribute>
+                        <barcode translate="label comment">
+                            <label>Barcode Attributes</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>111</sort_order>
+                            <source_model>webpos/source_adminhtml_product_barcodeattribute</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Change this configuration if you already have a barcode attribute.</comment>
+                        </barcode>
+                        <show_all_category translate="label">
+                            <label>Show inactive categories</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>112</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </show_all_category>
+                    </fields>
+                </product_search>
+                <guest_checkout translate="label">
+                    <label>Default Guest Checkout</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>60</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <customer_id translate="label comment">
+                            <label>Default Customer ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Set this field is blank to create automatically a new customer with the under information fields</comment>
+                        </customer_id>
+                        <first_name translate="label comment">
+                            <label>First Name</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>required-entry</validate>
+                            <comment></comment>
+                        </first_name>
+                        <last_name translate="label comment">
+                            <label>Last Name</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>required-entry</validate>
+                            <comment></comment>
+                        </last_name>
+                        <street translate="label comment">
+                            <label>Street</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>required-entry</validate>
+                            <comment></comment>
+                        </street>
+                        <country_id translate="label">
+                            <label>Country</label>
+                            <frontend_type>select</frontend_type>
+                            <frontend_class>countries</frontend_class>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <sort_order>4</sort_order>
+                            <validate>validate-select</validate>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </country_id>
+                        <region_id>
+                            <label>State/Province</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <validate>required-entry</validate>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </region_id>
+                        <city translate="label comment">
+                            <label>City</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <validate>required-entry</validate>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </city>
+                        <zip translate="label comment">
+                            <label>Zip/Postal Code</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>7</sort_order>
+                            <validate>required-entry</validate>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </zip>
+                        <telephone translate="label comment">
+                            <label>Telephone</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>8</sort_order>
+                            <validate>validate-number required-entry</validate>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </telephone>
+                        <email translate="label comment">
+                            <label>Email</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>9</sort_order>
+                            <validate>validate-email required-entry</validate>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </email>
+                    </fields>
+                </guest_checkout>  
+                <email_configuration translate="label">
+                    <label>Default Email configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>80</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <email_order_configuration_separator translate="label comment">
+                            <label>Orders</label>
+                            <frontend_type>label</frontend_type>
+                            <!--<frontend_model>webpos/adminhtml_system_config_field_separator</frontend_model>-->
+                            <margin_top>10px</margin_top>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </email_order_configuration_separator>
+                        <auto_email_orders translate="label">
+                            <label>Send order confirmation email automatically</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>10</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </auto_email_orders>
+                        <email_template_guest_order translate="label">
+                            <label>Order confirmation email template for guest</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>11</sort_order>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </email_template_guest_order>
+                        <email_template_customer_order translate="label">
+                            <label>Order confirmation email template for customer</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>12</sort_order>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </email_template_customer_order>
+                        <email_invoice_configuration_separator translate="label comment">
+                            <label>Invoices</label>
+                            <frontend_type>label</frontend_type>
+                            <!--<frontend_model>webpos/adminhtml_system_config_field_separator</frontend_model>-->
+                            <margin_top>10px</margin_top>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </email_invoice_configuration_separator>
+                        <auto_email_invoice translate="label">
+                            <label>Send invoice email automatically</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>21</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </auto_email_invoice>
+                        <email_template_guest_invoice translate="label">
+                            <label>Invoice email template for guest</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>22</sort_order>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </email_template_guest_invoice>
+                        <email_template_customer_invoice translate="label">
+                            <label>Invoice email template for customer</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>23</sort_order>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </email_template_customer_invoice>
+                        <email_shipment_configuration_separator translate="label comment">
+                            <label>Shipments</label>
+                            <frontend_type>label</frontend_type>
+                            <!--<frontend_model>webpos/adminhtml_system_config_field_separator</frontend_model>-->
+                            <margin_top>10px</margin_top>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </email_shipment_configuration_separator>
+                        <auto_email_shipment translate="label">
+                            <label>Send shipment email automatically</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>31</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </auto_email_shipment>
+                        <email_template_guest_shipment translate="label">
+                            <label>Shipment email template for guest</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>32</sort_order>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </email_template_guest_shipment>
+                        <email_template_customer_shipment translate="label">
+                            <label>Shipment email template for customer</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>33</sort_order>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </email_template_customer_shipment>
+                        <email_creditmemo_configuration_separator translate="label comment">
+                            <label>Credit Memos</label>
+                            <frontend_type>label</frontend_type>
+                            <!--<frontend_model>webpos/adminhtml_system_config_field_separator</frontend_model>-->
+                            <margin_top>10px</margin_top>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </email_creditmemo_configuration_separator>
+                        <auto_email_creditmemo translate="label">
+                            <label>Send credit memo email automatically</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>41</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </auto_email_creditmemo>
+                        <email_template_guest_creditmemo translate="label">
+                            <label>Credit memo email template for guest</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>42</sort_order>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </email_template_guest_creditmemo>
+                        <email_template_customer_creditmemo translate="label">
+                            <label>Credit memo email template for customer</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>43</sort_order>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </email_template_customer_creditmemo>
+                    </fields>
+                </email_configuration>
+                <receipt translate="label">
+                    <label>Receipt Printing Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>81</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <receipt_general_configuration_separator translate="label comment">
+                            <label>General</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>webpos/adminhtml_system_config_field_separator</frontend_model>
+                            <margin_top>10px</margin_top>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </receipt_general_configuration_separator>
+                        <auto_print translate="label">
+                            <label>Auto-print receipt after placing order</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Note: This function cannot work if your browser blocks automatic pop-up. Please allow it when your browser asks for this permission.</comment>
+                        </auto_print>
+                        <receipt_content_configuration_separator translate="label comment">
+                            <label>Content</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>webpos/adminhtml_system_config_field_separator</frontend_model>
+                            <margin_top>10px</margin_top>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </receipt_content_configuration_separator>
+                        <font_type translate="label comment">
+                            <label>Font</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>webpos/source_adminhtml_receiptfont</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Recommended fonts: monospace, sans-serif</comment>
+                        </font_type>
+                        <!--date_format translate="label">
+                            <label>Date Format</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>2</sort_order>
+                            <source_model>webpos/source_adminhtml_dateformat</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </date_format-->
+                        <header_text translate="label comment">
+                            <label>Header Text</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>You can use simple HTML tags here</comment>
+                        </header_text>
+                        <footer_text translate="label comment">
+                            <label>Footer Text</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>You can use simple HTML tags here</comment>
+                        </footer_text>
+                        <receipt_optional_configuration_separator translate="label comment">
+                            <label>Optional Fields</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>webpos/adminhtml_system_config_field_separator</frontend_model>
+                            <margin_top>10px</margin_top>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </receipt_optional_configuration_separator>
+                        <show_receipt_logo translate="label">
+                            <label>Show Web POS Logo</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>7</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </show_receipt_logo>
+                        <show_cashier_name translate="label">
+                            <label>Show Cashier Name</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>9</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </show_cashier_name>
+                        <show_comment translate="label">
+                            <label>Show comment</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>12</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </show_comment>
+                        <show_barcode translate="label">
+                            <label>Show barcode</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>13</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Encode order increment ID</comment>
+                        </show_barcode>
+                    </fields>
+                </receipt>
+            </groups>
+        </webpos>    
+        <!-- Add payment method settings  -->
+        <payment>
+            <groups>
+                <multipaymentforpos translate="label" module="webpos">
+                    <label>Web POS - Multiple Payments</label>
+                    <sort_order>660</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </active>
+                        <payments translate="label">
+                            <label>Payment methods use to split</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>webpos/source_adminhtml_multipaymentforpos</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </payments>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                    </fields>
+                </multipaymentforpos>
+                <codforpos translate="label" module="webpos">
+                    <label>Web POS - Cash On Delivery</label>
+                    <sort_order>665</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <use_reference_number translate="label">
+                            <label>Use Reference Number</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </use_reference_number>
+                        <pay_later translate="label">
+                            <label>Allow Paying Later</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </pay_later>
+                    </fields>
+                </codforpos>
+                <cashforpos translate="label" module="webpos">
+                    <label>Web POS - Cash</label>
+                    <sort_order>670</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <use_reference_number translate="label">
+                            <label>Use Reference Number</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </use_reference_number>
+                        <pay_later translate="label">
+                            <label>Allow Paying Later</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </pay_later>
+                    </fields>
+                </cashforpos>
+                <ccforpos translate="label" module="webpos">
+                    <label>Web POS - Credit Card</label>
+                    <sort_order>680</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <use_reference_number translate="label">
+                            <label>Use Reference Number</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </use_reference_number>
+                        <pay_later translate="label">
+                            <label>Allow Paying Later</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </pay_later>
+                    </fields>
+                </ccforpos>
+                <cp1forpos translate="label" module="webpos">
+                    <label>Web POS - Custom Payment 1</label>
+                    <sort_order>690</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <use_reference_number translate="label">
+                            <label>Use Reference Number</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </use_reference_number>
+                        <pay_later translate="label">
+                            <label>Allow Paying Later</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </pay_later>
+                    </fields>
+                </cp1forpos>
+                <cp2forpos translate="label" module="webpos">
+                    <label>Web POS - Custom Payment 2</label>
+                    <sort_order>700</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <use_reference_number translate="label">
+                            <label>Use Reference Number</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </use_reference_number>
+                        <pay_later translate="label">
+                            <label>Allow Paying Later</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </pay_later>
+                    </fields>
+                </cp2forpos>
+            </groups>
+        </payment>	
+        <!-- end -->	
+        <carriers>
+            <groups>
+                <webpos_shipping translate="label">
+                    <label>Web POS Shipping</label>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Carrier title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <name translate="label">
+                            <label>Method title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>22</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </name>
+                        <price translate="label">
+                            <label>Price</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>23</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </price>
+                        <shipping_custom_method_separator translate="label comment">
+                            <label>Custom methods</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>webpos/adminhtml_system_config_field_separator</frontend_model>
+                            <margin_top>10px</margin_top>
+                            <sort_order>24</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </shipping_custom_method_separator>
+                        <cs1_name translate="label">
+                            <label>Custom method title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </cs1_name>
+                        <cs1_price translate="label">
+                            <label>Custom method price</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>26</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </cs1_price>
+                    </fields>
+                </webpos_shipping>
+            </groups>
+        </carriers>	
+    </sections>
+</config>

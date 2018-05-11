@@ -1,0 +1,70 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<!-- ko if: orderData -->
+<div id="payment-popup" role="dialog"
+     data-bind="visible: isVisible, style: {display: stypeDisplay()},
+     attr:{class: 'modal fade add-comment ship-refund ' + classIn()}">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <form data-bind="attr:{id: formId}, submit: submit" >
+                <div class="popup-header">
+                    <button type="button" class="close" data-dismiss="modal" data-bind="i18n: ('Cancel'), click: display(false)"></button>
+                    <h4 class="modal-title" data-bind="i18n: ('Take Payment')"/>
+                    <button type="submit" class="btn-save" data-bind="i18n: ('Submit'), click: submit"/>
+                </div>
+                <div class="modal-body">
+                    <div id="order_payment_list_container">
+                        <!-- ko ifnot: selectedPayments().length > 0 -->
+                        <!-- ko template: {name: templatePaymentList, data: $parent} -->
+                        <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- ko template: {name: templatePaymentSelected, data: $parent} -->
+                        <!-- /ko -->
+                    </div>
+
+                    <div data-bind="attr:{id: morePaymentFormId}">
+                        <!-- ko template: {name: templatePaymentListPopup, data: $parent} -->
+                        <!-- /ko -->
+                    </div>
+
+                    <div class="action">
+                        <button data-bind="attr: {id: addMorePaymentBtn},i18n: ('ADD MORE PAYMENT METHOD'), click: addMorePayment">
+                        </button>
+                        <button class="btn-cl-cfg-active" data-bind="i18n: ('SUBMIT'), click: submit"></button>
+                    </div>
+
+                    <div class="remain-money">
+                        <!-- ko if: baseRemainTotal()>=0 -->
+                        <label data-bind="i18n: ('Remain Money')"></label>
+                        <span class="price" data-bind="text: remainTotalOrder"></span>
+                        <!-- /ko -->
+                        <!-- ko ifnot: baseRemainTotal()>=0 -->
+                        <label data-bind="i18n: ('Expected Change')"></label>
+                        <span class="price" data-bind="text: remainTotalOrder"></span>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- /ko -->

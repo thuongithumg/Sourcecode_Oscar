@@ -1,0 +1,289 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+
+                <div class="popup-header">
+                    <button type="button" class="close" data-dismiss="modal" data-bind="click: hideCustomerForm, i18n:'Cancel'"></button>
+                    <h4 class="modal-title" data-bind="text: firstName() + ' ' + lastName() "></h4>
+                    <button type="submit" class="btn-save  link-cl-cfg" data-bind="click: saveCustomerForm, i18n:'Save'"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-box">
+                                    <input type="text" name="first-name"
+                                           data-bind="value: firstName, attr: {placeholder: $t('First Name')}"
+                                           data-validate="{'required-entry':true}"
+                                           id="first_name_input"
+                                           class="customer-fname"/>
+                                    <em>*</em>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-box">
+                                    <input type="text" name="last-name" class="customer-lname"
+                                           data-validate="{'required-entry':true}"
+                                           id="last_name_input"
+                                           data-bind="value: lastName, attr: {placeholder: $t('Last Name')}"/>
+                                    <em>*</em>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-box">
+                                    <input type="text" name="email" class="customer-email"
+                                           data-validate="{'required-entry':true, 'validate-email': true}"
+                                           id="customer_email_input"
+                                           data-bind="value: email, attr: {placeholder: $t('Email')}"/>
+                                    <em>*</em>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-box customer-group">
+                                    <select class="selectpicker customer_group"
+                                            data-validate="{'required-entry':true}"
+                                            data-bind="options: customerGroupArray,
+                                                value: group_id,
+                                                optionsText: function(item) {
+                                                    return item.code
+                                                },
+                                                optionsValue: function(item) {
+                                                    return item.id
+                                                },
+                                                optionsCaption: $t('Please choose group...')
+                                                "
+                                            id="edit_customer_group"
+                                            name="customer_group">
+                                    </select>
+                                    <em>*</em>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6" data-bind="visible:showDob">
+                                <div class="input-box">
+                                    <!-- ko if: requireDob -->
+                                    <input type="text" name="dob"
+                                           data-bind="value: dob, attr: {placeholder: $t('Day of Birth')}"
+                                           data-validate="{'required-entry':true}"
+                                           class="dob"/>
+                                    <!--/ko-->
+                                    <!-- ko if: !requireDob -->
+                                    <input type="text" name="dob"
+                                           data-bind="value: dob, attr: {placeholder: $t('Day of Birth')}"
+                                           class="dob"/>
+                                    <!--/ko-->
+                                    <!-- ko if: requireDob -->
+                                    <em>*</em>
+                                    <!--/ko-->
+                                </div>
+                            </div>
+                            <div class="col-sm-6" data-bind="visible:showTaxvat">
+                                <div class="input-box">
+                                    <!-- ko if: requireTaxvat -->
+                                    <input type="text" name="taxvat"
+                                           data-bind="value: taxvat, attr: {placeholder: $t('Tax/VAT number')}"
+                                           data-validate="{'required-entry':true}"
+                                           class="taxvat"/>
+                                    <!--/ko-->
+                                    <!-- ko if: !requireTaxvat -->
+                                    <input type="text" name="taxvat"
+                                           data-bind="value: taxvat, attr: {placeholder: $t('Tax/VAT number')}"
+                                           class="taxvat"/>
+                                    <!--/ko-->
+                                    <!-- ko if: requireTaxvat -->
+                                    <em>*</em>
+                                    <!--/ko-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6" data-bind="visible:showGender">
+                                <div class="input-box">
+                                    <!-- ko if: requireGender -->
+                                    <select class="gender"
+                                            data-validate="{'required-entry':true}"
+                                            data-bind="options: genderArray,
+                                                        value: gender,
+                                                        optionsText: function(item) {
+                                                            return item.code
+                                                        },
+                                                        optionsValue: function(item) {
+                                                            return item.id
+                                                        },
+                                                        optionsCaption: $t('Please choose gender...')
+                                                        ">
+                                    </select>
+                                    <!--/ko-->
+                                    <!-- ko if: !requireGender -->
+                                    <select class="gender"
+                                            data-bind="options: genderArray,
+                                                        value: gender,
+                                                        optionsText: function(item) {
+                                                            return item.code
+                                                        },
+                                                        optionsValue: function(item) {
+                                                            return item.id
+                                                        },
+                                                        optionsCaption: $t('Please choose gender...')
+                                                        ">
+                                    </select>
+                                    <!--/ko-->
+                                    <!-- ko if: requireGender -->
+                                    <em>*</em>
+                                    <!--/ko-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="shipping-address">
+                                <label data-bind="i18n:'Shipping Address'"></label>
+                                <div class="input-box">
+                                    <select class="selectpicker"
+                                            id="shipping-checkout"
+                                            data-bind="options: addressArrayDisplay,
+                                                optionsText: function(item) {
+                                                   if (item.id !=0) {
+                                                        if (item.region.region) {
+                                                            return item.firstname + ' '+ item.lastname + ', '+ item.city + ', ' + item.country_id
+                                                                + ', ' + item.region.region + ', '+ item.telephone
+                                                        } else {
+                                                            return item.firstname + ' '+ item.lastname + ', '+ item.city + ', ' + item.country_id
+                                                                + ', ' + item.telephone
+                                                        }
+
+                                                    } else {
+                                                        return item.label;
+                                                    }
+                                                },
+                                                value: shippingAddressId,
+                                                optionsValue: function(item) {
+                                                    return item.id
+                                                },
+                                                optionsCaption: $t('Please choose shipping address ...'),
+                                                event:{ change: showShippingPreview}
+                                                "
+                                            data-validate="{'required-entry':true}"
+                                            name="shipping_address">
+                                    </select>
+                                    <div class="info-address-edit" data-bind="visible: isShowPreviewShipping()">
+                                        <h3 class="customer-name" data-bind="text: previewShippingFirstname() + ' ' + previewShippingLastname()"></h3>
+                                        <div class="customer-address">
+                                            <!-- ko if: previewShippingStreet1() -->
+                                            <!-- ko text: previewShippingStreet1() --><!--/ko-->
+                                            <!--/ko-->
+                                            <!-- ko if: previewShippingStreet2() -->
+                                            <!-- ko text: ', ' + previewShippingStreet2() --><!--/ko-->
+                                            <!--/ko-->
+                                            <!-- ko if: previewShippingCity() -->
+                                            <!-- ko text: ', ' + previewShippingCity() --><!--/ko-->
+                                            <!--/ko-->
+                                            <!-- ko if: previewShippingRegion() -->
+                                            <!-- ko text: ', ' + previewShippingRegion() --><!--/ko-->
+                                            <!--/ko-->
+                                            <!-- ko if: previewShippingCountry() -->
+                                            <!-- ko text: ', ' + previewShippingCountry() --><!--/ko-->
+                                            <!--/ko-->
+                                            <!-- ko if: previewShippingPostCode() -->
+                                            <!-- ko text: ' ' + previewShippingPostCode() --><!--/ko-->
+                                            <!--/ko-->
+
+                                        </div>
+                                        <div class="customer-phone" data-bind="text: previewShippingPhone"></div>
+                                        <a class="edit-address" data-bind="click: editShippingPreview"><span class="icon-iconPOS-edit-28"></span></a>
+                                        <a class="delete-address" data-bind="click: deleteShippingPreview"><span class="icon-iconPOS-emptycart"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="billing-address">
+                                <label data-bind="i18n:'Billing Address'"></label>
+                                <div class="input-box">
+                                    <select class="selectpicker"
+                                            id="billing-checkout"
+                                            data-bind="options: addressArrayDisplay,
+                                                optionsText: function(item) {
+                                                    if (item.id !=0) {
+                                                        if (item.region.region) {
+                                                            return item.firstname + ' '+ item.lastname + ', '+ item.city + ', ' + item.country_id
+                                                                + ', ' + item.region.region + ', '+ item.telephone
+                                                        } else {
+                                                            return item.firstname + ' '+ item.lastname + ', '+ item.city + ', ' + item.country_id
+                                                                + ', ' + item.telephone
+                                                        }
+                                                    } else {
+                                                        return item.label;
+                                                    }
+
+                                                },
+                                                value: billingAddressId,
+                                                optionsValue: function(item) {
+                                                    return item.id
+                                                },
+                                                optionsCaption: $t('Please choose billing address...'),
+                                                event:{ change: showBillingPreview}
+                                                "
+                                            data-validate="{'required-entry':true}"
+                                            name="billing_address">
+                                    </select>
+                                    <div class="info-address-edit" data-bind="visible: isShowPreviewBilling()">
+                                        <h3 class="customer-name" data-bind="text: previewBillingFirstname() + ' ' + previewBillingLastname()"></h3>
+                                        <div class="customer-address">
+                                            <!-- ko if: previewBillingStreet1() -->
+                                            <!-- ko text: previewBillingStreet1() --><!--/ko-->
+                                            <!--/ko-->
+                                            <!-- ko if: previewBillingStreet2() -->
+                                            <!-- ko text: ', ' + previewBillingStreet2() --><!--/ko-->
+                                            <!--/ko-->
+                                            <!-- ko if: previewBillingCity() -->
+                                            <!-- ko text: ', ' + previewBillingCity() --><!--/ko-->
+                                            <!--/ko-->
+                                            <!-- ko if: previewBillingRegion() -->
+                                            <!-- ko text: ', ' + previewBillingRegion() --><!--/ko-->
+                                            <!--/ko-->
+                                            <!-- ko if: previewBillingCountry() -->
+                                            <!-- ko text: ', ' + previewBillingCountry() --><!--/ko-->
+                                            <!--/ko-->
+                                            <!-- ko if: previewBillingPostCode() -->
+                                            <!-- ko text: ' ' + previewBillingPostCode() --><!--/ko-->
+                                            <!--/ko-->
+
+                                        </div>
+                                        <div class="customer-phone" data-bind="text: previewBillingPhone"></div>
+                                        <a class="edit-address" data-bind="click: editBillingPreview"><span class="icon-iconPOS-edit-28"></span></a>
+                                        <a class="delete-address" data-bind="click: deleteBillingPreview"><span class="icon-iconPOS-emptycart"></span></a>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="add-address">
+                                <div class="actions">
+                                    <button class="button btn-add-address" data-bind="click: showAddress">Add
+                                        Address <span class="icon-iconPOS-add"></span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+    </div>

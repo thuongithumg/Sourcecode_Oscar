@@ -1,0 +1,60 @@
+<div class="ms-webpos">
+    <div class="login-screen">
+        <div id="checkout-loader" data-role="checkout-loader" class="loading-mask" style="display: block">
+            <div class="loader">
+                <!--
+            <img src="<?php /* @escapeNotVerified */ echo $block->getViewFileUrl('images/loader-1.gif'); ?>"
+                 alt="<?php /* @escapeNotVerified */ echo __('Loading...'); ?>"
+                 style="position: absolute;">
+            -->
+            </div>
+        </div>
+        <div class="wrap-login-form">
+            <form class="form-login" role="form" id="webpos-login" method="post">
+                <h1 class="title-page"><img src="<?php echo $block->getLogoUrl();?>" width="200px" height="200px" alt="logo"/></h1>
+                <div class="form-group wrap-input">
+                    <div class="input-box"><input type="text" class="form-control required-entry required" id="username" name="username" placeholder="Username"></div>
+                    <div class="input-box"><input type="password" class="form-control required-entry required" id="pwd"
+                           name="password" placeholder="Password"></div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default"><?php echo __('Login');?></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    var WEBPOS = {};
+    //var ObjectManager = {};
+    <?php
+    $config = $block->getWebposConfig();
+    ?>
+    window.webposConfig = <?php /* @escapeNotVerified */ echo \Zend_Json::encode($config); ?>;
+</script>
+
+<script>
+    require([
+        'mage/url',
+        'Magento_Ui/js/block-loader'
+    ], function(url, blockLoader) {
+        blockLoader("<?php /* @escapeNotVerified */ echo $block->getViewFileUrl('images/loader-1.gif'); ?>");
+        return url.setBaseUrl('<?php /* @escapeNotVerified */ echo $block->getBaseUrl();?>');
+    });
+
+    require([
+        'Magestore_Webpos/js/model/webpos',
+    ], function (webposModel) {
+        WEBPOS = webposModel();
+        WEBPOS.setConfig(window.webposConfig);
+    });
+</script>
+
+<script>
+    require([
+        'jquery',
+        'Magestore_Webpos/js/login'
+    ], function ($) {
+        $('#webpos-login').webposLogin();
+    })
+</script>

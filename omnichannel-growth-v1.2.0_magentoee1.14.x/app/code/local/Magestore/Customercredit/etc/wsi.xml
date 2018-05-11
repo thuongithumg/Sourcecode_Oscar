@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Storecredit
+  ~ @module      Storecredit
+  ~ @author      Magestore Developer
+  ~
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  ~
+  -->
+
+<wsdl:definitions xmlns:typens="urn:{{var wsdl.name}}"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  name="{{var wsdl.name}}"
+                  targetNamespace="urn:{{var wsdl.name}}">
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:{{var wsdl.name}}">
+            <xsd:complexType name="salesOrderEntity">
+                <xsd:sequence>
+                    <xsd:element name="customercredit_discount" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="base_customercredit_discount" type="xsd:string" minOccurs="0" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="salesOrderInvoiceEntity">
+                <xsd:sequence>
+                    <xsd:element name="customercredit_discount" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="base_customercredit_discount" type="xsd:string" minOccurs="0" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="salesOrderCreditmemoEntity">
+                <xsd:sequence>
+                    <xsd:element name="customercredit_discount" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="base_customercredit_discount" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="comments" type="typens:salesOrderCreditmemoCommentEntityArray" minOccurs="0" maxOccurs="1" />
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+    </wsdl:types>
+</wsdl:definitions>

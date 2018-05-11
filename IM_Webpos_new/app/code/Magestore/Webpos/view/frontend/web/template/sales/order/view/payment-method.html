@@ -1,0 +1,43 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<!-- ko if: $parent.orderData.call().payment -->
+<div class="col-sm-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5 data-bind="text: $t('PAYMENT METHOD')" />
+        </div>
+        <div class="panel-body">
+            <!-- ko if: $parent.showWebposPayment() -->
+            <label class="title-box paid" data-bind="i18n:'Paid'"/>
+            <div class="customer-address" data-bind="foreach:$parent.getPaidPayment()">
+                <div class="content-box">
+                    <label data-bind="text: $t($data.method_title)"/>
+                    <label data-bind="text: $parents[1].getWebposPaymentAmount($data)"/>
+                </div>
+            </div>
+            <!-- ko if: $parent.showPayLater() -->
+            <label class="title-box pay-later" data-bind="i18n:'Pay Later'"/>
+            <div class="customer-address" data-bind="foreach:$parent.getPayLaterPayment()">
+                <div class="content-box">
+                    <label data-bind="text: $data.method_title"/>
+                </div>
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- ko ifnot: $parent.showWebposPayment() -->
+            <!-- ko if: ($parent.orderData.call().grand_total == 0 && $parent.orderData.call().webpos_staff_id); -->
+                <div class="content-box"><label data-bind="text: $t('No Payment Information Required')"/></div>
+            <!-- /ko -->
+            <!-- ko ifnot: ($parent.orderData.call().grand_total == 0 && $parent.orderData.call().webpos_staff_id); -->
+            <div class="customer-address" data-bind="foreach:$parent.orderData.call().payment.additional_information">
+                <div class="content-box"><label data-bind="text: $data"/></div>
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
+<!-- /ko -->

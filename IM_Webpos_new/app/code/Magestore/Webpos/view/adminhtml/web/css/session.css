@@ -1,0 +1,232 @@
+/*
+ * Copyright © 2018 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+@font-face{font-family:'icomoon';src:url(../fonts/icomoon-frontend/icomoon.eot?m55dj3);src:url(../fonts/icomoon-frontend/icomoon.eot?m55dj3#iefix) format("embedded-opentype"),url(../fonts/icomoon-frontend/icomoon.ttf?m55dj3) format("truetype"),url(../fonts/icomoon-frontend/icomoon.woff?m55dj3) format("woff"),url(../fonts/icomoon-frontend/icomoon.svg?m55dj3#icomoon) format("svg");font-weight:400;font-style:normal}
+[class^="icon-"],[class*=" icon-"]{font-size:24px;color: #768496;font-family:'icomoon'!important;speak:none;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+[class^="icon-icon"]:hover,[class*=" icon-icon"]:hover{color: #000;}
+.icon-iconPOS-payment-storecredit:before{content:"\e903"}
+.icon-iconPOS-reload:before {content:"\e933";}
+.icon-iconPOS-no-sync-29:before{content:"\e932"}
+.icon-iconPOS-checked:before{content:"\e900"}
+.icon-iconPOS-edit-28:before{content:"\e901"}
+.icon-iconPOS-empty-shift:before{content:"\e905"}
+.icon-iconPOS-logout:before{content:"\e904"}
+.icon-iconPOS-emptycart:before{content:"\e902"}
+.icon-iconPOS-payment-cp1forpos:before{content:"\e92b"}
+.icon-iconPOS-payment-cp2forpos:before{content:"\e903"}
+.icon-iconPOS-empty-customer:before{content:"\e907"}
+.icon-iconPOS-empty-order:before{content:"\e908"}
+.icon-iconPOS-payment-authorizenet_directpost:before{content:"\e906"}
+.icon-iconPOS-payment-cryozonic_stripe:before{content:"\e906"}
+.icon-iconPOS-payment-cashforpos:before{content:"\e92b"}
+.icon-iconPOS-payment-cashforpos .path1:before{content:"\e92c";color:#a5a5aa}
+.icon-iconPOS-payment-cashforpos .path2:before{content:"\e92d";margin-left:-1em;color:#a5a5aa}
+.icon-iconPOS-payment-cashforpos .path3:before{content:"\e92e";margin-left:-1em;color:#a3a4a8}
+.icon-iconPOS-payment-cashforpos .path4:before{content:"\e92f";margin-left:-1em;color:#a5a5aa}
+.icon-iconPOS-payment-ccforpos:before{content:"\e906"}
+.icon-iconPOS-payment-codforpos:before{content:"\e930"}
+.icon-iconPOS-payment-defaultforpos:before{content:"\e931"}
+.icon-iconPOS-remove:before{content:"\e909"}
+.icon-iconPOS-success .path1:before{content:"\e90a";color:#c9c9c9}
+.icon-iconPOS-success .path2:before{content:"\e90b";margin-left:-1em;color:#00a679}
+.icon-iconPOS-update:before{content:"\e90c"}
+.icon-iconPOS-add:before{content:"\e90d"}
+.icon-iconPOS-cal-del:before{content:"\e90e"}
+.icon-iconPOS-delete:before{content:"\e90f"}
+.icon-iconPOS-alert:before{content:"\e910"}
+.icon-iconPOS-next-image-slide:before{content:"\e911"}
+.icon-iconPOS-next:before{content:"\e912"}
+.icon-iconPOS-image:before{content:"\e913"}
+.icon-iconPOS-previous-image-slide:before{content:"\e914"}
+.icon-iconPOS-previous:before{content:"\e915"}
+.icon-iconPOS-account:before{content:"\e916"}
+.icon-iconPOS-up:before{content:"\e917"}
+.icon-iconPOS-customer-list:before{content:"\e918"}
+.icon-iconPOS-customer-sale:before{content:"\e919"}
+.icon-iconPOS-detail .path1:before{content:"\e91a";color:#b0bec5}
+.icon-iconPOS-detail .path2:before{content:"\e91b";margin-left:-1em;color:#00a679}
+.icon-iconPOS-inventory:before{content:"\e91c"}
+.icon-iconPOS-on-hold-order:before{content:"\e91d"}
+.icon-iconPOS-order-history:before{content:"\e91e"}
+.icon-iconPOS-out-of-stock:before{content:"\e91f"}
+.icon-iconPOS-setting:before{content:"\e920"}
+.icon-iconPOS-shift:before{content:"\e921"}
+.icon-iconPOS-synchronize:before{content:"\e922"}
+.icon-iconPOS-categories:before{content:"\e923"}
+.icon-iconPOS-change-customer:before{content:"\e924"}
+.icon-iconPOS-checkout:before{content:"\e925"}
+.icon-iconPOS-dropdown:before{content:"\e926"}
+.icon-iconPOS-edit-customer:before{content:"\e927"}
+.icon-iconPOS-more:before{content:"\e928"}
+.icon-iconPOS-search:before{content:"\e929"}
+.icon-iconPOS-menu:before{content:"\e92a"}
+
+.a-left{text-align: left;}
+.a-right{text-align: right;}
+.a-center{text-align: center;}
+.clear{clear:both;}
+.error_message{color:red;}
+.webpos-session-info .transactions-info{
+    display: flex;
+}
+.webpos-session-info .transactions-info a label{
+    cursor: pointer;
+}
+.webpos-session-info .transactions-info {
+    border-bottom: 1px solid #cac3b4;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+.webpos-session-info .transactions-info .block{
+    width:50%;
+}
+.webpos-session-sales .table,
+.webpos-session-info .transactions-info .block .table{
+    width:100%;
+}
+.webpos-session-sales .table tr td,
+.webpos-session-info .transactions-info .block .table tr td{
+    padding: 10px 5px;
+}
+.webpos-session-info .transactions-info .block .table tr td label{
+    font-weight: 600;
+}
+
+.webpos-session-sales table span.icon-iconPOS-payment-credit {display: inline-block!important;font-size: 50px;vertical-align: middle;}
+.webpos-session-sales table .credit-card-payment label {display:inline-block;vertical-align: middle;margin-bottom:0;font-size: 15px;color: #5d6774;font-weight: 400;}
+.webpos-session-sales .icon-payment{display:inline-block;width:38px;height:36px;padding:2px 4px;margin-right:10px;line-height: 30px;background:#2d4d73;border-radius:5px;text-align: center; color: #fff;vertical-align: middle;}
+.webpos-session-sales .icon-payment [class^='icon-ic']{line-height: 30px;color:#fff;    display: block;}
+.webpos-session-sales .cashforpos .icon-payment{background:transparent}
+.webpos-session-sales .cashforpos .icon-payment [class^='icon-ic']{color:#00a57a;font-size: 30px;}
+.webpos-session-sales .credit-card-payment{display: -webkit-box;display: -webkit-flex;display: -ms-flexbox;display: flex;-webkit-box-pack: justify;-webkit-justify-content: space-between; -ms-flex-pack: justify;justify-content: space-between;}
+.webpos-session-sales .credit-card-payment label{padding-left: 10px;flex-grow: 1;margin-top: 10px;}
+
+
+.counting-box{
+    border: 1px solid #e1e1e1;
+    margin: 20px 0px 10px 0px;
+    padding: 10px;
+}
+
+.counting-box label.opening-balance-wrapper{
+    display: flex;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.counting-box label.opening-balance-wrapper .opening-balance{
+    margin-left: 10px;
+}
+.counting-box label .opening-balance{
+    font-weight: bold;
+}
+
+.counting-box table tbody{
+    display:block;
+    max-height:40vh;
+    overflow:auto;
+}
+.counting-box table tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+
+.counting-box table tbody tr td .remove-icon{
+    margin-top: -2px;
+    float: right;
+}
+
+.counting-box table thead{
+    border-top: 1px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.counting-box table tfoot{
+    border-top: 1px solid #e1e1e1;
+}
+
+.counting-box table tfoot tr td,
+.counting-box table tbody tr td,
+.counting-box table thead tr th{
+    padding: 10px;
+}
+.counting-box table tfoot tr td{
+    padding-bottom: 0px;
+}
+
+.counting-box table tbody tr td input,
+.counting-box table tbody tr td select{
+    width: 100%;
+    padding: 5px;
+}
+.counting-box .icon-add .icon-iconPOS-add{cursor: pointer;}
+
+.transactions-info .difference-row{
+    border-top: 1px solid #e9ecf2;
+    border-bottom: 1px solid #e9ecf2;
+}
+
+.sum-info-top .block{padding: 0px}
+.sum-info-top .table{margin-bottom: 0px}
+
+#popup-close-shift .counting-box table{
+    width:100%;
+}
+#popup-close-shift .counting-box table thead{
+    border-top:none;
+}
+#popup-close-shift .counting-box table thead .col-sm-4{
+    width: 33.33333333%;
+}
+
+#popup-close-shift .cash-counting-notice{
+    margin-top: 20px;
+}
+
+#popup-close-shift .counting-box table tbody {
+    max-height: 40vh;
+}
+
+#cash-activities-popup{
+    max-height: 65vh;
+    overflow: auto;
+}
+
+.wrap-status-orders ul{padding: 0;text-align: left;}
+.wrap-status-orders ul li a{text-decoration: none;}
+.wrap-status-orders ul li{border-radius:2px;margin: 0 2px 5px;display:inline-block;position:relative;/* width: 12%; */border: 1px solid #d7d7d7;padding: 0px 24px;height: 24px;line-height: 22px;background:#fff}
+.wrap-status-orders ul li.selected{background:#fff}
+.wrap-status-orders ul li.selected a{color:#fff}
+.wrap-status-orders ul li.processing.selected{background:#1a80ff}
+.wrap-status-orders ul li.canceled.selected{background:#c2c2c2}
+
+#cash-activities-popup .table th,
+#cash-activities-popup .table td{    padding: 8px;vertical-align: middle;border-top: 0 none;border-bottom: 1px solid #c7ccd4;}
+#cash-activities-popup .table tr td:first-child{padding-left:0}
+#cash-activities-popup .table tr td:last-child{padding-right:0}
+#cash-activities-popup .table tr td.banlance-first label.balance-float{font-weight:500}
+#cash-activities-popup .table tr td.banlance-first label.balance-float,
+#cash-activities-popup .table tr td.banlance-first span.price{display:inline;}
+#cash-activities-popup .table tr td.banlance-first span.price{font-weight:600}
+#cash-activities-popup .table td .balance-float{color:#6f7d90;display:block;font-weight:400;text-align: right;}
+#cash-activities-popup .table td .price{color:#3c4857;font-size:15px;font-weight:400;text-align:right;display: block;}
+#cash-activities-popup .table{width:100%;}
+
+#cash-activities-popup .title-box{color:#6f7d90;font-size: 15px;font-weight:400;margin-bottom: 0;margin-top: 0;text-align: center;border-bottom: 1px solid #c7ccd4;padding-bottom: 20px;}
+#cash-activities-popup .table{color:#3c4857;font-size:14px;font-weight:400}
+#cash-activities-popup .table .staff-name{color:#3c4857;font-size:14px;font-weight:400;margin-top: 5px;margin-bottom: 5px;}
+#cash-activities-popup .table .date-time{color:#9da4a2;font-size:13px;font-weight:400;}
+#cash-activities-popup .table .note{font-size:12px;}
+
+#popup-make-adjustment .amount-box .input-box{    border-radius: 3px;display: -webkit-box;display: -webkit-flex;display: -ms-flexbox;display: flex;-webkit-box-pack: justify; -webkit-justify-content: space-between;-ms-flex-pack: justify;    justify-content: space-between;background:#fff;border:1px solid #e1e1e1;height:46px;line-height:46px;margin-top: 20px;padding: 0 10px;}
+#popup-make-adjustment .amount-box .input-box input{color:#48586c;border: 0 none;text-align: right;width:50%;}
+#popup-make-adjustment .amount-box .input-box label{color:#48586c;font-weight:normal;width:50%;}
+#popup-make-adjustment .amount-box textarea{border: 1px solid #e1e1e1;border-radius:3px;width: 100%;margin-top: 20px;min-height: 100px;padding: 10px;}
+#popup-make-adjustment .modal-body label.cash-drawer{ margin-top: 20px;display:block;text-align:center;font-size:15px;color:#48586c;font-weight:400}
+
+.reason-box textarea{
+    width: 100%;
+    height: 200px;
+}

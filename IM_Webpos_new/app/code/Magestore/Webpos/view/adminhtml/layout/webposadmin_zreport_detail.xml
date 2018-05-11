@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+    <head>
+        <css src="Magestore_Webpos::css/session.css"/>
+    </head>
+    <body>
+        <referenceBlock name="menu">
+            <action method="setActive">
+                <argument name="itemId" xsi:type="string">Magestore_Webpos::zreport</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Magestore\Webpos\Block\Adminhtml\Zreport\Detail" name="webposadmin_zreport_detail" template="Magestore_Webpos::pos/detail.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

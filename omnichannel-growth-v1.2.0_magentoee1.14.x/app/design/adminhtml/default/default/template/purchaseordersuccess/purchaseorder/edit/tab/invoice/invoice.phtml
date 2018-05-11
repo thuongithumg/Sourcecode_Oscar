@@ -1,0 +1,92 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Inventorysuccess
+ * @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+$blockGrid = $this->getBlockGrid();
+$gridJsObjectName = $blockGrid->getJsObjectName();
+$gridJsParentObjectName = $this->getJsParentObjectName();
+$hiddenInputField = $blockGrid->getHiddenInputField();
+?>
+<div class="modal right fade" id="create_invoice_modal" tabindex="-1"
+     role="dialog" aria-labelledby="modalLabel" style="display:none">
+    <div class="modal-dialog" role="document" id="create_invoice_modal_dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="icon-head"><?php echo $this->__('Create an Invoice (Purchase Order #%s)', $this->getPurchaseCode()) ?></h3>
+                <p class="form-buttons">
+                    <button id="open_import_submit_create_invoice" class="action-primary" type="button" data-dismiss="modal" data-toggle="modal" data-target="#import_invoice_item_modal">
+                        <span><?php echo $this->__('Import Invoice Items') ?></span>
+                    </button>
+                    <button id="submit_create_invoice" class="action-primary save" type="button" data-dismiss="modal">
+                        <span><?php echo $this->__('Save') ?></span>
+                    </button>
+                    <button title="Close" type="button" class="scalable delete" data-dismiss="modal" id="closeModal">
+                        <span><?php echo $this->__('Close') ?></span>
+                    </button>
+                </p>
+            </div>
+            <div class="modal-body">
+                <div class="entry-edit">
+                    <div class="entry-edit-head">
+                        <h4 class="icon-head head-edit-form fieldset-legend">
+                            <?php echo $this->__('Billed From') ?>
+                        </h4>
+                    </div>
+                    <div class="fieldset purchaseorder_fieldset" id="create_invoice_form">
+                        <?php echo $this->addInvoiceField(); ?>
+                    </div>
+                    <div class="entry-edit-head">
+                        <h4 class="icon-head head-edit-form fieldset-legend">
+                            <?php echo $this->__('Purchased Item List') ?>
+                        </h4>
+                    </div>
+                    <?php echo $this->getGridHtml(); ?>
+                </div>
+            </div>
+            <input type="hidden" name="<?php echo $hiddenInputField ?>" id="<?php echo $hiddenInputField ?>" value=""/>
+            <script type="text/javascript">
+                var createInvoice = new PurchaseorderSuccessJS({
+                    "selectedItems": <?php /* @escapeNotVerified */ echo $blockGrid->getSelectedItems(); ?>,
+                    "gridJsObjectName": <?php /* @escapeNotVerified */ echo '"' . $gridJsObjectName . '"' ?: '{}'; ?>,
+                    "parentGridJsObjectName": <?php /* @escapeNotVerified */ echo '"' . $gridJsParentObjectName . '"' ?: '{}'; ?>,
+                    "hiddenInputField": <?php /* @escapeNotVerified */ echo '"' . $hiddenInputField . '"' ?>,
+                    "editFields": <?php /* @escapeNotVerified */ echo $blockGrid->getEditFields(); ?>,
+                    "saveUrl": <?php /* @escapeNotVerified */ echo '"' . $blockGrid->getSaveUrl() . '"' ?: '""'; ?>,
+                    "reloadBtn": ["create_invoice_button"],
+                    "tabContainer": <?php /* @escapeNotVerified */ echo '"' . $this->getTabContainer() . '"'; ?>,
+                    "tabsReload": <?php /* @escapeNotVerified */ echo $this->getReloadTabs(); ?>,
+                    "canReloadTotal": true,
+                    "messages": {
+                        "noItemSelected": <?php /* @escapeNotVerified */ echo '"' . $this->__('Please select item(s) to create invoice.') . '"'?>,
+                    },
+                });
+                Event.observe($('submit_create_invoice'), 'click', function (event) {
+                    if (new Validation('create_invoice_modal').validate()) {
+                        var billed_at = $$('#create_invoice_modal_dialog #billed_at')[0].value;
+                        createInvoice.save(event, {billed_at: billed_at});
+                    } else {
+                        event.stopPropagation();
+                    }
+                }.bind(createInvoice));
+            </script>
+        </div>
+    </div>
+</div>
+

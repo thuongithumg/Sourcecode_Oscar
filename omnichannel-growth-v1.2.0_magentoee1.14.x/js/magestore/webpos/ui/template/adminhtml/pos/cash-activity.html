@@ -1,0 +1,55 @@
+
+    <!--
+  ~ * Copyright © 2016 Magestore. All rights reserved.
+  ~ * See COPYING.txt for license details.
+  ~
+  -->
+<div id="cash-activities-popup" data-bind="afterRender:initModal">
+    <table class="table table-activities">
+        <tbody>
+        <tr>
+            <td colspan="3" class="banlance-first">
+                <div class="wrap-status-orders">
+                    <ul data-bind="foreach: types">
+                        <li data-bind="click: $parent.filterTypes.bind($parent), attr:{'type':type,'class':css}, css:{'selected':selected()}">
+                            <a href="#" data-bind="i18n: label"></a>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        <tr data-bind="visible: isShowingFull">
+            <td colspan="3" class="banlance-first">
+                <label class="balance-float"><span data-bind="i18n:'Balance'"/>: </label>
+                <span class="price"><span data-bind="text: formatPrice(data().balance)" /></span>
+            </td>
+        </tr>
+        <tr data-bind="visible: isShowingFull">
+            <td><span data-bind="i18n:'Open Shift'"/></td>
+            <td>
+                <h3 class="staff-name"><span data-bind="text: data().staff_name" /></h3>
+                <label class="date-time"><span data-bind="text: getFullDatetime(data().opened_at)" /></label>
+            </td>
+            <td>
+                <label class="balance-float"><span data-bind="i18n:'Float'"/> </label>
+                <span class="price"><span data-bind="text: formatPrice(data().float_amount)" /></span>
+            </td>
+        </tr>
+
+        <!-- ko foreach: items -->
+        <tr data-bind="visible:showing">
+            <td><span data-bind="text: $parent.getTransactionSymbol(type, value)"/> <span  data-bind="text: $parent.formatPrice(value)"/></td>
+            <td>
+                <h3 class="staff-name"><span  data-bind="text: $parent.data().staff_name"/></h3>
+                <label class="date-time"><span data-bind="text: $parent.getFullDatetime(created_at)"/></label><br/>
+                <label class="date-time"><span data-bind="text: note"/></label>
+            </td>
+            <td>
+                <label class="balance-float"><span data-bind="i18n:'Balance'"/></label>
+                <span class="price"><span data-bind="text: $parent.formatPrice(balance)"/></span>
+            </td>
+        </tr>
+        <!-- /ko -->
+        </tbody>
+    </table>
+</div>

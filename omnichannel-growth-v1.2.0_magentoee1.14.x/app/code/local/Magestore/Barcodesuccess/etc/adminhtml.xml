@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<!--
+  ~
+  ~  Magestore
+  ~   NOTICE OF LICENSE
+  ~
+  ~   This source file is subject to the Magestore.com license that is
+  ~   available through the world-wide-web at this URL:
+  ~   http://www.magestore.com/license-agreement.html
+  ~
+  ~   DISCLAIMER
+  ~
+  ~   Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~   version in the future.
+  ~
+  ~   @category    Magestore
+  ~   @package     Magestore_Barcodesuccess
+  ~   @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~   @license     http://www.magestore.com/license-agreement.html
+  ~
+  ~
+  -->
+<config>
+    <menu>
+        <barcodesuccess module="barcodesuccess" translate="title">
+            <icon>icon-IMBackend-17</icon>
+            <title>Barcode Management</title>
+            <sort_order>72</sort_order>
+            <children>
+                <listing module="barcodesuccess" translate="title">
+                    <icon>icon-iconBackendIM-10</icon>
+                    <title>Barcode Listing</title>
+                    <sort_order>10</sort_order>
+                    <action>adminhtml/barcodesuccess_barcode/index</action>
+                </listing>
+                <generate module="barcodesuccess" translate="title">
+                    <icon>icon-iconBackendIM-05</icon>
+                    <title>Generate Barcodes</title>
+                    <sort_order>20</sort_order>
+                    <action>adminhtml/barcodesuccess_barcode/index/action/generate</action>
+                </generate>
+                <import module="barcodesuccess" translate="title">
+                    <icon>icon-iconBackendIM-09</icon>
+                    <title>Import Barcodes</title>
+                    <sort_order>30</sort_order>
+                    <action>adminhtml/barcodesuccess_barcode/index/action/import</action>
+                </import>
+                <scan module="barcodesuccess" translate="title">
+                    <icon>icon-iconBackendIM-04</icon>
+                    <title>Scan Barcodes</title>
+                    <sort_order>40</sort_order>
+                    <action>adminhtml/barcodesuccess_barcode_scan/index</action>
+                </scan>
+                <print module="barcodesuccess" translate="title">
+                    <icon>icon-iconBackendIM-08</icon>
+                    <title>Print Barcodes</title>
+                    <sort_order>50</sort_order>
+                    <action>adminhtml/barcodesuccess_barcode_print/index</action>
+                </print>
+                <history module="barcodesuccess" translate="title">
+                     <icon>icon-iconBackendIM-10</icon>
+                    <title>Barcode Generating History</title>
+                    <sort_order>60</sort_order>
+                    <action>adminhtml/barcodesuccess_history/index</action>
+                </history>
+                <template module="barcodesuccess" translate="title">
+                     <icon>icon-iconBackendIM-11</icon>
+                    <title>Barcode Label Templates</title>
+                    <sort_order>70</sort_order>
+                    <action>adminhtml/barcodesuccess_template/index</action>
+                </template>
+                <setting module="barcodesuccess" translate="title">
+                    <icon>icon-IMBackend-10</icon>
+                    <title>Settings</title>
+                    <sort_order>80</sort_order>
+                    <action>adminhtml/system_config/edit/section/barcodesuccess</action>
+                </setting>
+            </children>
+        </barcodesuccess>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <barcodesuccess module="barcodesuccess" translate="title">
+                                        <title>Barcode Settings</title>
+                                        <sort_order>71</sort_order>
+                                    </barcodesuccess>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <barcodesuccess module="barcodesuccess" translate="title">
+                        <title>Barcode Management</title>
+                        <sort_order>71</sort_order>
+                        <children>
+                            <listing module="barcodesuccess" translate="title">
+                                <title>Barcode Listing</title>
+                                <sort_order>10</sort_order>
+                            </listing>
+                            <generate module="barcodesuccess" translate="title">
+                                <title>Generate Barcodes</title>
+                                <sort_order>20</sort_order>
+                            </generate>
+                            <import module="barcodesuccess" translate="title">
+                                <title>Import Barcodes</title>
+                                <sort_order>30</sort_order>
+                            </import>
+                            <scan module="barcodesuccess" translate="title">
+                                <title>Scan Barcodes</title>
+                                <sort_order>40</sort_order>
+                            </scan>
+                            <print module="barcodesuccess" translate="title">
+                                <title>Print Barcodes</title>
+                                <sort_order>50</sort_order>
+                            </print>
+                            <history module="barcodesuccess" translate="title">
+                                <title>Barcode Generating History</title>
+                                <sort_order>60</sort_order>
+                            </history>
+                            <template module="barcodesuccess" translate="title">
+                                <title>Barcode Label Templates</title>
+                                <sort_order>70</sort_order>
+                            </template>
+                            <setting module="barcodesuccess" translate="title">
+                                <title>Barcode Settings</title>
+                                <sort_order>90</sort_order>
+                            </setting>                            
+                        </children>
+                    </barcodesuccess>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

@@ -1,0 +1,32 @@
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<?php
+
+if(isset($_COOKIE['hubUrl'])) {
+    $url = $_COOKIE['hubUrl'];
+} else {
+    $url = '';
+}
+
+if(isset($_COOKIE['device'])) {
+    $device = $_COOKIE['device'];
+} else {
+    $device = '';
+}
+
+if(isset($_COOKIE['data'])) {
+    $data = $_COOKIE['data'];
+} else {
+    $data = '';
+}
+?>
+
+<script>
+    $.ajax({
+        url: '<?php echo $url; ?>',
+        method: 'POST',
+        data: {
+            "device": '<?php echo $device; ?>',
+            "data": '<?php echo $data; ?>'
+        }
+    });
+</script>

@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Coresuccess
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+?>
+<script src="<?php echo $this->getJsUrl() ?>magestore/coresuccess/menu.js"></script>
+<script type="text/javascript">
+    var erpMenu = new ERPmenuController('<?php echo $this->__('Hide Main Menu'); ?>', '<?php echo $this->__('Show Main Menu'); ?>');
+</script>
+<h3>
+    <a href="javascript:void(0);" <?php if (!$this->isInDashboard()): ?>onclick="showDashboardMenu();"<?php endif; ?>>
+        <span><i class="fa fa-th"></i> <?php echo $this->getTitle() ?></span>
+    </a>
+</h3>    
+<div id="show_main_menu">
+    <a href="javascript:void(0);" onclick="erpMenu.showmainmenu()">
+        <i class="fa fa-angle-double-down"></i>
+    </a>
+</div>

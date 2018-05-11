@@ -1,0 +1,32 @@
+<!--
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Webpos
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<?php
+$_code = $block->getMethodCode();
+?>
+<ul class="form-list" id="payment_form_<?php echo $_code ?>" style="display:none;">
+    <li>
+        <label for="<?php echo $_code ?>_reference_no" ><?php echo __('Reference No') ?></label>
+        <span class="input-box">
+            <input type="text" title="<?php echo __('Reference No') ?>" class="input-text form-control" id="<?php echo $_code ?>_ref_no" name="payment[<?php echo $_code ?>_ref_no]" value="<?php echo $block->htmlEscape($block->getInfoData($_code . '_ref_no')) ?>" />
+        </span>
+    </li>
+</ul>

@@ -1,0 +1,84 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div id="payment_creditcard" class="row" data-bind="foreach: getPayments()">
+    <!-- ko if: (type == 1) -->
+    <iframe id="webpos-payment-iframe" allowtransparency="true" frameborder="0" name="iframeDirectPost"
+            style="width: 100%; background-color:transparent; display:none;"
+            src="">
+    </iframe>
+    <div class="col-sm-12">
+        <div class="payment-method payment-detail-box">
+            <div class="wrap-payment-credit">
+                <!--<div class="credit-card-payment" data-bind="text: $parent.getCcYearsValues()">-->
+                    <!--</div>-->
+                <!--<div class="credit-card-payment">-->
+                    <!--<span data-bind="attr:{'class': iconClass}"></span>-->
+                    <!--<label data-bind="text: title"></label>-->
+                    <!--<a class="remove-icon" data-bind="event: {click: $parent.removeSelectedPayment.bind($parent)}">-->
+                        <!--<span class="icon-iconPOS-remove"></span>-->
+                    <!--</a>-->
+                <!--</div>-->
+                <div class="input-actions-credit">
+                    <div class="wrap-swiper">
+                        <label id="webpos-swiper-status" for="webpos-swiper-data">Click here to swipe</label>
+                        <div class="wrap-input"><input type="text" style="height: 1px; width: 1px; border: 0 none; color: #FFF; font-size: 1px;"
+                               title="Swiper" class="input-text" id="webpos-swiper-data"
+                               name="webpos-swiper-data" value="    "/></div>
+                    </div>
+                    <form id="form-checkout-creditcard">
+                        <div class="refund-bottom-right">
+                            <div class="input-box name-card">
+                                <label data-bind="i18n: 'Name on card'"></label>
+                                <div class="wrap-input"><input name="cc_owner" type="text" data-bind="text: title" id="webpos_cc_owner"/></div>
+                            </div>
+                            <div class="input-box credit-card-type expiration-date">
+                                <label data-bind="i18n: 'Credit Card Type'" class="required"></label>
+                                <div class="wrap-input">
+                                    <select name="cc_type" class="selectpicker" id="webpos_cc_type"
+                                            data-validate="{'required-entry':true}"
+                                            data-bind="options: $parent.getCcTypesValues(),
+                                                       optionsValue: 'value',
+                                                       optionsText: 'type'">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="input-box credit-card-number">
+                                <label data-bind="i18n: 'Credit Card Number'" class="required"></label>
+                                <div class="wrap-input"><input name="cc_number" type="text" id="webpos_cc_number"
+                                       data-validate="{'required-entry':true}"/></div>
+                            </div>
+                            <div class="input-box expiration-date">
+                                <label data-bind="i18n: 'Expiration Date'" class="required"></label>
+                                <div class="input-box">
+                                    <div class="wrap-select"><select name="cc_exp_month" class="selectpicker" id="webpos_cc_exp_month"
+                                            data-validate="{'required-entry':true}"
+                                            data-bind="options: $parent.getCcMonthsValues(),
+                                                       optionsValue: 'value',
+                                                       optionsText: 'month'">
+                                    </select></div>
+                                    <div class="wrap-input">
+                                    <select name="cc_exp_year" class="selectpicker" id="webpos_cc_exp_year"
+                                            data-validate="{'required-entry':true}"
+                                            data-bind="options: $parent.getCcYearsValues(),
+                                                       optionsValue: 'value',
+                                                       optionsText: 'year'">
+                                    </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-box credit-card-cid">
+                                <label data-bind="i18n: 'CVV'" class="required"></label>
+                                <div class="wrap-input"><input name="cc_cid" type="text" id="webpos_cc_cid"
+                                       data-validate="{'required-entry':true}"/></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+</div>

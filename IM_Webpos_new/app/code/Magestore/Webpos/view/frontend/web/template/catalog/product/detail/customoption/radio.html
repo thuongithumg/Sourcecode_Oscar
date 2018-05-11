@@ -1,0 +1,37 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div class="field option">
+    <label class="label" data-bind="attr: {'for': 'options_' + parentData.option_id + '_text'}">
+        <span data-bind="text: parentData.title"></span>
+    </label>
+
+    <div class="control">
+        <div class="options-list nested" data-bind="attr: {'id': 'options-' + parentData.option_id + '-list'">
+            <!-- ko foreach: {data: parentData.values, as: 'itemData' }  -->
+                <div class="field choice admin__field admin__field-option">
+                    <input type="radio"
+                           class="radio admin__control-radio product-custom-option required"
+                           style="float: left"
+                           data-bind="event: {'click': $parents[2].updatePrice($parents[2].itemData().custom_options)},
+                                attr: {'id': 'options_' + parentData.option_id + '_' + itemData.sort_order,
+                                    'name': 'options['+parentData.option_id+']',
+                                    'value': itemData.option_type_id,
+                                    'price': itemData.price,
+                                    'data-validate': (parentData.is_require) ? '{\'required-entry\':true}' : '{\'required-entry\':false}',
+                                    'class': (parentData.is_require) ? 'radio admin__control-radio product-custom-option required' : 'radio admin__control-radio product-custom-option'
+                                }"
+                    />
+                    <label class="label admin__field-label"
+                           data-bind="attr: {'for': 'options_' + parentData.option_id + '_' + itemData.sort_order}">
+                        <span data-bind="text: itemData.title"></span>
+                        &nbsp;<span class="price-notice" data-bind="text: '+' + $parents[2].getFormatPrice(itemData.price, itemData.price_type)"></span>
+                    </label>
+                </div>
+            <!-- /ko -->
+            <span data-bind="attr: {'id': 'options-' + parentData.option_id + '-' + 'container'"></span>
+        </div>
+    </div>
+</div>

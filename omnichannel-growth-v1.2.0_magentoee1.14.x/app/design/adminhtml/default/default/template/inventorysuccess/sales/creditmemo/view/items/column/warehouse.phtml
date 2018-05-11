@@ -1,0 +1,10 @@
+
+<div class="return-warehouse" style="width:300px; text-align:left;">    
+    <?php echo $this->__('Refunded: %s', $this->getRefundedQty()) ?>
+    <br/>
+<?php if($returnQty = $this->getReturnQty()): ?>    
+    <?php echo $this->__('Returned: %s to %s', $returnQty, $this->getWarehouseInfo() ) ?>
+<?php else: ?>
+    <?php echo $this->__('Returned: 0') ?>
+<?php endif; ?>    
+</div> 

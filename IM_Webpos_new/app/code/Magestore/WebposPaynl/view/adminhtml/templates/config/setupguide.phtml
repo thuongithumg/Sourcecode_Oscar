@@ -1,0 +1,81 @@
+<tr>
+    <td class="label">
+        <label>
+            <span><?php echo __('Installation guide')?></span>
+        </label>
+    </td>
+    <td class="value paynl-installation-guide">
+        <h4 class="title"><?php echo __('Install the Paynl REST SDK')?></h4>
+        <ul class="paynl-installation-skd-guide">
+            <li>
+                <?php echo __('If you can access to your server via SSH:');?><br />
+                <div class="guide-content">
+                    <?php echo __('Use cd command to your Magento root folder. After that, enter the command:');?>
+                    <br />
+                    <b>composer require "paynl/sdk"</b>
+                    <br />
+                    <a href="https://github.com/paynl/sdk"><?php echo __('View detail')?></a>
+                </div>
+            </li>
+            <li>
+                <?php echo __('You can also download the SDK manually:');?><br />
+                <ol class="guide-content">
+                    <li>
+                        <?php echo __('Download latest/desired release zip file starting with sdk-master.zip from ')?>
+                        <a href="https://github.com/paynl/sdk#installation-without-composer"><?php echo __("Releases Section")?></a>
+                    </li>
+                    <li><?php echo __('Unzip and copy the folder named "sdk-master" to "vendor" folder on your Magento root folder');?></li>
+                    <li><?php echo __('The directory structure would look like: Your Magento root folder > vendor > paynl');?></li>
+                </ol>
+            </li>
+        </ul>
+        <h4 class="title"><?php echo __('Get your application infomation')?></h4>
+        <ul class="paynl-installation-app-guide">
+            <li>
+                <div class="guide-content">
+                    <div>
+                        <?php echo __('Login to your account at')?>
+                        <a href="https://admin.pay.nl/"><?php echo __("Paynl Developer")?></a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </td>
+    <td class=""></td>
+</tr>
+<style type="text/css">
+    .hide{
+        display: none;
+    }
+    .paynl-installation-guide h4.title{
+        padding-top:7px;
+        padding-left:0px;
+        margin-top:0px;
+        margin-left:0px;
+        font-size: 14px;
+        font-weight: 600;
+    }
+    .paynl-installation-guide ul li{
+        list-style: none;
+        margin: 5px 0px;
+    }
+    .paynl-installation-guide ol li{
+        list-style: inherit;
+    }
+    .paynl-installation-guide li .guide-content{
+        padding-left: 20px;
+    }
+    .loader {
+        border: 6px solid #f3f3f3; /* Light grey */
+        border-top: 6px solid #3498db; /* Blue */
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1.5s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+</style>

@@ -1,0 +1,28 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div class="indicator" data-bind="visible:loading">
+    <div class="spinner"></div>
+</div>
+
+<!-- ko foreach: {data: items} -->
+<span class="order-button square multiorder-item"
+      data-bind="
+       css: {'selected': ($parents[0].currentId() === entity_id)}">
+    <span data-bind="click: $parents[0].processItem.bind($parents[0])" style="width: 100%;height: 100%;display: block;">
+          <span class="order-sequence" data-bind="text: order_count"></span>
+        <!-- ko text: $parents[0].getTime(created_at) --><!-- /ko -->
+    </span>
+
+   <span style="position: absolute;right: 0;top: -16px;display: block;
+
+            width: 20px; height: 20px;" data-bind="click: $parents[0].removeSession.bind($parents[0])">x</span>
+</span>
+<!-- /ko -->
+<span class="order-button square pull-right" data-bind="click: addNewSession">
+    <i class="glyphicon glyphicon-plus"></i>
+</span>
+
+

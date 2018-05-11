@@ -1,0 +1,323 @@
+/*
+ * Copyright © 2016 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/* S: General */
+.clear {
+    clear: both
+}
+
+.hide {
+    display: none;
+}
+
+.text-center {
+    text-align: center
+}
+
+.text-left {
+    text-align: left
+}
+
+.text-right {
+    text-align: right
+}
+
+/* E: General */
+
+/* S: Search input - scan barcode page */
+.search-container {
+    position: relative;
+    margin-right: 50px;
+    width: 80%;
+}
+
+.search-field {
+    min-width: 5rem;
+}
+
+.search-label {
+    cursor: pointer;
+    height: 3.3rem;
+    padding: 0.75rem 1.4rem 0.55rem;
+    z-index: 2;
+    font-family: 'Admin Icons';
+    position: absolute;
+    right: 0px;
+}
+
+.search-action {
+    display: none;
+}
+
+.search-field._active .search-input:focus {
+    border-color: #007bdb;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.search-field._active .search-input {
+    background-color: #ffffff;
+    padding-right: 4rem;
+    border-color: #ccc;
+    width: 80%;
+    float: right;
+}
+
+.search-input {
+    background-color: transparent;
+    border: 1px solid transparent;
+    font-size: 1.4rem;
+    height: 4rem;
+    padding: 0.75rem 1.4rem 0.55rem;
+    transition: all .1s linear, width .3s linear;
+    z-index: 1;
+}
+
+.search-label:before {
+    color: #41362f;
+    content: '\e60c';
+    font-size: 2rem;
+}
+
+.search-field._active .search-title {
+    position: absolute;
+    text-align: right;
+    /*width: 20%;*/
+    height: 4rem;
+    line-height: 4rem;
+    padding: 0px 10px;
+    font-weight: 600;
+}
+
+/* E: Search input - scan barcode page */
+
+/* S: Panel */
+.os_panel {
+    border: 1px #ccc solid;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.os_panel .header {
+    border-bottom: 1px #ccc solid;
+    padding: 10px;
+    background: #373330;
+    color: #fff;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.os_panel .content {
+    list-style: none;
+    margin: 10px;
+}
+
+.os_panel .content .item {
+    padding: 10px 30px;
+    text-align: right;
+}
+
+.os_panel .header label {
+    line-height: 32px;
+}
+
+.os_panel .content .item label,
+.os_panel .header label {
+    font-weight: 600;
+}
+
+.os_panel .header .buttons {
+    height: 32px;
+    float: right;
+}
+
+.os_panel .content .item label {
+    float: left;
+    width: calc((100%) * 0.25);
+    text-align: right;
+    padding-right: 10px;
+}
+
+.os_panel .content .item span {
+    width: calc((100%) * 0.5);
+    float: left;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.os_panel .content .item span img {
+
+}
+
+/* E: Panel */
+
+/* S: Scan barcode */
+#barcode-scan-container .os_panel .content .item span img {
+    width: 150px;
+}
+
+#barcode-scan-container table.warehouse_qty_table {
+    margin-top: 10px;
+}
+
+table.warehouse_qty_table, table.warehouse_qty_table th, table.warehouse_qty_table td {
+    border: 1px #ccc solid;
+    padding: 10px 20px;
+}
+
+/* E: Scan barcode */
+
+/* S: barcode history detail */
+.barcodesuccess-history-view .entry-edit .sticky-header {
+    display: none;
+}
+
+/* E: barcode history detail */
+
+/* S: barcode detail */
+.barcodesuccess-index-view button.action-secondary {
+    margin-left: calc((100%) * 0.25);
+}
+
+.barcodesuccess-index-view .admin__field-control strong {
+    float: left;
+    width: 20%;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.admin__field-control span.admin__control-oslabel {
+    line-height: 3.3rem;
+}
+
+.barcodesuccess-index-view table.warehouse_qty_table {
+    margin-top: 10px;
+}
+
+.admin__field-control .admin__field-control .admin__control-text.qty-to-print {
+    width: 20%;
+}
+
+.barcodesuccess-index-view .admin__field-control .product-image-wrapper .product-image {
+    width: 150px;
+}
+
+/* E: barcode detail */
+
+/* S: barcode preview */
+.barcode_preview_container {
+    padding-top: 20px;
+}
+
+.barcode_preview_container .barcode-row {
+    border: 1px #ccc solid;
+}
+
+.barcode_preview_container .barcode-row.jewelry {
+    border: none;
+}
+
+.barcode_preview_container .barcode-row.jewelry .jewelry-container {
+    border: none;
+    position: relative;
+    border: 1px #ccc solid;
+    border-radius: 8px;
+    display: inline-flex;
+}
+
+.barcode_preview_container .barcode-row.jewelry .jewelry-container .jewelry-tongue {
+    position: absolute;
+    width: 100%;
+    height: 16%;
+    border: 1px #ccc solid;
+    top: 42%;
+    border-left: 1px transparent solid;
+    background: #fff;
+    border-radius: 0 40% 40% 0;
+}
+
+/* E: barcode preview */
+
+/* S: barcode template description */
+.barcode_template_description img {
+    width: 100%;
+}
+
+.barcode_template_description {
+    width: 25%;
+    top: 50%;
+    right: 0;
+    position: fixed;
+    transition: all 0.5s;
+}
+
+.barcode_template_description:hover {
+    top: 16vh;
+    width: 50vw;
+    height: 60vh;
+}
+
+.barcode_template_description:hover img {
+    border: 1px #666 solid;
+    border-radius: 10px;
+}
+
+/* E: barcode template description */
+/*fix css */
+#barcode-generate .entry-edit .fieldset .hor-scroll table input {
+    width: auto;
+}
+
+#barcode-import .form-list td.label label {
+    width: 200px;
+}
+
+#barcodesuccess_form .form-list td.value {
+    padding-top: 9px !important;
+}
+
+#barcode_print_tabs_form_section_content .form-list td.value {
+    width: auto;
+}
+
+#barcode_view_print .form-list td.value {
+    width: auto;
+}
+
+#barcode_scan_tabs_form_section_content .form-list td.value {
+    width: auto;
+}
+
+#barcode_generate_tabs_form_section_content .form-list td.label {
+    width: auto;
+}
+
+#barcodesuccess_form .form-list .value label{
+    display: inline-block;
+    width:97% !important;
+}
+.coresuccess .grid td.editable input.input-text{width: auto !important;}
+.coresuccess .form-button {
+    background: #009e8a;
+    color: #fff;
+    border: 0 none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    line-height: 30px;
+    padding: 7px 17px;
+    outline: none;
+    cursor: pointer;
+    margin-left: 5px;
+    border-radius: 0;
+    box-sizing: border-box
+}
+
+.coresuccess .form-button:hover, .form-button:focus {
+    background: #056b5e;
+    text-decoration: none;
+    color: #fff;
+    outline: 0;
+    outline: none
+}

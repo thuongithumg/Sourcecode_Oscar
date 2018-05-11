@@ -1,0 +1,84 @@
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Webpos
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+
+<div data-bind="attr: {'class': 'field option'}">
+    <label class="label">
+        <span data-bind="text: parentData.title"></span>
+    </label>
+    <div class="control">
+        <div class="nested options-list">
+	        <!--ko if: (parentData.required == '0')-->
+	        	<div class="field choice">
+                    <input type="radio"
+                           class="radio product bundle option change-container-classname"
+                           style="float: left"
+                           data-bind="event: {'click': $parents[2].updatePrice($parents[2].itemData().bundle_options)},
+                            attr: {'id': 'bundle-option-'+parentData.id+'-0',
+                                'name': 'bundle_option['+parentData.id+']',
+                                'value': ''
+                            }"
+                    />
+                    <label class="label"
+                           data-bind="attr: {'for': 'bundle-option-'+parentData.id+'-0'}">
+                        <span data-bind="i18n: 'No'"></span>
+                        &nbsp;<span class="price-notice" data-bind="text: parentData.title"></span>
+                    </label>
+                </div>
+	        <!--/ko-->
+            <!-- ko foreach: {data: $parents[1].convertToArray(parentData.items), as: 'itemData' }  -->
+                <div class="field choice">
+                    <input type="radio"
+                           class="radio product bundle option change-container-classname"
+                           style="float: left"
+                           data-bind="event: {'click': $parents[2].updatePrice($parents[2].itemData().bundle_options)},
+                            attr: {'id': 'bundle-option-'+parentData.id+'-'+itemData.selection_id,
+                                'name': 'bundle_option['+parentData.id+']',
+                                'value': itemData.selection_id,
+                                'checked': (itemData.is_default =='1') ? 'checked' : false,
+                                'data-validate': (parentData.required == '1') ? '{\'required-entry\':true}' : '{\'required-entry\':false}'
+                            }"
+                    />
+                    <label class="label"
+                           data-bind="attr: {'for': 'bundle-option-'+parentData.id+'-'+itemData.selection_id}">
+                        <span data-bind="text: itemData.name"></span>
+                        &nbsp;<span class="price-notice" data-bind="text: '+' + $parents[2].getSelectionTitlePrice(itemData.price)"></span>
+                    </label>
+                </div>
+            <!-- /ko -->
+            <div data-bind="attr: {'id': 'bundle-option-'+parentData.id+'-container'}"></div>
+            <div class="field qty qty-holder">
+                <label class="label" data-bind="attr: {'for': 'bundle-option-' + parentData.id + '-qty-input'}">
+                    <span data-bind="text: __('Quantity')"></span>
+                </label>
+                <div class="control">
+                    <input data-bind="event: {'change': $parents[1].updatePrice($parents[2].itemData().bundle_options)},
+                        attr: {'id': 'bundle-option-' + parentData.id + '-qty-input',
+                            'class': 'input-text qty',
+                            'type': 'number',
+                            'min' : 0,
+                            'name': 'bundle_option_qty[' + parentData.id + ']',
+                            'value' : 1
+                        },
+                        afterRender:$parents[1].updatePrice($parents[2].itemData().bundle_options)" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

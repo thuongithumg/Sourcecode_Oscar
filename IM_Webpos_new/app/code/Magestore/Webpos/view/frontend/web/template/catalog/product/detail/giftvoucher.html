@@ -1,0 +1,24 @@
+<!--
+  ~ Copyright © 2018 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div id="product-giftvoucher-view">
+    <!-- ko foreach: getRegion('giftcard-view-value') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <!--/ko-->
+
+    <!-- ko if: (giftCardType() != 1) -->
+    <!-- ko foreach: getRegion('giftcard-view-template') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <!--/ko-->
+    <!--/ko-->
+
+    <!-- ko foreach: getRegion('giftcard-view-message') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <!--/ko-->
+</div>
+
+
+
+

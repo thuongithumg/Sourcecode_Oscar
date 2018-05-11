@@ -1,0 +1,12 @@
+<div class="ms-webpos">
+    <div id="o-wrapper" class="o-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <?php echo $this->getChildHtml('webpos_catalog') ?>
+                <?php echo $this->getChildHtml('webpos_cart_block') ?>
+                <?php echo $this->getChildHtml('webpos_lockscreen') ?>
+            </div>
+        </div>
+    </div>
+    <?php echo $this->getChildHtml('webpos_menu_block') ?>
+</div>

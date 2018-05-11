@@ -1,0 +1,343 @@
+<div class="entry-edit">
+    <fieldset>
+        <?php echo $this->getChildHtml('select_warehouse') ?>           
+        <div class="grid np">
+          <div class="hor-scroll">
+            <table cellspacing="0" class="data order-tables">
+                <col/>
+                <col width="1" />
+                <col width="1" />
+                <col width="1" />
+                <col width="1" />
+                <?php if (!$this->canShipPartiallyItem()): ?>
+                <col width="20" />
+                <?php endif; ?>
+                <thead>
+                    <tr class="headings">
+                        <th><?php echo $this->helper('sales')->__('Product') ?></th>
+                        <th class="a-center"><?php echo $this->helper('sales')->__('Qty') ?></th>
+                        <th class="a-center"><?php echo $this->__('Qty in Warehouse') ?></th>
+                        <th class="a-center"><span class="nobr"><?php echo $this->helper('sales')->__('Qty to Ship') ?></span></th>
+                        <th class="a-center <?php echo $this->isShipmentRegular() ? 'last' : '' ?>"><?php echo $this->__('Qty pending ship') ?></th>                        
+                        <?php if (!$this->canShipPartiallyItem()): ?>
+                        <th class="a-center"><span class="nobr"><?php echo $this->helper('sales')->__('Ship') ?></span></th>
+                        <?php endif; ?>
+                    </tr>
+                </thead>
+                <?php $_items = $this->getShipment()->getAllItems() ?>
+                <?php $_i=0;foreach ($_items as $_item): if ($_item->getOrderItem()->getIsVirtual() || $_item->getOrderItem()->getParentItem()): continue; endif; $_i++ ?>
+                <tbody class="<?php echo $_i%2?'odd':'even' ?>">
+                    <?php echo $this->getItemHtml($_item) ?>
+                    <?php echo $this->getItemExtraInfoHtml($_item->getOrderItem()) ?>
+                </tbody>
+                <?php endforeach; ?>
+            </table>
+          </div>
+        </div>
+    </fieldset>
+</div>
+<br />
+<div class="box-left entry-edit">
+    <div class="entry-edit-head"><h4><?php echo $this->__('Shipment Comments') ?></h4></div>
+    <fieldset>
+        <div id="order-history_form">
+            <span class="field-row">
+                <label class="normal" for="shipment_comment_text"><?php echo Mage::helper('sales')->__('Shipment Comments') ?></label>
+                <textarea id="shipment_comment_text" name="shipment[comment_text]" rows="3" cols="5" style="height:6em; width:99%;"><?php echo $this->getShipment()->getCommentText(); ?></textarea>
+            </span>
+            <div class="clear"></div>
+        </div>
+    </fieldset>
+</div>
+
+<div class="box-right entry-edit">
+    <div class="order-totals">
+        <div class="order-totals-bottom">
+          <?php if ($this->canCreateShippingLabel()): ?>
+          <p>
+              <label class="normal" for="create_shipping_label"><?php echo Mage::helper('sales')->__('Create Shipping Label') ?></label>
+              <input id="create_shipping_label" name="shipment[create_shipping_label]" value="1" type="checkbox"  onclick="toggleCreateLabelCheckbox();" />
+          </p>
+          <?php endif ?>
+          <p>
+              <label class="normal" for="notify_customer"><?php echo Mage::helper('sales')->__('Append Comments') ?></label>
+              <input id="notify_customer" name="shipment[comment_customer_notify]" value="1" type="checkbox" />
+          </p>
+          <?php if ($this->canSendShipmentEmail()): ?>
+          <p>
+              <label class="normal" for="send_email"><?php echo Mage::helper('sales')->__('Email Copy of Shipment') ?></label>
+              <input id="send_email" name="shipment[send_email]" value="1" type="checkbox" />
+          </p>
+          <?php endif; ?>
+          <div class="a-right">
+          <?php echo $this->getChildHtml('submit_button') ?>
+          </div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+<script type="text/javascript">
+//<![CDATA[
+var sendEmailCheckbox = $('send_email');
+if (sendEmailCheckbox) {
+    var notifyCustomerCheckbox = $('notify_customer');
+    var shipmentCommentText = $('shipment_comment_text');
+    Event.observe(sendEmailCheckbox, 'change', bindSendEmail);
+    bindSendEmail();
+}
+function bindSendEmail() {
+    if (sendEmailCheckbox.checked == true) {
+        notifyCustomerCheckbox.disabled = false;
+        //shipmentCommentText.disabled = false;
+    }
+    else {
+        notifyCustomerCheckbox.disabled = true;
+        //shipmentCommentText.disabled = true;
+    }
+}
+function toggleCreateLabelCheckbox() {
+    var checkbox = $('create_shipping_label');
+    var submitButton = checkbox.up('.order-totals').select('.submit-button span')[0];
+    if (checkbox.checked) {
+        submitButton.innerText += '...';
+    } else {
+        submitButton.innerText = submitButton.innerText.replace(/\.\.\.$/, '');
+    }
+}
+function submitShipment(btn) {
+    
+    if(!$("shipment[warehouse]").value) {
+        alert('<?php echo __('Please select Warehouse to create shipment package') ?>');   
+        return;
+    }        
+    
+    var checkbox = $(btn).up('.order-totals').select('#create_shipping_label')[0];
+
+    if (!validQtyItems()) {
+        return;
+    }
+
+    if (checkbox && checkbox.checked) {
+        packaging.showWindow();
+    } else if(editForm.submit()) {
+        disableElements('submit-button');
+    }
+}
+
+function validQtyItems() {
+    var valid = true;
+    var errorMessage = '<?php echo Mage::helper('core')->jsQuoteEscape($this->helper('sales')->__('Invalid value(s) for Qty to Ship')) ?>';
+    $$('.qty-item').each(function(item) {
+        var val = parseFloat(item.value);
+        if (isNaN(val) || val < 0) {
+            valid = false;
+            alert(errorMessage);
+            throw $break;
+        }
+    });
+    return valid;
+}
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+    var warehouseJson = <?php echo $this->getChild('select_warehouse')->getWarehouseJson() ?>;
+    var requestStockUrl = '<?php echo $this->getChild('select_warehouse')->getRequestStockUrl() ?>';
+    window.allowShipOverQtyInWarehouse = false;
+        
+    Event.observe($("shipment[warehouse]"), 'change', changeShipmentWarehouse);
+    changeShipmentWarehouse();
+    
+    $$('.bundle-qty-to-ship-input').each(function(item) {
+        Event.observe(item, 'change', changeBundleQtyToShip);
+    });    
+    
+    
+    $$('.qty-item').each(function(item) {
+        var itemId = item.name;
+        itemId = itemId.replace("shipment[items][", "");
+        itemId = itemId.replace("]", "");
+        var qtyToShip = parseFloat(item.value);
+        if(isNaN(qtyToShip)) {
+            qtyToShip = 0;
+        }        
+        setQtyToShip(itemId, qtyToShip);
+        Event.observe(item, 'change', changeQtyToShip);
+    });  
+    
+    /**
+     * change qty-to-ship of bundle item
+     */
+    function changeBundleQtyToShip(event) {
+        var qtyToShipEl = $(event.target.id);
+        var qtyToShip = parseFloat(qtyToShipEl.value);
+        if(isNaN(qtyToShip)) {
+            qtyToShip = 0;
+        }         
+        var itemId = qtyToShipEl.id;
+        itemId = itemId.replace("shipment[items][", "");
+        itemId = itemId.replace("]", "");
+        qtyToShip = Math.min(qtyToShip, getQtyToShip(itemId));
+        qtyToShipEl.value = qtyToShip;       
+        
+        $$('.bundle-child-qty-to-ship-input'+itemId).each(function(item) {
+            var bundleQty = item.next().value;
+            bundleQty = bundleQty * qtyToShip;
+            item.value = bundleQty;
+            var cloneEvent = {target: {id: item.id}};
+            var allowShipOverQtyInWarehouse = window.allowShipOverQtyInWarehouse;
+            window.allowShipOverQtyInWarehouse = true;
+            changeQtyToShip(cloneEvent);
+            window.allowShipOverQtyInWarehouse = allowShipOverQtyInWarehouse;
+        });         
+    }
+    
+    /**
+     * Change qty-to-ship
+     */
+    function changeQtyToShip(event) {
+        var qtyToShipEl = $(event.target);
+        var selectWarehouseId = $("shipment[warehouse]").value;
+        var warehouse = warehouseJson[selectWarehouseId];
+        if(typeof warehouse === 'undefined') {
+            return;
+        }      
+        var items = warehouse['items'];
+        for (var itemId in items) {
+            var item = items[itemId];
+            if("shipment[items][" +itemId+ "]" == qtyToShipEl.name ) {
+                /* find qty-elements */
+                var qtyInWarehouseEl =  $("qty_in_warehouse["+ itemId +"]");
+                var qtyPendingShipEl =  $("qty_pending_ship["+ itemId +"]");  
+                
+                /* calculate qtys */
+                var qtyInWarehouse = item['qty_in_warehouse'];
+                var qtyToShip = getQtyToShip(itemId);
+
+                var qtyCanShip = parseFloat(qtyToShipEl.value);
+                
+                if(isNaN(qtyCanShip)) {
+                    qtyCanShip = 0;
+                }
+                
+                if(window.allowShipOverQtyInWarehouse) {
+                    qtyCanShip = Math.min(qtyCanShip, qtyToShip);
+                } else {
+                    qtyCanShip = Math.min(qtyCanShip, qtyToShip, qtyInWarehouse);
+                }
+                qtyCanShip = Math.max(0, qtyCanShip);
+                
+                var qtyPendingShip = Math.min(qtyToShip - qtyCanShip, qtyToShip);
+                                
+                /* fill qtys to elements */
+                qtyToShipEl.value = qtyCanShip;
+                if(qtyInWarehouseEl && qtyPendingShipEl) {
+                    qtyInWarehouseEl.innerHTML = qtyInWarehouse;
+                    if(qtyPendingShip > 0) {
+                        qtyPendingShipEl.innerHTML = qtyPendingShip + '/ ' + qtyToShip;
+                    } else {
+                        qtyPendingShipEl.innerHTML = '';
+                    }              
+                }
+            }
+        }
+    }
+
+    /*
+     * Select warehouse to create shipment
+     */
+    function changeShipmentWarehouse() {
+        var selectWarehouseId = $("shipment[warehouse]").value;
+        var warehouse = warehouseJson[selectWarehouseId];
+
+        if(typeof warehouse === 'undefined') {
+            $("shipment_request_stock_notify").innerHTML = '';
+            var elements = $$("#item_in_warehouse");
+            for (var i = 0; i < elements.length; i++) {
+                 elements[i].down('span').innerHTML = "";
+            }
+            return;
+        }
+        var items = warehouse['items'];
+
+        for (var itemId in items) {
+            var item = items[itemId];
+            /* find qty-elements */
+            var qtyInWarehouseEl =  $("qty_in_warehouse["+ itemId +"]");
+            var qtyPendingShipEl =  $("qty_pending_ship["+ itemId +"]");
+            var qtyToShipEl = qtyInWarehouseEl.up('tr').down('input.qty-item');
+
+            if(!qtyToShipEl) {
+                /* the qty-to-ship input doesn't exist */
+                continue;
+            }
+
+            /* calculate qtys */
+            var qtyInWarehouse = item['qty_in_warehouse'];
+            var qtyToShip;
+            if(getQtyToShip(itemId) === false) {
+                qtyToShip = qtyToShipEl.value;
+                setQtyToShip(itemId, qtyToShip);
+            } else {
+                qtyToShip = getQtyToShip(itemId);
+            }
+            var qtyPendingShip = Math.max(0, qtyToShip - qtyInWarehouse);;
+            var qtyCanShip = Math.min(qtyToShip, qtyInWarehouse);
+
+            /* fill qtys to elements */
+            qtyToShipEl.value = qtyCanShip;
+            if(qtyInWarehouseEl && qtyPendingShipEl) {
+                qtyInWarehouseEl.innerHTML = qtyInWarehouse;
+                if(qtyPendingShip > 0) {
+                    qtyPendingShipEl.innerHTML = qtyPendingShip + '/ ' + qtyToShip;
+                } else {
+                    qtyPendingShipEl.innerHTML = '';
+                }
+            }
+
+            /* check bundle item */
+            if(qtyToShipEl.hasClassName('bundle-qty-to-ship-input')) {
+                var cloneEvent = {target: {id: qtyToShipEl.id}};
+                changeBundleQtyToShip(cloneEvent);
+            }
+
+        }
+
+        showRequestStockNotify(selectWarehouseId, warehouse);
+    }
+    
+    function showRequestStockNotify(warehouseId, warehouseData) {
+        if(warehouseData['lack_qty'] > 0) {
+            var url = requestStockUrl + '?des_warehouse_id=' + warehouseId;
+            var label = '<a href="'+url+'" target="_blank">' + '<?php echo $this->__('Request stocks') ?>' + '</a> ' 
+                    + '<?php echo $this->__('of lack items to current warehouse:') ?>' 
+                    + ' <strong>' 
+                    + warehouseData['info']['warehouse_name']
+                    + ' ('+ warehouseData['info']['warehouse_code'] +')</strong>';
+        } else {
+            var label = '';
+        }
+        $("shipment_request_stock_notify").innerHTML = label;
+    }
+    
+    function setQtyToShip(itemId, qty) {
+        if(typeof window.inventoryShipItems == 'undefined') {
+            window.inventoryShipItems = {};       
+        }
+        window.inventoryShipItems[itemId] = qty;
+    }
+    
+    function getQtyToShip(itemId) {
+        if(typeof window.inventoryShipItems == 'undefined') {
+            return false;
+        }
+        if(typeof window.inventoryShipItems[itemId] == 'undefined') {
+            return false;
+        }        
+        
+        return window.inventoryShipItems[itemId];
+    }
+//]]>
+</script>
+

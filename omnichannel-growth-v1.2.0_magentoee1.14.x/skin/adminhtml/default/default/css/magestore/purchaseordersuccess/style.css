@@ -1,0 +1,22 @@
+.coresuccess .main-col .modal-header{float:left;width:100%;border-bottom:0 none;background:#f8f8f8;border-bottom:1px solid #d0d3d7;border-top:1px solid #d0d3d7;padding:24px 2px}
+.coresuccess .modal-header h3{float:left;color:#39372b;line-height:33px;margin:0;font-weight:600;font-size:16px;padding-left:0}
+.modal-header .form-buttons{float: right;}
+.coresuccess .modal-header button{background:#009e8a;color:#fff;font-size:13px;border:0 none;margin-right:2px}
+.coresuccess .modal-body{clear: both}
+.coresuccess .modal .validation-advice{margin-left: 200px}
+.coresuccess .modal .admin__grid-control .validation-advice{margin-left: 0px}
+.form-list #row_purchaseordersuccess_shipping_method_shipping_method td.value input.input-text,
+.form-list #row_purchaseordersuccess_payment_method_payment_method td.value input.input-text,
+.form-list #row_purchaseordersuccess_payment_term_payment_term td.value input.input-text,
+.coresuccess .form-list #row_purchaseordersuccess_shipping_method_shipping_method td.value select,
+.coresuccess .form-list #row_purchaseordersuccess_payment_method_payment_method td.value select,
+.coresuccess .form-list #row_purchaseordersuccess_payment_term_payment_term td.value select,
+.coresuccess .form-list #row_purchaseordersuccess_payment_term_payment_term td.value textarea{
+    width: auto;
+}
+.download-sample-file{
+    padding: 8px;
+}
+table.form-list {
+    padding: 0px 12px 12px 12px;
+}

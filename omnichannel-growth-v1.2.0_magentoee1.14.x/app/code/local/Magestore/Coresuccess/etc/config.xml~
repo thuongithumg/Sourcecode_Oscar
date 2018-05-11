@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Inventorysuccess
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  -->
+<config>
+    <modules>
+        <Magestore_Coresuccess>
+            <version>1.0.0</version>
+        </Magestore_Coresuccess>
+    </modules>
+    <frontend>
+        <layout>
+            <updates>
+                <coresuccess>
+                    <file>coresuccess.xml</file>
+                </coresuccess>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magestore_Coresuccess>
+                    <files>
+                        <default>Magestore_Coresuccess.csv</default>
+                    </files>
+                </Magestore_Coresuccess>
+            </modules>
+        </translate>
+    </frontend>
+    <adminhtml>
+        <layout>
+            <updates>
+                <coresuccess>
+                    <file>coresuccess.xml</file>
+                </coresuccess>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magestore_Coresuccess>
+                    <files>
+                        <default>Magestore_Coresuccess.csv</default>
+                    </files>
+                </Magestore_Coresuccess>
+            </modules>
+        </translate>
+        <events>
+            <controller_action_layout_load_before>
+                <observers>
+                    <magestore_coresuccess_observers>
+                        <class>coresuccess/observer</class>
+                        <method>controllerActionLayoutLoadBefore</method>
+                    </magestore_coresuccess_observers>
+                </observers>
+            </controller_action_layout_load_before>
+        </events>
+    </adminhtml>   
+    <global>
+        <models>
+            <coresuccess>
+                <class>Magestore_Coresuccess_Model</class>
+                <resourceModel>coresuccess_mysql4</resourceModel>
+            </coresuccess>
+            <coresuccess_mysql4>
+                <class>Magestore_Coresuccess_Model_Mysql4</class>
+                <entities>      
+                    <coresuccess>
+                        <table>coresuccess</table>
+                    </coresuccess>                                                
+                </entities>
+            </coresuccess_mysql4>
+            <cataloginventory>
+                <rewrite>
+                    <stock_item>Magestore_Coresuccess_Model_Rewrite_CataloginventoryStockItem</stock_item>
+                </rewrite>
+            </cataloginventory>            
+        </models>
+        <resources>
+            <coresuccess_setup>
+                <setup>
+                    <module>Magestore_Coresuccess</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </coresuccess_setup>
+            <coresuccess_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </coresuccess_write>
+            <coresuccess_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </coresuccess_read>
+        </resources>
+        <blocks>
+            <coresuccess>
+                <class>Magestore_Coresuccess_Block</class>
+            </coresuccess>
+        </blocks>
+        <helpers>
+            <coresuccess>
+                <class>Magestore_Coresuccess_Helper</class>
+            </coresuccess>
+        </helpers>
+    </global>
+</config>

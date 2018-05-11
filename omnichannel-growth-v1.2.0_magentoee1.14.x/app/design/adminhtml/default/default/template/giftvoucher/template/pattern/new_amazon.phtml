@@ -1,0 +1,116 @@
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/magestore/new_amazon_design.css') ?>"
+      media="all"/>
+<?php
+$barcode = Mage::helper('giftvoucher')->getGeneralConfig('barcode_enable');
+$barcode_type = Mage::helper('giftvoucher')->getGeneralConfig('barcode_type');
+$url_barcode = '';
+if($barcode){
+    if($barcode_type == 'code128') $url_barcode = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'giftvoucher/template/barcode/default.png';
+    else $url_barcode = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'giftvoucher/template/barcode/qr.png';
+}
+if(!$template->getStyleColor()) $template->setStyleColor('orange');
+if(!$template->getTextColor()) $template->setTextColor('#2f2f2f');
+
+if ($template->getNotes())
+    $notes = $template->getNotes();
+else
+    $notes = Mage::getSingleton('giftvoucher/giftvoucher')->getPrintNotes();
+
+if ($template->getImages()) {
+    $image = explode(',', $template->getImages());
+    $image = $image[0];
+} else {
+    $image = 'default.png';
+}
+$image = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'giftvoucher/template/images/amazon/' . $image;
+
+if(Mage::getStoreConfig('giftvoucher/print_voucher/logo')) $logo = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'giftvoucher/pdf/logo/'.Mage::getStoreConfig('giftvoucher/print_voucher/logo');
+else $logo = $this->getSkinUrl('images/logo_print.gif', array('_area'=>'frontend'));
+?>
+
+<style>
+    .giftcard-text-color{
+        color: <?php echo $template->getTextColor() ?> !important;
+    }
+    .giftcard-style-color{
+        color: <?php echo $template->getStyleColor() ?> !important;
+    }
+    .giftcard-text-color {
+        color: <?php echo $template->getTextColor() ?>
+    }
+</style>
+
+<table class="table-top">
+    <tbody>
+    <tr>
+        <td>
+            <?php if ($logo): ?>
+                <img id="alogo" width="100" src="<?php echo $logo ?>"/>
+            <?php endif; ?>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+<table class="table-middle" bgcolor="ffffff" class="full-width-table" border="0">
+    <tbody>
+    <tr>
+        <td>
+            <table border="0">
+                <tbody>
+                <tr>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="5" id="mainImageContainer">
+                        <img width="100%"
+                             src="<?php echo $image; ?>"
+                             alt="" border="0"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-top">
+                        <p class="gc-message giftcard-text-color"><?php echo $this->__('Write message here ...'); ?></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-bottom">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td valign="middle">
+                                        <span
+                                            class="gift-price giftcard-text-color">$100.00</span>
+                                    <br/>
+                                    <span class="gift-code giftcard-style-color" style="display: block; margin-top: 15px;">GIFT-XXXX-XXXX</span>
+                                </td>
+                                <?php if ($url_barcode != ''): ?>
+                                    <td rowspan="2" valign="middle"
+                                        style="padding: 30px; text-align: right; width: 30%;">
+
+                                        <img id="footLogo" src="<?php echo $url_barcode ?>"/>
+                                        <div id="gc-expire-day-header-amazon" class="giftcard-text-color">Expired: 10/10/2017</div>
+
+                                    </td>
+                                <?php endif; ?>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <!-- End inner table -->
+        </td>
+    </tr>
+    </tbody>
+</table>
+<table class="table-bottom" class="full-width-table" border="0">
+    <tbody>
+    <tr>
+        <td valign="middle">&nbsp;</td>
+    </tr>
+    </tbody>
+</table>
+

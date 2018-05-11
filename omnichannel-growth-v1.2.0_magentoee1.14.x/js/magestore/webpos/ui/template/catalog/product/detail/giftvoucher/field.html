@@ -1,0 +1,22 @@
+<!--
+  ~ Created by Wazza Rooney on 9/6/17 5:03 PM
+  ~ Copyright (c) 2017. All rights reserved.
+  ~ Last modified 7/6/17 10:31 AM
+  -->
+
+<div class="field option">
+    <label class="label" >
+        <span data-bind="text: `Enter value &nbsp;&nbsp;&nbsp;(${fromPrice($parents[2].itemData().giftvoucher_options[0])} - ${toPrice($parents[2].itemData().giftvoucher_options[0])})` "></span>
+    </label>
+
+    <div class="control">
+        <input type="text"
+               class="input-text product-custom-option"
+               id="giftvoucher-amount"
+               name=giftvoucher-amount"
+               data-bind="event: {'change': $parents[1].updatePrice($parents[2].itemData().giftvoucher_options[0])},
+                        attr: {'data-validate': '{\'required-entry\':true}'}"
+               value=""
+        />
+    </div>
+</div>

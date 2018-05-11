@@ -1,0 +1,77 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Inventorysupplyneeds
+ * @copyright   Copyright (c) 2017 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+?>
+<?php $reports = $this->getReports(); ?>
+<div id="inventory_report_dashboard" class="inventory_report_dashboard">
+    <div class="content-header">
+        <table cellspacing="0">
+            <tbody><tr>
+                <td style="width:50%;">
+                    <h3 class="icon-head head-adminhtml-report"><?php echo $this->__('Retailer Reports') ?></h3>
+                </td>
+            </tr>
+            </tbody></table>
+    </div>
+
+    <div class="dasboard_column">
+        <table class="report-table">
+            <?php $i = 0 ?>
+            <?php foreach ($reports as $type => $reportGroup): ?>
+                <?php if (++$i % 2 == 1): ?>
+                    <tr>
+                <?php endif; ?>
+                <td>
+                    <div class="report_box">
+                        <h2 class="mbl">
+                            <?php echo $reportGroup['title'] ?>
+                        </h2>
+                        <div class="report_list">
+                            <span class="report_image <?php echo $type ?>"> </span>
+                            <p class="report_type_description">
+                                <?php echo $reportGroup['description'] ?>
+                            </p>
+                            <ul>
+
+                                    <?php if ($reportGroup['reports']) {
+                                            foreach ($reportGroup['reports'] as $report): ?>
+                                <li>
+                                            <a href="<?php echo $this->getReportUrl($type, $report); ?>">
+                                                <?php echo $this->__($report['title']) ?>
+                                            </a> &nbsp;
+                                                <br><span><?php echo $this->__($report['description']) ?></span>
+                                           <?php endforeach; ?>
+                                </li>      <?php
+                                    } ?>
+
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+                <?php if ($i % 2 == 0): ?>
+                    </tr>
+                    <tr><td class="td-separate" colspan="3"></td></tr>
+                <?php else: ?>
+                    <td class="td-separate"></td>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </table>
+    </div>
+</div>

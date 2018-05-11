@@ -1,0 +1,18 @@
+<div id='general_container' class="pos_container">
+    <div id="webpos-settings-general">
+        <div id="block-webpos-settings-general" data-bind="scope:'webpos-settings-general'" class="block">
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <script type="text/x-magento-init">
+                {
+                    "#block-webpos-settings-general": {
+                        "Magento_Ui/js/core/app": <?php /* @escapeNotVerified */ echo $block->getJsLayout();?>
+                    }
+                }
+            </script>
+        </div>
+    </div>
+</div>
+<script>
+    window.CurrentCurrencyCode = window.webposConfig.currentCurrencyCode;
+    window.BaseCurrencyCode = window.webposConfig.baseCurrencyCode;
+</script>

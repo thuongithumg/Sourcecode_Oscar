@@ -1,0 +1,11 @@
+/*
+Copyright © 2016 Magestore. All rights reserved.
+See COPYING.txt for license details.
+*/
+
+.adminhtml-inventorysuccess-transferstock-external-edit .grid colgroup,
+.adminhtml-inventorysuccess-transferstock-requeststock-edit .grid colgroup,
+.adminhtml-inventorysuccess-transferstock-sendstock-edit .grid colgroup,
+.adminhtml-inventorysuccess-stocktaking-edit .grid colgroup,
+.adminhtml-inventorysuccess-adjuststock-edit .grid colgroup 
+{display:none;}
