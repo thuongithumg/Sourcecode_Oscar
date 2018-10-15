@@ -1,0 +1,80 @@
+sudo: required
+dist: trusty
+group: edge
+addons:
+  apt:
+    packages:
+    - mysql-server-5.6
+    - mysql-client-core-5.6
+    - mysql-client-5.6
+    - postfix
+  firefox: "46.0"
+  hosts:
+      - magento2.travis
+language: php
+php:
+  - 7.1
+env:
+  global:
+    - TEST_FILTER="InventorySuccess"
+    # magento version 2.2.1 - https://github.com/Magestore/devops-magento-2.2.1.git
+    - MAGENTO_VER="2.2.1"
+    # SAMPLE_DATA is suffixe of magento repository with sample data
+    # https://github.com/Magestore/devops-magento-2.2.1-sampledata.git
+    #- SAMPLE_DATA="sampledata"
+    - INTEGRATION_SETS=3
+    - NODE_JS_VERSION=6
+    - MAGENTO_HOST_NAME="magento2.travis"
+    - TEST_CASE="https://github.com/Magestore/automation-testing-omc.git"
+    - TEST_LOG="https://github.com/Magestore/automation-testing-log.git"
+    - TEST_FRAMEWORK="git@github.com:Magestore/devops-travis-magento-ftf.git"
+    - secure: "gcw8NoxlvpwUrTeWKqEvD/N6SiBuONeG4LdKby31NWk3+QfwvR6QKtQFw37Pj6WPHZgD7zn4b1RkXdviz/VYFxe0xaPKHf3mAf6PLJvkU0Y+GnbigUCrzoO4Vg1pyFsgoQJuxHPZ4++8j9ekg1m6Znb6D+GZlMii7jAD02c12btfBZeH5TU+TQbLz7STSAUkU+gcCHGJrAQRBoIj75LdctShLuw0+z6ksuMNfDep2Lcl+ph7KGioW2WwXZ1ADYOQLvJNSmK/39FyARMIkC/3MOM5dRDDHxO45dx9RicExmjLAlzu0JCCpHm4u9XMEazyMZQBUyAvhQChS1MYu3KTBQzi8OLAOt5tHi6F5novgtsCKl3dz4b/P+Qj1HwgBqTYXyCOp/qykr3YQ3PkZxiAyemAcYBnpCkunSRUEiDKKasfHE194+xP8i/3eDe+66E8ndVxhF7wR5oeUAcBOTYIkVVKnxpIc1WK8FQmu9na5xLZdDpLgmh4kMFtTgpRDDkXMDZc4i/epy1d6Z+AebsJqd7PJj1jQKSEA8fQjkX1/rvfygyyMWxRnd9FNW+80rlVwJMD8Cyf38H9O19V4I2csAmKP+lzoTs/4sMW20NEwsYL4QdW0Rqt599zRTEDP2a+FRWKgLdkfjgLj3V8uQq3/alBLG2AVDKuNeSf9zBbDrg="
+matrix:
+  include:
+    - env: MAGENTO_VER="2.2.1" SAMPLE_DATA="sampledata"
+    - php: 7.0.25
+      env: MAGENTO_VER="2.1.11" SAMPLE_DATA="sampledata"
+# safelist
+branches:
+  only:
+    - master
+    - develop
+    - /^release\/.*/
+cache:
+  apt: true
+  directories:
+    - $HOME/.composer/cache
+    - $HOME/.nvm
+    - $HOME/node_modules
+before_install:
+  - mkdir ./devops-travis
+  - git clone --depth=1 --branch=master $TEST_FRAMEWORK ./devops-travis
+  - cp -rf devops-travis/m2/* .
+  - sudo usermod --shell /bin/bash www-data
+  - sudo chmod +x ${TRAVIS_BUILD_DIR}/dev/travis/before_install.sh
+  - ${TRAVIS_BUILD_DIR}/dev/travis/before_install.sh
+install:
+  - cd /var/www && composer install --no-interaction --prefer-dist
+before_script:
+  - sudo chmod +x ${TRAVIS_BUILD_DIR}/dev/travis/before_script.sh
+  - ${TRAVIS_BUILD_DIR}/dev/travis/before_script.sh
+script:
+  - sudo chmod -R +x ${TRAVIS_BUILD_DIR}/dev/travis/test_*.sh
+  - travis_wait 180 ${TRAVIS_BUILD_DIR}/dev/travis/test_coding_standard.sh
+  - travis_wait 180 ${TRAVIS_BUILD_DIR}/dev/travis/test_script.sh
+after_failure:
+  - export MESSAGE="error"
+  # - |
+  #   echo "============Extension log:============="
+  #   if [ -f /var/www/var/log/exception.log ]; then cat /var/www/var/log/exception.log ; fi
+  # - |
+  #   echo "============System log:============="
+  #   if [ -f /var/www/var/log/system.log ]; then cat /var/www/var/log/system.log ; fi
+  # - |
+  #   echo "============Debug log:============="
+  #   if [ -f /var/www/var/log/debug.log ]; then cat /var/www/var/log/debug.log ; fi
+after_script:
+  - cd ${TRAVIS_BUILD_DIR}
+  - chmod +x ./dev/travis/write_log.sh
+  - ./dev/travis/write_log.sh
+  - chmod +x ./dev/travis/message.sh && ./dev/travis/message.sh
